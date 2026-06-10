@@ -19,7 +19,7 @@
     "products": [
       {
         "id": "T-01",
-        "name": "T-01",
+        "name": "Tocadore T-01",
         "price": 290,
         "oldPrice": 550,
         "image": "/uploads/cfe9b3489a985b6d5036bc8856caae05.jpg",
@@ -48,7 +48,7 @@
       },
       {
         "id": "T-02",
-        "name": "T-02",
+        "name": "Tocadore T-02",
         "price": 329,
         "oldPrice": 600,
         "image": "/uploads/23892ed3a413a251335d8380ad32cbac.jpg",
@@ -79,7 +79,7 @@
       },
       {
         "id": "T-03",
-        "name": "T-03",
+        "name": "Tocadore T-03",
         "price": 329,
         "oldPrice": 600,
         "image": "/uploads/cc7e87f07eb3e4eadc393f5c79924f18.jpg",
@@ -111,7 +111,7 @@
       },
       {
         "id": "T-04",
-        "name": "T-04",
+        "name": "Tocadore T-04",
         "price": 369,
         "oldPrice": 650,
         "image": "/uploads/d54586e9cbfcb8a6ddac354a8c2a0571.jpg",
@@ -143,7 +143,7 @@
       },
       {
         "id": "T-05",
-        "name": "T-05",
+        "name": "Tocadore T-05",
         "price": 369,
         "oldPrice": 650,
         "image": "/uploads/c087ee159cd89a85fec7030b08b0acab.jpg",
@@ -174,7 +174,7 @@
       },
       {
         "id": "T-06",
-        "name": "T-06",
+        "name": "Tocadore T-06",
         "price": 399,
         "oldPrice": 700,
         "image": "/uploads/40cf889d7a55a4afc01c59454a51d742.jpg",
@@ -206,7 +206,7 @@
       },
       {
         "id": "T-07",
-        "name": "T-07",
+        "name": "Tocadore T-07",
         "price": 399,
         "oldPrice": 700,
         "image": "/uploads/e86ae6968350e27eb24c92303c03eb20.jpg",
@@ -237,7 +237,7 @@
       },
       {
         "id": "T-08",
-        "name": "T-08",
+        "name": "Tocadore T-08",
         "price": 599,
         "oldPrice": 900,
         "image": "/uploads/8ee3496582b269374d611e94c9cd8d0d.jpg",
@@ -287,7 +287,7 @@
     "products": [
       {
         "id": "T-09",
-        "name": "T-09",
+        "name": "Tocadore T-09",
         "price": 379,
         "oldPrice": 700,
         "image": "/uploads/3ee281ae8993f1d2c211e10cef9675d4.jpg",
@@ -311,7 +311,7 @@
       },
       {
         "id": "T-10",
-        "name": "T-10",
+        "name": "Tocadore T-10",
         "price": 379,
         "oldPrice": 700,
         "image": "/uploads/1d6d4a9f248fc940809b8158797cba5e.jpg",
@@ -338,7 +338,7 @@
       },
       {
         "id": "T-11",
-        "name": "T-11",
+        "name": "Tocadore T-11",
         "price": 379,
         "oldPrice": 700,
         "image": "/uploads/53c7c542c8095408bc63ee34d26e8852.jpg",
@@ -361,7 +361,7 @@
       },
       {
         "id": "T-12",
-        "name": "T-12",
+        "name": "Tocadore T-12",
         "price": 379,
         "oldPrice": 700,
         "image": "/uploads/b59c4e2501ad3ec067510d579d30ac03.jpg",
@@ -388,7 +388,7 @@
       },
       {
         "id": "T-13",
-        "name": "T-13",
+        "name": "Tocadore T-13",
         "price": 399,
         "oldPrice": 750,
         "image": "/uploads/8a120f849d5d094ea636de110f5da616.jpg",
@@ -414,7 +414,7 @@
       },
       {
         "id": "T-14",
-        "name": "T-14",
+        "name": "Tocadore T-14",
         "price": 399,
         "oldPrice": 750,
         "image": "/uploads/845578ae92ec61b012ddbc1e57416c0a.jpg",
@@ -441,7 +441,7 @@
       },
       {
         "id": "T-15",
-        "name": "T-15",
+        "name": "Tocadore T-15",
         "price": 399,
         "oldPrice": 700,
         "image": "/uploads/bc37947b832e6e35627cf3fbc3e166f1.jpg",
@@ -467,7 +467,7 @@
       },
       {
         "id": "T-16",
-        "name": "T-16",
+        "name": "Tocadore T-16",
         "price": 459,
         "oldPrice": 800,
         "image": "/uploads/25076fa903e9891b55d0c515854a2ad8.jpg",
@@ -491,7 +491,7 @@
       },
       {
         "id": "T-17",
-        "name": "T-17",
+        "name": "Tocadore T-17",
         "price": 459,
         "oldPrice": 800,
         "image": "/uploads/db1a355f8f6622ca82b7ab13e0a4c157.jpg",
@@ -513,7 +513,7 @@
       },
       {
         "id": "T-18",
-        "name": "T-18",
+        "name": "Tocadore T-18",
         "price": 459,
         "oldPrice": 800,
         "image": "/uploads/d2a782ac4a78fc0502ca78ca07133abd.jpg",
@@ -540,7 +540,7 @@
       },
       {
         "id": "T-19",
-        "name": "T-19",
+        "name": "Tocadore T-19",
         "price": 499,
         "oldPrice": 850,
         "image": "/uploads/3f4865e828e2982a03aa007440e4cde7.jpg",
@@ -565,7 +565,7 @@
       },
       {
         "id": "T-20",
-        "name": "T-20",
+        "name": "Tocadore T-20",
         "price": 499,
         "oldPrice": 850,
         "image": "/uploads/d29e04e4fdb3901cd31b050922d2692b.jpg",
@@ -588,7 +588,7 @@
       },
       {
         "id": "T-21",
-        "name": "T-21",
+        "name": "Tocadore T-21",
         "price": 499,
         "oldPrice": 850,
         "image": "/uploads/5e55de193f06d3cb72f6f8ff2d83cadf.jpg",
@@ -614,7 +614,7 @@
       },
       {
         "id": "T-22",
-        "name": "T-22",
+        "name": "Tocadore T-22",
         "price": 499,
         "oldPrice": 850,
         "image": "/uploads/d9ff98b097c0c20ff0dda9946e3f9f89.jpg",
@@ -640,7 +640,7 @@
       },
       {
         "id": "T-23",
-        "name": "T-23",
+        "name": "Tocadore T-23",
         "price": 499,
         "oldPrice": 850,
         "image": "/uploads/f038af93b0da9d5dfb021a5003c7a2cf.jpg",
@@ -666,7 +666,7 @@
       },
       {
         "id": "T-24",
-        "name": "T-24",
+        "name": "Tocadore T-24",
         "price": 499,
         "oldPrice": 850,
         "image": "/uploads/721a7c3239b317f0780baff3a956d823.jpg",
@@ -690,7 +690,7 @@
       },
       {
         "id": "T-25",
-        "name": "T-25",
+        "name": "Tocadore T-25",
         "price": 499,
         "oldPrice": 850,
         "image": "/uploads/fffc2110c26b48a7b019708312405f83.jpg",
@@ -720,7 +720,7 @@
       },
       {
         "id": "T-26",
-        "name": "T-26",
+        "name": "Tocadore T-26",
         "price": 539,
         "oldPrice": 880,
         "image": "/uploads/825bff9923eb68f3472cd37ac95ca38f.jpg",
@@ -749,7 +749,7 @@
       },
       {
         "id": "T-27",
-        "name": "T-27",
+        "name": "Tocadore T-27",
         "price": 559,
         "oldPrice": 900,
         "image": "/uploads/771c0092caedde9b643cd77b72be35bf.jpg",
@@ -772,7 +772,7 @@
       },
       {
         "id": "T-28",
-        "name": "T-28",
+        "name": "Tocadore T-28",
         "price": 599,
         "oldPrice": 950,
         "image": "/uploads/db1841fc027062f555aa3d18b262a7ef.jpg",
@@ -797,7 +797,7 @@
       },
       {
         "id": "T-29",
-        "name": "T-29",
+        "name": "Tocadore T-29",
         "price": 599,
         "oldPrice": 950,
         "image": "/uploads/5c4a491791888b4ee6bd2f8b0386a4b1.jpg",
@@ -823,7 +823,7 @@
       },
       {
         "id": "T-30",
-        "name": "T-30",
+        "name": "Tocadore T-30",
         "price": 659,
         "oldPrice": 1000,
         "image": "/uploads/4e21b8144006717eeac8acce70fcb67b.jpg",
@@ -846,7 +846,7 @@
       },
       {
         "id": "T-31",
-        "name": "T-31",
+        "name": "Tocadore T-31",
         "price": 699,
         "oldPrice": 1100,
         "image": "/uploads/34f4fc21dd41507b1b4008cc9b310dde.jpg",
@@ -870,7 +870,7 @@
       },
       {
         "id": "T-32",
-        "name": "T-32",
+        "name": "Tocadore T-32",
         "price": 699,
         "oldPrice": 1100,
         "image": "/uploads/eccc6f7688cad6f013e8b769cf662175.jpg",
@@ -894,7 +894,7 @@
       },
       {
         "id": "T-33",
-        "name": "T-33",
+        "name": "Tocadore T-33",
         "price": 799,
         "oldPrice": 1150,
         "image": "/uploads/ad3a1a093a387b80941e2c8f5c799e91.jpg",
@@ -919,7 +919,7 @@
       },
       {
         "id": "T-34",
-        "name": "T-34",
+        "name": "Tocadore T-34",
         "price": 799,
         "oldPrice": 1150,
         "image": "/uploads/1b7e0b3553b37f44f001bb06894a728b.jpg",
@@ -944,7 +944,7 @@
       },
       {
         "id": "T-35",
-        "name": "T-35",
+        "name": "Tocadore T-35",
         "price": 839,
         "oldPrice": 1200,
         "image": "/uploads/8b2bd779bb48d73e4a228b3ddbc196f7.jpg",
@@ -967,7 +967,7 @@
       },
       {
         "id": "T-36",
-        "name": "T-36",
+        "name": "Tocadore T-36",
         "price": 879,
         "oldPrice": 1250,
         "image": "/uploads/0bd1726ea832d7b79bbb948567a8f775.jpg",
@@ -994,7 +994,7 @@
       },
       {
         "id": "T-37",
-        "name": "T-37",
+        "name": "Tocadore T-37",
         "price": 899,
         "oldPrice": 1300,
         "image": "/uploads/624c9ca6375c1f59191cc01d1b6568c2.jpg",
@@ -1018,7 +1018,7 @@
       },
       {
         "id": "T-38",
-        "name": "T-38",
+        "name": "Tocadore T-38",
         "price": 939,
         "oldPrice": 1350,
         "image": "/uploads/72c175e5e9c12d294eb32c03ea566100.jpg",
@@ -1044,7 +1044,7 @@
       },
       {
         "id": "T-39",
-        "name": "T-39",
+        "name": "Tocadore T-39",
         "price": 999,
         "oldPrice": 1400,
         "image": "/uploads/b4a5dd44be5059916fb90a8702d40c19.jpg",
@@ -1090,7 +1090,7 @@
     "products": [
       {
         "id": "E-01",
-        "name": "E-01",
+        "name": "Estantería E-01",
         "price": 199,
         "oldPrice": 400,
         "image": "/uploads/d28c174bb94ff71d2d46dc07648a8d28.jpg",
@@ -1113,7 +1113,7 @@
       },
       {
         "id": "E-02",
-        "name": "E-02",
+        "name": "Estantería E-02",
         "price": 259,
         "oldPrice": 430,
         "image": "/uploads/6a8baf8b0f5c4a4ebf057a3d4dbdcd11.jpg",
@@ -1136,7 +1136,7 @@
       },
       {
         "id": "E-03",
-        "name": "E-03",
+        "name": "Estantería E-03",
         "price": 259,
         "oldPrice": 430,
         "image": "/uploads/9f41af0ee82bfb816dbf2371e2613b4e.jpg",
@@ -1163,7 +1163,7 @@
       },
       {
         "id": "E-04",
-        "name": "E-04",
+        "name": "Estantería E-04",
         "price": 299,
         "oldPrice": 480,
         "image": "/uploads/89144ffbf7054d00ca68184620c44cf5.jpg",
@@ -1189,7 +1189,7 @@
       },
       {
         "id": "E-05",
-        "name": "E-05",
+        "name": "Estantería E-05",
         "price": 299,
         "oldPrice": 480,
         "image": "/uploads/2233f524cc4506ff80f44a1b8d44eee4.jpg",
@@ -1216,7 +1216,7 @@
       },
       {
         "id": "E-06",
-        "name": "E-06",
+        "name": "Estantería E-06",
         "price": 319,
         "oldPrice": 500,
         "image": "/uploads/7bd218a764fa9eb6ace48128ccd2a33a.jpg",
@@ -1239,7 +1239,7 @@
       },
       {
         "id": "E-07",
-        "name": "E-07",
+        "name": "Estantería E-07",
         "price": 319,
         "oldPrice": 500,
         "image": "/uploads/6de7caf4f0797702e856d34335da2301.jpg",
