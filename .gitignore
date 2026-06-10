@@ -1,0 +1,12 @@
+node_modules/
+screenshots/
+dist/
+.DS_Store
+
+# Secrets / environment — never commit. Keep .env.example as the template.
+.env
+.env.*
+!.env.example
+
+# Local tooling state
+.netlify

@@ -1,0 +1,710 @@
+[
+  {
+    "slug": "tocadores-loft",
+    "name": {
+      "es": "Tocadores Loft",
+      "en": "Loft Dressing Tables"
+    },
+    "tagline": {
+      "es": "Industrial cálido, líneas francas",
+      "en": "Warm industrial, honest lines"
+    },
+    "description": {
+      "es": "Tocadores de inspiración loft: estructura metálica, maderas nobles y un punto urbano. Pensados para espacios abiertos y luminosos.",
+      "en": "Loft-inspired dressing tables: metal frame, noble woods and an urban edge. Made for open, light-filled spaces."
+    },
+    "image": "1532372320572-cda25653a26d",
+    "products": [
+      {
+        "id": "loft-noa",
+        "name": "Noa",
+        "price": 690,
+        "oldPrice": 790,
+        "image": "1532372320572-cda25653a26d",
+        "images": [
+          "1532372320572-cda25653a26d",
+          "1616486338812-3dadae4b4ace",
+          "1556228453-efd6c1ff04f6"
+        ],
+        "material": {
+          "es": "Roble",
+          "en": "Oak"
+        },
+        "size": "110 × 45 cm",
+        "description": {
+          "es": "Tocador compacto con patas metálicas y tablero en roble. Perfecto para espacios con carácter.",
+          "en": "Compact dressing table with metal legs and oak top. Perfect for spaces with character."
+        }
+      },
+      {
+        "id": "loft-sena",
+        "name": "Sena",
+        "price": 740,
+        "image": "1616486338812-3dadae4b4ace",
+        "material": {
+          "es": "Nogal",
+          "en": "Walnut"
+        },
+        "size": "120 × 45 cm",
+        "description": {
+          "es": "Generosa superficie en nogal con cajón central de cierre suave y perfil bajo.",
+          "en": "Wide walnut surface with central soft-close drawer and low-slung profile."
+        }
+      },
+      {
+        "id": "loft-duna",
+        "name": "Duna",
+        "price": 820,
+        "image": "1595428774223-ef52624120d2",
+        "material": {
+          "es": "Fresno",
+          "en": "Ash"
+        },
+        "size": "130 × 48 cm",
+        "description": {
+          "es": "Perfil esbelto en fresno con patas cruzadas. Ligero, aéreo y atemporal.",
+          "en": "Slender ash frame with crossed legs. Light, airy and timeless."
+        }
+      },
+      {
+        "id": "loft-vela",
+        "name": "Vela",
+        "price": 890,
+        "image": "1586023492125-27b2c045efd7",
+        "material": {
+          "es": "Lacado mate",
+          "en": "Matte lacquer"
+        },
+        "size": "140 × 50 cm",
+        "description": {
+          "es": "Lacado mate en tonos neutros con base industrial flotante. Presencia sin ruido.",
+          "en": "Matte lacquer in neutral tones with floating industrial base. Presence without noise."
+        }
+      }
+    ]
+  },
+  {
+    "slug": "tocadores",
+    "name": {
+      "es": "Tocadores",
+      "en": "Dressing Tables"
+    },
+    "tagline": {
+      "es": "El ritual diario, en calma",
+      "en": "The daily ritual, in calm"
+    },
+    "description": {
+      "es": "Tocadores clásicos reinterpretados. Superficies limpias, cajones suaves y proporciones serenas para tu rincón de belleza.",
+      "en": "Classic dressing tables, reinterpreted. Clean surfaces, soft-close drawers and serene proportions for your beauty corner."
+    },
+    "image": "1540574163026-643ea20ade25",
+    "products": [
+      {
+        "id": "toc-alba",
+        "name": "Alba",
+        "price": 520,
+        "image": "1540574163026-643ea20ade25",
+        "material": {
+          "es": "Roble claro",
+          "en": "Light oak"
+        },
+        "size": "100 × 42 cm",
+        "description": {
+          "es": "Líneas puras en roble claro con cajón oculto. Sereno y funcional a la vez.",
+          "en": "Pure lines in light oak with hidden drawer. Serene and functional at once."
+        }
+      },
+      {
+        "id": "toc-lina",
+        "name": "Lina",
+        "price": 580,
+        "image": "1505693416388-ac5ce068fe85",
+        "material": {
+          "es": "Roble",
+          "en": "Oak"
+        },
+        "size": "110 × 45 cm",
+        "description": {
+          "es": "Estructura aérea en roble con espejo ovalado integrado y balda inferior.",
+          "en": "Airy oak structure with integrated oval mirror and lower shelf."
+        }
+      },
+      {
+        "id": "toc-mara",
+        "name": "Mara",
+        "price": 640,
+        "image": "1522708323590-d24dbb6b0267",
+        "material": {
+          "es": "Nogal",
+          "en": "Walnut"
+        },
+        "size": "115 × 45 cm",
+        "description": {
+          "es": "Amplio tablero en nogal con tres cajones y tiradores de latón bruñido.",
+          "en": "Wide walnut top with three drawers and burnished brass pulls."
+        }
+      },
+      {
+        "id": "toc-vera",
+        "name": "Vera",
+        "price": 710,
+        "image": "1567538096630-e0c55bd6374c",
+        "material": {
+          "es": "Lacado mate",
+          "en": "Matte lacquer"
+        },
+        "size": "120 × 48 cm",
+        "description": {
+          "es": "Lacado mate en tonos neutros con acabado aterciopelado al tacto. Elegancia discreta.",
+          "en": "Matte lacquer in neutral tones with a velvety finish. Discreet elegance."
+        }
+      }
+    ]
+  },
+  {
+    "slug": "estanterias",
+    "name": {
+      "es": "Estanterías",
+      "en": "Shelving"
+    },
+    "tagline": {
+      "es": "Orden que respira",
+      "en": "Order that breathes"
+    },
+    "description": {
+      "es": "Estanterías modulares de líneas finas. Para exhibir, ordenar y dar aire a la pared sin recargarla.",
+      "en": "Modular shelving with slender lines. To display, organise and give the wall air without crowding it."
+    },
+    "image": "1538688525198-9b88f6f53126",
+    "products": [
+      {
+        "id": "est-olmo",
+        "name": "Olmo",
+        "price": 340,
+        "image": "1538688525198-9b88f6f53126",
+        "material": {
+          "es": "Roble",
+          "en": "Oak"
+        },
+        "size": "80 × 180 cm",
+        "description": {
+          "es": "Módulos apilables en roble con baldas de distintas alturas. Adaptable a cada pared.",
+          "en": "Stackable oak modules with shelves at varying heights. Adaptable to any wall."
+        }
+      },
+      {
+        "id": "est-sora",
+        "name": "Sora",
+        "price": 420,
+        "image": "1618220179428-22790b461013",
+        "material": {
+          "es": "Fresno",
+          "en": "Ash"
+        },
+        "size": "90 × 200 cm",
+        "description": {
+          "es": "Sistema de estantes en fresno con estructura de acero negro. Loft con alma cálida.",
+          "en": "Ash shelf system with black steel frame. Loft aesthetic with warm soul."
+        }
+      },
+      {
+        "id": "est-brava",
+        "name": "Brava",
+        "price": 560,
+        "image": "1616594039964-ae9021a400a0",
+        "material": {
+          "es": "Nogal",
+          "en": "Walnut"
+        },
+        "size": "100 × 210 cm",
+        "description": {
+          "es": "Librería en nogal con baldas ajustables y luz led integrada. Noble y práctica.",
+          "en": "Walnut bookcase with adjustable shelves and integrated LED light. Noble and practical."
+        }
+      },
+      {
+        "id": "est-cala",
+        "name": "Cala",
+        "price": 690,
+        "image": "1493663284031-b7e3aefcae8e",
+        "material": {
+          "es": "Lacado mate",
+          "en": "Matte lacquer"
+        },
+        "size": "120 × 210 cm",
+        "description": {
+          "es": "Estantería lacada con compartimentos asimétricos. Organización con geometría limpia.",
+          "en": "Lacquered shelving with asymmetric compartments. Organisation through clean geometry."
+        }
+      }
+    ]
+  },
+  {
+    "slug": "mesas-de-manicura",
+    "name": {
+      "es": "Mesas De Manicura",
+      "en": "Manicure Tables"
+    },
+    "tagline": {
+      "es": "Trabajo de precisión, estética serena",
+      "en": "Precision work, serene aesthetics"
+    },
+    "description": {
+      "es": "Mesas de manicura profesionales con ergonomía cuidada y almacenamiento integrado. Belleza para el cliente y para el espacio.",
+      "en": "Professional manicure tables with careful ergonomics and integrated storage. Beauty for the client and for the space."
+    },
+    "image": "1567016432779-094069958ea5",
+    "products": [
+      {
+        "id": "man-ona",
+        "name": "Ona",
+        "price": 390,
+        "image": "1567016432779-094069958ea5",
+        "material": {
+          "es": "Roble claro",
+          "en": "Light oak"
+        },
+        "size": "90 × 40 cm",
+        "description": {
+          "es": "Mesa compacta con aspirador integrado y cajón de utensilios. Para espacios pequeños.",
+          "en": "Compact table with integrated aspirator and tool drawer. For smaller spaces."
+        }
+      },
+      {
+        "id": "man-lua",
+        "name": "Lúa",
+        "price": 460,
+        "image": "1503602642458-232111445657",
+        "material": {
+          "es": "Roble",
+          "en": "Oak"
+        },
+        "size": "100 × 42 cm",
+        "description": {
+          "es": "Mesa profesional en roble con iluminación led y soporte para gel UV.",
+          "en": "Professional oak table with LED lighting and UV gel holder."
+        }
+      },
+      {
+        "id": "man-tara",
+        "name": "Tara",
+        "price": 590,
+        "image": "1560448204-e02f11c3d0e2",
+        "material": {
+          "es": "Lacado mate",
+          "en": "Matte lacquer"
+        },
+        "size": "110 × 45 cm",
+        "description": {
+          "es": "Diseño lacado con cajones extraíbles y bandeja articulada para el trabajo.",
+          "en": "Lacquered design with pull-out drawers and articulated work tray."
+        }
+      },
+      {
+        "id": "man-indra",
+        "name": "Indra",
+        "price": 780,
+        "image": "1524758631624-e2822e304c36",
+        "material": {
+          "es": "Nogal",
+          "en": "Walnut"
+        },
+        "size": "120 × 48 cm",
+        "description": {
+          "es": "Mesa premium en nogal con aspirador silencioso, ruedas y amplio almacenamiento.",
+          "en": "Premium walnut table with silent aspirator, wheels and ample storage."
+        }
+      }
+    ]
+  },
+  {
+    "slug": "espejos-altos",
+    "name": {
+      "es": "Espejos Altos",
+      "en": "Tall Mirrors"
+    },
+    "tagline": {
+      "es": "Reflejo de cuerpo entero",
+      "en": "Full-length reflection"
+    },
+    "description": {
+      "es": "Espejos de pie y de pared a gran escala. Amplían la luz y el espacio con un marco mínimo y elegante.",
+      "en": "Large floor and wall mirrors. They expand light and space with a minimal, elegant frame."
+    },
+    "image": "1581539250439-c96689b516dd",
+    "products": [
+      {
+        "id": "esa-nara",
+        "name": "Nara",
+        "price": 320,
+        "image": "1581539250439-c96689b516dd",
+        "material": {
+          "es": "Latón",
+          "en": "Brass"
+        },
+        "size": "60 × 180 cm",
+        "description": {
+          "es": "Espejo de pie en latón con base estable de gran formato. Presencia cálida y duradera.",
+          "en": "Floor mirror in brass with stable large-format base. Warm and lasting presence."
+        }
+      },
+      {
+        "id": "esa-sora",
+        "name": "Solé",
+        "price": 380,
+        "image": "1616627561839-074385245ff6",
+        "material": {
+          "es": "Roble",
+          "en": "Oak"
+        },
+        "size": "70 × 190 cm",
+        "description": {
+          "es": "Espejo de pared en marco de roble con inclinación regulable. Versátil y natural.",
+          "en": "Wall mirror in oak frame with adjustable tilt. Versatile and natural."
+        }
+      },
+      {
+        "id": "esa-vala",
+        "name": "Vala",
+        "price": 460,
+        "image": "1617806118233-18e1de247200",
+        "material": {
+          "es": "Nogal",
+          "en": "Walnut"
+        },
+        "size": "80 × 200 cm",
+        "description": {
+          "es": "Espejo inclinable en nogal con bandeja inferior para objetos cotidianos.",
+          "en": "Tilting walnut mirror with lower shelf for everyday objects."
+        }
+      },
+      {
+        "id": "esa-mira",
+        "name": "Mira",
+        "price": 540,
+        "image": "1598300042247-d088f8ab3a91",
+        "material": {
+          "es": "Lacado mate",
+          "en": "Matte lacquer"
+        },
+        "size": "90 × 210 cm",
+        "description": {
+          "es": "Espejo lacado con iluminación led perimetral. La luz justa, donde la necesitas.",
+          "en": "Lacquered mirror with perimeter LED lighting. The right light, exactly where you need it."
+        }
+      }
+    ]
+  },
+  {
+    "slug": "espejos",
+    "name": {
+      "es": "Espejos",
+      "en": "Mirrors"
+    },
+    "tagline": {
+      "es": "La pieza que cambia un cuarto",
+      "en": "The piece that changes a room"
+    },
+    "description": {
+      "es": "Espejos de tocador y decorativos en formas puras. Redondos, ovalados o rectangulares, siempre con marco depurado.",
+      "en": "Vanity and decorative mirrors in pure shapes. Round, oval or rectangular, always with a refined frame."
+    },
+    "image": "1567225557594-88d73e55f2cb",
+    "products": [
+      {
+        "id": "esp-ono",
+        "name": "Ono",
+        "price": 190,
+        "image": "1567225557594-88d73e55f2cb",
+        "material": {
+          "es": "Latón",
+          "en": "Brass"
+        },
+        "size": "Ø 60 cm",
+        "description": {
+          "es": "Espejo circular en latón con acabado mate envejecido. Clásico y contemporáneo.",
+          "en": "Circular mirror in aged matte brass. Classic and contemporary at once."
+        }
+      },
+      {
+        "id": "esp-cira",
+        "name": "Cira",
+        "price": 240,
+        "image": "1581539250439-c96689b516dd",
+        "material": {
+          "es": "Roble",
+          "en": "Oak"
+        },
+        "size": "Ø 70 cm",
+        "description": {
+          "es": "Redondo en roble macizo con colgado de doble orientación. Natural y sereno.",
+          "en": "Round solid oak frame with two-way hanging. Natural and serene."
+        }
+      },
+      {
+        "id": "esp-tona",
+        "name": "Tona",
+        "price": 290,
+        "image": "1616594039964-ae9021a400a0",
+        "material": {
+          "es": "Nogal",
+          "en": "Walnut"
+        },
+        "size": "60 × 80 cm",
+        "description": {
+          "es": "Marco rectangular en nogal con proporciones áureas. Detalle que enriquece.",
+          "en": "Rectangular walnut frame with golden-ratio proportions. A detail that enriches."
+        }
+      },
+      {
+        "id": "esp-luma",
+        "name": "Luma",
+        "price": 360,
+        "image": "1598300042247-d088f8ab3a91",
+        "material": {
+          "es": "Lacado mate",
+          "en": "Matte lacquer"
+        },
+        "size": "70 × 90 cm",
+        "description": {
+          "es": "Lacado en blanco con retroiluminación tenue. Ambiente de spa en tu espacio.",
+          "en": "White lacquered with soft backlighting. Spa atmosphere in your own space."
+        }
+      }
+    ]
+  },
+  {
+    "slug": "consolas-con-espejo",
+    "name": {
+      "es": "Consolas Con Espejo",
+      "en": "Consoles with Mirror"
+    },
+    "tagline": {
+      "es": "Recibidor con carácter",
+      "en": "An entryway with character"
+    },
+    "description": {
+      "es": "Conjuntos de consola y espejo a juego. La bienvenida perfecta para tu hogar o tu salón de belleza.",
+      "en": "Matching console and mirror sets. The perfect welcome for your home or beauty salon."
+    },
+    "image": "1556228453-efd6c1ff04f6",
+    "products": [
+      {
+        "id": "cce-sena",
+        "name": "Senna",
+        "price": 720,
+        "image": "1556228453-efd6c1ff04f6",
+        "material": {
+          "es": "Roble",
+          "en": "Oak"
+        },
+        "size": "120 × 35 cm",
+        "description": {
+          "es": "Conjunto clásico en roble con espejo de marco fino. Armonía desde la entrada.",
+          "en": "Classic oak set with slim-frame mirror. Harmony from the very entrance."
+        }
+      },
+      {
+        "id": "cce-aria",
+        "name": "Aria",
+        "price": 860,
+        "image": "1586023492125-27b2c045efd7",
+        "material": {
+          "es": "Nogal",
+          "en": "Walnut"
+        },
+        "size": "130 × 38 cm",
+        "description": {
+          "es": "Conjunto en nogal con espejo ovalado y cajón integrado. Orgánico y refinado.",
+          "en": "Walnut set with oval mirror and integrated drawer. Organic and refined."
+        }
+      },
+      {
+        "id": "cce-noor",
+        "name": "Noor",
+        "price": 980,
+        "image": "1616486338812-3dadae4b4ace",
+        "material": {
+          "es": "Travertino",
+          "en": "Travertine"
+        },
+        "size": "140 × 40 cm",
+        "description": {
+          "es": "Consola en travertino con espejo de arco pleno. Material de lujo, formas atemporales.",
+          "en": "Travertine console with full-arch mirror. Luxury material, timeless forms."
+        }
+      },
+      {
+        "id": "cce-vela",
+        "name": "Vega",
+        "price": 1190,
+        "image": "1595428774223-ef52624120d2",
+        "material": {
+          "es": "Mármol",
+          "en": "Marble"
+        },
+        "size": "150 × 42 cm",
+        "description": {
+          "es": "Consola en mármol con espejo de marco biselado. La pieza más premium de la colección.",
+          "en": "Marble console with bevelled-frame mirror. The most premium piece in the collection."
+        }
+      }
+    ]
+  },
+  {
+    "slug": "consolas",
+    "name": {
+      "es": "Consolas",
+      "en": "Consoles"
+    },
+    "tagline": {
+      "es": "Finas, firmes, esenciales",
+      "en": "Slim, firm, essential"
+    },
+    "description": {
+      "es": "Consolas de perfil estrecho para pasillos y entradas. Máxima presencia, mínima profundidad.",
+      "en": "Narrow-profile consoles for hallways and entrances. Maximum presence, minimal depth."
+    },
+    "image": "1586023492125-27b2c045efd7",
+    "products": [
+      {
+        "id": "con-ela",
+        "name": "Ela",
+        "price": 520,
+        "image": "1586023492125-27b2c045efd7",
+        "material": {
+          "es": "Roble claro",
+          "en": "Light oak"
+        },
+        "size": "110 × 30 cm",
+        "description": {
+          "es": "Consola esbelta en roble claro, idónea para entradas y pasillos estrechos.",
+          "en": "Slender light-oak console, ideal for narrow entryways and hallways."
+        }
+      },
+      {
+        "id": "con-rune",
+        "name": "Rune",
+        "price": 610,
+        "image": "1556228453-efd6c1ff04f6",
+        "material": {
+          "es": "Roble",
+          "en": "Oak"
+        },
+        "size": "120 × 32 cm",
+        "description": {
+          "es": "Superficie en roble con cajón lateral y patas cónicas. Funcional con estilo.",
+          "en": "Oak surface with side drawer and tapered legs. Functional with style."
+        }
+      },
+      {
+        "id": "con-sela",
+        "name": "Sela",
+        "price": 740,
+        "image": "1560448204-e02f11c3d0e2",
+        "material": {
+          "es": "Nogal",
+          "en": "Walnut"
+        },
+        "size": "130 × 34 cm",
+        "description": {
+          "es": "Consola en nogal con estante inferior y acabado en aceite natural. Cálida y durable.",
+          "en": "Walnut console with lower shelf and natural oil finish. Warm and durable."
+        }
+      },
+      {
+        "id": "con-faro",
+        "name": "Faro",
+        "price": 880,
+        "image": "1524758631624-e2822e304c36",
+        "material": {
+          "es": "Lacado mate",
+          "en": "Matte lacquer"
+        },
+        "size": "140 × 36 cm",
+        "description": {
+          "es": "Lacado mate con base de acero negro y bandeja deslizante inferior. Loft urbano.",
+          "en": "Matte lacquer with black steel base and lower sliding tray. Urban loft aesthetic."
+        }
+      }
+    ]
+  },
+  {
+    "slug": "cajonera",
+    "name": {
+      "es": "Cajonera",
+      "en": "Drawer Units"
+    },
+    "tagline": {
+      "es": "Guardar, con elegancia",
+      "en": "Storage, elegantly"
+    },
+    "description": {
+      "es": "Cajoneras de cierre suave y tiradores discretos. Almacenamiento generoso que desaparece en el ambiente.",
+      "en": "Drawer units with soft-close runners and discreet pulls. Generous storage that melts into the room."
+    },
+    "image": "1616486338812-3dadae4b4ace",
+    "products": [
+      {
+        "id": "caj-bea",
+        "name": "Bea",
+        "price": 420,
+        "image": "1616486338812-3dadae4b4ace",
+        "material": {
+          "es": "Roble",
+          "en": "Oak"
+        },
+        "size": "80 × 90 cm",
+        "description": {
+          "es": "Tres cajones en roble con guías silenciosas y tirador de gota. Simple y eficaz.",
+          "en": "Three oak drawers with silent runners and drop handle. Simple and effective."
+        }
+      },
+      {
+        "id": "caj-tilo",
+        "name": "Tilo",
+        "price": 520,
+        "image": "1538688525198-9b88f6f53126",
+        "material": {
+          "es": "Fresno",
+          "en": "Ash"
+        },
+        "size": "90 × 95 cm",
+        "description": {
+          "es": "Cuatro cajones en fresno con frente liso y sin tirador. Minimalismo llevado al límite.",
+          "en": "Four ash drawers with smooth push-to-open front. Minimalism taken to the limit."
+        }
+      },
+      {
+        "id": "caj-mora",
+        "name": "Mora",
+        "price": 660,
+        "image": "1522708323590-d24dbb6b0267",
+        "material": {
+          "es": "Nogal",
+          "en": "Walnut"
+        },
+        "size": "100 × 100 cm",
+        "description": {
+          "es": "Cajonera alta en nogal con cerradura discreta y veta natural prominente.",
+          "en": "Tall walnut chest with discreet lock and prominent natural grain."
+        }
+      },
+      {
+        "id": "caj-sol",
+        "name": "Sol",
+        "price": 840,
+        "image": "1505693416388-ac5ce068fe85",
+        "material": {
+          "es": "Lacado mate",
+          "en": "Matte lacquer"
+        },
+        "size": "110 × 105 cm",
+        "description": {
+          "es": "Lacado en blanco con cajones de distintas alturas y pies de latón. Elegancia total.",
+          "en": "White lacquer with drawers of varying heights and brass feet. Total elegance."
+        }
+      }
+    ]
+  }
+]

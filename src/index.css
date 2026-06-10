@@ -1,0 +1,89 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ============================================================
+   HS Muebles — Design tokens (RAW RGB for Tailwind opacity)
+   Warm minimalist palette: beige + soft charcoal + gold
+   ============================================================ */
+:root {
+  --color-background: 247 245 242; /* #F7F5F2 warm off-white */
+  --color-primary: 43 43 43; /* #2B2B2B soft charcoal (never pure black) */
+  --color-secondary: 124 116 104; /* #7C7468 warm taupe text */
+  --color-accent: 196 162 101; /* #C4A265 muted gold */
+  --color-surface: 239 234 226; /* #EFEAE2 warm card/section surface */
+  --color-danger: 176 58 46; /* #B03A2E warm brick — form/validation errors only */
+}
+
+@layer base {
+  html {
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    @apply bg-background text-primary font-sans antialiased;
+    font-weight: 400;
+  }
+
+  ::selection {
+    background-color: rgb(var(--color-accent) / 0.25);
+  }
+
+  /* Quieter scrollbar to suit the minimal aesthetic */
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: rgb(var(--color-background));
+  }
+  ::-webkit-scrollbar-thumb {
+    background: rgb(var(--color-primary) / 0.15);
+    border-radius: 9999px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgb(var(--color-primary) / 0.25);
+  }
+}
+
+@layer utilities {
+  .no-scrollbar {
+    scrollbar-width: none;
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Subtle loading sheen for media placeholders (see components/Media.jsx).
+     A light band sweeps across the warm surface colour while an image loads. */
+  .shimmer {
+    background-image: linear-gradient(
+      100deg,
+      transparent 30%,
+      rgb(var(--color-background) / 0.6) 50%,
+      transparent 70%
+    );
+    background-size: 200% 100%;
+    background-repeat: no-repeat;
+  }
+
+  /* Initial state for GSAP scroll reveals (see components/Reveal.jsx).
+     Kept here so content is hidden before JS runs, avoiding flash. */
+  .reveal-init {
+    opacity: 0;
+    transform: translateY(28px);
+    will-change: transform, opacity;
+  }
+
+  /* Thin animated underline used in nav + inline links */
+  .link-underline {
+    background-image: linear-gradient(rgb(var(--color-accent)), rgb(var(--color-accent)));
+    background-size: 0% 1px;
+    background-position: 0 100%;
+    background-repeat: no-repeat;
+    transition: background-size 0.4s cubic-bezier(0.215, 0.61, 0.355, 1);
+  }
+  .link-underline:hover {
+    background-size: 100% 1px;
+  }
+}
