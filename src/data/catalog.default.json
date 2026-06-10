@@ -1,89 +1,5 @@
 [
   {
-    "slug": "tocadores-loft",
-    "name": {
-      "es": "Tocadores Loft",
-      "en": "Loft Dressing Tables"
-    },
-    "tagline": {
-      "es": "Industrial cálido, líneas francas",
-      "en": "Warm industrial, honest lines"
-    },
-    "description": {
-      "es": "Tocadores de inspiración loft: estructura metálica, maderas nobles y un punto urbano. Pensados para espacios abiertos y luminosos.",
-      "en": "Loft-inspired dressing tables: metal frame, noble woods and an urban edge. Made for open, light-filled spaces."
-    },
-    "image": "1532372320572-cda25653a26d",
-    "products": [
-      {
-        "id": "loft-noa",
-        "name": "Noa",
-        "price": 690,
-        "oldPrice": 790,
-        "image": "1532372320572-cda25653a26d",
-        "images": [
-          "1532372320572-cda25653a26d",
-          "1616486338812-3dadae4b4ace",
-          "1556228453-efd6c1ff04f6"
-        ],
-        "material": {
-          "es": "Roble",
-          "en": "Oak"
-        },
-        "size": "110 × 45 cm",
-        "description": {
-          "es": "Tocador compacto con patas metálicas y tablero en roble. Perfecto para espacios con carácter.",
-          "en": "Compact dressing table with metal legs and oak top. Perfect for spaces with character."
-        }
-      },
-      {
-        "id": "loft-sena",
-        "name": "Sena",
-        "price": 740,
-        "image": "1616486338812-3dadae4b4ace",
-        "material": {
-          "es": "Nogal",
-          "en": "Walnut"
-        },
-        "size": "120 × 45 cm",
-        "description": {
-          "es": "Generosa superficie en nogal con cajón central de cierre suave y perfil bajo.",
-          "en": "Wide walnut surface with central soft-close drawer and low-slung profile."
-        }
-      },
-      {
-        "id": "loft-duna",
-        "name": "Duna",
-        "price": 820,
-        "image": "1595428774223-ef52624120d2",
-        "material": {
-          "es": "Fresno",
-          "en": "Ash"
-        },
-        "size": "130 × 48 cm",
-        "description": {
-          "es": "Perfil esbelto en fresno con patas cruzadas. Ligero, aéreo y atemporal.",
-          "en": "Slender ash frame with crossed legs. Light, airy and timeless."
-        }
-      },
-      {
-        "id": "loft-vela",
-        "name": "Vela",
-        "price": 890,
-        "image": "1586023492125-27b2c045efd7",
-        "material": {
-          "es": "Lacado mate",
-          "en": "Matte lacquer"
-        },
-        "size": "140 × 50 cm",
-        "description": {
-          "es": "Lacado mate en tonos neutros con base industrial flotante. Presencia sin ruido.",
-          "en": "Matte lacquer in neutral tones with floating industrial base. Presence without noise."
-        }
-      }
-    ]
-  },
-  {
     "slug": "tocadores",
     "name": {
       "es": "Tocadores",
@@ -97,67 +13,1060 @@
       "es": "Tocadores clásicos reinterpretados. Superficies limpias, cajones suaves y proporciones serenas para tu rincón de belleza.",
       "en": "Classic dressing tables, reinterpreted. Clean surfaces, soft-close drawers and serene proportions for your beauty corner."
     },
-    "image": "1540574163026-643ea20ade25",
+    "image": "/uploads/cfe9b3489a985b6d5036bc8856caae05.jpg",
+    "imageMobile": "",
+    "video": "",
     "products": [
       {
-        "id": "toc-alba",
-        "name": "Alba",
-        "price": 520,
-        "image": "1540574163026-643ea20ade25",
+        "id": "T-01",
+        "name": "T-01",
+        "price": 290,
+        "oldPrice": 550,
+        "image": "/uploads/cfe9b3489a985b6d5036bc8856caae05.jpg",
+        "imageMobile": "",
+        "images": [
+          "/uploads/cfe9b3489a985b6d5036bc8856caae05.jpg",
+          "/uploads/38799916c0b5472fe8f6c681773c8db7.jpg",
+          "/uploads/42825111de12c7c6db9b502fdc7442f2.jpg",
+          "/uploads/2c4bf4862b24d592ad9470493bc24eba.jpg"
+        ],
+        "video": "",
         "material": {
           "es": "Roble claro",
           "en": "Light oak"
         },
-        "size": "100 × 42 cm",
+        "size": "60 × 40 × 160 cm",
         "description": {
-          "es": "Líneas puras en roble claro con cajón oculto. Sereno y funcional a la vez.",
-          "en": "Pure lines in light oak with hidden drawer. Serene and functional at once."
-        }
+          "es": "TocadoresTocadores TocadoresTocadoresTocadores TocadoresTocadoresTocadoresTocadoresTocadores",
+          "en": "TocadoresTocadores TocadoresTocadoresTocadores TocadoresTocadoresTocadoresTocadoresTocadores"
+        },
+        "related": [
+          "toc-vera",
+          "toc-lina",
+          "toc-mara"
+        ]
       },
       {
-        "id": "toc-lina",
-        "name": "Lina",
-        "price": 580,
-        "image": "1505693416388-ac5ce068fe85",
+        "id": "T-02",
+        "name": "T-02",
+        "price": 329,
+        "oldPrice": 600,
+        "image": "/uploads/23892ed3a413a251335d8380ad32cbac.jpg",
+        "imageMobile": "",
+        "images": [
+          "/uploads/23892ed3a413a251335d8380ad32cbac.jpg",
+          "/uploads/93b2e567c1736ccca6e7a66172570c54.jpg",
+          "/uploads/3e907b77043aebb97f7c90a126c24659.jpg",
+          "/uploads/068da070be408524ea999abfae4a2c7a.jpg",
+          "/uploads/6243f3b213211f593f5cbe40c4aba1a7.jpg"
+        ],
+        "video": "",
         "material": {
           "es": "Roble",
           "en": "Oak"
         },
-        "size": "110 × 45 cm",
+        "size": "60 × 40 × 160 cm",
         "description": {
-          "es": "Estructura aérea en roble con espejo ovalado integrado y balda inferior.",
-          "en": "Airy oak structure with integrated oval mirror and lower shelf."
-        }
+          "es": "TocadoresTocadoresTocadoresTocadores TocadoresTocadoresTocadoresTocadores TocadoresTocadores",
+          "en": "TocadoresTocadores TocadoresTocadoresTocadores TocadoresTocadoresTocadoresTocadoresTocadores"
+        },
+        "related": [
+          "toc-vera",
+          "toc-mara",
+          "toc-alba",
+          "toc-vera-copy-mq6vhosq"
+        ]
       },
       {
-        "id": "toc-mara",
-        "name": "Mara",
-        "price": 640,
-        "image": "1522708323590-d24dbb6b0267",
+        "id": "T-03",
+        "name": "T-03",
+        "price": 329,
+        "oldPrice": 600,
+        "image": "/uploads/cc7e87f07eb3e4eadc393f5c79924f18.jpg",
+        "imageMobile": "",
+        "images": [
+          "/uploads/cc7e87f07eb3e4eadc393f5c79924f18.jpg",
+          "/uploads/7954c0d366df3e76b37f87a484342ee5.jpg",
+          "/uploads/f64a17f4b931b35ba8a117ecffa8fb45.jpg",
+          "/uploads/756b7bc51a130c31a0ce92319449b82a.jpg",
+          "/uploads/98c54f605cb2f8974b7318a541afa35c.jpg",
+          "/uploads/a341e3a166c93f43f2eaec0cf0081c96.jpg",
+          "/uploads/7673e898c5106af923bf88813e26b86a.jpg"
+        ],
+        "video": "",
         "material": {
           "es": "Nogal",
           "en": "Walnut"
         },
-        "size": "115 × 45 cm",
+        "size": "60 × 40 × 160 cm",
         "description": {
-          "es": "Amplio tablero en nogal con tres cajones y tiradores de latón bruñido.",
-          "en": "Wide walnut top with three drawers and burnished brass pulls."
-        }
+          "es": "TocadoresTocadores TocadoresTocadoresTocadores TocadoresTocadoresTocadoresTocadoresTocadores",
+          "en": "TocadoresTocadores TocadoresTocadoresTocadores TocadoresTocadoresTocadoresTocadoresTocadores"
+        },
+        "related": [
+          "toc-vera",
+          "toc-alba",
+          "toc-lina"
+        ]
       },
       {
-        "id": "toc-vera",
-        "name": "Vera",
-        "price": 710,
-        "image": "1567538096630-e0c55bd6374c",
+        "id": "T-04",
+        "name": "T-04",
+        "price": 369,
+        "oldPrice": 650,
+        "image": "/uploads/d54586e9cbfcb8a6ddac354a8c2a0571.jpg",
+        "imageMobile": "",
+        "images": [
+          "/uploads/d54586e9cbfcb8a6ddac354a8c2a0571.jpg",
+          "/uploads/7411adc6125ea2493e06dec1d83bb97b.jpg",
+          "/uploads/d9e7687a87f4d186f4c17c67a62e5a3e.jpg",
+          "/uploads/798d4678da5632b8286c12fe633343f0.jpg",
+          "/uploads/f0c892fa931a8b3bc16cfb6d7ce2bf0a.jpg",
+          "/uploads/94bbb7f8659907b2bb6a37c8a5821223.jpg"
+        ],
+        "video": "",
         "material": {
           "es": "Lacado mate",
           "en": "Matte lacquer"
         },
-        "size": "120 × 48 cm",
+        "size": "80 × 40 × 160 cm",
         "description": {
-          "es": "Lacado mate en tonos neutros con acabado aterciopelado al tacto. Elegancia discreta.",
-          "en": "Matte lacquer in neutral tones with a velvety finish. Discreet elegance."
-        }
+          "es": "TocadoresTocadores TocadoresTocadoresTocadores TocadoresTocadoresTocadoresTocadoresTocadores",
+          "en": "TocadoresTocadores TocadoresTocadoresTocadores TocadoresTocadoresTocadoresTocadoresTocadores"
+        },
+        "related": [
+          "toc-vera-copy-mq6vhosq",
+          "toc-mara",
+          "toc-lina",
+          "toc-alba"
+        ]
+      },
+      {
+        "id": "T-05",
+        "name": "T-05",
+        "price": 369,
+        "oldPrice": 650,
+        "image": "/uploads/c087ee159cd89a85fec7030b08b0acab.jpg",
+        "imageMobile": "",
+        "images": [
+          "/uploads/c087ee159cd89a85fec7030b08b0acab.jpg",
+          "/uploads/bbaf72fd934103bd0705ba116ff8205d.jpg",
+          "/uploads/b912fbad36e4626d7a5610fbbdb93393.jpg",
+          "/uploads/23dce1208208ca430031c57649aeabfe.jpg",
+          "/uploads/bce652b44899a2984bdd0d1f111dd212.jpg"
+        ],
+        "video": "",
+        "material": {
+          "es": "Lacado mate",
+          "en": "Matte lacquer"
+        },
+        "size": "80 × 40 × 160 cm",
+        "description": {
+          "es": "TocadoresTocadores TocadoresTocadoresTocadores TocadoresTocadoresTocadoresTocadoresTocadores",
+          "en": "TocadoresTocadores TocadoresTocadoresTocadores TocadoresTocadoresTocadoresTocadoresTocadores"
+        },
+        "related": [
+          "toc-alba",
+          "toc-vera",
+          "toc-mara",
+          "toc-lina"
+        ]
+      },
+      {
+        "id": "T-06",
+        "name": "T-06",
+        "price": 399,
+        "oldPrice": 700,
+        "image": "/uploads/40cf889d7a55a4afc01c59454a51d742.jpg",
+        "imageMobile": "",
+        "images": [
+          "/uploads/40cf889d7a55a4afc01c59454a51d742.jpg",
+          "/uploads/b9e0a7084cf3dc25f2dfdaf5678e1bfd.jpg",
+          "/uploads/91a26320cce6a7cf908dd0518eea3867.jpg",
+          "/uploads/ba640349562afd645f83658bd46a2092.jpg",
+          "/uploads/cf9b1c362a015cd3c74d8da2f127a57b.jpg",
+          "/uploads/106eff145791bc7e12d23c4ec69e03cf.jpg"
+        ],
+        "video": "",
+        "material": {
+          "es": "Lacado mate",
+          "en": "Matte lacquer"
+        },
+        "size": "80 × 40 × 160 cm",
+        "description": {
+          "es": "TocadoresTocadores TocadoresTocadoresTocadores TocadoresTocadoresTocadoresTocadoresTocadores",
+          "en": "TocadoresTocadores TocadoresTocadoresTocadores TocadoresTocadoresTocadoresTocadoresTocadores"
+        },
+        "related": [
+          "toc-alba",
+          "toc-vera",
+          "toc-mara",
+          "toc-lina"
+        ]
+      },
+      {
+        "id": "T-07",
+        "name": "T-07",
+        "price": 399,
+        "oldPrice": 700,
+        "image": "/uploads/e86ae6968350e27eb24c92303c03eb20.jpg",
+        "imageMobile": "",
+        "images": [
+          "/uploads/e86ae6968350e27eb24c92303c03eb20.jpg",
+          "/uploads/12befe43faf2104c2296fa1ede82a07e.jpg",
+          "/uploads/8c945450450af7293da274eac29c96ac.jpg",
+          "/uploads/2e599eeebc78b61d754afbcb15b535ee.jpg",
+          "/uploads/df7c79f7ead8a322927349d13c021926.jpg"
+        ],
+        "video": "",
+        "material": {
+          "es": "Lacado mate",
+          "en": "Matte lacquer"
+        },
+        "size": "80 × 40 × 160 cm",
+        "description": {
+          "es": "TocadoresTocadores TocadoresTocadoresTocadores TocadoresTocadoresTocadoresTocadoresTocadores",
+          "en": "TocadoresTocadores TocadoresTocadoresTocadores TocadoresTocadoresTocadoresTocadoresTocadores"
+        },
+        "related": [
+          "toc-alba",
+          "toc-vera",
+          "toc-mara",
+          "toc-lina"
+        ]
+      },
+      {
+        "id": "T-08",
+        "name": "T-08",
+        "price": 599,
+        "oldPrice": 900,
+        "image": "/uploads/8ee3496582b269374d611e94c9cd8d0d.jpg",
+        "imageMobile": "",
+        "images": [
+          "/uploads/8ee3496582b269374d611e94c9cd8d0d.jpg",
+          "/uploads/43c168d0b071b89ef8b4043e4d2dcb0c.jpg",
+          "/uploads/aabb351e2f4dab134dc270307be07a7d.jpg",
+          "/uploads/5739026ccb514d3da9b71c58348bbe41.jpg"
+        ],
+        "video": "",
+        "material": {
+          "es": "Lacado mate",
+          "en": "Matte lacquer"
+        },
+        "size": "130 × 40 × 160 cm",
+        "description": {
+          "es": "TocadoresTocadores TocadoresTocadoresTocadores TocadoresTocadoresTocadoresTocadoresTocadores",
+          "en": "TocadoresTocadores TocadoresTocadoresTocadores TocadoresTocadoresTocadoresTocadoresTocadores"
+        },
+        "related": [
+          "toc-alba",
+          "toc-vera",
+          "toc-mara",
+          "toc-lina"
+        ]
+      }
+    ]
+  },
+  {
+    "slug": "tocadores-loft",
+    "name": {
+      "es": "Tocadores Loft",
+      "en": "Loft Dressing Tables"
+    },
+    "tagline": {
+      "es": "Industrial cálido, líneas francas",
+      "en": "Warm industrial, honest lines"
+    },
+    "description": {
+      "es": "Tocadores de inspiración loft: estructura metálica, maderas nobles y un punto urbano. Pensados para espacios abiertos y luminosos.",
+      "en": "Loft-inspired dressing tables: metal frame, noble woods and an urban edge. Made for open, light-filled spaces."
+    },
+    "image": "/uploads/3ee281ae8993f1d2c211e10cef9675d4.jpg",
+    "imageMobile": "",
+    "video": "",
+    "products": [
+      {
+        "id": "T-09",
+        "name": "T-09",
+        "price": 379,
+        "oldPrice": 700,
+        "image": "/uploads/3ee281ae8993f1d2c211e10cef9675d4.jpg",
+        "imageMobile": "",
+        "images": [
+          "/uploads/3ee281ae8993f1d2c211e10cef9675d4.jpg",
+          "/uploads/3008e04ff3a1bb8e3234559be7061b3f.jpg",
+          "/uploads/eb0c6a14b77ca84e7f5cfc85c1f03c98.jpg"
+        ],
+        "video": "",
+        "material": {
+          "es": "Roble",
+          "en": "Oak"
+        },
+        "size": "70 × 40 × 170 cm",
+        "description": {
+          "es": "",
+          "en": ""
+        },
+        "related": []
+      },
+      {
+        "id": "T-10",
+        "name": "T-10",
+        "price": 379,
+        "oldPrice": 700,
+        "image": "/uploads/1d6d4a9f248fc940809b8158797cba5e.jpg",
+        "imageMobile": "",
+        "images": [
+          "/uploads/1d6d4a9f248fc940809b8158797cba5e.jpg",
+          "/uploads/618594913f925884ed5ecf4b85bcac04.jpg",
+          "/uploads/9a09ddbaf56aa865453704ffe6fa19db.jpg",
+          "/uploads/a1ced1440aa8ba30b3ef59ece44041dc.jpg",
+          "/uploads/60bb2f674f247278f8393272047dd77a.jpg",
+          "/uploads/fd08f8a09ad56bd0470d3317f580f92a.jpg"
+        ],
+        "video": "",
+        "material": {
+          "es": "Nogal",
+          "en": "Walnut"
+        },
+        "size": "70 × 40 × 170 cm",
+        "description": {
+          "es": "",
+          "en": ""
+        },
+        "related": []
+      },
+      {
+        "id": "T-11",
+        "name": "T-11",
+        "price": 379,
+        "oldPrice": 700,
+        "image": "/uploads/53c7c542c8095408bc63ee34d26e8852.jpg",
+        "imageMobile": "",
+        "images": [
+          "/uploads/53c7c542c8095408bc63ee34d26e8852.jpg",
+          "/uploads/f3a61000b941527419595f50c619ba16.jpg"
+        ],
+        "video": "",
+        "material": {
+          "es": "Fresno",
+          "en": "Ash"
+        },
+        "size": "70 × 40 × 170 cm",
+        "description": {
+          "es": "",
+          "en": ""
+        },
+        "related": []
+      },
+      {
+        "id": "T-12",
+        "name": "T-12",
+        "price": 379,
+        "oldPrice": 700,
+        "image": "/uploads/b59c4e2501ad3ec067510d579d30ac03.jpg",
+        "imageMobile": "",
+        "images": [
+          "/uploads/b59c4e2501ad3ec067510d579d30ac03.jpg",
+          "/uploads/f206eec158c7f30fd96334523906ab23.jpg",
+          "/uploads/223fb69e7b8f2cf5f351695c0cf170a0.jpg",
+          "/uploads/38deb5caa51c10abee6910373bd1927e.jpg",
+          "/uploads/0c74dff9bddd2030abd259097137ce8b.jpg",
+          "/uploads/eb43661cfdff1ff9647c6d61a3da36e5.jpg"
+        ],
+        "video": "",
+        "material": {
+          "es": "Lacado mate",
+          "en": "Matte lacquer"
+        },
+        "size": "70 × 40 × 170 cm",
+        "description": {
+          "es": "",
+          "en": ""
+        },
+        "related": []
+      },
+      {
+        "id": "T-13",
+        "name": "T-13",
+        "price": 399,
+        "oldPrice": 750,
+        "image": "/uploads/8a120f849d5d094ea636de110f5da616.jpg",
+        "imageMobile": "",
+        "images": [
+          "/uploads/8a120f849d5d094ea636de110f5da616.jpg",
+          "/uploads/30e1cd59dee2d9a7a6a90227a62715e6.jpg",
+          "/uploads/d0aa1477d1ba07673ec23ca90e763f36.jpg",
+          "/uploads/439e0d482755f0538fc57440cd9dbb92.jpg",
+          "/uploads/7dad8b49160dd3327743cc9e2eccda35.jpg"
+        ],
+        "video": "",
+        "material": {
+          "es": "Lacado mate",
+          "en": "Matte lacquer"
+        },
+        "size": "70 × 40 × 170 cm",
+        "description": {
+          "es": "",
+          "en": ""
+        },
+        "related": []
+      },
+      {
+        "id": "T-14",
+        "name": "T-14",
+        "price": 399,
+        "oldPrice": 750,
+        "image": "/uploads/845578ae92ec61b012ddbc1e57416c0a.jpg",
+        "imageMobile": "",
+        "images": [
+          "/uploads/845578ae92ec61b012ddbc1e57416c0a.jpg",
+          "/uploads/bb99a1b818c27bc91e8344a0152c6185.jpg",
+          "/uploads/4aefea52dd7c011db8c60ff8c0d21bbb.jpg",
+          "/uploads/3836301925f9a188f0941940e6b0e600.jpg",
+          "/uploads/8f6e758f472b74ee4036a8cb390f4183.jpg",
+          "/uploads/827558981c11ea9432aad1b2bdcba8bb.jpg"
+        ],
+        "video": "",
+        "material": {
+          "es": "Lacado mate",
+          "en": "Matte lacquer"
+        },
+        "size": "70 × 40 × 170 cm",
+        "description": {
+          "es": "",
+          "en": ""
+        },
+        "related": []
+      },
+      {
+        "id": "T-15",
+        "name": "T-15",
+        "price": 399,
+        "oldPrice": 700,
+        "image": "/uploads/bc37947b832e6e35627cf3fbc3e166f1.jpg",
+        "imageMobile": "",
+        "images": [
+          "/uploads/bc37947b832e6e35627cf3fbc3e166f1.jpg",
+          "/uploads/0f49bbdc75e5567ff69cad422524a7ce.jpg",
+          "/uploads/673ef69985248679a0c80b52dcf9e083.jpg",
+          "/uploads/309f1a1a40e7e7f3164eb835d54472ea.jpg",
+          "/uploads/2e5dfad5b3a43c7441a3efacf141fe3c.jpg"
+        ],
+        "video": "",
+        "material": {
+          "es": "Lacado mate",
+          "en": "Matte lacquer"
+        },
+        "size": "70 × 40 × 170 cm",
+        "description": {
+          "es": "",
+          "en": ""
+        },
+        "related": []
+      },
+      {
+        "id": "T-16",
+        "name": "T-16",
+        "price": 459,
+        "oldPrice": 800,
+        "image": "/uploads/25076fa903e9891b55d0c515854a2ad8.jpg",
+        "imageMobile": "",
+        "images": [
+          "/uploads/25076fa903e9891b55d0c515854a2ad8.jpg",
+          "/uploads/33736e9b59355ce7cb958e83f5a4a8dc.jpg",
+          "/uploads/998a2403ed372166ba31f28bf3023421.jpg"
+        ],
+        "video": "",
+        "material": {
+          "es": "Lacado mate",
+          "en": "Matte lacquer"
+        },
+        "size": "90 × 40 × 170 cm",
+        "description": {
+          "es": "",
+          "en": ""
+        },
+        "related": []
+      },
+      {
+        "id": "T-17",
+        "name": "T-17",
+        "price": 459,
+        "oldPrice": 800,
+        "image": "/uploads/db1a355f8f6622ca82b7ab13e0a4c157.jpg",
+        "imageMobile": "",
+        "images": [
+          "/uploads/db1a355f8f6622ca82b7ab13e0a4c157.jpg"
+        ],
+        "video": "",
+        "material": {
+          "es": "Lacado mate",
+          "en": "Matte lacquer"
+        },
+        "size": "90 × 40 × 170 cm",
+        "description": {
+          "es": "",
+          "en": ""
+        },
+        "related": []
+      },
+      {
+        "id": "T-18",
+        "name": "T-18",
+        "price": 459,
+        "oldPrice": 800,
+        "image": "/uploads/d2a782ac4a78fc0502ca78ca07133abd.jpg",
+        "imageMobile": "",
+        "images": [
+          "/uploads/d2a782ac4a78fc0502ca78ca07133abd.jpg",
+          "/uploads/b4bdb4bdb77f0ea7e8abfcff4b5259a1.jpg",
+          "/uploads/c58f2d4e90565ec8413875e47a2d2220.jpg",
+          "/uploads/a7c4f176c91ecc4c4effd548037aeda4.jpg",
+          "/uploads/65878bb998e8f77d8552267db6079ee2.jpg",
+          "/uploads/b1687ee15af1c04ca51d2bcb15fe79c2.jpg"
+        ],
+        "video": "",
+        "material": {
+          "es": "Lacado mate",
+          "en": "Matte lacquer"
+        },
+        "size": "90 × 40 × 170 cm",
+        "description": {
+          "es": "",
+          "en": ""
+        },
+        "related": []
+      },
+      {
+        "id": "T-19",
+        "name": "T-19",
+        "price": 499,
+        "oldPrice": 850,
+        "image": "/uploads/3f4865e828e2982a03aa007440e4cde7.jpg",
+        "imageMobile": "",
+        "images": [
+          "/uploads/3f4865e828e2982a03aa007440e4cde7.jpg",
+          "/uploads/95a57f1bc404f3b29fdb3d38f225feee.jpg",
+          "/uploads/69352e02cf3a13b91aac770a5aa90204.jpg",
+          "/uploads/d4f60cbf1fa1df692e500d7c6bccfa53.jpg"
+        ],
+        "video": "",
+        "material": {
+          "es": "Lacado mate",
+          "en": "Matte lacquer"
+        },
+        "size": "90 × 40 × 170 cm",
+        "description": {
+          "es": "",
+          "en": ""
+        },
+        "related": []
+      },
+      {
+        "id": "T-20",
+        "name": "T-20",
+        "price": 499,
+        "oldPrice": 850,
+        "image": "/uploads/d29e04e4fdb3901cd31b050922d2692b.jpg",
+        "imageMobile": "",
+        "images": [
+          "/uploads/d29e04e4fdb3901cd31b050922d2692b.jpg",
+          "/uploads/f7d3fe0b66ec85ce5a429891a71ae10d.jpg"
+        ],
+        "video": "",
+        "material": {
+          "es": "Lacado mate",
+          "en": "Matte lacquer"
+        },
+        "size": "90 × 40 × 170 cm",
+        "description": {
+          "es": "",
+          "en": ""
+        },
+        "related": []
+      },
+      {
+        "id": "T-21",
+        "name": "T-21",
+        "price": 499,
+        "oldPrice": 850,
+        "image": "/uploads/5e55de193f06d3cb72f6f8ff2d83cadf.jpg",
+        "imageMobile": "",
+        "images": [
+          "/uploads/5e55de193f06d3cb72f6f8ff2d83cadf.jpg",
+          "/uploads/db73e014ec8957050e376a047aa523cc.jpg",
+          "/uploads/d464fee6601f991ad76f4bf674cbc80b.jpg",
+          "/uploads/1d1c67e11b4e82824956c7afea2b61bd.jpg",
+          "/uploads/4be934e77e0ac770378f00546a49de9a.jpg"
+        ],
+        "video": "",
+        "material": {
+          "es": "Lacado mate",
+          "en": "Matte lacquer"
+        },
+        "size": "90 × 40 × 170 cm",
+        "description": {
+          "es": "",
+          "en": ""
+        },
+        "related": []
+      },
+      {
+        "id": "T-22",
+        "name": "T-22",
+        "price": 499,
+        "oldPrice": 850,
+        "image": "/uploads/d9ff98b097c0c20ff0dda9946e3f9f89.jpg",
+        "imageMobile": "",
+        "images": [
+          "/uploads/d9ff98b097c0c20ff0dda9946e3f9f89.jpg",
+          "/uploads/e94864cec2a00dc449acbd96ed56bd9f.jpg",
+          "/uploads/b6f95212346cb9831cc7e1e988f1b668.jpg",
+          "/uploads/05a33116a197c4f3e1592fbd684af2ec.jpg",
+          "/uploads/f9681bac5b5bf263dfa5d1b79749017b.jpg"
+        ],
+        "video": "",
+        "material": {
+          "es": "Lacado mate",
+          "en": "Matte lacquer"
+        },
+        "size": "90 × 40 × 170 cm",
+        "description": {
+          "es": "",
+          "en": ""
+        },
+        "related": []
+      },
+      {
+        "id": "T-23",
+        "name": "T-23",
+        "price": 499,
+        "oldPrice": 850,
+        "image": "/uploads/f038af93b0da9d5dfb021a5003c7a2cf.jpg",
+        "imageMobile": "",
+        "images": [
+          "/uploads/f038af93b0da9d5dfb021a5003c7a2cf.jpg",
+          "/uploads/b385fb86ddd35a697fa03c73d5cee6cd.jpg",
+          "/uploads/f536a049656e02e05cee156a30628dd7.jpg",
+          "/uploads/d67b3c918cbcc801baace103a8fb9c85.jpg",
+          "/uploads/e4c7f8bbf96054dffca946ce487ddb55.jpg"
+        ],
+        "video": "",
+        "material": {
+          "es": "Lacado mate",
+          "en": "Matte lacquer"
+        },
+        "size": "90 × 40 × 170 cm",
+        "description": {
+          "es": "",
+          "en": ""
+        },
+        "related": []
+      },
+      {
+        "id": "T-24",
+        "name": "T-24",
+        "price": 499,
+        "oldPrice": 850,
+        "image": "/uploads/721a7c3239b317f0780baff3a956d823.jpg",
+        "imageMobile": "",
+        "images": [
+          "/uploads/721a7c3239b317f0780baff3a956d823.jpg",
+          "/uploads/552874825b09edd380c009db9a48ae18.jpg",
+          "/uploads/c6004bed37cc2b7541e102d406b9508d.jpg"
+        ],
+        "video": "",
+        "material": {
+          "es": "Lacado mate",
+          "en": "Matte lacquer"
+        },
+        "size": "90 × 40 × 170 cm",
+        "description": {
+          "es": "",
+          "en": ""
+        },
+        "related": []
+      },
+      {
+        "id": "T-25",
+        "name": "T-25",
+        "price": 499,
+        "oldPrice": 850,
+        "image": "/uploads/fffc2110c26b48a7b019708312405f83.jpg",
+        "imageMobile": "",
+        "images": [
+          "/uploads/fffc2110c26b48a7b019708312405f83.jpg",
+          "/uploads/28d19308d09ec8d998279309b4a01628.jpg",
+          "/uploads/ca1b87f6f9cc2c6c5d5b27e4ce9f90ae.jpg",
+          "/uploads/c95f1615a8cf3181b59139ef8110d83a.jpg",
+          "/uploads/2b27bbaf2c7f7c9bb475fae87759e66d.jpg",
+          "/uploads/a003fadc986609b312f7af8af6f5ec12.jpg",
+          "/uploads/526dd25feb661fb58da0c8b7cbb07bd4.jpg",
+          "/uploads/a6627b562ca741ff9f425734cb4c977a.jpg",
+          "/uploads/0ab52682386ff66df8b0e9d236cf7100.jpg"
+        ],
+        "video": "",
+        "material": {
+          "es": "Lacado mate",
+          "en": "Matte lacquer"
+        },
+        "size": "100 × 40 × 150 cm",
+        "description": {
+          "es": "",
+          "en": ""
+        },
+        "related": []
+      },
+      {
+        "id": "T-26",
+        "name": "T-26",
+        "price": 539,
+        "oldPrice": 880,
+        "image": "/uploads/825bff9923eb68f3472cd37ac95ca38f.jpg",
+        "imageMobile": "",
+        "images": [
+          "/uploads/825bff9923eb68f3472cd37ac95ca38f.jpg",
+          "/uploads/48dd83b1afd242bf95826a29d3502611.jpg",
+          "/uploads/a21b8f7a87eaf5ff2cd84f6987894c1a.jpg",
+          "/uploads/abf1c0f9b148c5847db57628dc23a126.jpg",
+          "/uploads/8335383250dde3ba28de047dc60e8bfd.jpg",
+          "/uploads/09def9f51798968e3ef06dad68dec841.jpg",
+          "/uploads/70f4d3c6ec8a3b40becdc9338e51db19.jpg",
+          "/uploads/88a7ac65d4e53136add77825044638d3.jpg"
+        ],
+        "video": "",
+        "material": {
+          "es": "Lacado mate",
+          "en": "Matte lacquer"
+        },
+        "size": "90 × 45 × 180 cm",
+        "description": {
+          "es": "",
+          "en": ""
+        },
+        "related": []
+      },
+      {
+        "id": "T-27",
+        "name": "T-27",
+        "price": 559,
+        "oldPrice": 900,
+        "image": "/uploads/771c0092caedde9b643cd77b72be35bf.jpg",
+        "imageMobile": "",
+        "images": [
+          "/uploads/771c0092caedde9b643cd77b72be35bf.jpg",
+          "/uploads/da01b73579e06002f6a1f07a27313507.jpg"
+        ],
+        "video": "",
+        "material": {
+          "es": "Lacado mate",
+          "en": "Matte lacquer"
+        },
+        "size": "100 × 40 × 180 cm",
+        "description": {
+          "es": "",
+          "en": ""
+        },
+        "related": []
+      },
+      {
+        "id": "T-28",
+        "name": "T-28",
+        "price": 599,
+        "oldPrice": 950,
+        "image": "/uploads/db1841fc027062f555aa3d18b262a7ef.jpg",
+        "imageMobile": "",
+        "images": [
+          "/uploads/db1841fc027062f555aa3d18b262a7ef.jpg",
+          "/uploads/db1841fc027062f555aa3d18b262a7ef.jpg",
+          "/uploads/bef3f2e4391e11ab03144deb55e70cc2.jpg",
+          "/uploads/ac34b578fe8c66dd8939310e07f82043.jpg"
+        ],
+        "video": "",
+        "material": {
+          "es": "Lacado mate",
+          "en": "Matte lacquer"
+        },
+        "size": "90 × 40 × 170 cm",
+        "description": {
+          "es": "",
+          "en": ""
+        },
+        "related": []
+      },
+      {
+        "id": "T-29",
+        "name": "T-29",
+        "price": 599,
+        "oldPrice": 950,
+        "image": "/uploads/5c4a491791888b4ee6bd2f8b0386a4b1.jpg",
+        "imageMobile": "",
+        "images": [
+          "/uploads/5c4a491791888b4ee6bd2f8b0386a4b1.jpg",
+          "/uploads/4e72de2107b5d37d557a180c0090acd9.jpg",
+          "/uploads/d950e151c02be9eece8f6e6b7a06cf21.jpg",
+          "/uploads/74921cfd9765168a2c371707922e6b5b.jpg",
+          "/uploads/6e9ad76da8eef2427cfcbdc2bddf3cfc.jpg"
+        ],
+        "video": "",
+        "material": {
+          "es": "Lacado mate",
+          "en": "Matte lacquer"
+        },
+        "size": "100 × 40 × 170 cm",
+        "description": {
+          "es": "",
+          "en": ""
+        },
+        "related": []
+      },
+      {
+        "id": "T-30",
+        "name": "T-30",
+        "price": 659,
+        "oldPrice": 1000,
+        "image": "/uploads/4e21b8144006717eeac8acce70fcb67b.jpg",
+        "imageMobile": "",
+        "images": [
+          "/uploads/4e21b8144006717eeac8acce70fcb67b.jpg",
+          "/uploads/6a3b086dec8d57b8a67bb76c66989605.jpg"
+        ],
+        "video": "",
+        "material": {
+          "es": "Lacado mate",
+          "en": "Matte lacquer"
+        },
+        "size": "90 × 40 × 185 cm",
+        "description": {
+          "es": "",
+          "en": ""
+        },
+        "related": []
+      },
+      {
+        "id": "T-31",
+        "name": "T-31",
+        "price": 699,
+        "oldPrice": 1100,
+        "image": "/uploads/34f4fc21dd41507b1b4008cc9b310dde.jpg",
+        "imageMobile": "",
+        "images": [
+          "/uploads/34f4fc21dd41507b1b4008cc9b310dde.jpg",
+          "/uploads/ce9227d66f23a03072c8f8c20b60f7e3.jpg",
+          "/uploads/85e4f31aa6c0b5ba2cb8e310811bce27.jpg"
+        ],
+        "video": "",
+        "material": {
+          "es": "Lacado mate",
+          "en": "Matte lacquer"
+        },
+        "size": "90 × 40 × 180 cm",
+        "description": {
+          "es": "",
+          "en": ""
+        },
+        "related": []
+      },
+      {
+        "id": "T-32",
+        "name": "T-32",
+        "price": 699,
+        "oldPrice": 1100,
+        "image": "/uploads/eccc6f7688cad6f013e8b769cf662175.jpg",
+        "imageMobile": "",
+        "images": [
+          "/uploads/eccc6f7688cad6f013e8b769cf662175.jpg",
+          "/uploads/7cb8dce7eaaf592d464cc0d10ed41a93.jpg",
+          "/uploads/ebfc5475a5e95631d0704e3043be45e6.jpg"
+        ],
+        "video": "",
+        "material": {
+          "es": "Lacado mate",
+          "en": "Matte lacquer"
+        },
+        "size": "130 × 40 × 140 cm",
+        "description": {
+          "es": "",
+          "en": ""
+        },
+        "related": []
+      },
+      {
+        "id": "T-33",
+        "name": "T-33",
+        "price": 799,
+        "oldPrice": 1150,
+        "image": "/uploads/ad3a1a093a387b80941e2c8f5c799e91.jpg",
+        "imageMobile": "",
+        "images": [
+          "/uploads/ad3a1a093a387b80941e2c8f5c799e91.jpg",
+          "/uploads/b3728813b02f6c3f86a0e4830cb13d80.jpg",
+          "/uploads/16f1ba918eef0a556acb0161a4c7624f.jpg",
+          "/uploads/42a3d956cd47970225325776ab7876d0.jpg"
+        ],
+        "video": "",
+        "material": {
+          "es": "Lacado mate",
+          "en": "Matte lacquer"
+        },
+        "size": "120 × 40 × 160 cm",
+        "description": {
+          "es": "",
+          "en": ""
+        },
+        "related": []
+      },
+      {
+        "id": "T-34",
+        "name": "T-34",
+        "price": 799,
+        "oldPrice": 1150,
+        "image": "/uploads/1b7e0b3553b37f44f001bb06894a728b.jpg",
+        "imageMobile": "",
+        "images": [
+          "/uploads/1b7e0b3553b37f44f001bb06894a728b.jpg",
+          "/uploads/92a5ec1b2d34c63dc870165bdab5bcc8.jpg",
+          "/uploads/701f63eef85d351518663f13582976ca.jpg",
+          "/uploads/7aff7c74a3a9946779db558d977e6231.jpg"
+        ],
+        "video": "",
+        "material": {
+          "es": "Lacado mate",
+          "en": "Matte lacquer"
+        },
+        "size": "180 × 45 × 180 cm",
+        "description": {
+          "es": "",
+          "en": ""
+        },
+        "related": []
+      },
+      {
+        "id": "T-35",
+        "name": "T-35",
+        "price": 839,
+        "oldPrice": 1200,
+        "image": "/uploads/8b2bd779bb48d73e4a228b3ddbc196f7.jpg",
+        "imageMobile": "",
+        "images": [
+          "/uploads/8b2bd779bb48d73e4a228b3ddbc196f7.jpg",
+          "/uploads/cda90ee8c19fdc286f06925ced564ec2.jpg"
+        ],
+        "video": "",
+        "material": {
+          "es": "Lacado mate",
+          "en": "Matte lacquer"
+        },
+        "size": "180 × 45 × 170 cm",
+        "description": {
+          "es": "",
+          "en": ""
+        },
+        "related": []
+      },
+      {
+        "id": "T-36",
+        "name": "T-36",
+        "price": 879,
+        "oldPrice": 1250,
+        "image": "/uploads/0bd1726ea832d7b79bbb948567a8f775.jpg",
+        "imageMobile": "",
+        "images": [
+          "/uploads/0bd1726ea832d7b79bbb948567a8f775.jpg",
+          "/uploads/9a171a730350f7f30a9845e3e4d82824.jpg",
+          "/uploads/3fe605ea1b884cb05eff1984dba62d37.jpg",
+          "/uploads/6a1b0b3971156d1b9a867bcd7e7a55f5.jpg",
+          "/uploads/512bf87915c071625b73627d8901ee77.jpg",
+          "/uploads/3c16cc410df41f8404dda30dddbc2c0d.jpg"
+        ],
+        "video": "",
+        "material": {
+          "es": "Lacado mate",
+          "en": "Matte lacquer"
+        },
+        "size": "180 × 45 × 170 cm",
+        "description": {
+          "es": "",
+          "en": ""
+        },
+        "related": []
+      },
+      {
+        "id": "T-37",
+        "name": "T-37",
+        "price": 899,
+        "oldPrice": 1300,
+        "image": "/uploads/624c9ca6375c1f59191cc01d1b6568c2.jpg",
+        "imageMobile": "",
+        "images": [
+          "/uploads/624c9ca6375c1f59191cc01d1b6568c2.jpg",
+          "/uploads/b7de40acec7fd0484a8e488918c9ea57.jpg",
+          "/uploads/6b9f3f461853b147eaae7334acf3b38a.jpg"
+        ],
+        "video": "",
+        "material": {
+          "es": "Lacado mate",
+          "en": "Matte lacquer"
+        },
+        "size": "180 × 45 × 180 cm",
+        "description": {
+          "es": "",
+          "en": ""
+        },
+        "related": []
+      },
+      {
+        "id": "T-38",
+        "name": "T-38",
+        "price": 939,
+        "oldPrice": 1350,
+        "image": "/uploads/72c175e5e9c12d294eb32c03ea566100.jpg",
+        "imageMobile": "",
+        "images": [
+          "/uploads/72c175e5e9c12d294eb32c03ea566100.jpg",
+          "/uploads/041b6578d735621a5c1655b8f1f55711.jpg",
+          "/uploads/89160f47b6fb71f8da39bc544b029b6b.jpg",
+          "/uploads/ef512ffa992b95d15c2d169cb8b461bb.jpg",
+          "/uploads/faa906e7fc0928982db3b96f60f4fcd8.jpg"
+        ],
+        "video": "",
+        "material": {
+          "es": "Lacado mate",
+          "en": "Matte lacquer"
+        },
+        "size": "180 × 45 × 180 cm",
+        "description": {
+          "es": "",
+          "en": ""
+        },
+        "related": []
+      },
+      {
+        "id": "T-39",
+        "name": "T-39",
+        "price": 999,
+        "oldPrice": 1400,
+        "image": "/uploads/b4a5dd44be5059916fb90a8702d40c19.jpg",
+        "imageMobile": "",
+        "images": [
+          "/uploads/b4a5dd44be5059916fb90a8702d40c19.jpg",
+          "/uploads/1cdd810047059739b43b90a24a2d6036.jpg",
+          "/uploads/12c351251df7a9392ffffe107acfdf30.jpg",
+          "/uploads/f78dbaf5303e78d0dd3eb2a3b3e726e8.jpg",
+          "/uploads/c93f4439b26f47b6bf4e4baf821540bb.jpg"
+        ],
+        "video": "",
+        "material": {
+          "es": "Lacado mate",
+          "en": "Matte lacquer"
+        },
+        "size": "180 × 45 × 180 cm",
+        "description": {
+          "es": "",
+          "en": ""
+        },
+        "related": []
       }
     ]
   },
@@ -175,67 +1084,184 @@
       "es": "Estanterías modulares de líneas finas. Para exhibir, ordenar y dar aire a la pared sin recargarla.",
       "en": "Modular shelving with slender lines. To display, organise and give the wall air without crowding it."
     },
-    "image": "1538688525198-9b88f6f53126",
+    "image": "/uploads/d28c174bb94ff71d2d46dc07648a8d28.jpg",
+    "imageMobile": "",
+    "video": "",
     "products": [
       {
-        "id": "est-olmo",
-        "name": "Olmo",
-        "price": 340,
-        "image": "1538688525198-9b88f6f53126",
+        "id": "E-01",
+        "name": "E-01",
+        "price": 199,
+        "oldPrice": 400,
+        "image": "/uploads/d28c174bb94ff71d2d46dc07648a8d28.jpg",
+        "imageMobile": "",
+        "images": [
+          "/uploads/d28c174bb94ff71d2d46dc07648a8d28.jpg",
+          "/uploads/2d96600fa4cf9c2cdfa5b81fcef75d70.jpg"
+        ],
+        "video": "",
         "material": {
           "es": "Roble",
           "en": "Oak"
         },
-        "size": "80 × 180 cm",
+        "size": "40 × 40 × 170 cm",
         "description": {
-          "es": "Módulos apilables en roble con baldas de distintas alturas. Adaptable a cada pared.",
-          "en": "Stackable oak modules with shelves at varying heights. Adaptable to any wall."
-        }
+          "es": "",
+          "en": ""
+        },
+        "related": []
       },
       {
-        "id": "est-sora",
-        "name": "Sora",
-        "price": 420,
-        "image": "1618220179428-22790b461013",
+        "id": "E-02",
+        "name": "E-02",
+        "price": 259,
+        "oldPrice": 430,
+        "image": "/uploads/6a8baf8b0f5c4a4ebf057a3d4dbdcd11.jpg",
+        "imageMobile": "",
+        "images": [
+          "/uploads/6a8baf8b0f5c4a4ebf057a3d4dbdcd11.jpg",
+          "/uploads/067b6d43f91f7b5cbf0a398b8b351b8a.jpg"
+        ],
+        "video": "",
         "material": {
           "es": "Fresno",
           "en": "Ash"
         },
-        "size": "90 × 200 cm",
+        "size": "40 × 40 × 190 cm",
         "description": {
-          "es": "Sistema de estantes en fresno con estructura de acero negro. Loft con alma cálida.",
-          "en": "Ash shelf system with black steel frame. Loft aesthetic with warm soul."
-        }
+          "es": "",
+          "en": ""
+        },
+        "related": []
       },
       {
-        "id": "est-brava",
-        "name": "Brava",
-        "price": 560,
-        "image": "1616594039964-ae9021a400a0",
+        "id": "E-03",
+        "name": "E-03",
+        "price": 259,
+        "oldPrice": 430,
+        "image": "/uploads/9f41af0ee82bfb816dbf2371e2613b4e.jpg",
+        "imageMobile": "",
+        "images": [
+          "/uploads/9f41af0ee82bfb816dbf2371e2613b4e.jpg",
+          "/uploads/b33f73e50106ca77bae731d1c8bb38fa.jpg",
+          "/uploads/fec7b5c08e9f4b1298355df9e5cb3e98.jpg",
+          "/uploads/6e78cb5c5d4b34331772340dcc583355.jpg",
+          "/uploads/b4e015f795e7538cd5e960707c285517.jpg",
+          "/uploads/285210680b55e62700e0e93e816feaba.jpg"
+        ],
+        "video": "",
         "material": {
           "es": "Nogal",
           "en": "Walnut"
         },
-        "size": "100 × 210 cm",
+        "size": "40 × 40 × 190 cm",
         "description": {
-          "es": "Librería en nogal con baldas ajustables y luz led integrada. Noble y práctica.",
-          "en": "Walnut bookcase with adjustable shelves and integrated LED light. Noble and practical."
-        }
+          "es": "",
+          "en": ""
+        },
+        "related": []
       },
       {
-        "id": "est-cala",
-        "name": "Cala",
-        "price": 690,
-        "image": "1493663284031-b7e3aefcae8e",
+        "id": "E-04",
+        "name": "E-04",
+        "price": 299,
+        "oldPrice": 480,
+        "image": "/uploads/89144ffbf7054d00ca68184620c44cf5.jpg",
+        "imageMobile": "",
+        "images": [
+          "/uploads/89144ffbf7054d00ca68184620c44cf5.jpg",
+          "/uploads/ee6e64fe8f0875dacc577dbddb188310.jpg",
+          "/uploads/1288355537f0316657f468cde0cb31d1.jpg",
+          "/uploads/8917bc1283661a77875d6c2d6b2e7356.jpg",
+          "/uploads/a615b011b5009cca984e0bac92667550.jpg"
+        ],
+        "video": "",
         "material": {
           "es": "Lacado mate",
           "en": "Matte lacquer"
         },
-        "size": "120 × 210 cm",
+        "size": "45 × 35 × 180 cm",
         "description": {
-          "es": "Estantería lacada con compartimentos asimétricos. Organización con geometría limpia.",
-          "en": "Lacquered shelving with asymmetric compartments. Organisation through clean geometry."
-        }
+          "es": "",
+          "en": ""
+        },
+        "related": []
+      },
+      {
+        "id": "E-05",
+        "name": "E-05",
+        "price": 299,
+        "oldPrice": 480,
+        "image": "/uploads/2233f524cc4506ff80f44a1b8d44eee4.jpg",
+        "imageMobile": "",
+        "images": [
+          "/uploads/2233f524cc4506ff80f44a1b8d44eee4.jpg",
+          "/uploads/0e00566ed3e30c98a219cb77b4833c9d.jpg",
+          "/uploads/42577a238965c8c82fe68822d034c43d.jpg",
+          "/uploads/e04b332686faa5672de9e60a6490602a.jpg",
+          "/uploads/650b604f768a975767faf26bb3a45ecf.jpg",
+          "/uploads/f2595658bca1f29611d366ff67cfaf28.jpg"
+        ],
+        "video": "",
+        "material": {
+          "es": "Lacado mate",
+          "en": "Matte lacquer"
+        },
+        "size": "45 × 35 × 180 cm",
+        "description": {
+          "es": "",
+          "en": ""
+        },
+        "related": []
+      },
+      {
+        "id": "E-06",
+        "name": "E-06",
+        "price": 319,
+        "oldPrice": 500,
+        "image": "/uploads/7bd218a764fa9eb6ace48128ccd2a33a.jpg",
+        "imageMobile": "",
+        "images": [
+          "/uploads/7bd218a764fa9eb6ace48128ccd2a33a.jpg",
+          "/uploads/9c8e3d192130e43586682e0447964b0f.jpg"
+        ],
+        "video": "",
+        "material": {
+          "es": "Lacado mate",
+          "en": "Matte lacquer"
+        },
+        "size": "50 × 40 × 190 cm",
+        "description": {
+          "es": "",
+          "en": ""
+        },
+        "related": []
+      },
+      {
+        "id": "E-07",
+        "name": "E-07",
+        "price": 319,
+        "oldPrice": 500,
+        "image": "/uploads/6de7caf4f0797702e856d34335da2301.jpg",
+        "imageMobile": "",
+        "images": [
+          "/uploads/6de7caf4f0797702e856d34335da2301.jpg",
+          "/uploads/0c00afe5c76520a3e5add04b08017145.jpg",
+          "/uploads/73791acc3e87a23f40cd307f85da45bb.jpg",
+          "/uploads/ba4ef2211a28e2c7f7c719f2f0adf7a7.jpg",
+          "/uploads/f8beb94f6c92d3d14d657283d4a6258c.jpg"
+        ],
+        "video": "",
+        "material": {
+          "es": "Lacado mate",
+          "en": "Matte lacquer"
+        },
+        "size": "50 × 40 × 190 cm",
+        "description": {
+          "es": "",
+          "en": ""
+        },
+        "related": []
       }
     ]
   },
@@ -254,66 +1280,96 @@
       "en": "Professional manicure tables with careful ergonomics and integrated storage. Beauty for the client and for the space."
     },
     "image": "1567016432779-094069958ea5",
+    "imageMobile": "",
+    "video": "",
     "products": [
       {
         "id": "man-ona",
         "name": "Ona",
         "price": 390,
+        "oldPrice": 0,
         "image": "1567016432779-094069958ea5",
+        "imageMobile": "",
+        "images": [
+          "1567016432779-094069958ea5"
+        ],
+        "video": "",
         "material": {
           "es": "Roble claro",
           "en": "Light oak"
         },
         "size": "90 × 40 cm",
         "description": {
-          "es": "Mesa compacta con aspirador integrado y cajón de utensilios. Para espacios pequeños.",
-          "en": "Compact table with integrated aspirator and tool drawer. For smaller spaces."
-        }
+          "es": "",
+          "en": ""
+        },
+        "related": []
       },
       {
         "id": "man-lua",
         "name": "Lúa",
         "price": 460,
+        "oldPrice": 0,
         "image": "1503602642458-232111445657",
+        "imageMobile": "",
+        "images": [
+          "1503602642458-232111445657"
+        ],
+        "video": "",
         "material": {
           "es": "Roble",
           "en": "Oak"
         },
         "size": "100 × 42 cm",
         "description": {
-          "es": "Mesa profesional en roble con iluminación led y soporte para gel UV.",
-          "en": "Professional oak table with LED lighting and UV gel holder."
-        }
+          "es": "",
+          "en": ""
+        },
+        "related": []
       },
       {
         "id": "man-tara",
         "name": "Tara",
         "price": 590,
+        "oldPrice": 0,
         "image": "1560448204-e02f11c3d0e2",
+        "imageMobile": "",
+        "images": [
+          "1560448204-e02f11c3d0e2"
+        ],
+        "video": "",
         "material": {
           "es": "Lacado mate",
           "en": "Matte lacquer"
         },
         "size": "110 × 45 cm",
         "description": {
-          "es": "Diseño lacado con cajones extraíbles y bandeja articulada para el trabajo.",
-          "en": "Lacquered design with pull-out drawers and articulated work tray."
-        }
+          "es": "",
+          "en": ""
+        },
+        "related": []
       },
       {
         "id": "man-indra",
         "name": "Indra",
         "price": 780,
+        "oldPrice": 0,
         "image": "1524758631624-e2822e304c36",
+        "imageMobile": "",
+        "images": [
+          "1524758631624-e2822e304c36"
+        ],
+        "video": "",
         "material": {
           "es": "Nogal",
           "en": "Walnut"
         },
         "size": "120 × 48 cm",
         "description": {
-          "es": "Mesa premium en nogal con aspirador silencioso, ruedas y amplio almacenamiento.",
-          "en": "Premium walnut table with silent aspirator, wheels and ample storage."
-        }
+          "es": "",
+          "en": ""
+        },
+        "related": []
       }
     ]
   },
@@ -332,66 +1388,96 @@
       "en": "Large floor and wall mirrors. They expand light and space with a minimal, elegant frame."
     },
     "image": "1581539250439-c96689b516dd",
+    "imageMobile": "",
+    "video": "",
     "products": [
       {
         "id": "esa-nara",
         "name": "Nara",
         "price": 320,
+        "oldPrice": 0,
         "image": "1581539250439-c96689b516dd",
+        "imageMobile": "",
+        "images": [
+          "1581539250439-c96689b516dd"
+        ],
+        "video": "",
         "material": {
           "es": "Latón",
           "en": "Brass"
         },
         "size": "60 × 180 cm",
         "description": {
-          "es": "Espejo de pie en latón con base estable de gran formato. Presencia cálida y duradera.",
-          "en": "Floor mirror in brass with stable large-format base. Warm and lasting presence."
-        }
+          "es": "",
+          "en": ""
+        },
+        "related": []
       },
       {
         "id": "esa-sora",
         "name": "Solé",
         "price": 380,
+        "oldPrice": 0,
         "image": "1616627561839-074385245ff6",
+        "imageMobile": "",
+        "images": [
+          "1616627561839-074385245ff6"
+        ],
+        "video": "",
         "material": {
           "es": "Roble",
           "en": "Oak"
         },
         "size": "70 × 190 cm",
         "description": {
-          "es": "Espejo de pared en marco de roble con inclinación regulable. Versátil y natural.",
-          "en": "Wall mirror in oak frame with adjustable tilt. Versatile and natural."
-        }
+          "es": "",
+          "en": ""
+        },
+        "related": []
       },
       {
         "id": "esa-vala",
         "name": "Vala",
         "price": 460,
+        "oldPrice": 0,
         "image": "1617806118233-18e1de247200",
+        "imageMobile": "",
+        "images": [
+          "1617806118233-18e1de247200"
+        ],
+        "video": "",
         "material": {
           "es": "Nogal",
           "en": "Walnut"
         },
         "size": "80 × 200 cm",
         "description": {
-          "es": "Espejo inclinable en nogal con bandeja inferior para objetos cotidianos.",
-          "en": "Tilting walnut mirror with lower shelf for everyday objects."
-        }
+          "es": "",
+          "en": ""
+        },
+        "related": []
       },
       {
         "id": "esa-mira",
         "name": "Mira",
         "price": 540,
+        "oldPrice": 0,
         "image": "1598300042247-d088f8ab3a91",
+        "imageMobile": "",
+        "images": [
+          "1598300042247-d088f8ab3a91"
+        ],
+        "video": "",
         "material": {
           "es": "Lacado mate",
           "en": "Matte lacquer"
         },
         "size": "90 × 210 cm",
         "description": {
-          "es": "Espejo lacado con iluminación led perimetral. La luz justa, donde la necesitas.",
-          "en": "Lacquered mirror with perimeter LED lighting. The right light, exactly where you need it."
-        }
+          "es": "",
+          "en": ""
+        },
+        "related": []
       }
     ]
   },
@@ -410,66 +1496,96 @@
       "en": "Vanity and decorative mirrors in pure shapes. Round, oval or rectangular, always with a refined frame."
     },
     "image": "1567225557594-88d73e55f2cb",
+    "imageMobile": "",
+    "video": "",
     "products": [
       {
         "id": "esp-ono",
         "name": "Ono",
         "price": 190,
+        "oldPrice": 0,
         "image": "1567225557594-88d73e55f2cb",
+        "imageMobile": "",
+        "images": [
+          "1567225557594-88d73e55f2cb"
+        ],
+        "video": "",
         "material": {
           "es": "Latón",
           "en": "Brass"
         },
         "size": "Ø 60 cm",
         "description": {
-          "es": "Espejo circular en latón con acabado mate envejecido. Clásico y contemporáneo.",
-          "en": "Circular mirror in aged matte brass. Classic and contemporary at once."
-        }
+          "es": "",
+          "en": ""
+        },
+        "related": []
       },
       {
         "id": "esp-cira",
         "name": "Cira",
         "price": 240,
+        "oldPrice": 0,
         "image": "1581539250439-c96689b516dd",
+        "imageMobile": "",
+        "images": [
+          "1581539250439-c96689b516dd"
+        ],
+        "video": "",
         "material": {
           "es": "Roble",
           "en": "Oak"
         },
         "size": "Ø 70 cm",
         "description": {
-          "es": "Redondo en roble macizo con colgado de doble orientación. Natural y sereno.",
-          "en": "Round solid oak frame with two-way hanging. Natural and serene."
-        }
+          "es": "",
+          "en": ""
+        },
+        "related": []
       },
       {
         "id": "esp-tona",
         "name": "Tona",
         "price": 290,
+        "oldPrice": 0,
         "image": "1616594039964-ae9021a400a0",
+        "imageMobile": "",
+        "images": [
+          "1616594039964-ae9021a400a0"
+        ],
+        "video": "",
         "material": {
           "es": "Nogal",
           "en": "Walnut"
         },
         "size": "60 × 80 cm",
         "description": {
-          "es": "Marco rectangular en nogal con proporciones áureas. Detalle que enriquece.",
-          "en": "Rectangular walnut frame with golden-ratio proportions. A detail that enriches."
-        }
+          "es": "",
+          "en": ""
+        },
+        "related": []
       },
       {
         "id": "esp-luma",
         "name": "Luma",
         "price": 360,
+        "oldPrice": 0,
         "image": "1598300042247-d088f8ab3a91",
+        "imageMobile": "",
+        "images": [
+          "1598300042247-d088f8ab3a91"
+        ],
+        "video": "",
         "material": {
           "es": "Lacado mate",
           "en": "Matte lacquer"
         },
         "size": "70 × 90 cm",
         "description": {
-          "es": "Lacado en blanco con retroiluminación tenue. Ambiente de spa en tu espacio.",
-          "en": "White lacquered with soft backlighting. Spa atmosphere in your own space."
-        }
+          "es": "",
+          "en": ""
+        },
+        "related": []
       }
     ]
   },
@@ -488,66 +1604,96 @@
       "en": "Matching console and mirror sets. The perfect welcome for your home or beauty salon."
     },
     "image": "1556228453-efd6c1ff04f6",
+    "imageMobile": "",
+    "video": "",
     "products": [
       {
         "id": "cce-sena",
         "name": "Senna",
         "price": 720,
+        "oldPrice": 0,
         "image": "1556228453-efd6c1ff04f6",
+        "imageMobile": "",
+        "images": [
+          "1556228453-efd6c1ff04f6"
+        ],
+        "video": "",
         "material": {
           "es": "Roble",
           "en": "Oak"
         },
         "size": "120 × 35 cm",
         "description": {
-          "es": "Conjunto clásico en roble con espejo de marco fino. Armonía desde la entrada.",
-          "en": "Classic oak set with slim-frame mirror. Harmony from the very entrance."
-        }
+          "es": "",
+          "en": ""
+        },
+        "related": []
       },
       {
         "id": "cce-aria",
         "name": "Aria",
         "price": 860,
+        "oldPrice": 0,
         "image": "1586023492125-27b2c045efd7",
+        "imageMobile": "",
+        "images": [
+          "1586023492125-27b2c045efd7"
+        ],
+        "video": "",
         "material": {
           "es": "Nogal",
           "en": "Walnut"
         },
         "size": "130 × 38 cm",
         "description": {
-          "es": "Conjunto en nogal con espejo ovalado y cajón integrado. Orgánico y refinado.",
-          "en": "Walnut set with oval mirror and integrated drawer. Organic and refined."
-        }
+          "es": "",
+          "en": ""
+        },
+        "related": []
       },
       {
         "id": "cce-noor",
         "name": "Noor",
         "price": 980,
+        "oldPrice": 0,
         "image": "1616486338812-3dadae4b4ace",
+        "imageMobile": "",
+        "images": [
+          "1616486338812-3dadae4b4ace"
+        ],
+        "video": "",
         "material": {
           "es": "Travertino",
           "en": "Travertine"
         },
         "size": "140 × 40 cm",
         "description": {
-          "es": "Consola en travertino con espejo de arco pleno. Material de lujo, formas atemporales.",
-          "en": "Travertine console with full-arch mirror. Luxury material, timeless forms."
-        }
+          "es": "",
+          "en": ""
+        },
+        "related": []
       },
       {
         "id": "cce-vela",
         "name": "Vega",
         "price": 1190,
+        "oldPrice": 0,
         "image": "1595428774223-ef52624120d2",
+        "imageMobile": "",
+        "images": [
+          "1595428774223-ef52624120d2"
+        ],
+        "video": "",
         "material": {
           "es": "Mármol",
           "en": "Marble"
         },
         "size": "150 × 42 cm",
         "description": {
-          "es": "Consola en mármol con espejo de marco biselado. La pieza más premium de la colección.",
-          "en": "Marble console with bevelled-frame mirror. The most premium piece in the collection."
-        }
+          "es": "",
+          "en": ""
+        },
+        "related": []
       }
     ]
   },
@@ -566,66 +1712,96 @@
       "en": "Narrow-profile consoles for hallways and entrances. Maximum presence, minimal depth."
     },
     "image": "1586023492125-27b2c045efd7",
+    "imageMobile": "",
+    "video": "",
     "products": [
       {
         "id": "con-ela",
         "name": "Ela",
         "price": 520,
+        "oldPrice": 0,
         "image": "1586023492125-27b2c045efd7",
+        "imageMobile": "",
+        "images": [
+          "1586023492125-27b2c045efd7"
+        ],
+        "video": "",
         "material": {
           "es": "Roble claro",
           "en": "Light oak"
         },
         "size": "110 × 30 cm",
         "description": {
-          "es": "Consola esbelta en roble claro, idónea para entradas y pasillos estrechos.",
-          "en": "Slender light-oak console, ideal for narrow entryways and hallways."
-        }
+          "es": "",
+          "en": ""
+        },
+        "related": []
       },
       {
         "id": "con-rune",
         "name": "Rune",
         "price": 610,
+        "oldPrice": 0,
         "image": "1556228453-efd6c1ff04f6",
+        "imageMobile": "",
+        "images": [
+          "1556228453-efd6c1ff04f6"
+        ],
+        "video": "",
         "material": {
           "es": "Roble",
           "en": "Oak"
         },
         "size": "120 × 32 cm",
         "description": {
-          "es": "Superficie en roble con cajón lateral y patas cónicas. Funcional con estilo.",
-          "en": "Oak surface with side drawer and tapered legs. Functional with style."
-        }
+          "es": "",
+          "en": ""
+        },
+        "related": []
       },
       {
         "id": "con-sela",
         "name": "Sela",
         "price": 740,
+        "oldPrice": 0,
         "image": "1560448204-e02f11c3d0e2",
+        "imageMobile": "",
+        "images": [
+          "1560448204-e02f11c3d0e2"
+        ],
+        "video": "",
         "material": {
           "es": "Nogal",
           "en": "Walnut"
         },
         "size": "130 × 34 cm",
         "description": {
-          "es": "Consola en nogal con estante inferior y acabado en aceite natural. Cálida y durable.",
-          "en": "Walnut console with lower shelf and natural oil finish. Warm and durable."
-        }
+          "es": "",
+          "en": ""
+        },
+        "related": []
       },
       {
         "id": "con-faro",
         "name": "Faro",
         "price": 880,
+        "oldPrice": 0,
         "image": "1524758631624-e2822e304c36",
+        "imageMobile": "",
+        "images": [
+          "1524758631624-e2822e304c36"
+        ],
+        "video": "",
         "material": {
           "es": "Lacado mate",
           "en": "Matte lacquer"
         },
         "size": "140 × 36 cm",
         "description": {
-          "es": "Lacado mate con base de acero negro y bandeja deslizante inferior. Loft urbano.",
-          "en": "Matte lacquer with black steel base and lower sliding tray. Urban loft aesthetic."
-        }
+          "es": "",
+          "en": ""
+        },
+        "related": []
       }
     ]
   },
@@ -644,66 +1820,96 @@
       "en": "Drawer units with soft-close runners and discreet pulls. Generous storage that melts into the room."
     },
     "image": "1616486338812-3dadae4b4ace",
+    "imageMobile": "",
+    "video": "",
     "products": [
       {
         "id": "caj-bea",
         "name": "Bea",
         "price": 420,
+        "oldPrice": 0,
         "image": "1616486338812-3dadae4b4ace",
+        "imageMobile": "",
+        "images": [
+          "1616486338812-3dadae4b4ace"
+        ],
+        "video": "",
         "material": {
           "es": "Roble",
           "en": "Oak"
         },
         "size": "80 × 90 cm",
         "description": {
-          "es": "Tres cajones en roble con guías silenciosas y tirador de gota. Simple y eficaz.",
-          "en": "Three oak drawers with silent runners and drop handle. Simple and effective."
-        }
+          "es": "",
+          "en": ""
+        },
+        "related": []
       },
       {
         "id": "caj-tilo",
         "name": "Tilo",
         "price": 520,
+        "oldPrice": 0,
         "image": "1538688525198-9b88f6f53126",
+        "imageMobile": "",
+        "images": [
+          "1538688525198-9b88f6f53126"
+        ],
+        "video": "",
         "material": {
           "es": "Fresno",
           "en": "Ash"
         },
         "size": "90 × 95 cm",
         "description": {
-          "es": "Cuatro cajones en fresno con frente liso y sin tirador. Minimalismo llevado al límite.",
-          "en": "Four ash drawers with smooth push-to-open front. Minimalism taken to the limit."
-        }
+          "es": "",
+          "en": ""
+        },
+        "related": []
       },
       {
         "id": "caj-mora",
         "name": "Mora",
         "price": 660,
+        "oldPrice": 0,
         "image": "1522708323590-d24dbb6b0267",
+        "imageMobile": "",
+        "images": [
+          "1522708323590-d24dbb6b0267"
+        ],
+        "video": "",
         "material": {
           "es": "Nogal",
           "en": "Walnut"
         },
         "size": "100 × 100 cm",
         "description": {
-          "es": "Cajonera alta en nogal con cerradura discreta y veta natural prominente.",
-          "en": "Tall walnut chest with discreet lock and prominent natural grain."
-        }
+          "es": "",
+          "en": ""
+        },
+        "related": []
       },
       {
         "id": "caj-sol",
         "name": "Sol",
         "price": 840,
+        "oldPrice": 0,
         "image": "1505693416388-ac5ce068fe85",
+        "imageMobile": "",
+        "images": [
+          "1505693416388-ac5ce068fe85"
+        ],
+        "video": "",
         "material": {
           "es": "Lacado mate",
           "en": "Matte lacquer"
         },
         "size": "110 × 105 cm",
         "description": {
-          "es": "Lacado en blanco con cajones de distintas alturas y pies de latón. Elegancia total.",
-          "en": "White lacquer with drawers of varying heights and brass feet. Total elegance."
-        }
+          "es": "",
+          "en": ""
+        },
+        "related": []
       }
     ]
   }
