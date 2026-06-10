@@ -56,8 +56,8 @@ export default function ProductCard({ product, categoryName }) {
             w={700}
             className="transition-transform duration-700 ease-out group-hover:scale-[1.04]"
           />
-          <div className="absolute inset-0 flex items-center justify-center bg-background/0 opacity-0 transition-all duration-300 group-hover:bg-background/85 group-hover:opacity-100">
-            <span className="text-xs uppercase tracking-[0.25em] text-primary">
+          <div className="absolute inset-0 flex items-center justify-center bg-background/0 opacity-0 transition-all duration-300 group-hover:bg-background/30 group-hover:opacity-100">
+            <span className="bg-background/80 px-5 py-2 text-xs uppercase tracking-[0.25em] text-primary">
               {t('product.view')}
             </span>
           </div>
@@ -95,7 +95,7 @@ export default function ProductCard({ product, categoryName }) {
         )}
       </div>
 
-      <div className="border-t border-primary/10 pt-4">
+      <Link to={to} aria-label={label} tabIndex={-1} className="block border-t border-primary/10 pt-4">
         <h3 className="font-serif text-xl text-primary transition-colors duration-300 group-hover:text-accent">
           {product.name}
         </h3>
@@ -109,7 +109,7 @@ export default function ProductCard({ product, categoryName }) {
           {product.material[lang] && <p>{product.material[lang]}</p>}
           {product.size && <p className="mt-0.5 text-primary/40">{product.size}</p>}
         </div>
-      </div>
+      </Link>
     </article>
   );
 }
