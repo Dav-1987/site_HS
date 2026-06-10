@@ -219,6 +219,16 @@ export default function Product() {
               </Button>
               <p className="mt-3 text-xs text-primary/40">{t('product.inquireNote')}</p>
             </div>
+
+            {/* Custom order notice */}
+            <div className="mt-6 border border-primary/10 bg-surface px-6 py-5">
+              <p className="mb-2 text-xs uppercase tracking-[0.2em] text-primary/40">
+                {t('product.customOrderTitle')}
+              </p>
+              <p className="text-sm leading-relaxed text-primary/70">
+                {t('product.customOrderText')}
+              </p>
+            </div>
           </Reveal>
         </div>
       </article>

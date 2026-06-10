@@ -69,6 +69,8 @@ export const translations = {
     'product.gallery': 'Vista',
     'product.video': 'Vídeo',
     'product.zoom': 'Ampliar',
+    'product.customOrderTitle': 'Fabricación a medida',
+    'product.customOrderText': 'Este artículo puede fabricarse en las dimensiones que necesites. Contáctanos para recibir presupuesto personalizado.',
 
     // --- Contact ---
     'contact.eyebrow': 'Contacto',
@@ -179,6 +181,8 @@ export const translations = {
     'product.gallery': 'View',
     'product.video': 'Video',
     'product.zoom': 'Zoom',
+    'product.customOrderTitle': 'Made to your measurements',
+    'product.customOrderText': 'This item can be made in any dimensions you need. Contact us for a personalised quote.',
 
     // --- Contact ---
     'contact.eyebrow': 'Contact',
