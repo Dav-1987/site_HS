@@ -33,7 +33,7 @@ app.use(express.static(DIST_DIR));
 
 // ─── Middleware ───────────────────────────────────────────────────────────────
 
-app.use(express.json());
+app.use(express.json({ limit: '1mb' }));
 
 // ─── /api/admin/login + /api/admin-login (оба варианта) ──────────────────────
 

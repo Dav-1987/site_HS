@@ -16,12 +16,12 @@ function LangToggle({ className = '' }) {
             aria-label={`${l.label}`}
             aria-pressed={lang === l.code}
             className={`transition-colors duration-300 ${
-              lang === l.code ? 'text-accent' : 'text-primary/40 hover:text-primary'
+              lang === l.code ? 'text-accent' : 'text-primary/70 hover:text-primary'
             }`}
           >
             {l.label}
           </button>
-          {i === 0 && <span className="text-primary/20">/</span>}
+          {i === 0 && <span className="text-primary/40">/</span>}
         </span>
       ))}
     </div>
@@ -33,7 +33,20 @@ export default function Header() {
   const { categories } = useCatalog();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [catOpen, setCatOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
+
+  // Transparent only at the very top of the home page; solid everywhere else.
+  const isHome = location.pathname === '/';
+  const transparent = isHome && !scrolled;
+
+  // Track scroll position to toggle the solid/transparent header state.
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 40);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
 
   // Close menus on navigation.
   useEffect(() => {
@@ -51,12 +64,18 @@ export default function Header() {
 
   const navLinkClass = ({ isActive }) =>
     `link-underline text-xs uppercase tracking-[0.2em] py-1 ${
-      isActive ? 'text-primary' : 'text-primary/65 hover:text-primary'
+      isActive ? 'text-primary' : 'text-primary hover:text-primary'
     }`;
 
   return (
-    <header className="sticky top-0 z-50 border-b border-primary/5 bg-background/85 backdrop-blur-md">
-      <div className="flex h-20 items-center justify-between px-6 md:px-12 lg:px-20">
+    <header
+      className={`fixed inset-x-0 top-0 z-50 text-primary transition-colors duration-500 ${
+        transparent
+          ? 'bg-transparent'
+          : 'border-b border-primary/10 bg-background/90 backdrop-blur-md'
+      }`}
+    >
+      <div className="flex h-14 items-center justify-between px-6 md:px-12 lg:h-20 lg:px-20">
         <Link
           to="/"
           className="font-serif text-xl tracking-tight text-primary md:text-2xl"
@@ -99,7 +118,7 @@ export default function Header() {
 
           <Link
             to="/#nosotros"
-            className="link-underline py-1 text-xs uppercase tracking-[0.2em] text-primary/65 hover:text-primary"
+            className="link-underline py-1 text-xs uppercase tracking-[0.2em] text-primary hover:text-primary"
           >
             {t('nav.about')}
           </Link>
@@ -109,7 +128,7 @@ export default function Header() {
         </nav>
 
         <div className="flex items-center gap-5">
-          <LangToggle className="hidden sm:flex" />
+          <LangToggle className="flex" />
 
           {/* Mobile toggle */}
           <button
@@ -140,10 +159,10 @@ export default function Header() {
 
       {/* Mobile menu */}
       <div
-        className={`fixed inset-x-0 top-20 z-40 overflow-y-auto bg-background transition-opacity duration-300 lg:hidden ${
+        className={`fixed inset-x-0 top-14 z-40 overflow-y-auto bg-background transition-opacity duration-300 lg:hidden ${
           mobileOpen ? 'visible opacity-100' : 'invisible opacity-0'
         }`}
-        style={{ height: mobileOpen ? 'calc(100dvh - 5rem)' : 0 }}
+        style={{ height: mobileOpen ? 'calc(100dvh - 3.5rem)' : 0 }}
       >
         <nav className="flex flex-col px-6 py-8" aria-label={t('nav.menu')}>
           <NavLink to="/" className="border-b border-primary/10 py-4 font-serif text-2xl font-light">
@@ -194,7 +213,6 @@ export default function Header() {
             {t('nav.contact')}
           </NavLink>
 
-          <LangToggle className="pt-8" />
         </nav>
       </div>
     </header>

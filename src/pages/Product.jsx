@@ -28,17 +28,20 @@ function RelatedCarousel({ related, title }) {
 export default function Product() {
   const { id } = useParams();
   const { lang, t } = useLanguage();
-  const { getProduct, categories } = useCatalog();
+  const { getProduct, categories, loaded } = useCatalog();
   const [active, setActive] = useState(0);
+  const [thumbStart, setThumbStart] = useState(0);
   const [zoom, setZoom] = useState(false);
   const startX = useRef(null);
 
-  // Reset the selected gallery image when navigating between products.
+  // Reset gallery state when navigating between products.
   useEffect(() => {
     setActive(0);
+    setThumbStart(0);
   }, [id]);
 
   const found = getProduct(id);
+  if (!found && !loaded) return null;
   if (!found) return <NotFound />;
 
   const { product, category } = found;
@@ -50,10 +53,22 @@ export default function Product() {
   // The video slot is an object { type:'video', src }; everything else is a string.
   const gallery = videoSrc ? [...images, { type: 'video', src: videoSrc }] : images;
   const multi = gallery.length > 1;
+  const THUMB_VISIBLE = 4;
   const activeIdx = Math.min(active, gallery.length - 1);
   const activeItem = gallery[activeIdx];
   const isVideoActive = typeof activeItem === 'object' && activeItem?.type === 'video';
-  const goImage = (dir) => setActive((i) => (i + dir + gallery.length) % gallery.length);
+
+  const activateImage = (i) => {
+    setActive(i);
+    setThumbStart((s) => {
+      if (i < s) return i;
+      if (i >= s + THUMB_VISIBLE) return Math.min(i - THUMB_VISIBLE + 1, gallery.length - THUMB_VISIBLE);
+      return s;
+    });
+  };
+  const goImage = (dir) => activateImage((activeIdx + dir + gallery.length) % gallery.length);
+  const shiftStrip = (dir) =>
+    setThumbStart((s) => Math.max(0, Math.min(s + dir, gallery.length - THUMB_VISIBLE)));
 
   const related = computeRelated(categories, product, category, product.related);
   const specs = [
@@ -131,7 +146,7 @@ export default function Product() {
                     type="button"
                     aria-label={t('carousel.prev')}
                     onClick={(e) => { e.stopPropagation(); goImage(-1); }}
-                    className="absolute left-3 top-1/2 flex h-10 w-10 -translate-y-1/2 items-center justify-center bg-background/80 text-xl text-primary opacity-0 transition-opacity duration-300 hover:bg-background group-hover:opacity-100"
+                    className="absolute left-3 top-1/2 flex h-10 w-10 -translate-y-1/2 items-center justify-center bg-background/80 text-xl text-primary transition-opacity duration-300 hover:bg-background md:opacity-0 md:group-hover:opacity-100"
                   >
                     ‹
                   </button>
@@ -139,7 +154,7 @@ export default function Product() {
                     type="button"
                     aria-label={t('carousel.next')}
                     onClick={(e) => { e.stopPropagation(); goImage(1); }}
-                    className="absolute right-3 top-1/2 flex h-10 w-10 -translate-y-1/2 items-center justify-center bg-background/80 text-xl text-primary opacity-0 transition-opacity duration-300 hover:bg-background group-hover:opacity-100"
+                    className="absolute right-3 top-1/2 flex h-10 w-10 -translate-y-1/2 items-center justify-center bg-background/80 text-xl text-primary transition-opacity duration-300 hover:bg-background md:opacity-0 md:group-hover:opacity-100"
                   >
                     ›
                   </button>
@@ -147,30 +162,62 @@ export default function Product() {
               )}
             </div>
             {multi && (
-              <div className="mt-4 grid grid-cols-4 gap-3 md:gap-4">
-                {gallery.map((item, i) => {
-                  const isVid = typeof item === 'object' && item.type === 'video';
-                  return (
-                    <button
-                      key={i}
-                      type="button"
-                      onClick={() => setActive(i)}
-                      aria-label={isVid ? t('product.video') : `${t('product.gallery')} ${i + 1}`}
-                      aria-current={i === activeIdx}
-                      className={`relative aspect-[4/5] overflow-hidden bg-surface transition-opacity duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent ${
-                        i === activeIdx ? 'ring-1 ring-accent' : 'opacity-60 hover:opacity-100'
-                      }`}
-                    >
-                      {isVid ? (
-                        <div className="flex h-full w-full items-center justify-center bg-surface">
-                          <span className="text-3xl text-primary/30">▶</span>
-                        </div>
-                      ) : (
-                        <Media id={item} alt={`${product.name} ${t('product.gallery')} ${i + 1}`} w={300} />
-                      )}
-                    </button>
-                  );
-                })}
+              <div className="relative mt-4">
+                {thumbStart > 0 && (
+                  <button
+                    type="button"
+                    aria-label={t('carousel.prev')}
+                    onClick={() => shiftStrip(-1)}
+                    className="absolute left-0 top-0 z-10 flex h-full w-8 items-center justify-center bg-gradient-to-r from-background via-background/80 to-transparent text-xl text-primary"
+                  >
+                    ‹
+                  </button>
+                )}
+                <div
+                  className="grid grid-cols-4 gap-3 md:gap-4"
+                  onTouchStart={(e) => { startX.current = e.touches[0].clientX; }}
+                  onTouchEnd={(e) => {
+                    if (startX.current == null) return;
+                    const dx = e.changedTouches[0].clientX - startX.current;
+                    if (Math.abs(dx) > 30) shiftStrip(dx < 0 ? 1 : -1);
+                    startX.current = null;
+                  }}
+                >
+                  {gallery.slice(thumbStart, thumbStart + THUMB_VISIBLE).map((item, j) => {
+                    const i = thumbStart + j;
+                    const isVid = typeof item === 'object' && item.type === 'video';
+                    return (
+                      <button
+                        key={i}
+                        type="button"
+                        onClick={() => activateImage(i)}
+                        aria-label={isVid ? t('product.video') : `${t('product.gallery')} ${i + 1}`}
+                        aria-current={i === activeIdx}
+                        className={`relative aspect-[4/5] overflow-hidden bg-surface transition-opacity duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent ${
+                          i === activeIdx ? 'ring-1 ring-accent' : 'opacity-60 hover:opacity-100'
+                        }`}
+                      >
+                        {isVid ? (
+                          <div className="flex h-full w-full items-center justify-center bg-surface">
+                            <span className="text-3xl text-primary/30">▶</span>
+                          </div>
+                        ) : (
+                          <Media id={item} alt={`${product.name} ${t('product.gallery')} ${i + 1}`} w={300} />
+                        )}
+                      </button>
+                    );
+                  })}
+                </div>
+                {thumbStart + THUMB_VISIBLE < gallery.length && (
+                  <button
+                    type="button"
+                    aria-label={t('carousel.next')}
+                    onClick={() => shiftStrip(1)}
+                    className="absolute right-0 top-0 z-10 flex h-full w-8 items-center justify-center bg-gradient-to-l from-background via-background/80 to-transparent text-xl text-primary"
+                  >
+                    ›
+                  </button>
+                )}
               </div>
             )}
           </Reveal>

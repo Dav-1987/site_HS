@@ -90,8 +90,9 @@ export default function ProductCarousel({ products }) {
           onClick={(e) => {
             if (dragRef.current.moved) e.stopPropagation();
           }}
-          className="no-scrollbar flex cursor-grab gap-6 overflow-x-auto snap-x snap-mandatory px-6 pb-1 md:gap-8 md:px-12 lg:px-20"
+          className="no-scrollbar flex cursor-grab gap-6 overflow-x-auto snap-x snap-mandatory pb-1 [scroll-padding-inline-start:1.5rem] md:gap-8 md:[scroll-padding-inline-start:3rem] lg:[scroll-padding-inline-start:5rem]"
         >
+          <div className="w-6 flex-none md:w-12 lg:w-20" aria-hidden="true" />
           {products.map((p) => (
             <div
               key={p.id}
@@ -100,6 +101,7 @@ export default function ProductCarousel({ products }) {
               <ProductCard product={p} categorySlug={p.categorySlug} categoryName={p.category} />
             </div>
           ))}
+          <div className="w-6 flex-none md:w-12 lg:w-20" aria-hidden="true" />
         </div>
       </Reveal>
 

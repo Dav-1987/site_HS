@@ -44,22 +44,22 @@ export default function CategoryCard({ category }) {
         )}
         <div className="absolute inset-0 bg-gradient-to-t from-primary/65 via-primary/10 to-transparent" />
 
-        <span className="absolute left-5 top-5 text-[11px] uppercase tracking-[0.2em] text-background/75">
+        <span className="absolute left-3 top-3 text-[9px] uppercase tracking-[0.2em] text-background/75 md:left-5 md:top-5 md:text-[11px]">
           {category.products.length} {t('category.products')}
         </span>
 
         <span
           aria-hidden="true"
-          className="absolute right-5 top-5 flex h-10 w-10 translate-y-1 items-center justify-center rounded-full border border-background/40 text-background opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100"
+          className="absolute right-3 top-3 flex h-8 w-8 translate-y-1 items-center justify-center rounded-full border border-background/40 text-background opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100 md:right-5 md:top-5 md:h-10 md:w-10"
         >
           →
         </span>
 
-        <div className="absolute inset-x-0 bottom-0 p-6">
-          <h3 className="font-serif text-2xl font-light leading-tight text-background md:text-3xl">
+        <div className="absolute inset-x-0 bottom-0 p-3 md:p-6">
+          <h3 className="font-serif text-base font-light leading-tight text-background md:text-2xl lg:text-3xl">
             {category.name[lang]}
           </h3>
-          <p className="mt-1.5 text-[11px] uppercase tracking-[0.18em] text-background/70">
+          <p className="mt-1 text-[9px] uppercase tracking-[0.15em] text-background/70 md:mt-1.5 md:text-[11px] md:tracking-[0.18em]">
             {category.tagline[lang]}
           </p>
         </div>

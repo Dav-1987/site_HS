@@ -54,10 +54,14 @@ export default function Layout() {
     return undefined;
   }, [location]);
 
+  // The header is fixed (overlapping content). The home hero sits under it on
+  // purpose; every other page needs top padding equal to the header height.
+  const isHome = location.pathname === '/';
+
   return (
     <div className="flex min-h-screen flex-col">
       <Header />
-      <main className="flex-1">
+      <main className={`flex-1 ${isHome ? '' : 'pt-14 lg:pt-20'}`}>
         <Outlet />
       </main>
       <Footer />

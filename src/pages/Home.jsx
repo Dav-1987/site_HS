@@ -15,7 +15,7 @@ function Hero() {
   const { t } = useLanguage();
   const { settings } = useSettings();
   return (
-    <section className="relative flex min-h-[calc(100svh-5rem)] items-center justify-center overflow-hidden bg-surface text-center">
+    <section className="relative flex min-h-[100svh] items-center justify-center overflow-hidden bg-surface text-center">
       {/* Full-bleed background image (LCP — loaded eagerly). Editable in /admin;
           a warm, styled interior with a calm zone behind the centered headline. */}
       <div className="absolute inset-0">
@@ -36,7 +36,7 @@ function Hero() {
 
       {/* Centered content */}
       <Reveal stagger className="relative z-10 mx-auto max-w-3xl px-6">
-        <p className="mb-6 text-sm font-semibold uppercase tracking-[0.4em] text-accent">
+        <p className="mb-6 text-[10px] font-semibold uppercase tracking-[0.2em] text-accent sm:text-sm sm:tracking-[0.4em]">
           {t('hero.eyebrow')}
         </p>
         <h1 className="font-serif font-semibold leading-[0.95] tracking-tightest text-primary text-[9vw] sm:text-[7.5vw] lg:text-[5vw]">
@@ -97,12 +97,12 @@ function CategoriesSection() {
   const { t } = useLanguage();
   const { categories } = useCatalog();
   return (
-    <section className="bg-surface px-6 py-24 md:px-12 md:py-32 lg:px-20">
+    <section className="bg-surface px-3 py-16 md:px-12 md:py-32 lg:px-20">
       <SectionHeader
         eyebrow={t('section.categories.eyebrow')}
         title={t('section.categories.title')}
       />
-      <Reveal stagger className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 lg:gap-8">
+      <Reveal stagger className="grid grid-cols-2 gap-3 sm:grid-cols-2 lg:grid-cols-3 md:gap-6 lg:gap-8">
         {categories.map((c) => (
           <CategoryCard key={c.slug} category={c} />
         ))}

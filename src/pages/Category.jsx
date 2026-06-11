@@ -10,9 +10,10 @@ import NotFound from './NotFound.jsx';
 export default function Category() {
   const { slug } = useParams();
   const { lang, t } = useLanguage();
-  const { categories, getCategory } = useCatalog();
+  const { categories, getCategory, loaded } = useCatalog();
   const category = getCategory(slug);
 
+  if (!category && !loaded) return null;
   if (!category) return <NotFound />;
 
   const related = categories.filter((c) => c.slug !== category.slug).slice(0, 3);
