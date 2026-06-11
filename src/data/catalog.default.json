@@ -41,9 +41,9 @@
           "en": "TocadoresTocadores TocadoresTocadoresTocadores TocadoresTocadoresTocadoresTocadoresTocadores"
         },
         "related": [
-          "toc-vera",
-          "toc-lina",
-          "toc-mara"
+          "T-02",
+          "T-03",
+          "T-04"
         ]
       },
       {
@@ -71,10 +71,9 @@
           "en": "TocadoresTocadores TocadoresTocadoresTocadores TocadoresTocadoresTocadoresTocadoresTocadores"
         },
         "related": [
-          "toc-vera",
-          "toc-mara",
-          "toc-alba",
-          "toc-vera-copy-mq6vhosq"
+          "T-01",
+          "T-03",
+          "T-05"
         ]
       },
       {
@@ -104,9 +103,9 @@
           "en": "TocadoresTocadores TocadoresTocadoresTocadores TocadoresTocadoresTocadoresTocadoresTocadores"
         },
         "related": [
-          "toc-vera",
-          "toc-alba",
-          "toc-lina"
+          "T-01",
+          "T-02",
+          "T-04"
         ]
       },
       {
@@ -135,10 +134,9 @@
           "en": "TocadoresTocadores TocadoresTocadoresTocadores TocadoresTocadoresTocadoresTocadoresTocadores"
         },
         "related": [
-          "toc-vera-copy-mq6vhosq",
-          "toc-mara",
-          "toc-lina",
-          "toc-alba"
+          "T-02",
+          "T-03",
+          "T-06"
         ]
       },
       {
@@ -166,10 +164,9 @@
           "en": "TocadoresTocadores TocadoresTocadoresTocadores TocadoresTocadoresTocadoresTocadoresTocadores"
         },
         "related": [
-          "toc-alba",
-          "toc-vera",
-          "toc-mara",
-          "toc-lina"
+          "T-03",
+          "T-04",
+          "T-06"
         ]
       },
       {
@@ -198,10 +195,9 @@
           "en": "TocadoresTocadores TocadoresTocadoresTocadores TocadoresTocadoresTocadoresTocadoresTocadores"
         },
         "related": [
-          "toc-alba",
-          "toc-vera",
-          "toc-mara",
-          "toc-lina"
+          "T-04",
+          "T-05",
+          "T-07"
         ]
       },
       {
@@ -229,10 +225,9 @@
           "en": "TocadoresTocadores TocadoresTocadoresTocadores TocadoresTocadoresTocadoresTocadoresTocadores"
         },
         "related": [
-          "toc-alba",
-          "toc-vera",
-          "toc-mara",
-          "toc-lina"
+          "T-05",
+          "T-06",
+          "T-08"
         ]
       },
       {
@@ -259,10 +254,9 @@
           "en": "TocadoresTocadores TocadoresTocadoresTocadores TocadoresTocadoresTocadoresTocadoresTocadores"
         },
         "related": [
-          "toc-alba",
-          "toc-vera",
-          "toc-mara",
-          "toc-lina"
+          "T-06",
+          "T-07",
+          "T-01"
         ]
       }
     ]

@@ -20,7 +20,6 @@ export const translations = {
     'hero.promo': '¡Grandes descuentos en toda la colección!',
     'hero.promo.perks': 'Al pedir ahora: envío, montaje e instalación — totalmente gratis.',
     'hero.cta': 'Ver catálogo',
-    'hero.cta.secondary': 'Nuestra historia',
 
     // --- Sections ---
     'section.categories.eyebrow': 'Colecciones',
@@ -35,7 +34,6 @@ export const translations = {
       'Diseñamos y fabricamos en España, con maderas seleccionadas y acabados que envejecen con gracia. Menos, pero mejor.',
     'about.stat.1.value': '12+',
     'about.stat.1.label': 'Años de oficio',
-    'about.stat.2.value': '9',
     'about.stat.2.label': 'Colecciones',
     'about.stat.3.value': '100%',
     'about.stat.3.label': 'Hecho en España',
@@ -137,7 +135,6 @@ export const translations = {
     'hero.promo': 'Big discounts across the entire collection!',
     'hero.promo.perks': 'Order now and get free delivery, assembly & installation.',
     'hero.cta': 'View catalog',
-    'hero.cta.secondary': 'Our story',
 
     // --- Sections ---
     'section.categories.eyebrow': 'Collections',
@@ -152,7 +149,6 @@ export const translations = {
       'We design and build in Spain, with selected woods and finishes that age gracefully. Less, but better.',
     'about.stat.1.value': '12+',
     'about.stat.1.label': 'Years of craft',
-    'about.stat.2.value': '9',
     'about.stat.2.label': 'Collections',
     'about.stat.3.value': '100%',
     'about.stat.3.label': 'Made in Spain',

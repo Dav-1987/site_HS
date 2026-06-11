@@ -19,8 +19,8 @@ export function unsplash(id, w = 900) {
 }
 
 /**
- * Resolve an `image` field to a usable <img> src. Supports three formats:
- *  - /uploads/<hash>.<ext>  → nearest pre-generated WebP size (_400/_800/_1600)
+ * Resolve an `image` field to a usable src. Three formats:
+ *  - /uploads/<hash>.<ext>      → nearest pre-generated WebP size (_400/_800/_1600)
  *  - an Unsplash photo id token → expanded via unsplash() (already optimized)
  *  - a full external URL        → used as-is
  */

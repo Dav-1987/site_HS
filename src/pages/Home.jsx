@@ -113,6 +113,7 @@ function CategoriesSection() {
 
 function AboutSection() {
   const { t } = useLanguage();
+  const { categories } = useCatalog();
   const stats = [1, 2, 3];
   return (
     <section id="nosotros" className="scroll-mt-24 px-6 py-24 md:px-12 md:py-32 lg:px-20">
@@ -141,7 +142,7 @@ function AboutSection() {
             {stats.map((n) => (
               <div key={n}>
                 <p className="font-serif text-4xl font-light text-primary md:text-5xl">
-                  {t(`about.stat.${n}.value`)}
+                  {n === 2 ? categories.length : t(`about.stat.${n}.value`)}
                 </p>
                 <p className="mt-2 text-[11px] uppercase tracking-[0.15em] text-secondary">
                   {t(`about.stat.${n}.label`)}
