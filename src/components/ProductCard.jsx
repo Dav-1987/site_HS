@@ -6,9 +6,12 @@ import { useLanguage } from '../i18n/LanguageContext.jsx';
 import { productImages } from '../data/catalog.js';
 
 /** Product tile: swipeable image carousel + discount-aware price. */
-export default function ProductCard({ product, categoryName }) {
+export default function ProductCard({ product, categorySlug, categoryName }) {
   const { lang, t } = useLanguage();
-  const to = `/producto/${product.id}`;
+  const slug = categorySlug || product.categorySlug;
+  // Canonical product URL is /<categorySlug>/<id>; the legacy /producto/<id>
+  // form still works as a redirect if the slug is ever missing.
+  const to = slug ? `/${slug}/${product.id}` : `/producto/${product.id}`;
   const label = categoryName ? `${product.name} — ${categoryName[lang]}` : product.name;
 
   const images = productImages(product);

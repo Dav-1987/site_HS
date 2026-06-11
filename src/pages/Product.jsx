@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link, Navigate, useParams } from 'react-router-dom';
 import { useLanguage } from '../i18n/LanguageContext.jsx';
 import { useCatalog } from '../catalog/CatalogContext.jsx';
 import { productDescription, productImages, computeRelated } from '../data/catalog.js';
@@ -26,7 +26,7 @@ function RelatedCarousel({ related, title }) {
 }
 
 export default function Product() {
-  const { id } = useParams();
+  const { categorySlug, id } = useParams();
   const { lang, t } = useLanguage();
   const { getProduct, categories, loaded } = useCatalog();
   const [active, setActive] = useState(0);
@@ -45,6 +45,12 @@ export default function Product() {
   if (!found) return <NotFound />;
 
   const { product, category } = found;
+
+  // Canonical URL: if the category slug in the URL is stale or wrong
+  // (renamed category, moved product), redirect to the correct one.
+  if (category.slug !== categorySlug) {
+    return <Navigate to={`/${category.slug}/${product.id}`} replace />;
+  }
 
   // Real per-product gallery (falls back to the single cover image).
   const images = productImages(product);
@@ -94,7 +100,7 @@ export default function Product() {
           </Link>
           <span aria-hidden="true">/</span>
           <Link
-            to={`/categoria/${category.slug}`}
+            to={`/${category.slug}`}
             className="transition-colors hover:text-accent"
           >
             {category.name[lang]}
@@ -225,7 +231,7 @@ export default function Product() {
           {/* Info */}
           <Reveal delay={0.1} className="lg:col-span-7 lg:pl-4">
             <Link
-              to={`/categoria/${category.slug}`}
+              to={`/${category.slug}`}
               className="text-xs uppercase tracking-[0.25em] text-accent transition-colors hover:text-primary"
             >
               {category.name[lang]}

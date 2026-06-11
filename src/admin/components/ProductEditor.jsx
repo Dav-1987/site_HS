@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { LABEL, BTN_GHOST } from '../ui.js';
 import { Field, TextArea } from './Field.jsx';
+import { urlSafe } from '../urlSafe.js';
 import ImageField from './ImageField.jsx';
 import VideoField from './VideoField.jsx';
 import ProductImagesEditor from './ProductImagesEditor.jsx';
@@ -50,7 +51,11 @@ export default function ProductEditor({
       {open && (
         <div className="border-t border-primary/10 p-4">
           <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-            <Field label="ID (уникальный)" value={product.id} onChange={(v) => set({ id: v })} />
+            <Field
+              label="ID (уникальный, часть адреса страницы)"
+              value={product.id}
+              onChange={(v) => set({ id: urlSafe(v) })}
+            />
             <Field label="Название" value={product.name} onChange={(v) => set({ name: v })} />
             <Field label="Размер" value={product.size} onChange={(v) => set({ size: v })} />
             <Field

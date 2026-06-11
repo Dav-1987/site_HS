@@ -51,7 +51,7 @@ export default function Footer() {
               {categories.slice(0, 6).map((c) => (
                 <li key={c.slug}>
                   <Link
-                    to={`/categoria/${c.slug}`}
+                    to={`/${c.slug}`}
                     className="text-secondary transition-colors duration-300 hover:text-accent"
                   >
                     {c.name[lang]}

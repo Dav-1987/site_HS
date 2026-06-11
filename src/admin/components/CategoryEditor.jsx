@@ -1,5 +1,6 @@
 import { BTN_GHOST } from '../ui.js';
 import { Field, TextArea } from './Field.jsx';
+import { urlSafe, RESERVED_SLUGS } from '../urlSafe.js';
 import ImageField from './ImageField.jsx';
 import VideoField from './VideoField.jsx';
 import ProductEditor from './ProductEditor.jsx';
@@ -85,7 +86,18 @@ export default function CategoryEditor({
       {open && (
         <div className="space-y-6 border-t border-primary/10 px-5 py-6">
           <div className="grid gap-3 sm:grid-cols-2">
-            <Field label="Slug (адрес в URL)" value={category.slug} onChange={(v) => set({ slug: v })} />
+            <div>
+              <Field
+                label="Slug (адрес в URL)"
+                value={category.slug}
+                onChange={(v) => set({ slug: urlSafe(v, { lower: true }) })}
+              />
+              {RESERVED_SLUGS.includes(category.slug) && (
+                <p className="mt-1 text-xs text-red-600">
+                  Этот slug занят системной страницей сайта — категория будет недоступна по своему адресу.
+                </p>
+              )}
+            </div>
             <Field label="Название (исп.)" value={category.name?.es} onChange={(v) => setI18n('name', 'es', v)} />
             <Field label="Название (англ.)" value={category.name?.en} onChange={(v) => setI18n('name', 'en', v)} />
             <Field label="Слоган (исп.)" value={category.tagline?.es} onChange={(v) => setI18n('tagline', 'es', v)} />

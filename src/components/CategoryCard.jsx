@@ -18,7 +18,7 @@ export default function CategoryCard({ category }) {
 
   return (
     <Link
-      to={`/categoria/${category.slug}`}
+      to={`/${category.slug}`}
       className="group block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-4 focus-visible:ring-offset-background"
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
