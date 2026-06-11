@@ -1,4 +1,5 @@
 import express from 'express';
+import { rateLimit } from 'express-rate-limit';
 import { createHash } from 'node:crypto';
 import { createWriteStream, existsSync, mkdirSync, renameSync, unlinkSync } from 'node:fs';
 import { join, dirname } from 'node:path';
@@ -54,9 +55,17 @@ function handleLoginPost(req, res) {
   res.json({ ok: true });
 }
 
+const loginRateLimit = rateLimit({
+  windowMs: 60 * 1000,
+  max: 5,
+  standardHeaders: true,
+  legacyHeaders: false,
+  message: { error: 'Too many login attempts, try again in a minute' },
+});
+
 app.get(['/api/admin/login', '/api/admin-login'], handleLoginGet);
 app.delete(['/api/admin/login', '/api/admin-login'], handleLoginDelete);
-app.post(['/api/admin/login', '/api/admin-login'], handleLoginPost);
+app.post(['/api/admin/login', '/api/admin-login'], loginRateLimit, handleLoginPost);
 
 // ─── Orphaned-upload cleanup ──────────────────────────────────────────────────
 
@@ -355,6 +364,12 @@ app.post('/api/upload', (req, res) => {
 
 app.get('/api/image/:key', (req, res) => {
   res.redirect(301, `/uploads/${req.params.key}`);
+});
+
+// ─── /api/* catch-all — неизвестные API-маршруты → JSON 404 ─────────────────
+
+app.all('/api/*', (req, res) => {
+  res.status(404).json({ error: `Unknown API route: ${req.method} ${req.path}` });
 });
 
 // ─── SPA fallback — все неизвестные маршруты → index.html ────────────────────

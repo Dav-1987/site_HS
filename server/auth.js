@@ -40,12 +40,14 @@ export function createSessionToken(maxAgeS = DEFAULT_MAX_AGE_S) {
   return `${payloadB64}.${sign(payloadB64)}`;
 }
 
+const SECURE = process.env.NODE_ENV === 'production' ? '; Secure' : '';
+
 export function sessionCookie(token, maxAgeS = DEFAULT_MAX_AGE_S) {
-  return `${COOKIE_NAME}=${token}; HttpOnly; SameSite=Lax; Path=/; Max-Age=${maxAgeS}`;
+  return `${COOKIE_NAME}=${token}; HttpOnly; SameSite=Lax; Path=/; Max-Age=${maxAgeS}${SECURE}`;
 }
 
 export function clearCookie() {
-  return `${COOKIE_NAME}=; HttpOnly; SameSite=Lax; Path=/; Max-Age=0`;
+  return `${COOKIE_NAME}=; HttpOnly; SameSite=Lax; Path=/; Max-Age=0${SECURE}`;
 }
 
 function readCookie(req, name) {

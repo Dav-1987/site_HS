@@ -20,6 +20,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "express-rate-limit": "^8.5.2",
     "gsap": "^3.12.5",
     "lenis": "^1.1.18",
     "react": "^19.0.0",
