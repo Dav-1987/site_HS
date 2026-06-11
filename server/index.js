@@ -3,6 +3,7 @@ import { createHash } from 'node:crypto';
 import { createWriteStream, existsSync, mkdirSync, renameSync, unlinkSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import sharp from 'sharp';
 
 import { verifyPassword, createSessionToken, sessionCookie, clearCookie, isAuthenticated } from './auth.js';
 import { readOrSeedCatalog, writeCatalog, recordVersion, listVersions, getVersionData,
@@ -87,6 +88,10 @@ async function runCleanup() {
     for (const filename of toDelete) {
       try {
         unlinkSync(join(UPLOADS_DIR, filename));
+        const base = filename.replace(/\.[^.]+$/, '');
+        for (const w of WEBP_SIZES) {
+          try { unlinkSync(join(UPLOADS_DIR, `${base}_${w}.webp`)); } catch {}
+        }
         console.log(`[cleanup] deleted: ${filename}`);
       } catch (err) {
         if (err.code !== 'ENOENT') { console.error(`[cleanup] failed to delete ${filename}:`, err); continue; }
@@ -255,6 +260,21 @@ app.put('/api/settings', handleSettingsSave);
 
 // ─── /api/upload — стриминг, изображения (5 МБ) + видео (200 МБ) ─────────────
 
+const WEBP_SIZES = [400, 800, 1600];
+
+async function generateWebpVariants(srcPath, base) {
+  for (const w of WEBP_SIZES) {
+    try {
+      await sharp(srcPath)
+        .resize(w, null, { withoutEnlargement: true })
+        .webp({ quality: 82 })
+        .toFile(join(UPLOADS_DIR, `${base}_${w}.webp`));
+    } catch (err) {
+      console.error(`[sharp] ${base}_${w}.webp:`, err.message);
+    }
+  }
+}
+
 const IMAGE_TYPES = {
   'image/jpeg': 'jpg',
   'image/png': 'png',
@@ -306,18 +326,24 @@ app.post('/api/upload', (req, res) => {
 
   req.on('end', () => {
     if (done) return;
-    ws.end(() => {
+    ws.end(async () => {
       if (size === 0) { fail(400, 'Empty file'); return; }
       done = true;
-      const key = `${hash.digest('hex').slice(0, 32)}.${ext}`;
+      const base = hash.digest('hex').slice(0, 32);
+      const key = `${base}.${ext}`;
+      const finalPath = join(UPLOADS_DIR, key);
       try {
-        renameSync(tmpPath, join(UPLOADS_DIR, key));
-        res.json({ url: `/uploads/${key}` });
+        renameSync(tmpPath, finalPath);
       } catch (err) {
         console.error('upload rename failed', err);
         try { unlinkSync(tmpPath); } catch {}
         if (!res.headersSent) res.status(500).json({ error: 'Failed to store file' });
+        return;
       }
+      if (!isVideo && ext !== 'gif') {
+        await generateWebpVariants(finalPath, base);
+      }
+      res.json({ url: `/uploads/${key}` });
     });
   });
 

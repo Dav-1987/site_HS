@@ -63,7 +63,7 @@ export default function Header() {
   }, [mobileOpen]);
 
   const navLinkClass = ({ isActive }) =>
-    `link-underline text-xs uppercase tracking-[0.2em] py-1 ${
+    `link-underline text-xs uppercase tracking-[0.2em] py-1 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-accent focus-visible:ring-offset-2 ${
       isActive ? 'text-primary' : 'text-primary hover:text-primary'
     }`;
 
@@ -100,8 +100,8 @@ export default function Header() {
                 {categories.map((c) => (
                   <Link
                     key={c.slug}
-                    to={`/categoria/${c.slug}`}
-                    className="group/item flex items-center justify-between border-b border-primary/5 py-2.5 text-sm text-primary/70 transition-colors duration-300 hover:text-accent"
+                    to={`/${c.slug}`}
+                    className="group/item flex items-center justify-between border-b border-primary/5 py-2.5 text-sm text-primary/70 transition-colors duration-300 hover:text-accent focus-visible:outline-none focus-visible:text-accent"
                   >
                     <span>{c.name[lang]}</span>
                     <span
@@ -118,7 +118,7 @@ export default function Header() {
 
           <Link
             to="/#nosotros"
-            className="link-underline py-1 text-xs uppercase tracking-[0.2em] text-primary hover:text-primary"
+            className="link-underline py-1 text-xs uppercase tracking-[0.2em] text-primary hover:text-primary focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-accent focus-visible:ring-offset-2"
           >
             {t('nav.about')}
           </Link>
@@ -191,7 +191,7 @@ export default function Header() {
               {categories.map((c) => (
                 <Link
                   key={c.slug}
-                  to={`/categoria/${c.slug}`}
+                  to={`/${c.slug}`}
                   className="py-2 text-base text-primary/70"
                 >
                   {c.name[lang]}

@@ -20,14 +20,16 @@ export function unsplash(id, w = 900) {
 
 /**
  * Resolve an `image` field to a usable <img> src. Supports three formats:
- *  - an Unsplash photo id token   → expanded via unsplash() (already optimized)
- *  - an app path ("/api/image/…") → routed through Netlify Image CDN
- *                                   (on-the-fly resize + WebP)
- *  - a full external URL          → used as-is
+ *  - /uploads/<hash>.<ext>  → nearest pre-generated WebP size (_400/_800/_1600)
+ *  - an Unsplash photo id token → expanded via unsplash() (already optimized)
+ *  - a full external URL        → used as-is
  */
 export function resolveImage(image, w = 900) {
   if (!image) return null;
-  // Uploaded files: serve directly from /uploads/
+  if (image.startsWith('/uploads/')) {
+    const size = w <= 400 ? 400 : w <= 900 ? 800 : 1600;
+    return image.replace(/\.[^.]+$/, `_${size}.webp`);
+  }
   if (image.startsWith('/')) return image;
   if (/^https?:\/\//.test(image)) return image;
   return unsplash(image, w);

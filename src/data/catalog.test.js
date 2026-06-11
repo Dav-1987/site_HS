@@ -42,8 +42,10 @@ describe('resolveImage', () => {
     expect(resolveImage(null)).toBeNull();
   });
 
-  it('passes app-absolute paths through unchanged', () => {
-    expect(resolveImage('/uploads/abc.jpg', 700)).toBe('/uploads/abc.jpg');
+  it('resolves /uploads/ paths to the nearest WebP size variant', () => {
+    expect(resolveImage('/uploads/abc.jpg', 200)).toBe('/uploads/abc_400.webp');
+    expect(resolveImage('/uploads/abc.jpg', 700)).toBe('/uploads/abc_800.webp');
+    expect(resolveImage('/uploads/abc.jpg', 1200)).toBe('/uploads/abc_1600.webp');
   });
 
   it('passes full URLs through unchanged', () => {

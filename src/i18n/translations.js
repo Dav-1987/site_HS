@@ -91,6 +91,10 @@ export const translations = {
     'contact.info.title': 'Atelier',
     'contact.info.hours': 'Lun–Vie · 9:00–18:00',
 
+    // --- A11y ---
+    'a11y.skipToContent': 'Saltar al contenido',
+    'notFound.text': 'La página que buscas no existe.',
+
     // --- A11y: carousel + lightbox ---
     'carousel.prev': 'Anterior',
     'carousel.next': 'Siguiente',
@@ -202,6 +206,10 @@ export const translations = {
     'contact.form.error.generic': 'Could not send your message. Please try again.',
     'contact.info.title': 'Atelier',
     'contact.info.hours': 'Mon–Fri · 9:00–18:00',
+
+    // --- A11y ---
+    'a11y.skipToContent': 'Skip to content',
+    'notFound.text': 'The page you are looking for does not exist.',
 
     // --- A11y: carousel + lightbox ---
     'carousel.prev': 'Previous',
