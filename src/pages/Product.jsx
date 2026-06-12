@@ -35,18 +35,13 @@ export default function Product() {
   const [active, setActive] = useState(0);
   const [thumbStart, setThumbStart] = useState(0);
   const [zoom, setZoom] = useState(false);
-  const [added, setAdded] = useState(false);
   const startX = useRef(null);
-  const addedTimer = useRef(null);
 
-  // Reset gallery + "added" feedback when navigating between products.
+  // Reset gallery state when navigating between products.
   useEffect(() => {
     setActive(0);
     setThumbStart(0);
-    setAdded(false);
   }, [id]);
-
-  useEffect(() => () => clearTimeout(addedTimer.current), []);
 
   const found = getProduct(id);
   if (!found && !loaded) return null;
@@ -273,19 +268,16 @@ export default function Product() {
             {/* CTA */}
             <div className="mt-10">
               <div className="flex flex-col gap-3 sm:flex-row">
+                {/* Label reflects the cart state: "added" while the product
+                    is in the cart, back to "add" when it is removed. */}
                 <Button
                   type="button"
                   variant="solid"
-                  onClick={() => {
-                    add(product.id);
-                    setAdded(true);
-                    clearTimeout(addedTimer.current);
-                    addedTimer.current = setTimeout(() => setAdded(false), 2000);
-                  }}
+                  onClick={() => add(product.id)}
                   className="w-full sm:w-auto"
                 >
                   <span aria-live="polite">
-                    {added ? `${t('product.added')} ✓` : `${t('product.addToCart')} →`}
+                    {inCartQty > 0 ? `${t('product.added')} ✓` : `${t('product.addToCart')} →`}
                   </span>
                 </Button>
                 {inCartQty > 0 && (

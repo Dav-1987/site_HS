@@ -47,16 +47,20 @@ describe('product page cart stepper', () => {
     fireEvent.click(screen.getByText(/Añadir a la cesta/i));
     expect(screen.getByLabelText(decreaseLabel)).toBeTruthy();
     expect(screen.getByText('1')).toBeTruthy();
+    // While the product is in the cart the CTA label stays "Añadido".
+    expect(screen.getByText(/Añadido/i)).toBeTruthy();
+    expect(screen.queryByText(/Añadir a la cesta/i)).toBeNull();
 
     // + increments, add button also increments.
     fireEvent.click(screen.getByLabelText(`Aumentar cantidad: ${product.name}`));
     expect(screen.getByText('2')).toBeTruthy();
 
-    // − down to zero removes the product and hides the stepper.
+    // − down to zero removes the product, hides the stepper and restores the label.
     const minus = screen.getByLabelText(decreaseLabel);
     fireEvent.click(minus);
     fireEvent.click(minus);
     expect(screen.queryByLabelText(decreaseLabel)).toBeNull();
+    expect(screen.getByText(/Añadir a la cesta/i)).toBeTruthy();
     expect(JSON.parse(window.localStorage.getItem('hs_cart_v1'))).toEqual([]);
   });
 });
