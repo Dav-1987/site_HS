@@ -7,6 +7,7 @@ import { productDescription, productImages, computeRelated } from '../data/catal
 import Media from '../components/Media.jsx';
 import Reveal from '../components/Reveal.jsx';
 import Button from '../components/Button.jsx';
+import QtyStepper from '../components/QtyStepper.jsx';
 import Price from '../components/Price.jsx';
 import Lightbox from '../components/Lightbox.jsx';
 import ProductCarousel from '../components/ProductCarousel.jsx';
@@ -30,7 +31,7 @@ export default function Product() {
   const { categorySlug, id } = useParams();
   const { lang, t } = useLanguage();
   const { getProduct, categories, loaded } = useCatalog();
-  const { add } = useCart();
+  const { items, add, setQty } = useCart();
   const [active, setActive] = useState(0);
   const [thumbStart, setThumbStart] = useState(0);
   const [zoom, setZoom] = useState(false);
@@ -52,6 +53,8 @@ export default function Product() {
   if (!found) return <NotFound />;
 
   const { product, category } = found;
+  // Quantity of this product already in the cart (0 = not in cart yet).
+  const inCartQty = items.find((l) => l.id === product.id)?.qty ?? 0;
 
   // Canonical URL: if the category slug in the URL is stale or wrong
   // (renamed category, moved product), redirect to the correct one.
@@ -285,6 +288,14 @@ export default function Product() {
                     {added ? `${t('product.added')} ✓` : `${t('product.addToCart')} →`}
                   </span>
                 </Button>
+                {inCartQty > 0 && (
+                  <QtyStepper
+                    qty={inCartQty}
+                    onChange={(q) => setQty(product.id, q)}
+                    name={product.name}
+                    size="lg"
+                  />
+                )}
                 <Button
                   to="/contacto"
                   state={{ product: `${product.name} — ${category.name[lang]}` }}

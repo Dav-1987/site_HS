@@ -3,16 +3,14 @@ import { Link } from 'react-router-dom';
 import { useLanguage } from '../i18n/LanguageContext.jsx';
 import { useCatalog } from '../catalog/CatalogContext.jsx';
 import { useCart } from '../cart/CartContext.jsx';
-import { cartLines, cartTotal, MAX_QTY } from '../cart/cartUtils.js';
+import { cartLines, cartTotal } from '../cart/cartUtils.js';
 import { productImages } from '../data/catalog.js';
 import { LABEL, ERROR, SUBMIT, HONEYPOT, EMAIL_RE, inputClass } from '../components/formStyles.js';
 import Media from '../components/Media.jsx';
 import Price from '../components/Price.jsx';
 import Reveal from '../components/Reveal.jsx';
 import Button from '../components/Button.jsx';
-
-const QTY_BTN =
-  'flex h-9 w-9 items-center justify-center text-base text-primary/60 transition-colors duration-300 hover:text-primary focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-accent disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:text-primary/60';
+import QtyStepper from '../components/QtyStepper.jsx';
 
 function CartLine({ line, onQty, onRemove }) {
   const { lang, t } = useLanguage();
@@ -59,26 +57,7 @@ function CartLine({ line, onQty, onRemove }) {
         </div>
 
         <div className="mt-auto flex items-center justify-between pt-3">
-          <div className="flex items-center border border-primary/15">
-            <button
-              type="button"
-              onClick={() => onQty(qty - 1)}
-              aria-label={`${t('cart.qty.decrease')}: ${product.name}`}
-              className={QTY_BTN}
-            >
-              −
-            </button>
-            <span className="w-8 text-center text-sm text-primary">{qty}</span>
-            <button
-              type="button"
-              onClick={() => onQty(qty + 1)}
-              disabled={qty >= MAX_QTY}
-              aria-label={`${t('cart.qty.increase')}: ${product.name}`}
-              className={QTY_BTN}
-            >
-              +
-            </button>
-          </div>
+          <QtyStepper qty={qty} onChange={onQty} name={product.name} />
           <span className="font-serif text-lg text-primary">
             {lineTotal} {t('common.currency')}
           </span>
