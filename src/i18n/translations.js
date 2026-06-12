@@ -8,6 +8,7 @@ export const translations = {
     'nav.catalog': 'Catálogo',
     'nav.about': 'Nosotros',
     'nav.contact': 'Contacto',
+    'nav.cart': 'Cesta',
     'nav.menu': 'Menú',
     'nav.close': 'Cerrar',
 
@@ -69,6 +70,27 @@ export const translations = {
     'product.zoom': 'Ampliar',
     'product.customOrderTitle': 'Fabricación a medida',
     'product.customOrderText': 'Este artículo puede fabricarse en las dimensiones que necesites. Contáctanos para recibir presupuesto personalizado.',
+    'product.addToCart': 'Añadir a la cesta',
+    'product.added': 'Añadido',
+
+    // --- Cart ---
+    'cart.eyebrow': 'Tu selección',
+    'cart.title': 'Cesta',
+    'cart.empty': 'Tu cesta está vacía.',
+    'cart.browse': 'Ver catálogo',
+    'cart.item.remove': 'Eliminar',
+    'cart.qty.decrease': 'Reducir cantidad',
+    'cart.qty.increase': 'Aumentar cantidad',
+    'cart.total': 'Total',
+    'cart.note': 'Sin compromiso: confirmamos disponibilidad, precio y plazos contigo antes de fabricar.',
+    'cart.form.title': 'Solicitar pedido',
+    'cart.form.phone': 'Teléfono',
+    'cart.form.email': 'Correo electrónico (opcional)',
+    'cart.form.comment': 'Comentario (opcional)',
+    'cart.form.comment.placeholder': '¿Algo que debamos saber? Medidas, acabados…',
+    'cart.form.submit': 'Enviar solicitud',
+    'cart.form.sent.title': 'Gracias, hemos recibido tu solicitud.',
+    'cart.form.sent.body': 'Te contactaremos en menos de 24 horas laborables para confirmar tu pedido.',
 
     // --- Contact ---
     'contact.eyebrow': 'Contacto',
@@ -123,6 +145,7 @@ export const translations = {
     'nav.catalog': 'Catalog',
     'nav.about': 'About',
     'nav.contact': 'Contact',
+    'nav.cart': 'Cart',
     'nav.menu': 'Menu',
     'nav.close': 'Close',
 
@@ -183,6 +206,27 @@ export const translations = {
     'product.zoom': 'Zoom',
     'product.customOrderTitle': 'Made to your measurements',
     'product.customOrderText': 'This item can be made in any dimensions you need. Contact us for a personalised quote.',
+    'product.addToCart': 'Add to cart',
+    'product.added': 'Added',
+
+    // --- Cart ---
+    'cart.eyebrow': 'Your selection',
+    'cart.title': 'Cart',
+    'cart.empty': 'Your cart is empty.',
+    'cart.browse': 'View catalog',
+    'cart.item.remove': 'Remove',
+    'cart.qty.decrease': 'Decrease quantity',
+    'cart.qty.increase': 'Increase quantity',
+    'cart.total': 'Total',
+    'cart.note': 'No obligation: we confirm availability, price and lead time with you before production.',
+    'cart.form.title': 'Request order',
+    'cart.form.phone': 'Phone',
+    'cart.form.email': 'Email (optional)',
+    'cart.form.comment': 'Comment (optional)',
+    'cart.form.comment.placeholder': 'Anything we should know? Measurements, finishes…',
+    'cart.form.submit': 'Send request',
+    'cart.form.sent.title': 'Thank you, we have received your request.',
+    'cart.form.sent.body': 'We will contact you within 24 working hours to confirm your order.',
 
     // --- Contact ---
     'contact.eyebrow': 'Contact',

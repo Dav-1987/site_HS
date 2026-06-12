@@ -6,6 +6,7 @@ import Home from './pages/Home.jsx';
 import Catalog from './pages/Catalog.jsx';
 import Category from './pages/Category.jsx';
 import Contact from './pages/Contact.jsx';
+import Cart from './pages/Cart.jsx';
 import Product from './pages/Product.jsx';
 import NotFound from './pages/NotFound.jsx';
 
@@ -38,6 +39,8 @@ export default function App() {
         <Route path="/categoria/:slug" element={<LegacyCategoryRedirect />} />
         <Route path="/producto/:id" element={<LegacyProductRedirect />} />
         <Route path="/contacto" element={<Contact />} />
+        {/* Must stay above the /:slug category catch-all. */}
+        <Route path="/carrito" element={<Cart />} />
         <Route path="/:slug" element={<Category />} />
         <Route path="/:categorySlug/:id" element={<Product />} />
         <Route path="*" element={<NotFound />} />

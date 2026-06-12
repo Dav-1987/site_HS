@@ -3,6 +3,41 @@ import { Link, NavLink, useLocation } from 'react-router-dom';
 import { useLanguage } from '../i18n/LanguageContext.jsx';
 import { LANGUAGES } from '../i18n/translations.js';
 import { useCatalog } from '../catalog/CatalogContext.jsx';
+import { useCart } from '../cart/CartContext.jsx';
+import { cartCount, cartLines } from '../cart/cartUtils.js';
+
+function CartLink() {
+  const { t } = useLanguage();
+  const { items } = useCart();
+  const { categories } = useCatalog();
+  // Count only lines that resolve against the live catalog, so the badge
+  // always matches what the cart page actually shows.
+  const count = cartCount(cartLines(items, categories));
+  return (
+    <Link
+      to="/carrito"
+      aria-label={count > 0 ? `${t('nav.cart')} (${count})` : t('nav.cart')}
+      className="relative flex h-10 w-10 items-center justify-center text-primary transition-colors duration-300 hover:text-accent focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-accent"
+    >
+      <svg
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        aria-hidden="true"
+        className="h-5 w-5"
+      >
+        <path d="M5.5 8h13l-1.2 12.5h-10.6L5.5 8Z" />
+        <path d="M9 8V6.5a3 3 0 0 1 6 0V8" />
+      </svg>
+      {count > 0 && (
+        <span className="absolute right-0 top-0 flex h-4 min-w-[1rem] items-center justify-center rounded-full bg-accent px-1 text-[10px] font-medium leading-none text-background">
+          {count > 99 ? '99+' : count}
+        </span>
+      )}
+    </Link>
+  );
+}
 
 function LangToggle({ className = '' }) {
   const { lang, setLang } = useLanguage();
@@ -127,8 +162,9 @@ export default function Header() {
           </NavLink>
         </nav>
 
-        <div className="flex items-center gap-5">
+        <div className="flex items-center gap-3 md:gap-5">
           <LangToggle className="flex" />
+          <CartLink />
 
           {/* Mobile toggle */}
           <button

@@ -65,11 +65,14 @@ npm run build -- --config vite.config.vps.js
 scp -r dist root@185.202.172.59:/var/www/hs-muebles/
 
 # 3. Скопировать изменённые файлы сервера
-scp server/index.js server/store.js server/settings.js server/auth.js root@185.202.172.59:/var/www/hs-muebles/server/
+scp server/index.js server/store.js server/settings.js server/auth.js server/order.js server/notify.js root@185.202.172.59:/var/www/hs-muebles/server/
 
 # 4. Перезапустить API
 ssh root@185.202.172.59 "pm2 restart hs-api"
 ```
+
+> Если менялся `server/package.json` (новые зависимости), перед перезапуском:
+> `ssh root@185.202.172.59 "cd /var/www/hs-muebles/server && npm install"`
 
 ---
 
@@ -148,6 +151,27 @@ ssh root@185.202.172.59 "PGPASSWORD='hs_secure_2024' psql -U hs_user -d hs_muebl
 | POST | `/api/upload` | только авторизованный |
 | GET | `/api/versions` | только авторизованный |
 | POST | `/api/versions` | только авторизованный |
+| POST | `/api/order` | публичный (rate-limit 5/мин) |
+
+### Заявки из корзины (`/api/order`)
+
+Заявка отправляется в **Telegram** и/или на **email** — каналы включаются
+env-переменными в `/var/www/hs-muebles/.env` (см. `.env.example`):
+
+```
+TELEGRAM_BOT_TOKEN=...   # бот от @BotFather
+TELEGRAM_CHAT_ID=...     # id чата/группы, куда слать заявки
+SMTP_HOST=...            # SMTP сервер почты
+SMTP_PORT=465
+SMTP_USER=...
+SMTP_PASS=...
+ORDER_EMAIL_TO=...       # получатель (по умолчанию SMTP_USER)
+ORDER_EMAIL_FROM=...     # отправитель (по умолчанию SMTP_USER)
+```
+
+После правки `.env`: `pm2 restart hs-api --update-env`.
+Каждая заявка дублируется в логи PM2 (`pm2 logs hs-api`) — даже если оба канала упали.
+Требуется пакет `nodemailer` (`cd /var/www/hs-muebles/server && npm install`).
 
 ---
 

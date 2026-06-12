@@ -12,6 +12,7 @@ import App from './App.jsx';
 import { SettingsProvider } from './settings/SettingsContext.jsx';
 import { LanguageProvider } from './i18n/LanguageContext.jsx';
 import { CatalogProvider } from './catalog/CatalogContext.jsx';
+import { CartProvider } from './cart/CartContext.jsx';
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
@@ -19,7 +20,9 @@ createRoot(document.getElementById('root')).render(
       <SettingsProvider>
         <LanguageProvider>
           <CatalogProvider>
-            <App />
+            <CartProvider>
+              <App />
+            </CartProvider>
           </CatalogProvider>
         </LanguageProvider>
       </SettingsProvider>

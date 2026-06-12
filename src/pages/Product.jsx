@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { Link, Navigate, useParams } from 'react-router-dom';
 import { useLanguage } from '../i18n/LanguageContext.jsx';
 import { useCatalog } from '../catalog/CatalogContext.jsx';
+import { useCart } from '../cart/CartContext.jsx';
 import { productDescription, productImages, computeRelated } from '../data/catalog.js';
 import Media from '../components/Media.jsx';
 import Reveal from '../components/Reveal.jsx';
@@ -29,16 +30,22 @@ export default function Product() {
   const { categorySlug, id } = useParams();
   const { lang, t } = useLanguage();
   const { getProduct, categories, loaded } = useCatalog();
+  const { add } = useCart();
   const [active, setActive] = useState(0);
   const [thumbStart, setThumbStart] = useState(0);
   const [zoom, setZoom] = useState(false);
+  const [added, setAdded] = useState(false);
   const startX = useRef(null);
+  const addedTimer = useRef(null);
 
-  // Reset gallery state when navigating between products.
+  // Reset gallery + "added" feedback when navigating between products.
   useEffect(() => {
     setActive(0);
     setThumbStart(0);
+    setAdded(false);
   }, [id]);
+
+  useEffect(() => () => clearTimeout(addedTimer.current), []);
 
   const found = getProduct(id);
   if (!found && !loaded) return null;
@@ -262,14 +269,31 @@ export default function Product() {
 
             {/* CTA */}
             <div className="mt-10">
-              <Button
-                to="/contacto"
-                state={{ product: `${product.name} — ${category.name[lang]}` }}
-                variant="solid"
-                className="w-full sm:w-auto"
-              >
-                {t('product.inquire')} →
-              </Button>
+              <div className="flex flex-col gap-3 sm:flex-row">
+                <Button
+                  type="button"
+                  variant="solid"
+                  onClick={() => {
+                    add(product.id);
+                    setAdded(true);
+                    clearTimeout(addedTimer.current);
+                    addedTimer.current = setTimeout(() => setAdded(false), 2000);
+                  }}
+                  className="w-full sm:w-auto"
+                >
+                  <span aria-live="polite">
+                    {added ? `${t('product.added')} ✓` : `${t('product.addToCart')} →`}
+                  </span>
+                </Button>
+                <Button
+                  to="/contacto"
+                  state={{ product: `${product.name} — ${category.name[lang]}` }}
+                  variant="outline"
+                  className="w-full sm:w-auto"
+                >
+                  {t('product.inquire')}
+                </Button>
+              </div>
               <p className="mt-3 text-xs text-primary/40">{t('product.inquireNote')}</p>
             </div>
 

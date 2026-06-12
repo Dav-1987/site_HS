@@ -2,13 +2,7 @@ import { useRef, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useLanguage } from '../i18n/LanguageContext.jsx';
 import Reveal from '../components/Reveal.jsx';
-
-const FIELD =
-  'w-full border-b bg-transparent py-3 text-primary placeholder:text-primary/35 transition-colors focus:outline-none';
-const LABEL = 'mb-2 block text-xs uppercase tracking-[0.2em] text-primary/50';
-const ERROR = 'mt-2 text-xs text-danger/90';
-
-const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+import { LABEL, ERROR, SUBMIT, HONEYPOT, EMAIL_RE, inputClass } from '../components/formStyles.js';
 
 export default function Contact() {
   const { t } = useLanguage();
@@ -20,8 +14,7 @@ export default function Contact() {
   // When arriving from a product page, pre-fill the message with the piece name.
   const prefill = state?.product ? `${t('contact.prefill')} ${state.product}` : '';
 
-  const fieldClass = (name) =>
-    `${FIELD} ${errors[name] ? 'border-danger/70' : 'border-primary/20 focus:border-accent'}`;
+  const fieldClass = (name) => inputClass(Boolean(errors[name]));
 
   const validate = (form) => {
     const next = {};
@@ -131,7 +124,7 @@ export default function Contact() {
                 tabIndex={-1}
                 autoComplete="off"
                 aria-hidden="true"
-                className="absolute left-[-9999px] h-0 w-0 opacity-0"
+                className={HONEYPOT}
               />
 
               <div className="grid gap-8 sm:grid-cols-2">
@@ -212,7 +205,7 @@ export default function Contact() {
                 type="submit"
                 disabled={sending}
                 aria-busy={sending}
-                className="inline-flex items-center justify-center gap-3 bg-primary px-9 py-4 text-xs uppercase tracking-[0.2em] text-background transition-colors duration-300 hover:bg-accent hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:cursor-not-allowed disabled:opacity-60 disabled:hover:bg-primary disabled:hover:text-background"
+                className={SUBMIT}
               >
                 {sending ? t('contact.form.sending') : `${t('contact.form.submit')} →`}
               </button>

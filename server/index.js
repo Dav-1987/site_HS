@@ -11,6 +11,8 @@ import { readOrSeedCatalog, writeCatalog, recordVersion, listVersions, getVersio
          extractUploadKeys, scheduleForDeletion, unscheduleFiles,
          getFilesReadyToDelete, purgePendingRecords } from './store.js';
 import { readSettings, writeSettings } from './settings.js';
+import { validateOrder, resolveOrderItems, formatOrderText } from './order.js';
+import { telegramConfigured, emailConfigured, sendTelegram, sendOrderEmail } from './notify.js';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const UPLOADS_DIR = join(__dirname, '../uploads');
@@ -358,6 +360,55 @@ app.post('/api/upload', (req, res) => {
 
   req.on('error', () => fail(500, 'Upload failed'));
   ws.on('error', () => fail(500, 'Storage error'));
+});
+
+// ─── /api/order — заявка из корзины → Telegram + email ───────────────────────
+
+const orderRateLimit = rateLimit({
+  windowMs: 60 * 1000,
+  max: 5,
+  standardHeaders: true,
+  legacyHeaders: false,
+  message: { error: 'Too many requests, try again in a minute' },
+});
+
+app.post('/api/order', orderRateLimit, async (req, res) => {
+  // Honeypot: bots fill the hidden form field — pretend success, drop silently.
+  if (req.body?._gotcha) return res.json({ ok: true });
+
+  const invalid = validateOrder(req.body);
+  if (invalid) return res.status(400).json({ error: invalid });
+
+  try {
+    const categories = await readOrSeedCatalog();
+    const lines = resolveOrderItems(req.body.items, categories);
+    if (!lines.length) return res.status(400).json({ error: 'no valid items in cart' });
+
+    const text = formatOrderText(req.body, lines);
+    // Always logged, so the order survives in PM2 logs even if both channels fail.
+    console.log(`[order] new request:\n${text}`);
+
+    const sends = [];
+    if (telegramConfigured()) sends.push(sendTelegram(text));
+    if (emailConfigured())
+      sends.push(sendOrderEmail('Nueva solicitud de pedido — HS Muebles', text));
+    if (!sends.length) {
+      console.error('[order] no notification channel configured (TELEGRAM_* / SMTP_* env vars)');
+      return res.status(503).json({ error: 'Order service is not configured' });
+    }
+
+    const results = await Promise.allSettled(sends);
+    const failed = results.filter((r) => r.status === 'rejected');
+    failed.forEach((r) => console.error('[order] notify failed:', r.reason));
+    // Accept the order if at least one channel got through.
+    if (failed.length === results.length) {
+      return res.status(502).json({ error: 'Failed to send order' });
+    }
+    res.json({ ok: true });
+  } catch (err) {
+    console.error('order POST failed', err);
+    res.status(500).json({ error: 'Failed to send order' });
+  }
 });
 
 // ─── /api/image/:key — legacy redirect to /uploads/:key ──────────────────────
