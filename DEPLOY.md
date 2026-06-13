@@ -12,8 +12,27 @@
 | IP | `185.202.172.59` |
 | Пользователь | `root` |
 | SSH ключ | `~/.ssh/id_ed25519` (уже настроен) |
-| Сайт | `http://185.202.172.59` |
+| Домен | `https://hsmuebles.es` (и `www.hsmuebles.es`) |
+| Сайт (по IP) | `http://185.202.172.59` |
 | Папка проекта | `/var/www/hs-muebles/` |
+
+### Домен и HTTPS
+
+| Параметр | Значение |
+|---|---|
+| Домен | `hsmuebles.es`, `www.hsmuebles.es` |
+| DNS | **Cloudflare** (NS `tate`/`eleanor.ns.cloudflare.com`), A-записи `@` и `www` → `185.202.172.59`, **серое облако (DNS only)** |
+| SSL | Let's Encrypt через **certbot --nginx**, авто-продление `certbot.timer` (systemd) |
+| Редирект | `http → https` (301), оба домена с www и без |
+
+> ⚠️ A-запись держать **серой (DNS only)**, не оранжевой — иначе Cloudflare режет тело запроса на 100 МБ и ломает загрузку видео (до 200 МБ).
+
+```bash
+# Перевыпустить/добавить домен к сертификату
+ssh root@185.202.172.59 "certbot --nginx -d hsmuebles.es -d www.hsmuebles.es --redirect"
+# Проверить продление
+ssh root@185.202.172.59 "certbot renew --dry-run"
+```
 
 ### Подключение к серверу
 ```bash
@@ -47,9 +66,10 @@ ssh root@185.202.172.59
 | Сервис | Описание |
 |---|---|
 | **PM2** (`hs-api`) | держит Node.js/Express живым, автозапуск |
-| **Nginx Proxy Manager** | Docker, порты 80/443, проксирует на Express :4000 |
+| **Nginx** (host, не Docker) | порты 80/443, конфиг `/etc/nginx/sites-available/hs-muebles`; отдаёт статику `dist/` и `uploads/`, проксирует `/api/` на Express :4000 |
+| **certbot** | Let's Encrypt SSL для `hsmuebles.es`, авто-продление `certbot.timer` |
 | **PostgreSQL 16** | БД `hs_muebles`, пользователь `hs_user` |
-| **Express** | порт `4000`, отдаёт и API и статику |
+| **Express** | порт `4000`, отдаёт API; статику отдаёт nginx напрямую |
 
 ---
 
