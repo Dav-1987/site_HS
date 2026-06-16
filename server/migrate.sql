@@ -33,8 +33,15 @@ CREATE TABLE IF NOT EXISTS products (
   material_es    TEXT NOT NULL DEFAULT '',
   material_en    TEXT NOT NULL DEFAULT '',
   size           TEXT NOT NULL DEFAULT '',
+  reference      TEXT NOT NULL DEFAULT '',
+  subtitle       TEXT NOT NULL DEFAULT '',
   position       INTEGER NOT NULL DEFAULT 0
 );
+
+-- Idempotent for existing installs: CREATE TABLE IF NOT EXISTS above won't add
+-- columns to a table that already exists, so add them explicitly here too.
+ALTER TABLE products ADD COLUMN IF NOT EXISTS reference TEXT NOT NULL DEFAULT '';
+ALTER TABLE products ADD COLUMN IF NOT EXISTS subtitle TEXT NOT NULL DEFAULT '';
 
 CREATE INDEX IF NOT EXISTS idx_products_category ON products (category_slug);
 

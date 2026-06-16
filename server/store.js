@@ -31,6 +31,8 @@ function shapeCategory(cat, products) {
       video: p.video ?? '',
       material: { es: p.material_es, en: p.material_en },
       size: p.size,
+      reference: p.reference ?? '',
+      subtitle: p.subtitle ?? '',
       description: { es: p.description_es ?? '', en: p.description_en ?? '' },
       related: Array.isArray(p.related) ? p.related : [],
     })),
@@ -91,8 +93,8 @@ export async function writeCatalog(categories) {
         const images = gallery.length ? gallery : cover ? [cover] : [];
         await client.query(
           `INSERT INTO products
-             (id, category_slug, name, price, old_price, image, image_mobile, images, material_es, material_en, size, video, description_es, description_en, related, position)
-           VALUES ($1,$2,$3,$4,$5,$6,$7,$8::jsonb,$9,$10,$11,$12,$13,$14,$15::jsonb,$16)`,
+             (id, category_slug, name, price, old_price, image, image_mobile, images, material_es, material_en, size, reference, subtitle, video, description_es, description_en, related, position)
+           VALUES ($1,$2,$3,$4,$5,$6,$7,$8::jsonb,$9,$10,$11,$12,$13,$14,$15,$16,$17::jsonb,$18)`,
           [
             p.id,
             c.slug,
@@ -105,6 +107,8 @@ export async function writeCatalog(categories) {
             p.material?.es ?? '',
             p.material?.en ?? '',
             p.size ?? '',
+            p.reference ?? '',
+            p.subtitle ?? '',
             p.video ?? '',
             p.description?.es ?? '',
             p.description?.en ?? '',

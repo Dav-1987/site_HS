@@ -36,6 +36,7 @@ export default function ProductEditor({
           <span className={`shrink-0 text-base transition-transform ${open ? 'rotate-45' : ''}`}>+</span>
           <span className="truncate font-serif text-lg font-light text-primary">
             {product.name || <span className="text-primary/30">Новый товар</span>}
+            {product.subtitle && <span className="ml-2 text-sm text-primary/40">{product.subtitle}</span>}
           </span>
           {product.price > 0 && (
             <span className="shrink-0 text-xs text-primary/40">€{product.price}</span>

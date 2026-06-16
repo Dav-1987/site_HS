@@ -101,6 +101,9 @@ export default function ProductCard({ product, categorySlug, categoryName }) {
       <Link to={to} aria-label={label} tabIndex={-1} className="block border-t border-primary/10 pt-4">
         <h3 className="font-serif text-xl text-primary transition-colors duration-300 group-hover:text-accent">
           {product.name}
+          {product.subtitle && (
+            <span className="ml-2 text-sm text-primary/45">{product.subtitle}</span>
+          )}
         </h3>
         {product.description?.[lang] && (
           <p className="mt-1.5 line-clamp-2 text-[13px] leading-snug text-primary/55">
