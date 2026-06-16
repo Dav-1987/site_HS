@@ -86,6 +86,7 @@ export default function Product() {
     { label: t('product.materialLabel'), value: product.material[lang] },
     { label: t('product.sizeLabel'), value: product.size },
     { label: t('product.collectionLabel'), value: category.name[lang] },
+    { label: t('product.skuLabel'), value: product.name },
   ];
 
   return (
