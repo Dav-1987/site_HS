@@ -9,7 +9,7 @@ import Reveal from '../components/Reveal.jsx';
 import Button from '../components/Button.jsx';
 import SectionHeader from '../components/SectionHeader.jsx';
 import CategoryCard from '../components/CategoryCard.jsx';
-import ProductCarousel from '../components/ProductCarousel.jsx';
+import { CarouselArrows, CarouselTrack, useCarousel } from '../components/ProductCarousel.jsx';
 
 function Hero() {
   const { t } = useLanguage();
@@ -78,6 +78,8 @@ function FeaturedSection() {
     () => computeFeatured(categories, settings.featured),
     [categories, settings.featured],
   );
+  const carousel = useCarousel();
+  if (!featured?.length) return null;
 
   return (
     <section className="py-24 md:py-32">
@@ -86,14 +88,17 @@ function FeaturedSection() {
           eyebrow={t('section.featured.eyebrow')}
           title={t('section.featured.title')}
           action={
-            <Button to="/catalogo" variant="ghost">
-              {t('common.viewAll')} →
-            </Button>
+            <div className="flex flex-col items-end gap-4">
+              <Button to="/catalogo" variant="ghost">
+                {t('common.viewAll')} →
+              </Button>
+              <CarouselArrows carousel={carousel} />
+            </div>
           }
         />
       </div>
 
-      <ProductCarousel products={featured} />
+      <CarouselTrack products={featured} carousel={carousel} />
     </section>
   );
 }
