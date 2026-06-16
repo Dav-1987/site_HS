@@ -113,9 +113,10 @@ export default function Header() {
       <div className="flex h-14 items-center justify-between px-6 md:px-12 lg:h-20 lg:px-20">
         <Link
           to="/"
-          className="font-serif text-xl tracking-tight text-primary md:text-2xl"
+          className="flex items-center gap-2.5 font-serif text-xl tracking-tight text-primary md:text-2xl"
           aria-label="HS Muebles"
         >
+          <img src="/logo-hs.png" alt="" className="h-7 w-7 md:h-9 md:w-9" />
           HS <span className="text-accent">Muebles</span>
         </Link>
 

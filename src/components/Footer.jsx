@@ -15,7 +15,8 @@ export default function Footer() {
         <div className="grid grid-cols-1 gap-14 md:grid-cols-12">
           {/* Brand + newsletter */}
           <div className="md:col-span-5">
-            <Link to="/" className="font-serif text-3xl tracking-tight text-primary">
+            <Link to="/" className="flex items-center gap-3 font-serif text-3xl tracking-tight text-primary">
+              <img src="/logo-hs.png" alt="" className="h-9 w-9" />
               HS <span className="text-accent">Muebles</span>
             </Link>
             <p className="mt-5 max-w-sm text-sm leading-relaxed text-secondary">
