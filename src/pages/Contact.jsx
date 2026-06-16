@@ -70,7 +70,7 @@ export default function Contact() {
           <p className="mb-5 text-xs uppercase tracking-[0.3em] text-accent">
             {t('contact.eyebrow')}
           </p>
-          <h1 className="font-serif text-5xl font-light leading-[1.02] tracking-tight text-primary md:text-6xl">
+          <h1 className="font-serif text-[clamp(3rem,4.7vw,3.75rem)] font-light leading-[1.02] tracking-tight text-primary">
             {t('contact.title')}
           </h1>
           <p className="mt-6 max-w-md text-base leading-relaxed text-secondary">

@@ -33,7 +33,7 @@ export default function Category() {
           <p className="mb-5 text-xs uppercase tracking-[0.3em] text-accent">
             {category.tagline[lang]}
           </p>
-          <h1 className="font-serif text-5xl font-light leading-[1.02] tracking-tight text-primary md:text-7xl">
+          <h1 className="font-serif text-[clamp(3rem,5.6vw,4.5rem)] font-light leading-[1.02] tracking-tight text-primary">
             {category.name[lang]}
           </h1>
           <p className="mt-7 max-w-lg text-base leading-relaxed text-secondary">
@@ -68,7 +68,7 @@ export default function Category() {
 
       {/* Related */}
       <section className="bg-surface px-6 py-20 md:px-12 md:py-28 lg:px-20">
-        <h2 className="mb-12 font-serif text-3xl font-light tracking-tight text-primary md:text-4xl">
+        <h2 className="mb-12 font-serif text-[clamp(1.875rem,2.8vw,2.25rem)] font-light tracking-tight text-primary">
           {t('category.related')}
         </h2>
         <Reveal stagger className="grid grid-cols-1 gap-6 sm:grid-cols-3 lg:gap-8">

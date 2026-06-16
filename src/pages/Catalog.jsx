@@ -13,7 +13,7 @@ export default function Catalog() {
         <p className="mb-2 text-xs uppercase tracking-[0.3em] text-accent">
           {t('catalog.eyebrow')}
         </p>
-        <h1 className="font-serif text-4xl font-light leading-[1.02] tracking-tight text-primary md:text-6xl">
+        <h1 className="font-serif text-[clamp(2.25rem,4.7vw,3.75rem)] font-light leading-[1.02] tracking-tight text-primary">
           {t('catalog.title')}
         </h1>
         <p className="mt-3 max-w-xl text-base leading-relaxed text-secondary">

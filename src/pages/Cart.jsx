@@ -156,7 +156,7 @@ export default function Cart() {
     return (
       <section className="px-6 pb-24 pt-16 md:px-12 md:pb-32 md:pt-24 lg:px-20">
         <div className="mx-auto flex min-h-[24rem] max-w-xl flex-col items-center justify-center text-center">
-          <h1 className="font-serif text-4xl font-light tracking-tight text-primary md:text-5xl">
+          <h1 className="font-serif text-[clamp(2.25rem,3.75vw,3rem)] font-light tracking-tight text-primary">
             {t('cart.title')}
           </h1>
           <p className="mt-4 text-secondary">{t('cart.empty')}</p>
@@ -172,7 +172,7 @@ export default function Cart() {
     <section className="px-6 pb-24 pt-16 md:px-12 md:pb-32 md:pt-24 lg:px-20">
       <Reveal>
         <p className="mb-5 text-xs uppercase tracking-[0.3em] text-accent">{t('cart.eyebrow')}</p>
-        <h1 className="font-serif text-5xl font-light leading-[1.02] tracking-tight text-primary md:text-6xl">
+        <h1 className="font-serif text-[clamp(3rem,4.7vw,3.75rem)] font-light leading-[1.02] tracking-tight text-primary">
           {t('cart.title')}
         </h1>
       </Reveal>

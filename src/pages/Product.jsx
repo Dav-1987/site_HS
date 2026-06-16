@@ -241,7 +241,7 @@ export default function Product() {
             >
               {category.name[lang]}
             </Link>
-            <h1 className="mt-4 font-serif text-5xl font-light leading-[1.05] tracking-tight text-primary md:text-6xl">
+            <h1 className="mt-4 font-serif text-[clamp(3rem,4.7vw,3.75rem)] font-light leading-[1.05] tracking-tight text-primary">
               {product.name}
             </h1>
             <div className="mt-4">

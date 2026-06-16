@@ -128,7 +128,7 @@ function AboutSection() {
           <p className="mb-5 text-xs uppercase tracking-[0.3em] text-accent">
             {t('section.about.eyebrow')}
           </p>
-          <h2 className="font-serif text-4xl font-light leading-tight tracking-tight text-primary md:text-5xl">
+          <h2 className="font-serif text-[clamp(2.25rem,3.75vw,3rem)] font-light leading-tight tracking-tight text-primary">
             {t('section.about.title')}
           </h2>
           <p className="mt-7 max-w-lg leading-relaxed text-secondary">
@@ -141,7 +141,7 @@ function AboutSection() {
           <div className="mt-12 grid grid-cols-3 gap-6 border-t border-primary/10 pt-10">
             {stats.map((n) => (
               <div key={n}>
-                <p className="font-serif text-4xl font-light text-primary md:text-5xl">
+                <p className="font-serif text-[clamp(2.25rem,3.75vw,3rem)] font-light text-primary">
                   {n === 2 ? categories.length : t(`about.stat.${n}.value`)}
                 </p>
                 <p className="mt-2 text-[11px] uppercase tracking-[0.15em] text-secondary">
@@ -161,7 +161,7 @@ function CtaSection() {
   return (
     <section className="px-6 pb-24 md:px-12 md:pb-32 lg:px-20">
       <Reveal className="relative overflow-hidden bg-primary px-8 py-20 text-center md:px-12 md:py-28">
-        <h2 className="mx-auto max-w-2xl font-serif text-4xl font-light leading-tight text-background md:text-5xl">
+        <h2 className="mx-auto max-w-2xl font-serif text-[clamp(2.25rem,3.75vw,3rem)] font-light leading-tight text-background">
           {t('section.cta.title')}
         </h2>
         <p className="mx-auto mt-5 max-w-md text-sm leading-relaxed text-background/70">

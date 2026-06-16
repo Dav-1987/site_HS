@@ -8,7 +8,7 @@ export default function SectionHeader({ eyebrow, title, action, className = '' }
         {eyebrow && (
           <p className="mb-4 text-xs uppercase tracking-[0.3em] text-accent">{eyebrow}</p>
         )}
-        <h2 className="font-serif text-4xl font-light leading-[1.05] tracking-tight text-primary md:text-6xl">
+        <h2 className="font-serif text-[clamp(2.25rem,4.7vw,3.75rem)] font-light leading-[1.05] tracking-tight text-primary">
           {title}
         </h2>
       </div>
