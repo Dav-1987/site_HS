@@ -1,9 +1,17 @@
 {
   "hero": {
-    "image": "1771888703723-01d85da1dae1",
-    "imageMobile": ""
+    "image": "/uploads/f47ceb39a1f26f9571cc2599b48f90ef.jpg",
+    "imageMobile": "/uploads/6aec2b756de62c4cb1ed18a11f2cecd6.png",
+    "video": ""
   },
-  "featured": [],
+  "featured": [
+    "toc-lina",
+    "toc-vera",
+    "toc-vera-copy-mq6vhosq",
+    "toc-mara",
+    "toc-alba",
+    "toc-vera-copy-mq6vhosq-copy-mq6vl97u"
+  ],
   "texts": {
     "es": {},
     "en": {}
