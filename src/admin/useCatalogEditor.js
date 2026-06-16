@@ -7,6 +7,36 @@ import {
 } from './api.js';
 import { defaultSettings, mergeSettings } from '../data/settings.js';
 
+// Unsaved-edits draft, kept in localStorage so a reload/closed-tab accident
+// doesn't wipe out in-progress work. Cleared once the user saves or
+// explicitly declines to restore it.
+const DRAFT_KEY = 'hs-admin-catalog-draft';
+
+function readDraft() {
+  try {
+    const raw = localStorage.getItem(DRAFT_KEY);
+    return raw ? JSON.parse(raw) : null;
+  } catch {
+    return null;
+  }
+}
+
+function writeDraft(draft) {
+  try {
+    localStorage.setItem(DRAFT_KEY, JSON.stringify(draft));
+  } catch {
+    // Storage full/unavailable — the draft is a convenience, not critical.
+  }
+}
+
+function clearDraft() {
+  try {
+    localStorage.removeItem(DRAFT_KEY);
+  } catch {
+    // Ignore.
+  }
+}
+
 /**
  * All state + mutations for the catalog editor: loads catalog + settings,
  * tracks dirty flags, and exposes the category/settings mutators and save.
@@ -38,13 +68,54 @@ export function useCatalogEditor() {
 
   useEffect(() => {
     fetchCatalog()
-      .then((data) => setCategories(data.categories))
+      .then((data) => {
+        const draft = readDraft();
+        if (draft?.categories && window.confirm(
+          `Найден несохранённый черновик от ${new Date(draft.savedAt).toLocaleString()}. Восстановить его?`,
+        )) {
+          setCategories(draft.categories);
+          setDirty(Boolean(draft.dirty));
+          if (draft.settings) {
+            setSettings(mergeSettings(draft.settings));
+            setSettingsDirty(Boolean(draft.settingsDirty));
+          }
+        } else {
+          clearDraft();
+          setCategories(data.categories);
+        }
+      })
       .catch((err) => setLoadError(err.message || 'Не удалось загрузить каталог'));
     // Settings load independently — fall back to defaults so the panel still works.
+    // (Skipped if a restored draft above already set settings.)
     fetchSettings()
-      .then((data) => setSettings(mergeSettings(data.settings)))
-      .catch(() => setSettings(defaultSettings));
+      .then((data) => setSettings((prev) => prev ?? mergeSettings(data.settings)))
+      .catch(() => setSettings((prev) => prev ?? defaultSettings));
   }, []);
+
+  // Persist a debounced draft of unsaved edits to localStorage so a stray
+  // reload or closed tab can be recovered from on the next visit.
+  useEffect(() => {
+    if (!categories) return;
+    if (!dirty && !settingsDirty) {
+      clearDraft();
+      return;
+    }
+    const id = setTimeout(() => {
+      writeDraft({ categories, settings, dirty, settingsDirty, savedAt: Date.now() });
+    }, 500);
+    return () => clearTimeout(id);
+  }, [categories, settings, dirty, settingsDirty]);
+
+  // Warn before leaving the tab (reload/close) while there are unsaved edits.
+  useEffect(() => {
+    const handler = (e) => {
+      if (!dirty && !settingsDirty) return;
+      e.preventDefault();
+      e.returnValue = '';
+    };
+    window.addEventListener('beforeunload', handler);
+    return () => window.removeEventListener('beforeunload', handler);
+  }, [dirty, settingsDirty]);
 
   const updateSettings = (next) => {
     setSettings(next);
@@ -115,6 +186,7 @@ export function useCatalogEditor() {
         setSettingsDirty(false);
       }
       setStatus('Сохранено ✓');
+      clearDraft();
     } catch (err) {
       setStatus(err.message || 'Ошибка сохранения');
     } finally {
