@@ -59,6 +59,11 @@ export default function ProductEditor({
             <Field label="Название" value={product.name} onChange={(v) => set({ name: v })} />
             <Field label="Размер" value={product.size} onChange={(v) => set({ size: v })} />
             <Field
+              label="Referencia (артикул, необязательно)"
+              value={product.reference}
+              onChange={(v) => set({ reference: v })}
+            />
+            <Field
               label="Цена (€)"
               type="number"
               value={product.price}
@@ -70,7 +75,6 @@ export default function ProductEditor({
               value={product.oldPrice}
               onChange={(v) => set({ oldPrice: v === '' ? 0 : Number(v) })}
             />
-            <div className="hidden lg:block" aria-hidden="true" />
             <Field label="Материал (исп.)" value={product.material?.es} onChange={(v) => setMat('es', v)} />
             <Field label="Материал (англ.)" value={product.material?.en} onChange={(v) => setMat('en', v)} />
           </div>
