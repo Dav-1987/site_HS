@@ -15,7 +15,7 @@ function Hero() {
   const { t } = useLanguage();
   const { settings } = useSettings();
   return (
-    <section className="relative flex min-h-[100svh] items-center justify-center overflow-hidden bg-surface pb-[clamp(2rem,6vh,4rem)] pt-[clamp(5rem,12vh,7rem)] text-center">
+    <section className="relative flex min-h-[100svh] flex-col overflow-hidden bg-surface text-center">
       {/* Full-bleed background image (LCP — loaded eagerly). Editable in /admin;
           a warm, styled interior with a calm zone behind the centered headline. */}
       <div className="absolute inset-0">
@@ -34,35 +34,38 @@ function Hero() {
         className="absolute inset-0 bg-gradient-to-t from-background/60 via-background/25 to-transparent"
       />
 
-      {/* Eyebrow — pinned to the top of the hero, just under the header. */}
-      <p className="absolute inset-x-0 top-16 z-10 px-6 text-center text-[10px] font-semibold uppercase tracking-[0.2em] text-accent sm:text-sm sm:tracking-[0.4em] lg:top-24">
+      {/* Eyebrow — sits in normal flow at the top, just under the header, so it
+          can never overlap the centered content below it even on short screens. */}
+      <p className="relative z-10 px-6 pt-[clamp(4.5rem,11vh,7rem)] text-[10px] font-semibold uppercase tracking-[0.2em] text-accent sm:text-sm sm:tracking-[0.4em] lg:pt-[clamp(6rem,11vh,7rem)]">
         {t('hero.eyebrow')}
       </p>
 
-      {/* Centered content */}
-      <Reveal stagger className="relative z-10 mx-auto max-w-3xl px-6">
-        <h1 className="font-serif font-semibold leading-[1.05] tracking-tightest text-primary text-[clamp(2rem,7vw,3.5rem)]">
-          <span className="block">{t('hero.title.1')}</span>
-          <span className="block italic text-primary">{t('hero.title.2')}</span>
-          <span className="block">{t('hero.title.3')}</span>
-        </h1>
-        <p className="mx-auto mt-[clamp(0.875rem,3.5vh,2rem)] max-w-md text-base leading-relaxed text-primary">
-          {t('hero.subtitle')}
-        </p>
-        <div className="mx-auto mt-[clamp(0.875rem,3.5vh,2rem)] max-w-lg space-y-3">
-          <p className="text-lg font-bold uppercase tracking-[0.15em] text-primary">
-            {t('hero.promo')}
+      {/* Remaining content centers in whatever space is left below the eyebrow. */}
+      <div className="relative z-10 flex flex-1 items-center justify-center px-6 pb-[clamp(1.25rem,5vh,3.5rem)]">
+        <Reveal stagger className="mx-auto max-w-3xl">
+          <h1 className="font-serif font-semibold leading-[1.05] tracking-tightest text-primary text-[clamp(2rem,7vw,3.5rem)]">
+            <span className="block">{t('hero.title.1')}</span>
+            <span className="block italic text-primary">{t('hero.title.2')}</span>
+            <span className="block">{t('hero.title.3')}</span>
+          </h1>
+          <p className="mx-auto mt-[clamp(0.875rem,3.5vh,2rem)] max-w-md text-base leading-relaxed text-primary">
+            {t('hero.subtitle')}
           </p>
-          <p className="text-base font-medium leading-relaxed text-primary">
-            {t('hero.promo.perks')}
-          </p>
-        </div>
-        <div className="mt-[clamp(1rem,4vh,2.5rem)] flex justify-center">
-          <Button to="/catalogo" variant="solid">
-            {t('hero.cta')}
-          </Button>
-        </div>
-      </Reveal>
+          <div className="mx-auto mt-[clamp(0.875rem,3.5vh,2rem)] max-w-lg space-y-3">
+            <p className="text-lg font-bold uppercase tracking-[0.15em] text-primary">
+              {t('hero.promo')}
+            </p>
+            <p className="text-base font-medium leading-relaxed text-primary">
+              {t('hero.promo.perks')}
+            </p>
+          </div>
+          <div className="mt-[clamp(1rem,4vh,2.5rem)] flex justify-center">
+            <Button to="/catalogo" variant="solid">
+              {t('hero.cta')}
+            </Button>
+          </div>
+        </Reveal>
+      </div>
     </section>
   );
 }
