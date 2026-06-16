@@ -252,7 +252,7 @@ export default function Product() {
               <Price product={product} className="font-serif text-3xl text-primary" />
             </div>
 
-            <p className="mt-8 max-w-md leading-relaxed text-secondary">
+            <p className="mt-8 max-w-md whitespace-pre-line leading-relaxed text-secondary">
               {productDescription(product, category, lang)}
             </p>
 
