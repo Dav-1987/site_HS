@@ -1,11 +1,19 @@
 import { useState } from 'react';
-import { LABEL, BTN_GHOST } from '../ui.js';
+import { BTN_GHOST } from '../ui.js';
 import { Field, TextArea } from './Field.jsx';
 import { urlSafe } from '../urlSafe.js';
 import ImageField from './ImageField.jsx';
 import VideoField from './VideoField.jsx';
 import ProductImagesEditor from './ProductImagesEditor.jsx';
 import ProductPicker from './ProductPicker.jsx';
+
+function SectionLabel({ children }) {
+  return (
+    <div className="mt-5 mb-2 border-t border-primary/10 pt-4 text-[11px] font-medium uppercase tracking-[0.22em] text-accent/70 first:mt-0 first:border-t-0 first:pt-0">
+      {children}
+    </div>
+  );
+}
 
 export default function ProductEditor({
   product,
@@ -51,24 +59,33 @@ export default function ProductEditor({
       {/* Body */}
       {open && (
         <div className="border-t border-primary/10 p-4">
+          <SectionLabel>Основная информация</SectionLabel>
           <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-            <Field
-              label="ID (уникальный, часть адреса страницы)"
-              value={product.id}
-              onChange={(v) => set({ id: urlSafe(v) })}
-            />
             <Field label="Название" value={product.name} onChange={(v) => set({ name: v })} />
             <Field
               label="Подзаголовок (мелким шрифтом рядом с названием, необязательно)"
               value={product.subtitle}
               onChange={(v) => set({ subtitle: v })}
             />
-            <Field label="Размер" value={product.size} onChange={(v) => set({ size: v })} />
+            <Field
+              label="ID (уникальный, часть адреса страницы)"
+              value={product.id}
+              onChange={(v) => set({ id: urlSafe(v) })}
+            />
+          </div>
+
+          <SectionLabel>Артикул и размер</SectionLabel>
+          <div className="grid gap-3 sm:grid-cols-2">
             <Field
               label="Referencia (артикул, необязательно)"
               value={product.reference}
               onChange={(v) => set({ reference: v })}
             />
+            <Field label="Размер" value={product.size} onChange={(v) => set({ size: v })} />
+          </div>
+
+          <SectionLabel>Цена</SectionLabel>
+          <div className="grid gap-3 sm:grid-cols-2">
             <Field
               label="Цена (€)"
               type="number"
@@ -81,13 +98,19 @@ export default function ProductEditor({
               value={product.oldPrice}
               onChange={(v) => set({ oldPrice: v === '' ? 0 : Number(v) })}
             />
-            <Field label="Материал (исп.)" value={product.material?.es} onChange={(v) => setMat('es', v)} />
-            <Field label="Материал (англ.)" value={product.material?.en} onChange={(v) => setMat('en', v)} />
           </div>
           <p className="mt-2 text-xs text-primary/40">
             «Старая цена» больше текущей → показывается зачёркнутой рядом с актуальной. 0 — без скидки.
           </p>
-          <div className="mt-3 grid gap-3 sm:grid-cols-2">
+
+          <SectionLabel>Материал</SectionLabel>
+          <div className="grid gap-3 sm:grid-cols-2">
+            <Field label="Материал (исп.)" value={product.material?.es} onChange={(v) => setMat('es', v)} />
+            <Field label="Материал (англ.)" value={product.material?.en} onChange={(v) => setMat('en', v)} />
+          </div>
+
+          <SectionLabel>Описание</SectionLabel>
+          <div className="grid gap-3 sm:grid-cols-2">
             <TextArea
               label="Описание (исп.)"
               value={product.description?.es}
@@ -99,41 +122,39 @@ export default function ProductEditor({
               onChange={(v) => setDesc('en', v)}
             />
           </div>
-          <div className="mt-3">
-            <ProductImagesEditor images={images} onChange={setImages} />
-          </div>
-          <div className="mt-3">
-            <ImageField
-              label="Обложка (мобильные)"
-              value={product.imageMobile}
-              onChange={(v) => set({ imageMobile: v })}
-              frames={[['4 / 5', 'Карточка 4:5']]}
-            />
-            <p className="mt-2 text-xs leading-relaxed text-primary/40">
-              Пусто — на мобильных используется первое фото из галереи.
-            </p>
-          </div>
-          <div className="mt-3">
-            <VideoField
-              label="Видео товара (идёт последним в галерее после фото)"
-              value={product.video}
-              onChange={(v) => set({ video: v })}
-            />
-          </div>
-          <div className="mt-3">
-            <span className={LABEL}>Похожие товары («You may also like»)</span>
-            <p className="mt-1 mb-2 text-xs leading-relaxed text-primary/40">
-              Что показывать в блоке на странице этого товара. Пусто — берутся товары
-              из этой же категории.
-            </p>
-            <ProductPicker
-              value={product.related || []}
-              onChange={(related) => set({ related })}
-              allProducts={allProducts}
-              excludeId={product.id}
-              emptyHint="Пусто — автоматически из этой категории."
-            />
-          </div>
+          <SectionLabel>Фотографии</SectionLabel>
+          <ProductImagesEditor images={images} onChange={setImages} />
+
+          <SectionLabel>Обложка для мобильных</SectionLabel>
+          <ImageField
+            label="Обложка (мобильные)"
+            value={product.imageMobile}
+            onChange={(v) => set({ imageMobile: v })}
+            frames={[['4 / 5', 'Карточка 4:5']]}
+          />
+          <p className="mt-2 text-xs leading-relaxed text-primary/40">
+            Пусто — на мобильных используется первое фото из галереи.
+          </p>
+
+          <SectionLabel>Видео</SectionLabel>
+          <VideoField
+            label="Видео товара (идёт последним в галерее после фото)"
+            value={product.video}
+            onChange={(v) => set({ video: v })}
+          />
+
+          <SectionLabel>Похожие товары («You may also like»)</SectionLabel>
+          <p className="mb-2 text-xs leading-relaxed text-primary/40">
+            Что показывать в блоке на странице этого товара. Пусто — берутся товары
+            из этой же категории.
+          </p>
+          <ProductPicker
+            value={product.related || []}
+            onChange={(related) => set({ related })}
+            allProducts={allProducts}
+            excludeId={product.id}
+            emptyHint="Пусто — автоматически из этой категории."
+          />
           <div className="mt-4 flex items-center justify-end border-t border-primary/10 pt-4">
             <button
               type="button"
