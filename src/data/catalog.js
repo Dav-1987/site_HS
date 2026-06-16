@@ -58,6 +58,32 @@ export function productDiscount(product) {
   };
 }
 
+// Furniture-type words that prefix product names (e.g. "Tocador T-01") and
+// shouldn't repeat in the "Referencia" spec row, which is meant to read as
+// a bare model code. Longer phrases are listed before the words they
+// contain ("Consola Con Espejo" before "Consola"/"Espejo") so they're
+// stripped as a whole instead of leaving an orphaned leftover word.
+const REFERENCE_STRIP_WORDS = [
+  'Consola Con Espejo',
+  'Mesa De Manicura',
+  'Espejo Alto',
+  'Estantería',
+  'Tocador',
+  'Espejo',
+  'Comoda',
+  'Consola',
+];
+
+/** Product name with the furniture-type word(s) stripped, for the "Referencia" spec row. */
+export function productReference(name) {
+  if (!name) return name;
+  let out = name;
+  for (const word of REFERENCE_STRIP_WORDS) {
+    out = out.replace(new RegExp(word, 'gi'), '');
+  }
+  return out.replace(/\s+/g, ' ').trim();
+}
+
 /** Lookup helper used by the dynamic category route. */
 export function findCategory(categories, slug) {
   return categories.find((c) => c.slug === slug);

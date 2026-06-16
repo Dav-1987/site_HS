@@ -3,7 +3,7 @@ import { Link, Navigate, useParams } from 'react-router-dom';
 import { useLanguage } from '../i18n/LanguageContext.jsx';
 import { useCatalog } from '../catalog/CatalogContext.jsx';
 import { useCart } from '../cart/CartContext.jsx';
-import { productDescription, productImages, computeRelated } from '../data/catalog.js';
+import { productDescription, productImages, productReference, computeRelated } from '../data/catalog.js';
 import Media from '../components/Media.jsx';
 import Reveal from '../components/Reveal.jsx';
 import Button from '../components/Button.jsx';
@@ -86,7 +86,7 @@ export default function Product() {
     { label: t('product.materialLabel'), value: product.material[lang] },
     { label: t('product.sizeLabel'), value: product.size },
     { label: t('product.collectionLabel'), value: category.name[lang] },
-    { label: t('product.skuLabel'), value: product.name },
+    { label: t('product.skuLabel'), value: productReference(product.name) },
   ];
 
   return (
