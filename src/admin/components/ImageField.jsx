@@ -27,7 +27,13 @@ function CropPreview({ src, ratio, caption }) {
   );
 }
 
-export default function ImageField({ label, value, onChange, frames = [['4 / 5', 'Карточка 4:5']] }) {
+export default function ImageField({
+  label,
+  value,
+  onChange,
+  frames = [['4 / 5', 'Карточка 4:5']],
+  hint = '',
+}) {
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState('');
   const preview = resolveImage(value, 320);
@@ -79,6 +85,9 @@ export default function ImageField({ label, value, onChange, frames = [['4 / 5',
             </label>
             {error && <span className="text-xs text-red-600">{error}</span>}
           </div>
+          {hint && (
+            <p className="mt-2 text-xs leading-relaxed text-primary/60">{hint}</p>
+          )}
           <p className="mt-2 text-xs leading-relaxed text-primary/40">
             На витрине фото обрезается по этим рамкам (по центру). Держите главный
             объект в центре кадра.

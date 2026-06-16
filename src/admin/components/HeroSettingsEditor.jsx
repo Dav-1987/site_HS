@@ -25,12 +25,14 @@ export default function HeroSettingsEditor({ settings, onChange }) {
             value={settings.hero.image}
             onChange={(v) => setHero({ image: v })}
             frames={[['16 / 9', 'Десктоп']]}
+            hint="Рекомендуемый размер: 2400×1350 px (соотношение 16:9), минимум 1920×1080 px. JPG/WebP, до 5 МБ."
           />
           <ImageField
             label="Фоновое изображение (мобильные)"
             value={settings.hero.imageMobile}
             onChange={(v) => setHero({ imageMobile: v })}
             frames={[['3 / 4', 'Мобильный']]}
+            hint="Рекомендуемый размер: 1200×1600 px (соотношение 3:4), минимум 1080×1440 px. JPG/WebP, до 5 МБ."
           />
           <p className="text-xs leading-relaxed text-primary/40">
             Фото на весь первый экран, заголовок выводится по центру поверх него.
