@@ -242,8 +242,11 @@ export default function Product() {
             >
               {category.name[lang]}
             </Link>
-            <h1 className="mt-4 font-serif text-[clamp(3rem,4.7vw,3.75rem)] font-light leading-[1.05] tracking-tight text-primary">
-              {product.name}
+            <h1 className="mt-4 font-serif leading-[1.05] tracking-tight text-primary">
+              <span className="text-[clamp(3rem,4.7vw,3.75rem)] font-light">{product.name}</span>
+              {product.subtitle && (
+                <span className="ml-3 text-lg font-light text-primary/50">{product.subtitle}</span>
+              )}
             </h1>
             <div className="mt-4">
               <Price product={product} className="font-serif text-3xl text-primary" />

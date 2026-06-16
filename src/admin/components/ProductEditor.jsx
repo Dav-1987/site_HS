@@ -57,6 +57,11 @@ export default function ProductEditor({
               onChange={(v) => set({ id: urlSafe(v) })}
             />
             <Field label="Название" value={product.name} onChange={(v) => set({ name: v })} />
+            <Field
+              label="Подзаголовок (мелким шрифтом рядом с названием, необязательно)"
+              value={product.subtitle}
+              onChange={(v) => set({ subtitle: v })}
+            />
             <Field label="Размер" value={product.size} onChange={(v) => set({ size: v })} />
             <Field
               label="Referencia (артикул, необязательно)"
