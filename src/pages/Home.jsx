@@ -15,7 +15,7 @@ function Hero() {
   const { t } = useLanguage();
   const { settings } = useSettings();
   return (
-    <section className="relative flex min-h-[100svh] items-center justify-center overflow-hidden bg-surface text-center">
+    <section className="relative flex min-h-[100svh] items-center justify-center overflow-hidden bg-surface pb-[clamp(2rem,6vh,4rem)] pt-[clamp(5rem,12vh,7rem)] text-center">
       {/* Full-bleed background image (LCP — loaded eagerly). Editable in /admin;
           a warm, styled interior with a calm zone behind the centered headline. */}
       <div className="absolute inset-0">
@@ -36,18 +36,18 @@ function Hero() {
 
       {/* Centered content */}
       <Reveal stagger className="relative z-10 mx-auto max-w-3xl px-6">
-        <p className="mb-6 text-[10px] font-semibold uppercase tracking-[0.2em] text-accent sm:text-sm sm:tracking-[0.4em]">
+        <p className="mb-[clamp(0.75rem,2.5vh,1.5rem)] text-[10px] font-semibold uppercase tracking-[0.2em] text-accent sm:text-sm sm:tracking-[0.4em]">
           {t('hero.eyebrow')}
         </p>
-        <h1 className="font-serif font-semibold leading-[0.95] tracking-tightest text-primary text-[9vw] sm:text-[7.5vw] lg:text-[5vw]">
+        <h1 className="font-serif font-semibold leading-[1.05] tracking-tightest text-primary text-[clamp(2rem,7vw,3.5rem)]">
           <span className="block">{t('hero.title.1')}</span>
           <span className="block italic text-primary">{t('hero.title.2')}</span>
           <span className="block">{t('hero.title.3')}</span>
         </h1>
-        <p className="mx-auto mt-8 max-w-md text-base leading-relaxed text-primary">
+        <p className="mx-auto mt-[clamp(0.875rem,3.5vh,2rem)] max-w-md text-base leading-relaxed text-primary">
           {t('hero.subtitle')}
         </p>
-        <div className="mx-auto mt-8 max-w-lg space-y-3">
+        <div className="mx-auto mt-[clamp(0.875rem,3.5vh,2rem)] max-w-lg space-y-3">
           <p className="text-lg font-bold uppercase tracking-[0.15em] text-primary">
             {t('hero.promo')}
           </p>
@@ -55,7 +55,7 @@ function Hero() {
             {t('hero.promo.perks')}
           </p>
         </div>
-        <div className="mt-10 flex justify-center">
+        <div className="mt-[clamp(1rem,4vh,2.5rem)] flex justify-center">
           <Button to="/catalogo" variant="solid">
             {t('hero.cta')}
           </Button>
