@@ -29,7 +29,7 @@ export default function Footer() {
               {t('footer.explore')}
             </h4>
             <ul className="space-y-3 text-sm">
-              {categories.slice(0, 6).map((c) => (
+              {categories.map((c) => (
                 <li key={c.slug}>
                   <Link
                     to={`/${c.slug}`}
