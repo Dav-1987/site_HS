@@ -34,11 +34,13 @@ function Hero() {
         className="absolute inset-0 bg-gradient-to-t from-background/60 via-background/25 to-transparent"
       />
 
+      {/* Eyebrow — pinned to the top of the hero, just under the header. */}
+      <p className="absolute inset-x-0 top-16 z-10 px-6 text-center text-[10px] font-semibold uppercase tracking-[0.2em] text-accent sm:text-sm sm:tracking-[0.4em] lg:top-24">
+        {t('hero.eyebrow')}
+      </p>
+
       {/* Centered content */}
       <Reveal stagger className="relative z-10 mx-auto max-w-3xl px-6">
-        <p className="mb-[clamp(0.75rem,2.5vh,1.5rem)] text-[10px] font-semibold uppercase tracking-[0.2em] text-accent sm:text-sm sm:tracking-[0.4em]">
-          {t('hero.eyebrow')}
-        </p>
         <h1 className="font-serif font-semibold leading-[1.05] tracking-tightest text-primary text-[clamp(2rem,7vw,3.5rem)]">
           <span className="block">{t('hero.title.1')}</span>
           <span className="block italic text-primary">{t('hero.title.2')}</span>
