@@ -21,7 +21,7 @@ export default function Category() {
   return (
     <>
       {/* Header */}
-      <section className="px-6 pt-6 md:px-12 md:pt-14 lg:px-20">
+      <section className="px-6 pt-6 md:px-12 md:pt-10 lg:px-20">
         <Link
           to="/catalogo"
           className="link-underline mb-6 inline-block text-xs uppercase tracking-[0.2em] text-secondary hover:text-primary"
@@ -46,7 +46,7 @@ export default function Category() {
       </section>
 
       {/* Products */}
-      <section className="px-6 pb-20 pt-10 md:px-12 md:pb-28 md:pt-16 lg:px-20">
+      <section className="px-6 pb-12 pt-6 md:px-12 md:pb-16 md:pt-8 lg:px-20">
         {category.products.length > 0 ? (
           <Reveal
             stagger
@@ -67,7 +67,7 @@ export default function Category() {
       </section>
 
       {/* Related */}
-      <section className="bg-surface px-6 py-20 md:px-12 md:py-28 lg:px-20">
+      <section className="bg-surface px-6 py-14 md:px-12 md:py-20 lg:px-20">
         <h2 className="mb-12 font-serif text-[clamp(1.875rem,2.8vw,2.25rem)] font-light tracking-tight text-primary">
           {t('category.related')}
         </h2>

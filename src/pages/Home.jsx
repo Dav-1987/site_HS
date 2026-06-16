@@ -82,7 +82,7 @@ function FeaturedSection() {
   if (!featured?.length) return null;
 
   return (
-    <section className="py-24 md:py-32">
+    <section className="py-14 md:py-20">
       <div className="px-6 md:px-12 lg:px-20">
         <SectionHeader
           eyebrow={t('section.featured.eyebrow')}
@@ -107,7 +107,7 @@ function CategoriesSection() {
   const { t } = useLanguage();
   const { categories } = useCatalog();
   return (
-    <section className="bg-surface px-3 py-16 md:px-12 md:py-32 lg:px-20">
+    <section className="bg-surface px-3 py-14 md:px-12 md:py-20 lg:px-20">
       <SectionHeader
         eyebrow={t('section.categories.eyebrow')}
         title={t('section.categories.title')}

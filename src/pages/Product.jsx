@@ -15,7 +15,7 @@ import NotFound from './NotFound.jsx';
 
 function RelatedCarousel({ related, title }) {
   return (
-    <section className="mt-6 py-20 md:mt-12 md:py-28">
+    <section className="mt-4 py-14 md:mt-8 md:py-20">
       <div className="px-6 md:px-12 lg:px-20">
         <h2 className="mb-12 font-serif text-3xl font-light tracking-tight text-primary md:text-4xl">
           {title}
@@ -91,7 +91,7 @@ export default function Product() {
 
   return (
     <>
-      <article className="px-6 pt-5 md:px-12 md:pt-10 lg:px-20">
+      <article className="px-6 pt-4 md:px-12 md:pt-6 lg:px-20">
         {/* Breadcrumb */}
         <nav
           aria-label="breadcrumb"
