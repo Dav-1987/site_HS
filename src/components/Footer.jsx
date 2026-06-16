@@ -21,25 +21,6 @@ export default function Footer() {
             <p className="mt-5 max-w-sm text-sm leading-relaxed text-secondary">
               {t('footer.tagline')}
             </p>
-
-            <form
-              className="mt-8 flex max-w-sm items-center border-b border-primary/20 focus-within:border-accent"
-              onSubmit={(e) => e.preventDefault()}
-            >
-              <input
-                type="email"
-                required
-                placeholder={t('footer.newsletter.placeholder')}
-                aria-label={t('footer.newsletter.placeholder')}
-                className="w-full bg-transparent py-3 text-sm text-primary placeholder:text-primary/40 focus:outline-none"
-              />
-              <button
-                type="submit"
-                className="shrink-0 py-3 text-xs uppercase tracking-[0.2em] text-primary transition-colors hover:text-accent"
-              >
-                {t('footer.newsletter.button')}
-              </button>
-            </form>
           </div>
 
           {/* Explore */}
@@ -70,11 +51,6 @@ export default function Footer() {
               <li>
                 <Link to="/catalogo" className="text-secondary transition-colors hover:text-accent">
                   {t('nav.catalog')}
-                </Link>
-              </li>
-              <li>
-                <Link to="/#nosotros" className="text-secondary transition-colors hover:text-accent">
-                  {t('nav.about')}
                 </Link>
               </li>
               <li>

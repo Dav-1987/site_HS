@@ -116,83 +116,12 @@ function CategoriesSection() {
   );
 }
 
-function AboutSection() {
-  const { t } = useLanguage();
-  const { categories } = useCatalog();
-  const stats = [1, 2, 3];
-  return (
-    <section id="nosotros" className="scroll-mt-24 px-6 py-24 md:px-12 md:py-32 lg:px-20">
-      <div className="grid items-center gap-14 lg:grid-cols-2 lg:gap-24">
-        <Reveal className="order-2 lg:order-1">
-          <div className="relative aspect-[5/6] overflow-hidden bg-surface">
-            <Media id="1556228453-efd6c1ff04f6" alt={t('section.about.title')} w={1000} />
-          </div>
-        </Reveal>
-
-        <Reveal stagger className="order-1 lg:order-2">
-          <p className="mb-5 text-xs uppercase tracking-[0.3em] text-accent">
-            {t('section.about.eyebrow')}
-          </p>
-          <h2 className="font-serif text-[clamp(2.25rem,3.75vw,3rem)] font-light leading-tight tracking-tight text-primary">
-            {t('section.about.title')}
-          </h2>
-          <p className="mt-7 max-w-lg leading-relaxed text-secondary">
-            {t('section.about.body.1')}
-          </p>
-          <p className="mt-4 max-w-lg leading-relaxed text-secondary">
-            {t('section.about.body.2')}
-          </p>
-
-          <div className="mt-12 grid grid-cols-3 gap-6 border-t border-primary/10 pt-10">
-            {stats.map((n) => (
-              <div key={n}>
-                <p className="font-serif text-[clamp(2.25rem,3.75vw,3rem)] font-light text-primary">
-                  {n === 2 ? categories.length : t(`about.stat.${n}.value`)}
-                </p>
-                <p className="mt-2 text-[11px] uppercase tracking-[0.15em] text-secondary">
-                  {t(`about.stat.${n}.label`)}
-                </p>
-              </div>
-            ))}
-          </div>
-        </Reveal>
-      </div>
-    </section>
-  );
-}
-
-function CtaSection() {
-  const { t } = useLanguage();
-  return (
-    <section className="px-6 pb-24 md:px-12 md:pb-32 lg:px-20">
-      <Reveal className="relative overflow-hidden bg-primary px-8 py-20 text-center md:px-12 md:py-28">
-        <h2 className="mx-auto max-w-2xl font-serif text-[clamp(2.25rem,3.75vw,3rem)] font-light leading-tight text-background">
-          {t('section.cta.title')}
-        </h2>
-        <p className="mx-auto mt-5 max-w-md text-sm leading-relaxed text-background/70">
-          {t('section.cta.body')}
-        </p>
-        <div className="mt-9 flex justify-center">
-          <Button
-            to="/contacto"
-            className="border-background/30 text-background hover:bg-background hover:text-primary"
-          >
-            {t('section.cta.button')}
-          </Button>
-        </div>
-      </Reveal>
-    </section>
-  );
-}
-
 export default function Home() {
   return (
     <>
       <Hero />
       <FeaturedSection />
       <CategoriesSection />
-      <AboutSection />
-      <CtaSection />
     </>
   );
 }

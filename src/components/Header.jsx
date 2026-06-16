@@ -151,12 +151,6 @@ export default function Header() {
             </div>
           </div>
 
-          <Link
-            to="/#nosotros"
-            className="link-underline py-1 text-xs uppercase tracking-[0.2em] text-primary hover:text-primary focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-accent focus-visible:ring-offset-2"
-          >
-            {t('nav.about')}
-          </Link>
           <NavLink to="/contacto" className={navLinkClass}>
             {t('nav.contact')}
           </NavLink>
@@ -236,12 +230,6 @@ export default function Header() {
             </div>
           )}
 
-          <Link
-            to="/#nosotros"
-            className="border-b border-primary/10 py-4 font-serif text-2xl font-light"
-          >
-            {t('nav.about')}
-          </Link>
           <NavLink
             to="/contacto"
             className="border-b border-primary/10 py-4 font-serif text-2xl font-light"

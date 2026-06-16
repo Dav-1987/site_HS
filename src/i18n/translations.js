@@ -6,7 +6,6 @@ export const translations = {
     // --- Navigation ---
     'nav.home': 'Inicio',
     'nav.catalog': 'Catálogo',
-    'nav.about': 'Nosotros',
     'nav.contact': 'Contacto',
     'nav.cart': 'Cesta',
     'nav.menu': 'Menú',
@@ -27,22 +26,6 @@ export const translations = {
     'section.categories.title': 'Explora por categoría',
     'section.featured.eyebrow': 'Selección',
     'section.featured.title': 'Piezas destacadas',
-    'section.about.eyebrow': 'Nosotros',
-    'section.about.title': 'Artesanía serena, diseño duradero',
-    'section.about.body.1':
-      'En HS Muebles creamos mobiliario de tocador donde la función se encuentra con la calma. Cada pieza nace de líneas limpias, materiales nobles y una obsesión por el detalle.',
-    'section.about.body.2':
-      'Diseñamos y fabricamos en España, con maderas seleccionadas y acabados que envejecen con gracia. Menos, pero mejor.',
-    'about.stat.1.value': '12+',
-    'about.stat.1.label': 'Años de oficio',
-    'about.stat.2.label': 'Colecciones',
-    'about.stat.3.value': '100%',
-    'about.stat.3.label': 'Hecho en España',
-
-    'section.cta.title': '¿Diseñamos tu espacio?',
-    'section.cta.body':
-      'Cuéntanos qué buscas y te ayudaremos a elegir la pieza perfecta.',
-    'section.cta.button': 'Hablemos',
 
     // --- Catalog page ---
     'catalog.eyebrow': 'Catálogo',
@@ -127,9 +110,6 @@ export const translations = {
     'footer.explore': 'Explorar',
     'footer.company': 'Empresa',
     'footer.follow': 'Síguenos',
-    'footer.newsletter': 'Recibe novedades y nuevas colecciones.',
-    'footer.newsletter.placeholder': 'Tu correo',
-    'footer.newsletter.button': 'Suscribirse',
     'footer.rights': 'Todos los derechos reservados.',
     'footer.legal': 'Aviso legal',
     'footer.privacy': 'Privacidad',
@@ -143,7 +123,6 @@ export const translations = {
     // --- Navigation ---
     'nav.home': 'Home',
     'nav.catalog': 'Catalog',
-    'nav.about': 'About',
     'nav.contact': 'Contact',
     'nav.cart': 'Cart',
     'nav.menu': 'Menu',
@@ -164,22 +143,6 @@ export const translations = {
     'section.categories.title': 'Explore by category',
     'section.featured.eyebrow': 'Selection',
     'section.featured.title': 'Featured pieces',
-    'section.about.eyebrow': 'About us',
-    'section.about.title': 'Quiet craft, lasting design',
-    'section.about.body.1':
-      'At HS Muebles we craft vanity furniture where function meets calm. Every piece begins with clean lines, noble materials and an obsession with detail.',
-    'section.about.body.2':
-      'We design and build in Spain, with selected woods and finishes that age gracefully. Less, but better.',
-    'about.stat.1.value': '12+',
-    'about.stat.1.label': 'Years of craft',
-    'about.stat.2.label': 'Collections',
-    'about.stat.3.value': '100%',
-    'about.stat.3.label': 'Made in Spain',
-
-    'section.cta.title': 'Shall we design your space?',
-    'section.cta.body':
-      'Tell us what you need and we will help you choose the perfect piece.',
-    'section.cta.button': "Let's talk",
 
     // --- Catalog page ---
     'catalog.eyebrow': 'Catalog',
@@ -263,9 +226,6 @@ export const translations = {
     'footer.explore': 'Explore',
     'footer.company': 'Company',
     'footer.follow': 'Follow us',
-    'footer.newsletter': 'Get news and new collections.',
-    'footer.newsletter.placeholder': 'Your email',
-    'footer.newsletter.button': 'Subscribe',
     'footer.rights': 'All rights reserved.',
     'footer.legal': 'Legal notice',
     'footer.privacy': 'Privacy',
