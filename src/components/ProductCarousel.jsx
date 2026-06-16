@@ -96,7 +96,7 @@ export default function ProductCarousel({ products }) {
           {products.map((p) => (
             <div
               key={p.id}
-              className="w-[75vw] flex-none snap-start sm:w-[calc(50vw-36px)] md:w-[calc(50vw-64px)] lg:w-[calc(33.333vw-75px)]"
+              className="w-[85%] flex-none snap-start sm:w-[calc(50%-18px)] md:w-[calc(50%-32px)] lg:w-[calc(33.333%-37px)]"
             >
               <ProductCard product={p} categorySlug={p.categorySlug} categoryName={p.category} />
             </div>
