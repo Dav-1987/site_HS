@@ -3,6 +3,12 @@ import { resolveImage } from '../data/catalog.js';
 
 const FILL = 'h-full w-full object-cover';
 
+function uploadSrcSet(path) {
+  if (!path || !path.startsWith('/uploads/')) return null;
+  const base = path.replace(/\.[^.]+$/, '');
+  return `${base}_400.webp 400w, ${base}_800.webp 800w, ${base}_1600.webp 1600w`;
+}
+
 /**
  * Image that fills its (aspect-ratio'd, overflow-hidden) parent and degrades
  * to a branded placeholder if the source ever fails to load.
@@ -42,7 +48,11 @@ export default function Media({ id, idMobile = '', alt = '', w = 900, className 
     if (!eager && loaded) setLoaded(false);
   }
 
-  const mobileSrc = idMobile ? resolveImage(idMobile, w) : null;
+  // Eager (LCP hero): responsive srcset so the browser picks the right size.
+  // Mobile source targets ≤767px — _800.webp covers 2× phones (390×2=780px).
+  const eagerSrcSet = eager ? uploadSrcSet(id) : null;
+  const mobileSrc = idMobile ? resolveImage(idMobile, eager ? 800 : w) : null;
+  const mobileSrcSet = eager ? uploadSrcSet(idMobile) : null;
 
   // Catches the case where a (cached) image finishes loading before React
   // attaches onLoad — without this the fade could stay stuck at opacity-0.
@@ -54,6 +64,8 @@ export default function Media({ id, idMobile = '', alt = '', w = 900, className 
     <img
       ref={eager ? undefined : refCb}
       src={src}
+      srcSet={eagerSrcSet || undefined}
+      sizes={eagerSrcSet ? '100vw' : undefined}
       alt={alt}
       loading={eager ? 'eager' : 'lazy'}
       fetchPriority={eager ? 'high' : undefined}
@@ -68,7 +80,11 @@ export default function Media({ id, idMobile = '', alt = '', w = 900, className 
 
   const media = mobileSrc ? (
     <picture className="block h-full w-full">
-      <source media="(max-width: 767px)" srcSet={mobileSrc} />
+      <source
+        media="(max-width: 767px)"
+        srcSet={mobileSrcSet || mobileSrc}
+        sizes={mobileSrcSet ? '100vw' : undefined}
+      />
       {img}
     </picture>
   ) : (

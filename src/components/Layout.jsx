@@ -1,6 +1,5 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, Suspense } from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
-import Lenis from 'lenis';
 import Header from './Header.jsx';
 import Footer from './Footer.jsx';
 import { gsap, ScrollTrigger } from '../lib/gsap.js';
@@ -21,19 +20,24 @@ export default function Layout() {
     const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (reduce) return undefined;
 
-    const lenis = new Lenis({ duration: 1.1, smoothWheel: true, wheelMultiplier: 1 });
-    lenisRef.current = lenis;
+    let teardown;
+    import('lenis').then(({ default: Lenis }) => {
+      const lenis = new Lenis({ duration: 1.1, smoothWheel: true, wheelMultiplier: 1 });
+      lenisRef.current = lenis;
 
-    lenis.on('scroll', ScrollTrigger.update);
-    const tick = (time) => lenis.raf(time * 1000);
-    gsap.ticker.add(tick);
-    gsap.ticker.lagSmoothing(0);
+      lenis.on('scroll', ScrollTrigger.update);
+      const tick = (time) => lenis.raf(time * 1000);
+      gsap.ticker.add(tick);
+      gsap.ticker.lagSmoothing(0);
 
-    return () => {
-      gsap.ticker.remove(tick);
-      lenis.destroy();
-      lenisRef.current = null;
-    };
+      teardown = () => {
+        gsap.ticker.remove(tick);
+        lenis.destroy();
+        lenisRef.current = null;
+      };
+    });
+
+    return () => teardown?.();
   }, []);
 
   // Scroll handling on navigation: jump to top, or to a #hash target.
@@ -75,7 +79,9 @@ export default function Layout() {
       </a>
       <Header />
       <main id="main-content" className={`flex-1 ${isHome ? '' : 'pt-14 lg:pt-20'}`}>
-        <Outlet />
+        <Suspense fallback={null}>
+          <Outlet />
+        </Suspense>
       </main>
       <Footer />
     </div>

@@ -2,13 +2,13 @@ import { lazy, Suspense } from 'react';
 import { Routes, Route, Navigate, useParams } from 'react-router-dom';
 import { useCatalog } from './catalog/CatalogContext.jsx';
 import Layout from './components/Layout.jsx';
-import Home from './pages/Home.jsx';
-import Catalog from './pages/Catalog.jsx';
-import Category from './pages/Category.jsx';
-import Contact from './pages/Contact.jsx';
-import Product from './pages/Product.jsx';
-import NotFound from './pages/NotFound.jsx';
 
+const Home = lazy(() => import('./pages/Home.jsx'));
+const Catalog = lazy(() => import('./pages/Catalog.jsx'));
+const Category = lazy(() => import('./pages/Category.jsx'));
+const Contact = lazy(() => import('./pages/Contact.jsx'));
+const Product = lazy(() => import('./pages/Product.jsx'));
+const NotFound = lazy(() => import('./pages/NotFound.jsx'));
 const Admin = lazy(() => import('./pages/Admin.jsx'));
 
 /** Old /categoria/:slug URLs → canonical /:slug (kept so saved links survive). */
