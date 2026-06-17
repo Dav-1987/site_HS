@@ -83,8 +83,6 @@ export default function Product() {
 
   const related = computeRelated(categories, product, category, product.related);
   const specs = [
-    { label: t('product.materialLabel'), value: product.material[lang] },
-    { label: t('product.sizeLabel'), value: product.size },
     { label: t('product.collectionLabel'), value: category.name[lang] },
     { label: t('product.skuLabel'), value: product.reference?.trim() || productReference(product.name) },
   ];
