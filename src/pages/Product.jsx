@@ -90,12 +90,8 @@ export default function Product() {
         {/* Breadcrumb */}
         <nav
           aria-label="breadcrumb"
-          className="mb-6 flex flex-wrap items-center gap-2 text-[11px] uppercase tracking-[0.2em] text-primary/40"
+          className="mb-6 flex flex-wrap items-center gap-2 text-[9px] md:text-[11px] uppercase tracking-[0.2em] text-primary/40"
         >
-          <Link to="/" className="transition-colors hover:text-accent">
-            {t('nav.home')}
-          </Link>
-          <span aria-hidden="true">/</span>
           <Link to="/catalogo" className="transition-colors hover:text-accent">
             {t('nav.catalog')}
           </Link>
@@ -111,6 +107,22 @@ export default function Product() {
         </nav>
 
         <div className="grid gap-10 lg:grid-cols-12 lg:gap-16">
+          {/* Mobile-only title above gallery */}
+          <div className="lg:hidden" aria-hidden="true">
+            <Link
+              to={`/${category.slug}`}
+              className="text-xs uppercase tracking-[0.25em] text-accent"
+            >
+              {category.name[lang]}
+            </Link>
+            <h2 className="mt-2 font-serif leading-[1.05] tracking-tight text-primary">
+              <span className="text-[clamp(2.25rem,8vw,3rem)] font-light">{product.name}</span>
+              {product.subtitle && (
+                <span className="ml-2 text-base font-light text-primary/50">{product.subtitle}</span>
+              )}
+            </h2>
+          </div>
+
           {/* Gallery */}
           <Reveal className="lg:col-span-5">
             <div
@@ -233,17 +245,17 @@ export default function Product() {
           <Reveal delay={0.1} className="lg:col-span-7 lg:pl-4">
             <Link
               to={`/${category.slug}`}
-              className="text-xs uppercase tracking-[0.25em] text-accent transition-colors hover:text-primary"
+              className="hidden text-xs uppercase tracking-[0.25em] text-accent transition-colors hover:text-primary lg:inline-block"
             >
               {category.name[lang]}
             </Link>
-            <h1 className="mt-4 font-serif leading-[1.05] tracking-tight text-primary">
+            <h1 className="hidden font-serif leading-[1.05] tracking-tight text-primary lg:mt-4 lg:block">
               <span className="text-[clamp(3rem,4.7vw,3.75rem)] font-light">{product.name}</span>
               {product.subtitle && (
                 <span className="ml-3 text-lg font-light text-primary/50">{product.subtitle}</span>
               )}
             </h1>
-            <div className="mt-4">
+            <div className="mt-4 lg:mt-4">
               <Price product={product} className="font-serif text-3xl text-primary" />
             </div>
 
