@@ -7,6 +7,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
+    "build:seo": "vite build --config vite.config.vps.js && node scripts/prerender.mjs && node scripts/generate-sitemap.mjs",
     "preview": "vite preview --port 3000",
     "shot": "node screenshot.mjs",
     "catalog:pull": "node scripts/pull-catalog.mjs",

@@ -5,11 +5,15 @@ import Header from './Header.jsx';
 import Footer from './Footer.jsx';
 import { gsap, ScrollTrigger } from '../lib/gsap.js';
 import { useLanguage } from '../i18n/LanguageContext.jsx';
+import { useSettings } from '../settings/SettingsContext.jsx';
+import JsonLd from './JsonLd.jsx';
+import { organizationSchema, websiteSchema } from '../seo/schema.js';
 
 export default function Layout() {
   const lenisRef = useRef(null);
   const location = useLocation();
   const { t } = useLanguage();
+  const { settings } = useSettings();
 
   // Smooth scroll (desktop) wired into the GSAP ticker so ScrollTrigger stays
   // in sync. Skipped entirely when the user prefers reduced motion.
@@ -62,6 +66,7 @@ export default function Layout() {
 
   return (
     <div className="flex min-h-screen flex-col">
+      <JsonLd data={[organizationSchema(settings?.contact), websiteSchema()]} />
       <a
         href="#main-content"
         className="sr-only focus-visible:not-sr-only focus-visible:fixed focus-visible:left-4 focus-visible:top-4 focus-visible:z-[200] focus-visible:bg-background focus-visible:px-4 focus-visible:py-2 focus-visible:text-sm focus-visible:text-primary focus-visible:ring-1 focus-visible:ring-accent"

@@ -121,9 +121,18 @@ function CategoriesSection() {
   );
 }
 
+const SITE = 'https://hsmuebles.es';
+
 export default function Home() {
   return (
     <>
+      <title>HS Muebles — Tocadores y mobiliario minimalista | España</title>
+      <meta name="description" content="Muebles de tocador, espejos, consolas y estanterías de diseño minimalista. Envío, montaje e instalación gratis en toda España." />
+      <link rel="canonical" href={SITE} />
+      <meta property="og:title" content="HS Muebles — Mobiliario minimalista" />
+      <meta property="og:description" content="Tocadores, espejos y mobiliario de diseño minimalista. Envío y montaje gratis." />
+      <meta property="og:url" content={SITE} />
+      <meta property="og:type" content="website" />
       <Hero />
       <FeaturedSection />
       <CategoriesSection />

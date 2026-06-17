@@ -10,7 +10,7 @@ import { writeFile } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 import { dirname, resolve } from 'node:path';
 
-const DEFAULT_URL = 'http://185.202.172.59';
+const DEFAULT_URL = 'https://hsmuebles.es';
 
 const base = (process.argv[2] || DEFAULT_URL).replace(/\/$/, '');
 const target = resolve(dirname(fileURLToPath(import.meta.url)), '../src/data/catalog.default.json');

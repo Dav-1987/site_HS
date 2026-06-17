@@ -6,6 +6,10 @@ import Button from '../components/Button.jsx';
 import ProductCard from '../components/ProductCard.jsx';
 import CategoryCard from '../components/CategoryCard.jsx';
 import NotFound from './NotFound.jsx';
+import JsonLd from '../components/JsonLd.jsx';
+import { breadcrumbSchema, productListSchema } from '../seo/schema.js';
+
+const SITE = 'https://hsmuebles.es';
 
 export default function Category() {
   const { slug } = useParams();
@@ -17,9 +21,29 @@ export default function Category() {
   if (!category) return <NotFound />;
 
   const related = categories.filter((c) => c.slug !== category.slug).slice(0, 3);
+  const catName = category.name[lang] ?? category.name.es;
+  const catDesc = `Colección ${catName} de HS Muebles — ${category.products.length} piezas de mobiliario minimalista. Envío, montaje e instalación gratuitos.`;
+  const canonicalUrl = `${SITE}/${category.slug}`;
 
   return (
     <>
+      <title>{`${catName} — Muebles minimalistas | HS Muebles`}</title>
+      <meta name="description" content={catDesc} />
+      <link rel="canonical" href={canonicalUrl} />
+      <meta property="og:title" content={`${catName} | HS Muebles`} />
+      <meta property="og:description" content={catDesc} />
+      <meta property="og:url" content={canonicalUrl} />
+      <meta property="og:type" content="website" />
+      <JsonLd
+        data={[
+          breadcrumbSchema([
+            { name: 'Inicio', url: SITE },
+            { name: t('nav.catalog'), url: `${SITE}/catalogo` },
+            { name: category.name.es, url: canonicalUrl },
+          ]),
+          productListSchema(category.products, category.slug),
+        ]}
+      />
       {/* Header */}
       <section className="px-6 pt-6 md:px-12 md:pt-10 lg:px-20">
         <Link

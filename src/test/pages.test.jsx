@@ -38,9 +38,10 @@ describe('page smoke render', () => {
     expect(screen.getByText(/Todas las colecciones/i)).toBeTruthy();
   });
 
-  it('Contact renders the submit button', () => {
+  it('Contact renders the page heading and subtitle', () => {
     renderPage(<Contact />);
-    expect(screen.getByText(/Enviar mensaje/i)).toBeTruthy();
+    expect(screen.getByText(/Contacto/i)).toBeTruthy();
+    expect(screen.getByText(/Escríbenos y te responderemos/i)).toBeTruthy();
   });
 
   it('NotFound renders the 404 code', () => {

@@ -2,7 +2,11 @@ import { useEffect, useRef, useState } from 'react';
 import { Link, Navigate, useParams } from 'react-router-dom';
 import { useLanguage } from '../i18n/LanguageContext.jsx';
 import { useCatalog } from '../catalog/CatalogContext.jsx';
-import { productDescription, productImages, productReference, computeRelated } from '../data/catalog.js';
+import { productDescription, productImages, productReference, computeRelated, resolveImage } from '../data/catalog.js';
+import JsonLd from '../components/JsonLd.jsx';
+import { productSchema, breadcrumbSchema } from '../seo/schema.js';
+
+const SITE = 'https://hsmuebles.es';
 import Media from '../components/Media.jsx';
 import Reveal from '../components/Reveal.jsx';
 import Button from '../components/Button.jsx';
@@ -79,6 +83,9 @@ export default function Product() {
     setThumbStart((s) => Math.max(0, Math.min(s + dir, gallery.length - THUMB_VISIBLE)));
 
   const related = computeRelated(categories, product, category, product.related);
+  const metaDesc = productDescription(product, category, 'es');
+  const canonicalUrl = `${SITE}/${category.slug}/${product.id}`;
+  const ogImage = resolveImage(images[0], 900);
   const specs = [
     { label: t('product.collectionLabel'), value: category.name[lang] },
     { label: t('product.skuLabel'), value: product.reference?.trim() || productReference(product.name) },
@@ -86,6 +93,25 @@ export default function Product() {
 
   return (
     <>
+      <title>{`${product.name} — ${category.name.es} | HS Muebles`}</title>
+      <meta name="description" content={metaDesc} />
+      <link rel="canonical" href={canonicalUrl} />
+      <meta property="og:title" content={`${product.name} | HS Muebles`} />
+      <meta property="og:description" content={metaDesc} />
+      <meta property="og:url" content={canonicalUrl} />
+      <meta property="og:type" content="product" />
+      {ogImage && <meta property="og:image" content={ogImage} />}
+      <JsonLd
+        data={[
+          productSchema(product, category),
+          breadcrumbSchema([
+            { name: 'Inicio', url: SITE },
+            { name: t('nav.catalog'), url: `${SITE}/catalogo` },
+            { name: category.name.es, url: `${SITE}/${category.slug}` },
+            { name: product.name, url: canonicalUrl },
+          ]),
+        ]}
+      />
       <article className="px-6 pt-4 md:px-12 md:pt-6 lg:px-20">
         {/* Breadcrumb */}
         <nav

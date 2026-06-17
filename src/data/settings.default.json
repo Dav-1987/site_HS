@@ -1,26 +1,31 @@
 {
   "hero": {
-    "image": "/uploads/f47ceb39a1f26f9571cc2599b48f90ef.jpg",
-    "imageMobile": "/uploads/6aec2b756de62c4cb1ed18a11f2cecd6.png",
+    "image": "/uploads/3bd0ec419e184a6a6560789b03cd960e.jpg",
+    "imageMobile": "/uploads/349aa4b7c58b9132444aa4e2ec22d5d5.jpg",
     "video": ""
   },
   "featured": [
-    "toc-lina",
-    "toc-vera",
-    "toc-vera-copy-mq6vhosq",
-    "toc-mara",
-    "toc-alba",
-    "toc-vera-copy-mq6vhosq-copy-mq6vl97u"
+    "Tocador-T-20",
+    "Espejo-Alto-D11",
+    "Estanteria-E-02",
+    "Tocador-T-14",
+    "Espejo-Alto-D06",
+    "Estanteria-E-07"
   ],
-  "texts": {
-    "es": {},
-    "en": {}
-  },
   "contact": {
-    "instagram": "https://www.instagram.com/hs.muebles.es",
-    "tiktok": "https://www.tiktok.com/@hsmuebles",
-    "whatsapp": "https://wa.me/c/34614848301",
-    "phone": "614848301",
-    "email": "info@hsmuebles.es"
+    "instagram": "",
+    "tiktok": "",
+    "whatsapp": "",
+    "phone": "",
+    "email": ""
+  },
+  "texts": {
+    "es": {
+      "hero.title.2": "para su hogar",
+      "product.sizeLabel": "Medidas (total)"
+    },
+    "en": {
+      "hero.title.2": "for your home"
+    }
   }
 }
