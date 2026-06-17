@@ -117,7 +117,7 @@ export default function Header() {
           aria-label="HS Muebles"
         >
           <img src="/logo-hs.png" alt="" className="h-7 w-7 md:h-9 md:w-9" />
-          HS <span className="text-accent">Muebles</span>
+          <span className="text-accent">Muebles</span>
         </Link>
 
         {/* Desktop navigation */}
