@@ -46,6 +46,9 @@ export default function ProductEditor({
             {product.name || <span className="text-primary/30">Новый товар</span>}
             {product.subtitle && <span className="ml-2 text-sm text-primary/40">{product.subtitle}</span>}
           </span>
+          {product.reference && (
+            <span className="shrink-0 text-xs font-mono text-accent/70">{product.reference}</span>
+          )}
           {product.price > 0 && (
             <span className="shrink-0 text-xs text-primary/40">€{product.price}</span>
           )}
