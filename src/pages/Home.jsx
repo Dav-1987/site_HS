@@ -21,7 +21,7 @@ function Hero() {
           a warm, styled interior with a calm zone behind the centered headline. */}
       <div className="absolute inset-0">
         {settings.hero.video ? (
-          <VideoMedia src={settings.hero.video} autoPlay />
+          <VideoMedia src={settings.hero.video} poster={resolveImage(settings.hero.image, 1600)} autoPlay />
         ) : (
           <Media id={settings.hero.image} idMobile={settings.hero.imageMobile} alt={t('hero.eyebrow')} w={2000} eager />
         )}
