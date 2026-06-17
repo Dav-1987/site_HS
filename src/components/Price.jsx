@@ -20,7 +20,7 @@ export default function Price({ product, className = '' }) {
       <span className="text-[0.72em] text-primary/35 line-through">
         {oldPrice} {t('common.currency')}
       </span>
-      <span className="text-[1.15em] font-medium text-accent">{cur}</span>
+      <span className="inline-block text-[1.15em] font-medium text-accent transition-transform duration-300 group-hover:scale-110">{cur}</span>
     </span>
   );
 }
