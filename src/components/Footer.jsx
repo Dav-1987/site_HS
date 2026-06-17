@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { useLanguage } from '../i18n/LanguageContext.jsx';
 import { useCatalog } from '../catalog/CatalogContext.jsx';
+import { useSettings } from '../settings/SettingsContext.jsx';
 
 function IconInstagram() {
   return (
@@ -49,6 +50,8 @@ function IconEmail() {
 export default function Footer() {
   const { lang, t } = useLanguage();
   const { categories } = useCatalog();
+  const { settings } = useSettings();
+  const contact = settings.contact;
   const year = new Date().getFullYear();
 
   return (
@@ -67,28 +70,38 @@ export default function Footer() {
 
             {/* Social icons */}
             <div className="mt-6 flex items-center gap-4">
-              <a href="https://www.instagram.com/hs.muebles.es" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="text-secondary transition-colors duration-300 hover:text-accent">
-                <IconInstagram />
-              </a>
-              <a href="https://www.tiktok.com/@hsmuebles" target="_blank" rel="noopener noreferrer" aria-label="TikTok" className="text-secondary transition-colors duration-300 hover:text-accent">
-                <IconTikTok />
-              </a>
-              <a href="https://wa.me/c/34614848301" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp" className="text-secondary transition-colors duration-300 hover:text-accent">
-                <IconWhatsApp />
-              </a>
+              {contact.instagram && (
+                <a href={contact.instagram} target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="text-secondary transition-colors duration-300 hover:text-accent">
+                  <IconInstagram />
+                </a>
+              )}
+              {contact.tiktok && (
+                <a href={contact.tiktok} target="_blank" rel="noopener noreferrer" aria-label="TikTok" className="text-secondary transition-colors duration-300 hover:text-accent">
+                  <IconTikTok />
+                </a>
+              )}
+              {contact.whatsapp && (
+                <a href={contact.whatsapp} target="_blank" rel="noopener noreferrer" aria-label="WhatsApp" className="text-secondary transition-colors duration-300 hover:text-accent">
+                  <IconWhatsApp />
+                </a>
+              )}
             </div>
 
             {/* Phone */}
-            <a href="tel:+34614848301" className="mt-4 flex items-center gap-2 text-sm text-secondary transition-colors duration-300 hover:text-accent">
-              <IconPhone />
-              614 848 301
-            </a>
+            {contact.phone && (
+              <a href={`tel:+34${contact.phone.replace(/\s/g, '')}`} className="mt-4 flex items-center gap-2 text-sm text-secondary transition-colors duration-300 hover:text-accent">
+                <IconPhone />
+                {contact.phone}
+              </a>
+            )}
 
             {/* Email */}
-            <a href="mailto:info@hsmuebles.es" className="mt-3 flex items-center gap-2 text-sm text-secondary transition-colors duration-300 hover:text-accent">
-              <IconEmail />
-              info@hsmuebles.es
-            </a>
+            {contact.email && (
+              <a href={`mailto:${contact.email}`} className="mt-3 flex items-center gap-2 text-sm text-secondary transition-colors duration-300 hover:text-accent">
+                <IconEmail />
+                {contact.email}
+              </a>
+            )}
           </div>
 
           {/* Explore */}

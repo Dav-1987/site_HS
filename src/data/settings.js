@@ -47,6 +47,18 @@ function sanitizeTexts(texts) {
  * `featured` is an ordered list of product ids (empty → auto-curated on the home
  * page); `texts` is a sparse map of UI-copy overrides (empty → use the code default).
  */
+function sanitizeContact(c) {
+  const def = defaultSettings.contact;
+  const str = (v, fb) => (typeof v === 'string' ? v.trim() : fb);
+  return {
+    instagram: str(c?.instagram, def.instagram),
+    tiktok:    str(c?.tiktok,    def.tiktok),
+    whatsapp:  str(c?.whatsapp,  def.whatsapp),
+    phone:     str(c?.phone,     def.phone),
+    email:     str(c?.email,     def.email),
+  };
+}
+
 export function mergeSettings(input) {
   const image = input?.hero?.image;
   const imageMobile = input?.hero?.imageMobile;
@@ -60,5 +72,6 @@ export function mergeSettings(input) {
     },
     featured: sanitizeFeatured(input?.featured),
     texts: sanitizeTexts(input?.texts),
+    contact: sanitizeContact(input?.contact),
   };
 }

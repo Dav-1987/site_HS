@@ -4,6 +4,7 @@ import HistoryPanel from './HistoryPanel.jsx';
 import HeroSettingsEditor from './HeroSettingsEditor.jsx';
 import FeaturedSettingsEditor from './FeaturedSettingsEditor.jsx';
 import TextsEditor from './TextsEditor.jsx';
+import ContactEditor from './ContactEditor.jsx';
 import CategoryEditor from './CategoryEditor.jsx';
 
 export default function CatalogEditor({ onLogout }) {
@@ -92,6 +93,12 @@ export default function CatalogEditor({ onLogout }) {
           <TextsEditor
             texts={settings.texts}
             onChange={(texts) => updateSettings({ ...settings, texts })}
+          />
+        )}
+        {settings && (
+          <ContactEditor
+            contact={settings.contact}
+            onChange={(contact) => updateSettings({ ...settings, contact })}
           />
         )}
 
