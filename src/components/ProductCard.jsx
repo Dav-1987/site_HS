@@ -59,11 +59,6 @@ export default function ProductCard({ product, categorySlug, categoryName }) {
             w={700}
             className="transition-transform duration-700 ease-out group-hover:scale-[1.04]"
           />
-          <div className="absolute inset-0 flex items-center justify-center bg-background/0 opacity-0 transition-all duration-300 group-hover:bg-background/30 group-hover:opacity-100">
-            <span className="whitespace-nowrap bg-background/80 px-3 py-2 text-[10px] uppercase tracking-[0.15em] text-primary md:px-5 md:text-xs md:tracking-[0.25em]">
-              {t('product.view')}
-            </span>
-          </div>
         </Link>
 
         {multi && (
