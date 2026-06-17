@@ -16,9 +16,6 @@ export default function Catalog() {
         <h1 className="font-serif text-[clamp(2.25rem,4.7vw,3.75rem)] font-light leading-[1.02] tracking-tight text-primary">
           {t('catalog.title')}
         </h1>
-        <p className="mt-3 max-w-xl text-base leading-relaxed text-secondary">
-          {t('catalog.subtitle')}
-        </p>
       </Reveal>
 
       <Reveal stagger className="grid grid-cols-2 gap-3 sm:grid-cols-2 lg:grid-cols-3 md:gap-6 lg:gap-8">

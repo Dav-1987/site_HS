@@ -30,15 +30,9 @@ export default function Category() {
         </Link>
 
         <Reveal>
-          <p className="mb-5 text-xs uppercase tracking-[0.3em] text-accent">
-            {category.tagline[lang]}
-          </p>
           <h1 className="font-serif text-[clamp(3rem,5.6vw,4.5rem)] font-light leading-[1.02] tracking-tight text-primary">
             {category.name[lang]}
           </h1>
-          <p className="mt-7 max-w-lg text-base leading-relaxed text-secondary">
-            {category.description[lang]}
-          </p>
           <p className="mt-6 text-xs uppercase tracking-[0.2em] text-primary/40">
             {category.products.length} {t('category.products')}
           </p>
