@@ -56,6 +56,7 @@ export const translations = {
     'product.customOrderText': 'Este artículo puede fabricarse en las dimensiones que necesites. Contáctanos para recibir presupuesto personalizado.',
     // --- Order modal ---
     'order.button': '¡PEDIR AHORA!',
+    'order.shipping': 'Envío y montaje gratis',
     'order.modal.eyebrow': 'Solicitar producto',
     'order.form.name': 'Nombre',
     'order.form.name.placeholder': 'Tu nombre',
@@ -167,6 +168,7 @@ export const translations = {
     'product.customOrderText': 'This item can be made in any dimensions you need. Contact us for a personalised quote.',
     // --- Order modal ---
     'order.button': 'ORDER NOW!',
+    'order.shipping': 'Free delivery and assembly',
     'order.modal.eyebrow': 'Request product',
     'order.form.name': 'Name',
     'order.form.name.placeholder': 'Your name',

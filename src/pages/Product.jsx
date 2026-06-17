@@ -277,7 +277,7 @@ export default function Product() {
             </dl>
 
             {/* CTA */}
-            <div className="mt-10">
+            <div className="group mt-10 flex flex-col items-start gap-3 sm:flex-row sm:items-center sm:gap-6">
               <Button
                 type="button"
                 variant="solid"
@@ -286,6 +286,9 @@ export default function Product() {
               >
                 {t('order.button')}
               </Button>
+              <span className="text-sm font-medium text-primary transition-all duration-300 group-hover:text-[1rem] group-hover:font-bold">
+                {t('order.shipping')}
+              </span>
             </div>
 
           </Reveal>
