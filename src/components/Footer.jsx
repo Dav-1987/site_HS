@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useLanguage } from '../i18n/LanguageContext.jsx';
 import { useCatalog } from '../catalog/CatalogContext.jsx';
@@ -53,6 +54,14 @@ export default function Footer() {
   const { settings } = useSettings();
   const contact = settings.contact;
   const year = new Date().getFullYear();
+  const [emailCopied, setEmailCopied] = useState(false);
+
+  const copyEmail = () => {
+    navigator.clipboard.writeText(contact.email).then(() => {
+      setEmailCopied(true);
+      setTimeout(() => setEmailCopied(false), 2000);
+    });
+  };
 
   return (
     <footer className="border-t border-primary/10 bg-background">
@@ -95,12 +104,25 @@ export default function Footer() {
               </a>
             )}
 
-            {/* Email */}
+            {/* Email — click to copy */}
             {contact.email && (
-              <a href={`mailto:${contact.email}`} className="mt-3 flex items-center gap-2 text-sm text-secondary transition-colors duration-300 hover:text-accent">
-                <IconEmail />
-                {contact.email}
-              </a>
+              <div className="relative mt-3 inline-block">
+                <button
+                  type="button"
+                  onClick={copyEmail}
+                  className="flex items-center gap-2 text-sm text-secondary transition-colors duration-300 hover:text-accent"
+                >
+                  <IconEmail />
+                  {contact.email}
+                </button>
+                <span
+                  className={`pointer-events-none absolute -top-8 left-0 whitespace-nowrap rounded bg-primary px-2 py-1 text-[11px] text-background transition-all duration-200 ${
+                    emailCopied ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-1'
+                  }`}
+                >
+                  Copiado ✓
+                </span>
+              </div>
             )}
           </div>
 
