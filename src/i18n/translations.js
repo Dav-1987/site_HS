@@ -74,7 +74,7 @@ export const translations = {
 
     // --- Contact ---
     'contact.eyebrow': 'Contacto',
-    'contact.title': 'Hablemos de tu proyecto',
+    'contact.title': 'Contacto',
     'contact.subtitle':
       'Escríbenos y te responderemos en menos de 24 horas laborables.',
     'contact.prefill': 'Me interesa esta pieza:',
@@ -187,7 +187,7 @@ export const translations = {
 
     // --- Contact ---
     'contact.eyebrow': 'Contact',
-    'contact.title': "Let's talk about your project",
+    'contact.title': 'Contacts',
     'contact.subtitle':
       'Write to us and we will reply within 24 working hours.',
     'contact.prefill': "I'm interested in this piece:",

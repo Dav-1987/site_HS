@@ -1,218 +1,147 @@
-import { useRef, useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useState } from 'react';
 import { useLanguage } from '../i18n/LanguageContext.jsx';
+import { useSettings } from '../settings/SettingsContext.jsx';
 import Reveal from '../components/Reveal.jsx';
-import { LABEL, ERROR, SUBMIT, HONEYPOT, EMAIL_RE, inputClass } from '../components/formStyles.js';
+
+function IconInstagram() {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="h-5 w-5 shrink-0">
+      <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+      <circle cx="12" cy="12" r="4"/>
+      <circle cx="17.5" cy="6.5" r="0.5" fill="currentColor" stroke="none"/>
+    </svg>
+  );
+}
+
+function IconTikTok() {
+  return (
+    <svg viewBox="0 0 24 24" fill="currentColor" className="h-5 w-5 shrink-0">
+      <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.32 6.32 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.17 8.17 0 0 0 4.78 1.52V6.76a4.85 4.85 0 0 1-1.01-.07z"/>
+    </svg>
+  );
+}
+
+function IconWhatsApp() {
+  return (
+    <svg viewBox="0 0 24 24" fill="currentColor" className="h-5 w-5 shrink-0">
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+      <path d="M12 0C5.373 0 0 5.373 0 12c0 2.118.554 4.107 1.523 5.828L0 24l6.336-1.501A11.955 11.955 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 0 1-5.01-1.376l-.36-.214-3.724.882.933-3.614-.235-.372A9.818 9.818 0 0 1 2.182 12C2.182 6.573 6.573 2.182 12 2.182c5.428 0 9.818 4.391 9.818 9.818 0 5.428-4.39 9.818-9.818 9.818z"/>
+    </svg>
+  );
+}
+
+function IconPhone() {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="h-5 w-5 shrink-0">
+      <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.27h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 8.9a16 16 0 0 0 6 6l.9-.9a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+    </svg>
+  );
+}
+
+function IconEmail() {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="h-5 w-5 shrink-0">
+      <rect x="2" y="4" width="20" height="16" rx="2"/>
+      <polyline points="2,4 12,13 22,4"/>
+    </svg>
+  );
+}
 
 export default function Contact() {
   const { t } = useLanguage();
-  const { state } = useLocation();
-  const formRef = useRef(null);
-  const [status, setStatus] = useState('idle'); // idle | sending | sent | error
-  const [errors, setErrors] = useState({});
+  const { settings } = useSettings();
+  const contact = settings.contact;
+  const [emailCopied, setEmailCopied] = useState(false);
 
-  // When arriving from a product page, pre-fill the message with the piece name.
-  const prefill = state?.product ? `${t('contact.prefill')} ${state.product}` : '';
-
-  const fieldClass = (name) => inputClass(Boolean(errors[name]));
-
-  const validate = (form) => {
-    const next = {};
-    if (!form.name.value.trim()) next.name = t('contact.form.error.required');
-    const email = form.email.value.trim();
-    if (!email) next.email = t('contact.form.error.required');
-    else if (!EMAIL_RE.test(email)) next.email = t('contact.form.error.email');
-    if (!form.message.value.trim()) next.message = t('contact.form.error.required');
-    return next;
+  const copyEmail = () => {
+    navigator.clipboard.writeText(contact.email).then(() => {
+      setEmailCopied(true);
+      setTimeout(() => setEmailCopied(false), 2000);
+    });
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    const form = e.currentTarget;
-
-    // Honeypot: real users never see this field. If a bot fills it, pretend we
-    // succeeded and silently drop the submission.
-    if (form._gotcha.value) {
-      setStatus('sent');
-      return;
-    }
-
-    const found = validate(form);
-    setErrors(found);
-    if (Object.keys(found).length > 0) {
-      form[Object.keys(found)[0]]?.focus();
-      return;
-    }
-
-    setStatus('sending');
-    try {
-      // TODO(backend): POST these fields to /api/contact (email/Postgres) once the
-      // endpoint exists. Until then we acknowledge locally so the user gets feedback.
-      await new Promise((resolve) => setTimeout(resolve, 600));
-      setStatus('sent');
-      form.reset();
-    } catch {
-      setStatus('error');
-    }
-  };
-
-  // Clear a field's error as soon as the user edits it.
-  const clearError = (name) =>
-    setErrors((prev) => (prev[name] ? { ...prev, [name]: undefined } : prev));
-
-  const sending = status === 'sending';
+  const items = [
+    contact.instagram && {
+      icon: <IconInstagram />,
+      label: 'Instagram',
+      content: (
+        <a href={contact.instagram} target="_blank" rel="noopener noreferrer"
+          className="text-primary transition-colors hover:text-accent">
+          @hs.muebles.es
+        </a>
+      ),
+    },
+    contact.tiktok && {
+      icon: <IconTikTok />,
+      label: 'TikTok',
+      content: (
+        <a href={contact.tiktok} target="_blank" rel="noopener noreferrer"
+          className="text-primary transition-colors hover:text-accent">
+          @hsmuebles
+        </a>
+      ),
+    },
+    contact.whatsapp && {
+      icon: <IconWhatsApp />,
+      label: 'WhatsApp',
+      content: (
+        <a href={contact.whatsapp} target="_blank" rel="noopener noreferrer"
+          className="text-primary transition-colors hover:text-accent">
+          {contact.phone}
+        </a>
+      ),
+    },
+    contact.phone && {
+      icon: <IconPhone />,
+      label: t('contact.info.hours'),
+      content: (
+        <a href={`tel:+34${contact.phone.replace(/\s/g, '')}`}
+          className="text-primary transition-colors hover:text-accent">
+          +34 {contact.phone}
+        </a>
+      ),
+    },
+    contact.email && {
+      icon: <IconEmail />,
+      label: 'Email',
+      content: (
+        <div className="relative inline-block">
+          <button type="button" onClick={copyEmail}
+            className="text-primary transition-colors hover:text-accent">
+            {contact.email}
+          </button>
+          <span className={`pointer-events-none absolute -top-8 left-0 whitespace-nowrap rounded bg-primary px-2 py-1 text-[11px] text-background transition-all duration-200 ${emailCopied ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-1'}`}>
+            {t('footer.emailCopied')}
+          </span>
+        </div>
+      ),
+    },
+  ].filter(Boolean);
 
   return (
-    <section className="px-6 pb-24 pt-16 md:px-12 md:pb-32 md:pt-24 lg:px-20">
-      <div className="grid gap-16 lg:grid-cols-12 lg:gap-24">
-        {/* Intro + info */}
-        <Reveal className="lg:col-span-5">
-          <p className="mb-5 text-xs uppercase tracking-[0.3em] text-accent">
-            {t('contact.eyebrow')}
-          </p>
-          <h1 className="font-serif text-[clamp(3rem,4.7vw,3.75rem)] font-light leading-[1.02] tracking-tight text-primary">
-            {t('contact.title')}
-          </h1>
-          <p className="mt-6 max-w-md text-base leading-relaxed text-secondary">
-            {t('contact.subtitle')}
-          </p>
+    <section className="px-6 pb-24 pt-8 md:px-12 md:pb-32 md:pt-12 lg:px-20">
+      <Reveal className="max-w-xl">
+        <h1 className="font-serif text-[clamp(3rem,4.7vw,3.75rem)] font-light leading-[1.02] tracking-tight text-primary">
+          {t('contact.title')}
+        </h1>
+        <p className="mt-5 text-base leading-relaxed text-secondary">
+          {t('contact.subtitle')}
+        </p>
+      </Reveal>
 
-          <div className="mt-12 space-y-6 border-t border-primary/10 pt-10">
-            <div>
-              <p className="mb-1 text-xs uppercase tracking-[0.2em] text-primary/40">
-                {t('contact.info.title')}
-              </p>
-              <p className="text-secondary">Calle del Roble 12, 28004 Madrid</p>
+      <Reveal delay={0.1} className="mt-14 max-w-lg">
+        <dl className="divide-y divide-primary/10 border-t border-primary/10">
+          {items.map((item, i) => (
+            <div key={i} className="flex items-center gap-5 py-5">
+              <span className="text-accent">{item.icon}</span>
+              <dt className="w-24 shrink-0 text-[11px] uppercase tracking-[0.2em] text-primary/40">
+                {item.label}
+              </dt>
+              <dd className="text-sm">{item.content}</dd>
             </div>
-            <div>
-              <p className="mb-1 text-xs uppercase tracking-[0.2em] text-primary/40">Email</p>
-              <a href="mailto:hola@hsmuebles.es" className="text-secondary hover:text-accent">
-                hola@hsmuebles.es
-              </a>
-            </div>
-            <div>
-              <p className="mb-1 text-xs uppercase tracking-[0.2em] text-primary/40">
-                {t('contact.info.hours')}
-              </p>
-              <a href="tel:+34910000000" className="text-secondary hover:text-accent">
-                +34 910 000 000
-              </a>
-            </div>
-          </div>
-        </Reveal>
-
-        {/* Form */}
-        <Reveal delay={0.1} className="lg:col-span-7">
-          {status === 'sent' ? (
-            <div
-              role="status"
-              className="flex h-full min-h-[20rem] flex-col items-center justify-center border border-accent/30 bg-surface p-10 text-center"
-            >
-              <span className="mb-4 flex h-14 w-14 items-center justify-center rounded-full border border-accent text-accent">
-                ✓
-              </span>
-              <p className="font-serif text-2xl font-light text-primary">
-                {t('contact.form.sent')}
-              </p>
-            </div>
-          ) : (
-            <form ref={formRef} onSubmit={handleSubmit} className="space-y-8" noValidate>
-              {/* Honeypot — visually hidden, off the tab order, ignored by users. */}
-              <input
-                type="text"
-                name="_gotcha"
-                tabIndex={-1}
-                autoComplete="off"
-                aria-hidden="true"
-                className={HONEYPOT}
-              />
-
-              <div className="grid gap-8 sm:grid-cols-2">
-                <div>
-                  <label htmlFor="name" className={LABEL}>
-                    {t('contact.form.name')}
-                  </label>
-                  <input
-                    id="name"
-                    name="name"
-                    type="text"
-                    required
-                    aria-required="true"
-                    aria-invalid={errors.name ? 'true' : undefined}
-                    aria-describedby={errors.name ? 'name-error' : undefined}
-                    onInput={() => clearError('name')}
-                    className={fieldClass('name')}
-                  />
-                  {errors.name && (
-                    <p id="name-error" className={ERROR}>
-                      {errors.name}
-                    </p>
-                  )}
-                </div>
-                <div>
-                  <label htmlFor="email" className={LABEL}>
-                    {t('contact.form.email')}
-                  </label>
-                  <input
-                    id="email"
-                    name="email"
-                    type="email"
-                    required
-                    aria-required="true"
-                    aria-invalid={errors.email ? 'true' : undefined}
-                    aria-describedby={errors.email ? 'email-error' : undefined}
-                    onInput={() => clearError('email')}
-                    className={fieldClass('email')}
-                  />
-                  {errors.email && (
-                    <p id="email-error" className={ERROR}>
-                      {errors.email}
-                    </p>
-                  )}
-                </div>
-              </div>
-              <div>
-                <label htmlFor="message" className={LABEL}>
-                  {t('contact.form.message')}
-                </label>
-                <textarea
-                  id="message"
-                  name="message"
-                  rows={5}
-                  required
-                  aria-required="true"
-                  aria-invalid={errors.message ? 'true' : undefined}
-                  aria-describedby={errors.message ? 'message-error' : undefined}
-                  defaultValue={prefill}
-                  placeholder={t('contact.form.message.placeholder')}
-                  onInput={() => clearError('message')}
-                  className={`${fieldClass('message')} resize-none`}
-                />
-                {errors.message && (
-                  <p id="message-error" className={ERROR}>
-                    {errors.message}
-                  </p>
-                )}
-              </div>
-
-              {status === 'error' && (
-                <p role="alert" className="text-sm text-danger/90">
-                  {t('contact.form.error.generic')}
-                </p>
-              )}
-
-              <button
-                type="submit"
-                disabled={sending}
-                aria-busy={sending}
-                className={SUBMIT}
-              >
-                {sending ? t('contact.form.sending') : `${t('contact.form.submit')} →`}
-              </button>
-            </form>
-          )}
-        </Reveal>
-      </div>
+          ))}
+        </dl>
+      </Reveal>
     </section>
   );
 }
