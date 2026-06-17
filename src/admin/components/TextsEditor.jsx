@@ -98,7 +98,7 @@ export default function TextsEditor({ texts, onChange }) {
         <div className="space-y-3 border-t border-primary/10 px-5 py-6">
           <p className="text-xs leading-relaxed text-primary/45">
             Пусто = берётся текст из кода (показан серым как подсказка). Заполните поле,
-            чтобы переопределить; очистите — вернётся стандартный текст. Цифры в блоке
+            чтобы переопределить; очистите — вернётся стандартный текст. Напишите <code className="rounded bg-primary/10 px-1">---</code> чтобы скрыть текст на сайте полностью. Цифры в блоке
             «О нас» — это значения вроде «12+», «100%».
           </p>
           {Object.entries(groups).map(([g, keys]) => (

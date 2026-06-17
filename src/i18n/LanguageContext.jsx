@@ -29,7 +29,9 @@ export function LanguageProvider({ children }) {
   const t = useCallback(
     (key) => {
       const override = overrides?.[lang]?.[key];
-      if (typeof override === 'string' && override) return override;
+      if (typeof override === 'string' && override) {
+        return override === '---' ? '' : override;
+      }
       return translations[lang]?.[key] ?? translations[DEFAULT_LANG]?.[key] ?? key;
     },
     [lang, overrides],
