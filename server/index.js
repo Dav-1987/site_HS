@@ -20,6 +20,7 @@ const UPLOADS_DIR = join(__dirname, '../uploads');
 if (!existsSync(UPLOADS_DIR)) mkdirSync(UPLOADS_DIR, { recursive: true });
 
 const app = express();
+app.set('trust proxy', 1); // nginx sits in front — trust X-Forwarded-For for rate limiting
 const PORT = process.env.PORT || 4000;
 
 // ─── Статика ─────────────────────────────────────────────────────────────────

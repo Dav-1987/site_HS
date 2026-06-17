@@ -1,0 +1,18 @@
+# HS Muebles
+
+> Tienda de muebles artesanales en madera maciza, ubicada en España. / Solid-wood handcrafted furniture store, based in Spain.
+
+HS Muebles diseña y vende muebles de madera maciza hechos a medida: mesas, sillas, estanterías, armarios y muebles de salón. Todos los productos se fabrican de forma artesanal. El sitio está disponible en español e inglés.
+
+HS Muebles designs and sells custom solid-wood furniture: tables, chairs, shelves, wardrobes, and living-room pieces. All products are handcrafted. The site is available in Spanish and English.
+
+## Páginas principales / Main pages
+
+- [Inicio / Home](https://hsmuebles.es/)
+- [Catálogo / Catalog](https://hsmuebles.es/catalog)
+- [Contacto / Contact](https://hsmuebles.es/contact)
+
+## Contacto / Contact
+
+- Web: https://hsmuebles.es
+- Email: info@hsmuebles.es

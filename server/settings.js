@@ -44,6 +44,28 @@ function sanitizeTexts(texts) {
   return out;
 }
 
+function sanitizeContact(c) {
+  const def = defaultSettings.contact || {};
+  const str = (v, fb = '') => (typeof v === 'string' ? v.trim().slice(0, MAX_TEXT_LEN) : fb);
+  return {
+    instagram: str(c?.instagram, def.instagram),
+    tiktok: str(c?.tiktok, def.tiktok),
+    whatsapp: str(c?.whatsapp, def.whatsapp),
+    phone: str(c?.phone, def.phone),
+    email: str(c?.email, def.email),
+  };
+}
+
+function sanitizeSeo(seo) {
+  const def = defaultSettings.seo || {};
+  const str = (v, fb = '') => (typeof v === 'string' ? v.trim().slice(0, MAX_TEXT_LEN) : fb);
+  return {
+    image: str(seo?.image, def.image),
+    title: str(seo?.title, def.title),
+    description: str(seo?.description, def.description),
+  };
+}
+
 export function mergeSettings(input) {
   const image = input?.hero?.image;
   const imageMobile = input?.hero?.imageMobile;
@@ -59,6 +81,8 @@ export function mergeSettings(input) {
     },
     featured: sanitizeFeatured(input?.featured),
     texts: sanitizeTexts(input?.texts),
+    contact: sanitizeContact(input?.contact),
+    seo: sanitizeSeo(input?.seo),
   };
 }
 

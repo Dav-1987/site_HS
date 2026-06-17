@@ -7,6 +7,8 @@ import ProductCard from '../components/ProductCard.jsx';
 import CategoryCard from '../components/CategoryCard.jsx';
 import NotFound from './NotFound.jsx';
 import JsonLd from '../components/JsonLd.jsx';
+import SocialMeta from '../components/SocialMeta.jsx';
+import { resolveImage } from '../data/catalog.js';
 import { breadcrumbSchema, productListSchema } from '../seo/schema.js';
 
 const SITE = 'https://hsmuebles.es';
@@ -30,10 +32,12 @@ export default function Category() {
       <title>{`${catName} — Muebles minimalistas | HS Muebles`}</title>
       <meta name="description" content={catDesc} />
       <link rel="canonical" href={canonicalUrl} />
-      <meta property="og:title" content={`${catName} | HS Muebles`} />
-      <meta property="og:description" content={catDesc} />
-      <meta property="og:url" content={canonicalUrl} />
-      <meta property="og:type" content="website" />
+      <SocialMeta
+        title={`${catName} | HS Muebles`}
+        description={catDesc}
+        url={canonicalUrl}
+        image={resolveImage(category.image, 1600)}
+      />
       <JsonLd
         data={[
           breadcrumbSchema([

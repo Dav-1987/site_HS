@@ -5,6 +5,7 @@ import HeroSettingsEditor from './HeroSettingsEditor.jsx';
 import FeaturedSettingsEditor from './FeaturedSettingsEditor.jsx';
 import TextsEditor from './TextsEditor.jsx';
 import ContactEditor from './ContactEditor.jsx';
+import SeoSettingsEditor from './SeoSettingsEditor.jsx';
 import CategoryEditor from './CategoryEditor.jsx';
 
 export default function CatalogEditor({ onLogout }) {
@@ -101,6 +102,7 @@ export default function CatalogEditor({ onLogout }) {
             onChange={(contact) => updateSettings({ ...settings, contact })}
           />
         )}
+        {settings && <SeoSettingsEditor settings={settings} onChange={updateSettings} />}
 
         {categories.map((c, ci) => (
           <CategoryEditor

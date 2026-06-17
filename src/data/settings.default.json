@@ -19,6 +19,11 @@
     "phone": "",
     "email": ""
   },
+  "seo": {
+    "image": "",
+    "title": "",
+    "description": ""
+  },
   "texts": {
     "es": {
       "hero.title.2": "para su hogar",

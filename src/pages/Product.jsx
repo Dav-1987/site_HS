@@ -4,6 +4,7 @@ import { useLanguage } from '../i18n/LanguageContext.jsx';
 import { useCatalog } from '../catalog/CatalogContext.jsx';
 import { productDescription, productImages, productReference, computeRelated, resolveImage } from '../data/catalog.js';
 import JsonLd from '../components/JsonLd.jsx';
+import SocialMeta from '../components/SocialMeta.jsx';
 import { productSchema, breadcrumbSchema } from '../seo/schema.js';
 
 const SITE = 'https://hsmuebles.es';
@@ -85,7 +86,7 @@ export default function Product() {
   const related = computeRelated(categories, product, category, product.related);
   const metaDesc = productDescription(product, category, 'es');
   const canonicalUrl = `${SITE}/${category.slug}/${product.id}`;
-  const ogImage = resolveImage(images[0], 900);
+  const ogImage = resolveImage(images[0], 1600);
   const specs = [
     { label: t('product.collectionLabel'), value: category.name[lang] },
     { label: t('product.skuLabel'), value: product.reference?.trim() || productReference(product.name) },
@@ -96,11 +97,13 @@ export default function Product() {
       <title>{`${product.name} — ${category.name.es} | HS Muebles`}</title>
       <meta name="description" content={metaDesc} />
       <link rel="canonical" href={canonicalUrl} />
-      <meta property="og:title" content={`${product.name} | HS Muebles`} />
-      <meta property="og:description" content={metaDesc} />
-      <meta property="og:url" content={canonicalUrl} />
-      <meta property="og:type" content="product" />
-      {ogImage && <meta property="og:image" content={ogImage} />}
+      <SocialMeta
+        title={`${product.name} | HS Muebles`}
+        description={metaDesc}
+        url={canonicalUrl}
+        type="product"
+        image={ogImage}
+      />
       <JsonLd
         data={[
           productSchema(product, category),
@@ -133,20 +136,23 @@ export default function Product() {
         </nav>
 
         <div className="grid gap-10 lg:grid-cols-12 lg:gap-16">
-          {/* Mobile-only title above gallery */}
-          <div className="lg:hidden" aria-hidden="true">
+          {/* Mobile-only title above gallery (real <h1>; the category link is a
+              visual duplicate of the breadcrumb, so it's hidden from AT). */}
+          <div className="lg:hidden">
             <Link
               to={`/${category.slug}`}
+              aria-hidden="true"
+              tabIndex={-1}
               className="text-xs uppercase tracking-[0.25em] text-accent"
             >
               {category.name[lang]}
             </Link>
-            <h2 className="mt-2 font-serif leading-[1.05] tracking-tight text-primary">
+            <h1 className="mt-2 font-serif leading-[1.05] tracking-tight text-primary">
               <span className="text-[clamp(2.25rem,8vw,3rem)] font-light">{product.name}</span>
               {product.subtitle && (
                 <span className="ml-2 text-base font-light text-primary/50">{product.subtitle}</span>
               )}
-            </h2>
+            </h1>
           </div>
 
           {/* Gallery */}

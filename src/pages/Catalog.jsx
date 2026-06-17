@@ -3,6 +3,8 @@ import { useCatalog } from '../catalog/CatalogContext.jsx';
 import Reveal from '../components/Reveal.jsx';
 import CategoryCard from '../components/CategoryCard.jsx';
 import JsonLd from '../components/JsonLd.jsx';
+import SocialMeta from '../components/SocialMeta.jsx';
+import { resolveImage } from '../data/catalog.js';
 import { breadcrumbSchema, categoryListSchema } from '../seo/schema.js';
 
 const SITE = 'https://hsmuebles.es';
@@ -16,10 +18,12 @@ export default function Catalog() {
       <title>Catálogo de muebles — Tocadores, espejos y más | HS Muebles</title>
       <meta name="description" content="Explora las 9 colecciones de HS Muebles: tocadores loft, espejos de cuerpo entero, estanterías, cómodas, consolas y mesas de manicura. Diseño minimalista." />
       <link rel="canonical" href={`${SITE}/catalogo`} />
-      <meta property="og:title" content="Catálogo completo | HS Muebles" />
-      <meta property="og:description" content="9 colecciones de mobiliario minimalista: tocadores, espejos, cómodas y más." />
-      <meta property="og:url" content={`${SITE}/catalogo`} />
-      <meta property="og:type" content="website" />
+      <SocialMeta
+        title="Catálogo completo | HS Muebles"
+        description="9 colecciones de mobiliario minimalista: tocadores, espejos, cómodas y más."
+        url={`${SITE}/catalogo`}
+        image={resolveImage(categories[0]?.image, 1600)}
+      />
       <JsonLd
         data={[
           breadcrumbSchema([

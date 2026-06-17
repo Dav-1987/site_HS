@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useLanguage } from '../i18n/LanguageContext.jsx';
 import { useSettings } from '../settings/SettingsContext.jsx';
 import Reveal from '../components/Reveal.jsx';
+import SocialMeta from '../components/SocialMeta.jsx';
 
 function IconInstagram() {
   return (
@@ -125,10 +126,11 @@ export default function Contact() {
       <title>Contacto | HS Muebles</title>
       <meta name="description" content="Contacta con HS Muebles: tienda de muebles minimalistas en España. Teléfono, email, Instagram y TikTok. Envío, montaje e instalación gratis." />
       <link rel="canonical" href={`${SITE}/contacto`} />
-      <meta property="og:title" content="Contacto | HS Muebles" />
-      <meta property="og:description" content="Contacta con HS Muebles. Envío, montaje e instalación gratis en toda España." />
-      <meta property="og:url" content={`${SITE}/contacto`} />
-      <meta property="og:type" content="website" />
+      <SocialMeta
+        title="Contacto | HS Muebles"
+        description="Contacta con HS Muebles. Envío, montaje e instalación gratis en toda España."
+        url={`${SITE}/contacto`}
+      />
       <section className="px-6 pb-24 pt-8 md:px-12 md:pb-32 md:pt-12 lg:px-20">
       <Reveal className="max-w-xl">
         <h1 className="font-serif text-[clamp(3rem,4.7vw,3.75rem)] font-light leading-[1.02] tracking-tight text-primary">

@@ -59,6 +59,17 @@ function sanitizeContact(c) {
   };
 }
 
+/** Site-wide social/SEO preview (default OG image + share title/description). */
+function sanitizeSeo(seo) {
+  const def = defaultSettings.seo;
+  const str = (v, fb) => (typeof v === 'string' ? v.trim() : fb);
+  return {
+    image: str(seo?.image, def.image),
+    title: str(seo?.title, def.title),
+    description: str(seo?.description, def.description),
+  };
+}
+
 export function mergeSettings(input) {
   const image = input?.hero?.image;
   const imageMobile = input?.hero?.imageMobile;
@@ -73,5 +84,6 @@ export function mergeSettings(input) {
     featured: sanitizeFeatured(input?.featured),
     texts: sanitizeTexts(input?.texts),
     contact: sanitizeContact(input?.contact),
+    seo: sanitizeSeo(input?.seo),
   };
 }
