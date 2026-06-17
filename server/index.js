@@ -11,7 +11,7 @@ import { readOrSeedCatalog, writeCatalog, recordVersion, listVersions, getVersio
          extractUploadKeys, scheduleForDeletion, unscheduleFiles,
          getFilesReadyToDelete, purgePendingRecords } from './store.js';
 import { readSettings, writeSettings } from './settings.js';
-import { validateOrder, resolveOrderItems, formatOrderText } from './order.js';
+import { validateOrder, formatOrderText } from './order.js';
 import { telegramConfigured, emailConfigured, sendTelegram, sendOrderEmail } from './notify.js';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -380,11 +380,7 @@ app.post('/api/order', orderRateLimit, async (req, res) => {
   if (invalid) return res.status(400).json({ error: invalid });
 
   try {
-    const categories = await readOrSeedCatalog();
-    const lines = resolveOrderItems(req.body.items, categories);
-    if (!lines.length) return res.status(400).json({ error: 'no valid items in cart' });
-
-    const text = formatOrderText(req.body, lines);
+    const text = formatOrderText(req.body);
     // Always logged, so the order survives in PM2 logs even if both channels fail.
     console.log(`[order] new request:\n${text}`);
 

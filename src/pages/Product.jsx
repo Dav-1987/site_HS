@@ -2,15 +2,14 @@ import { useEffect, useRef, useState } from 'react';
 import { Link, Navigate, useParams } from 'react-router-dom';
 import { useLanguage } from '../i18n/LanguageContext.jsx';
 import { useCatalog } from '../catalog/CatalogContext.jsx';
-import { useCart } from '../cart/CartContext.jsx';
 import { productDescription, productImages, productReference, computeRelated } from '../data/catalog.js';
 import Media from '../components/Media.jsx';
 import Reveal from '../components/Reveal.jsx';
 import Button from '../components/Button.jsx';
-import QtyStepper from '../components/QtyStepper.jsx';
 import Price from '../components/Price.jsx';
 import Lightbox from '../components/Lightbox.jsx';
 import ProductCarousel from '../components/ProductCarousel.jsx';
+import OrderModal from '../components/OrderModal.jsx';
 import NotFound from './NotFound.jsx';
 
 function RelatedCarousel({ related, title }) {
@@ -31,10 +30,10 @@ export default function Product() {
   const { categorySlug, id } = useParams();
   const { lang, t } = useLanguage();
   const { getProduct, categories, loaded } = useCatalog();
-  const { items, add, setQty } = useCart();
   const [active, setActive] = useState(0);
   const [thumbStart, setThumbStart] = useState(0);
   const [zoom, setZoom] = useState(false);
+  const [orderOpen, setOrderOpen] = useState(false);
   const startX = useRef(null);
 
   // Reset gallery state when navigating between products.
@@ -48,8 +47,6 @@ export default function Product() {
   if (!found) return <NotFound />;
 
   const { product, category } = found;
-  // Quantity of this product already in the cart (0 = not in cart yet).
-  const inCartQty = items.find((l) => l.id === product.id)?.qty ?? 0;
 
   // Canonical URL: if the category slug in the URL is stale or wrong
   // (renamed category, moved product), redirect to the correct one.
@@ -269,51 +266,21 @@ export default function Product() {
 
             {/* CTA */}
             <div className="mt-10">
-              <div className="flex flex-col gap-3 sm:flex-row">
-                {/* Label reflects the cart state: "added" while the product
-                    is in the cart, back to "add" when it is removed. */}
-                <Button
-                  type="button"
-                  variant="solid"
-                  onClick={() => add(product.id)}
-                  className="w-full sm:w-auto"
-                >
-                  <span aria-live="polite">
-                    {inCartQty > 0 ? `${t('product.added')} ✓` : `${t('product.addToCart')} →`}
-                  </span>
-                </Button>
-                {inCartQty > 0 && (
-                  <QtyStepper
-                    qty={inCartQty}
-                    onChange={(q) => setQty(product.id, q)}
-                    name={product.name}
-                    size="lg"
-                  />
-                )}
-                <Button
-                  to="/contacto"
-                  state={{ product: `${product.name} — ${category.name[lang]}` }}
-                  variant="outline"
-                  className="w-full sm:w-auto"
-                >
-                  {t('product.inquire')}
-                </Button>
-              </div>
-              <p className="mt-3 text-xs text-primary/40">{t('product.inquireNote')}</p>
+              <Button
+                type="button"
+                variant="solid"
+                onClick={() => setOrderOpen(true)}
+                className="w-full sm:w-auto"
+              >
+                {t('order.button')}
+              </Button>
             </div>
 
-            {/* Custom order notice */}
-            <div className="mt-6 border border-primary/10 bg-surface px-6 py-5">
-              <p className="mb-2 text-xs uppercase tracking-[0.2em] text-primary/40">
-                {t('product.customOrderTitle')}
-              </p>
-              <p className="text-sm leading-relaxed text-primary/70">
-                {t('product.customOrderText')}
-              </p>
-            </div>
           </Reveal>
         </div>
       </article>
+
+      <OrderModal product={product} isOpen={orderOpen} onClose={() => setOrderOpen(false)} />
 
       {zoom && !isVideoActive && (
         <Lightbox
