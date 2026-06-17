@@ -90,7 +90,7 @@ export default function Product() {
         {/* Breadcrumb */}
         <nav
           aria-label="breadcrumb"
-          className="mb-6 flex flex-wrap items-center gap-2 text-[9px] md:text-[11px] uppercase tracking-[0.2em] text-primary/40"
+          className="mb-6 flex flex-wrap items-center gap-2 text-[9px] md:text-[11px] uppercase tracking-[0.08em] text-primary/40"
         >
           <Link to="/catalogo" className="transition-colors hover:text-accent">
             {t('nav.catalog')}
