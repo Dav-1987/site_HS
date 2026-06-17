@@ -57,6 +57,7 @@ export const translations = {
     // --- Order modal ---
     'order.button': '¡PEDIR AHORA!',
     'order.shipping': 'Envío y montaje gratis',
+    'footer.emailCopied': 'Copiado ✓',
     'order.modal.eyebrow': 'Solicitar producto',
     'order.form.name': 'Nombre',
     'order.form.name.placeholder': 'Tu nombre',
@@ -169,6 +170,7 @@ export const translations = {
     // --- Order modal ---
     'order.button': 'ORDER NOW!',
     'order.shipping': 'Free delivery and assembly',
+    'footer.emailCopied': 'Copied ✓',
     'order.modal.eyebrow': 'Request product',
     'order.form.name': 'Name',
     'order.form.name.placeholder': 'Your name',

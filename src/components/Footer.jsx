@@ -120,7 +120,7 @@ export default function Footer() {
                     emailCopied ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-1'
                   }`}
                 >
-                  Copiado ✓
+                  {t('footer.emailCopied')}
                 </span>
               </div>
             )}
