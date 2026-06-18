@@ -66,9 +66,9 @@ export default function Footer() {
   return (
     <footer className="border-t border-primary/10 bg-background">
       <div className="px-6 pb-10 pt-20 md:px-12 md:pb-12 md:pt-28 lg:px-20">
-        <div className="grid grid-cols-1 gap-14 md:grid-cols-12">
+        <div>
           {/* Brand + socials + contacts */}
-          <div className="md:col-span-5">
+          <div className="max-w-sm">
             <Link to="/" className="flex items-center gap-3 font-serif text-3xl tracking-tight text-primary">
               <img src="/logo-hs.png" alt="" className="h-9 w-9" />
               <span className="text-accent">Muebles</span>
@@ -124,44 +124,6 @@ export default function Footer() {
                 </span>
               </div>
             )}
-          </div>
-
-          {/* Explore */}
-          <nav className="md:col-span-3 md:col-start-7" aria-label={t('footer.explore')}>
-            <h4 className="mb-5 text-xs uppercase tracking-[0.25em] text-primary/40">
-              {t('footer.explore')}
-            </h4>
-            <ul className="space-y-3 text-sm">
-              {categories.map((c) => (
-                <li key={c.slug}>
-                  <Link
-                    to={`/${c.slug}`}
-                    className="text-secondary transition-colors duration-300 hover:text-accent"
-                  >
-                    {c.name[lang]}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </nav>
-
-          {/* Company */}
-          <div className="md:col-span-3">
-            <h4 className="mb-5 text-xs uppercase tracking-[0.25em] text-primary/40">
-              {t('footer.company')}
-            </h4>
-            <ul className="space-y-3 text-sm">
-              <li>
-                <Link to="/catalogo" className="text-secondary transition-colors hover:text-accent">
-                  {t('nav.catalog')}
-                </Link>
-              </li>
-              <li>
-                <Link to="/contacto" className="text-secondary transition-colors hover:text-accent">
-                  {t('nav.contact')}
-                </Link>
-              </li>
-            </ul>
           </div>
         </div>
 
