@@ -58,12 +58,25 @@ export default function Lightbox({ images, index, alt = '', onClose, onIndex }) 
       }
     };
 
+    // Push a history entry so the browser Back button closes the lightbox
+    // instead of navigating away from the page.
+    let closedByBack = false;
+    history.pushState({ lightbox: true }, '');
+    const onPop = () => {
+      closedByBack = true;
+      navRef.current.onClose();
+    };
+
     document.addEventListener('keydown', onKey);
+    window.addEventListener('popstate', onPop);
     document.body.style.overflow = 'hidden';
     return () => {
       document.removeEventListener('keydown', onKey);
+      window.removeEventListener('popstate', onPop);
       document.body.style.overflow = '';
       if (prevFocus instanceof HTMLElement) prevFocus.focus();
+      // If closed by X / backdrop (not Back button), pop our extra history entry.
+      if (!closedByBack) history.back();
     };
     // Mount-only: live values are read from navRef, focusables() re-queries the DOM.
   }, []);
@@ -131,6 +144,23 @@ export default function Lightbox({ images, index, alt = '', onClose, onIndex }) 
         >
           ›
         </button>
+      )}
+
+      {/* Full-height edge tap zones — declared last so they sit above the image
+          in the stacking order and intercept taps on the left/right edges. */}
+      {multi && (
+        <>
+          <div
+            className="absolute left-0 top-0 h-full w-[22%] cursor-pointer"
+            onClick={(e) => { e.stopPropagation(); go(-1); }}
+            aria-hidden="true"
+          />
+          <div
+            className="absolute right-0 top-0 h-full w-[22%] cursor-pointer"
+            onClick={(e) => { e.stopPropagation(); go(1); }}
+            aria-hidden="true"
+          />
+        </>
       )}
 
       {multi && (

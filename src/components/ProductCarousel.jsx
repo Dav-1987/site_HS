@@ -98,7 +98,7 @@ export function CarouselTrack({ products, carousel }) {
         {products.map((p) => (
           <div
             key={p.id}
-            className="w-[85%] flex-none snap-start sm:w-[calc(50%-18px)] md:w-[calc(50%-32px)] lg:w-[calc(33.333%-37px)]"
+            className="w-[calc(50%-12px)] flex-none snap-start sm:w-[calc(50%-18px)] md:w-[calc(50%-32px)] lg:w-[calc(33.333%-37px)]"
           >
             <ProductCard product={p} categorySlug={p.categorySlug} categoryName={p.category} />
           </div>
