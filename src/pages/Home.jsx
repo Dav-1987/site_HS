@@ -13,7 +13,7 @@ import CategoryCard from '../components/CategoryCard.jsx';
 import { CarouselArrows, CarouselTrack, useCarousel } from '../components/ProductCarousel.jsx';
 
 const FEATURED_CARD_CLASSNAME =
-  'w-[calc(100%-48px)] flex-none snap-start sm:w-[calc(50%-18px)] md:w-[calc(50%-32px)] lg:w-[calc(33.333%-37px)]';
+  'w-[calc(100%-80px)] flex-none snap-start sm:w-[calc(50%-18px)] md:w-[calc(50%-32px)] lg:w-[calc(33.333%-37px)]';
 const FEATURED_ASPECT_CLASSNAME = 'aspect-[9/16] sm:aspect-[4/5]';
 
 function Hero() {
@@ -91,6 +91,7 @@ function FeaturedSection() {
       <div className="px-6 md:px-12 lg:px-20">
         <SectionHeader
           title={t('section.featured.title')}
+          gapClassName="mb-6 md:mb-20"
           action={
             <div className="hidden md:block">
               <CarouselArrows carousel={carousel} />

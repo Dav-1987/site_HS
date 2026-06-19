@@ -1,8 +1,8 @@
 /** Shared section heading: eyebrow label + large serif title + optional action. */
-export default function SectionHeader({ eyebrow, title, action, className = '' }) {
+export default function SectionHeader({ eyebrow, title, action, className = '', gapClassName = 'mb-14 md:mb-20' }) {
   return (
     <div
-      className={`mb-14 flex flex-col gap-6 md:mb-20 md:flex-row md:items-end md:justify-between ${className}`}
+      className={`${gapClassName} flex flex-col gap-6 md:flex-row md:items-end md:justify-between ${className}`}
     >
       <div className="max-w-2xl">
         {eyebrow && (
