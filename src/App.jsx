@@ -8,6 +8,8 @@ const Catalog = lazy(() => import('./pages/Catalog.jsx'));
 const Category = lazy(() => import('./pages/Category.jsx'));
 const Contact = lazy(() => import('./pages/Contact.jsx'));
 const Product = lazy(() => import('./pages/Product.jsx'));
+const PrivacyPolicy = lazy(() => import('./pages/PrivacyPolicy.jsx'));
+const LegalNotice = lazy(() => import('./pages/LegalNotice.jsx'));
 const NotFound = lazy(() => import('./pages/NotFound.jsx'));
 const Admin = lazy(() => import('./pages/Admin.jsx'));
 
@@ -38,6 +40,8 @@ export default function App() {
         <Route path="/categoria/:slug" element={<LegacyCategoryRedirect />} />
         <Route path="/producto/:id" element={<LegacyProductRedirect />} />
         <Route path="/contacto" element={<Contact />} />
+        <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+        <Route path="/legal-notice" element={<LegalNotice />} />
         <Route path="/:slug" element={<Category />} />
         <Route path="/:categorySlug/:id" element={<Product />} />
         <Route path="*" element={<NotFound />} />

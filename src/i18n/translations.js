@@ -129,6 +129,28 @@ export const translations = {
     'footer.legal': 'Aviso legal',
     'footer.privacy': 'Privacidad',
 
+    // --- Privacy Policy ---
+    'privacy.title': 'Política de Privacidad',
+    'privacy.intro': 'Respetamos tu privacidad.',
+    'privacy.p1':
+      'Cuando envías una solicitud a través de nuestro sitio web, podemos recopilar tu nombre, número de teléfono, dirección de correo electrónico y cualquier otra información que decidas proporcionar.',
+    'privacy.p2':
+      'Utilizamos esta información únicamente para responder a tu solicitud, gestionar pedidos y ofrecer atención al cliente.',
+    'privacy.p3': 'No vendemos tus datos personales a terceros.',
+    'privacy.p4':
+      'Si tienes alguna pregunta sobre tus datos personales, puedes contactarnos en {email}.',
+
+    // --- Legal Notice ---
+    'legal.title': 'Aviso Legal',
+    'legal.companyLabel': 'Empresa',
+    'legal.website': 'Sitio web',
+    'legal.email': 'Correo electrónico',
+    'legal.p1':
+      'Todos los contenidos de este sitio web, incluidos textos, imágenes, gráficos y elementos de diseño, son propiedad de HS Muebles y no pueden ser copiados, reproducidos, distribuidos o utilizados sin autorización previa.',
+    'legal.p2':
+      'HS Muebles no se responsabiliza de los daños o perjuicios derivados del uso de este sitio web.',
+    'legal.p3': 'Para cualquier consulta, puede contactarnos en {email}.',
+
     // --- Common ---
     'common.viewAll': 'Ver todo',
     'common.currency': '€',
@@ -259,6 +281,27 @@ export const translations = {
     'footer.rights': 'All rights reserved.',
     'footer.legal': 'Legal notice',
     'footer.privacy': 'Privacy',
+
+    // --- Privacy Policy ---
+    'privacy.title': 'Privacy Policy',
+    'privacy.intro': 'We respect your privacy.',
+    'privacy.p1':
+      'When you submit a request through our website, we may collect your name, phone number, email address, and other information you choose to provide.',
+    'privacy.p2':
+      'We use this information only to respond to your request, process orders, and provide customer support.',
+    'privacy.p3': 'We do not sell your personal information to third parties.',
+    'privacy.p4':
+      'If you have any questions regarding your personal data, please contact us at {email}.',
+
+    // --- Legal Notice ---
+    'legal.title': 'Legal Notice',
+    'legal.companyLabel': 'Company',
+    'legal.website': 'Website',
+    'legal.email': 'Email',
+    'legal.p1':
+      'All content on this website, including text, images, graphics and design elements, is the property of HS Muebles and may not be copied, reproduced, distributed or used without prior permission.',
+    'legal.p2': 'HS Muebles is not responsible for any damages resulting from the use of this website.',
+    'legal.p3': 'For any questions, please contact us at {email}.',
 
     // --- Common ---
     'common.viewAll': 'View all',

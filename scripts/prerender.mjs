@@ -35,6 +35,8 @@ const routes = [
   '/',
   '/catalogo',
   '/contacto',
+  '/privacy-policy',
+  '/legal-notice',
   ...catalog.map((cat) => `/${cat.slug}`),
   ...catalog.flatMap((cat) => cat.products.map((p) => `/${cat.slug}/${p.id}`)),
 ];

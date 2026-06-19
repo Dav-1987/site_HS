@@ -133,12 +133,12 @@ export default function Footer() {
             © {year} HS Muebles. {t('footer.rights')}
           </p>
           <div className="flex gap-6">
-            <a href="#" className="transition-colors hover:text-accent">
+            <Link to="/legal-notice" className="transition-colors hover:text-accent">
               {t('footer.legal')}
-            </a>
-            <a href="#" className="transition-colors hover:text-accent">
+            </Link>
+            <Link to="/privacy-policy" className="transition-colors hover:text-accent">
               {t('footer.privacy')}
-            </a>
+            </Link>
           </div>
         </div>
       </div>

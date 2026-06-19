@@ -16,6 +16,8 @@ const staticRoutes = [
   { url: '/', priority: '1.0', changefreq: 'weekly' },
   { url: '/catalogo', priority: '0.9', changefreq: 'weekly' },
   { url: '/contacto', priority: '0.6', changefreq: 'monthly' },
+  { url: '/privacy-policy', priority: '0.3', changefreq: 'yearly' },
+  { url: '/legal-notice', priority: '0.3', changefreq: 'yearly' },
 ];
 
 const categoryRoutes = catalog.map((cat) => ({
