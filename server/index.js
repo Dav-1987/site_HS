@@ -6,6 +6,7 @@ import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import sharp from 'sharp';
 
+import pool from './db.js';
 import { verifyPassword, createSessionToken, sessionCookie, clearCookie, isAuthenticated } from './auth.js';
 import { readOrSeedCatalog, writeCatalog, recordVersion, listVersions, getVersionData,
          extractUploadKeys, scheduleForDeletion, unscheduleFiles,
@@ -405,6 +406,18 @@ app.post('/api/order', orderRateLimit, async (req, res) => {
   } catch (err) {
     console.error('order POST failed', err);
     res.status(500).json({ error: 'Failed to send order' });
+  }
+});
+
+// ─── /api/health — PM2 / uptime monitoring ───────────────────────────────────
+
+app.get('/api/health', async (req, res) => {
+  try {
+    await pool.query('SELECT 1');
+    res.json({ ok: true, db: 'ok' });
+  } catch (err) {
+    console.error('[health] db check failed', err);
+    res.status(503).json({ ok: false, db: 'error' });
   }
 });
 

@@ -1,7 +1,8 @@
 import { lazy, Suspense } from 'react';
-import { Routes, Route, Navigate, useParams } from 'react-router-dom';
+import { Routes, Route, Navigate, useParams, useLocation } from 'react-router-dom';
 import { useCatalog } from './catalog/CatalogContext.jsx';
 import Layout from './components/Layout.jsx';
+import ErrorBoundary from './components/ErrorBoundary.jsx';
 
 const Home = lazy(() => import('./pages/Home.jsx'));
 const Catalog = lazy(() => import('./pages/Catalog.jsx'));
@@ -29,23 +30,29 @@ function LegacyProductRedirect() {
 }
 
 export default function App() {
+  const location = useLocation();
   return (
-    <Routes>
-      {/* Admin lives outside the marketing Layout (no header/footer). */}
-      <Route path="/admin" element={<Suspense fallback={null}><Admin /></Suspense>} />
+    // Reset on every navigation (key=pathname) so a crash on one page doesn't
+    // permanently brick the rest of the SPA session — the boundary remounts
+    // fresh as soon as the user moves to a different route.
+    <ErrorBoundary key={location.pathname}>
+      <Routes>
+        {/* Admin lives outside the marketing Layout (no header/footer). */}
+        <Route path="/admin" element={<Suspense fallback={null}><Admin /></Suspense>} />
 
-      <Route element={<Layout />}>
-        <Route path="/" element={<Home />} />
-        <Route path="/catalogo" element={<Catalog />} />
-        <Route path="/categoria/:slug" element={<LegacyCategoryRedirect />} />
-        <Route path="/producto/:id" element={<LegacyProductRedirect />} />
-        <Route path="/contacto" element={<Contact />} />
-        <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-        <Route path="/legal-notice" element={<LegalNotice />} />
-        <Route path="/:slug" element={<Category />} />
-        <Route path="/:categorySlug/:id" element={<Product />} />
-        <Route path="*" element={<NotFound />} />
-      </Route>
-    </Routes>
+        <Route element={<Layout />}>
+          <Route path="/" element={<Home />} />
+          <Route path="/catalogo" element={<Catalog />} />
+          <Route path="/categoria/:slug" element={<LegacyCategoryRedirect />} />
+          <Route path="/producto/:id" element={<LegacyProductRedirect />} />
+          <Route path="/contacto" element={<Contact />} />
+          <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+          <Route path="/legal-notice" element={<LegalNotice />} />
+          <Route path="/:slug" element={<Category />} />
+          <Route path="/:categorySlug/:id" element={<Product />} />
+          <Route path="*" element={<NotFound />} />
+        </Route>
+      </Routes>
+    </ErrorBoundary>
   );
 }

@@ -35,7 +35,6 @@ export const translations = {
 
     // --- Category / product ---
     'category.products': 'piezas',
-    'category.back': 'Volver al catálogo',
     'category.empty': 'Próximamente nuevas piezas en esta colección.',
     'category.related': 'Otras colecciones',
     'product.from': 'Desde',
@@ -112,6 +111,8 @@ export const translations = {
     // --- A11y ---
     'a11y.skipToContent': 'Saltar al contenido',
     'notFound.text': 'La página que buscas no existe.',
+    'error.boundary.title': 'Algo ha ido mal',
+    'error.boundary.body': 'Ha ocurrido un error inesperado. Inténtalo de nuevo o vuelve al inicio.',
 
     // --- A11y: carousel + lightbox ---
     'carousel.prev': 'Anterior',
@@ -193,7 +194,6 @@ export const translations = {
 
     // --- Category / product ---
     'category.products': 'pieces',
-    'category.back': 'Back to catalog',
     'category.empty': 'New pieces coming soon to this collection.',
     'category.related': 'Other collections',
     'product.from': 'From',
@@ -270,6 +270,8 @@ export const translations = {
     // --- A11y ---
     'a11y.skipToContent': 'Skip to content',
     'notFound.text': 'The page you are looking for does not exist.',
+    'error.boundary.title': 'Something went wrong',
+    'error.boundary.body': 'An unexpected error occurred. Please try again or go back home.',
 
     // --- A11y: carousel + lightbox ---
     'carousel.prev': 'Previous',

@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useLanguage } from '../i18n/LanguageContext.jsx';
-import { useCatalog } from '../catalog/CatalogContext.jsx';
 import { useSettings } from '../settings/SettingsContext.jsx';
 
 function IconInstagram() {
@@ -49,18 +48,18 @@ function IconEmail() {
 }
 
 export default function Footer() {
-  const { lang, t } = useLanguage();
-  const { categories } = useCatalog();
+  const { t } = useLanguage();
   const { settings } = useSettings();
   const contact = settings.contact;
   const year = new Date().getFullYear();
   const [emailCopied, setEmailCopied] = useState(false);
 
   const copyEmail = () => {
+    if (!navigator.clipboard) return;
     navigator.clipboard.writeText(contact.email).then(() => {
       setEmailCopied(true);
       setTimeout(() => setEmailCopied(false), 2000);
-    });
+    }).catch(() => {});
   };
 
   return (
@@ -96,9 +95,17 @@ export default function Footer() {
               )}
             </div>
 
-            {/* Phone */}
+            {/* Phone — admin enters a bare local number (e.g. "614848301") and
+                we assume Spain by default, but accept a full international
+                number (leading "+") as-is to avoid doubling the prefix. */}
             {contact.phone && (
-              <a href={`tel:+34${contact.phone.replace(/\s/g, '')}`} className="mt-4 flex items-center gap-2 text-sm text-secondary transition-colors duration-300 hover:text-accent">
+              <a
+                href={`tel:${(() => {
+                  const digits = contact.phone.replace(/\s/g, '');
+                  return digits.startsWith('+') ? digits : `+34${digits}`;
+                })()}`}
+                className="mt-4 flex items-center gap-2 text-sm text-secondary transition-colors duration-300 hover:text-accent"
+              >
                 <IconPhone />
                 {contact.phone}
               </a>
@@ -116,11 +123,15 @@ export default function Footer() {
                   {contact.email}
                 </button>
                 <span
+                  role="status"
                   className={`pointer-events-none absolute -top-8 left-0 whitespace-nowrap rounded bg-primary px-2 py-1 text-[11px] text-background transition-all duration-200 ${
                     emailCopied ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-1'
                   }`}
                 >
-                  {t('footer.emailCopied')}
+                  {/* role="status" only announces on content change, not on
+                      the opacity/translate transition — render the text node
+                      conditionally so screen readers pick it up. */}
+                  {emailCopied ? t('footer.emailCopied') : ''}
                 </span>
               </div>
             )}

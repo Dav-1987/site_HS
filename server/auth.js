@@ -2,7 +2,7 @@
 // Replaced Netlify.env.get() → process.env
 // Replaced req.headers.get() → req.headers[] (Express style)
 
-import { createHmac, timingSafeEqual } from 'node:crypto';
+import { createHash, createHmac, timingSafeEqual } from 'node:crypto';
 
 const COOKIE_NAME = 'hs_admin';
 const DEFAULT_MAX_AGE_S = 60 * 60 * 24 * 7; // 7 days
@@ -21,11 +21,13 @@ function sign(payloadB64) {
   return createHmac('sha256', secret()).update(payloadB64).digest('base64url');
 }
 
+// Hash both sides first so the comparison is always fixed-length —
+// timingSafeEqual alone still leaks the input length via the early-return
+// when lengths differ.
 function safeEqual(a, b) {
-  const ab = Buffer.from(a);
-  const bb = Buffer.from(b);
-  if (ab.length !== bb.length) return false;
-  return timingSafeEqual(ab, bb);
+  const ah = createHash('sha256').update(a).digest();
+  const bh = createHash('sha256').update(b).digest();
+  return timingSafeEqual(ah, bh);
 }
 
 export function verifyPassword(input) {

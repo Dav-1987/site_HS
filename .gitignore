@@ -10,3 +10,7 @@ dist/
 
 # Local tooling state
 .netlify
+
+# DB dumps / audit reports — never commit (may contain data, are dev-only artifacts)
+products_backup_*.sql
+*-audit/

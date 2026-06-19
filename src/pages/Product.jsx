@@ -96,6 +96,15 @@ export default function Product() {
   const related = computeRelated(categories, product, category, product.related);
   const metaDesc = productDescription(product, category, 'es');
   const canonicalUrl = `${SITE}/${category.slug}/${product.id}`;
+  // Many products share the same generic `name` (e.g. "Tocador") and even the
+  // same `subtitle` (dimensions) within a category — fold in the reference
+  // (always present, always unique) so every page gets a distinct <title>.
+  const ref = (product.reference || productReference(product.name) || '').trim();
+  const pageTitle = [
+    product.name,
+    product.subtitle,
+    ref && `(${ref})`,
+  ].filter(Boolean).join(' ');
   const ogImage = resolveImage(images[0], 1600);
   const specs = [
     { label: t('product.collectionLabel'), value: category.name[lang] },
@@ -104,11 +113,11 @@ export default function Product() {
 
   return (
     <>
-      <title>{`${product.name} — ${category.name.es} | HS Muebles`}</title>
+      <title>{`${pageTitle} — ${category.name.es} | HS Muebles`}</title>
       <meta name="description" content={metaDesc} />
       <link rel="canonical" href={canonicalUrl} />
       <SocialMeta
-        title={`${product.name} | HS Muebles`}
+        title={`${pageTitle} | HS Muebles`}
         description={metaDesc}
         url={canonicalUrl}
         type="product"

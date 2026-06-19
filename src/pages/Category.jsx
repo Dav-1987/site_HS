@@ -50,12 +50,16 @@ export default function Category() {
       />
       {/* Header */}
       <section className="px-6 pt-6 md:px-12 md:pt-10 lg:px-20">
-        <Link
-          to="/catalogo"
-          className="link-underline mb-6 inline-block text-xs uppercase tracking-[0.2em] text-secondary hover:text-primary"
+        <nav
+          aria-label="breadcrumb"
+          className="mb-6 flex flex-wrap items-center gap-2 text-[9px] md:text-[11px] uppercase tracking-[0.08em] text-primary/40"
         >
-          ← {t('category.back')}
-        </Link>
+          <Link to="/catalogo" className="transition-colors hover:text-accent">
+            {t('nav.catalog')}
+          </Link>
+          <span aria-hidden="true">/</span>
+          <span className="text-primary/70">{category.name[lang]}</span>
+        </nav>
 
         <Reveal>
           <h1 className="font-serif text-[clamp(3rem,5.6vw,4.5rem)] font-light leading-[1.02] tracking-tight text-primary">
