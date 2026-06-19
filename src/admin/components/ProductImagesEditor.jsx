@@ -1,28 +1,37 @@
 import { useState } from 'react';
 import { resolveImage } from '../../data/catalog.js';
-import { uploadImage } from '../api.js';
+import { uploadImage, uploadVideo } from '../api.js';
 import { LABEL } from '../ui.js';
 
-// Multi-photo editor for a product: drag-to-reorder grid, multi-upload, replace
-// and delete. First photo is the cover.
-export default function ProductImagesEditor({ images, onChange }) {
-  const [uploading, setUploading] = useState(false);
-  const [uploadProgress, setUploadProgress] = useState('');
-  const [uploadErrors, setUploadErrors] = useState([]);
+// Unified media editor for a product: photos AND videos in one drag-to-reorder
+// grid. Any item can be moved to any position; the first photo is the catalog
+// cover. Multi-upload for both photos and videos.
+//
+// `media` is an ordered array of { type: 'image'|'video', src }.
+export default function ProductImagesEditor({ media, onChange }) {
+  const items = Array.isArray(media) ? media : [];
+  const [photoUploading, setPhotoUploading] = useState(false);
+  const [photoProgress, setPhotoProgress] = useState('');
+  const [videoUploading, setVideoUploading] = useState(false);
+  const [videoProgress, setVideoProgress] = useState('');
+  const [errors, setErrors] = useState([]);
   const [replacingIdx, setReplacingIdx] = useState(null);
   const [dragIdx, setDragIdx] = useState(null);
   const [overIdx, setOverIdx] = useState(null);
 
+  // Index of the first photo — that's the catalog cover.
+  const coverIdx = items.findIndex((m) => m.type !== 'video');
+
   const remove = (i) => {
-    if (!window.confirm('Удалить это фото?')) return;
-    onChange(images.filter((_, j) => j !== i));
+    const isVid = items[i]?.type === 'video';
+    if (!window.confirm(isVid ? 'Удалить это видео?' : 'Удалить это фото?')) return;
+    onChange(items.filter((_, j) => j !== i));
   };
 
-  // Drag-and-drop handlers
+  // Drag-and-drop reordering (works across photos and videos alike).
   const onDragStart = (e, i) => {
     setDragIdx(i);
     e.dataTransfer.effectAllowed = 'move';
-    // Transparent drag ghost — браузер сам рисует превью
     e.dataTransfer.setData('text/plain', String(i));
   };
   const onDragOver = (e, i) => {
@@ -33,7 +42,7 @@ export default function ProductImagesEditor({ images, onChange }) {
   const onDrop = (e, i) => {
     e.preventDefault();
     if (dragIdx === null || dragIdx === i) { setDragIdx(null); setOverIdx(null); return; }
-    const next = [...images];
+    const next = [...items];
     const [dragged] = next.splice(dragIdx, 1);
     next.splice(i, 0, dragged);
     onChange(next);
@@ -42,41 +51,56 @@ export default function ProductImagesEditor({ images, onChange }) {
   };
   const onDragEnd = () => { setDragIdx(null); setOverIdx(null); };
 
-  const onMultiUpload = async (e) => {
-    const files = Array.from(e.target.files || []);
-    e.target.value = '';
-    if (!files.length) return;
-    setUploading(true);
-    setUploadProgress(`0 / ${files.length}`);
-    setUploadErrors([]);
-    const urls = [];
-    const errors = [];
+  // Multi-upload helper shared by photo/video add tiles.
+  const uploadMany = async (files, kind) => {
+    const upload = kind === 'video' ? uploadVideo : uploadImage;
+    const type = kind === 'video' ? 'video' : 'image';
+    const setBusy = kind === 'video' ? setVideoUploading : setPhotoUploading;
+    const setProgress = kind === 'video' ? setVideoProgress : setPhotoProgress;
+    setBusy(true);
+    setProgress(`0 / ${files.length}`);
+    setErrors([]);
+    const added = [];
+    const errs = [];
     for (let i = 0; i < files.length; i++) {
       try {
-        const { url } = await uploadImage(files[i]);
-        urls.push(url);
+        const { url } = await upload(files[i]);
+        added.push({ type, src: url });
       } catch (err) {
-        errors.push(`${files[i].name}: ${err.message || 'Ошибка загрузки'}`);
+        errs.push(`${files[i].name}: ${err.message || 'Ошибка загрузки'}`);
       }
-      setUploadProgress(`${i + 1} / ${files.length}`);
+      setProgress(`${i + 1} / ${files.length}`);
     }
-    setUploading(false);
-    setUploadProgress('');
-    setUploadErrors(errors);
-    if (urls.length) onChange([...images, ...urls]);
+    setBusy(false);
+    setProgress('');
+    setErrors(errs);
+    if (added.length) onChange([...items, ...added]);
+  };
+
+  const onAddPhotos = (e) => {
+    const files = Array.from(e.target.files || []);
+    e.target.value = '';
+    if (files.length) uploadMany(files, 'image');
+  };
+  const onAddVideos = (e) => {
+    const files = Array.from(e.target.files || []);
+    e.target.value = '';
+    if (files.length) uploadMany(files, 'video');
   };
 
   const onReplace = async (e, idx) => {
     const file = e.target.files?.[0];
     e.target.value = '';
     if (!file) return;
+    const item = items[idx];
+    const upload = item.type === 'video' ? uploadVideo : uploadImage;
     setReplacingIdx(idx);
-    setUploadErrors([]);
+    setErrors([]);
     try {
-      const { url } = await uploadImage(file);
-      onChange(images.map((x, j) => (j === idx ? url : x)));
+      const { url } = await upload(file);
+      onChange(items.map((x, j) => (j === idx ? { ...x, src: url } : x)));
     } catch (err) {
-      setUploadErrors([`${file.name}: ${err.message || 'Ошибка загрузки'}`]);
+      setErrors([`${file.name}: ${err.message || 'Ошибка загрузки'}`]);
     } finally {
       setReplacingIdx(null);
     }
@@ -84,15 +108,16 @@ export default function ProductImagesEditor({ images, onChange }) {
 
   return (
     <div>
-      <span className={LABEL}>Фотографии (первая — обложка)</span>
+      <span className={LABEL}>Фото и видео — перетаскивайте в любом порядке (первое фото — обложка каталога)</span>
 
-      {/* Compact thumbnail grid */}
+      {/* Drag-to-reorder media grid */}
       <div className="mt-2 grid grid-cols-4 gap-2 sm:grid-cols-5 lg:grid-cols-6">
-        {images.map((img, i) => {
-          const src = resolveImage(img, 200);
+        {items.map((item, i) => {
+          const isVid = item.type === 'video';
           const isReplacing = replacingIdx === i;
           const isDragging = dragIdx === i;
           const isOver = overIdx === i && dragIdx !== null && dragIdx !== i;
+          const src = isVid ? item.src : resolveImage(item.src, 200);
 
           return (
             <div
@@ -108,15 +133,26 @@ export default function ProductImagesEditor({ images, onChange }) {
                 isOver ? 'ring-2 ring-accent ring-offset-1' : '',
               ].join(' ')}
             >
-              {/* Cover badge */}
-              {i === 0 && (
+              {/* Position / role badge */}
+              {i === coverIdx ? (
                 <span className="pointer-events-none absolute left-1 top-1 z-10 bg-background/80 px-1.5 py-0.5 text-[9px] uppercase tracking-[0.12em] text-primary/60">
                   Обложка
                 </span>
+              ) : (
+                <span className="pointer-events-none absolute left-1 top-1 z-10 bg-background/80 px-1.5 py-0.5 text-[9px] uppercase tracking-[0.12em] text-primary/50">
+                  {i + 1}
+                </span>
+              )}
+
+              {/* Video marker */}
+              {isVid && (
+                <span className="pointer-events-none absolute right-1 top-1 z-10 bg-primary/70 px-1 py-0.5 text-[9px] text-background">▶</span>
               )}
 
               {/* Thumbnail */}
-              {src ? (
+              {isVid ? (
+                <video src={src} muted playsInline className="h-full w-full object-cover pointer-events-none" />
+              ) : src ? (
                 <img src={src} alt="" className="h-full w-full object-cover pointer-events-none" />
               ) : (
                 <div className="flex h-full w-full items-center justify-center">
@@ -126,23 +162,20 @@ export default function ProductImagesEditor({ images, onChange }) {
 
               {/* Hover overlay — replace + delete */}
               <div className="absolute inset-0 flex flex-col items-center justify-center gap-2 bg-primary/65 opacity-0 transition-opacity duration-200 group-hover:opacity-100">
-                {/* Replace */}
                 <label className="cursor-pointer text-center text-[10px] uppercase tracking-[0.1em] text-background transition-colors hover:text-accent">
                   {isReplacing ? '…' : '↺ Заменить'}
                   <input
                     type="file"
-                    accept="image/*"
+                    accept={isVid ? 'video/*' : 'image/*'}
                     className="hidden"
-                    disabled={isReplacing || uploading}
+                    disabled={isReplacing}
                     onChange={(e) => onReplace(e, i)}
                   />
                 </label>
-
-                {/* Delete */}
                 <button
                   type="button"
                   onClick={() => remove(i)}
-                  aria-label="Удалить фото"
+                  aria-label={isVid ? 'Удалить видео' : 'Удалить фото'}
                   className="text-[10px] uppercase tracking-[0.1em] text-background/70 transition-colors hover:text-red-400"
                 >
                   × Удалить
@@ -152,17 +185,17 @@ export default function ProductImagesEditor({ images, onChange }) {
           );
         })}
 
-        {/* Add tile — triggers multi-upload */}
+        {/* Add photos */}
         <label
           className="aspect-square cursor-pointer border border-dashed border-primary/20 bg-transparent flex flex-col items-center justify-center gap-1 text-primary/30 transition-colors hover:border-accent hover:text-accent"
           onDragOver={(e) => e.preventDefault()}
         >
-          {uploading ? (
-            <span className="text-[10px] uppercase tracking-[0.1em]">{uploadProgress}</span>
+          {photoUploading ? (
+            <span className="text-[10px] uppercase tracking-[0.1em]">{photoProgress}</span>
           ) : (
             <>
               <span className="text-2xl leading-none">+</span>
-              <span className="text-[9px] uppercase tracking-[0.1em]">Добавить</span>
+              <span className="text-[9px] uppercase tracking-[0.1em]">Фото</span>
             </>
           )}
           <input
@@ -170,16 +203,40 @@ export default function ProductImagesEditor({ images, onChange }) {
             accept="image/*"
             multiple
             className="hidden"
-            disabled={uploading}
-            onChange={onMultiUpload}
+            disabled={photoUploading}
+            onChange={onAddPhotos}
+          />
+        </label>
+
+        {/* Add videos */}
+        <label className="aspect-square cursor-pointer border border-dashed border-primary/20 bg-transparent flex flex-col items-center justify-center gap-1 text-primary/30 transition-colors hover:border-accent hover:text-accent">
+          {videoUploading ? (
+            <span className="text-[10px] uppercase tracking-[0.1em]">{videoProgress}</span>
+          ) : (
+            <>
+              <span className="text-2xl leading-none">▶</span>
+              <span className="text-[9px] uppercase tracking-[0.1em]">Видео</span>
+            </>
+          )}
+          <input
+            type="file"
+            accept="video/*"
+            multiple
+            className="hidden"
+            disabled={videoUploading}
+            onChange={onAddVideos}
           />
         </label>
       </div>
 
-      {/* Errors */}
-      {uploadErrors.length > 0 && (
+      <p className="mt-2 text-xs leading-relaxed text-primary/40">
+        Видео: MP4, WebM, MOV, макс. 200 МБ. Порядок плиток = порядок в галерее товара.
+        Держите хотя бы одно фото — первое фото используется как обложка в каталоге.
+      </p>
+
+      {errors.length > 0 && (
         <div className="mt-2 space-y-1">
-          {uploadErrors.map((msg, i) => (
+          {errors.map((msg, i) => (
             <p key={i} className="text-xs text-red-600">{msg}</p>
           ))}
         </div>

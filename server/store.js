@@ -11,6 +11,27 @@ const defaultCatalog = JSON.parse(
   readFileSync(join(__dirname, '../src/data/catalog.default.json'), 'utf8'),
 );
 
+// Build the canonical ordered media list for a product. Prefers the unified
+// `media` field; for products saved before it existed, synthesizes it from the
+// legacy `images` + single `video` (+ `videoFirst`) fields. Mirrors
+// productMedia() on the client.
+function normalizeMedia(p) {
+  if (Array.isArray(p?.media) && p.media.length) {
+    return p.media
+      .filter((m) => m && typeof m.src === 'string' && m.src)
+      .map((m) => ({ type: m.type === 'video' ? 'video' : 'image', src: m.src }));
+  }
+  const list = (Array.isArray(p?.images) ? p.images : []).filter(
+    (s) => typeof s === 'string' && s,
+  );
+  const photos = (list.length ? list : p?.image ? [p.image] : []).map((src) => ({
+    type: 'image',
+    src,
+  }));
+  const video = p?.video ? [{ type: 'video', src: p.video }] : [];
+  return p?.videoFirst ? [...video, ...photos] : [...photos, ...video];
+}
+
 function shapeCategory(cat, products) {
   return {
     slug: cat.slug,
@@ -29,6 +50,8 @@ function shapeCategory(cat, products) {
       imageMobile: p.image_mobile ?? '',
       images: Array.isArray(p.images) ? p.images : [],
       video: p.video ?? '',
+      videoFirst: p.video_first === true,
+      media: Array.isArray(p.media) ? p.media : [],
       material: { es: p.material_es, en: p.material_en },
       size: p.size,
       reference: p.reference ?? '',
@@ -86,15 +109,15 @@ export async function writeCatalog(categories) {
       const products = c.products ?? [];
       for (let pi = 0; pi < products.length; pi++) {
         const p = products[pi];
-        const gallery = (Array.isArray(p.images) ? p.images : []).filter(
-          (s) => typeof s === 'string' && s,
-        );
-        const cover = p.image || gallery[0] || '';
+        const media = normalizeMedia(p);
+        // Photos-only list (for the legacy cover columns the card/OG/schema use).
+        const gallery = media.filter((m) => m.type === 'image').map((m) => m.src);
+        const cover = gallery[0] || p.image || '';
         const images = gallery.length ? gallery : cover ? [cover] : [];
         await client.query(
           `INSERT INTO products
-             (id, category_slug, name, price, old_price, image, image_mobile, images, material_es, material_en, size, reference, subtitle, video, description_es, description_en, related, position)
-           VALUES ($1,$2,$3,$4,$5,$6,$7,$8::jsonb,$9,$10,$11,$12,$13,$14,$15,$16,$17::jsonb,$18)`,
+             (id, category_slug, name, price, old_price, image, image_mobile, images, material_es, material_en, size, reference, subtitle, video, video_first, media, description_es, description_en, related, position)
+           VALUES ($1,$2,$3,$4,$5,$6,$7,$8::jsonb,$9,$10,$11,$12,$13,$14,$15,$16::jsonb,$17,$18,$19::jsonb,$20)`,
           [
             p.id,
             c.slug,
@@ -109,7 +132,10 @@ export async function writeCatalog(categories) {
             p.size ?? '',
             p.reference ?? '',
             p.subtitle ?? '',
-            p.video ?? '',
+            // Legacy single-video fields kept empty once media is the source of truth.
+            '',
+            false,
+            JSON.stringify(media),
             p.description?.es ?? '',
             p.description?.en ?? '',
             JSON.stringify(Array.isArray(p.related) ? p.related : []),
@@ -193,6 +219,7 @@ export function extractUploadKeys(categories) {
     for (const p of c.products ?? []) {
       add(p.image); add(p.imageMobile); add(p.video);
       for (const img of p.images ?? []) add(img);
+      for (const m of p.media ?? []) add(m?.src);
     }
   }
   return keys;

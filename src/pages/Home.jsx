@@ -12,6 +12,10 @@ import SectionHeader from '../components/SectionHeader.jsx';
 import CategoryCard from '../components/CategoryCard.jsx';
 import { CarouselArrows, CarouselTrack, useCarousel } from '../components/ProductCarousel.jsx';
 
+const FEATURED_CARD_CLASSNAME =
+  'w-[calc(100%-48px)] flex-none snap-start sm:w-[calc(50%-18px)] md:w-[calc(50%-32px)] lg:w-[calc(33.333%-37px)]';
+const FEATURED_ASPECT_CLASSNAME = 'aspect-[9/16] sm:aspect-[4/5]';
+
 function Hero() {
   const { t } = useLanguage();
   const { settings } = useSettings();
@@ -89,7 +93,7 @@ function FeaturedSection() {
           eyebrow={t('section.featured.eyebrow')}
           title={t('section.featured.title')}
           action={
-            <div className="flex flex-col items-end gap-4">
+            <div className="hidden flex-col items-end gap-4 md:flex">
               <Button to="/catalogo" variant="ghost">
                 {t('common.viewAll')} →
               </Button>
@@ -99,7 +103,12 @@ function FeaturedSection() {
         />
       </div>
 
-      <CarouselTrack products={featured} carousel={carousel} />
+      <CarouselTrack
+        products={featured}
+        carousel={carousel}
+        cardClassName={FEATURED_CARD_CLASSNAME}
+        imageAspectClassName={FEATURED_ASPECT_CLASSNAME}
+      />
     </section>
   );
 }

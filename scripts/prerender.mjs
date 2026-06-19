@@ -140,7 +140,7 @@ async function main() {
   let fail = 0;
   for (const route of routes) {
     try {
-      const appHtml = render(route);
+      const appHtml = await render(route);
       saveRoute(route, compose(template, appHtml));
       ok++;
       process.stdout.write(`  ✅ ${route}\n`);

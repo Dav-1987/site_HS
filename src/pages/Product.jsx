@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { Link, Navigate, useParams } from 'react-router-dom';
 import { useLanguage } from '../i18n/LanguageContext.jsx';
 import { useCatalog } from '../catalog/CatalogContext.jsx';
-import { productDescription, productImages, productReference, computeRelated, resolveImage } from '../data/catalog.js';
+import { productDescription, productImages, productMedia, productReference, computeRelated, resolveImage } from '../data/catalog.js';
 import JsonLd from '../components/JsonLd.jsx';
 import SocialMeta from '../components/SocialMeta.jsx';
 import { productSchema, breadcrumbSchema } from '../seo/schema.js';
@@ -59,17 +59,27 @@ export default function Product() {
     return <Navigate to={`/${category.slug}/${product.id}`} replace />;
   }
 
-  // Real per-product gallery (falls back to the single cover image).
+  // Unified, ordered gallery: photos and videos interleaved exactly as the
+  // admin arranged them. Each item is { type:'image'|'video', src }.
+  const gallery = productMedia(product);
+  // Photos only (for the zoom lightbox, OG image and Schema.org).
   const images = productImages(product);
-  const videoSrc = product.video || '';
-  // Full gallery: photos, with the video last (if any).
-  // The video slot is an object { type:'video', src }; everything else is a string.
-  const gallery = videoSrc ? [...images, { type: 'video', src: videoSrc }] : images;
+  // Index maps between gallery slots and the photo-only list (videos are gaps).
+  const galleryToPhoto = [];
+  const photoToGallery = [];
+  gallery.forEach((item, i) => {
+    if (item.type === 'video') {
+      galleryToPhoto[i] = -1;
+    } else {
+      galleryToPhoto[i] = photoToGallery.length;
+      photoToGallery.push(i);
+    }
+  });
   const multi = gallery.length > 1;
   const THUMB_VISIBLE = 4;
   const activeIdx = Math.min(active, gallery.length - 1);
   const activeItem = gallery[activeIdx];
-  const isVideoActive = typeof activeItem === 'object' && activeItem?.type === 'video';
+  const isVideoActive = activeItem?.type === 'video';
 
   const activateImage = (i) => {
     setActive(i);
@@ -172,16 +182,20 @@ export default function Product() {
             >
               {isVideoActive ? (
                 <video
+                  key={activeItem.src}
                   src={activeItem.src}
                   controls
+                  autoPlay
+                  muted
+                  loop
                   playsInline
-                  className="h-full w-full object-cover"
+                  className="h-full w-full bg-black object-contain"
                   onClick={(e) => e.stopPropagation()}
                 />
               ) : (
                 <Media
-                  id={activeItem}
-                  idMobile={activeIdx === 0 ? product.imageMobile : ''}
+                  id={activeItem.src}
+                  idMobile={activeIdx === photoToGallery[0] ? product.imageMobile : ''}
                   alt={`${product.name} — ${category.name[lang]}`}
                   w={1400}
                 />
@@ -236,7 +250,7 @@ export default function Product() {
                 >
                   {gallery.slice(thumbStart, thumbStart + THUMB_VISIBLE).map((item, j) => {
                     const i = thumbStart + j;
-                    const isVid = typeof item === 'object' && item.type === 'video';
+                    const isVid = item.type === 'video';
                     return (
                       <button
                         key={i}
@@ -253,7 +267,7 @@ export default function Product() {
                             <span className="text-3xl text-primary/30">▶</span>
                           </div>
                         ) : (
-                          <Media id={item} alt={`${product.name} ${t('product.gallery')} ${i + 1}`} w={300} />
+                          <Media id={item.src} alt={`${product.name} ${t('product.gallery')} ${i + 1}`} w={300} />
                         )}
                       </button>
                     );
@@ -332,10 +346,10 @@ export default function Product() {
       {zoom && !isVideoActive && (
         <Lightbox
           images={images}
-          index={Math.min(activeIdx, images.length - 1)}
+          index={galleryToPhoto[activeIdx] >= 0 ? galleryToPhoto[activeIdx] : 0}
           alt={`${product.name} — ${category.name[lang]}`}
           onClose={() => setZoom(false)}
-          onIndex={setActive}
+          onIndex={(k) => setActive(photoToGallery[k])}
         />
       )}
 

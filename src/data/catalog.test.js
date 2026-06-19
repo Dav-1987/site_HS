@@ -5,6 +5,7 @@ import {
   computeRelated,
   resolveImage,
   productImages,
+  productMedia,
 } from './catalog.js';
 
 // Small catalog fixture: cat(slug, ...productIds)
@@ -76,6 +77,59 @@ describe('productImages', () => {
   it('returns an empty array when nothing is set', () => {
     expect(productImages({})).toEqual([]);
     expect(productImages(null)).toEqual([]);
+  });
+
+  it('derives photos (videos excluded) from the unified media list', () => {
+    const product = {
+      media: [
+        { type: 'video', src: 'v1' },
+        { type: 'image', src: 'a' },
+        { type: 'image', src: 'b' },
+      ],
+    };
+    expect(productImages(product)).toEqual(['a', 'b']);
+  });
+});
+
+describe('productMedia', () => {
+  it('returns the unified media list, normalized, in order', () => {
+    const product = {
+      media: [
+        { type: 'image', src: 'a' },
+        { type: 'video', src: 'v' },
+        { type: 'bogus', src: 'b' },
+        { type: 'video', src: '' },
+        { src: 'c' },
+      ],
+    };
+    expect(productMedia(product)).toEqual([
+      { type: 'image', src: 'a' },
+      { type: 'video', src: 'v' },
+      { type: 'image', src: 'b' },
+      { type: 'image', src: 'c' },
+    ]);
+  });
+
+  it('synthesizes media from legacy images + video (video last by default)', () => {
+    const product = { images: ['a', 'b'], video: 'v' };
+    expect(productMedia(product)).toEqual([
+      { type: 'image', src: 'a' },
+      { type: 'image', src: 'b' },
+      { type: 'video', src: 'v' },
+    ]);
+  });
+
+  it('honors the legacy videoFirst flag', () => {
+    const product = { images: ['a'], video: 'v', videoFirst: true };
+    expect(productMedia(product)).toEqual([
+      { type: 'video', src: 'v' },
+      { type: 'image', src: 'a' },
+    ]);
+  });
+
+  it('returns an empty array when nothing is set', () => {
+    expect(productMedia({})).toEqual([]);
+    expect(productMedia(null)).toEqual([]);
   });
 });
 

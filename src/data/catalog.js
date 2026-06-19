@@ -35,8 +35,43 @@ export function resolveImage(image, w = 900) {
   return unsplash(image, w);
 }
 
-/** Ordered image gallery for a product: explicit `images`, else the cover `image`. */
+/**
+ * Unified, ordered media gallery for a product: a mix of photos and videos in
+ * the exact order the admin arranged them. Each item is `{ type, src }` with
+ * type `'image'` or `'video'`.
+ *
+ * Source of truth is `product.media`. For products saved before the unified
+ * model existed, it's synthesized from the legacy `images` + single `video`
+ * (+ `videoFirst`) fields so old data keeps working without a re-save.
+ */
+export function productMedia(product) {
+  if (Array.isArray(product?.media) && product.media.length) {
+    return product.media
+      .filter((m) => m && typeof m.src === 'string' && m.src)
+      .map((m) => ({ type: m.type === 'video' ? 'video' : 'image', src: m.src }));
+  }
+  // Legacy fallback: photos from `images`/`image`, plus the single `video`.
+  const list = Array.isArray(product?.images) ? product.images.filter(Boolean) : [];
+  const photos = (list.length ? list : product?.image ? [product.image] : []).map((src) => ({
+    type: 'image',
+    src,
+  }));
+  const video = product?.video ? [{ type: 'video', src: product.video }] : [];
+  return product?.videoFirst ? [...video, ...photos] : [...photos, ...video];
+}
+
+/**
+ * Ordered photo gallery (no videos) for a product. Derived from the unified
+ * `media` list when present, else the legacy `images`/`image` fields. Used for
+ * the catalog cover, OG image, zoom lightbox and Schema.org — all photo-only.
+ */
 export function productImages(product) {
+  if (Array.isArray(product?.media) && product.media.length) {
+    const photos = product.media
+      .filter((m) => m && m.type !== 'video' && typeof m.src === 'string' && m.src)
+      .map((m) => m.src);
+    if (photos.length) return photos;
+  }
   const list = Array.isArray(product?.images) ? product.images.filter(Boolean) : [];
   if (list.length) return list;
   return product?.image ? [product.image] : [];

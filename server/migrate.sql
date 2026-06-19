@@ -42,6 +42,9 @@ CREATE TABLE IF NOT EXISTS products (
 -- columns to a table that already exists, so add them explicitly here too.
 ALTER TABLE products ADD COLUMN IF NOT EXISTS reference TEXT NOT NULL DEFAULT '';
 ALTER TABLE products ADD COLUMN IF NOT EXISTS subtitle TEXT NOT NULL DEFAULT '';
+ALTER TABLE products ADD COLUMN IF NOT EXISTS video_first BOOLEAN NOT NULL DEFAULT false;
+-- Unified ordered media list (photos + videos): [{ "type": "image"|"video", "src": "..." }]
+ALTER TABLE products ADD COLUMN IF NOT EXISTS media JSONB NOT NULL DEFAULT '[]'::jsonb;
 
 CREATE INDEX IF NOT EXISTS idx_products_category ON products (category_slug);
 

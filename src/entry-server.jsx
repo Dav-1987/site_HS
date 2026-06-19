@@ -11,6 +11,14 @@
  * We use renderToStaticMarkup (not renderToString) because the client mounts
  * with createRoot().render() — it replaces #root rather than hydrating — so no
  * hydration markers are needed.
+ *
+ * Routes are code-split with React.lazy (great for the client bundle), but a
+ * single synchronous renderToStaticMarkup pass can't resolve a Suspense
+ * boundary — the lazy page just suspends and renders the `null` fallback,
+ * leaving <main> empty. So `render` is async: it renders, lets the pending
+ * lazy chunk(s) load, and re-renders until the markup stabilizes. The lazy
+ * component instances are module-level singletons in App.jsx, so their resolved
+ * state carries over between passes.
  */
 import { StrictMode } from 'react';
 import { renderToStaticMarkup } from 'react-dom/server';
@@ -20,8 +28,12 @@ import { SettingsProvider } from './settings/SettingsContext.jsx';
 import { LanguageProvider } from './i18n/LanguageContext.jsx';
 import { CatalogProvider } from './catalog/CatalogContext.jsx';
 
-export function render(url) {
-  return renderToStaticMarkup(
+// Yield to the event loop so pending dynamic import()s (and the microtasks
+// React attaches to them) can settle before the next render pass.
+const tick = () => new Promise((resolve) => setTimeout(resolve, 0));
+
+export async function render(url) {
+  const tree = (
     <StrictMode>
       <StaticRouter location={url}>
         <SettingsProvider>
@@ -32,6 +44,20 @@ export function render(url) {
           </LanguageProvider>
         </SettingsProvider>
       </StaticRouter>
-    </StrictMode>,
+    </StrictMode>
   );
+
+  // First pass kicks off the lazy route's import(); content suspends to null.
+  let html = renderToStaticMarkup(tree);
+
+  // Re-render until the markup stops changing — i.e. every lazy boundary on the
+  // path has loaded. Capped so a stuck chunk can't loop forever.
+  for (let i = 0; i < 5; i++) {
+    await tick();
+    const next = renderToStaticMarkup(tree);
+    if (next === html) break;
+    html = next;
+  }
+
+  return html;
 }

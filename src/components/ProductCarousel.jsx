@@ -52,8 +52,11 @@ export function useCarousel() {
   return { trackRef, dragRef, activeIdx, atStart, atEnd, syncState, scroll, goTo };
 }
 
+const DEFAULT_CARD_CLASSNAME =
+  'w-[calc(50%-12px)] flex-none snap-start sm:w-[calc(50%-18px)] md:w-[calc(50%-32px)] lg:w-[calc(33.333%-37px)]';
+
 /** Horizontal, snap-scrolling, drag-to-scroll track of product cards. */
-export function CarouselTrack({ products, carousel }) {
+export function CarouselTrack({ products, carousel, cardClassName = DEFAULT_CARD_CLASSNAME, imageAspectClassName }) {
   const { trackRef, dragRef, syncState } = carousel;
 
   return (
@@ -96,11 +99,13 @@ export function CarouselTrack({ products, carousel }) {
       >
         <div className="w-6 flex-none md:w-12 lg:w-20" aria-hidden="true" />
         {products.map((p) => (
-          <div
-            key={p.id}
-            className="w-[calc(50%-12px)] flex-none snap-start sm:w-[calc(50%-18px)] md:w-[calc(50%-32px)] lg:w-[calc(33.333%-37px)]"
-          >
-            <ProductCard product={p} categorySlug={p.categorySlug} categoryName={p.category} />
+          <div key={p.id} className={cardClassName}>
+            <ProductCard
+              product={p}
+              categorySlug={p.categorySlug}
+              categoryName={p.category}
+              aspectClassName={imageAspectClassName}
+            />
           </div>
         ))}
         <div className="w-6 flex-none md:w-12 lg:w-20" aria-hidden="true" />

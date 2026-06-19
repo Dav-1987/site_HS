@@ -6,7 +6,7 @@ import { useLanguage } from '../i18n/LanguageContext.jsx';
 import { productImages } from '../data/catalog.js';
 
 /** Product tile: swipeable image carousel + discount-aware price. */
-export default function ProductCard({ product, categorySlug, categoryName }) {
+export default function ProductCard({ product, categorySlug, categoryName, aspectClassName = 'aspect-[4/5]' }) {
   const { lang, t } = useLanguage();
   const slug = categorySlug || product.categorySlug;
   // Canonical product URL is /<categorySlug>/<id>; the legacy /producto/<id>
@@ -25,7 +25,7 @@ export default function ProductCard({ product, categorySlug, categoryName }) {
   return (
     <article className="group">
       <div
-        className="relative mb-5 aspect-[4/5] overflow-hidden bg-surface"
+        className={`relative mb-5 ${aspectClassName} overflow-hidden bg-surface`}
         onPointerDown={(e) => {
           startX.current = e.clientX;
           swiped.current = false;

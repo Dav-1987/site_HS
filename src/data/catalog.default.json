@@ -29,6 +29,21 @@
           "/uploads/f7d3fe0b66ec85ce5a429891a71ae10d.jpg"
         ],
         "video": "",
+        "videoFirst": false,
+        "media": [
+          {
+            "src": "/uploads/d29e04e4fdb3901cd31b050922d2692b.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/f7d3fe0b66ec85ce5a429891a71ae10d.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/015e7089509b625cd540eba2539e6a67.mp4",
+            "type": "video"
+          }
+        ],
         "material": {
           "es": "Melamina, Metal",
           "en": "Melamine-faced Chipboard, Metal"
@@ -37,8 +52,8 @@
         "reference": "T-20",
         "subtitle": "90 × 40 × 170 cm",
         "description": {
-          "es": "Medidas: \n* ancho 90cm\n* prof. 40cm\n* altura 90cm\n\n✨ Espejo 90x80cm \n\n💡 Bombillas LED de regalo 🎁",
-          "en": ""
+          "es": "Medidas: \n•  ancho 90cm\n•  prof. 40cm\n•  altura 90cm\n\nEspejo 90x80cm \n\n🎁 Bombillas LED de regalo ",
+          "en": "Dimensions:\n• Width: 90 cm\n• Depth: 40 cm\n• Height: 90 cm\n\nMirror: 90 × 80 cm\n\n🎁 Free LED bulbs included"
         },
         "related": []
       },
@@ -55,6 +70,25 @@
           "/uploads/998a2403ed372166ba31f28bf3023421.jpg"
         ],
         "video": "",
+        "videoFirst": false,
+        "media": [
+          {
+            "src": "/uploads/25076fa903e9891b55d0c515854a2ad8.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/33736e9b59355ce7cb958e83f5a4a8dc.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/998a2403ed372166ba31f28bf3023421.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/9954214466d37037b64d80d219f3ff00.mp4",
+            "type": "video"
+          }
+        ],
         "material": {
           "es": "Lacado mate",
           "en": "Matte lacquer"
@@ -63,8 +97,8 @@
         "reference": "T-16",
         "subtitle": "90 × 40 × 170 cm",
         "description": {
-          "es": "Medidas: \n* ancho 90cm\n* prof. 40cm\n* altura 90cm\n\n✨ Espejo 90x80cm \n\n💡 Bombillas LED de regalo 🎁",
-          "en": ""
+          "es": "Medidas: \n•  ancho 90cm\n•  prof. 40cm\n•  altura 90cm\n\nEspejo 90x80cm \n\n🎁 Bombillas LED de regalo ",
+          "en": "Dimensions:\n• Width: 90 cm\n• Depth: 40 cm\n• Height: 90 cm\n\nMirror: 90 × 80 cm\n\n🎁 Free LED bulbs included"
         },
         "related": []
       },
@@ -84,6 +118,33 @@
           "/uploads/827558981c11ea9432aad1b2bdcba8bb.jpg"
         ],
         "video": "",
+        "videoFirst": false,
+        "media": [
+          {
+            "src": "/uploads/845578ae92ec61b012ddbc1e57416c0a.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/bb99a1b818c27bc91e8344a0152c6185.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/4aefea52dd7c011db8c60ff8c0d21bbb.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/3836301925f9a188f0941940e6b0e600.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/8f6e758f472b74ee4036a8cb390f4183.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/827558981c11ea9432aad1b2bdcba8bb.jpg",
+            "type": "image"
+          }
+        ],
         "material": {
           "es": "Lacado mate",
           "en": "Matte lacquer"
@@ -92,8 +153,8 @@
         "reference": "T-14",
         "subtitle": "70 × 40 × 170 cm",
         "description": {
-          "es": "",
-          "en": ""
+          "es": "Medidas: \n•  ancho 70cm\n•  prof. 40cm\n•  altura 90cm\n\nEspejo 70x80cm \n\n🎁 Bombillas LED de regalo ",
+          "en": "Dimensions:\n• Width: 70 cm\n• Depth: 40 cm\n• Height: 90 cm\n\nMirror: 70 × 80 cm\n\n🎁 Free LED bulbs included"
         },
         "related": []
       },
@@ -110,6 +171,21 @@
           "/uploads/eb0c6a14b77ca84e7f5cfc85c1f03c98.jpg"
         ],
         "video": "",
+        "videoFirst": false,
+        "media": [
+          {
+            "src": "/uploads/3008e04ff3a1bb8e3234559be7061b3f.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/3ee281ae8993f1d2c211e10cef9675d4.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/eb0c6a14b77ca84e7f5cfc85c1f03c98.jpg",
+            "type": "image"
+          }
+        ],
         "material": {
           "es": "Roble",
           "en": "Oak"
@@ -118,8 +194,8 @@
         "reference": "T-09",
         "subtitle": "70 × 40 × 170 cm",
         "description": {
-          "es": "",
-          "en": ""
+          "es": "Medidas: \n•  ancho 70cm\n•  prof. 40cm\n•  altura 90cm\n\nEspejo 70x80cm \n\n🎁 Bombillas LED de regalo ",
+          "en": "Dimensions:\n• Width: 70 cm\n• Depth: 40 cm\n• Height: 90 cm\n\nMirror: 70 × 80 cm\n\n🎁 Free LED bulbs included"
         },
         "related": []
       },
@@ -139,6 +215,33 @@
           "/uploads/eb43661cfdff1ff9647c6d61a3da36e5.jpg"
         ],
         "video": "",
+        "videoFirst": false,
+        "media": [
+          {
+            "src": "/uploads/f206eec158c7f30fd96334523906ab23.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/b59c4e2501ad3ec067510d579d30ac03.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/223fb69e7b8f2cf5f351695c0cf170a0.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/38deb5caa51c10abee6910373bd1927e.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/0c74dff9bddd2030abd259097137ce8b.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/eb43661cfdff1ff9647c6d61a3da36e5.jpg",
+            "type": "image"
+          }
+        ],
         "material": {
           "es": "Lacado mate",
           "en": "Matte lacquer"
@@ -147,8 +250,8 @@
         "reference": "T-12",
         "subtitle": "70 × 40 × 170 cm",
         "description": {
-          "es": "",
-          "en": ""
+          "es": "Medidas: \n•  ancho 70cm\n•  prof. 40cm\n•  altura 90cm\n\nEspejo 70x80cm \n\n🎁 Bombillas LED de regalo ",
+          "en": "Dimensions:\n• Width: 70 cm\n• Depth: 40 cm\n• Height: 90 cm\n\nMirror: 70 × 80 cm\n\n🎁 Free LED bulbs included"
         },
         "related": []
       },
@@ -166,6 +269,29 @@
           "/uploads/d4f60cbf1fa1df692e500d7c6bccfa53.jpg"
         ],
         "video": "",
+        "videoFirst": false,
+        "media": [
+          {
+            "src": "/uploads/95a57f1bc404f3b29fdb3d38f225feee.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/3f4865e828e2982a03aa007440e4cde7.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/69352e02cf3a13b91aac770a5aa90204.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/d4f60cbf1fa1df692e500d7c6bccfa53.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/ee3ea3ec9ed9c3a39d8ca1c7ee50b6bf.mp4",
+            "type": "video"
+          }
+        ],
         "material": {
           "es": "Lacado mate",
           "en": "Matte lacquer"
@@ -174,8 +300,8 @@
         "reference": "T-19",
         "subtitle": "90 × 40 × 170 cm",
         "description": {
-          "es": "",
-          "en": ""
+          "es": "Medidas: \n•  ancho 90cm\n•  prof. 40cm\n•  altura 90cm\n\nEspejo 90x80cm \n\n🎁 Bombillas LED de regalo ",
+          "en": "Dimensions:\n• Width: 90 cm\n• Depth: 40 cm\n• Height: 90 cm\n\nMirror: 90 × 80 cm\n\n🎁 Free LED bulbs included"
         },
         "related": []
       },
@@ -191,6 +317,17 @@
           "/uploads/da01b73579e06002f6a1f07a27313507.jpg"
         ],
         "video": "",
+        "videoFirst": false,
+        "media": [
+          {
+            "src": "/uploads/771c0092caedde9b643cd77b72be35bf.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/da01b73579e06002f6a1f07a27313507.jpg",
+            "type": "image"
+          }
+        ],
         "material": {
           "es": "Lacado mate",
           "en": "Matte lacquer"
@@ -199,8 +336,8 @@
         "reference": "T-27",
         "subtitle": "100 × 40 × 180 cm",
         "description": {
-          "es": "",
-          "en": ""
+          "es": "Medidas: \n•  ancho 100cm\n•  prof. 40cm\n•  altura 90cm\n\nEspejo 100 x 80cm \n\n🎁 Bombillas LED de regalo ",
+          "en": "Dimensions:\n• Width: 100 cm\n• Depth: 40 cm\n• Height: 90 cm\n\nMirror: 100 × 80 cm\n\n🎁 Free LED bulbs included"
         },
         "related": []
       },
@@ -218,6 +355,25 @@
           "/uploads/7aff7c74a3a9946779db558d977e6231.jpg"
         ],
         "video": "",
+        "videoFirst": false,
+        "media": [
+          {
+            "src": "/uploads/1b7e0b3553b37f44f001bb06894a728b.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/92a5ec1b2d34c63dc870165bdab5bcc8.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/701f63eef85d351518663f13582976ca.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/7aff7c74a3a9946779db558d977e6231.jpg",
+            "type": "image"
+          }
+        ],
         "material": {
           "es": "Lacado mate",
           "en": "Matte lacquer"
@@ -226,8 +382,8 @@
         "reference": "T-34",
         "subtitle": "180 × 45 × 180 cm",
         "description": {
-          "es": "",
-          "en": ""
+          "es": "Medidas: \n•  ancho 180cm\n•  prof. 45cm\n•  altura 90cm\n\nEspejo 180x80cm \n\n🎁 Bombillas LED de regalo ",
+          "en": "Dimensions:\n• Width: 180 cm\n• Depth: 45 cm\n• Height: 90 cm\n\nMirror: 180 × 80 cm\n\n🎁 Free LED bulbs included"
         },
         "related": []
       },
@@ -246,6 +402,33 @@
           "/uploads/6e9ad76da8eef2427cfcbdc2bddf3cfc.jpg"
         ],
         "video": "",
+        "videoFirst": false,
+        "media": [
+          {
+            "src": "/uploads/5c4a491791888b4ee6bd2f8b0386a4b1.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/4e72de2107b5d37d557a180c0090acd9.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/d950e151c02be9eece8f6e6b7a06cf21.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/74921cfd9765168a2c371707922e6b5b.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/6e9ad76da8eef2427cfcbdc2bddf3cfc.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/54109d82b7e31a566a9928c8639ead13.mp4",
+            "type": "video"
+          }
+        ],
         "material": {
           "es": "Lacado mate",
           "en": "Matte lacquer"
@@ -254,8 +437,8 @@
         "reference": "T-29",
         "subtitle": "100 × 40 × 170 cm",
         "description": {
-          "es": "",
-          "en": ""
+          "es": "Medidas: \n•  ancho 100cm\n•  prof. 40cm\n•  altura 90cm\n\nEspejo 100x80cm ",
+          "en": "Dimensions:\n• Width: 100 cm\n• Depth: 40 cm\n• Height: 90 cm\n\nMirror: 100 × 80 cm"
         },
         "related": []
       },
@@ -272,6 +455,21 @@
           "/uploads/c6004bed37cc2b7541e102d406b9508d.jpg"
         ],
         "video": "",
+        "videoFirst": false,
+        "media": [
+          {
+            "src": "/uploads/721a7c3239b317f0780baff3a956d823.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/552874825b09edd380c009db9a48ae18.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/c6004bed37cc2b7541e102d406b9508d.jpg",
+            "type": "image"
+          }
+        ],
         "material": {
           "es": "Lacado mate",
           "en": "Matte lacquer"
@@ -280,8 +478,8 @@
         "reference": "T-24",
         "subtitle": "90 × 40 × 170 cm",
         "description": {
-          "es": "",
-          "en": ""
+          "es": "Medidas: \n•  ancho 90cm\n•  prof. 40cm\n•  altura 90cm\n\nEspejo 90x80cm \n\n🎁 Bombillas LED de regalo ",
+          "en": "Dimensions:\n• Width: 90 cm\n• Depth: 40 cm\n• Height: 90 cm\n\nMirror: 90 × 80 cm\n\n🎁 Free LED bulbs included"
         },
         "related": []
       },
@@ -300,6 +498,29 @@
           "/uploads/f9681bac5b5bf263dfa5d1b79749017b.jpg"
         ],
         "video": "",
+        "videoFirst": false,
+        "media": [
+          {
+            "src": "/uploads/d9ff98b097c0c20ff0dda9946e3f9f89.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/e94864cec2a00dc449acbd96ed56bd9f.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/b6f95212346cb9831cc7e1e988f1b668.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/05a33116a197c4f3e1592fbd684af2ec.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/f9681bac5b5bf263dfa5d1b79749017b.jpg",
+            "type": "image"
+          }
+        ],
         "material": {
           "es": "Lacado mate",
           "en": "Matte lacquer"
@@ -308,8 +529,8 @@
         "reference": "T-22",
         "subtitle": "90 × 40 × 170 cm",
         "description": {
-          "es": "",
-          "en": ""
+          "es": "Medidas: \n•  ancho 90cm\n•  prof. 40cm\n•  altura 90cm\n\nEspejo 90x80cm \n\n🎁 Bombillas LED de regalo ",
+          "en": "Dimensions:\n• Width: 90 cm\n• Depth: 40 cm\n• Height: 90 cm\n\nMirror: 90 × 80 cm\n\n🎁 Free LED bulbs included"
         },
         "related": []
       },
@@ -329,6 +550,37 @@
           "/uploads/fd08f8a09ad56bd0470d3317f580f92a.jpg"
         ],
         "video": "",
+        "videoFirst": false,
+        "media": [
+          {
+            "src": "/uploads/618594913f925884ed5ecf4b85bcac04.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/1d6d4a9f248fc940809b8158797cba5e.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/9a09ddbaf56aa865453704ffe6fa19db.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/a1ced1440aa8ba30b3ef59ece44041dc.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/60bb2f674f247278f8393272047dd77a.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/fd08f8a09ad56bd0470d3317f580f92a.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/62d448e7ec4acbce3c4d5c35acb8cd9a.mp4",
+            "type": "video"
+          }
+        ],
         "material": {
           "es": "Nogal",
           "en": "Walnut"
@@ -337,8 +589,8 @@
         "reference": "T-10",
         "subtitle": "70 × 40 × 170 cm",
         "description": {
-          "es": "",
-          "en": ""
+          "es": "Medidas: \n•  ancho 70cm\n•  prof. 40cm\n•  altura 90cm\n\nEspejo 70x80cm \n\n🎁 Bombillas LED de regalo ",
+          "en": "Dimensions:\n• Width: 70 cm\n• Depth: 40 cm\n• Height: 90 cm\n\nMirror: 70 × 80 cm\n\n🎁 Free LED bulbs included"
         },
         "related": []
       },
@@ -357,6 +609,29 @@
           "/uploads/4be934e77e0ac770378f00546a49de9a.jpg"
         ],
         "video": "",
+        "videoFirst": false,
+        "media": [
+          {
+            "src": "/uploads/d464fee6601f991ad76f4bf674cbc80b.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/5e55de193f06d3cb72f6f8ff2d83cadf.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/db73e014ec8957050e376a047aa523cc.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/1d1c67e11b4e82824956c7afea2b61bd.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/4be934e77e0ac770378f00546a49de9a.jpg",
+            "type": "image"
+          }
+        ],
         "material": {
           "es": "Lacado mate",
           "en": "Matte lacquer"
@@ -365,8 +640,8 @@
         "reference": "T-21",
         "subtitle": "90 × 40 × 170 cm",
         "description": {
-          "es": "",
-          "en": ""
+          "es": "Medidas: \n•  ancho 90cm\n•  prof. 40cm\n•  altura 90cm\n\nEspejo 90x80cm \n\n🎁 Bombillas LED de regalo ",
+          "en": "Dimensions:\n• Width: 90 cm\n• Depth: 40 cm\n• Height: 90 cm\n\nMirror: 90 × 80 cm\n\n🎁 Free LED bulbs included"
         },
         "related": []
       },
@@ -385,6 +660,29 @@
           "/uploads/e4c7f8bbf96054dffca946ce487ddb55.jpg"
         ],
         "video": "",
+        "videoFirst": false,
+        "media": [
+          {
+            "src": "/uploads/b385fb86ddd35a697fa03c73d5cee6cd.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/f038af93b0da9d5dfb021a5003c7a2cf.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/f536a049656e02e05cee156a30628dd7.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/d67b3c918cbcc801baace103a8fb9c85.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/e4c7f8bbf96054dffca946ce487ddb55.jpg",
+            "type": "image"
+          }
+        ],
         "material": {
           "es": "Lacado mate",
           "en": "Matte lacquer"
@@ -393,8 +691,8 @@
         "reference": "T-23",
         "subtitle": "90 × 40 × 170 cm",
         "description": {
-          "es": "",
-          "en": ""
+          "es": "Medidas: \n•  ancho 90cm\n•  prof. 40cm\n•  altura 90cm\n\nEspejo 90x80cm \n\n🎁 Bombillas LED de regalo ",
+          "en": "Dimensions:\n• Width: 90 cm\n• Depth: 40 cm\n• Height: 90 cm\n\nMirror: 90 × 80 cm\n\n🎁 Free LED bulbs included"
         },
         "related": []
       },
@@ -413,6 +711,29 @@
           "/uploads/faa906e7fc0928982db3b96f60f4fcd8.jpg"
         ],
         "video": "",
+        "videoFirst": false,
+        "media": [
+          {
+            "src": "/uploads/72c175e5e9c12d294eb32c03ea566100.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/041b6578d735621a5c1655b8f1f55711.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/89160f47b6fb71f8da39bc544b029b6b.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/ef512ffa992b95d15c2d169cb8b461bb.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/faa906e7fc0928982db3b96f60f4fcd8.jpg",
+            "type": "image"
+          }
+        ],
         "material": {
           "es": "Lacado mate",
           "en": "Matte lacquer"
@@ -421,8 +742,8 @@
         "reference": "T-38",
         "subtitle": "180 × 45 × 180 cm",
         "description": {
-          "es": "",
-          "en": ""
+          "es": "Medidas: \n•  ancho 180cm\n•  prof. 45cm\n•  altura 90cm\n\nEspejo 180x80cm \n\n🎁 Bombillas LED de regalo ",
+          "en": "Dimensions:\n• Width: 180 cm\n• Depth: 45 cm\n• Height: 90 cm\n\nMirror: 180 × 80 cm\n\n🎁 Free LED bulbs included"
         },
         "related": []
       },
@@ -437,6 +758,13 @@
           "/uploads/db1a355f8f6622ca82b7ab13e0a4c157.jpg"
         ],
         "video": "",
+        "videoFirst": false,
+        "media": [
+          {
+            "src": "/uploads/db1a355f8f6622ca82b7ab13e0a4c157.jpg",
+            "type": "image"
+          }
+        ],
         "material": {
           "es": "Lacado mate",
           "en": "Matte lacquer"
@@ -445,8 +773,8 @@
         "reference": "T-17",
         "subtitle": "90 × 40 × 170 cm",
         "description": {
-          "es": "",
-          "en": ""
+          "es": "Medidas: \n•  ancho 90cm\n•  prof. 40cm\n•  altura 90cm\n\nEspejo 90x80cm \n\n🎁 Bombillas LED de regalo ",
+          "en": "Dimensions:\n• Width: 90 cm\n• Depth: 40 cm\n• Height: 90 cm\n\nMirror: 90 × 80 cm\n\n🎁 Free LED bulbs included"
         },
         "related": []
       },
@@ -465,6 +793,29 @@
           "/uploads/2e5dfad5b3a43c7441a3efacf141fe3c.jpg"
         ],
         "video": "",
+        "videoFirst": false,
+        "media": [
+          {
+            "src": "/uploads/0f49bbdc75e5567ff69cad422524a7ce.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/bc37947b832e6e35627cf3fbc3e166f1.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/673ef69985248679a0c80b52dcf9e083.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/309f1a1a40e7e7f3164eb835d54472ea.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/2e5dfad5b3a43c7441a3efacf141fe3c.jpg",
+            "type": "image"
+          }
+        ],
         "material": {
           "es": "Lacado mate",
           "en": "Matte lacquer"
@@ -473,8 +824,8 @@
         "reference": "T-15",
         "subtitle": "70 × 40 × 170 cm",
         "description": {
-          "es": "",
-          "en": ""
+          "es": "Medidas: \n•  ancho 70cm\n•  prof. 40cm\n•  altura 90cm\n\nEspejo 70x80cm \n\n🎁 Bombillas LED de regalo ",
+          "en": "Dimensions:\n• Width: 70 cm\n• Depth: 40 cm\n• Height: 90 cm\n\nMirror: 70 × 80 cm\n\n🎁 Free LED bulbs included"
         },
         "related": []
       },
@@ -493,6 +844,29 @@
           "/uploads/7dad8b49160dd3327743cc9e2eccda35.jpg"
         ],
         "video": "",
+        "videoFirst": false,
+        "media": [
+          {
+            "src": "/uploads/8a120f849d5d094ea636de110f5da616.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/30e1cd59dee2d9a7a6a90227a62715e6.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/d0aa1477d1ba07673ec23ca90e763f36.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/439e0d482755f0538fc57440cd9dbb92.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/7dad8b49160dd3327743cc9e2eccda35.jpg",
+            "type": "image"
+          }
+        ],
         "material": {
           "es": "Lacado mate",
           "en": "Matte lacquer"
@@ -501,8 +875,8 @@
         "reference": "T-13",
         "subtitle": "70 × 40 × 170 cm",
         "description": {
-          "es": "",
-          "en": ""
+          "es": "Medidas: \n•  ancho 70cm\n•  prof. 40cm\n•  altura 90cm\n\nEspejo 70x80cm \n\n🎁 Bombillas LED de regalo ",
+          "en": "Dimensions:\n• Width: 70 cm\n• Depth: 40 cm\n• Height: 90 cm\n\nMirror: 70 × 80 cm\n\n🎁 Free LED bulbs included"
         },
         "related": []
       },
@@ -522,6 +896,33 @@
           "/uploads/b1687ee15af1c04ca51d2bcb15fe79c2.jpg"
         ],
         "video": "",
+        "videoFirst": false,
+        "media": [
+          {
+            "src": "/uploads/c58f2d4e90565ec8413875e47a2d2220.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/d2a782ac4a78fc0502ca78ca07133abd.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/b4bdb4bdb77f0ea7e8abfcff4b5259a1.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/a7c4f176c91ecc4c4effd548037aeda4.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/65878bb998e8f77d8552267db6079ee2.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/b1687ee15af1c04ca51d2bcb15fe79c2.jpg",
+            "type": "image"
+          }
+        ],
         "material": {
           "es": "Lacado mate",
           "en": "Matte lacquer"
@@ -530,8 +931,8 @@
         "reference": "T-18",
         "subtitle": "90 × 40 × 170 cm",
         "description": {
-          "es": "",
-          "en": ""
+          "es": "Medidas: \n•  ancho 90cm\n•  prof. 40cm\n•  altura 90cm\n\nEspejo 90x80cm \n\n🎁 Bombillas LED de regalo ",
+          "en": "Dimensions:\n• Width: 90 cm\n• Depth: 40 cm\n• Height: 90 cm\n\nMirror: 90 × 80 cm\n\n🎁 Free LED bulbs included"
         },
         "related": []
       },
@@ -547,6 +948,17 @@
           "/uploads/6a3b086dec8d57b8a67bb76c66989605.jpg"
         ],
         "video": "",
+        "videoFirst": false,
+        "media": [
+          {
+            "src": "/uploads/4e21b8144006717eeac8acce70fcb67b.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/6a3b086dec8d57b8a67bb76c66989605.jpg",
+            "type": "image"
+          }
+        ],
         "material": {
           "es": "Lacado mate",
           "en": "Matte lacquer"
@@ -555,8 +967,8 @@
         "reference": "T-30",
         "subtitle": "90 × 40 × 185 cm",
         "description": {
-          "es": "",
-          "en": ""
+          "es": "Medidas: \n•  ancho 90cm\n•  prof. 40cm\n•  altura 100cm\n\nEspejo d-70cm ",
+          "en": "Dimensions:\n• Width: 90 cm\n• Depth: 40 cm\n• Height: 100 cm\n\nMirror: d-70 cm"
         },
         "related": []
       },
@@ -578,6 +990,45 @@
           "/uploads/88a7ac65d4e53136add77825044638d3.jpg"
         ],
         "video": "",
+        "videoFirst": false,
+        "media": [
+          {
+            "src": "/uploads/48dd83b1afd242bf95826a29d3502611.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/825bff9923eb68f3472cd37ac95ca38f.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/a21b8f7a87eaf5ff2cd84f6987894c1a.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/abf1c0f9b148c5847db57628dc23a126.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/8335383250dde3ba28de047dc60e8bfd.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/09def9f51798968e3ef06dad68dec841.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/70f4d3c6ec8a3b40becdc9338e51db19.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/88a7ac65d4e53136add77825044638d3.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/5b57e03c00c2eb939e67f2bdc6a01923.mp4",
+            "type": "video"
+          }
+        ],
         "material": {
           "es": "Lacado mate",
           "en": "Matte lacquer"
@@ -586,8 +1037,8 @@
         "reference": "T-26",
         "subtitle": "90 × 45 × 180 cm",
         "description": {
-          "es": "",
-          "en": ""
+          "es": "Medidas: \n•  ancho 90cm\n•  prof. 45cm\n•  altura 90cm\n\nEspejo 90x90cm \n\n🎁 Bombillas LED de regalo ",
+          "en": "Dimensions:\n• Width: 90 cm\n• Depth: 45 cm\n• Height: 90 cm\n\nMirror: 90 × 90 cm\n\n🎁 Free LED bulbs included"
         },
         "related": []
       },
@@ -603,6 +1054,17 @@
           "/uploads/f3a61000b941527419595f50c619ba16.jpg"
         ],
         "video": "",
+        "videoFirst": false,
+        "media": [
+          {
+            "src": "/uploads/53c7c542c8095408bc63ee34d26e8852.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/f3a61000b941527419595f50c619ba16.jpg",
+            "type": "image"
+          }
+        ],
         "material": {
           "es": "Fresno",
           "en": "Ash"
@@ -611,8 +1073,8 @@
         "reference": "T-11",
         "subtitle": "70 × 40 × 170 cm",
         "description": {
-          "es": "",
-          "en": ""
+          "es": "Medidas: \n•  ancho 70cm\n•  prof. 40cm\n•  altura 90cm\n\nEspejo 70x80cm \n\n🎁 Bombillas LED de regalo ",
+          "en": "Dimensions:\n• Width: 70 cm\n• Depth: 40 cm\n• Height: 90 cm\n\nMirror: 70 × 80 cm\n\n🎁 Free LED bulbs included"
         },
         "related": []
       },
@@ -635,6 +1097,49 @@
           "/uploads/0ab52682386ff66df8b0e9d236cf7100.jpg"
         ],
         "video": "",
+        "videoFirst": false,
+        "media": [
+          {
+            "src": "/uploads/28d19308d09ec8d998279309b4a01628.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/fffc2110c26b48a7b019708312405f83.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/ca1b87f6f9cc2c6c5d5b27e4ce9f90ae.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/c95f1615a8cf3181b59139ef8110d83a.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/2b27bbaf2c7f7c9bb475fae87759e66d.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/a003fadc986609b312f7af8af6f5ec12.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/526dd25feb661fb58da0c8b7cbb07bd4.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/a6627b562ca741ff9f425734cb4c977a.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/0ab52682386ff66df8b0e9d236cf7100.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/dcb663ba71ca41cb90ef9ec9247f8cf2.mp4",
+            "type": "video"
+          }
+        ],
         "material": {
           "es": "Lacado mate",
           "en": "Matte lacquer"
@@ -643,8 +1148,8 @@
         "reference": "T-25",
         "subtitle": "100 × 40 × 150 cm",
         "description": {
-          "es": "",
-          "en": ""
+          "es": "Medidas: \n•  ancho 100cm\n•  prof. 40cm\n•  altura 80cm\n\nEspejo 85x70cm \n\n🎁 Bombillas LED de regalo ",
+          "en": "Dimensions:\n• Width: 100 cm\n• Depth: 40 cm\n• Height: 80 cm\n\nMirror: 85 × 70 cm\n\n🎁 Free LED bulbs included"
         },
         "related": []
       },
@@ -662,6 +1167,29 @@
           "/uploads/ac34b578fe8c66dd8939310e07f82043.jpg"
         ],
         "video": "",
+        "videoFirst": false,
+        "media": [
+          {
+            "src": "/uploads/db1841fc027062f555aa3d18b262a7ef.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/db1841fc027062f555aa3d18b262a7ef.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/bef3f2e4391e11ab03144deb55e70cc2.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/ac34b578fe8c66dd8939310e07f82043.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/39c7ea7586a0275bdff814072f062694.mp4",
+            "type": "video"
+          }
+        ],
         "material": {
           "es": "Lacado mate",
           "en": "Matte lacquer"
@@ -670,8 +1198,8 @@
         "reference": "T-28",
         "subtitle": "90 × 40 × 170 cm",
         "description": {
-          "es": "",
-          "en": ""
+          "es": "Medidas: \n•  ancho 90cm\n•  prof. 40cm\n•  altura 90cm\n\nEspejo 90x80cm \n\n🎁 Bombillas LED de regalo ",
+          "en": "Dimensions:\n• Width: 90 cm\n• Depth: 40 cm\n• Height: 90 cm\n\nMirror: 90 × 80 cm\n\n🎁 Free LED bulbs included"
         },
         "related": []
       },
@@ -688,6 +1216,25 @@
           "/uploads/85e4f31aa6c0b5ba2cb8e310811bce27.jpg"
         ],
         "video": "",
+        "videoFirst": false,
+        "media": [
+          {
+            "src": "/uploads/34f4fc21dd41507b1b4008cc9b310dde.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/ce9227d66f23a03072c8f8c20b60f7e3.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/85e4f31aa6c0b5ba2cb8e310811bce27.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/324b3d45b65823df469c8bba5cbac47f.mp4",
+            "type": "video"
+          }
+        ],
         "material": {
           "es": "Lacado mate",
           "en": "Matte lacquer"
@@ -696,8 +1243,8 @@
         "reference": "T-31",
         "subtitle": "90 × 40 × 180 cm",
         "description": {
-          "es": "",
-          "en": ""
+          "es": "Medidas: \n•  ancho 90cm\n•  prof. 40cm\n•  altura 100cm\n\nEspejo d-80cm  ",
+          "en": "Dimensions:\n• Width: 90 cm\n• Depth: 40 cm\n• Height: 100 cm\n\nMirror: d-80 cm"
         },
         "related": []
       },
@@ -714,6 +1261,21 @@
           "/uploads/ebfc5475a5e95631d0704e3043be45e6.jpg"
         ],
         "video": "",
+        "videoFirst": false,
+        "media": [
+          {
+            "src": "/uploads/eccc6f7688cad6f013e8b769cf662175.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/7cb8dce7eaaf592d464cc0d10ed41a93.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/ebfc5475a5e95631d0704e3043be45e6.jpg",
+            "type": "image"
+          }
+        ],
         "material": {
           "es": "Lacado mate",
           "en": "Matte lacquer"
@@ -722,8 +1284,8 @@
         "reference": "T-32",
         "subtitle": "130 × 40 × 140 cm",
         "description": {
-          "es": "",
-          "en": ""
+          "es": "Medidas: \n•  ancho 130cm\n•  prof. 40cm\n•  altura 80cm\n\nEspejo 90 × 80 cm",
+          "en": "Dimensions:\n• Width: 130 cm\n• Depth: 40 cm\n• Height: 80 cm\n\nMirror: 90 × 80 cm"
         },
         "related": []
       },
@@ -741,6 +1303,29 @@
           "/uploads/42a3d956cd47970225325776ab7876d0.jpg"
         ],
         "video": "",
+        "videoFirst": false,
+        "media": [
+          {
+            "src": "/uploads/ad3a1a093a387b80941e2c8f5c799e91.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/b3728813b02f6c3f86a0e4830cb13d80.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/16f1ba918eef0a556acb0161a4c7624f.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/42a3d956cd47970225325776ab7876d0.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/6d713c91840dc79b17c93f3f295e805a.mp4",
+            "type": "video"
+          }
+        ],
         "material": {
           "es": "Lacado mate",
           "en": "Matte lacquer"
@@ -749,8 +1334,8 @@
         "reference": "T-33",
         "subtitle": "120 × 40 × 160 cm",
         "description": {
-          "es": "",
-          "en": ""
+          "es": "Medidas: \n•  ancho 120cm\n•  prof. 40cm\n•  altura 100cm\n\nEspejo d-80cm ",
+          "en": "Dimensions:\n• Width: 120 cm\n• Depth: 40 cm\n• Height: 100 cm\n\nMirror: d-80 cm"
         },
         "related": []
       },
@@ -766,6 +1351,17 @@
           "/uploads/cda90ee8c19fdc286f06925ced564ec2.jpg"
         ],
         "video": "",
+        "videoFirst": false,
+        "media": [
+          {
+            "src": "/uploads/8b2bd779bb48d73e4a228b3ddbc196f7.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/cda90ee8c19fdc286f06925ced564ec2.jpg",
+            "type": "image"
+          }
+        ],
         "material": {
           "es": "Lacado mate",
           "en": "Matte lacquer"
@@ -774,8 +1370,8 @@
         "reference": "T-35",
         "subtitle": "180 × 45 × 170 cm",
         "description": {
-          "es": "",
-          "en": ""
+          "es": "Medidas: \n•  ancho 180cm\n•  prof. 45cm\n•  altura 90cm\n\nEspejo 180x80cm \n\n🎁 Bombillas LED de regalo ",
+          "en": "Dimensions:\n• Width: 180 cm\n• Depth: 45 cm\n• Height: 90 cm\n\nMirror: 180 × 80 cm\n\n🎁 Free LED bulbs included"
         },
         "related": []
       },
@@ -795,6 +1391,33 @@
           "/uploads/3c16cc410df41f8404dda30dddbc2c0d.jpg"
         ],
         "video": "",
+        "videoFirst": false,
+        "media": [
+          {
+            "src": "/uploads/512bf87915c071625b73627d8901ee77.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/0bd1726ea832d7b79bbb948567a8f775.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/9a171a730350f7f30a9845e3e4d82824.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/3fe605ea1b884cb05eff1984dba62d37.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/6a1b0b3971156d1b9a867bcd7e7a55f5.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/3c16cc410df41f8404dda30dddbc2c0d.jpg",
+            "type": "image"
+          }
+        ],
         "material": {
           "es": "Lacado mate",
           "en": "Matte lacquer"
@@ -803,8 +1426,8 @@
         "reference": "T-36",
         "subtitle": "180 × 45 × 170 cm",
         "description": {
-          "es": "",
-          "en": ""
+          "es": "Medidas: \n•  ancho 180cm\n•  prof. 45cm\n•  altura 90cm\n\nEspejo 180x80cm \n\n🎁 Bombillas LED de regalo ",
+          "en": "Dimensions:\n• Width: 180 cm\n• Depth: 45 cm\n• Height: 90 cm\n\nMirror: 180 × 80 cm\n\n🎁 Free LED bulbs included"
         },
         "related": []
       },
@@ -821,6 +1444,21 @@
           "/uploads/b7de40acec7fd0484a8e488918c9ea57.jpg"
         ],
         "video": "",
+        "videoFirst": false,
+        "media": [
+          {
+            "src": "/uploads/6b9f3f461853b147eaae7334acf3b38a.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/624c9ca6375c1f59191cc01d1b6568c2.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/b7de40acec7fd0484a8e488918c9ea57.jpg",
+            "type": "image"
+          }
+        ],
         "material": {
           "es": "Lacado mate",
           "en": "Matte lacquer"
@@ -829,8 +1467,8 @@
         "reference": "T-37",
         "subtitle": "180 × 45 × 180 cm",
         "description": {
-          "es": "",
-          "en": ""
+          "es": "Medidas: \n•  ancho 180cm\n•  prof. 45cm\n•  altura 90cm\n\nEspejo 180x80cm \n\n🎁 Bombillas LED de regalo ",
+          "en": "Dimensions:\n• Width: 180 cm\n• Depth: 45 cm\n• Height: 90 cm\n\nMirror: 180 × 80 cm\n\n🎁 Free LED bulbs included"
         },
         "related": []
       },
@@ -849,6 +1487,29 @@
           "/uploads/c93f4439b26f47b6bf4e4baf821540bb.jpg"
         ],
         "video": "",
+        "videoFirst": false,
+        "media": [
+          {
+            "src": "/uploads/1cdd810047059739b43b90a24a2d6036.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/b4a5dd44be5059916fb90a8702d40c19.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/12c351251df7a9392ffffe107acfdf30.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/f78dbaf5303e78d0dd3eb2a3b3e726e8.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/c93f4439b26f47b6bf4e4baf821540bb.jpg",
+            "type": "image"
+          }
+        ],
         "material": {
           "es": "Lacado mate",
           "en": "Matte lacquer"
@@ -857,8 +1518,8 @@
         "reference": "T-39",
         "subtitle": "180 × 45 × 180 cm",
         "description": {
-          "es": "",
-          "en": ""
+          "es": "Medidas: \n•  ancho 180cm\n•  prof. 45cm\n•  altura 90cm\n\nEspejo 180x80cm \n\n🎁 Bombillas LED de regalo ",
+          "en": "Dimensions:\n• Width: 180 cm\n• Depth: 45 cm\n• Height: 90 cm\n\nMirror: 180 × 80 cm\n\n🎁 Free LED bulbs included"
         },
         "related": []
       }
@@ -896,6 +1557,25 @@
           "/uploads/69e509cd596e0c3c732fbc03a07e7dcd.jpg"
         ],
         "video": "",
+        "videoFirst": false,
+        "media": [
+          {
+            "src": "/uploads/178863f09e500b897ac832bf4bf8e289.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/b011dc7f47235e8d7dceeee6ffe839ef.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/ccf0b80bcc929e963fb6311541022905.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/69e509cd596e0c3c732fbc03a07e7dcd.jpg",
+            "type": "image"
+          }
+        ],
         "material": {
           "es": "Lacado mate",
           "en": "Matte lacquer"
@@ -904,8 +1584,8 @@
         "reference": "T-40",
         "subtitle": "140 × 60 × 76 cm",
         "description": {
-          "es": "",
-          "en": ""
+          "es": "Medidas: \n•  ancho 70cm\n•  prof. 40cm\n•  altura 90cm\n\nEspejo 70x80cm ",
+          "en": "Dimensions:\n• Width: 70 cm\n• Depth: 40 cm\n• Height: 90 cm\n\nMirror: 70 × 80 cm"
         },
         "related": [
           "toc-alba",
@@ -928,6 +1608,25 @@
           "/uploads/5739026ccb514d3da9b71c58348bbe41.jpg"
         ],
         "video": "",
+        "videoFirst": false,
+        "media": [
+          {
+            "src": "/uploads/8ee3496582b269374d611e94c9cd8d0d.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/43c168d0b071b89ef8b4043e4d2dcb0c.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/aabb351e2f4dab134dc270307be07a7d.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/5739026ccb514d3da9b71c58348bbe41.jpg",
+            "type": "image"
+          }
+        ],
         "material": {
           "es": "Lacado mate",
           "en": "Matte lacquer"
@@ -936,8 +1635,8 @@
         "reference": "T-08",
         "subtitle": "130 × 40 × 160 cm",
         "description": {
-          "es": "",
-          "en": ""
+          "es": "Medidas: \n•  ancho 130cm\n•  prof. 40cm\n•  altura 80cm\n\nEspejo 120x80cm \n\n🎁 Bombillas LED de regalo ",
+          "en": "Dimensions:\n• Width: 130 cm\n• Depth: 40 cm\n• Height: 80 cm\n\nMirror: 120 × 80 cm\n\n🎁 Free LED bulbs included"
         },
         "related": [
           "toc-alba",
@@ -961,6 +1660,29 @@
           "/uploads/6243f3b213211f593f5cbe40c4aba1a7.jpg"
         ],
         "video": "",
+        "videoFirst": false,
+        "media": [
+          {
+            "src": "/uploads/23892ed3a413a251335d8380ad32cbac.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/93b2e567c1736ccca6e7a66172570c54.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/3e907b77043aebb97f7c90a126c24659.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/068da070be408524ea999abfae4a2c7a.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/6243f3b213211f593f5cbe40c4aba1a7.jpg",
+            "type": "image"
+          }
+        ],
         "material": {
           "es": "Roble",
           "en": "Oak"
@@ -969,8 +1691,8 @@
         "reference": "T-02",
         "subtitle": "60 × 40 × 160 cm",
         "description": {
-          "es": "",
-          "en": ""
+          "es": "Medidas: \n•  ancho 60cm\n•  prof. 40cm\n•  altura 80cm\n\nEspejo 60x80cm \n\n🎁 Bombillas LED de regalo ",
+          "en": "Dimensions:\n• Width: 60 cm\n• Depth: 40 cm\n• Height: 80 cm\n\nMirror: 60 × 80 cm\n\n🎁 Free LED bulbs included"
         },
         "related": [
           "toc-vera",
@@ -996,6 +1718,37 @@
           "/uploads/7673e898c5106af923bf88813e26b86a.jpg"
         ],
         "video": "",
+        "videoFirst": false,
+        "media": [
+          {
+            "src": "/uploads/cc7e87f07eb3e4eadc393f5c79924f18.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/7954c0d366df3e76b37f87a484342ee5.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/f64a17f4b931b35ba8a117ecffa8fb45.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/756b7bc51a130c31a0ce92319449b82a.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/98c54f605cb2f8974b7318a541afa35c.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/a341e3a166c93f43f2eaec0cf0081c96.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/7673e898c5106af923bf88813e26b86a.jpg",
+            "type": "image"
+          }
+        ],
         "material": {
           "es": "Nogal",
           "en": "Walnut"
@@ -1004,8 +1757,8 @@
         "reference": "t-03",
         "subtitle": "60 × 40 × 160 cm",
         "description": {
-          "es": "",
-          "en": ""
+          "es": "Medidas: \n•  ancho 60cm\n•  prof. 40cm\n•  altura 80cm\n\nEspejo 60x80cm \n\n🎁 Bombillas LED de regalo ",
+          "en": "Dimensions:\n• Width: 60 cm\n• Depth: 40 cm\n• Height: 80 cm\n\nMirror: 60 × 80 cm\n\n🎁 Free LED bulbs included"
         },
         "related": [
           "toc-vera",
@@ -1029,6 +1782,33 @@
           "/uploads/94bbb7f8659907b2bb6a37c8a5821223.jpg"
         ],
         "video": "",
+        "videoFirst": false,
+        "media": [
+          {
+            "src": "/uploads/d54586e9cbfcb8a6ddac354a8c2a0571.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/7411adc6125ea2493e06dec1d83bb97b.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/d9e7687a87f4d186f4c17c67a62e5a3e.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/798d4678da5632b8286c12fe633343f0.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/f0c892fa931a8b3bc16cfb6d7ce2bf0a.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/94bbb7f8659907b2bb6a37c8a5821223.jpg",
+            "type": "image"
+          }
+        ],
         "material": {
           "es": "Lacado mate",
           "en": "Matte lacquer"
@@ -1037,8 +1817,8 @@
         "reference": "T-04",
         "subtitle": "80 × 40 × 160 cm",
         "description": {
-          "es": "",
-          "en": ""
+          "es": "Dimensions:\n• Width: 80 cm\n• Depth: 40 cm\n• Height: 80 cm\n\nMirror: 60 × 80 cm\n\n🎁 Free LED bulbs included",
+          "en": "Dimensions:\n• Width: 80 cm\n• Depth: 40 cm\n• Height: 80 cm\n\nMirror: 60 × 80 cm\n\n🎁 Free LED bulbs included"
         },
         "related": [
           "toc-vera-copy-mq6vhosq",
@@ -1062,6 +1842,29 @@
           "/uploads/bce652b44899a2984bdd0d1f111dd212.jpg"
         ],
         "video": "",
+        "videoFirst": false,
+        "media": [
+          {
+            "src": "/uploads/c087ee159cd89a85fec7030b08b0acab.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/bbaf72fd934103bd0705ba116ff8205d.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/b912fbad36e4626d7a5610fbbdb93393.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/23dce1208208ca430031c57649aeabfe.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/bce652b44899a2984bdd0d1f111dd212.jpg",
+            "type": "image"
+          }
+        ],
         "material": {
           "es": "Lacado mate",
           "en": "Matte lacquer"
@@ -1070,8 +1873,8 @@
         "reference": "T-05",
         "subtitle": "80 × 40 × 160 cm",
         "description": {
-          "es": "",
-          "en": ""
+          "es": "Medidas: \n•  ancho 80cm\n•  prof. 40cm\n•  altura 80cm\n\nEspejo 60x80cm \n\n🎁 Bombillas LED de regalo ",
+          "en": "Dimensions:\n• Width: 80 cm\n• Depth: 40 cm\n• Height: 80 cm\n\nMirror: 60 × 80 cm\n\n🎁 Free LED bulbs included"
         },
         "related": [
           "toc-alba",
@@ -1096,6 +1899,33 @@
           "/uploads/106eff145791bc7e12d23c4ec69e03cf.jpg"
         ],
         "video": "",
+        "videoFirst": false,
+        "media": [
+          {
+            "src": "/uploads/40cf889d7a55a4afc01c59454a51d742.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/b9e0a7084cf3dc25f2dfdaf5678e1bfd.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/91a26320cce6a7cf908dd0518eea3867.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/ba640349562afd645f83658bd46a2092.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/cf9b1c362a015cd3c74d8da2f127a57b.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/106eff145791bc7e12d23c4ec69e03cf.jpg",
+            "type": "image"
+          }
+        ],
         "material": {
           "es": "Lacado mate",
           "en": "Matte lacquer"
@@ -1104,8 +1934,8 @@
         "reference": "T-06",
         "subtitle": "80 × 40 × 160 cm",
         "description": {
-          "es": "",
-          "en": ""
+          "es": "Medidas: \n•  ancho 80cm\n•  prof. 40cm\n•  altura 80cm\n\nEspejo 80x80cm \n\n🎁 Bombillas LED de regalo ",
+          "en": "Dimensions:\n• Width: 80 cm\n• Depth: 40 cm\n• Height: 80 cm\n\nMirror: 80 × 80 cm\n\n🎁 Free LED bulbs included"
         },
         "related": [
           "toc-alba",
@@ -1129,6 +1959,29 @@
           "/uploads/df7c79f7ead8a322927349d13c021926.jpg"
         ],
         "video": "",
+        "videoFirst": false,
+        "media": [
+          {
+            "src": "/uploads/e86ae6968350e27eb24c92303c03eb20.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/12befe43faf2104c2296fa1ede82a07e.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/8c945450450af7293da274eac29c96ac.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/2e599eeebc78b61d754afbcb15b535ee.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/df7c79f7ead8a322927349d13c021926.jpg",
+            "type": "image"
+          }
+        ],
         "material": {
           "es": "Lacado mate",
           "en": "Matte lacquer"
@@ -1137,8 +1990,8 @@
         "reference": "T-07",
         "subtitle": "80 × 40 × 160 cm",
         "description": {
-          "es": "",
-          "en": ""
+          "es": "Medidas: \n•  ancho 80cm\n•  prof. 40cm\n•  altura 80cm\n\nEspejo 80x80cm \n\n🎁 Bombillas LED de regalo ",
+          "en": "Dimensions:\n• Width: 80 cm\n• Depth: 40 cm\n• Height: 80 cm\n\nMirror: 80 × 80 cm\n\n🎁 Free LED bulbs included"
         },
         "related": [
           "toc-alba",
@@ -1161,6 +2014,25 @@
           "/uploads/2c4bf4862b24d592ad9470493bc24eba.jpg"
         ],
         "video": "",
+        "videoFirst": false,
+        "media": [
+          {
+            "src": "/uploads/cfe9b3489a985b6d5036bc8856caae05.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/38799916c0b5472fe8f6c681773c8db7.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/42825111de12c7c6db9b502fdc7442f2.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/2c4bf4862b24d592ad9470493bc24eba.jpg",
+            "type": "image"
+          }
+        ],
         "material": {
           "es": "Roble claro",
           "en": "Light oak"
@@ -1169,8 +2041,8 @@
         "reference": "T-01",
         "subtitle": "60 × 40 × 160 cm",
         "description": {
-          "es": "",
-          "en": ""
+          "es": "Medidas: \n•  ancho 60cm\n•  prof. 40cm\n•  altura 80cm\n\nEspejo 60x80cm \n\n🎁 Bombillas LED de regalo ",
+          "en": "Dimensions:\n• Width: 60 cm\n• Depth: 40 cm\n• Height: 80 cm\n\nMirror: 60 × 80 cm\n\n🎁 Free LED bulbs included"
         },
         "related": [
           "toc-vera",
@@ -1223,6 +2095,69 @@
           "/uploads/243f5ad407d439c10e86c4da34d94445.jpg"
         ],
         "video": "",
+        "videoFirst": false,
+        "media": [
+          {
+            "src": "/uploads/b14fe9d72a43616cdb0d39989850cd1f.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/15fb26ac83bb8ab2fffa36ee7f307f7a.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/31ec8456841d6867a90c8ce99b34ac30.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/b179756a4c8393a54b446508816b8546.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/1892fc33a4af8d8b7c012a31484c792d.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/f3fd8da2d29f97e9fc3db4ecc3377c7c.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/609c3d4a0cd80d5b2c466cadbeae975c.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/7bf21a72ad5b111969ed3b174d3ff275.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/a8a21ec6b66e12990371996b7f1ad3db.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/bb811c0af4aad4967313f15ad2ffaa40.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/29911e2f36e4a478205fd0f5b6970079.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/cfd91dd80b02589ad5613d310128e916.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/404c09234b1bf6706ce3f914e8719a8c.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/78932e3f6956254faa367f9b51786763.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/243f5ad407d439c10e86c4da34d94445.jpg",
+            "type": "image"
+          }
+        ],
         "material": {
           "es": "Latón",
           "en": "Brass"
@@ -1231,8 +2166,8 @@
         "reference": "D-11",
         "subtitle": "70 × 175 cm",
         "description": {
-          "es": "",
-          "en": ""
+          "es": "Medidas: \n•  ancho 70cm\n•  altura 175cm",
+          "en": "Dimensions:\n• Width: 70 cm\n• Height: 175 cm"
         },
         "related": []
       },
@@ -1249,6 +2184,21 @@
           "/uploads/bfb2e193700b5d85b163d09f64b1dd5c.jpg"
         ],
         "video": "",
+        "videoFirst": false,
+        "media": [
+          {
+            "src": "/uploads/2bdbe4a9ee6b085d9acd001698b84648.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/d5404b0518549c0ff50ddb73588cafaf.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/bfb2e193700b5d85b163d09f64b1dd5c.jpg",
+            "type": "image"
+          }
+        ],
         "material": {
           "es": "Latón",
           "en": "Brass"
@@ -1257,8 +2207,8 @@
         "reference": "D-06",
         "subtitle": "70 × 175 cm",
         "description": {
-          "es": "",
-          "en": ""
+          "es": "Medidas: \n•  ancho 70cm\n•  prof. 30cm\n•  altura 175cm",
+          "en": "Dimensions:\n• Width: 70 cm\n• Depth: 30 cm\n• Height: 175 cm"
         },
         "related": []
       },
@@ -1297,6 +2247,109 @@
           "/uploads/5328764d19c6a5fea3d8fa0c1f1d82a3.jpg"
         ],
         "video": "",
+        "videoFirst": false,
+        "media": [
+          {
+            "src": "/uploads/c6ef164a041593228741dd2a7536771a.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/d7e65978af93b46cea1d7897e471239d.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/e010573da2608f4bbad6eb43a2a80b4a.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/ef174bc3005e3d9066a5daa8ed08df49.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/7a5518bb718b5f7cca8f6ae4542cef81.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/3d790b7e7a7e233e209ccee65b026415.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/7d3cc1b58fbccdca4961eba989162562.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/2e3108db40d9ecb257493ec87e9ce21c.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/898262f3336c3d5350185c009490d31d.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/55ea19fc0d7cefd7e43551cf77a55f85.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/04e7ace988d47d6e3bff3bfed26aff41.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/9e4dd7080beb717e89e34a239d6315d9.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/94bd2f2967154028b0a89ea0905546b6.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/e0d0f41f8a731344d252d8cc253a53e8.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/528d5c8515bf6aad088e6cc20fb2cfe3.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/7a4af9c52b6d8829aa3f5fd4ab871b8f.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/6f24e21e92877ca2c1e55f2d938b8bef.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/d19bef11e687599f614c0e2f18d31377.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/6c3504d87ae188181ccf625fcff7077f.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/068511fede323f33e1667b7338fc1b76.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/1940bfc0efddba9967c97b3c0d1b7222.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/8231fbf55ad0bd334853c99c694b80ce.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/79fd29c0fcd30120eb3f20d2509f0dfd.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/a6c8ac47c4c8b2e37756f86e7769fc24.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/5328764d19c6a5fea3d8fa0c1f1d82a3.jpg",
+            "type": "image"
+          }
+        ],
         "material": {
           "es": "Latón",
           "en": "Brass"
@@ -1305,8 +2358,8 @@
         "reference": "D-02",
         "subtitle": "60 × 170 cm",
         "description": {
-          "es": "",
-          "en": ""
+          "es": "Medidas: \n•  ancho 60cm\n•  altura 170cm",
+          "en": "Dimensions:\n• Width: 60 cm\n• Height: 170 cm"
         },
         "related": []
       },
@@ -1327,6 +2380,37 @@
           "/uploads/5ef097f895dcad2f71504bc57293d340.jpg"
         ],
         "video": "",
+        "videoFirst": false,
+        "media": [
+          {
+            "src": "/uploads/418284049907464f82bf359c7970df1d.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/54100888b0c3f3511e786744e46578d8.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/6efd8e96ddc2a7032d4499be36ce10c3.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/f0d52565d40f9e842b8728a2c49a4203.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/b08c70a89c7a373e2f4791d2eb10ae23.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/eeb5cecd80e19188e33d316e730e61cc.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/5ef097f895dcad2f71504bc57293d340.jpg",
+            "type": "image"
+          }
+        ],
         "material": {
           "es": "Latón",
           "en": "Brass"
@@ -1335,8 +2419,8 @@
         "reference": "D-10",
         "subtitle": "65 × 170 cm",
         "description": {
-          "es": "",
-          "en": ""
+          "es": "Medidas: \n•  ancho 65cm\n•  altura 170cm",
+          "en": "Dimensions:\n• Width: 65 cm\n• Height: 170 cm"
         },
         "related": []
       },
@@ -1352,6 +2436,21 @@
           "/uploads/6be7c2df6b1c0ab91690b9f131a94322.jpg"
         ],
         "video": "",
+        "videoFirst": false,
+        "media": [
+          {
+            "src": "/uploads/9d966433630f7f064a9b147e4bc69580.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/6be7c2df6b1c0ab91690b9f131a94322.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/713528639637b8cabccbae67336bf6f6.mp4",
+            "type": "video"
+          }
+        ],
         "material": {
           "es": "Latón",
           "en": "Brass"
@@ -1360,8 +2459,8 @@
         "reference": "D-05",
         "subtitle": "50 × 40 × 180 cm",
         "description": {
-          "es": "",
-          "en": ""
+          "es": "Medidas: \n•  ancho 55cm\n•  prof. 40cm\n•  altura 180cm\n\nEspejo 50x160cm",
+          "en": "Dimensions:\n• Width: 55 cm\n• Depth: 40 cm\n• Height: 180 cm\n\nMirror: 50 × 160 cm"
         },
         "related": []
       },
@@ -1378,6 +2477,21 @@
           "/uploads/91537a37126271bbbd5a5aca715c6e49.jpg"
         ],
         "video": "",
+        "videoFirst": false,
+        "media": [
+          {
+            "src": "/uploads/851ece18aff29006726fbcd048c52845.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/6dd50533a5325c6f873956892bcde038.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/91537a37126271bbbd5a5aca715c6e49.jpg",
+            "type": "image"
+          }
+        ],
         "material": {
           "es": "Latón",
           "en": "Brass"
@@ -1386,8 +2500,8 @@
         "reference": "D-09",
         "subtitle": "60 × 175 cm",
         "description": {
-          "es": "",
-          "en": ""
+          "es": "Medidas: \n•  ancho 60cm\n•  prof. 30cm\n•  altura 175cm",
+          "en": "Dimensions:\n• Width: 60 cm\n• Depth: 30 cm\n• Height: 175 cm"
         },
         "related": []
       },
@@ -1404,6 +2518,21 @@
           "/uploads/0534bda269866a293102b2dc6c3d6be9.jpg"
         ],
         "video": "",
+        "videoFirst": false,
+        "media": [
+          {
+            "src": "/uploads/aa1e8abedcfb5204a012e220167772ee.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/b5b171eddb608733cf150abb22d2714f.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/0534bda269866a293102b2dc6c3d6be9.jpg",
+            "type": "image"
+          }
+        ],
         "material": {
           "es": "Latón",
           "en": "Brass"
@@ -1412,8 +2541,8 @@
         "reference": "D-01",
         "subtitle": "60 × 170 cm",
         "description": {
-          "es": "",
-          "en": ""
+          "es": "Medidas: \n•  ancho 60cm\n•  altura 170cm",
+          "en": "Dimensions:\n• Width: 60 cm\n• Height: 170 cm"
         },
         "related": []
       },
@@ -1431,6 +2560,25 @@
           "/uploads/07b18de84ee765e3a038b8ef303faddf.jpg"
         ],
         "video": "",
+        "videoFirst": false,
+        "media": [
+          {
+            "src": "/uploads/c43ae200269a2178bbc21d155d262d62.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/3b0c69c2a5d42e8276d95df3c7b23dca.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/0b0a1b32eb47583da858f2515b5268f2.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/07b18de84ee765e3a038b8ef303faddf.jpg",
+            "type": "image"
+          }
+        ],
         "material": {
           "es": "Latón",
           "en": "Brass"
@@ -1439,8 +2587,8 @@
         "reference": "D-03",
         "subtitle": "60 × 170 cm",
         "description": {
-          "es": "",
-          "en": ""
+          "es": "Medidas: \n•  ancho 60cm\n•  altura 170cm",
+          "en": "Dimensions:\n• Width: 60 cm\n• Height: 170 cm"
         },
         "related": []
       },
@@ -1455,6 +2603,13 @@
           "/uploads/473c9181a2046b2411986610af45eccf.jpg"
         ],
         "video": "",
+        "videoFirst": false,
+        "media": [
+          {
+            "src": "/uploads/473c9181a2046b2411986610af45eccf.jpg",
+            "type": "image"
+          }
+        ],
         "material": {
           "es": "Latón",
           "en": "Brass"
@@ -1463,8 +2618,8 @@
         "reference": "D-04",
         "subtitle": "50 × 35 × 160 cm",
         "description": {
-          "es": "",
-          "en": ""
+          "es": "Medidas: \n•  ancho 55cm\n•  prof. 34cm\n•  altura 160cm\n\nEspejo 50x140cm",
+          "en": "Dimensions:\n• Width: 55cm\n• Depth: 34cm\n• Height: 160cm\n\nMirror: 50 × 140 cm"
         },
         "related": []
       },
@@ -1479,6 +2634,13 @@
           "/uploads/93d76369b73d27c30f1f5855b889a233.jpg"
         ],
         "video": "",
+        "videoFirst": false,
+        "media": [
+          {
+            "src": "/uploads/93d76369b73d27c30f1f5855b889a233.jpg",
+            "type": "image"
+          }
+        ],
         "material": {
           "es": "Latón",
           "en": "Brass"
@@ -1487,8 +2649,8 @@
         "reference": "D-07",
         "subtitle": "45 × 175 cm",
         "description": {
-          "es": "",
-          "en": ""
+          "es": "Medidas: \n•  ancho 45cm\n•  prof. 40cm\n•  altura 175cm\n\nEspejo 40x160cm ",
+          "en": "Dimensions:\n• Width: 45 cm\n• Depth: 40 cm\n• Height: 175 cm\n\nMirror: 40 × 160 cm"
         },
         "related": []
       },
@@ -1504,6 +2666,17 @@
           "/uploads/a5513f814d82486b9a469d165003320a.jpg"
         ],
         "video": "",
+        "videoFirst": false,
+        "media": [
+          {
+            "src": "/uploads/a274e039cbe387a07c336fe504abd60f.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/a5513f814d82486b9a469d165003320a.jpg",
+            "type": "image"
+          }
+        ],
         "material": {
           "es": "Latón",
           "en": "Brass"
@@ -1512,8 +2685,8 @@
         "reference": "D-08",
         "subtitle": "45 × 175 cm",
         "description": {
-          "es": "",
-          "en": ""
+          "es": "Medidas: \n•  ancho 45cm\n•  prof. 40cm\n•  altura 175cm\n\nEspejo 40x160cm ",
+          "en": "Dimensions:\n• Width: 45 cm\n• Depth: 40 cm\n• Height: 175 cm\n\nMirror: 40 × 160 cm"
         },
         "related": []
       }
@@ -1552,6 +2725,33 @@
           "/uploads/f8beb94f6c92d3d14d657283d4a6258c.jpg"
         ],
         "video": "",
+        "videoFirst": false,
+        "media": [
+          {
+            "src": "/uploads/ba4ef2211a28e2c7f7c719f2f0adf7a7.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/6de7caf4f0797702e856d34335da2301.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/0c00afe5c76520a3e5add04b08017145.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/73791acc3e87a23f40cd307f85da45bb.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/f8beb94f6c92d3d14d657283d4a6258c.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/5388d93ece5e1993387691ff4acd47b3.mp4",
+            "type": "video"
+          }
+        ],
         "material": {
           "es": "Lacado mate",
           "en": "Matte lacquer"
@@ -1560,8 +2760,8 @@
         "reference": "E-07",
         "subtitle": "50 × 40 × 190 cm",
         "description": {
-          "es": "",
-          "en": ""
+          "es": "Medidas: \n•  ancho 50cm\n•  prof. 40cm\n•  altura 190cm",
+          "en": "Dimensions:\n• Width: 50 cm\n• Depth: 40 cm\n• Height: 190 cm"
         },
         "related": []
       },
@@ -1582,6 +2782,41 @@
           "/uploads/db5f4f6807bf109cd3a147129cf33ce8.jpg"
         ],
         "video": "",
+        "videoFirst": false,
+        "media": [
+          {
+            "src": "/uploads/1a861d6895b693d6801509375477534e.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/e5502349df7b7b590e23540321a13263.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/0d6db29125fd76dbccc2778f71d229ac.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/147abb05666bec1bd32376383e92d9dd.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/c07b98ba5a5857515153b9bccaf7cf4e.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/ab581bbbec2a955c8591ad175354c06d.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/db5f4f6807bf109cd3a147129cf33ce8.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/783661a5002e1543ab3e82e4e3551b23.mp4",
+            "type": "video"
+          }
+        ],
         "material": {
           "es": "Lacado mate",
           "en": "Matte lacquer"
@@ -1590,8 +2825,8 @@
         "reference": "E-16",
         "subtitle": "80 × 40 × 190 cm",
         "description": {
-          "es": "",
-          "en": ""
+          "es": "Medidas: \n•  ancho 80cm\n•  prof. 40cm\n•  altura 190cm",
+          "en": "Dimensions:\n• Width: 80 cm\n• Depth: 40 cm\n• Height: 190 cm"
         },
         "related": []
       },
@@ -1611,6 +2846,37 @@
           "/uploads/f2595658bca1f29611d366ff67cfaf28.jpg"
         ],
         "video": "",
+        "videoFirst": false,
+        "media": [
+          {
+            "src": "/uploads/2233f524cc4506ff80f44a1b8d44eee4.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/0e00566ed3e30c98a219cb77b4833c9d.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/42577a238965c8c82fe68822d034c43d.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/e04b332686faa5672de9e60a6490602a.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/650b604f768a975767faf26bb3a45ecf.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/f2595658bca1f29611d366ff67cfaf28.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/c9dfcabbb01b30aa95c094dfd5782a06.mp4",
+            "type": "video"
+          }
+        ],
         "material": {
           "es": "Lacado mate",
           "en": "Matte lacquer"
@@ -1619,8 +2885,8 @@
         "reference": "E-05",
         "subtitle": "45 × 35 × 180 cm",
         "description": {
-          "es": "",
-          "en": ""
+          "es": "Medidas: \n•  ancho 45cm\n•  prof. 35cm\n•  altura 180cm",
+          "en": "Dimensions:\n• Width: 45 cm\n• Depth: 35 cm\n• Height: 180 cm"
         },
         "related": []
       },
@@ -1636,6 +2902,21 @@
           "/uploads/067b6d43f91f7b5cbf0a398b8b351b8a.jpg"
         ],
         "video": "",
+        "videoFirst": false,
+        "media": [
+          {
+            "src": "/uploads/6a8baf8b0f5c4a4ebf057a3d4dbdcd11.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/067b6d43f91f7b5cbf0a398b8b351b8a.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/9eddb3c4ebc88f433f3f2a21c733ab0f.mp4",
+            "type": "video"
+          }
+        ],
         "material": {
           "es": "Fresno",
           "en": "Ash"
@@ -1644,8 +2925,8 @@
         "reference": "E-02",
         "subtitle": "40 × 40 × 190 cm",
         "description": {
-          "es": "",
-          "en": ""
+          "es": "Medidas: \n•  ancho 40cm\n•  prof. 40cm\n•  altura 190cm",
+          "en": "Dimensions:\n• Width: 40 cm\n• Depth: 40 cm\n• Height: 190 cm"
         },
         "related": []
       },
@@ -1664,6 +2945,33 @@
           "/uploads/241614a8d832885972990c81d07f9cb2.jpg"
         ],
         "video": "",
+        "videoFirst": false,
+        "media": [
+          {
+            "src": "/uploads/d49166c624a67325c8b4c553086acf16.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/c33cb80989b38108d08cbac31e46fd22.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/d1ca612ad5f1e05d19774f793a1fc097.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/0f91295a58c0d127750e115c5587654a.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/241614a8d832885972990c81d07f9cb2.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/9bd3033bbd7d6cbba12bc51335b61249.mp4",
+            "type": "video"
+          }
+        ],
         "material": {
           "es": "Lacado mate",
           "en": "Matte lacquer"
@@ -1672,8 +2980,8 @@
         "reference": "E-14",
         "subtitle": "86 × 40 × 190 cm",
         "description": {
-          "es": "",
-          "en": ""
+          "es": "Medidas: \n•  ancho 86cm\n•  prof. 40cm\n•  altura 190cm",
+          "en": "Dimensions:\n• Width: 86 cm\n• Depth: 40 cm\n• Height: 190 cm"
         },
         "related": []
       },
@@ -1689,6 +2997,21 @@
           "/uploads/9c8e3d192130e43586682e0447964b0f.jpg"
         ],
         "video": "",
+        "videoFirst": false,
+        "media": [
+          {
+            "src": "/uploads/7bd218a764fa9eb6ace48128ccd2a33a.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/9c8e3d192130e43586682e0447964b0f.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/d8c6ca0e4e632f5e846ecf2cdff7cb2b.mp4",
+            "type": "video"
+          }
+        ],
         "material": {
           "es": "Lacado mate",
           "en": "Matte lacquer"
@@ -1697,8 +3020,8 @@
         "reference": "E-06",
         "subtitle": "50 × 40 × 190 cm",
         "description": {
-          "es": "",
-          "en": ""
+          "es": "Medidas: \n•  ancho 50cm\n•  prof. 40cm\n•  altura 190cm",
+          "en": "Dimensions:\n• Width: 50 cm\n• Depth: 40 cm\n• Height: 190 cm"
         },
         "related": []
       },
@@ -1716,6 +3039,29 @@
           "/uploads/1aebc4e5a9444b83342c6d56b4fc2720.jpg"
         ],
         "video": "",
+        "videoFirst": false,
+        "media": [
+          {
+            "src": "/uploads/af14c88c751cf65803a8a04cec483bd5.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/37cabfae8ab4d783fc8af1bfe265cc0e.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/b00e369deede9e1169fd6276cb370ced.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/1aebc4e5a9444b83342c6d56b4fc2720.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/643486527f176d8667883fd10fd1cec3.mp4",
+            "type": "video"
+          }
+        ],
         "material": {
           "es": "Lacado mate",
           "en": "Matte lacquer"
@@ -1724,8 +3070,8 @@
         "reference": "E-17",
         "subtitle": "80 × 40 × 200 cm",
         "description": {
-          "es": "",
-          "en": ""
+          "es": "Medidas: \n•  ancho 80cm\n•  prof. 40cm\n•  altura 200cm",
+          "en": "Dimensions:\n• Width: 80 cm\n• Depth: 40 cm\n• Height: 200 cm"
         },
         "related": []
       },
@@ -1742,6 +3088,21 @@
           "/uploads/e69c8a3e9fc2a5df7cd505dca7fa5396.jpg"
         ],
         "video": "",
+        "videoFirst": false,
+        "media": [
+          {
+            "src": "/uploads/b64d0c4e3a26dbd3b02daeb44ca4e149.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/06817be096c745ebdb1c9bde88f526f6.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/e69c8a3e9fc2a5df7cd505dca7fa5396.jpg",
+            "type": "image"
+          }
+        ],
         "material": {
           "es": "Lacado mate",
           "en": "Matte lacquer"
@@ -1750,8 +3111,8 @@
         "reference": "E-10",
         "subtitle": "40 × 30 × 200 cm",
         "description": {
-          "es": "",
-          "en": ""
+          "es": "Medidas: \n•  ancho 40cm\n•  prof. 30cm\n•  altura 200cm",
+          "en": "Dimensions:\n• Width: 40 cm\n• Depth: 30 cm\n• Height: 200 cm"
         },
         "related": []
       },
@@ -1767,6 +3128,17 @@
           "/uploads/2d96600fa4cf9c2cdfa5b81fcef75d70.jpg"
         ],
         "video": "",
+        "videoFirst": false,
+        "media": [
+          {
+            "src": "/uploads/d28c174bb94ff71d2d46dc07648a8d28.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/2d96600fa4cf9c2cdfa5b81fcef75d70.jpg",
+            "type": "image"
+          }
+        ],
         "material": {
           "es": "Roble",
           "en": "Oak"
@@ -1775,8 +3147,8 @@
         "reference": "E-01",
         "subtitle": "40 × 40 × 170 cm",
         "description": {
-          "es": "",
-          "en": ""
+          "es": "Medidas: \n•  ancho 40cm\n•  prof. 40cm\n•  altura 170cm",
+          "en": "Dimensions:\n• Width: 40 cm\n• Depth: 40 cm\n• Height: 170 cm"
         },
         "related": []
       },
@@ -1794,6 +3166,29 @@
           "/uploads/e2747110780795563bb8300cbc918bc4.jpg"
         ],
         "video": "",
+        "videoFirst": false,
+        "media": [
+          {
+            "src": "/uploads/5b4267b13e4742819d1f56cacfd3ae0c.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/e40cafa3a3e6065af6de83716be604f8.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/03dcba2848726f9be46ae75f2db5d4ea.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/e2747110780795563bb8300cbc918bc4.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/a56abefa7a80b5bb986b8a605901e3f0.mp4",
+            "type": "video"
+          }
+        ],
         "material": {
           "es": "Lacado mate",
           "en": "Matte lacquer"
@@ -1802,8 +3197,8 @@
         "reference": "E-08",
         "subtitle": "50 × 40 × 190 cm",
         "description": {
-          "es": "",
-          "en": ""
+          "es": "Medidas: \n•  ancho 50cm\n•  prof. 40cm\n•  altura 190cm",
+          "en": "Dimensions:\n• Width: 50 cm\n• Depth: 40 cm\n• Height: 190 cm"
         },
         "related": []
       },
@@ -1819,6 +3214,17 @@
           "/uploads/08353cb8239a8083d1132e402b132fd3.jpg"
         ],
         "video": "",
+        "videoFirst": false,
+        "media": [
+          {
+            "src": "/uploads/99ac31e368589a89f4a5f3aeaa5927e8.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/08353cb8239a8083d1132e402b132fd3.jpg",
+            "type": "image"
+          }
+        ],
         "material": {
           "es": "Lacado mate",
           "en": "Matte lacquer"
@@ -1827,8 +3233,8 @@
         "reference": "E-15",
         "subtitle": "80 × 40 × 190 cm",
         "description": {
-          "es": "",
-          "en": ""
+          "es": "Medidas: \n•  ancho 80cm\n•  prof. 40cm\n•  altura 190cm",
+          "en": "Dimensions:\n• Width: 80 cm\n• Depth: 40 cm\n• Height: 190 cm"
         },
         "related": []
       },
@@ -1844,6 +3250,21 @@
           "/uploads/10b641ad623a9b5f2d7918a61fc35cd5.jpg"
         ],
         "video": "",
+        "videoFirst": false,
+        "media": [
+          {
+            "src": "/uploads/f1760e451f3f1d23ddb20f29fce84ec6.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/10b641ad623a9b5f2d7918a61fc35cd5.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/4268c5900a8e943eae7e29a3b48dbe03.mp4",
+            "type": "video"
+          }
+        ],
         "material": {
           "es": "Lacado mate",
           "en": "Matte lacquer"
@@ -1852,8 +3273,8 @@
         "reference": "E-12",
         "subtitle": "80 × 40 × 190 cm",
         "description": {
-          "es": "",
-          "en": ""
+          "es": "Medidas: \n•  ancho 80cm\n•  prof. 40cm\n•  altura 190cm",
+          "en": "Dimensions:\n• Width: 80 cm\n• Depth: 40 cm\n• Height: 190 cm"
         },
         "related": []
       },
@@ -1873,6 +3294,33 @@
           "/uploads/285210680b55e62700e0e93e816feaba.jpg"
         ],
         "video": "",
+        "videoFirst": false,
+        "media": [
+          {
+            "src": "/uploads/9f41af0ee82bfb816dbf2371e2613b4e.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/b33f73e50106ca77bae731d1c8bb38fa.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/fec7b5c08e9f4b1298355df9e5cb3e98.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/6e78cb5c5d4b34331772340dcc583355.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/b4e015f795e7538cd5e960707c285517.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/285210680b55e62700e0e93e816feaba.jpg",
+            "type": "image"
+          }
+        ],
         "material": {
           "es": "Nogal",
           "en": "Walnut"
@@ -1881,8 +3329,8 @@
         "reference": "E-03",
         "subtitle": "40 × 40 × 190 cm",
         "description": {
-          "es": "",
-          "en": ""
+          "es": "Medidas: \n•  ancho 40cm\n•  prof. 40cm\n•  altura 190cm",
+          "en": "Dimensions:\n• Width: 40 cm\n• Depth: 40 cm\n• Height: 190 cm"
         },
         "related": []
       },
@@ -1901,6 +3349,33 @@
           "/uploads/9f53ae11f4096a008c4905a4ed6f1f69.jpg"
         ],
         "video": "",
+        "videoFirst": false,
+        "media": [
+          {
+            "src": "/uploads/1e4634edcadb5498252c80f4974bcfb3.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/5c65f9143e57f6944ff744bb8c751a15.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/326cf916307b10641aad5dd330b219d4.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/c086b3481141d4ec4ae89a634c99fc51.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/9f53ae11f4096a008c4905a4ed6f1f69.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/eb26f5d1082cacfe35aa74e934bfce73.mp4",
+            "type": "video"
+          }
+        ],
         "material": {
           "es": "Lacado mate",
           "en": "Matte lacquer"
@@ -1909,8 +3384,8 @@
         "reference": "E-13",
         "subtitle": "80 × 40 × 150 cm",
         "description": {
-          "es": "",
-          "en": ""
+          "es": "Medidas: \n•  ancho 80cm\n•  prof. 40cm\n•  altura 150cm",
+          "en": "Dimensions:\n• Width: 80 cm\n• Depth: 40 cm\n• Height: 150 cm"
         },
         "related": []
       },
@@ -1929,6 +3404,29 @@
           "/uploads/a615b011b5009cca984e0bac92667550.jpg"
         ],
         "video": "",
+        "videoFirst": false,
+        "media": [
+          {
+            "src": "/uploads/89144ffbf7054d00ca68184620c44cf5.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/ee6e64fe8f0875dacc577dbddb188310.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/1288355537f0316657f468cde0cb31d1.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/8917bc1283661a77875d6c2d6b2e7356.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/a615b011b5009cca984e0bac92667550.jpg",
+            "type": "image"
+          }
+        ],
         "material": {
           "es": "Lacado mate",
           "en": "Matte lacquer"
@@ -1937,8 +3435,8 @@
         "reference": "E-04",
         "subtitle": "45 × 35 × 180 cm",
         "description": {
-          "es": "",
-          "en": ""
+          "es": "Medidas: \n•  ancho 45cm\n•  prof. 35cm\n•  altura 180cm",
+          "en": "Dimensions:\n• Width: 45 cm\n• Depth: 35 cm\n• Height: 180 cm"
         },
         "related": []
       },
@@ -1953,6 +3451,13 @@
           "/uploads/273816b8d650953ba09d8adc3e177d13.jpg"
         ],
         "video": "",
+        "videoFirst": false,
+        "media": [
+          {
+            "src": "/uploads/273816b8d650953ba09d8adc3e177d13.jpg",
+            "type": "image"
+          }
+        ],
         "material": {
           "es": "Lacado mate",
           "en": "Matte lacquer"
@@ -1961,8 +3466,8 @@
         "reference": "E-11",
         "subtitle": "40 × 30 × 200 cm",
         "description": {
-          "es": "",
-          "en": ""
+          "es": "Medidas: \n•  ancho 40cm\n•  prof. 30cm\n•  altura 200cm",
+          "en": "Dimensions:\n• Width: 40 cm\n• Depth: 30 cm\n• Height: 200 cm"
         },
         "related": []
       },
@@ -1982,6 +3487,33 @@
           "/uploads/8c846d56137069a17acc82069e14ebe4.jpg"
         ],
         "video": "",
+        "videoFirst": false,
+        "media": [
+          {
+            "src": "/uploads/2ae7e0d8535037d975982aeb58df61c4.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/ae9c0b6b3b650e2a273460919bbda1d5.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/01382c61eec39efde6b5f71cc823c118.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/8444c70f4a01c644cdb27137a895d730.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/b46740f1872c6c6b8f799ada880acdac.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/8c846d56137069a17acc82069e14ebe4.jpg",
+            "type": "image"
+          }
+        ],
         "material": {
           "es": "Lacado mate",
           "en": "Matte lacquer"
@@ -1990,8 +3522,8 @@
         "reference": "E-09",
         "subtitle": "50 × 40 × 190 cm",
         "description": {
-          "es": "",
-          "en": ""
+          "es": "Medidas: \n•  ancho 50cm\n•  prof. 40cm\n•  altura 190cm",
+          "en": "Dimensions:\n• Width: 50 cm\n• Depth: 40 cm\n• Height: 190 cm"
         },
         "related": []
       }
@@ -2028,6 +3560,21 @@
           "/uploads/cb3ac32d5be8256108f9e311bc1fc0c4.jpg"
         ],
         "video": "",
+        "videoFirst": false,
+        "media": [
+          {
+            "src": "/uploads/1e68f7d1e65161f76f6bb563a2af9022.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/1c399e483e7fa58e1962616e96ec5c83.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/cb3ac32d5be8256108f9e311bc1fc0c4.jpg",
+            "type": "image"
+          }
+        ],
         "material": {
           "es": "Latón",
           "en": "Brass"
@@ -2036,8 +3583,8 @@
         "reference": "K-12",
         "subtitle": "Ø d-70cm",
         "description": {
-          "es": "",
-          "en": ""
+          "es": ".",
+          "en": "."
         },
         "related": []
       },
@@ -2055,6 +3602,25 @@
           "/uploads/b134e549dd9c51bde492b79be40f6136.jpg"
         ],
         "video": "",
+        "videoFirst": false,
+        "media": [
+          {
+            "src": "/uploads/0eb2e83fe288beb457416da7105c41c3.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/8d6120b3e3a93f603912dbc31803f834.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/eb33864742bfe3ad38c51cd33e0ee17d.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/b134e549dd9c51bde492b79be40f6136.jpg",
+            "type": "image"
+          }
+        ],
         "material": {
           "es": "Latón",
           "en": "Brass"
@@ -2063,8 +3629,8 @@
         "reference": "K-09",
         "subtitle": "80 x 65cm",
         "description": {
-          "es": "",
-          "en": ""
+          "es": ".",
+          "en": "."
         },
         "related": []
       },
@@ -2089,6 +3655,53 @@
           "/uploads/730795b05ad89696715d0a2ae25b3177.jpg"
         ],
         "video": "",
+        "videoFirst": false,
+        "media": [
+          {
+            "src": "/uploads/0f37072097b41ef0942de7f71ac255fd.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/c498338cf980dda41a2628553100d0fb.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/ff43da728eb54169cdabff960c8c958b.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/0747af5185cd28c54b6b44fa9e0ebe9d.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/723a3f33a4804c6f367bf551db4ea792.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/32551664bce2018688c4701747b89ffe.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/4e3d9a3a3f688a2a52cf666e16fa4834.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/8cc83880f2d6502b27a9a51b3f5285c0.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/4c0ccb27d75a40cbfa1bd6e211a6cc61.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/0569e9108fffde84cf83b906973c7c9e.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/730795b05ad89696715d0a2ae25b3177.jpg",
+            "type": "image"
+          }
+        ],
         "material": {
           "es": "Latón",
           "en": "Brass"
@@ -2097,8 +3710,8 @@
         "reference": "K-05",
         "subtitle": "86 x 85cm",
         "description": {
-          "es": "",
-          "en": ""
+          "es": ".",
+          "en": "."
         },
         "related": []
       },
@@ -2119,6 +3732,37 @@
           "/uploads/77f74df442e0ecd20211fd3244b2aca3.jpg"
         ],
         "video": "",
+        "videoFirst": false,
+        "media": [
+          {
+            "src": "/uploads/b4bdfa3c000fd74f8ed3338cf455d007.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/1e5249aa3053a20f347bf4df1c6c7140.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/ea4310053dac9dd78b9bd54ddd8718ec.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/6345ba80652331db695aeec48aa83a03.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/31f66857bb36f0eebb17647f6bc5f078.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/7b4cfea452b1ea477982a2e530ba6198.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/77f74df442e0ecd20211fd3244b2aca3.jpg",
+            "type": "image"
+          }
+        ],
         "material": {
           "es": "Latón",
           "en": "Brass"
@@ -2127,8 +3771,8 @@
         "reference": "K-13",
         "subtitle": "Ø d-80cm",
         "description": {
-          "es": "",
-          "en": ""
+          "es": ".",
+          "en": "."
         },
         "related": []
       },
@@ -2147,6 +3791,29 @@
           "/uploads/a7396186568a0d943877183084109ec5.jpg"
         ],
         "video": "",
+        "videoFirst": false,
+        "media": [
+          {
+            "src": "/uploads/083ac4739da74fb6601daa0ff0f37600.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/f3c409def8a16e74d0daaf507afc383f.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/d0d1c6d7b8ee30a798cf46aa6a679ce4.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/276ab6191d87a87c0b98d05a1b0b2b88.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/a7396186568a0d943877183084109ec5.jpg",
+            "type": "image"
+          }
+        ],
         "material": {
           "es": "Latón",
           "en": "Brass"
@@ -2155,8 +3822,8 @@
         "reference": "K-14",
         "subtitle": "Ø d-90cm",
         "description": {
-          "es": "",
-          "en": ""
+          "es": ".",
+          "en": "."
         },
         "related": []
       },
@@ -2181,6 +3848,53 @@
           "/uploads/a3b8fd67e6c43990c84cee75d4808103.jpg"
         ],
         "video": "",
+        "videoFirst": false,
+        "media": [
+          {
+            "src": "/uploads/bf1fe7c17b3927f0466afa6a480b99df.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/6d4c36e4ee332b6bed23c34d658d87d7.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/f0af557b9bd04b4e0c1e1b45b4939815.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/dd84ff7411b64bd47d80dc0aa75f424b.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/353fb3a25798625b9cce60cf9dc734b6.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/2a9367f498f8fcc0d9860e707edf3b91.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/e0c16b4be4552f404a329588281f71dd.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/9e8b5f8fce4ae90862b0b1cee13b50d8.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/adbf6f17f27b415a08e00c984dc6b072.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/b6d37178f0977cec136159cb4050cfc5.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/a3b8fd67e6c43990c84cee75d4808103.jpg",
+            "type": "image"
+          }
+        ],
         "material": {
           "es": "Latón",
           "en": "Brass"
@@ -2189,8 +3903,8 @@
         "reference": "K-10",
         "subtitle": "80 x 60cm",
         "description": {
-          "es": "",
-          "en": ""
+          "es": ".",
+          "en": "."
         },
         "related": []
       },
@@ -2210,6 +3924,33 @@
           "/uploads/16f92be4c5aee0dbd509723fc42fa4a5.jpg"
         ],
         "video": "",
+        "videoFirst": false,
+        "media": [
+          {
+            "src": "/uploads/e3e0f6aad4735a88523bc148c75cb45f.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/c6946bba37f74807773766c2136702d7.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/bf6a5807b211064745cffea4c68452a1.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/9c6c72bca53cea48e8d2a044e71dc1ae.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/6048529e1041ddb84622f7d0fe8883ae.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/16f92be4c5aee0dbd509723fc42fa4a5.jpg",
+            "type": "image"
+          }
+        ],
         "material": {
           "es": "Latón",
           "en": "Brass"
@@ -2218,8 +3959,8 @@
         "reference": "K-15",
         "subtitle": "Ø d-90cm",
         "description": {
-          "es": "",
-          "en": ""
+          "es": ".",
+          "en": "."
         },
         "related": []
       },
@@ -2239,6 +3980,33 @@
           "/uploads/8f78a41110bb742b18be754cf3c83a82.jpg"
         ],
         "video": "",
+        "videoFirst": false,
+        "media": [
+          {
+            "src": "/uploads/2d62889e8f15abd762e6133462f3fdb1.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/edef0946bfb2f3c6559613bac83ae5ef.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/74aac4781450c4b2dc5c4416cc009469.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/12ad7860af1127881c9b9a49caac635a.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/67cf4dd3303e65cbc8e7fba0366a2e17.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/8f78a41110bb742b18be754cf3c83a82.jpg",
+            "type": "image"
+          }
+        ],
         "material": {
           "es": "Latón",
           "en": "Brass"
@@ -2247,8 +4015,8 @@
         "reference": "K-07",
         "subtitle": "70 x 63cm",
         "description": {
-          "es": "",
-          "en": ""
+          "es": ".",
+          "en": "."
         },
         "related": []
       },
@@ -2274,6 +4042,57 @@
           "/uploads/a5d90377cb1f44aa05af7e06be67d308.jpg"
         ],
         "video": "",
+        "videoFirst": false,
+        "media": [
+          {
+            "src": "/uploads/0aedb45905bd0fe025e19976225bfdc1.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/810cdf15f270427b22201769eae56f54.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/1322e8d0fa5e0f421fe55f23a51909fe.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/6ea9d4b5b9c6cf7b85c5d46f21acd5ef.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/694084c4fb183a5b3e8e30c9e7aef46f.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/afd4455509b687ef57f6844d8d2b8954.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/35d8008c6afcef45d4cb7e355be2109b.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/38b4453ed12b743fec288b4ac800450d.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/e198d1610fff2e0e406fe34ab38b0d97.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/8aeaeeed66f328e96ee5b703b2189f5b.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/d4967fec1639fe502ece916dae874f87.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/a5d90377cb1f44aa05af7e06be67d308.jpg",
+            "type": "image"
+          }
+        ],
         "material": {
           "es": "Latón",
           "en": "Brass"
@@ -2282,8 +4101,8 @@
         "reference": "K-11",
         "subtitle": "65 x 80cm",
         "description": {
-          "es": "",
-          "en": ""
+          "es": ".",
+          "en": "."
         },
         "related": []
       },
@@ -2307,6 +4126,49 @@
           "/uploads/6d473e41c7bfb6c486e0f81a95909a4f.jpg"
         ],
         "video": "",
+        "videoFirst": false,
+        "media": [
+          {
+            "src": "/uploads/392a100defd7e08ba2b3f5e3bf6728b2.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/90bbbd123cadffddbb2053b16fed7e90.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/b43522355569aff3ebdf8306f9385170.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/374fb33333555089bacc65de16bf4d0a.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/833ac76560095a56b8ba16add4d9d0ee.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/f6ce72ead99aff335bdc706d4e3506f8.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/d9c1f1ca857ec14ed21205391c79e4f7.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/ce3d2aadd66d433eb044988f6ebe1789.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/c4880e843f2313cefa122f8043765b02.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/6d473e41c7bfb6c486e0f81a95909a4f.jpg",
+            "type": "image"
+          }
+        ],
         "material": {
           "es": "Latón",
           "en": "Brass"
@@ -2315,8 +4177,8 @@
         "reference": "K-01",
         "subtitle": "Ø d-80cm",
         "description": {
-          "es": "",
-          "en": ""
+          "es": ".",
+          "en": "."
         },
         "related": []
       },
@@ -2337,6 +4199,37 @@
           "/uploads/50b58ebe71cab14cf0a2ccde8356769f.jpg"
         ],
         "video": "",
+        "videoFirst": false,
+        "media": [
+          {
+            "src": "/uploads/84fb56b3a6f01b281439695109aac716.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/6f5cd6bcd0cf2a8446c1d3dcaf597ec1.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/59179159878f7e3dd31eb0650ff0361b.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/06e906540d64293851595ad21d236d6a.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/e73a275c19e6422bc806468d3e4c236b.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/8c96d9efb9a3d4affaffb645d69a0fca.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/50b58ebe71cab14cf0a2ccde8356769f.jpg",
+            "type": "image"
+          }
+        ],
         "material": {
           "es": "Latón",
           "en": "Brass"
@@ -2345,8 +4238,8 @@
         "reference": "K-06",
         "subtitle": "Ø d-70cm",
         "description": {
-          "es": "",
-          "en": ""
+          "es": ".",
+          "en": "."
         },
         "related": []
       },
@@ -2371,6 +4264,53 @@
           "/uploads/b63c8fc77e0a0a2fbbd5a9854f58bd28.jpg"
         ],
         "video": "",
+        "videoFirst": false,
+        "media": [
+          {
+            "src": "/uploads/981a9896804a36c218d97798187357b3.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/672a4c64615669abb02a46a8d9881402.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/ef0fd4fac6dd74b0c7f1745f7759eb8d.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/b6560fb74d22c71bd402ebdb4c6bfa20.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/084e9aa94044c3aecde4bb9354b831c4.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/6e217ce5df4141761d4c9e083fb75ba8.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/a1323b326e81d5f79adcf39ba6a8915c.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/3d84991906a0e6ddc64ae52c9b624490.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/41531c7aee940f4c05767f1bbde54ed0.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/3eacbb6803b4f95edd9ad9247a563152.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/b63c8fc77e0a0a2fbbd5a9854f58bd28.jpg",
+            "type": "image"
+          }
+        ],
         "material": {
           "es": "Latón",
           "en": "Brass"
@@ -2379,8 +4319,8 @@
         "reference": "K-04",
         "subtitle": "90 x 70cm",
         "description": {
-          "es": "",
-          "en": ""
+          "es": ".",
+          "en": "."
         },
         "related": []
       },
@@ -2401,6 +4341,37 @@
           "/uploads/d6df112f94cad84196e1f21cd7a80543.jpg"
         ],
         "video": "",
+        "videoFirst": false,
+        "media": [
+          {
+            "src": "/uploads/5cdbfd6624ff9ef1db5c0816f91084c4.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/23967d2957946de30f96c037d135c1b6.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/7cee55ba288e5db98381cfd9c64cd8cc.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/2b4cf274a7edea79b26bd669daed50d8.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/9b588c677f0d5d190f740349307c2c61.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/aa0b3990ca6af330cb2e649a82214024.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/d6df112f94cad84196e1f21cd7a80543.jpg",
+            "type": "image"
+          }
+        ],
         "material": {
           "es": "Latón",
           "en": "Brass"
@@ -2409,8 +4380,8 @@
         "reference": "K-08",
         "subtitle": "Ø d-80cm",
         "description": {
-          "es": "",
-          "en": ""
+          "es": ".",
+          "en": "."
         },
         "related": []
       },
@@ -2433,6 +4404,45 @@
           "/uploads/0b6d7d77c9fe5eb3e078c600c891f42e.jpg"
         ],
         "video": "",
+        "videoFirst": false,
+        "media": [
+          {
+            "src": "/uploads/0b11ba399f2cae2d81843c5a809a4d46.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/fb4dc6622f24234c1a85a77ef6e2ba9c.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/b4ee1747d6e5c86c4ff88cb7d520c3a0.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/cea1d0dec9397a1f78232e0de0aafe4b.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/9be82050cdae89eb13891c49bfd18842.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/028e056fe3d7c5a2a2a8a03fdb6b0edf.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/683e7e53b423d5a743a9ec381e5945ac.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/f01ab3549fec401f6b9157cde8eece3d.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/0b6d7d77c9fe5eb3e078c600c891f42e.jpg",
+            "type": "image"
+          }
+        ],
         "material": {
           "es": "Latón",
           "en": "Brass"
@@ -2441,8 +4451,8 @@
         "reference": "K-02",
         "subtitle": "Ø d-70cm",
         "description": {
-          "es": "",
-          "en": ""
+          "es": ".",
+          "en": "."
         },
         "related": []
       },
@@ -2468,6 +4478,57 @@
           "/uploads/ab482095ee0f77d0b11d904d1a0a1cb3.jpg"
         ],
         "video": "",
+        "videoFirst": false,
+        "media": [
+          {
+            "src": "/uploads/1f7913e8d1b3aae8d9197b1d56670bfd.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/3bc2aeba091eb2aa730d3619de17eedb.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/0c03f16daa9ca0c89688e28149995aa5.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/c0038f041d0f07ac665e1040c5368a69.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/e02358f15d719c27f10971aeef885fd3.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/1071b5b7dfdb06be72c2f87a25a2ded9.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/e521cb80c2665b4047d8753130aa1e47.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/1188dc640edad5a4c7cb7ae286c4a2d2.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/92522ef4117cc697c6ba235e5e486e72.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/3420c861bc0dc406c23eb281b846adbe.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/044e098d4a5ad6fd6bc1f136a79a666f.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/ab482095ee0f77d0b11d904d1a0a1cb3.jpg",
+            "type": "image"
+          }
+        ],
         "material": {
           "es": "Latón",
           "en": "Brass"
@@ -2476,8 +4537,8 @@
         "reference": "K-03",
         "subtitle": "80 x 80cm",
         "description": {
-          "es": "",
-          "en": ""
+          "es": ".",
+          "en": "."
         },
         "related": []
       }
@@ -2514,6 +4575,25 @@
           "/uploads/df374f5177eb4ffb3b4936a0c4c781b0.jpg"
         ],
         "video": "",
+        "videoFirst": false,
+        "media": [
+          {
+            "src": "/uploads/4e7bd785b23f06e67e63f368c87a27d0.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/cf920581618d78287f86d4156602b868.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/df374f5177eb4ffb3b4936a0c4c781b0.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/bc9ac17fd9a3c3db48328aa81a1e0df0.mp4",
+            "type": "video"
+          }
+        ],
         "material": {
           "es": "Roble claro",
           "en": "Light oak"
@@ -2522,8 +4602,8 @@
         "reference": "B-01",
         "subtitle": "40 × 40 × 70cm",
         "description": {
-          "es": "",
-          "en": ""
+          "es": "Medidas: \n•  ancho 40cm\n•  prof. 40cm\n•  altura 70cm",
+          "en": "Dimensions:\n• Width: 40 cm\n• Depth: 40 cm\n• Height: 70 cm"
         },
         "related": []
       },
@@ -2541,6 +4621,25 @@
           "/uploads/e9022bcf6a7412185d516cc9bb835f96.jpg"
         ],
         "video": "",
+        "videoFirst": false,
+        "media": [
+          {
+            "src": "/uploads/624ce1f194a1aa5f92230fd6bd7c73b2.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/cdd98060f19ddec62b4d74eb29dccff8.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/6838957c99ad6bcf29777cacfb52a3cd.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/e9022bcf6a7412185d516cc9bb835f96.jpg",
+            "type": "image"
+          }
+        ],
         "material": {
           "es": "Roble claro",
           "en": "Light oak"
@@ -2549,8 +4648,8 @@
         "reference": "B-02",
         "subtitle": "70 × 40 × 70cm",
         "description": {
-          "es": "",
-          "en": ""
+          "es": "Medidas: \n•  ancho 70cm\n•  prof. 40cm\n•  altura 70cm",
+          "en": "Dimensions:\n• Width: 70 cm\n• Depth: 40 cm\n• Height: 70 cm"
         },
         "related": []
       },
@@ -2568,6 +4667,25 @@
           "/uploads/4abfd3cd9ed8b3a592597fdae2b2ebe8.jpg"
         ],
         "video": "",
+        "videoFirst": false,
+        "media": [
+          {
+            "src": "/uploads/21ec0c792c66a908370bca863bbc60b7.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/0a208ac3e88a89699e51cc3becee6806.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/253d97d8b3b343501e60eeb0ec903b11.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/4abfd3cd9ed8b3a592597fdae2b2ebe8.jpg",
+            "type": "image"
+          }
+        ],
         "material": {
           "es": "Roble claro",
           "en": "Light oak"
@@ -2576,8 +4694,8 @@
         "reference": "B-03",
         "subtitle": "40 × 40 × 120cm",
         "description": {
-          "es": "",
-          "en": ""
+          "es": "Medidas: \n•  ancho 40cm\n•  prof. 40cm\n•  altura 120cm",
+          "en": "Dimensions:\n• Width: 40 cm\n• Depth: 40 cm\n• Height: 120 cm"
         },
         "related": []
       },
@@ -2595,6 +4713,29 @@
           "/uploads/a25afe15a31f4a130c003a66da466135.jpg"
         ],
         "video": "",
+        "videoFirst": false,
+        "media": [
+          {
+            "src": "/uploads/babc2366a5bb92ae18207a0b8be52f03.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/94af827d36d3cfdcaa8bacbcfbc59d02.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/fc9255bc88c94faba12007dfece97ed6.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/a25afe15a31f4a130c003a66da466135.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/7c4225b78b821bdfa51e4e2881e1a8e7.mp4",
+            "type": "video"
+          }
+        ],
         "material": {
           "es": "Roble claro",
           "en": "Light oak"
@@ -2603,8 +4744,8 @@
         "reference": "B-04",
         "subtitle": "40 × 40 × 120cm",
         "description": {
-          "es": "",
-          "en": ""
+          "es": "Medidas: \n•  ancho 40cm\n•  prof. 40cm\n•  altura 120cm",
+          "en": "Dimensions:\n• Width: 40 cm\n• Depth: 40 cm\n• Height: 120 cm"
         },
         "related": []
       },
@@ -2623,6 +4764,33 @@
           "/uploads/e358cd25ad4e57393fbb292a0ea22d7f.jpg"
         ],
         "video": "",
+        "videoFirst": false,
+        "media": [
+          {
+            "src": "/uploads/388bda67530152e6dee05e8334d06392.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/cce99cbb3bf6ecad55cde368da7cae5e.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/4d5b351ba3ebda5059c43eff8b0f95c1.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/f31aa93e8602fa8bed3760aac0653523.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/e358cd25ad4e57393fbb292a0ea22d7f.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/c4760219416e0638845cadeeb3b87244.mp4",
+            "type": "video"
+          }
+        ],
         "material": {
           "es": "Roble claro",
           "en": "Light oak"
@@ -2631,8 +4799,8 @@
         "reference": "B-05",
         "subtitle": "60 × 40 × 150cm",
         "description": {
-          "es": "",
-          "en": ""
+          "es": "Medidas: \n•  ancho 60cm\n•  prof. 40cm\n•  altura 150cm",
+          "en": "Dimensions:\n• Width: 60 cm\n• Depth: 40 cm\n• Height: 150 cm"
         },
         "related": []
       }
@@ -2676,6 +4844,53 @@
           "/uploads/42d57b86e42abd0b7d495ddaf0465acc.jpg"
         ],
         "video": "",
+        "videoFirst": false,
+        "media": [
+          {
+            "src": "/uploads/ab6d7fb0401733a31bea7ccea1faa246.mp4",
+            "type": "video"
+          },
+          {
+            "src": "/uploads/7576e1660f352f2509c84b32bb713000.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/265876bd765107ac927314e6cd47f3ab.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/aaef49ca6a1a963b565d3e7be3122c2b.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/49e47d6fd60353b0d8d6a009f4bbfb0a.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/e4e15e2819ed2ee83ddfb3fb6ba620ab.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/333d755bfde4d3432b12cdc46133ed65.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/b5094b39f2df70388b5c74652ded16d3.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/47fc4e49f163bdd95e381a08b8280c4d.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/ab4db9f3fc7e2f79f36938556d5665b7.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/42d57b86e42abd0b7d495ddaf0465acc.jpg",
+            "type": "image"
+          }
+        ],
         "material": {
           "es": "Roble",
           "en": "Oak"
@@ -2684,8 +4899,8 @@
         "reference": "A-01",
         "subtitle": "120 × 40 × 80cm",
         "description": {
-          "es": "",
-          "en": ""
+          "es": "Medidas: \n•  ancho 120cm\n•  prof. 40cm\n•  altura 80cm\n\nEspejo 80x80cm",
+          "en": "Dimensions:\n• Width: 120 cm\n• Depth: 40 cm\n• Height: 80 cm\n\nMirror: 80 × 80 cm"
         },
         "related": []
       },
@@ -2712,6 +4927,61 @@
           "/uploads/6dbd2c2066e8bf09769230b9656baff4.jpg"
         ],
         "video": "",
+        "videoFirst": false,
+        "media": [
+          {
+            "src": "/uploads/af040768b5edb0959d51bfcdc9a2857d.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/3b2f60472efd6903ffea29a81c31c4e6.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/780eff7b308d5548bc1f3041b6c211b4.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/8f5c9a813c979e54b05cd1dfeaa57ae7.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/170da7330afb704ce42854c529ab1cf3.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/6f74ea759230bdb5ad2ad4448db98a24.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/9c18b7cf37aeb98a28b0f118a03eb78c.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/9209f7d74502ca124e0f5085bbe59869.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/3fcb8af368cbaf83652c027a467b4182.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/31540ba67b11be8b7de48f4675a280e3.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/647aa51b870ebe241a6f7f062c9e8fa5.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/49f281a89f13fe6238eeb496df62b891.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/6dbd2c2066e8bf09769230b9656baff4.jpg",
+            "type": "image"
+          }
+        ],
         "material": {
           "es": "Roble",
           "en": "Oak"
@@ -2720,8 +4990,8 @@
         "reference": "A-02",
         "subtitle": "120 × 40 × 80cm",
         "description": {
-          "es": "",
-          "en": ""
+          "es": "Medidas: \n•  ancho 120cm\n•  prof. 40cm\n•  altura 80cm\n\nEspejo d-80cm",
+          "en": "Dimensions:\n• Width: 120 cm\n• Depth: 40 cm\n• Height: 80 cm\n\nMirror: d-80 cm"
         },
         "related": []
       },
@@ -2753,6 +5023,81 @@
           "/uploads/8d3a24cb7edb909cbcf04bc86b059320.jpg"
         ],
         "video": "",
+        "videoFirst": false,
+        "media": [
+          {
+            "src": "/uploads/3a7b6d3d5eb8bef30843748d9a1da92a.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/d4c6f47f9b8d974f37bc095e880dcb47.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/2d81bc9e40bd6c977f13ec1bc94e64c0.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/545ded67b1cc05d3b24ff0a8fe05a588.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/8afd74d5a2756c23ab3c03ba6baa1d16.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/cfac977637cb788c8cef598090d9b6a0.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/5e43a4dd3c918c4d05edec226abf7bc5.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/3110935996dfb855b3cc6657c3652e60.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/a055d5bb1dd4b2e25c04a4ebed349320.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/b524fd13ddfe86100c9e4b0520aa4909.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/4276a9cb2802978f75aef7e469b45cc3.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/89087b579881258602fa4c25258a5876.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/f557dc46a3f8e17ab818552d7b32c6e9.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/8ab824ab490c850baf8645295bc8c1c4.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/16112f0ccf1b937251b577aae4f7ec6a.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/00d2ead023a02e63486fb523b56701f7.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/1efdb26465bac6784764f23549e44f2f.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/8d3a24cb7edb909cbcf04bc86b059320.jpg",
+            "type": "image"
+          }
+        ],
         "material": {
           "es": "Roble",
           "en": "Oak"
@@ -2761,8 +5106,8 @@
         "reference": "A-03",
         "subtitle": "120 × 33 × 80cm",
         "description": {
-          "es": "",
-          "en": ""
+          "es": "Medidas: \n•  ancho 120cm\n•  prof. 33cm\n•  altura 80cm\n\nEspejo d-70cm",
+          "en": "Dimensions:\n• Width: 120 cm\n• Depth: 33 cm\n• Height: 80 cm\n\nMirror: d-70 cm"
         },
         "related": []
       },
@@ -2789,6 +5134,61 @@
           "/uploads/af7644fdaff5b5d35a694fe2371e0177.jpg"
         ],
         "video": "",
+        "videoFirst": false,
+        "media": [
+          {
+            "src": "/uploads/a4034de8e5ccf1ee87446b627cbe2032.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/6a32dfa15541cdeb779b46e35544af33.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/ab6daf93656db526467173c2e9f9aef1.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/4d2f45f89840ee825aef1aa7b5bd37ed.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/fbbb1aa3bd48c5059867631642b00b1e.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/b6249c969e05eddaa615cd0b8bfde8e9.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/30e47c11a7fae81d85b159384b271134.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/448a781c4f3340e95b8862b373e58b09.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/2ae464af2bab0a8205366fd96937f9b2.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/77d5e9a19efcdf66c047ecf4fc741e10.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/8e0ff56de8f8ba02b542b68b6f55f16f.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/f24db1a6ae384abea0c5f33d561516db.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/af7644fdaff5b5d35a694fe2371e0177.jpg",
+            "type": "image"
+          }
+        ],
         "material": {
           "es": "Roble",
           "en": "Oak"
@@ -2797,8 +5197,8 @@
         "reference": "A-04",
         "subtitle": "120 × 33 × 80cm",
         "description": {
-          "es": "",
-          "en": ""
+          "es": "Medidas: \n•  ancho 120cm\n•  prof. 33cm\n•  altura 80cm\n\nEspejo 90x70cm",
+          "en": "Dimensions:\n• Width: 120 cm\n• Depth: 33 cm\n• Height: 80 cm\n\nMirror: 90×70 cm"
         },
         "related": []
       }
@@ -2838,6 +5238,37 @@
           "/uploads/d3edcf960b639f473d0d85e2bd5a12b9.jpg"
         ],
         "video": "",
+        "videoFirst": false,
+        "media": [
+          {
+            "src": "/uploads/688b442d5ad448b3f99d8ba718853de4.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/192f6ffc1778d03c01a87d793630961c.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/3f00af8cc105af3df84b1fbf3728a5d8.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/80dc3f767a78355bb47e13850a674d25.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/66727780e66c962301f0717fb76bbe8b.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/d3edcf960b639f473d0d85e2bd5a12b9.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/de7cc4c35ac0d53301779fb7d4b27a3a.mp4",
+            "type": "video"
+          }
+        ],
         "material": {
           "es": "Roble claro",
           "en": "Light oak"
@@ -2846,8 +5277,8 @@
         "reference": "S-06",
         "subtitle": "130 × 40 × 80cm",
         "description": {
-          "es": "",
-          "en": ""
+          "es": "Medidas: \n•  ancho 130cm\n•  prof. 40cm\n•  altura 80cm",
+          "en": "Dimensions:\n• Width: 130 cm\n• Depth: 40 cm\n• Height: 80 cm"
         },
         "related": []
       },
@@ -2866,6 +5297,29 @@
           "/uploads/27701ff3910ee3cf231738b0ec605c70.jpg"
         ],
         "video": "",
+        "videoFirst": false,
+        "media": [
+          {
+            "src": "/uploads/f9f3a7d25c9c7157a55489eeeed63ccd.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/1903804c8f5f7c955e5f38a82b499286.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/5d43f9da803d4b10fc10f5e625b17f1b.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/266c0f02b3666eb54f55102066f2e3b4.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/27701ff3910ee3cf231738b0ec605c70.jpg",
+            "type": "image"
+          }
+        ],
         "material": {
           "es": "Roble claro",
           "en": "Light oak"
@@ -2874,8 +5328,8 @@
         "reference": "S-05",
         "subtitle": "110 × 40 × 80cm",
         "description": {
-          "es": "",
-          "en": ""
+          "es": "Medidas: \n•  ancho 110cm\n•  prof. 40cm\n•  altura 80cm",
+          "en": "Dimensions:\n• Width: 110 cm\n• Depth: 40 cm\n• Height: 80 cm"
         },
         "related": []
       },
@@ -2894,6 +5348,33 @@
           "/uploads/f1dd2fd7e200e9e7c0014e05cde4c958.jpg"
         ],
         "video": "",
+        "videoFirst": false,
+        "media": [
+          {
+            "src": "/uploads/46ac703f200f28563fec9aaf85f2dfe4.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/9cf996589701600da14f3db3e68e7de9.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/990e5296dac4fe03e50555a8759eda95.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/0970a28b3ecd71d868c9d94f305703fc.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/f1dd2fd7e200e9e7c0014e05cde4c958.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/2add0d55e78d6f3ba339296572e4b078.mp4",
+            "type": "video"
+          }
+        ],
         "material": {
           "es": "Roble claro",
           "en": "Light oak"
@@ -2902,8 +5383,8 @@
         "reference": "S-07",
         "subtitle": "150 × 40 × 80cm",
         "description": {
-          "es": "",
-          "en": ""
+          "es": "Medidas: \n•  ancho 150cm\n•  prof. 40cm\n•  altura 80cm",
+          "en": "Dimensions:\n• Width: 150 cm\n• Depth: 40 cm\n• Height: 80 cm"
         },
         "related": []
       },
@@ -2921,6 +5402,25 @@
           "/uploads/5cd34c4a0c88d4f198375b42e0a4e324.jpg"
         ],
         "video": "",
+        "videoFirst": false,
+        "media": [
+          {
+            "src": "/uploads/fadbcfb288c6d1f3c6de016c2074df24.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/1a3cb80724c65bc8ffaf6158a08d2598.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/2c6c77ef1040983afd7ef0d0790448c4.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/5cd34c4a0c88d4f198375b42e0a4e324.jpg",
+            "type": "image"
+          }
+        ],
         "material": {
           "es": "Roble claro",
           "en": "Light oak"
@@ -2929,8 +5429,8 @@
         "reference": "S-01",
         "subtitle": "80 × 40 × 80cm",
         "description": {
-          "es": "",
-          "en": ""
+          "es": "Medidas: \n•  ancho 80cm\n•  prof. 40cm\n•  altura 80cm",
+          "en": "Dimensions:\n• Width: 80 cm\n• Depth: 40 cm\n• Height: 80 cm"
         },
         "related": []
       },
@@ -2946,6 +5446,21 @@
           "/uploads/54bc737e8bb239338591ea27d53a9f82.jpg"
         ],
         "video": "",
+        "videoFirst": false,
+        "media": [
+          {
+            "src": "/uploads/06ea9910a256fd4f8ef805f384ae9c4b.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/54bc737e8bb239338591ea27d53a9f82.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/4c8daf89197993f03ba4c0a980c2889d.mp4",
+            "type": "video"
+          }
+        ],
         "material": {
           "es": "Roble claro",
           "en": "Light oak"
@@ -2954,8 +5469,8 @@
         "reference": "S-02",
         "subtitle": "100 × 40 × 80cm",
         "description": {
-          "es": "",
-          "en": ""
+          "es": "Medidas: \n•  ancho 100cm\n•  prof. 40cm\n•  altura 80cm",
+          "en": "Dimensions:\n• Width: 100 cm\n• Depth: 40 cm\n• Height: 80 cm"
         },
         "related": []
       },
@@ -2974,6 +5489,29 @@
           "/uploads/d2715d6ca7412a8ff396e4399681c49b.jpg"
         ],
         "video": "",
+        "videoFirst": false,
+        "media": [
+          {
+            "src": "/uploads/8ab3aa5851a87504cc1a67c094695206.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/451f1b7672c026a3cfa78a077e3d7ce6.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/28f832ef7aa3c2fe479b819378b1e104.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/7a2ebc2b108fd8da7226b32fe8688634.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/d2715d6ca7412a8ff396e4399681c49b.jpg",
+            "type": "image"
+          }
+        ],
         "material": {
           "es": "Roble claro",
           "en": "Light oak"
@@ -2982,8 +5520,8 @@
         "reference": "S-03",
         "subtitle": "120 × 40 × 80cm",
         "description": {
-          "es": "",
-          "en": ""
+          "es": "Medidas: \n•  ancho 120cm\n•  prof. 40cm\n•  altura 80cm",
+          "en": "Dimensions:\n• Width: 120 cm\n• Depth: 40 cm\n• Height: 80 cm"
         },
         "related": []
       },
@@ -3001,6 +5539,25 @@
           "/uploads/b6b892d3bd6b3a1324af47d9763ff4da.jpg"
         ],
         "video": "",
+        "videoFirst": false,
+        "media": [
+          {
+            "src": "/uploads/fe02a22121007338d8ba68af9c68f230.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/f2666a5f1c18e5c2440be19d7eff6623.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/6692faf54132c4a6ec2835c27e479f93.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/b6b892d3bd6b3a1324af47d9763ff4da.jpg",
+            "type": "image"
+          }
+        ],
         "material": {
           "es": "Roble claro",
           "en": "Light oak"
@@ -3009,8 +5566,8 @@
         "reference": "S-04",
         "subtitle": "150 × 40 × 80cm",
         "description": {
-          "es": "",
-          "en": ""
+          "es": "Medidas: \n•  ancho 150cm\n•  prof. 40cm\n•  altura 80cm",
+          "en": "Dimensions:\n• Width: 150 cm\n• Depth: 40 cm\n• Height: 80 cm"
         },
         "related": []
       }
@@ -3051,6 +5608,41 @@
           "/uploads/3fa4157685280615b00a39fc109b90e1.jpg"
         ],
         "video": "",
+        "videoFirst": false,
+        "media": [
+          {
+            "src": "/uploads/267b093b59c306ada5f02c4f2c56ffbc.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/e003e5b134f3190cf5f3e280a1fb0604.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/1cdc281d737228dc6ef91a380eee3b23.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/c8002a1975743e310a02673fbc779926.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/d1691786fcb97896f5d631a2f63a3dfa.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/45bfe3cd1fca69a0f4ae122b9ebacfcd.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/3fa4157685280615b00a39fc109b90e1.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/49e87454afa6530bb628272f3e6a3e0e.mp4",
+            "type": "video"
+          }
+        ],
         "material": {
           "es": "Roble claro",
           "en": "Light oak"
@@ -3059,8 +5651,8 @@
         "reference": "M-01",
         "subtitle": "110 x 50 x 80cm",
         "description": {
-          "es": "",
-          "en": ""
+          "es": "Medidas: \n•  ancho 110cm\n•  prof. 50cm\n•  altura 80cm",
+          "en": "Dimensions:\n• Width: 110 cm\n• Depth: 50 cm\n• Height: 80 cm"
         },
         "related": []
       },
@@ -3077,6 +5669,21 @@
           "/uploads/af84860729dd4aaf133236fee1f4f1f8.jpg"
         ],
         "video": "",
+        "videoFirst": false,
+        "media": [
+          {
+            "src": "/uploads/f0bf3cdb821290b769196e5ac2e08bb8.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/1ff8aa4dfa8ac7447c6a9a9d2f8ca2c1.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/af84860729dd4aaf133236fee1f4f1f8.jpg",
+            "type": "image"
+          }
+        ],
         "material": {
           "es": "Roble claro",
           "en": "Light oak"
@@ -3085,8 +5692,8 @@
         "reference": "M-02",
         "subtitle": "100 x 50 x 80cm",
         "description": {
-          "es": "",
-          "en": ""
+          "es": "Medidas: \n•  ancho 100cm\n•  prof. 50cm\n•  altura 80cm",
+          "en": "Dimensions:\n• Width: 100 cm\n• Depth: 50 cm\n• Height: 80 cm"
         },
         "related": []
       },
@@ -3102,6 +5709,17 @@
           "/uploads/a8b7383f2cd59cd4bd345bba2eb663b5.jpg"
         ],
         "video": "",
+        "videoFirst": false,
+        "media": [
+          {
+            "src": "/uploads/dbbabd0ce8914311ea8d2eb3a5e3ce3a.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/a8b7383f2cd59cd4bd345bba2eb663b5.jpg",
+            "type": "image"
+          }
+        ],
         "material": {
           "es": "Roble claro",
           "en": "Light oak"
@@ -3110,8 +5728,8 @@
         "reference": "M-03",
         "subtitle": "110 x 50 x 80cm",
         "description": {
-          "es": "",
-          "en": ""
+          "es": "Medidas: \n•  ancho 110cm\n•  prof. 50cm\n•  altura 80cm",
+          "en": "Medidas: \n•  ancho 110cm\n•  prof. 50cm\n•  altura 80cm"
         },
         "related": []
       },
@@ -3128,6 +5746,21 @@
           "/uploads/a6fe29197296fd1e9a85bdcf750c3f0c.jpg"
         ],
         "video": "",
+        "videoFirst": false,
+        "media": [
+          {
+            "src": "/uploads/61830933c42b20a3e45e68a281840c4b.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/3d5fc8947ebf3a9293f61e5fd234fae2.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/a6fe29197296fd1e9a85bdcf750c3f0c.jpg",
+            "type": "image"
+          }
+        ],
         "material": {
           "es": "Roble claro",
           "en": "Light oak"
@@ -3136,8 +5769,8 @@
         "reference": "M-04",
         "subtitle": "120 x 50 x 80cm",
         "description": {
-          "es": "",
-          "en": ""
+          "es": "Medidas: \n•  ancho 120cm\n•  prof. 50cm\n•  altura 80cm",
+          "en": "Dimensions:\n• Width: 120 cm\n• Depth: 50 cm\n• Height: 80 cm"
         },
         "related": []
       },
@@ -3157,6 +5790,33 @@
           "/uploads/8c53d0624c0d5534b517afb449c7f329.jpg"
         ],
         "video": "",
+        "videoFirst": false,
+        "media": [
+          {
+            "src": "/uploads/06fb3fd09ad6a923e92b524c454665e7.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/6c5980d2793ec3aecbe0d7f67ff809a9.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/06fb3fd09ad6a923e92b524c454665e7.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/adf9541104691628b870d3ca09da0b80.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/74304952cfa9b48dad33024cd3376f34.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/8c53d0624c0d5534b517afb449c7f329.jpg",
+            "type": "image"
+          }
+        ],
         "material": {
           "es": "Roble claro",
           "en": "Light oak"
@@ -3165,8 +5825,8 @@
         "reference": "M-05",
         "subtitle": "120 x 50 x 80cm",
         "description": {
-          "es": "",
-          "en": ""
+          "es": "Medidas: \n•  ancho 120cm\n•  prof. 50cm\n•  altura 80cm",
+          "en": "Dimensions:\n• Width: 120 cm\n• Depth: 50 cm\n• Height: 80 cm"
         },
         "related": []
       }

@@ -2,8 +2,8 @@ import { useState } from 'react';
 import { BTN_GHOST } from '../ui.js';
 import { Field, TextArea } from './Field.jsx';
 import { urlSafe } from '../urlSafe.js';
+import { productMedia } from '../../data/catalog.js';
 import ImageField from './ImageField.jsx';
-import VideoField from './VideoField.jsx';
 import ProductImagesEditor from './ProductImagesEditor.jsx';
 import ProductPicker from './ProductPicker.jsx';
 
@@ -29,8 +29,14 @@ export default function ProductEditor({
   const set = (patch) => onChange({ ...product, ...patch });
   const setMat = (lang, val) => set({ material: { ...product.material, [lang]: val } });
   const setDesc = (lang, val) => set({ description: { ...product.description, [lang]: val } });
-  const images = product.images?.length ? product.images : product.image ? [product.image] : [];
-  const setImages = (imgs) => set({ images: imgs, image: imgs[0] || '' });
+  // Unified ordered media (photos + videos). Keep the legacy cover fields
+  // (`image`/`images`) in sync so the catalog card, OG image and Schema.org —
+  // all photo-only — stay correct without a separate save step.
+  const media = productMedia(product);
+  const setMedia = (next) => {
+    const photos = next.filter((m) => m.type === 'image').map((m) => m.src);
+    set({ media: next, image: photos[0] || '', images: photos, video: '', videoFirst: false });
+  };
 
   return (
     <div className="border border-primary/10 bg-background">
@@ -125,8 +131,8 @@ export default function ProductEditor({
               onChange={(v) => setDesc('en', v)}
             />
           </div>
-          <SectionLabel>Фотографии</SectionLabel>
-          <ProductImagesEditor images={images} onChange={setImages} />
+          <SectionLabel>Фото и видео</SectionLabel>
+          <ProductImagesEditor media={media} onChange={setMedia} />
 
           <SectionLabel>Обложка для мобильных</SectionLabel>
           <ImageField
@@ -138,13 +144,6 @@ export default function ProductEditor({
           <p className="mt-2 text-xs leading-relaxed text-primary/40">
             Пусто — на мобильных используется первое фото из галереи.
           </p>
-
-          <SectionLabel>Видео</SectionLabel>
-          <VideoField
-            label="Видео товара (идёт последним в галерее после фото)"
-            value={product.video}
-            onChange={(v) => set({ video: v })}
-          />
 
           <SectionLabel>Похожие товары («You may also like»)</SectionLabel>
           <p className="mb-2 text-xs leading-relaxed text-primary/40">
