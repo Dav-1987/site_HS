@@ -86,9 +86,13 @@ export default function FeaturedCardsEditor({ value, onChange, allProducts }) {
   };
   const add = () => onChange([...cards, { productId: '', cover: '', video: '' }]);
 
+  // "Name · ARTÍCULO · Category" so products that share a name (e.g. "Tocador")
+  // can be told apart by their reference (артикул) in the dropdown.
+  const optionLabel = (p) =>
+    [p.name, p.reference, p.categoryName].filter(Boolean).join(' · ');
   const labelOf = (id) => {
     const p = allProducts.find((x) => x.id === id);
-    return p ? `${p.name} · ${p.categoryName}` : `${id} (удалён?)`;
+    return p ? optionLabel(p) : `${id} (удалён?)`;
   };
 
   return (
@@ -155,7 +159,7 @@ export default function FeaturedCardsEditor({ value, onChange, allProducts }) {
                     <option value="">— выберите товар —</option>
                     {available.map((p) => (
                       <option key={p.id} value={p.id}>
-                        {p.name} · {p.categoryName}
+                        {optionLabel(p)}
                       </option>
                     ))}
                   </select>

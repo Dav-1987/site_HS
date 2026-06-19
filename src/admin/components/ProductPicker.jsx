@@ -6,9 +6,11 @@ import { INPUT, BTN_GHOST } from '../ui.js';
 // products) still render with their id so they can be removed.
 export default function ProductPicker({ value, onChange, allProducts, excludeId, emptyHint }) {
   const ids = Array.isArray(value) ? value : [];
+  // "Name · ARTÍCULO · Category" so same-named products are distinguishable.
+  const optionLabel = (p) => [p.name, p.reference, p.categoryName].filter(Boolean).join(' · ');
   const labelOf = (id) => {
     const p = allProducts.find((x) => x.id === id);
-    return p ? `${p.name} · ${p.categoryName}` : `${id} (удалён?)`;
+    return p ? optionLabel(p) : `${id} (удалён?)`;
   };
   const available = allProducts.filter((p) => p.id !== excludeId && !ids.includes(p.id));
   const add = (id) => id && onChange([...ids, id]);
@@ -66,7 +68,7 @@ export default function ProductPicker({ value, onChange, allProducts, excludeId,
         <option value="">{available.length ? '+ Добавить товар…' : 'Нет доступных товаров'}</option>
         {available.map((p) => (
           <option key={p.id} value={p.id}>
-            {p.name || p.id} · {p.categoryName}
+            {optionLabel(p)}
           </option>
         ))}
       </select>

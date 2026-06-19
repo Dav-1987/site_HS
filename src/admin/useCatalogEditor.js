@@ -60,6 +60,7 @@ export function useCatalogEditor() {
         c.products.map((p) => ({
           id: p.id,
           name: p.name || p.id,
+          reference: p.reference || '',
           categoryName: c.name?.es || c.slug || '',
         })),
       ),
