@@ -160,6 +160,9 @@ export default function OrderModal({ product, isOpen, onClose }) {
                 >
                   {sending ? t('order.form.sending') : t('order.form.submit')}
                 </button>
+                <p className="text-center text-[10px] leading-relaxed text-primary/40">
+                  {t('order.form.privacyNotice')}
+                </p>
               </form>
             </>
           )}
