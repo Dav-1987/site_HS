@@ -1,11 +1,11 @@
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Media from './Media.jsx';
 import Price from './Price.jsx';
 import { useLanguage } from '../i18n/LanguageContext.jsx';
-import { productImages } from '../data/catalog.js';
+import { productMedia } from '../data/catalog.js';
 
-/** Product tile: swipeable image carousel + discount-aware price. */
+/** Product tile: swipeable photo/video carousel + discount-aware price. */
 export default function ProductCard({ product, categorySlug, categoryName, aspectClassName = 'aspect-[4/5]' }) {
   const { lang, t } = useLanguage();
   const slug = categorySlug || product.categorySlug;
@@ -14,17 +14,52 @@ export default function ProductCard({ product, categorySlug, categoryName, aspec
   const to = slug ? `/${slug}/${product.id}` : `/producto/${product.id}`;
   const label = categoryName ? `${product.name} — ${categoryName[lang]}` : product.name;
 
-  const images = productImages(product);
-  const multi = images.length > 1;
+  // Unified, ordered media (photos + videos), exactly as the product page shows
+  // it — so a video-first product plays its video on the card too, and swiping
+  // moves across photos and videos alike.
+  const media = productMedia(product);
+  const multi = media.length > 1;
   const [idx, setIdx] = useState(0);
   const startX = useRef(null);
   const swiped = useRef(false);
+  const cardRef = useRef(null);
+  const videoRef = useRef(null);
 
-  const go = (dir) => setIdx((i) => (i + dir + images.length) % images.length);
+  const go = (dir) => setIdx((i) => (i + dir + media.length) % media.length);
+
+  const item = media[idx] || media[0];
+  const isVideo = item?.type === 'video';
+
+  // Autoplay the active video (muted, looped) while the card is on screen; pause
+  // it when it scrolls away so a grid of video-first cards stays light.
+  useEffect(() => {
+    if (!isVideo) return undefined;
+    const v = videoRef.current;
+    if (!v) return undefined;
+    const tryPlay = () => {
+      const p = v.play();
+      if (p?.catch) p.catch(() => {});
+    };
+    const el = cardRef.current;
+    if (!el || typeof IntersectionObserver === 'undefined') {
+      tryPlay();
+      return undefined;
+    }
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) tryPlay();
+        else v.pause();
+      },
+      { threshold: 0.5 },
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, [isVideo, idx]);
 
   return (
     <article className="group">
       <div
+        ref={cardRef}
         className={`relative mb-5 ${aspectClassName} overflow-hidden bg-surface`}
         onPointerDown={(e) => {
           startX.current = e.clientX;
@@ -52,13 +87,30 @@ export default function ProductCard({ product, categorySlug, categoryName, aspec
           }}
           className="block h-full w-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-4 focus-visible:ring-offset-background"
         >
-          <Media
-            id={images[idx]}
-            idMobile={idx === 0 ? product.imageMobile : ''}
-            alt={label}
-            w={700}
-            className="transition-transform duration-700 ease-out group-hover:scale-[1.04]"
-          />
+          {isVideo ? (
+            // No controls + pointer-events-none → a tap/click navigates to the
+            // product (and still bubbles to the swipe handler) instead of
+            // toggling the player.
+            <video
+              key={item.src}
+              ref={videoRef}
+              src={item.src}
+              muted
+              loop
+              playsInline
+              preload="metadata"
+              aria-label={label}
+              className="pointer-events-none h-full w-full bg-surface object-cover"
+            />
+          ) : (
+            <Media
+              id={item.src}
+              idMobile={idx === 0 ? product.imageMobile : ''}
+              alt={label}
+              w={700}
+              className="transition-transform duration-700 ease-out group-hover:scale-[1.04]"
+            />
+          )}
         </Link>
 
         {multi && (
@@ -80,9 +132,9 @@ export default function ProductCard({ product, categorySlug, categoryName, aspec
               ›
             </button>
             <div className="absolute bottom-3 left-1/2 flex -translate-x-1/2 gap-1.5">
-              {images.map((img, i) => (
+              {media.map((m, i) => (
                 <span
-                  key={img + i}
+                  key={m.src + i}
                   className={`h-1.5 w-1.5 rounded-full transition-colors ${
                     i === idx ? 'bg-primary' : 'bg-primary/30'
                   }`}
