@@ -90,13 +90,9 @@ function FeaturedSection() {
     <section className="py-14 md:py-20">
       <div className="px-6 md:px-12 lg:px-20">
         <SectionHeader
-          eyebrow={t('section.featured.eyebrow')}
           title={t('section.featured.title')}
           action={
-            <div className="hidden flex-col items-end gap-4 md:flex">
-              <Button to="/catalogo" variant="ghost">
-                {t('common.viewAll')} →
-              </Button>
+            <div className="hidden md:block">
               <CarouselArrows carousel={carousel} />
             </div>
           }
