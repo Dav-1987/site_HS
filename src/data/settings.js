@@ -27,6 +27,26 @@ function sanitizeFeatured(input) {
   return out;
 }
 
+/**
+ * Featured cards for the home section: ordered list of `{ productId, cover, video }`.
+ * A `productId` is required (the card links to it and shows its name/price); cover
+ * and video are optional `/uploads/…` paths. Capped to MAX_FEATURED.
+ */
+function sanitizeFeaturedCards(input) {
+  if (!Array.isArray(input)) return [];
+  const out = [];
+  for (const card of input) {
+    if (!card || typeof card !== 'object') continue;
+    const productId = typeof card.productId === 'string' ? card.productId.trim() : '';
+    if (!productId) continue;
+    const cover = typeof card.cover === 'string' ? card.cover.trim() : '';
+    const video = typeof card.video === 'string' ? card.video.trim() : '';
+    out.push({ productId, cover, video });
+    if (out.length >= MAX_FEATURED) break;
+  }
+  return out;
+}
+
 /** Keep only non-empty string overrides, grouped by language. */
 function sanitizeTexts(texts) {
   const out = { es: {}, en: {} };
@@ -82,6 +102,7 @@ export function mergeSettings(input) {
       video: typeof video === 'string' ? video.trim() : '',
     },
     featured: sanitizeFeatured(input?.featured),
+    featuredCards: sanitizeFeaturedCards(input?.featuredCards),
     texts: sanitizeTexts(input?.texts),
     contact: sanitizeContact(input?.contact),
     seo: sanitizeSeo(input?.seo),

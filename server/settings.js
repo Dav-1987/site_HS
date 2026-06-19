@@ -29,6 +29,21 @@ function sanitizeFeatured(input) {
   return out;
 }
 
+function sanitizeFeaturedCards(input) {
+  if (!Array.isArray(input)) return [];
+  const out = [];
+  for (const card of input) {
+    if (!card || typeof card !== 'object') continue;
+    const productId = typeof card.productId === 'string' ? card.productId.trim() : '';
+    if (!productId) continue;
+    const cover = typeof card.cover === 'string' ? card.cover.trim().slice(0, MAX_TEXT_LEN) : '';
+    const video = typeof card.video === 'string' ? card.video.trim().slice(0, MAX_TEXT_LEN) : '';
+    out.push({ productId: productId.slice(0, MAX_TEXT_LEN), cover, video });
+    if (out.length >= MAX_FEATURED) break;
+  }
+  return out;
+}
+
 function sanitizeTexts(texts) {
   const out = { es: {}, en: {} };
   for (const lang of ['es', 'en']) {
@@ -80,6 +95,7 @@ export function mergeSettings(input) {
       video: typeof video === 'string' ? video.trim() : '',
     },
     featured: sanitizeFeatured(input?.featured),
+    featuredCards: sanitizeFeaturedCards(input?.featuredCards),
     texts: sanitizeTexts(input?.texts),
     contact: sanitizeContact(input?.contact),
     seo: sanitizeSeo(input?.seo),

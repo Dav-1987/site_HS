@@ -2,7 +2,7 @@ import { useMemo } from 'react';
 import { useLanguage } from '../i18n/LanguageContext.jsx';
 import { useCatalog } from '../catalog/CatalogContext.jsx';
 import { useSettings } from '../settings/SettingsContext.jsx';
-import { computeFeatured, resolveImage } from '../data/catalog.js';
+import { computeFeatured, resolveFeaturedCards, resolveImage } from '../data/catalog.js';
 import SocialMeta from '../components/SocialMeta.jsx';
 import Media from '../components/Media.jsx';
 import VideoMedia from '../components/VideoMedia.jsx';
@@ -10,6 +10,7 @@ import Reveal from '../components/Reveal.jsx';
 import Button from '../components/Button.jsx';
 import SectionHeader from '../components/SectionHeader.jsx';
 import CategoryCard from '../components/CategoryCard.jsx';
+import FeaturedCard from '../components/FeaturedCard.jsx';
 import { CarouselArrows, CarouselTrack, useCarousel } from '../components/ProductCarousel.jsx';
 
 const FEATURED_CARD_CLASSNAME =
@@ -79,12 +80,19 @@ function FeaturedSection() {
   const { t } = useLanguage();
   const { categories } = useCatalog();
   const { settings } = useSettings();
-  const featured = useMemo(
-    () => computeFeatured(categories, settings.featured),
-    [categories, settings.featured],
+  // Admin-curated video cards take priority; if none are configured, fall back to
+  // the legacy auto/id-list selection rendered as plain product cards.
+  const cards = useMemo(
+    () => resolveFeaturedCards(categories, settings.featuredCards),
+    [categories, settings.featuredCards],
   );
+  const fallback = useMemo(
+    () => (cards.length ? [] : computeFeatured(categories, settings.featured)),
+    [cards.length, categories, settings.featured],
+  );
+  const items = cards.length ? cards : fallback;
   const carousel = useCarousel();
-  if (!featured?.length) return null;
+  if (!items.length) return null;
 
   return (
     <section className="py-14 md:py-20">
@@ -101,10 +109,15 @@ function FeaturedSection() {
       </div>
 
       <CarouselTrack
-        products={featured}
+        products={items}
         carousel={carousel}
         cardClassName={FEATURED_CARD_CLASSNAME}
         imageAspectClassName={FEATURED_ASPECT_CLASSNAME}
+        renderItem={
+          cards.length
+            ? (item) => <FeaturedCard item={item} aspectClassName={FEATURED_ASPECT_CLASSNAME} />
+            : undefined
+        }
       />
     </section>
   );

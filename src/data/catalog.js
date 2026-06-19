@@ -189,6 +189,28 @@ export function computeFeatured(categories, featuredIds) {
 }
 
 /**
+ * Resolve admin-curated Featured cards into card-ready items. Each input card is
+ * `{ productId, cover, video }`; the output is the resolved product (shaped with
+ * its category slug/name) augmented with `featuredCover` + `featuredVideo`, so it
+ * slots straight into the carousel track. Cards whose `productId` is missing/stale
+ * are skipped so the section never breaks. `cover` falls back to the product's
+ * first photo when not set.
+ */
+export function resolveFeaturedCards(categories, cards) {
+  if (!Array.isArray(cards)) return [];
+  const out = [];
+  for (const card of cards) {
+    if (!card || typeof card !== 'object') continue;
+    const found = findProduct(categories, card.productId);
+    if (!found) continue;
+    const product = withCategory(found.product, found.category);
+    const cover = card.cover || productImages(found.product)[0] || '';
+    out.push({ ...product, featuredCover: cover, featuredVideo: card.video || '' });
+  }
+  return out;
+}
+
+/**
  * Products for a product page's "You may also like" block.
  *  - If the product has a non-empty `related` id list → resolve those (admin
  *    choice), excluding the product itself.

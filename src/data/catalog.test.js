@@ -3,6 +3,7 @@ import {
   productDiscount,
   computeFeatured,
   computeRelated,
+  resolveFeaturedCards,
   resolveImage,
   productImages,
   productMedia,
@@ -151,6 +152,46 @@ describe('computeFeatured', () => {
   it('auto-curates when no ids are given', () => {
     const out = computeFeatured(categories, []);
     expect(out.length).toBeGreaterThan(0);
+  });
+});
+
+describe('resolveFeaturedCards', () => {
+  const categories = [
+    { slug: 'c1', name: { es: 'C1', en: 'C1' }, products: [{ id: 'p1', name: 'P1', images: ['ph1'] }] },
+    { slug: 'c2', name: { es: 'C2', en: 'C2' }, products: [{ id: 'p2', name: 'P2' }] },
+  ];
+
+  it('resolves cards in order, attaching product, category, cover and video', () => {
+    const out = resolveFeaturedCards(categories, [
+      { productId: 'p2', cover: 'cov2', video: 'vid2' },
+      { productId: 'p1', cover: '', video: '' },
+    ]);
+    expect(out.map((c) => c.id)).toEqual(['p2', 'p1']);
+    expect(out[0].categorySlug).toBe('c2');
+    expect(out[0].category).toEqual({ es: 'C2', en: 'C2' });
+    expect(out[0].featuredCover).toBe('cov2');
+    expect(out[0].featuredVideo).toBe('vid2');
+  });
+
+  it('falls back to the product first photo when no cover is set', () => {
+    const out = resolveFeaturedCards(categories, [{ productId: 'p1' }]);
+    expect(out[0].featuredCover).toBe('ph1');
+    expect(out[0].featuredVideo).toBe('');
+  });
+
+  it('skips cards with missing/stale or invalid product ids', () => {
+    const out = resolveFeaturedCards(categories, [
+      { productId: 'ghost' },
+      null,
+      { cover: 'x' },
+      { productId: 'p1' },
+    ]);
+    expect(out.map((c) => c.id)).toEqual(['p1']);
+  });
+
+  it('returns an empty array for non-array input', () => {
+    expect(resolveFeaturedCards(categories, null)).toEqual([]);
+    expect(resolveFeaturedCards(categories, undefined)).toEqual([]);
   });
 });
 

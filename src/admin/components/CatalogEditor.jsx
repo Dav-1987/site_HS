@@ -2,7 +2,7 @@ import { useCatalogEditor } from '../useCatalogEditor.js';
 import { BTN_SOLID, BTN_GHOST } from '../ui.js';
 import HistoryPanel from './HistoryPanel.jsx';
 import HeroSettingsEditor from './HeroSettingsEditor.jsx';
-import FeaturedSettingsEditor from './FeaturedSettingsEditor.jsx';
+import FeaturedCardsEditor from './FeaturedCardsEditor.jsx';
 import TextsEditor from './TextsEditor.jsx';
 import ContactEditor from './ContactEditor.jsx';
 import SeoSettingsEditor from './SeoSettingsEditor.jsx';
@@ -84,9 +84,9 @@ export default function CatalogEditor({ onLogout }) {
       <main className="mx-auto max-w-5xl space-y-4 px-6 py-10">
         {settings && <HeroSettingsEditor settings={settings} onChange={updateSettings} />}
         {settings && (
-          <FeaturedSettingsEditor
-            value={settings.featured || []}
-            onChange={(featured) => updateSettings({ ...settings, featured })}
+          <FeaturedCardsEditor
+            value={settings.featuredCards || []}
+            onChange={(featuredCards) => updateSettings({ ...settings, featuredCards })}
             allProducts={allProducts}
           />
         )}
