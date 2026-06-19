@@ -2,6 +2,7 @@ import { useEffect, useRef, Suspense } from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
 import Header from './Header.jsx';
 import Footer from './Footer.jsx';
+import CookieBanner from './CookieBanner.jsx';
 import { gsap, ScrollTrigger } from '../lib/gsap.js';
 import { useLanguage } from '../i18n/LanguageContext.jsx';
 import { useSettings } from '../settings/SettingsContext.jsx';
@@ -84,6 +85,7 @@ export default function Layout() {
         </Suspense>
       </main>
       <Footer />
+      <CookieBanner />
     </div>
   );
 }

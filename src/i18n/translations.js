@@ -151,6 +151,11 @@ export const translations = {
       'HS Muebles no se responsabiliza de los daños o perjuicios derivados del uso de este sitio web.',
     'legal.p3': 'Para cualquier consulta, puede contactarnos en {email}.',
 
+    // --- Cookie banner ---
+    'cookie.message': 'Utilizamos cookies para mejorar tu experiencia y analizar el tráfico del sitio web.',
+    'cookie.accept': 'Aceptar',
+    'cookie.reject': 'Rechazar',
+
     // --- Common ---
     'common.viewAll': 'Ver todo',
     'common.currency': '€',
@@ -302,6 +307,11 @@ export const translations = {
       'All content on this website, including text, images, graphics and design elements, is the property of HS Muebles and may not be copied, reproduced, distributed or used without prior permission.',
     'legal.p2': 'HS Muebles is not responsible for any damages resulting from the use of this website.',
     'legal.p3': 'For any questions, please contact us at {email}.',
+
+    // --- Cookie banner ---
+    'cookie.message': 'We use cookies to improve your experience and analyze website traffic.',
+    'cookie.accept': 'Accept',
+    'cookie.reject': 'Reject',
 
     // --- Common ---
     'common.viewAll': 'View all',
