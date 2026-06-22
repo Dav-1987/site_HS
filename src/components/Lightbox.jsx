@@ -131,19 +131,23 @@ export default function Lightbox({ items, index, alt = '', onClose, onIndex }) {
         />
       )}
 
-      {/* Full-height edge tap zones — sit above the image but below the
-          controls (z-10) so they intercept taps without swallowing clicks
-          on the close/prev/next buttons in the corners. Hidden for videos so
-          the native controls (seek bar, fullscreen) aren't blocked. */}
+      {/* Edge tap zones for prev/next, confined to the vertical middle band of
+          the image's left/right edges. Keeping them clear of the top and bottom
+          quarters means the corners — where the close button (top-right) and
+          counter (bottom) live — stay "tap to close" area: a touch near the X
+          that misses the 44px button hits the backdrop and closes, instead of
+          navigating (which felt like "the X won't close"). Navigation is still
+          covered here by swipe and the visible ‹ › buttons. Hidden for videos
+          so the native controls (seek, fullscreen) work. */}
       {multi && !isVideo && (
         <>
           <div
-            className="absolute left-0 top-0 h-full w-[22%] cursor-pointer"
+            className="absolute left-0 top-1/4 bottom-1/4 w-[22%] cursor-pointer"
             onClick={(e) => { e.stopPropagation(); go(-1); }}
             aria-hidden="true"
           />
           <div
-            className="absolute right-0 top-0 h-full w-[22%] cursor-pointer"
+            className="absolute right-0 top-1/4 bottom-1/4 w-[22%] cursor-pointer"
             onClick={(e) => { e.stopPropagation(); go(1); }}
             aria-hidden="true"
           />
