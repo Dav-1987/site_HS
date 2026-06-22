@@ -27,6 +27,24 @@ export default function ProductCard({ product, categorySlug, categoryName, aspec
 
   const go = (dir) => setIdx((i) => (i + dir + media.length) % media.length);
 
+  // Shared swipe logic for touch and mouse/pen. Touch uses real touch events
+  // (below); mouse/pen uses pointer events. Touch pointer events are NOT used
+  // for swiping — the browser cancels them when it claims the gesture for
+  // vertical scroll, so on phones pointerup never fires and the swipe is lost.
+  const startSwipe = (x) => {
+    startX.current = x;
+    swiped.current = false;
+  };
+  const endSwipe = (x) => {
+    if (startX.current == null) return;
+    const dx = x - startX.current;
+    if (multi && Math.abs(dx) > 40) {
+      swiped.current = true; // a swipe ends with a click — suppress navigation
+      go(dx < 0 ? 1 : -1);
+    }
+    startX.current = null;
+  };
+
   const item = media[idx] || media[0];
   const isVideo = item?.type === 'video';
 
@@ -60,20 +78,11 @@ export default function ProductCard({ product, categorySlug, categoryName, aspec
     <article className="group">
       <div
         ref={cardRef}
-        className={`relative mb-5 ${aspectClassName} overflow-hidden bg-surface`}
-        onPointerDown={(e) => {
-          startX.current = e.clientX;
-          swiped.current = false;
-        }}
-        onPointerUp={(e) => {
-          if (startX.current == null) return;
-          const dx = e.clientX - startX.current;
-          if (multi && Math.abs(dx) > 40) {
-            swiped.current = true;
-            go(dx < 0 ? 1 : -1);
-          }
-          startX.current = null;
-        }}
+        className={`relative mb-5 ${aspectClassName} touch-pan-y overflow-hidden bg-surface`}
+        onPointerDown={(e) => { if (e.pointerType !== 'touch') startSwipe(e.clientX); }}
+        onPointerUp={(e) => { if (e.pointerType !== 'touch') endSwipe(e.clientX); }}
+        onTouchStart={(e) => startSwipe(e.touches[0].clientX)}
+        onTouchEnd={(e) => endSwipe(e.changedTouches[0].clientX)}
       >
         <Link
           to={to}
