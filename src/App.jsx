@@ -1,4 +1,4 @@
-import { lazy, Suspense } from 'react';
+import { lazy, Suspense, useEffect, useRef } from 'react';
 import { Routes, Route, Navigate, useParams, useLocation } from 'react-router-dom';
 import { useCatalog } from './catalog/CatalogContext.jsx';
 import Layout from './components/Layout.jsx';
@@ -29,8 +29,30 @@ function LegacyProductRedirect() {
   return <Navigate to={`/${found.category.slug}/${id}`} replace />;
 }
 
+const YANDEX_METRIKA_ID = 109965392;
+const GA4_MEASUREMENT_ID = 'G-F59Y5J11MF';
+
 export default function App() {
   const location = useLocation();
+  const isFirstRender = useRef(true);
+
+  // Skip the first render: index.html already sends the initial pageview
+  // (ym 'init' / gtag 'config'). Only client-side route changes need a hit.
+  useEffect(() => {
+    if (isFirstRender.current) {
+      isFirstRender.current = false;
+      return;
+    }
+    const url = location.pathname + location.search + location.hash;
+
+    if (typeof window.ym === 'function') {
+      window.ym(YANDEX_METRIKA_ID, 'hit', url);
+    }
+    if (typeof window.gtag === 'function') {
+      window.gtag('config', GA4_MEASUREMENT_ID, { page_path: url });
+    }
+  }, [location.pathname, location.search, location.hash]);
+
   return (
     // Reset on every navigation (key=pathname) so a crash on one page doesn't
     // permanently brick the rest of the SPA session — the boundary remounts

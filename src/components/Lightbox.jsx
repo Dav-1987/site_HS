@@ -102,29 +102,6 @@ export default function Lightbox({ images, index, alt = '', onClose, onIndex }) 
         startX.current = null;
       }}
     >
-      <button
-        type="button"
-        onClick={onClose}
-        aria-label={t('lightbox.close')}
-        className="absolute right-4 top-4 flex h-11 w-11 items-center justify-center text-2xl text-background/70 transition-colors hover:text-background focus-visible:outline-none focus-visible:text-background"
-      >
-        ✕
-      </button>
-
-      {multi && (
-        <button
-          type="button"
-          aria-label={t('carousel.prev')}
-          onClick={(e) => {
-            e.stopPropagation();
-            go(-1);
-          }}
-          className={`${arrow} left-2`}
-        >
-          ‹
-        </button>
-      )}
-
       <img
         src={resolveImage(images[index], 2000)}
         alt={alt}
@@ -132,22 +109,9 @@ export default function Lightbox({ images, index, alt = '', onClose, onIndex }) 
         onClick={(e) => e.stopPropagation()}
       />
 
-      {multi && (
-        <button
-          type="button"
-          aria-label={t('carousel.next')}
-          onClick={(e) => {
-            e.stopPropagation();
-            go(1);
-          }}
-          className={`${arrow} right-2`}
-        >
-          ›
-        </button>
-      )}
-
-      {/* Full-height edge tap zones — declared last so they sit above the image
-          in the stacking order and intercept taps on the left/right edges. */}
+      {/* Full-height edge tap zones — sit above the image but below the
+          controls (z-10) so they intercept taps without swallowing clicks
+          on the close/prev/next buttons in the corners. */}
       {multi && (
         <>
           <div
@@ -161,6 +125,43 @@ export default function Lightbox({ images, index, alt = '', onClose, onIndex }) 
             aria-hidden="true"
           />
         </>
+      )}
+
+      <button
+        type="button"
+        onClick={onClose}
+        aria-label={t('lightbox.close')}
+        className="absolute right-4 top-4 z-10 flex h-11 w-11 items-center justify-center text-2xl text-background/70 transition-colors hover:text-background focus-visible:outline-none focus-visible:text-background"
+      >
+        ✕
+      </button>
+
+      {multi && (
+        <button
+          type="button"
+          aria-label={t('carousel.prev')}
+          onClick={(e) => {
+            e.stopPropagation();
+            go(-1);
+          }}
+          className={`${arrow} left-2 z-10`}
+        >
+          ‹
+        </button>
+      )}
+
+      {multi && (
+        <button
+          type="button"
+          aria-label={t('carousel.next')}
+          onClick={(e) => {
+            e.stopPropagation();
+            go(1);
+          }}
+          className={`${arrow} right-2 z-10`}
+        >
+          ›
+        </button>
       )}
 
       {multi && (
