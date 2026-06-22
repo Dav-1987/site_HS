@@ -3,25 +3,33 @@ import { resolveImage } from '../data/catalog.js';
 import { useLanguage } from '../i18n/LanguageContext.jsx';
 
 /**
- * Fullscreen image viewer. Swipe (touch), arrow buttons and keyboard
- * (←/→/Esc) navigate; clicking the backdrop closes. Controlled via `index`
- * + `onIndex` so the underlying gallery stays in sync.
+ * Fullscreen media viewer for a product's unified gallery — photos AND videos
+ * in a single feed. Each item is `{ type: 'image' | 'video', src }`. Swipe
+ * (touch), arrow buttons and keyboard (←/→/Esc) navigate; clicking the backdrop
+ * closes. Controlled via `index` + `onIndex` so the underlying gallery stays in
+ * sync.
+ *
+ * Videos render with native controls; swipe-to-navigate and the edge tap zones
+ * are disabled while a video is shown so its controls (seek/fullscreen) stay
+ * fully usable — navigate away from a video with the ‹ › buttons or arrow keys.
  *
  * A11y: it's a modal dialog, so focus is trapped inside while open (Tab/
  * Shift+Tab cycle within), the first control is focused on open, and focus is
  * restored to the triggering element on close.
  */
-export default function Lightbox({ images, index, alt = '', onClose, onIndex }) {
+export default function Lightbox({ items, index, alt = '', onClose, onIndex }) {
   const { t } = useLanguage();
   const startX = useRef(null);
   const dialogRef = useRef(null);
-  const multi = images.length > 1;
-  const go = (dir) => onIndex((index + dir + images.length) % images.length);
+  const multi = items.length > 1;
+  const current = items[index];
+  const isVideo = current?.type === 'video';
+  const go = (dir) => onIndex((index + dir + items.length) % items.length);
 
   // Keep the latest nav callbacks reachable from the mount-only keydown handler
   // below without re-binding it (which would re-steal focus on every arrow press).
   const navRef = useRef({});
-  navRef.current = { index, len: images.length, multi, onClose, onIndex };
+  navRef.current = { index, len: items.length, multi, onClose, onIndex };
 
   useEffect(() => {
     const dialog = dialogRef.current;
@@ -93,26 +101,41 @@ export default function Lightbox({ images, index, alt = '', onClose, onIndex }) 
       aria-label={alt || t('lightbox.label')}
       onClick={onClose}
       onTouchStart={(e) => {
+        // Let the video's own controls handle touches (seek/scrub).
+        if (isVideo) return;
         startX.current = e.touches[0].clientX;
       }}
       onTouchEnd={(e) => {
-        if (startX.current == null) return;
+        if (isVideo || startX.current == null) return;
         const dx = e.changedTouches[0].clientX - startX.current;
         if (multi && Math.abs(dx) > 40) go(dx < 0 ? 1 : -1);
         startX.current = null;
       }}
     >
-      <img
-        src={resolveImage(images[index], 2000)}
-        alt={alt}
-        className="max-h-[88vh] w-auto max-w-[92vw] object-contain"
-        onClick={(e) => e.stopPropagation()}
-      />
+      {isVideo ? (
+        <video
+          key={current.src}
+          src={current.src}
+          controls
+          autoPlay
+          playsInline
+          className="max-h-[88vh] w-auto max-w-[92vw] bg-black object-contain"
+          onClick={(e) => e.stopPropagation()}
+        />
+      ) : (
+        <img
+          src={resolveImage(current.src, 2000)}
+          alt={alt}
+          className="max-h-[88vh] w-auto max-w-[92vw] object-contain"
+          onClick={(e) => e.stopPropagation()}
+        />
+      )}
 
       {/* Full-height edge tap zones — sit above the image but below the
           controls (z-10) so they intercept taps without swallowing clicks
-          on the close/prev/next buttons in the corners. */}
-      {multi && (
+          on the close/prev/next buttons in the corners. Hidden for videos so
+          the native controls (seek bar, fullscreen) aren't blocked. */}
+      {multi && !isVideo && (
         <>
           <div
             className="absolute left-0 top-0 h-full w-[22%] cursor-pointer"
@@ -166,7 +189,7 @@ export default function Lightbox({ images, index, alt = '', onClose, onIndex }) 
 
       {multi && (
         <span className="absolute bottom-5 left-1/2 -translate-x-1/2 text-xs uppercase tracking-[0.2em] text-background/60">
-          {index + 1} / {images.length}
+          {index + 1} / {items.length}
         </span>
       )}
     </div>

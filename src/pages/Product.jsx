@@ -62,19 +62,11 @@ export default function Product() {
   // Unified, ordered gallery: photos and videos interleaved exactly as the
   // admin arranged them. Each item is { type:'image'|'video', src }.
   const gallery = productMedia(product);
-  // Photos only (for the zoom lightbox, OG image and Schema.org).
+  // Photos only (for the OG image and Schema.org — both photo-only).
   const images = productImages(product);
-  // Index maps between gallery slots and the photo-only list (videos are gaps).
-  const galleryToPhoto = [];
-  const photoToGallery = [];
-  gallery.forEach((item, i) => {
-    if (item.type === 'video') {
-      galleryToPhoto[i] = -1;
-    } else {
-      galleryToPhoto[i] = photoToGallery.length;
-      photoToGallery.push(i);
-    }
-  });
+  // Gallery slot of the first photo — the only one that gets the mobile-cropped
+  // cover variant (product.imageMobile).
+  const firstPhotoIdx = gallery.findIndex((m) => m.type !== 'video');
   const multi = gallery.length > 1;
   const THUMB_VISIBLE = 4;
   const activeIdx = Math.min(active, gallery.length - 1);
@@ -204,7 +196,7 @@ export default function Product() {
               ) : (
                 <Media
                   id={activeItem.src}
-                  idMobile={activeIdx === photoToGallery[0] ? product.imageMobile : ''}
+                  idMobile={activeIdx === firstPhotoIdx ? product.imageMobile : ''}
                   alt={`${product.name} — ${category.name[lang]}`}
                   w={1400}
                 />
@@ -352,13 +344,13 @@ export default function Product() {
 
       <OrderModal product={product} isOpen={orderOpen} onClose={() => setOrderOpen(false)} />
 
-      {zoom && !isVideoActive && (
+      {zoom && (
         <Lightbox
-          images={images}
-          index={galleryToPhoto[activeIdx] >= 0 ? galleryToPhoto[activeIdx] : 0}
+          items={gallery}
+          index={activeIdx}
           alt={`${product.name} — ${category.name[lang]}`}
           onClose={() => setZoom(false)}
-          onIndex={(k) => setActive(photoToGallery[k])}
+          onIndex={setActive}
         />
       )}
 
