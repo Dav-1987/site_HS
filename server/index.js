@@ -14,6 +14,7 @@ import { readOrSeedCatalog, writeCatalog, recordVersion, listVersions, getVersio
 import { readSettings, writeSettings } from './settings.js';
 import { validateOrder, formatOrderText } from './order.js';
 import { telegramConfigured, emailConfigured, sendTelegram, sendOrderEmail } from './notify.js';
+import { metaCapiConfigured, sendLeadEvent } from './meta-capi.js';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const UPLOADS_DIR = join(__dirname, '../uploads');
@@ -402,6 +403,24 @@ app.post('/api/order', orderRateLimit, async (req, res) => {
     if (failed.length === results.length) {
       return res.status(502).json({ error: 'Failed to send order' });
     }
+
+    // Meta Conversions API — server-side Lead, best effort. Fire-and-forget so a
+    // slow or failing Meta call never delays or breaks the customer's order.
+    if (metaCapiConfigured()) {
+      sendLeadEvent({
+        name: req.body.name,
+        phone: req.body.phone,
+        eventId: req.body.eventId,
+        fbp: req.body.fbp,
+        fbc: req.body.fbc,
+        eventSourceUrl: req.body.eventSourceUrl,
+        clientIp: req.ip,
+        userAgent: req.get('user-agent'),
+        productName: req.body.productName,
+        productId: req.body.productId,
+      }).catch((err) => console.error('[order] Meta CAPI failed:', err.message));
+    }
+
     res.json({ ok: true });
   } catch (err) {
     console.error('order POST failed', err);

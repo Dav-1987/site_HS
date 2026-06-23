@@ -20,6 +20,13 @@ describe('trackPixel', () => {
     expect(fbq).toHaveBeenCalledWith('track', 'PageView', undefined);
   });
 
+  it('forwards fbq options (eventID) as a 4th arg when given', () => {
+    const fbq = vi.fn();
+    window.fbq = fbq;
+    trackPixel('Lead', { content_name: 'X' }, { eventID: 'evt-1' });
+    expect(fbq).toHaveBeenCalledWith('track', 'Lead', { content_name: 'X' }, { eventID: 'evt-1' });
+  });
+
   it('is a no-op (does not throw) when fbq is absent', () => {
     delete window.fbq;
     expect(() => trackPixel('ViewContent', { content_ids: ['x'] })).not.toThrow();

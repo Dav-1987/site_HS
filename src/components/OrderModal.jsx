@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { useLanguage } from '../i18n/LanguageContext.jsx';
-import { trackPixel, setPixelUserData, buildUserData } from '../lib/track.js';
+import { trackPixel, setPixelUserData, buildUserData, getFbCookies } from '../lib/track.js';
 
 const TITLE_ID = 'order-modal-title';
 
@@ -100,6 +100,9 @@ export default function OrderModal({ product, isOpen, onClose }) {
     setSending(true);
     setServerError('');
     try {
+      const eventId =
+        window.crypto?.randomUUID?.() ?? `${Date.now()}-${Math.random().toString(36).slice(2)}`;
+      const { fbp, fbc } = getFbCookies();
       const res = await fetch('/api/order', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -109,6 +112,11 @@ export default function OrderModal({ product, isOpen, onClose }) {
           comment: comment.trim() || undefined,
           productName: productLabel,
           productId: product.id,
+          // Conversions API: shared event_id (dedup with the browser Lead) + match keys.
+          eventId,
+          fbp,
+          fbc,
+          eventSourceUrl: window.location.href,
           _gotcha: e.currentTarget._gotcha.value,
         }),
       });
@@ -118,11 +126,11 @@ export default function OrderModal({ product, isOpen, onClose }) {
       // Advanced matching: feed the (browser-hashed) name + phone before the
       // Lead so Meta can attribute the conversion to the ad click.
       setPixelUserData(buildUserData({ name, phone }));
-      trackPixel('Lead', {
-        content_type: 'product',
-        content_ids: [product.id],
-        content_name: productLabel,
-      });
+      trackPixel(
+        'Lead',
+        { content_type: 'product', content_ids: [product.id], content_name: productLabel },
+        { eventID: eventId },
+      );
     } catch {
       setServerError(t('order.form.error.generic'));
     } finally {
