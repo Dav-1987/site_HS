@@ -3,6 +3,7 @@ import { useLanguage } from '../i18n/LanguageContext.jsx';
 import { useSettings } from '../settings/SettingsContext.jsx';
 import Reveal from '../components/Reveal.jsx';
 import SocialMeta from '../components/SocialMeta.jsx';
+import { trackPixel } from '../lib/track.js';
 
 function IconInstagram() {
   return (
@@ -57,6 +58,7 @@ export default function Contact() {
   const [emailCopied, setEmailCopied] = useState(false);
 
   const copyEmail = () => {
+    trackPixel('Contact', { method: 'email' });
     navigator.clipboard.writeText(contact.email).then(() => {
       setEmailCopied(true);
       setTimeout(() => setEmailCopied(false), 2000);
@@ -89,6 +91,7 @@ export default function Contact() {
       label: 'WhatsApp',
       content: (
         <a href={contact.whatsapp} target="_blank" rel="noopener noreferrer"
+          onClick={() => trackPixel('Contact', { method: 'whatsapp' })}
           className="text-primary transition-colors hover:text-accent">
           {contact.phone}
         </a>
@@ -99,6 +102,7 @@ export default function Contact() {
       label: t('contact.info.hours'),
       content: (
         <a href={`tel:+34${contact.phone.replace(/\s/g, '')}`}
+          onClick={() => trackPixel('Contact', { method: 'phone' })}
           className="text-primary transition-colors hover:text-accent">
           +34 {contact.phone}
         </a>

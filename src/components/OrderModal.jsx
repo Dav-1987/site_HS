@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { useLanguage } from '../i18n/LanguageContext.jsx';
+import { trackPixel } from '../lib/track.js';
 
 const TITLE_ID = 'order-modal-title';
 
@@ -114,6 +115,11 @@ export default function OrderModal({ product, isOpen, onClose }) {
       const data = await res.json();
       if (!res.ok) throw new Error(data.error || 'error');
       setSent(true);
+      trackPixel('Lead', {
+        content_type: 'product',
+        content_ids: [product.id],
+        content_name: productLabel,
+      });
     } catch {
       setServerError(t('order.form.error.generic'));
     } finally {

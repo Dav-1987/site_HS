@@ -3,6 +3,7 @@ import { Link, Navigate, useParams } from 'react-router-dom';
 import { useLanguage } from '../i18n/LanguageContext.jsx';
 import { useCatalog } from '../catalog/CatalogContext.jsx';
 import { productDescription, productImages, productMedia, productReference, computeRelated, resolveImage } from '../data/catalog.js';
+import { trackPixel } from '../lib/track.js';
 import JsonLd from '../components/JsonLd.jsx';
 import SocialMeta from '../components/SocialMeta.jsx';
 import { productSchema, breadcrumbSchema } from '../seo/schema.js';
@@ -46,6 +47,21 @@ export default function Product() {
     setActive(0);
     setThumbStart(0);
   }, [id]);
+
+  // Meta Pixel: fire ViewContent once the catalog is loaded and the product
+  // resolves, so retargeting / catalog audiences capture product views.
+  useEffect(() => {
+    if (!loaded) return;
+    const match = getProduct(id);
+    if (match) {
+      trackPixel('ViewContent', {
+        content_type: 'product',
+        content_ids: [match.product.id],
+        content_name: match.product.name,
+      });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [id, loaded]);
 
   const found = getProduct(id);
   if (!found && !loaded) return null;

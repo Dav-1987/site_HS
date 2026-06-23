@@ -11,6 +11,12 @@ dist/
 # Local tooling state
 .netlify
 
+# Google service account keys — never commit (private credentials)
+*-service_account.json
+*.iam.gserviceaccount.com.json
+winter-bridge-*.json
+service_account*.json
+
 # DB dumps / audit reports — never commit (may contain data, are dev-only artifacts)
 products_backup_*.sql
 *-audit/

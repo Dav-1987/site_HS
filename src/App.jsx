@@ -3,6 +3,7 @@ import { Routes, Route, Navigate, useParams, useLocation } from 'react-router-do
 import { useCatalog } from './catalog/CatalogContext.jsx';
 import Layout from './components/Layout.jsx';
 import ErrorBoundary from './components/ErrorBoundary.jsx';
+import { trackPixel } from './lib/track.js';
 
 const Home = lazy(() => import('./pages/Home.jsx'));
 const Catalog = lazy(() => import('./pages/Catalog.jsx'));
@@ -30,27 +31,38 @@ function LegacyProductRedirect() {
 }
 
 const YANDEX_METRIKA_ID = 109965392;
-const GA4_MEASUREMENT_ID = 'G-F59Y5J11MF';
 
 export default function App() {
   const location = useLocation();
   const isFirstRender = useRef(true);
+  // Previous full URL, sent as the `referer` on Yandex SPA hits so transition
+  // sources aren't lost. Seeded with the landing URL on first render.
+  const prevUrlRef = useRef(typeof window !== 'undefined' ? window.location.href : '');
 
-  // Skip the first render: index.html already sends the initial pageview
-  // (ym 'init' / gtag 'config'). Only client-side route changes need a hit.
+  // Yandex.Metrika has no automatic SPA tracking, so we fire a hit on every
+  // client-side route change, with title + previous URL (referer) so Webvisor
+  // records the right page and the transition source is preserved.
+  // GA4 is intentionally NOT called here: its Enhanced Measurement "page changes
+  // based on browser history events" (on by default) already tracks SPA
+  // navigations natively — a manual page_view would double-count.
+  // Skip the first render: index.html already sends the initial pageview.
   useEffect(() => {
     if (isFirstRender.current) {
       isFirstRender.current = false;
       return;
     }
-    const url = location.pathname + location.search + location.hash;
+    const path = location.pathname + location.search + location.hash;
 
     if (typeof window.ym === 'function') {
-      window.ym(YANDEX_METRIKA_ID, 'hit', url);
+      window.ym(YANDEX_METRIKA_ID, 'hit', path, {
+        title: document.title,
+        referer: prevUrlRef.current,
+      });
     }
-    if (typeof window.gtag === 'function') {
-      window.gtag('config', GA4_MEASUREMENT_ID, { page_path: url });
-    }
+    // Meta Pixel, like Yandex, has no automatic SPA tracking — fire a PageView
+    // on each client-side route change. index.html already sent the initial one.
+    trackPixel('PageView');
+    prevUrlRef.current = window.location.origin + path;
   }, [location.pathname, location.search, location.hash]);
 
   return (
