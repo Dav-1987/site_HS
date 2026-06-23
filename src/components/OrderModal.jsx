@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { useLanguage } from '../i18n/LanguageContext.jsx';
-import { trackPixel } from '../lib/track.js';
+import { trackPixel, setPixelUserData, buildUserData } from '../lib/track.js';
 
 const TITLE_ID = 'order-modal-title';
 
@@ -115,6 +115,9 @@ export default function OrderModal({ product, isOpen, onClose }) {
       const data = await res.json();
       if (!res.ok) throw new Error(data.error || 'error');
       setSent(true);
+      // Advanced matching: feed the (browser-hashed) name + phone before the
+      // Lead so Meta can attribute the conversion to the ad click.
+      setPixelUserData(buildUserData({ name, phone }));
       trackPixel('Lead', {
         content_type: 'product',
         content_ids: [product.id],
