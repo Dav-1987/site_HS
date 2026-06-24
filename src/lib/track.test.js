@@ -1,8 +1,16 @@
 import { describe, it, expect, vi, afterEach } from 'vitest';
-import { trackPixel, buildUserData, setPixelUserData, META_PIXEL_ID } from './track.js';
+import {
+  trackPixel,
+  buildUserData,
+  setPixelUserData,
+  trackGoogleAdsLead,
+  GOOGLE_ADS_ID,
+  META_PIXEL_ID,
+} from './track.js';
 
 afterEach(() => {
   delete window.fbq;
+  delete window.gtag;
 });
 
 describe('trackPixel', () => {
@@ -30,6 +38,24 @@ describe('trackPixel', () => {
   it('is a no-op (does not throw) when fbq is absent', () => {
     delete window.fbq;
     expect(() => trackPixel('ViewContent', { content_ids: ['x'] })).not.toThrow();
+  });
+});
+
+describe('trackGoogleAdsLead', () => {
+  it('fires a conversion event with send_to, value and currency', () => {
+    const gtag = vi.fn();
+    window.gtag = gtag;
+    trackGoogleAdsLead();
+    expect(gtag).toHaveBeenCalledWith('event', 'conversion', {
+      send_to: `${GOOGLE_ADS_ID}/aTAPCI6368QcEP_r4_5D`,
+      value: 1.0,
+      currency: 'EUR',
+    });
+  });
+
+  it('is a no-op (does not throw) when gtag is absent', () => {
+    delete window.gtag;
+    expect(() => trackGoogleAdsLead()).not.toThrow();
   });
 });
 

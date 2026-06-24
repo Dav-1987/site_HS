@@ -54,6 +54,29 @@ export function setPixelUserData(userData) {
   }
 }
 
+// Google Ads conversion tracking. The base gtag.js is loaded in index.html
+// (shared with GA4) and also configured there for AW-18251052543, so this is a
+// thin wrapper like trackPixel — a no-op when gtag failed to load or was blocked.
+export const GOOGLE_ADS_ID = 'AW-18251052543';
+// Conversion label for the "Lead" action (Submit lead form). From Google Ads →
+// Conversions → Lead → conversion label.
+const GOOGLE_ADS_LEAD_LABEL = 'aTAPCI6368QcEP_r4_5D';
+
+/**
+ * Fire the Google Ads "Lead" conversion. Matches the value/currency configured
+ * on the conversion action (1 EUR, same value for all). Safe to call before
+ * gtag.js has loaded — calls queue on the dataLayer.
+ */
+export function trackGoogleAdsLead() {
+  if (typeof window !== 'undefined' && typeof window.gtag === 'function') {
+    window.gtag('event', 'conversion', {
+      send_to: `${GOOGLE_ADS_ID}/${GOOGLE_ADS_LEAD_LABEL}`,
+      value: 1.0,
+      currency: 'EUR',
+    });
+  }
+}
+
 /**
  * Read Meta's browser identifiers for server-side (Conversions API) matching:
  * `_fbp` (browser id) and `_fbc` (click id). When `_fbc` isn't set yet but the

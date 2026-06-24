@@ -1,6 +1,12 @@
 import { useEffect, useRef, useState } from 'react';
 import { useLanguage } from '../i18n/LanguageContext.jsx';
-import { trackPixel, setPixelUserData, buildUserData, getFbCookies } from '../lib/track.js';
+import {
+  trackPixel,
+  setPixelUserData,
+  buildUserData,
+  getFbCookies,
+  trackGoogleAdsLead,
+} from '../lib/track.js';
 
 const TITLE_ID = 'order-modal-title';
 
@@ -131,6 +137,8 @@ export default function OrderModal({ product, isOpen, onClose }) {
         { content_type: 'product', content_ids: [product.id], content_name: productLabel },
         { eventID: eventId },
       );
+      // Google Ads "Lead" conversion, fired on the same successful submit.
+      trackGoogleAdsLead();
     } catch {
       setServerError(t('order.form.error.generic'));
     } finally {
