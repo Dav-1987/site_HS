@@ -17,3 +17,7 @@ jobs:
       - run: npm ci
       - run: npm run lint
       - run: npm test
+      # Smoke-tests the SEO build pipeline (vite build + prerender + sitemap)
+      # against the committed catalog.default.json — catches a broken
+      # prerender/route before it ever reaches a real deploy.
+      - run: npm run build:seo
