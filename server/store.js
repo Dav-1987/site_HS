@@ -41,6 +41,7 @@ function shapeCategory(cat, products) {
     image: cat.image,
     imageMobile: cat.image_mobile ?? '',
     video: cat.video ?? '',
+    updatedAt: cat.updated_at instanceof Date ? cat.updated_at.toISOString() : cat.updated_at,
     products: products.map((p) => ({
       id: p.id,
       name: p.name,
@@ -58,8 +59,48 @@ function shapeCategory(cat, products) {
       subtitle: p.subtitle ?? '',
       description: { es: p.description_es ?? '', en: p.description_en ?? '' },
       related: Array.isArray(p.related) ? p.related : [],
+      updatedAt: p.updated_at instanceof Date ? p.updated_at.toISOString() : p.updated_at,
     })),
   };
+}
+
+// A category/product is only "changed" (and its updated_at bumped) if one of
+// these SEO/content-relevant fields differs from the previous save. `position`
+// (drag-reorder) is intentionally excluded — reordering isn't a content change.
+function categoryContentEqual(a, b) {
+  if (!a || !b) return false;
+  return (
+    a.name?.es === b.name?.es &&
+    a.name?.en === b.name?.en &&
+    a.tagline?.es === b.tagline?.es &&
+    a.tagline?.en === b.tagline?.en &&
+    a.description?.es === b.description?.es &&
+    a.description?.en === b.description?.en &&
+    a.image === b.image &&
+    a.imageMobile === b.imageMobile &&
+    a.video === b.video
+  );
+}
+
+function productContentEqual(a, b) {
+  if (!a || !b) return false;
+  return (
+    a.name === b.name &&
+    a.price === b.price &&
+    a.oldPrice === b.oldPrice &&
+    a.image === b.image &&
+    a.imageMobile === b.imageMobile &&
+    JSON.stringify(a.images ?? []) === JSON.stringify(b.images ?? []) &&
+    JSON.stringify(a.media ?? []) === JSON.stringify(b.media ?? []) &&
+    a.material?.es === b.material?.es &&
+    a.material?.en === b.material?.en &&
+    a.size === b.size &&
+    a.reference === b.reference &&
+    a.subtitle === b.subtitle &&
+    a.description?.es === b.description?.es &&
+    a.description?.en === b.description?.en &&
+    JSON.stringify(a.related ?? []) === JSON.stringify(b.related ?? [])
+  );
 }
 
 export async function readCatalog() {
@@ -79,18 +120,31 @@ export async function readCatalog() {
 }
 
 export async function writeCatalog(categories) {
+  // Snapshot the previous state so unchanged rows keep their old updated_at
+  // instead of every row getting NOW() on every save (writeCatalog always
+  // does a full DELETE + re-INSERT, never a targeted UPDATE).
+  const previous = await readCatalog();
+  const prevCatBySlug = new Map(previous.map((c) => [c.slug, c]));
+  const prevProdById = new Map(previous.flatMap((c) => c.products.map((p) => [p.id, p])));
+
   const client = await pool.connect();
   try {
     await client.query('BEGIN');
     await client.query('DELETE FROM products');
     await client.query('DELETE FROM categories');
 
+    const now = new Date();
+
     for (let ci = 0; ci < categories.length; ci++) {
       const c = categories[ci];
+      const prevCat = prevCatBySlug.get(c.slug);
+      const categoryUpdatedAt =
+        prevCat && categoryContentEqual(c, prevCat) ? new Date(prevCat.updatedAt) : now;
+
       await client.query(
         `INSERT INTO categories
-           (slug, name_es, name_en, tagline_es, tagline_en, description_es, description_en, image, image_mobile, video, position)
-         VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11)`,
+           (slug, name_es, name_en, tagline_es, tagline_en, description_es, description_en, image, image_mobile, video, position, updated_at)
+         VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12)`,
         [
           c.slug,
           c.name?.es ?? '',
@@ -103,6 +157,7 @@ export async function writeCatalog(categories) {
           c.imageMobile ?? '',
           c.video ?? '',
           ci,
+          categoryUpdatedAt,
         ],
       );
 
@@ -114,10 +169,18 @@ export async function writeCatalog(categories) {
         const gallery = media.filter((m) => m.type === 'image').map((m) => m.src);
         const cover = gallery[0] || p.image || '';
         const images = gallery.length ? gallery : cover ? [cover] : [];
+
+        const prevProd = prevProdById.get(p.id);
+        const comparableNew = { ...p, image: cover, images, media };
+        const productUpdatedAt =
+          prevProd && productContentEqual(comparableNew, prevProd)
+            ? new Date(prevProd.updatedAt)
+            : now;
+
         await client.query(
           `INSERT INTO products
-             (id, category_slug, name, price, old_price, image, image_mobile, images, material_es, material_en, size, reference, subtitle, video, video_first, media, description_es, description_en, related, position)
-           VALUES ($1,$2,$3,$4,$5,$6,$7,$8::jsonb,$9,$10,$11,$12,$13,$14,$15,$16::jsonb,$17,$18,$19::jsonb,$20)`,
+             (id, category_slug, name, price, old_price, image, image_mobile, images, material_es, material_en, size, reference, subtitle, video, video_first, media, description_es, description_en, related, position, updated_at)
+           VALUES ($1,$2,$3,$4,$5,$6,$7,$8::jsonb,$9,$10,$11,$12,$13,$14,$15,$16::jsonb,$17,$18,$19::jsonb,$20,$21)`,
           [
             p.id,
             c.slug,
@@ -140,6 +203,7 @@ export async function writeCatalog(categories) {
             p.description?.en ?? '',
             JSON.stringify(Array.isArray(p.related) ? p.related : []),
             pi,
+            productUpdatedAt,
           ],
         );
       }

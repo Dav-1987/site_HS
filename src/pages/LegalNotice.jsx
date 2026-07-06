@@ -2,24 +2,28 @@ import { useLanguage } from '../i18n/LanguageContext.jsx';
 import { useSettings } from '../settings/SettingsContext.jsx';
 import Reveal from '../components/Reveal.jsx';
 import SocialMeta from '../components/SocialMeta.jsx';
+import HreflangLinks from '../components/HreflangLinks.jsx';
 
 const SITE = 'https://hsmuebles.es';
 
 export default function LegalNotice() {
-  const { t } = useLanguage();
+  const { t, localize } = useLanguage();
   const { settings } = useSettings();
   const email = settings.contact.email;
   const [before, after] = t('legal.p3').split('{email}');
+  const esPath = '/legal-notice';
+  const canonicalUrl = `${SITE}${localize(esPath)}`;
 
   return (
     <>
       <title>{t('legal.title')} | HS Muebles</title>
       <meta name="description" content={t('legal.p1')} />
-      <link rel="canonical" href={`${SITE}/legal-notice`} />
+      <link rel="canonical" href={canonicalUrl} />
+      <HreflangLinks esPath={esPath} />
       <SocialMeta
         title={`${t('legal.title')} | HS Muebles`}
         description={t('legal.p1')}
-        url={`${SITE}/legal-notice`}
+        url={canonicalUrl}
       />
       <section className="px-6 pb-24 pt-8 md:px-12 md:pb-32 md:pt-12 lg:px-20">
         <Reveal className="max-w-xl">

@@ -453,9 +453,20 @@ app.all('/api/*', (req, res) => {
 });
 
 // ─── SPA fallback — все неизвестные маршруты → index.html ────────────────────
+//
+// Прошедшие сюда запросы НЕ совпали ни с одним файлом в dist/ — а значит и ни
+// с одним из prerender-маршрутов (см. scripts/prerender.mjs), которые лежат в
+// dist/<route>/index.html и обслуживаются static-мидлварой выше (строка 39)
+// до того, как дойдёт до этого catch-all. Единственные легитимные маршруты,
+// не имеющие prerender-снапшота — чисто клиентские (/admin, легаси-редиректы).
+// Для них отдаём 200, для всего остального — 404, чтобы Google не считал
+// несуществующие страницы soft-404 (текст "не найдено" со статусом 200).
+
+const CLIENT_ONLY_ROUTES = [/^\/admin(\/|$)/, /^\/categoria\//, /^\/producto\//];
 
 app.get('*', (req, res) => {
-  res.sendFile(join(DIST_DIR, 'index.html'));
+  const isClientOnlyRoute = CLIENT_ONLY_ROUTES.some((re) => re.test(req.path));
+  res.status(isClientOnlyRoute ? 200 : 404).sendFile(join(DIST_DIR, 'index.html'));
 });
 
 // ─── Start ────────────────────────────────────────────────────────────────────

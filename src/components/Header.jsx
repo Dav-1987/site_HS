@@ -1,18 +1,32 @@
 import { useEffect, useState } from 'react';
-import { Link, NavLink, useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { Link, NavLink } from './LocalizedLink.jsx';
 import { useLanguage } from '../i18n/LanguageContext.jsx';
 import { LANGUAGES } from '../i18n/translations.js';
 import { useCatalog } from '../catalog/CatalogContext.jsx';
+import { stripLangPrefix, withLang } from '../i18n/routing.js';
 
 function LangToggle({ className = '' }) {
-  const { lang, setLang } = useLanguage();
+  const { lang } = useLanguage();
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  // Switches language while staying on the same page (same category/product),
+  // rather than resetting to home — the URL itself carries the language, so
+  // this is a real navigation, not just a state flip.
+  const switchTo = (code) => {
+    if (code === lang) return;
+    const { path } = stripLangPrefix(location.pathname);
+    navigate(`${withLang(path, code)}${location.search}${location.hash}`);
+  };
+
   return (
     <div className={`flex items-center gap-2 text-xs uppercase tracking-[0.2em] ${className}`}>
       {LANGUAGES.map((l, i) => (
         <span key={l.code} className="flex items-center gap-2">
           <button
             type="button"
-            onClick={() => setLang(l.code)}
+            onClick={() => switchTo(l.code)}
             aria-label={`${l.label}`}
             aria-pressed={lang === l.code}
             className={`transition-colors duration-300 ${
@@ -37,7 +51,7 @@ export default function Header() {
   const location = useLocation();
 
   // Transparent only at the very top of the home page; solid everywhere else.
-  const isHome = location.pathname === '/';
+  const isHome = stripLangPrefix(location.pathname).path === '/';
   const transparent = isHome && !scrolled;
 
   // Track scroll position to toggle the solid/transparent header state.

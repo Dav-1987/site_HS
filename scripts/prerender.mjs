@@ -20,6 +20,8 @@ import { build } from 'vite';
 import { readFileSync, writeFileSync, mkdirSync, rmSync } from 'fs';
 import { join, dirname } from 'path';
 import { fileURLToPath, pathToFileURL } from 'url';
+import { buildRoutes } from '../src/routes.js';
+import { withLang } from '../src/i18n/routing.js';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(__dirname, '..');
@@ -31,15 +33,13 @@ const catalog = JSON.parse(
   readFileSync(join(ROOT, 'src/data/catalog.default.json'), 'utf8'),
 );
 
-const routes = [
-  '/',
-  '/catalogo',
-  '/contacto',
-  '/privacy-policy',
-  '/legal-notice',
-  ...catalog.map((cat) => `/${cat.slug}`),
-  ...catalog.flatMap((cat) => cat.products.map((p) => `/${cat.slug}/${p.id}`)),
-];
+// Every ES route (src/routes.js) plus its /en mirror (src/i18n/routing.js) —
+// same list App.jsx's router serves at runtime.
+const esPaths = buildRoutes(catalog).map((r) => r.path);
+const routes = esPaths.flatMap((path) => [
+  { path, lang: 'es' },
+  { path: withLang(path, 'en'), lang: 'en' },
+]);
 
 // ── Head hoisting ─────────────────────────────────────────────────────────────
 // renderToStaticMarkup emits any <title>/<meta>/<link> the page declares inline
@@ -81,9 +81,9 @@ function extractHead(html) {
 }
 
 // ── Compose final document ────────────────────────────────────────────────────
-function compose(template, appHtml) {
+function compose(template, appHtml, lang) {
   const { headTags, body } = extractHead(appHtml);
-  let out = template;
+  let out = template.replace(/<html lang="es">/, `<html lang="${lang}">`);
 
   // If the page sets its own <title>, drop the shell <title> from the template.
   if (headTags.some((t) => /^<title/i.test(t))) {
@@ -138,15 +138,15 @@ async function main() {
 
   let ok = 0;
   let fail = 0;
-  for (const route of routes) {
+  for (const { path, lang } of routes) {
     try {
-      const appHtml = await render(route);
-      saveRoute(route, compose(template, appHtml));
+      const appHtml = await render(path);
+      saveRoute(path, compose(template, appHtml, lang));
       ok++;
-      process.stdout.write(`  ✅ ${route}\n`);
+      process.stdout.write(`  ✅ ${path}\n`);
     } catch (err) {
       fail++;
-      process.stdout.write(`  ⚠️  ${route} — ${err.message}\n`);
+      process.stdout.write(`  ⚠️  ${path} — ${err.message}\n`);
     }
   }
 

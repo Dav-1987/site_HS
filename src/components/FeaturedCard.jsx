@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link } from './LocalizedLink.jsx';
 import Media from './Media.jsx';
 import Price from './Price.jsx';
 import { useLanguage } from '../i18n/LanguageContext.jsx';

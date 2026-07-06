@@ -1,4 +1,5 @@
-import { Link, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
+import { Link } from '../components/LocalizedLink.jsx';
 import { useLanguage } from '../i18n/LanguageContext.jsx';
 import { useCatalog } from '../catalog/CatalogContext.jsx';
 import Reveal from '../components/Reveal.jsx';
@@ -8,6 +9,7 @@ import CategoryCard from '../components/CategoryCard.jsx';
 import NotFound from './NotFound.jsx';
 import JsonLd from '../components/JsonLd.jsx';
 import SocialMeta from '../components/SocialMeta.jsx';
+import HreflangLinks from '../components/HreflangLinks.jsx';
 import { resolveImage } from '../data/catalog.js';
 import { breadcrumbSchema, productListSchema } from '../seo/schema.js';
 
@@ -15,7 +17,7 @@ const SITE = 'https://hsmuebles.es';
 
 export default function Category() {
   const { slug } = useParams();
-  const { lang, t } = useLanguage();
+  const { lang, t, localize } = useLanguage();
   const { categories, getCategory, loaded } = useCatalog();
   const category = getCategory(slug);
 
@@ -24,14 +26,19 @@ export default function Category() {
 
   const related = categories.filter((c) => c.slug !== category.slug).slice(0, 3);
   const catName = category.name[lang] ?? category.name.es;
-  const catDesc = `Colección ${catName} de HS Muebles — ${category.products.length} piezas de mobiliario minimalista. Envío, montaje e instalación gratuitos.`;
-  const canonicalUrl = `${SITE}/${category.slug}`;
+  const catDesc = t('category.meta.description')
+    .replace('{name}', catName)
+    .replace('{count}', category.products.length);
+  const esPath = `/${category.slug}`;
+  const canonicalUrl = `${SITE}${localize(esPath)}`;
+  const catalogUrl = `${SITE}${localize('/catalogo')}`;
 
   return (
     <>
-      <title>{`${catName} — Muebles minimalistas | HS Muebles`}</title>
+      <title>{t('category.meta.title').replace('{name}', catName)}</title>
       <meta name="description" content={catDesc} />
       <link rel="canonical" href={canonicalUrl} />
+      <HreflangLinks esPath={esPath} />
       <SocialMeta
         title={`${catName} | HS Muebles`}
         description={catDesc}
@@ -41,11 +48,11 @@ export default function Category() {
       <JsonLd
         data={[
           breadcrumbSchema([
-            { name: 'Inicio', url: SITE },
-            { name: t('nav.catalog'), url: `${SITE}/catalogo` },
-            { name: category.name.es, url: canonicalUrl },
+            { name: t('nav.home'), url: `${SITE}${localize('/')}` },
+            { name: t('nav.catalog'), url: catalogUrl },
+            { name: category.name[lang], url: canonicalUrl },
           ]),
-          productListSchema(category.products, category.slug),
+          productListSchema(category.products, category.slug, lang),
         ]}
       />
       {/* Header */}

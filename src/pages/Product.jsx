@@ -1,11 +1,13 @@
 import { useEffect, useRef, useState } from 'react';
-import { Link, Navigate, useParams } from 'react-router-dom';
+import { Navigate, useParams } from 'react-router-dom';
+import { Link } from '../components/LocalizedLink.jsx';
 import { useLanguage } from '../i18n/LanguageContext.jsx';
 import { useCatalog } from '../catalog/CatalogContext.jsx';
 import { productDescription, productImages, productMedia, productReference, computeRelated, resolveImage } from '../data/catalog.js';
 import { trackPixel } from '../lib/track.js';
 import JsonLd from '../components/JsonLd.jsx';
 import SocialMeta from '../components/SocialMeta.jsx';
+import HreflangLinks from '../components/HreflangLinks.jsx';
 import { productSchema, breadcrumbSchema } from '../seo/schema.js';
 
 const SITE = 'https://hsmuebles.es';
@@ -34,7 +36,7 @@ function RelatedCarousel({ related, title }) {
 
 export default function Product() {
   const { categorySlug, id } = useParams();
-  const { lang, t } = useLanguage();
+  const { lang, t, localize } = useLanguage();
   const { getProduct, categories, loaded } = useCatalog();
   const [active, setActive] = useState(0);
   const [thumbStart, setThumbStart] = useState(0);
@@ -72,7 +74,7 @@ export default function Product() {
   // Canonical URL: if the category slug in the URL is stale or wrong
   // (renamed category, moved product), redirect to the correct one.
   if (category.slug !== categorySlug) {
-    return <Navigate to={`/${category.slug}/${product.id}`} replace />;
+    return <Navigate to={localize(`/${category.slug}/${product.id}`)} replace />;
   }
 
   // Unified, ordered gallery: photos and videos interleaved exactly as the
@@ -102,8 +104,11 @@ export default function Product() {
     setThumbStart((s) => Math.max(0, Math.min(s + dir, gallery.length - THUMB_VISIBLE)));
 
   const related = computeRelated(categories, product, category, product.related);
-  const metaDesc = productDescription(product, category, 'es');
-  const canonicalUrl = `${SITE}/${category.slug}/${product.id}`;
+  const metaDesc = productDescription(product, category, lang);
+  const esPath = `/${category.slug}/${product.id}`;
+  const canonicalUrl = `${SITE}${localize(esPath)}`;
+  const categoryUrl = `${SITE}${localize(`/${category.slug}`)}`;
+  const catalogUrl = `${SITE}${localize('/catalogo')}`;
   // Many products share the same generic `name` (e.g. "Tocador") and even the
   // same `subtitle` (dimensions) within a category — fold in the reference
   // (always present, always unique) so every page gets a distinct <title>.
@@ -121,9 +126,10 @@ export default function Product() {
 
   return (
     <>
-      <title>{`${pageTitle} — ${category.name.es} | HS Muebles`}</title>
+      <title>{`${pageTitle} — ${category.name[lang]} | HS Muebles`}</title>
       <meta name="description" content={metaDesc} />
       <link rel="canonical" href={canonicalUrl} />
+      <HreflangLinks esPath={esPath} />
       <SocialMeta
         title={`${pageTitle} | HS Muebles`}
         description={metaDesc}
@@ -133,11 +139,11 @@ export default function Product() {
       />
       <JsonLd
         data={[
-          productSchema(product, category),
+          productSchema(product, category, lang),
           breadcrumbSchema([
-            { name: 'Inicio', url: SITE },
-            { name: t('nav.catalog'), url: `${SITE}/catalogo` },
-            { name: category.name.es, url: `${SITE}/${category.slug}` },
+            { name: t('nav.home'), url: `${SITE}${localize('/')}` },
+            { name: t('nav.catalog'), url: catalogUrl },
+            { name: category.name[lang], url: categoryUrl },
             { name: product.name, url: canonicalUrl },
           ]),
         ]}

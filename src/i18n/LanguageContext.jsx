@@ -1,25 +1,22 @@
-import { createContext, useContext, useCallback, useEffect, useMemo, useState } from 'react';
+import { createContext, useContext, useCallback, useEffect, useMemo } from 'react';
+import { useLocation } from 'react-router-dom';
 import { translations } from './translations.js';
 import { useSettings } from '../settings/SettingsContext.jsx';
+import { stripLangPrefix, withLang } from './routing.js';
 
-const STORAGE_KEY = 'hs-lang';
 const DEFAULT_LANG = 'es';
 
 const LanguageContext = createContext(null);
 
-function getInitialLang() {
-  if (typeof window === 'undefined') return DEFAULT_LANG;
-  const stored = window.localStorage.getItem(STORAGE_KEY);
-  if (stored && translations[stored]) return stored;
-  return DEFAULT_LANG;
-}
-
 export function LanguageProvider({ children }) {
-  const [lang, setLang] = useState(getInitialLang);
+  // The URL is the single source of truth for language — not a client-side
+  // preference — so a crawler (or anyone) visiting /en/... always gets English,
+  // and /catalogo always gets Spanish, with no hidden state involved.
+  const location = useLocation();
+  const { lang } = stripLangPrefix(location.pathname);
   const { settings } = useSettings();
 
   useEffect(() => {
-    window.localStorage.setItem(STORAGE_KEY, lang);
     document.documentElement.lang = lang;
   }, [lang]);
 
@@ -37,14 +34,11 @@ export function LanguageProvider({ children }) {
     [lang, overrides],
   );
 
-  const toggleLang = useCallback(() => {
-    setLang((prev) => (prev === 'es' ? 'en' : 'es'));
-  }, []);
+  // Turns an ES-form app path ("/catalogo", "/tocadores-loft") into the
+  // current language's URL ("/catalogo" or "/en/catalogo").
+  const localize = useCallback((path) => withLang(path, lang), [lang]);
 
-  const value = useMemo(
-    () => ({ lang, setLang, toggleLang, t }),
-    [lang, toggleLang, t],
-  );
+  const value = useMemo(() => ({ lang, t, localize }), [lang, t, localize]);
 
   return <LanguageContext.Provider value={value}>{children}</LanguageContext.Provider>;
 }

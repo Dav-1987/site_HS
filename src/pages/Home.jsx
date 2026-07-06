@@ -4,6 +4,7 @@ import { useCatalog } from '../catalog/CatalogContext.jsx';
 import { useSettings } from '../settings/SettingsContext.jsx';
 import { computeFeatured, resolveFeaturedCards, resolveImage } from '../data/catalog.js';
 import SocialMeta from '../components/SocialMeta.jsx';
+import HreflangLinks from '../components/HreflangLinks.jsx';
 import Media from '../components/Media.jsx';
 import VideoMedia from '../components/VideoMedia.jsx';
 import Reveal from '../components/Reveal.jsx';
@@ -144,20 +145,21 @@ function CategoriesSection() {
 const SITE = 'https://hsmuebles.es';
 
 export default function Home() {
+  const { t, localize } = useLanguage();
   const { settings } = useSettings();
   const seo = settings?.seo || {};
+  const esPath = '/';
+  const canonicalUrl = `${SITE}${localize(esPath)}`;
   return (
     <>
-      <title>HS Muebles — Tocadores y mobiliario minimalista | España</title>
-      <meta name="description" content="Muebles de tocador, espejos, consolas y estanterías de diseño minimalista. Envío, montaje e instalación gratis en toda España." />
-      <link rel="canonical" href={SITE} />
+      <title>{t('home.meta.title')}</title>
+      <meta name="description" content={t('home.meta.description')} />
+      <link rel="canonical" href={canonicalUrl} />
+      <HreflangLinks esPath={esPath} />
       <SocialMeta
-        title={seo.title || 'HS Muebles — Mobiliario minimalista'}
-        description={
-          seo.description ||
-          'Tocadores, espejos y mobiliario de diseño minimalista. Envío y montaje gratis.'
-        }
-        url={SITE}
+        title={seo.title || t('home.og.title')}
+        description={seo.description || t('home.og.description')}
+        url={canonicalUrl}
         image={resolveImage(seo.image || settings?.hero?.image, 1600)}
       />
       <Hero />

@@ -32,6 +32,27 @@ export const translations = {
     'catalog.subtitle':
       'Nueve familias de mobiliario, un mismo lenguaje minimalista.',
 
+    // --- SEO meta (page <title>/<meta description>, not visible UI copy) ---
+    'home.meta.title': 'HS Muebles — Tocadores y mobiliario minimalista | España',
+    'home.meta.description':
+      'Muebles de tocador, espejos, consolas y estanterías de diseño minimalista. Envío, montaje e instalación gratis en toda España.',
+    'home.og.title': 'HS Muebles — Mobiliario minimalista',
+    'home.og.description':
+      'Tocadores, espejos y mobiliario de diseño minimalista. Envío y montaje gratis.',
+    'catalog.meta.title': 'Catálogo de muebles — Tocadores, espejos y más | HS Muebles',
+    'catalog.meta.description':
+      'Explora las {count} colecciones de HS Muebles: tocadores loft, espejos de cuerpo entero, estanterías, cómodas, consolas y mesas de manicura. Diseño minimalista.',
+    'catalog.og.title': 'Catálogo completo | HS Muebles',
+    'catalog.og.description':
+      '{count} colecciones de mobiliario minimalista: tocadores, espejos, cómodas y más.',
+    'category.meta.title': '{name} — Muebles minimalistas | HS Muebles',
+    'category.meta.description':
+      'Colección {name} de HS Muebles — {count} piezas de mobiliario minimalista. Envío, montaje e instalación gratuitos.',
+    'contact.meta.description':
+      'Contacta con HS Muebles: tienda de muebles minimalistas en España. Teléfono, email, Instagram y TikTok. Envío, montaje e instalación gratis.',
+    'contact.og.description':
+      'Contacta con HS Muebles. Envío, montaje e instalación gratis en toda España.',
+
     // --- Category / product ---
     'category.products': 'piezas',
     'category.empty': 'Próximamente nuevas piezas en esta colección.',
@@ -173,6 +194,27 @@ export const translations = {
     'catalog.eyebrow': 'Catalog',
     'catalog.title': 'All collections',
     'catalog.subtitle': 'Nine furniture families, one minimalist language.',
+
+    // --- SEO meta (page <title>/<meta description>, not visible UI copy) ---
+    'home.meta.title': 'HS Muebles — Vanity Furniture & Minimalist Design | Spain',
+    'home.meta.description':
+      'Vanity furniture, mirrors, console tables and shelving in minimalist design. Free shipping, assembly and installation across Spain.',
+    'home.og.title': 'HS Muebles — Minimalist Furniture',
+    'home.og.description':
+      'Vanity furniture, mirrors and minimalist design pieces. Free shipping and assembly.',
+    'catalog.meta.title': 'Furniture Catalog — Vanities, Mirrors & More | HS Muebles',
+    'catalog.meta.description':
+      "Explore HS Muebles' {count} collections: loft dressing tables, full-length mirrors, shelving, dressers, console tables and manicure tables. Minimalist design.",
+    'catalog.og.title': 'Full Catalog | HS Muebles',
+    'catalog.og.description':
+      '{count} collections of minimalist furniture: vanities, mirrors, dressers and more.',
+    'category.meta.title': '{name} — Minimalist Furniture | HS Muebles',
+    'category.meta.description':
+      '{name} collection by HS Muebles — {count} pieces of minimalist furniture. Free shipping, assembly and installation.',
+    'contact.meta.description':
+      'Contact HS Muebles: minimalist furniture store in Spain. Phone, email, Instagram and TikTok. Free shipping, assembly and installation.',
+    'contact.og.description':
+      'Contact HS Muebles. Free shipping, assembly and installation across Spain.',
 
     // --- Category / product ---
     'category.products': 'pieces',

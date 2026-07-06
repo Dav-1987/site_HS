@@ -1,6 +1,8 @@
 import { readFileSync, writeFileSync } from 'fs';
 import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
+import { buildRoutes } from '../src/routes.js';
+import { withLang } from '../src/i18n/routing.js';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const DIST = join(__dirname, '../dist');
@@ -10,41 +12,52 @@ const catalog = JSON.parse(
   readFileSync(join(__dirname, '../src/data/catalog.default.json'), 'utf8'),
 );
 
-const today = new Date().toISOString().split('T')[0];
+// Real per-row modification time (see server/store.js writeCatalog), pulled
+// down into catalog.default.json by scripts/pull-catalog.mjs. Older pulls
+// taken before that column existed won't have it — fall back to undefined
+// (omit <lastmod> rather than fabricate a date; Google prefers no lastmod
+// over an inaccurate one).
+const isoDate = (d) => (d ? new Date(d).toISOString().split('T')[0] : undefined);
 
-const staticRoutes = [
-  { url: '/', priority: '1.0', changefreq: 'weekly' },
-  { url: '/catalogo', priority: '0.9', changefreq: 'weekly' },
-  { url: '/contacto', priority: '0.6', changefreq: 'monthly' },
-  { url: '/privacy-policy', priority: '0.3', changefreq: 'yearly' },
-  { url: '/legal-notice', priority: '0.3', changefreq: 'yearly' },
-];
+const routes = buildRoutes(catalog);
 
-const categoryRoutes = catalog.map((cat) => ({
-  url: `/${cat.slug}`,
-  priority: '0.8',
-  changefreq: 'weekly',
-}));
+const allTimestamps = routes.map((r) => r.updatedAt).filter(Boolean);
+// / and /catalogo surface the whole catalog, so they're "modified" whenever
+// any category/product last changed.
+const latestCatalogChange = allTimestamps.length
+  ? isoDate(allTimestamps.reduce((max, t) => (t > max ? t : max)))
+  : undefined;
 
-const productRoutes = catalog.flatMap((cat) =>
-  cat.products.map((p) => ({
-    url: `/${cat.slug}/${p.id}`,
-    priority: '0.7',
-    changefreq: 'monthly',
-  })),
-);
+// Every ES route (English has no separate content of its own, just a mirror
+// URL — see src/i18n/routing.js) becomes two <url> entries, ES and EN, each
+// pointing at both language versions via hreflang alternates so Google treats
+// them as translations of one page rather than duplicate/unrelated content.
+function urlEntry(route, lang) {
+  const lastmod = route.catalogAggregate ? latestCatalogChange : isoDate(route.updatedAt);
+  return {
+    loc: `${SITE}${withLang(route.path, lang)}`,
+    lastmod,
+    changefreq: route.changefreq,
+    priority: route.priority,
+    alternates: [
+      { hreflang: 'es', href: `${SITE}${route.path}` },
+      { hreflang: 'en', href: `${SITE}${withLang(route.path, 'en')}` },
+      { hreflang: 'x-default', href: `${SITE}${route.path}` },
+    ],
+  };
+}
 
-const allRoutes = [...staticRoutes, ...categoryRoutes, ...productRoutes];
+const allUrls = routes.flatMap((r) => [urlEntry(r, 'es'), urlEntry(r, 'en')]);
 
 const xml = `<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-${allRoutes
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+${allUrls
   .map(
-    (r) => `  <url>
-    <loc>${SITE}${r.url}</loc>
-    <lastmod>${today}</lastmod>
-    <changefreq>${r.changefreq}</changefreq>
-    <priority>${r.priority}</priority>
+    (u) => `  <url>
+    <loc>${u.loc}</loc>
+${u.lastmod ? `    <lastmod>${u.lastmod}</lastmod>\n` : ''}    <changefreq>${u.changefreq}</changefreq>
+    <priority>${u.priority}</priority>
+${u.alternates.map((a) => `    <xhtml:link rel="alternate" hreflang="${a.hreflang}" href="${a.href}"/>`).join('\n')}
   </url>`,
   )
   .join('\n')}
@@ -52,4 +65,4 @@ ${allRoutes
 `;
 
 writeFileSync(join(DIST, 'sitemap.xml'), xml, 'utf8');
-console.log(`✅ sitemap.xml — ${allRoutes.length} URLs`);
+console.log(`✅ sitemap.xml — ${allUrls.length} URLs`);

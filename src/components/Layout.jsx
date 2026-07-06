@@ -8,11 +8,12 @@ import { useLanguage } from '../i18n/LanguageContext.jsx';
 import { useSettings } from '../settings/SettingsContext.jsx';
 import JsonLd from './JsonLd.jsx';
 import { organizationSchema, websiteSchema } from '../seo/schema.js';
+import { stripLangPrefix } from '../i18n/routing.js';
 
 export default function Layout() {
   const lenisRef = useRef(null);
   const location = useLocation();
-  const { t } = useLanguage();
+  const { t, lang } = useLanguage();
   const { settings } = useSettings();
 
   // Smooth scroll (desktop) wired into the GSAP ticker so ScrollTrigger stays
@@ -67,11 +68,11 @@ export default function Layout() {
 
   // The header is fixed (overlapping content). The home hero sits under it on
   // purpose; every other page needs top padding equal to the header height.
-  const isHome = location.pathname === '/';
+  const isHome = stripLangPrefix(location.pathname).path === '/';
 
   return (
     <div className="flex min-h-screen flex-col">
-      <JsonLd data={[organizationSchema(settings?.contact), websiteSchema()]} />
+      <JsonLd data={[organizationSchema(settings?.contact), websiteSchema(lang)]} />
       <a
         href="#main-content"
         className="sr-only focus-visible:not-sr-only focus-visible:fixed focus-visible:left-4 focus-visible:top-4 focus-visible:z-[200] focus-visible:bg-background focus-visible:px-4 focus-visible:py-2 focus-visible:text-sm focus-visible:text-primary focus-visible:ring-1 focus-visible:ring-accent"

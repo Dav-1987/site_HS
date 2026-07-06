@@ -15,13 +15,15 @@ const LegalNotice = lazy(() => import('./pages/LegalNotice.jsx'));
 const NotFound = lazy(() => import('./pages/NotFound.jsx'));
 const Admin = lazy(() => import('./pages/Admin.jsx'));
 
-/** Old /categoria/:slug URLs → canonical /:slug (kept so saved links survive). */
+/** Old /categoria/:slug URLs → canonical /:slug (kept so saved links survive).
+ *  Spanish-only: this legacy URL form never existed under /en. */
 function LegacyCategoryRedirect() {
   const { slug } = useParams();
   return <Navigate to={`/${slug}`} replace />;
 }
 
-/** Old /producto/:id URLs → canonical /:categorySlug/:id (kept so saved links survive). */
+/** Old /producto/:id URLs → canonical /:categorySlug/:id (kept so saved links survive).
+ *  Spanish-only: this legacy URL form never existed under /en. */
 function LegacyProductRedirect() {
   const { id } = useParams();
   const { getProduct, loaded } = useCatalog();
@@ -29,6 +31,23 @@ function LegacyProductRedirect() {
   if (!found) return loaded ? <NotFound /> : null;
   return <Navigate to={`/${found.category.slug}/${id}`} replace />;
 }
+
+// Shared between the Spanish (/) and English (/en) route trees — relative
+// paths so they resolve under whichever parent mounts them. Keeping this in
+// one place instead of two copies is exactly the lesson from the sitemap/
+// prerender route lists drifting apart (see src/routes.js).
+const marketingRoutes = (
+  <>
+    <Route index element={<Home />} />
+    <Route path="catalogo" element={<Catalog />} />
+    <Route path="contacto" element={<Contact />} />
+    <Route path="privacy-policy" element={<PrivacyPolicy />} />
+    <Route path="legal-notice" element={<LegalNotice />} />
+    <Route path=":slug" element={<Category />} />
+    <Route path=":categorySlug/:id" element={<Product />} />
+    <Route path="*" element={<NotFound />} />
+  </>
+);
 
 const YANDEX_METRIKA_ID = 109965392;
 
@@ -74,17 +93,16 @@ export default function App() {
         {/* Admin lives outside the marketing Layout (no header/footer). */}
         <Route path="/admin" element={<Suspense fallback={null}><Admin /></Suspense>} />
 
-        <Route element={<Layout />}>
-          <Route path="/" element={<Home />} />
-          <Route path="/catalogo" element={<Catalog />} />
-          <Route path="/categoria/:slug" element={<LegacyCategoryRedirect />} />
-          <Route path="/producto/:id" element={<LegacyProductRedirect />} />
-          <Route path="/contacto" element={<Contact />} />
-          <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-          <Route path="/legal-notice" element={<LegalNotice />} />
-          <Route path="/:slug" element={<Category />} />
-          <Route path="/:categorySlug/:id" element={<Product />} />
-          <Route path="*" element={<NotFound />} />
+        {/* Spanish — default, unprefixed. */}
+        <Route path="/" element={<Layout />}>
+          <Route path="categoria/:slug" element={<LegacyCategoryRedirect />} />
+          <Route path="producto/:id" element={<LegacyProductRedirect />} />
+          {marketingRoutes}
+        </Route>
+
+        {/* English mirror — same paths under /en (see src/i18n/routing.js). */}
+        <Route path="/en" element={<Layout />}>
+          {marketingRoutes}
         </Route>
       </Routes>
     </ErrorBoundary>

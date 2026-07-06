@@ -11,6 +11,7 @@ import {
   productReference,
   resolveImage,
 } from '../data/catalog.js';
+import { withLang } from '../i18n/routing.js';
 
 export const SITE = 'https://hsmuebles.es';
 const ORG_NAME = 'HS Muebles';
@@ -57,13 +58,13 @@ export function organizationSchema(contact = {}) {
 }
 
 /** WebSite node. */
-export function websiteSchema() {
+export function websiteSchema(lang = 'es') {
   return {
     '@context': 'https://schema.org',
     '@type': 'WebSite',
     name: ORG_NAME,
     url: SITE,
-    inLanguage: 'es',
+    inLanguage: lang,
   };
 }
 
@@ -82,10 +83,10 @@ export function breadcrumbSchema(trail) {
 }
 
 /** Product + Offer node. */
-export function productSchema(product, category) {
+export function productSchema(product, category, lang = 'es') {
   const { price } = productDiscount(product);
   const sku = product.reference?.trim() || productReference(product.name);
-  const url = `${SITE}/${category.slug}/${product.id}`;
+  const url = `${SITE}${withLang(`/${category.slug}/${product.id}`, lang)}`;
   const images = productImages(product)
     .map((img) => absUrl(resolveImage(img, 1600)))
     .filter(Boolean);
@@ -107,18 +108,19 @@ export function productSchema(product, category) {
     '@context': 'https://schema.org',
     '@type': 'Product',
     name: product.name,
-    description: productDescription(product, category, 'es'),
+    description: productDescription(product, category, lang),
     image: images,
     sku,
     mpn: sku,
-    category: category.name.es,
+    category: category.name[lang] ?? category.name.es,
+    inLanguage: lang,
     brand: { '@type': 'Brand', name: ORG_NAME },
     offers,
   });
 }
 
 /** ItemList from products belonging to one category. */
-export function productListSchema(products, categorySlug) {
+export function productListSchema(products, categorySlug, lang = 'es') {
   return {
     '@context': 'https://schema.org',
     '@type': 'ItemList',
@@ -127,13 +129,13 @@ export function productListSchema(products, categorySlug) {
       '@type': 'ListItem',
       position: i + 1,
       name: p.name,
-      url: `${SITE}/${categorySlug}/${p.id}`,
+      url: `${SITE}${withLang(`/${categorySlug}/${p.id}`, lang)}`,
     })),
   };
 }
 
 /** ItemList from the top-level categories (catalog page). */
-export function categoryListSchema(categories) {
+export function categoryListSchema(categories, lang = 'es') {
   return {
     '@context': 'https://schema.org',
     '@type': 'ItemList',
@@ -141,8 +143,8 @@ export function categoryListSchema(categories) {
     itemListElement: categories.map((c, i) => ({
       '@type': 'ListItem',
       position: i + 1,
-      name: c.name.es,
-      url: `${SITE}/${c.slug}`,
+      name: c.name[lang] ?? c.name.es,
+      url: `${SITE}${withLang(`/${c.slug}`, lang)}`,
     })),
   };
 }

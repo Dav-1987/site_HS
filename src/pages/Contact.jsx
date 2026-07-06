@@ -3,6 +3,7 @@ import { useLanguage } from '../i18n/LanguageContext.jsx';
 import { useSettings } from '../settings/SettingsContext.jsx';
 import Reveal from '../components/Reveal.jsx';
 import SocialMeta from '../components/SocialMeta.jsx';
+import HreflangLinks from '../components/HreflangLinks.jsx';
 import { trackPixel } from '../lib/track.js';
 
 function IconInstagram() {
@@ -52,10 +53,12 @@ function IconEmail() {
 const SITE = 'https://hsmuebles.es';
 
 export default function Contact() {
-  const { t } = useLanguage();
+  const { t, localize } = useLanguage();
   const { settings } = useSettings();
   const contact = settings.contact;
   const [emailCopied, setEmailCopied] = useState(false);
+  const esPath = '/contacto';
+  const canonicalUrl = `${SITE}${localize(esPath)}`;
 
   const copyEmail = () => {
     trackPixel('Contact', { method: 'email' });
@@ -127,13 +130,14 @@ export default function Contact() {
 
   return (
     <>
-      <title>Contacto | HS Muebles</title>
-      <meta name="description" content="Contacta con HS Muebles: tienda de muebles minimalistas en España. Teléfono, email, Instagram y TikTok. Envío, montaje e instalación gratis." />
-      <link rel="canonical" href={`${SITE}/contacto`} />
+      <title>{`${t('contact.title')} | HS Muebles`}</title>
+      <meta name="description" content={t('contact.meta.description')} />
+      <link rel="canonical" href={canonicalUrl} />
+      <HreflangLinks esPath={esPath} />
       <SocialMeta
-        title="Contacto | HS Muebles"
-        description="Contacta con HS Muebles. Envío, montaje e instalación gratis en toda España."
-        url={`${SITE}/contacto`}
+        title={`${t('contact.title')} | HS Muebles`}
+        description={t('contact.og.description')}
+        url={canonicalUrl}
       />
       <section className="px-6 pb-24 pt-8 md:px-12 md:pb-32 md:pt-12 lg:px-20">
       <Reveal className="max-w-xl">

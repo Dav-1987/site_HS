@@ -45,6 +45,11 @@ ALTER TABLE products ADD COLUMN IF NOT EXISTS subtitle TEXT NOT NULL DEFAULT '';
 ALTER TABLE products ADD COLUMN IF NOT EXISTS video_first BOOLEAN NOT NULL DEFAULT false;
 -- Unified ordered media list (photos + videos): [{ "type": "image"|"video", "src": "..." }]
 ALTER TABLE products ADD COLUMN IF NOT EXISTS media JSONB NOT NULL DEFAULT '[]'::jsonb;
+-- Real per-row last-modified time, for accurate sitemap <lastmod> (see store.js
+-- writeCatalog: only bumped when the row's content actually changed, since the
+-- editor always re-saves the whole catalog via DELETE+INSERT).
+ALTER TABLE categories ADD COLUMN IF NOT EXISTS updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW();
+ALTER TABLE products ADD COLUMN IF NOT EXISTS updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW();
 
 CREATE INDEX IF NOT EXISTS idx_products_category ON products (category_slug);
 
