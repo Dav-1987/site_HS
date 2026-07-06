@@ -3,15 +3,23 @@
 // The DATA now lives in catalog.default.json (single source of
 // truth, shared with the Netlify function that seeds the DB).
 // At runtime the live catalog comes from /api/catalog via
-// CatalogContext; this file only provides the default dataset
-// (used as the instant first paint + offline fallback) and the
-// pure helpers that operate on whatever catalog is passed in.
+// CatalogContext; this file only provides the pure helpers that
+// operate on whatever catalog is passed in, plus a lazy loader
+// for the bundled default dataset.
 // ============================================================
 
-import defaultCatalogData from './catalog.default.json';
-
-/** The bundled default catalog (instant first paint + fallback). */
-export const defaultCatalog = defaultCatalogData;
+// Prerendering needs the default catalog synchronously (see
+// entry-server.jsx) and the client only needs it as a last-resort
+// offline fallback (see CatalogContext) — neither wants it in the
+// critical client bundle (~40KB gzip), so it's a dynamic import,
+// code-split into its own chunk and cached after the first call.
+let defaultCatalogPromise;
+export function loadDefaultCatalog() {
+  if (!defaultCatalogPromise) {
+    defaultCatalogPromise = import('./catalog.default.json').then((m) => m.default);
+  }
+  return defaultCatalogPromise;
+}
 
 /** Build a sized Unsplash URL from a photo id token. */
 export function unsplash(id, w = 900) {

@@ -1,6 +1,21 @@
 // Pure helpers for the public order endpoint: payload validation and message
 // formatting. Side-effect free so they can be unit-tested without Express.
 
+// Loosely validates a phone number: digits with optional leading + and
+// spaces/dashes/parens as separators (however the customer chose to type it),
+// with a plausible digit count. Catches typos/garbage ("abc", "12", a stray
+// letter) without rejecting legitimate international numbers — nobody can be
+// called back from a bad number, so this is worth a hard reject.
+const PHONE_CHARS_RE = /^\+?[0-9\s\-().]+$/;
+
+export function isValidPhone(phone) {
+  if (typeof phone !== 'string') return false;
+  const trimmed = phone.trim();
+  if (!trimmed || !PHONE_CHARS_RE.test(trimmed)) return false;
+  const digits = (trimmed.match(/\d/g) || []).length;
+  return digits >= 7 && digits <= 15;
+}
+
 /** Validate the customer payload; returns an error string or null. */
 export function validateOrder(body) {
   if (!body || typeof body !== 'object') return 'invalid payload';
@@ -8,6 +23,7 @@ export function validateOrder(body) {
   if (body.name.length > 200) return 'name is too long';
   if (typeof body.phone !== 'string' || !body.phone.trim()) return 'phone is required';
   if (body.phone.length > 50) return 'phone is too long';
+  if (!isValidPhone(body.phone)) return 'phone is not a valid phone number';
   if (body.comment !== undefined && typeof body.comment !== 'string') return 'invalid comment';
   if (body.comment && body.comment.length > 2000) return 'comment is too long';
   if (typeof body.productName !== 'string' || !body.productName.trim()) return 'productName is required';

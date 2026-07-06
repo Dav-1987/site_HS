@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { validateOrder, formatOrderText } from './order.js';
+import { validateOrder, formatOrderText, isValidPhone } from './order.js';
 
 const validBody = {
   name: 'Ana',
@@ -32,6 +32,28 @@ describe('validateOrder', () => {
   it('rejects non-object payloads', () => {
     expect(validateOrder(null)).toBeTruthy();
     expect(validateOrder('x')).toBeTruthy();
+  });
+
+  it('rejects a malformed phone number', () => {
+    expect(validateOrder({ ...validBody, phone: 'abc' })).toMatch(/phone/);
+    expect(validateOrder({ ...validBody, phone: '12' })).toMatch(/phone/);
+    expect(validateOrder({ ...validBody, phone: '600-000-OOPS' })).toMatch(/phone/);
+  });
+});
+
+describe('isValidPhone', () => {
+  it('accepts real-looking numbers in various formats', () => {
+    expect(isValidPhone('+34 600 000 000')).toBe(true);
+    expect(isValidPhone('600000000')).toBe(true);
+    expect(isValidPhone('(600) 000-000')).toBe(true);
+  });
+
+  it('rejects garbage, too-short, and too-long input', () => {
+    expect(isValidPhone('abc')).toBe(false);
+    expect(isValidPhone('12')).toBe(false);
+    expect(isValidPhone('1'.repeat(20))).toBe(false);
+    expect(isValidPhone('')).toBe(false);
+    expect(isValidPhone(undefined)).toBe(false);
   });
 });
 

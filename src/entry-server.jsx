@@ -5,8 +5,11 @@
  * `render(url)` once per route. The app is SSR-safe: every context initializer
  * guards browser globals (`typeof window`, try/catch around localStorage) and
  * all fetch/document access lives in useEffect — so on the server the tree
- * renders from the bundled defaultCatalog / defaultSettings, which is exactly
- * the content we want crawlers to see.
+ * renders from the bundled default catalog (loaded once below, then passed in
+ * as `initialCatalog`) and defaultSettings, which is exactly the content we
+ * want crawlers to see. The client bundle never imports the catalog dataset
+ * this way — see data/catalog.js — this SSR-only entry point is the sole
+ * place that loads it eagerly.
  *
  * We use renderToStaticMarkup (not renderToString) because the client mounts
  * with createRoot().render() — it replaces #root rather than hydrating — so no
@@ -27,18 +30,20 @@ import App from './App.jsx';
 import { SettingsProvider } from './settings/SettingsContext.jsx';
 import { LanguageProvider } from './i18n/LanguageContext.jsx';
 import { CatalogProvider } from './catalog/CatalogContext.jsx';
+import { loadDefaultCatalog } from './data/catalog.js';
 
 // Yield to the event loop so pending dynamic import()s (and the microtasks
 // React attaches to them) can settle before the next render pass.
 const tick = () => new Promise((resolve) => setTimeout(resolve, 0));
 
 export async function render(url) {
+  const initialCatalog = await loadDefaultCatalog();
   const tree = (
     <StrictMode>
       <StaticRouter location={url}>
         <SettingsProvider>
           <LanguageProvider>
-            <CatalogProvider>
+            <CatalogProvider initialCatalog={initialCatalog}>
               <App />
             </CatalogProvider>
           </LanguageProvider>

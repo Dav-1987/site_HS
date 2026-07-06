@@ -10,6 +10,18 @@ import {
 
 const TITLE_ID = 'order-modal-title';
 
+// Mirrors server/order.js's isValidPhone — kept in sync manually since client
+// and server are separate deploy targets. Loosely validates digits with an
+// optional leading + and spaces/dashes/parens as separators, catching typos
+// (letters, too few/many digits) without rejecting real international numbers.
+const PHONE_CHARS_RE = /^\+?[0-9\s\-().]+$/;
+function isValidPhone(phone) {
+  const trimmed = phone.trim();
+  if (!trimmed || !PHONE_CHARS_RE.test(trimmed)) return false;
+  const digits = (trimmed.match(/\d/g) || []).length;
+  return digits >= 7 && digits <= 15;
+}
+
 export default function OrderModal({ product, isOpen, onClose }) {
   const { t } = useLanguage();
   const [name, setName] = useState('');
@@ -90,6 +102,7 @@ export default function OrderModal({ product, isOpen, onClose }) {
     const e = {};
     if (!name.trim()) e.name = t('order.form.error.required');
     if (!phone.trim()) e.phone = t('order.form.error.required');
+    else if (!isValidPhone(phone)) e.phone = t('order.form.error.phone');
     return e;
   };
 
@@ -198,6 +211,7 @@ export default function OrderModal({ product, isOpen, onClose }) {
                   <input
                     type="text"
                     name="name"
+                    autoComplete="name"
                     value={name}
                     onChange={(e) => { setName(e.target.value); setErrors((p) => ({ ...p, name: '' })); }}
                     placeholder={t('order.form.name.placeholder')}
@@ -213,6 +227,8 @@ export default function OrderModal({ product, isOpen, onClose }) {
                   <input
                     type="tel"
                     name="phone"
+                    autoComplete="tel"
+                    inputMode="tel"
                     value={phone}
                     onChange={(e) => { setPhone(e.target.value); setErrors((p) => ({ ...p, phone: '' })); }}
                     placeholder={t('order.form.phone.placeholder')}

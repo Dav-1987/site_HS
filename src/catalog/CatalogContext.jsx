@@ -1,5 +1,5 @@
-import { createContext, useContext, useEffect, useMemo, useState } from 'react';
-import { defaultCatalog, findCategory, findProduct } from '../data/catalog.js';
+import { createContext, useContext, useEffect, useMemo, useRef, useState } from 'react';
+import { loadDefaultCatalog, findCategory, findProduct } from '../data/catalog.js';
 
 const CatalogContext = createContext(null);
 const CACHE_KEY = 'hs_catalog_v2';
@@ -23,25 +23,42 @@ function writeCache(categories) {
 
 /**
  * Holds the live catalog. Starts from localStorage cache (fastest, up-to-date
- * after any previous visit) or the bundled default (first visit / offline),
- * then hydrates from /api/catalog and persists the result back to localStorage.
+ * after any previous visit), or `initialCatalog` (only passed by the SSR/
+ * prerender entry point — see entry-server.jsx), or empty; then hydrates from
+ * /api/catalog and persists the result back to localStorage. The bundled
+ * default dataset is only ever loaded (dynamically, off the critical path) if
+ * the API is unreachable and there's nothing else to show — prerendering
+ * already covers the "meaningful content on first paint" case, so shipping
+ * the whole catalog to every visitor's browser isn't worth the bundle size.
  */
-export function CatalogProvider({ children }) {
-  const [categories, setCategories] = useState(() => readCache() ?? defaultCatalog);
+export function CatalogProvider({ children, initialCatalog }) {
+  const [categories, setCategories] = useState(() => readCache() ?? initialCatalog ?? []);
   const [loaded, setLoaded] = useState(false);
+  const hasStartingData = useRef(categories.length > 0);
 
   useEffect(() => {
     let alive = true;
     fetch('/api/catalog')
-      .then((r) => (r.ok ? r.json() : null))
+      .then((r) => (r.ok ? r.json() : Promise.reject(new Error(`HTTP ${r.status}`))))
       .then((data) => {
-        if (alive && Array.isArray(data?.categories) && data.categories.length > 0) {
+        if (!alive) return;
+        if (Array.isArray(data?.categories) && data.categories.length > 0) {
           setCategories(data.categories);
           writeCache(data.categories);
+        } else {
+          throw new Error('empty catalog response');
         }
       })
       .catch(() => {
-        /* keep current state on any failure */
+        // API unreachable/empty and nothing to show yet (first-ever visit,
+        // offline) — load the bundled default as a last-resort fallback.
+        if (alive && !hasStartingData.current) {
+          loadDefaultCatalog()
+            .then((data) => {
+              if (alive) setCategories(data);
+            })
+            .catch(() => {});
+        }
       })
       .finally(() => {
         if (alive) setLoaded(true);

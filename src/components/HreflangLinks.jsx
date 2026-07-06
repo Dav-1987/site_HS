@@ -1,4 +1,5 @@
 import { SITE } from '../seo/schema.js';
+import { withLang } from '../i18n/routing.js';
 
 /**
  * ES/EN/x-default <link rel="alternate" hreflang> trio for a page whose
@@ -8,9 +9,9 @@ import { SITE } from '../seo/schema.js';
 export default function HreflangLinks({ esPath }) {
   return (
     <>
-      <link rel="alternate" hreflang="es" href={`${SITE}${esPath}`} />
-      <link rel="alternate" hreflang="en" href={`${SITE}/en${esPath}`} />
-      <link rel="alternate" hreflang="x-default" href={`${SITE}${esPath}`} />
+      <link rel="alternate" hrefLang="es" href={`${SITE}${esPath}`} />
+      <link rel="alternate" hrefLang="en" href={`${SITE}${withLang(esPath, 'en')}`} />
+      <link rel="alternate" hrefLang="x-default" href={`${SITE}${esPath}`} />
     </>
   );
 }

@@ -142,8 +142,15 @@ export default function ProductCard({ product, categorySlug, categoryName, aspec
             </button>
             <div className="absolute bottom-3 left-1/2 flex -translate-x-1/2 gap-1.5">
               {media.map((m, i) => (
-                <span
+                <button
                   key={m.src + i}
+                  type="button"
+                  aria-label={`${t('carousel.goTo')} ${i + 1}`}
+                  aria-current={i === idx}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setIdx(i);
+                  }}
                   className={`h-1.5 w-1.5 rounded-full transition-colors ${
                     i === idx ? 'bg-primary' : 'bg-primary/30'
                   }`}

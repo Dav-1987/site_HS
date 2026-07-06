@@ -4,7 +4,7 @@ import { MemoryRouter, Routes, Route } from 'react-router-dom';
 import { SettingsProvider } from '../settings/SettingsContext.jsx';
 import { LanguageProvider } from '../i18n/LanguageContext.jsx';
 import { CatalogProvider } from '../catalog/CatalogContext.jsx';
-import { defaultCatalog } from '../data/catalog.js';
+import defaultCatalog from '../data/catalog.default.json';
 import Product from '../pages/Product.jsx';
 
 const category = defaultCatalog[0];
@@ -15,7 +15,7 @@ function renderProduct() {
     <MemoryRouter initialEntries={[`/${category.slug}/${product.id}`]}>
       <SettingsProvider>
         <LanguageProvider>
-          <CatalogProvider>
+          <CatalogProvider initialCatalog={defaultCatalog}>
             <Routes>
               <Route path="/:categorySlug/:id" element={<Product />} />
             </Routes>
@@ -56,5 +56,14 @@ describe('product page order flow', () => {
     fireEvent.click(screen.getByText(/Enviar solicitud/i));
     const errors = screen.getAllByText(/Este campo es obligatorio/i);
     expect(errors.length).toBeGreaterThanOrEqual(2); // name + phone
+  });
+
+  it('rejects a malformed phone number', () => {
+    renderProduct();
+    fireEvent.click(screen.getByText(/¡PEDIR AHORA!/i));
+    fireEvent.change(screen.getByPlaceholderText('Tu nombre'), { target: { value: 'Ana' } });
+    fireEvent.change(screen.getByPlaceholderText('+34 600 000 000'), { target: { value: 'abc' } });
+    fireEvent.click(screen.getByText(/Enviar solicitud/i));
+    expect(screen.getByText(/Introduce un número de teléfono válido/i)).toBeTruthy();
   });
 });
