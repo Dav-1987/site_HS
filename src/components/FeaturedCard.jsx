@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { Link } from './LocalizedLink.jsx';
 import Media from './Media.jsx';
 import Price from './Price.jsx';
+import DiscountBadge from './DiscountBadge.jsx';
 import { useLanguage } from '../i18n/LanguageContext.jsx';
 
 /** True on devices that have a real hover-capable pointer (desktop mouse). */
@@ -100,6 +101,7 @@ export default function FeaturedCard({ item, aspectClassName = 'aspect-[4/5]' })
             }`}
           />
         )}
+        <DiscountBadge product={item} />
       </Link>
 
       <Link to={to} aria-label={label} tabIndex={-1} className="block border-t border-primary/10 pt-4">

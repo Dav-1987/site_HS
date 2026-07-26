@@ -62,9 +62,6 @@ function Hero() {
             <p className="text-lg font-bold uppercase tracking-[0.15em] text-primary">
               {t('hero.promo')}
             </p>
-            <p className="text-base font-medium leading-relaxed text-primary">
-              {t('hero.promo.perks')}
-            </p>
           </div>
           <div className="mt-[clamp(1rem,4vh,2.5rem)] flex justify-center">
             <Button to="/catalogo" variant="solid">
@@ -96,7 +93,7 @@ function FeaturedSection() {
   if (!items.length) return null;
 
   return (
-    <section className="py-14 md:py-20">
+    <section className="py-14 md:hidden">
       <div className="px-6 md:px-12 lg:px-20">
         <SectionHeader
           title={t('section.featured.title')}

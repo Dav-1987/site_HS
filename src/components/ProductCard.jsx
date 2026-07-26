@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { Link } from './LocalizedLink.jsx';
 import Media from './Media.jsx';
 import Price from './Price.jsx';
+import DiscountBadge from './DiscountBadge.jsx';
 import { useLanguage } from '../i18n/LanguageContext.jsx';
 import { productMedia } from '../data/catalog.js';
 
@@ -121,6 +122,8 @@ export default function ProductCard({ product, categorySlug, categoryName, aspec
             />
           )}
         </Link>
+
+        <DiscountBadge product={product} />
 
         {multi && (
           <>

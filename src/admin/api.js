@@ -85,3 +85,13 @@ export function restoreVersion(id) {
     body: JSON.stringify({ id }),
   }).then(asJson);
 }
+
+/** List cart order requests (newest first). */
+export function fetchOrders() {
+  return fetch('/api/orders', { method: 'GET' }).then(asJson);
+}
+
+/** Delete an order request by id. */
+export function deleteOrder(id) {
+  return fetch(`/api/orders/${id}`, { method: 'DELETE' }).then(asJson);
+}

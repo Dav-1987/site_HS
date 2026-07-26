@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { useLanguage } from '../i18n/LanguageContext.jsx';
+import { productDiscount } from '../data/catalog.js';
 import {
   trackPixel,
   setPixelUserData,
@@ -26,6 +27,7 @@ export default function OrderModal({ product, isOpen, onClose }) {
   const { t } = useLanguage();
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
+  const [address, setAddress] = useState('');
   const [comment, setComment] = useState('');
   const [errors, setErrors] = useState({});
   const [sending, setSending] = useState(false);
@@ -89,7 +91,7 @@ export default function OrderModal({ product, isOpen, onClose }) {
 
   useEffect(() => {
     if (isOpen) {
-      setName(''); setPhone(''); setComment('');
+      setName(''); setPhone(''); setAddress(''); setComment('');
       setErrors({}); setSending(false); setSent(false); setServerError('');
     }
   }, [isOpen]);
@@ -128,9 +130,11 @@ export default function OrderModal({ product, isOpen, onClose }) {
         body: JSON.stringify({
           name,
           phone,
+          address: address.trim() || undefined,
           comment: comment.trim() || undefined,
           productName: productLabel,
           productId: product.id,
+          price: productDiscount(product).price,
           // Conversions API: shared event_id (dedup with the browser Lead) + match keys.
           eventId,
           fbp,
@@ -235,6 +239,21 @@ export default function OrderModal({ product, isOpen, onClose }) {
                     className="w-full border border-primary/20 bg-transparent px-3 py-2.5 text-sm text-primary outline-none transition-colors focus:border-accent"
                   />
                   {errors.phone && <p className="mt-1 text-xs text-red-500">{errors.phone}</p>}
+                </div>
+
+                <div>
+                  <label className="mb-1 block text-[11px] uppercase tracking-[0.2em] text-primary/50">
+                    {t('order.form.address')}
+                  </label>
+                  <input
+                    type="text"
+                    name="address"
+                    autoComplete="street-address"
+                    value={address}
+                    onChange={(e) => setAddress(e.target.value)}
+                    placeholder={t('order.form.address.placeholder')}
+                    className="w-full border border-primary/20 bg-transparent px-3 py-2.5 text-sm text-primary outline-none transition-colors focus:border-accent"
+                  />
                 </div>
 
                 <div>

@@ -13,6 +13,7 @@
   --color-accent: 196 162 101; /* #C4A265 muted gold */
   --color-surface: 239 234 226; /* #EFEAE2 warm card/section surface */
   --color-danger: 176 58 46; /* #B03A2E warm brick — form/validation errors only */
+  --color-sale: 79 138 40; /* #4F8A28 salad green — discount badge only */
 }
 
 @layer base {

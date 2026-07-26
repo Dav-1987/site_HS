@@ -17,7 +17,6 @@ export const translations = {
     'hero.title.3': '',
     'hero.subtitle': 'Creamos muebles de diseño único, adaptados a sus medidas y estilo.',
     'hero.promo': '¡Grandes descuentos en toda la colección!',
-    'hero.promo.perks': 'Al pedir ahora: envío, montaje e instalación — totalmente gratis.',
     'hero.cta': 'Ver catálogo',
 
     // --- Sections ---
@@ -76,13 +75,17 @@ export const translations = {
 
     // --- Order modal ---
     'order.button': '¡PEDIR AHORA!',
-    'order.shipping': 'Envío y montaje gratis',
+    'order.perk.delivery': 'Entrega confiable',
+    'order.perk.installation': 'Instalación gratuita',
+    'order.perk.bulbs': 'Bombillas LED de regalo',
     'footer.emailCopied': 'Copiado ✓',
     'order.modal.eyebrow': 'Solicitar producto',
     'order.form.name': 'Nombre',
     'order.form.name.placeholder': 'Tu nombre',
     'order.form.phone': 'Teléfono',
     'order.form.phone.placeholder': '+34 600 000 000',
+    'order.form.address': 'Dirección',
+    'order.form.address.placeholder': 'Calle, número, ciudad',
     'order.form.comment': 'Comentarios adicionales',
     'order.form.comment.placeholder': '¿Algo que debamos saber?',
     'order.form.submit': 'Enviar solicitud',
@@ -182,7 +185,6 @@ export const translations = {
     'hero.title.3': '',
     'hero.subtitle': 'We create uniquely designed furniture, tailored to your measurements and style.',
     'hero.promo': 'Big discounts across the entire collection!',
-    'hero.promo.perks': 'Order now and get free delivery, assembly & installation.',
     'hero.cta': 'View catalog',
 
     // --- Sections ---
@@ -240,13 +242,17 @@ export const translations = {
 
     // --- Order modal ---
     'order.button': 'ORDER NOW!',
-    'order.shipping': 'Free delivery and assembly',
+    'order.perk.delivery': 'Reliable delivery',
+    'order.perk.installation': 'Free installation',
+    'order.perk.bulbs': 'Free LED bulbs',
     'footer.emailCopied': 'Copied ✓',
     'order.modal.eyebrow': 'Request product',
     'order.form.name': 'Name',
     'order.form.name.placeholder': 'Your name',
     'order.form.phone': 'Phone',
     'order.form.phone.placeholder': '+34 600 000 000',
+    'order.form.address': 'Address',
+    'order.form.address.placeholder': 'Street, number, city',
     'order.form.comment': 'Additional comments',
     'order.form.comment.placeholder': 'Anything we should know?',
     'order.form.submit': 'Send request',

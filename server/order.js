@@ -24,19 +24,25 @@ export function validateOrder(body) {
   if (typeof body.phone !== 'string' || !body.phone.trim()) return 'phone is required';
   if (body.phone.length > 50) return 'phone is too long';
   if (!isValidPhone(body.phone)) return 'phone is not a valid phone number';
+  if (body.address !== undefined && typeof body.address !== 'string') return 'invalid address';
+  if (body.address && body.address.length > 300) return 'address is too long';
   if (body.comment !== undefined && typeof body.comment !== 'string') return 'invalid comment';
   if (body.comment && body.comment.length > 2000) return 'comment is too long';
   if (typeof body.productName !== 'string' || !body.productName.trim()) return 'productName is required';
+  if (body.price !== undefined && (typeof body.price !== 'number' || !Number.isFinite(body.price) || body.price < 0))
+    return 'invalid price';
   return null;
 }
 
 /** Plain-text order summary shared by the Telegram and email notifications. */
-export function formatOrderText({ name, phone, comment, productName, productId }) {
+export function formatOrderText({ name, phone, address, comment, productName, productId, price }) {
   const out = ['🛒 Nueva solicitud — HS Muebles', ''];
   out.push(`Producto: ${productName}${productId ? ` [${productId}]` : ''}`);
+  if (typeof price === 'number' && Number.isFinite(price)) out.push(`Precio: ${price} €`);
   out.push('');
   out.push(`Cliente: ${name.trim()}`);
   out.push(`Teléfono: ${phone.trim()}`);
+  if (address?.trim()) out.push(`Dirección: ${address.trim()}`);
   if (comment?.trim()) out.push(`Comentarios: ${comment.trim()}`);
   return out.join('\n');
 }

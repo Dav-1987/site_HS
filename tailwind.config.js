@@ -10,6 +10,7 @@ export default {
         accent: 'rgb(var(--color-accent) / <alpha-value>)',
         surface: 'rgb(var(--color-surface) / <alpha-value>)',
         danger: 'rgb(var(--color-danger) / <alpha-value>)',
+        sale: 'rgb(var(--color-sale) / <alpha-value>)',
       },
       fontFamily: {
         serif: ['"Oswald"', 'sans-serif'],

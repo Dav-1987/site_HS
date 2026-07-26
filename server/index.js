@@ -14,6 +14,7 @@ import { readOrSeedCatalog, writeCatalog, recordVersion, listVersions, getVersio
 import { readSettings, writeSettings } from './settings.js';
 import { validateOrder, formatOrderText } from './order.js';
 import { telegramConfigured, emailConfigured, sendTelegram, sendOrderEmail } from './notify.js';
+import { saveOrder, markOrderTelegramSent, listOrders, deleteOrder } from './orders.js';
 import { metaCapiConfigured, sendLeadEvent } from './meta-capi.js';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -387,20 +388,56 @@ app.post('/api/order', orderRateLimit, async (req, res) => {
     // Always logged, so the order survives in PM2 logs even if both channels fail.
     console.log(`[order] new request:\n${text}`);
 
-    const sends = [];
-    if (telegramConfigured()) sends.push(sendTelegram(text));
-    if (emailConfigured())
-      sends.push(sendOrderEmail('Nueva solicitud de pedido — HS Muebles', text));
-    if (!sends.length) {
+    if (!telegramConfigured() && !emailConfigured()) {
       console.error('[order] no notification channel configured (TELEGRAM_* / SMTP_* env vars)');
       return res.status(503).json({ error: 'Order service is not configured' });
     }
 
-    const results = await Promise.allSettled(sends);
-    const failed = results.filter((r) => r.status === 'rejected');
-    failed.forEach((r) => console.error('[order] notify failed:', r.reason));
-    // Accept the order if at least one channel got through.
-    if (failed.length === results.length) {
+    let emailSent = false;
+    let emailError = null;
+    if (emailConfigured()) {
+      try {
+        await sendOrderEmail('Nueva solicitud de pedido — HS Muebles', text);
+        emailSent = true;
+      } catch (err) {
+        emailError = err;
+      }
+    }
+
+    // Durable record — Telegram/email above are best-effort notifications, this
+    // row is what keeps the order from being lost if both channels fail or PM2
+    // logs get rotated/truncated.
+    let orderId = null;
+    try {
+      orderId = await saveOrder({
+        name: req.body.name,
+        phone: req.body.phone,
+        address: req.body.address,
+        comment: req.body.comment,
+        productId: req.body.productId,
+        productName: req.body.productName,
+        price: req.body.price,
+        telegramSent: false,
+        emailSent,
+      });
+    } catch (err) {
+      console.error('[order] DB save failed:', err);
+    }
+
+    // Telegram delivery retries internally (see notify.js) to ride out a lossy
+    // network hop on the way to Telegram's datacenter — that can take several
+    // seconds, so it's fire-and-forget here rather than making the customer's
+    // cart submission wait on it.
+    if (telegramConfigured()) {
+      sendTelegram(text)
+        .then(() => {
+          if (orderId) markOrderTelegramSent(orderId).catch((err) => console.error('[order] DB update failed:', err));
+        })
+        .catch((err) => console.error('[order] Telegram notify failed:', err.message));
+    }
+
+    if (emailConfigured() && !emailSent) {
+      console.error('[order] notify failed:', emailError);
       return res.status(502).json({ error: 'Failed to send order' });
     }
 
@@ -425,6 +462,31 @@ app.post('/api/order', orderRateLimit, async (req, res) => {
   } catch (err) {
     console.error('order POST failed', err);
     res.status(500).json({ error: 'Failed to send order' });
+  }
+});
+
+app.get('/api/orders', async (req, res) => {
+  if (!isAuthenticated(req)) return res.status(401).json({ error: 'Unauthorized' });
+  try {
+    const orders = await listOrders();
+    res.json({ orders });
+  } catch (err) {
+    console.error('orders GET failed', err);
+    res.status(500).json({ error: 'Failed to load orders' });
+  }
+});
+
+app.delete('/api/orders/:id', async (req, res) => {
+  if (!isAuthenticated(req)) return res.status(401).json({ error: 'Unauthorized' });
+  const id = Number(req.params.id);
+  if (!Number.isFinite(id)) return res.status(400).json({ error: 'Invalid order id' });
+  try {
+    const deleted = await deleteOrder(id);
+    if (!deleted) return res.status(404).json({ error: 'Order not found' });
+    res.json({ ok: true });
+  } catch (err) {
+    console.error('order DELETE failed', err);
+    res.status(500).json({ error: 'Failed to delete order' });
   }
 });
 

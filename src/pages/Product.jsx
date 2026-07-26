@@ -12,6 +12,7 @@ import { productSchema, breadcrumbSchema } from '../seo/schema.js';
 
 const SITE = 'https://hsmuebles.es';
 import Media from '../components/Media.jsx';
+import DiscountBadge from '../components/DiscountBadge.jsx';
 import Reveal from '../components/Reveal.jsx';
 import Button from '../components/Button.jsx';
 import Price from '../components/Price.jsx';
@@ -19,6 +20,55 @@ import Lightbox from '../components/Lightbox.jsx';
 import ProductCarousel from '../components/ProductCarousel.jsx';
 import OrderModal from '../components/OrderModal.jsx';
 import NotFound from './NotFound.jsx';
+
+function IconTruck({ className = '' }) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className={`h-6 w-6 shrink-0 ${className}`}>
+      <rect x="1" y="6" width="14" height="11" rx="1" />
+      <path d="M15 9h4l3 3v5h-7z" />
+      <circle cx="6" cy="19" r="1.75" />
+      <circle cx="17.5" cy="19" r="1.75" />
+    </svg>
+  );
+}
+
+function IconTools({ className = '' }) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className={`h-6 w-6 shrink-0 ${className}`}>
+      <path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L2.6 18.4a1.5 1.5 0 0 0 2.12 2.12L11.4 13.8a4 4 0 0 0 5.4-5.4l-2.5 2.5-2-2z" />
+    </svg>
+  );
+}
+
+function IconBulb({ className = '' }) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className={`h-6 w-6 shrink-0 ${className}`}>
+      <path d="M9 18h6" />
+      <path d="M10 21h4" />
+      <path d="M12 3a6 6 0 0 0-4 10.47c.53.5.9 1.16 1 1.88V16h6v-.65c.1-.72.47-1.38 1-1.88A6 6 0 0 0 12 3z" />
+    </svg>
+  );
+}
+
+function OrderPerks({ t }) {
+  const perks = [
+    { Icon: IconTruck, label: t('order.perk.delivery') },
+    { Icon: IconTools, label: t('order.perk.installation') },
+    { Icon: IconBulb, label: t('order.perk.bulbs') },
+  ];
+  return (
+    <div className="mt-6 grid w-full grid-cols-3 divide-x divide-primary/10 rounded-2xl border border-primary/10 bg-surface sm:w-auto">
+      {perks.map(({ Icon, label }) => (
+        <div key={label} className="flex flex-col items-center gap-2 px-3 py-5 text-center sm:px-6">
+          <Icon className="text-accent" />
+          <span className="text-[0.65rem] font-medium uppercase leading-tight tracking-widest text-primary/70">
+            {label}
+          </span>
+        </div>
+      ))}
+    </div>
+  );
+}
 
 function RelatedCarousel({ related, title }) {
   return (
@@ -223,6 +273,7 @@ export default function Product() {
                   w={1400}
                 />
               )}
+              <DiscountBadge product={product} />
               {!isVideoActive && (
                 <span className="pointer-events-none absolute bottom-3 right-3 bg-background/85 px-3 py-1.5 text-[10px] uppercase tracking-[0.18em] text-primary opacity-0 transition-opacity duration-300 group-hover:opacity-100">
                   {t('product.zoom')}
@@ -346,7 +397,7 @@ export default function Product() {
             </dl>
 
             {/* CTA */}
-            <div className="group mt-10 flex flex-col items-start gap-3 sm:flex-row sm:items-center sm:gap-6">
+            <div className="mt-10 flex flex-col items-start gap-3 sm:flex-row sm:items-center sm:gap-6">
               <Button
                 type="button"
                 variant="solid"
@@ -355,10 +406,8 @@ export default function Product() {
               >
                 {t('order.button')}
               </Button>
-              <span className="text-sm font-medium text-primary transition-all duration-300 group-hover:text-[1rem] group-hover:font-bold">
-                {t('order.shipping')}
-              </span>
             </div>
+            <OrderPerks t={t} />
 
           </Reveal>
         </div>

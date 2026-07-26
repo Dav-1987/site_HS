@@ -27,10 +27,9 @@ function renderProduct() {
 }
 
 describe('product page order flow', () => {
-  it('renders the order CTA with shipping note', () => {
+  it('renders the order CTA', () => {
     renderProduct();
     expect(screen.getByText(/¡PEDIR AHORA!/i)).toBeTruthy();
-    expect(screen.getByText(/Envío y montaje gratis/i)).toBeTruthy();
   });
 
   it('opens the order modal when the CTA is clicked', () => {

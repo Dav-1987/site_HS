@@ -1,6 +1,8 @@
+import { useState } from 'react';
 import { useCatalogEditor } from '../useCatalogEditor.js';
 import { BTN_SOLID, BTN_GHOST } from '../ui.js';
 import HistoryPanel from './HistoryPanel.jsx';
+import OrdersPanel from './OrdersPanel.jsx';
 import HeroSettingsEditor from './HeroSettingsEditor.jsx';
 import FeaturedCardsEditor from './FeaturedCardsEditor.jsx';
 import TextsEditor from './TextsEditor.jsx';
@@ -32,6 +34,8 @@ export default function CatalogEditor({ onLogout }) {
     applyRestored,
   } = useCatalogEditor();
 
+  const [showOrders, setShowOrders] = useState(false);
+
   if (loadError) {
     return (
       <div className="mx-auto max-w-4xl px-6 py-20">
@@ -59,6 +63,9 @@ export default function CatalogEditor({ onLogout }) {
             {(dirty || settingsDirty) && !status && (
               <span className="text-xs text-accent">Есть несохранённые изменения</span>
             )}
+            <button type="button" onClick={() => setShowOrders(true)} className={BTN_GHOST}>
+              Заявки
+            </button>
             <button type="button" onClick={() => setShowHistory(true)} className={BTN_GHOST}>
               История
             </button>
@@ -76,6 +83,8 @@ export default function CatalogEditor({ onLogout }) {
           </div>
         </div>
       </header>
+
+      {showOrders && <OrdersPanel onClose={() => setShowOrders(false)} />}
 
       {showHistory && (
         <HistoryPanel onClose={() => setShowHistory(false)} onRestored={applyRestored} />

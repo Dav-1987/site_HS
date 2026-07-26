@@ -67,3 +67,24 @@ CREATE TABLE IF NOT EXISTS site_settings (
   key   TEXT PRIMARY KEY,
   value JSONB NOT NULL
 );
+
+-- Заявки из корзины (POST /api/order). Telegram/email — лучшая попытка
+-- уведомления, эта таблица — единственная надёжная история заявок.
+CREATE TABLE IF NOT EXISTS orders (
+  id             BIGSERIAL PRIMARY KEY,
+  created_at     TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+  name           TEXT NOT NULL,
+  phone          TEXT NOT NULL,
+  comment        TEXT NOT NULL DEFAULT '',
+  product_id     TEXT NOT NULL DEFAULT '',
+  product_name   TEXT NOT NULL DEFAULT '',
+  telegram_sent  BOOLEAN NOT NULL DEFAULT false,
+  email_sent     BOOLEAN NOT NULL DEFAULT false
+);
+
+CREATE INDEX IF NOT EXISTS idx_orders_created ON orders (created_at DESC);
+
+-- Actual (non-struck-through) price at the moment of the order request.
+ALTER TABLE orders ADD COLUMN IF NOT EXISTS price INTEGER;
+
+ALTER TABLE orders ADD COLUMN IF NOT EXISTS address TEXT NOT NULL DEFAULT '';
