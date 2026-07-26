@@ -79,7 +79,7 @@ export default function FeaturedCard({ item, aspectClassName = 'aspect-[4/5]' })
         to={to}
         aria-label={label}
         {...hoverHandlers}
-        className={`relative mb-5 block ${aspectClassName} overflow-hidden bg-surface focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-4 focus-visible:ring-offset-background`}
+        className={`relative mb-5 block ${aspectClassName} overflow-hidden bg-surface [container-type:inline-size] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-4 focus-visible:ring-offset-background`}
       >
         <Media
           id={cover}
@@ -107,7 +107,11 @@ export default function FeaturedCard({ item, aspectClassName = 'aspect-[4/5]' })
       <Link to={to} aria-label={label} tabIndex={-1} className="block border-t border-primary/10 pt-4">
         <h3 className="font-serif text-xl text-primary transition-colors duration-300 group-hover:text-accent">
           {item.name}
-          {item.subtitle && <span className="ml-2 text-sm text-primary/45">{item.subtitle}</span>}
+          {item.subtitle && (
+            <span className="block whitespace-nowrap text-xs text-primary/45 sm:text-sm">
+              {item.subtitle}
+            </span>
+          )}
         </h3>
         <Price product={item} className="mt-2 font-serif text-lg text-primary/80" />
       </Link>

@@ -214,8 +214,6 @@ export default function Product() {
           >
             {category.name[lang]}
           </Link>
-          <span aria-hidden="true">/</span>
-          <span className="text-primary/70">{product.name}</span>
         </nav>
 
         <div className="grid gap-10 lg:grid-cols-12 lg:gap-16">
@@ -241,7 +239,7 @@ export default function Product() {
           {/* Gallery */}
           <Reveal className="lg:col-span-5">
             <div
-              className={`group relative aspect-[4/5] overflow-hidden bg-surface ${!isVideoActive ? 'cursor-zoom-in' : ''}`}
+              className={`group relative aspect-[4/5] overflow-hidden bg-surface [container-type:inline-size] ${!isVideoActive ? 'cursor-zoom-in' : ''}`}
               onClick={!isVideoActive ? () => setZoom(true) : undefined}
               onTouchStart={(e) => {
                 startX.current = e.touches[0].clientX;

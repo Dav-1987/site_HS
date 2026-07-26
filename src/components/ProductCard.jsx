@@ -79,7 +79,7 @@ export default function ProductCard({ product, categorySlug, categoryName, aspec
     <article className="group">
       <div
         ref={cardRef}
-        className={`relative mb-5 ${aspectClassName} touch-pan-y overflow-hidden bg-surface`}
+        className={`relative mb-5 ${aspectClassName} touch-pan-y overflow-hidden bg-surface [container-type:inline-size]`}
         onPointerDown={(e) => { if (e.pointerType !== 'touch') startSwipe(e.clientX); }}
         onPointerUp={(e) => { if (e.pointerType !== 'touch') endSwipe(e.clientX); }}
         onTouchStart={(e) => startSwipe(e.touches[0].clientX)}
@@ -167,8 +167,12 @@ export default function ProductCard({ product, categorySlug, categoryName, aspec
       <Link to={to} aria-label={label} tabIndex={-1} className="block border-t border-primary/10 pt-4">
         <h3 className="font-serif text-xl text-primary transition-colors duration-300 group-hover:text-accent">
           {product.name}
+          {/* Own line + nowrap: on a narrow 2-column card the dimensions used to
+              break mid-string ("… 140" / "cm"), which read as a stray line. */}
           {product.subtitle && (
-            <span className="ml-2 text-sm text-primary/45">{product.subtitle}</span>
+            <span className="block whitespace-nowrap text-xs text-primary/45 sm:text-sm">
+              {product.subtitle}
+            </span>
           )}
         </h3>
         <Price product={product} className="mt-2 font-serif text-lg text-primary/80" />
