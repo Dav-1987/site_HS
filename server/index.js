@@ -16,6 +16,7 @@ import { validateOrder, formatOrderText } from './order.js';
 import { telegramConfigured, emailConfigured, sendTelegram, sendOrderEmail } from './notify.js';
 import { saveOrder, markOrderTelegramSent, listOrders, deleteOrder } from './orders.js';
 import { metaCapiConfigured, sendLeadEvent } from './meta-capi.js';
+import { buildProductIndex, resolveRedirect } from './redirects.js';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const UPLOADS_DIR = join(__dirname, '../uploads');
@@ -525,6 +526,38 @@ app.all('/api/*', (req, res) => {
 // несуществующие страницы soft-404 (текст "не найдено" со статусом 200).
 
 const CLIENT_ONLY_ROUTES = [/^\/admin(\/|$)/, /^\/categoria\//, /^\/producto\//];
+
+// ─── Legacy URL redirects ────────────────────────────────────────────────────
+//
+// Requests that reach this point matched no prerendered snapshot — which is
+// exactly what an outdated catalog URL looks like after a product moves between
+// sections in /admin (its address carries the category slug). Send those on with
+// a real 301 instead of letting the catch-all below answer 404; see redirects.js.
+//
+// The id→category index is rebuilt from the DB at most once a minute: it only
+// changes on an admin save, and this path is 404 traffic, not the hot path.
+const INDEX_TTL_MS = 60 * 1000;
+let productIndex = null;
+let productIndexAt = 0;
+
+async function currentProductIndex() {
+  if (!productIndex || Date.now() - productIndexAt > INDEX_TTL_MS) {
+    productIndex = buildProductIndex(await readOrSeedCatalog());
+    productIndexAt = Date.now();
+  }
+  return productIndex;
+}
+
+app.get('*', async (req, res, next) => {
+  try {
+    const target = resolveRedirect(req.path, await currentProductIndex());
+    if (target) return res.redirect(301, target);
+  } catch (err) {
+    // A DB hiccup must never keep the page itself from being served.
+    console.error('[redirect] lookup failed', err);
+  }
+  return next();
+});
 
 app.get('*', (req, res) => {
   const isClientOnlyRoute = CLIENT_ONLY_ROUTES.some((re) => re.test(req.path));

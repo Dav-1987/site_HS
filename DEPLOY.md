@@ -67,6 +67,12 @@ ssh root@185.202.172.59
 |---|---|
 | **PM2** (`hs-api`) | держит Node.js/Express живым, автозапуск |
 | **Nginx** (host, не Docker) | порты 80/443, конфиг `/etc/nginx/sites-available/hs-muebles`; отдаёт статику `dist/` и `uploads/`, проксирует `/api/` на Express :4000 |
+
+> **Маршрутизация HTML:** nginx отдаёт prerender-файлы сам (`try_files $uri $uri/index.html @spa`),
+> и только если файла нет — уходит в `location @spa` → Express :4000. Именно оттуда работают
+> 301-редиректы на переехавшие товары (`server/redirects.js`) и 404-статус для несуществующих
+> страниц (`server/index.js`, catch-all). Если вернуть `=404` вместо `@spa`, Express перестанет
+> видеть HTML-запросы и редиректы молча умрут. Бэкапы конфига: `/root/hs-muebles.nginx.bak-*`.
 | **certbot** | Let's Encrypt SSL для `hsmuebles.es`, авто-продление `certbot.timer` |
 | **PostgreSQL 16** | БД `hs_muebles`, пользователь `hs_user` |
 | **Express** | порт `4000`, отдаёт API; статику отдаёт nginx напрямую |
