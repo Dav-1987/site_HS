@@ -11,7 +11,7 @@ export default function DiscountBadge({ product, className = '' }) {
 
   return (
     <span
-      className={`pointer-events-none absolute left-3 top-3 z-10 rounded-md bg-sale px-2 py-1 text-xs font-bold uppercase tracking-wide text-white transition-all duration-300 group-hover:scale-110 group-hover:bg-danger ${className}`}
+      className={`pointer-events-none absolute left-3 top-3 z-10 rounded-xl bg-sale px-5 py-2.5 text-3xl font-bold uppercase tracking-wide text-white transition-all duration-300 group-hover:scale-110 group-hover:bg-danger ${className}`}
     >
       -{percent}%
     </span>
