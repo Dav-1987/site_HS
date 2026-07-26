@@ -6,11 +6,12 @@ import Reveal from '../components/Reveal.jsx';
 import Button from '../components/Button.jsx';
 import ProductCard from '../components/ProductCard.jsx';
 import CategoryCard from '../components/CategoryCard.jsx';
+import OtherModelsCard from '../components/OtherModelsCard.jsx';
 import NotFound from './NotFound.jsx';
 import JsonLd from '../components/JsonLd.jsx';
 import SocialMeta from '../components/SocialMeta.jsx';
 import HreflangLinks from '../components/HreflangLinks.jsx';
-import { resolveImage } from '../data/catalog.js';
+import { isHiddenCategory, resolveImage } from '../data/catalog.js';
 import { breadcrumbSchema, productListSchema } from '../seo/schema.js';
 
 const SITE = 'https://hsmuebles.es';
@@ -93,6 +94,9 @@ export default function Category() {
                 categoryName={category.name}
               />
             ))}
+            {/* Closes every visible grid — the only door into "Otros Modelos".
+                Omitted on that section's own page, where it would self-link. */}
+            {!isHiddenCategory(category) && <OtherModelsCard />}
           </Reveal>
         ) : (
           <p className="py-16 text-center text-secondary">{t('category.empty')}</p>

@@ -7,6 +7,9 @@ import {
   resolveImage,
   productImages,
   productMedia,
+  isHiddenCategory,
+  visibleCategories,
+  OTHER_MODELS_SLUG,
 } from './catalog.js';
 
 // Small catalog fixture: cat(slug, ...productIds)
@@ -213,5 +216,36 @@ describe('computeRelated', () => {
   it('caps the result to the given limit', () => {
     const out = computeRelated(categories, product, category, [], 1);
     expect(out).toHaveLength(1);
+  });
+});
+
+describe('hidden categories', () => {
+  const hidden = cat(OTHER_MODELS_SLUG, 'h1', 'h2');
+  const categories = [cat('c1', 'p1', 'p2'), cat('c2', 'p3'), hidden];
+
+  it('flags the "other models" section and filters it out of listings', () => {
+    expect(isHiddenCategory(hidden)).toBe(true);
+    expect(isHiddenCategory(categories[0])).toBe(false);
+    expect(visibleCategories(categories).map((c) => c.slug)).toEqual(['c1', 'c2']);
+  });
+
+  it('keeps hidden products out of a visible product’s related list', () => {
+    const category = categories[0];
+    const product = category.products[0]; // p1
+    const out = computeRelated(categories, product, category, ['h1', 'p2']);
+    expect(out.map((p) => p.id)).toEqual(['p2']);
+  });
+
+  it('falls back to the visible catalog for a product inside the hidden section', () => {
+    const product = hidden.products[0]; // h1
+    const out = computeRelated(categories, product, hidden, []);
+    // One piece per visible collection — never a hidden sibling.
+    expect(out.map((p) => p.id)).toEqual(['p1', 'p3']);
+  });
+
+  it('drops hidden ids from a hidden product’s explicit related list', () => {
+    const product = hidden.products[0]; // h1
+    const out = computeRelated(categories, product, hidden, ['h2', 'p3']);
+    expect(out.map((p) => p.id)).toEqual(['p3']);
   });
 });

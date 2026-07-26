@@ -127,6 +127,31 @@ export function productReference(name) {
   return out.replace(/\s+/g, ' ').trim();
 }
 
+// ─── Hidden categories ────────────────────────────────────────────────────────
+//
+// "Otros Modelos" is a real, browsable category (own page, own product URLs,
+// editable in /admin like any other) that is deliberately kept out of every
+// category listing — catalog grid, home page, header dropdown, the "related
+// collections" strip. The only way in is the tile at the end of each visible
+// category's product grid (see OtherModelsCard).
+//
+// The flag lives here rather than on the category row because the catalog
+// round-trips through Postgres on every admin save: an unknown JSON field would
+// be silently dropped by writeCatalog (see server/store.js) and the section
+// would quietly resurface in the catalog.
+export const OTHER_MODELS_SLUG = 'otros-modelos';
+const HIDDEN_CATEGORY_SLUGS = new Set([OTHER_MODELS_SLUG]);
+
+/** True for categories that must never appear in a category listing. */
+export function isHiddenCategory(category) {
+  return HIDDEN_CATEGORY_SLUGS.has(category?.slug);
+}
+
+/** The categories a visitor may see listed. */
+export function visibleCategories(categories) {
+  return categories.filter((c) => !isHiddenCategory(c));
+}
+
 /** Lookup helper used by the dynamic category route. */
 export function findCategory(categories, slug) {
   return categories.find((c) => c.slug === slug);
@@ -173,6 +198,9 @@ export function computeFeatured(categories, featuredIds) {
     // All ids were stale → fall through to the auto-curated set below.
   }
 
+  // Auto-curation picks blind, by position — so it draws from the listed
+  // collections only. A hand-picked `featuredIds` above may point anywhere.
+  const visible = visibleCategories(categories);
   const picks = [
     [0, 2],
     [6, 2],
@@ -181,13 +209,13 @@ export function computeFeatured(categories, featuredIds) {
   ];
   const out = [];
   for (const [ci, pi] of picks) {
-    const c = categories[ci];
+    const c = visible[ci];
     const p = c?.products?.[pi];
     if (c && p) out.push(withCategory(p, c));
   }
   // Fallback: take the first product of the first categories.
   if (out.length === 0) {
-    for (const c of categories) {
+    for (const c of visible) {
       const p = c?.products?.[0];
       if (p) out.push(withCategory(p, c));
       if (out.length >= 4) break;
@@ -223,13 +251,29 @@ export function resolveFeaturedCards(categories, cards) {
  *  - If the product has a non-empty `related` id list → resolve those (admin
  *    choice), excluding the product itself.
  *  - Otherwise fall back to other products from the same category.
+ * Hidden categories are off-limits throughout: their products never surface
+ * here, and a product that lives in one gets a spread of the visible catalog
+ * instead of its own (equally hidden) siblings.
  * Always capped to `limit` to keep the grid to a single row.
  */
 export function computeRelated(categories, product, category, relatedIds, limit = 4) {
+  const visible = visibleCategories(categories);
+
   if (Array.isArray(relatedIds) && relatedIds.length) {
-    const manual = resolveIds(categories, relatedIds, { exclude: product.id }).slice(0, limit);
+    const manual = resolveIds(visible, relatedIds, { exclude: product.id }).slice(0, limit);
     if (manual.length) return manual;
-    // All ids were stale → fall through to the same-category default below.
+    // All ids were stale or hidden → fall through to the defaults below.
+  }
+
+  if (isHiddenCategory(category)) {
+    // One piece per visible collection — a way back into the main catalog.
+    return visible
+      .map((c) => {
+        const p = c.products.find((x) => x.id !== product.id);
+        return p ? withCategory(p, c) : null;
+      })
+      .filter(Boolean)
+      .slice(0, limit);
   }
 
   return category.products

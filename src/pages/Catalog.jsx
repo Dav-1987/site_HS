@@ -49,7 +49,8 @@ export default function Catalog() {
           </h1>
         </Reveal>
 
-        <Reveal stagger className="grid grid-cols-2 gap-3 sm:grid-cols-2 lg:grid-cols-3 md:gap-6 lg:gap-8">
+        {/* Four collections, one desktop row — no orphan card on a second line. */}
+        <Reveal stagger className="grid grid-cols-2 gap-3 sm:grid-cols-2 lg:grid-cols-4 md:gap-6 lg:gap-8">
           {categories.map((c) => (
             <CategoryCard key={c.slug} category={c} />
           ))}

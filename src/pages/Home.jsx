@@ -76,17 +76,20 @@ function Hero() {
 
 function FeaturedSection() {
   const { t } = useLanguage();
-  const { categories } = useCatalog();
+  // Curated by hand in /admin, so it resolves against the full catalog —
+  // a hand-picked card keeps working even if its product sits in a section
+  // that isn't listed anywhere (see isHiddenCategory).
+  const { allCategories } = useCatalog();
   const { settings } = useSettings();
   // Admin-curated video cards take priority; if none are configured, fall back to
   // the legacy auto/id-list selection rendered as plain product cards.
   const cards = useMemo(
-    () => resolveFeaturedCards(categories, settings.featuredCards),
-    [categories, settings.featuredCards],
+    () => resolveFeaturedCards(allCategories, settings.featuredCards),
+    [allCategories, settings.featuredCards],
   );
   const fallback = useMemo(
-    () => (cards.length ? [] : computeFeatured(categories, settings.featured)),
-    [cards.length, categories, settings.featured],
+    () => (cards.length ? [] : computeFeatured(allCategories, settings.featured)),
+    [cards.length, allCategories, settings.featured],
   );
   const items = cards.length ? cards : fallback;
   const carousel = useCarousel();

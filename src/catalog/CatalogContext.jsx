@@ -1,5 +1,10 @@
 import { createContext, useContext, useEffect, useMemo, useRef, useState } from 'react';
-import { loadDefaultCatalog, findCategory, findProduct } from '../data/catalog.js';
+import {
+  loadDefaultCatalog,
+  findCategory,
+  findProduct,
+  visibleCategories,
+} from '../data/catalog.js';
 
 const CatalogContext = createContext(null);
 const CACHE_KEY = 'hs_catalog_v2';
@@ -68,9 +73,14 @@ export function CatalogProvider({ children, initialCatalog }) {
     };
   }, []);
 
+  // `categories` is what every listing renders — hidden sections (see
+  // isHiddenCategory) are filtered out of it. `allCategories` keeps them, for
+  // lookups by slug/id: a hidden section still has a working page and product
+  // URLs, it's just never listed.
   const value = useMemo(
     () => ({
-      categories,
+      categories: visibleCategories(categories),
+      allCategories: categories,
       loaded,
       getCategory: (slug) => findCategory(categories, slug),
       getProduct: (id) => findProduct(categories, id),
