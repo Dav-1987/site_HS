@@ -102,6 +102,31 @@ ssh root@185.202.172.59 "pm2 restart hs-api"
 
 ---
 
+## Пересборка каталога (SEO) — кнопка «Пересобрать сайт» в /admin
+
+Правки каталога/настроек через `/admin` попадают в БД и видны на сайте сразу
+(`/api/*`), но prerendered HTML (то, что видит Google) обновляется только
+пересборкой — `npm run build:seo` + деплой `dist/`. Кнопка в админке гоняет
+это на **GitHub Actions**, не на VPS: сервер общий (1 vCPU, ~2 ГБ RAM уже в
+свопе при обычной нагрузке, диск >90% занят чужими Docker-сервисами — n8n,
+несколько ботов), `vite build` там рисковал уронить и сайт, и соседей.
+
+- Workflow: `.github/workflows/rebuild-deploy.yml` (`workflow_dispatch`) —
+  `catalog:pull` (свежие данные из живого `/api/catalog`) → `build:seo` →
+  деплой на VPS по SSH тем же `scripts/deploy-dist.mjs`.
+- Триггерит и опрашивает статус `server/rebuild.js` через GitHub API —
+  нужен `GH_REBUILD_TOKEN` в `.env` (fine-grained PAT, только этот репозиторий,
+  Actions: Read and write; см. `.env.example`). Без токена кнопка в админке
+  не отображается.
+- Деплой в workflow идёт через **отдельный** SSH-ключ (не личный ключ
+  разработчика) — публичная часть добавлена в `authorized_keys` на VPS,
+  приватная лежит в GitHub Secrets (`VPS_SSH_KEY`, `VPS_HOST_KEY`). Ключ можно
+  отозвать независимо: удалить строку из `authorized_keys` на сервере и
+  сгенерировать новый (`gh secret set VPS_SSH_KEY --repo Dav-1987/site_HS`).
+- Ручной запуск без кнопки: `gh workflow run rebuild-deploy.yml --repo Dav-1987/site_HS`.
+
+---
+
 ## Деплой только фронтенда
 
 Когда изменился только src/ (React компоненты, страницы, стили):
