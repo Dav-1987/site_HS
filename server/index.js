@@ -17,6 +17,7 @@ import { telegramConfigured, emailConfigured, sendTelegram, sendOrderEmail } fro
 import { saveOrder, markOrderTelegramSent, listOrders, deleteOrder } from './orders.js';
 import { metaCapiConfigured, sendLeadEvent } from './meta-capi.js';
 import { buildProductIndex, resolveRedirect } from './redirects.js';
+import { rebuildConfigured, triggerRebuild, getLatestRun } from './rebuild.js';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const UPLOADS_DIR = join(__dirname, '../uploads');
@@ -488,6 +489,40 @@ app.delete('/api/orders/:id', async (req, res) => {
   } catch (err) {
     console.error('order DELETE failed', err);
     res.status(500).json({ error: 'Failed to delete order' });
+  }
+});
+
+// ─── /api/admin/rebuild — SEO rebuild + deploy, run on GitHub Actions ───────
+//
+// The button in /admin. Does NOT build on this box — see rebuild.js for why
+// (the VPS is a small shared server, already tight on RAM/disk). This just
+// asks GitHub to run .github/workflows/rebuild-deploy.yml and reports back
+// its status; the actual `vite build` + prerender + deploy happens on GitHub's
+// runner.
+
+app.post('/api/admin/rebuild', async (req, res) => {
+  if (!isAuthenticated(req)) return res.status(401).json({ error: 'Unauthorized' });
+  if (!rebuildConfigured()) {
+    return res.status(503).json({ error: 'Rebuild not configured (missing GH_REBUILD_TOKEN)' });
+  }
+  try {
+    await triggerRebuild();
+    res.json({ ok: true });
+  } catch (err) {
+    console.error('[rebuild] trigger failed', err);
+    res.status(502).json({ error: 'Failed to start rebuild' });
+  }
+});
+
+app.get('/api/admin/rebuild/status', async (req, res) => {
+  if (!isAuthenticated(req)) return res.status(401).json({ error: 'Unauthorized' });
+  if (!rebuildConfigured()) return res.json({ configured: false, run: null });
+  try {
+    const run = await getLatestRun();
+    res.json({ configured: true, run });
+  } catch (err) {
+    console.error('[rebuild] status check failed', err);
+    res.status(502).json({ error: 'Failed to check rebuild status' });
   }
 });
 

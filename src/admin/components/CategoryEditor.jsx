@@ -1,4 +1,5 @@
-import { BTN_GHOST } from '../ui.js';
+import { useState } from 'react';
+import { BTN_GHOST, BTN_SOLID, INPUT } from '../ui.js';
 import { Field, TextArea } from './Field.jsx';
 import { urlSafe, RESERVED_SLUGS } from '../urlSafe.js';
 import ImageField from './ImageField.jsx';
@@ -16,7 +17,32 @@ export default function CategoryEditor({
   isFirst,
   isLast,
   allProducts,
+  categoryOptions,
+  onMoveProducts,
 }) {
+  // Bulk "move to another category" — selection is local (not persisted):
+  // it's a transient action, and product ids stay valid across a move since
+  // they're unique catalog-wide, so nothing here needs to survive a re-open.
+  const [selected, setSelected] = useState(() => new Set());
+  const [moveTarget, setMoveTarget] = useState('');
+  const toggleSelected = (id) =>
+    setSelected((s) => {
+      const next = new Set(s);
+      if (next.has(id)) next.delete(id);
+      else next.add(id);
+      return next;
+    });
+  const allSelected = category.products.length > 0 && selected.size === category.products.length;
+  const toggleSelectAll = () =>
+    setSelected(allSelected ? new Set() : new Set(category.products.map((p) => p.id)));
+  const moveTargets = (categoryOptions || []).filter((c) => c.slug !== category.slug);
+  const handleMoveSelected = () => {
+    if (!moveTarget) return;
+    onMoveProducts(Array.from(selected), moveTarget);
+    setSelected(new Set());
+    setMoveTarget('');
+  };
+
   const set = (patch) => onChange({ ...category, ...patch });
   const setI18n = (key, lang, val) =>
     set({ [key]: { ...category[key], [lang]: val } });
@@ -134,24 +160,79 @@ export default function CategoryEditor({
           {/* Products */}
           <div>
             <div className="mb-3 flex items-center justify-between">
-              <h3 className="text-xs uppercase tracking-[0.2em] text-primary/50">Товары</h3>
+              <div className="flex items-center gap-3">
+                <h3 className="text-xs uppercase tracking-[0.2em] text-primary/50">Товары</h3>
+                {category.products.length > 0 && (
+                  <label className="flex items-center gap-1.5 text-xs text-primary/50">
+                    <input
+                      type="checkbox"
+                      checked={allSelected}
+                      onChange={toggleSelectAll}
+                      className="h-4 w-4 accent-accent"
+                    />
+                    Выбрать все
+                  </label>
+                )}
+              </div>
               <button type="button" onClick={addProduct} className={BTN_GHOST}>
                 + Добавить товар
               </button>
             </div>
+
+            {selected.size > 0 && (
+              <div className="mb-4 flex flex-wrap items-center gap-3 border border-accent/40 bg-accent/5 px-4 py-3">
+                <span className="text-xs uppercase tracking-[0.18em] text-primary/70">
+                  Выбрано: {selected.size}
+                </span>
+                <select
+                  className={`${INPUT} w-auto flex-1 sm:flex-none sm:w-64`}
+                  value={moveTarget}
+                  onChange={(e) => setMoveTarget(e.target.value)}
+                >
+                  <option value="">Переместить в…</option>
+                  {moveTargets.map((c) => (
+                    <option key={c.slug} value={c.slug}>
+                      {c.name}
+                    </option>
+                  ))}
+                </select>
+                <button
+                  type="button"
+                  onClick={handleMoveSelected}
+                  disabled={!moveTarget}
+                  className={BTN_SOLID}
+                >
+                  Переместить выбранные
+                </button>
+                <button type="button" onClick={() => setSelected(new Set())} className={BTN_GHOST}>
+                  Снять выбор
+                </button>
+              </div>
+            )}
+
             <div className="space-y-4">
               {category.products.map((p, pi) => (
-                <ProductEditor
-                  key={pi}
-                  product={p}
-                  onChange={(next) => updateProduct(pi, next)}
-                  onRemove={() => removeProduct(pi)}
-                  onMove={(dir) => moveProduct(pi, dir)}
-                  onDuplicate={() => duplicateProduct(pi)}
-                  isFirst={pi === 0}
-                  isLast={pi === category.products.length - 1}
-                  allProducts={allProducts}
-                />
+                <div key={pi} className="flex items-start gap-3">
+                  <input
+                    type="checkbox"
+                    checked={selected.has(p.id)}
+                    onChange={() => toggleSelected(p.id)}
+                    aria-label={`Выбрать ${p.name || p.id}`}
+                    className="mt-4 h-4 w-4 shrink-0 accent-accent"
+                  />
+                  <div className="min-w-0 flex-1">
+                    <ProductEditor
+                      product={p}
+                      onChange={(next) => updateProduct(pi, next)}
+                      onRemove={() => removeProduct(pi)}
+                      onMove={(dir) => moveProduct(pi, dir)}
+                      onDuplicate={() => duplicateProduct(pi)}
+                      isFirst={pi === 0}
+                      isLast={pi === category.products.length - 1}
+                      allProducts={allProducts}
+                    />
+                  </div>
+                </div>
               ))}
               {category.products.length === 0 && (
                 <p className="text-sm text-primary/40">Пока нет товаров.</p>

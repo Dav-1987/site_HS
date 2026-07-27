@@ -95,3 +95,13 @@ export function fetchOrders() {
 export function deleteOrder(id) {
   return fetch(`/api/orders/${id}`, { method: 'DELETE' }).then(asJson);
 }
+
+/** Start a full rebuild + deploy (runs on GitHub Actions, not the VPS). */
+export function triggerRebuild() {
+  return fetch('/api/admin/rebuild', { method: 'POST' }).then(asJson);
+}
+
+/** `{ configured, run: { status, conclusion, url, createdAt } | null }` */
+export function fetchRebuildStatus() {
+  return fetch('/api/admin/rebuild/status', { method: 'GET' }).then(asJson);
+}

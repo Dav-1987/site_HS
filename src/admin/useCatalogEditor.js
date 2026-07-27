@@ -6,6 +6,7 @@ import {
   saveSettings,
 } from './api.js';
 import { defaultSettings, mergeSettings } from '../data/settings.js';
+import { moveProductsToCategory } from '../data/catalog.js';
 
 // Unsaved-edits draft, kept in localStorage so a reload/closed-tab accident
 // doesn't wipe out in-progress work. Cleared once the user saves or
@@ -64,6 +65,14 @@ export function useCatalogEditor() {
           categoryName: c.name?.es || c.slug || '',
         })),
       ),
+    [categories],
+  );
+
+  // Category picker for "move products to…" — every category as-is, including
+  // ones the public site keeps out of its listings (e.g. Otros Modelos): the
+  // admin always works with the raw catalog, unfiltered.
+  const categoryOptions = useMemo(
+    () => (categories || []).map((c) => ({ slug: c.slug, name: c.name?.es || c.slug })),
     [categories],
   );
 
@@ -161,6 +170,11 @@ export function useCatalogEditor() {
     ]);
     setOpenIdx(categories.length);
   };
+  const moveProducts = (fromSlug, ids, toSlug) => {
+    const next = moveProductsToCategory(categories, fromSlug, ids, toSlug);
+    if (next !== categories) mutate(next);
+  };
+
   const duplicateCategory = (ci) => {
     const src = categories[ci];
     const suffix = Date.now().toString(36);
@@ -216,12 +230,14 @@ export function useCatalogEditor() {
     showHistory,
     setShowHistory,
     allProducts,
+    categoryOptions,
     updateSettings,
     updateCategory,
     removeCategory,
     moveCategory,
     addCategory,
     duplicateCategory,
+    moveProducts,
     save,
     applyRestored,
   };

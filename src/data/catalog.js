@@ -320,3 +320,27 @@ export function productDescription(product, category, lang) {
       : `Crafted in ${mat}, measuring ${product.size}. Part of the ${cat} collection.`;
   return `${intro} ${second}`;
 }
+
+/**
+ * Move a set of products (by id) from one category to the end of another's
+ * list — the admin's bulk "move to category" action. A product's id is
+ * unique catalog-wide and never changes here, so nothing about the product
+ * itself is touched, only which category array it lives in (i.e. its URL).
+ *
+ * Pure and a no-op (returns `categories` unchanged, same reference) if either
+ * category is missing, the two slugs are the same, or `ids` matches nothing —
+ * a stale target slug must never silently drop products from the catalog.
+ */
+export function moveProductsToCategory(categories, fromSlug, ids, toSlug) {
+  const idSet = new Set(ids);
+  const from = categories.find((c) => c.slug === fromSlug);
+  const toExists = categories.some((c) => c.slug === toSlug);
+  if (!from || !toExists || fromSlug === toSlug || idSet.size === 0) return categories;
+  const moving = from.products.filter((p) => idSet.has(p.id));
+  if (moving.length === 0) return categories;
+  return categories.map((c) => {
+    if (c.slug === fromSlug) return { ...c, products: c.products.filter((p) => !idSet.has(p.id)) };
+    if (c.slug === toSlug) return { ...c, products: [...c.products, ...moving] };
+    return c;
+  });
+}

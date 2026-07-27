@@ -3,6 +3,7 @@ import { useCatalogEditor } from '../useCatalogEditor.js';
 import { BTN_SOLID, BTN_GHOST } from '../ui.js';
 import HistoryPanel from './HistoryPanel.jsx';
 import OrdersPanel from './OrdersPanel.jsx';
+import RebuildButton from './RebuildButton.jsx';
 import HeroSettingsEditor from './HeroSettingsEditor.jsx';
 import FeaturedCardsEditor from './FeaturedCardsEditor.jsx';
 import TextsEditor from './TextsEditor.jsx';
@@ -24,12 +25,14 @@ export default function CatalogEditor({ onLogout }) {
     showHistory,
     setShowHistory,
     allProducts,
+    categoryOptions,
     updateSettings,
     updateCategory,
     removeCategory,
     moveCategory,
     addCategory,
     duplicateCategory,
+    moveProducts,
     save,
     applyRestored,
   } = useCatalogEditor();
@@ -69,6 +72,7 @@ export default function CatalogEditor({ onLogout }) {
             <button type="button" onClick={() => setShowHistory(true)} className={BTN_GHOST}>
               История
             </button>
+            <RebuildButton />
             <button type="button" onClick={onLogout} className={BTN_GHOST}>
               Выйти
             </button>
@@ -126,6 +130,8 @@ export default function CatalogEditor({ onLogout }) {
             isFirst={ci === 0}
             isLast={ci === categories.length - 1}
             allProducts={allProducts}
+            categoryOptions={categoryOptions}
+            onMoveProducts={(ids, toSlug) => moveProducts(c.slug, ids, toSlug)}
           />
         ))}
 
