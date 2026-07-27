@@ -82,7 +82,23 @@ function categoryContentEqual(a, b) {
   );
 }
 
-function productContentEqual(a, b) {
+// `media` items round-trip through a Postgres jsonb column, which does NOT
+// preserve object key order (it stores object keys shortest-first, so
+// `{ type, src }` as written comes back as `{ src, type }`) — a plain
+// `JSON.stringify` comparison against the freshly-built value therefore
+// never matches for any product with media, and every save bumped every
+// product's `updated_at`, defeating the "only bump on real change" point of
+// this whole comparison (see writeCatalog below and migrate.sql). Item
+// *order* in the array still matters (it's the gallery order — a real
+// content change); only each item's own key order doesn't.
+function mediaEqual(a, b) {
+  const x = Array.isArray(a) ? a : [];
+  const y = Array.isArray(b) ? b : [];
+  if (x.length !== y.length) return false;
+  return x.every((m, i) => m?.type === y[i]?.type && m?.src === y[i]?.src);
+}
+
+export function productContentEqual(a, b) {
   if (!a || !b) return false;
   return (
     a.name === b.name &&
@@ -91,7 +107,7 @@ function productContentEqual(a, b) {
     a.image === b.image &&
     a.imageMobile === b.imageMobile &&
     JSON.stringify(a.images ?? []) === JSON.stringify(b.images ?? []) &&
-    JSON.stringify(a.media ?? []) === JSON.stringify(b.media ?? []) &&
+    mediaEqual(a.media, b.media) &&
     a.material?.es === b.material?.es &&
     a.material?.en === b.material?.en &&
     a.size === b.size &&

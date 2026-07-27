@@ -1,0 +1,76 @@
+import { describe, it, expect } from 'vitest';
+import { productContentEqual } from './store.js';
+
+const base = {
+  name: 'Tocador',
+  price: 499,
+  oldPrice: 0,
+  image: '/uploads/a.jpg',
+  imageMobile: '',
+  images: ['/uploads/a.jpg'],
+  media: [{ type: 'image', src: '/uploads/a.jpg' }],
+  material: { es: 'Melamina', en: 'Melamine' },
+  size: '90 × 40 × 170 cm',
+  reference: 'M-01',
+  subtitle: '',
+  description: { es: '', en: '' },
+  related: [],
+};
+
+describe('productContentEqual', () => {
+  it('treats identical products as equal', () => {
+    expect(productContentEqual(base, { ...base })).toBe(true);
+  });
+
+  // Regression test: Postgres jsonb does not preserve object key order (it
+  // returns object keys shortest-first), so a product read back from the DB
+  // has its media items as { src, type } even though normalizeMedia() always
+  // builds { type, src }. A plain JSON.stringify comparison saw these as
+  // different and bumped updated_at on every save for every product with
+  // media — i.e. always, since virtually every product has media.
+  it('ignores media object key order (Postgres jsonb round-trip)', () => {
+    const fromDb = { ...base, media: [{ src: '/uploads/a.jpg', type: 'image' }] };
+    expect(productContentEqual(base, fromDb)).toBe(true);
+  });
+
+  it('still detects a real media change (different src)', () => {
+    const changed = { ...base, media: [{ type: 'image', src: '/uploads/b.jpg' }] };
+    expect(productContentEqual(base, changed)).toBe(false);
+  });
+
+  it('still detects a real media change (reordered gallery)', () => {
+    const twoPhotos = {
+      ...base,
+      media: [
+        { type: 'image', src: '/uploads/a.jpg' },
+        { type: 'image', src: '/uploads/b.jpg' },
+      ],
+    };
+    const reordered = {
+      ...base,
+      media: [
+        { type: 'image', src: '/uploads/b.jpg' },
+        { type: 'image', src: '/uploads/a.jpg' },
+      ],
+    };
+    expect(productContentEqual(twoPhotos, reordered)).toBe(false);
+  });
+
+  it('still detects a real media change (different item count)', () => {
+    const one = base;
+    const two = {
+      ...base,
+      media: [...base.media, { type: 'video', src: '/uploads/v.mp4' }],
+    };
+    expect(productContentEqual(one, two)).toBe(false);
+  });
+
+  it('detects an unrelated field change (price)', () => {
+    expect(productContentEqual(base, { ...base, price: 599 })).toBe(false);
+  });
+
+  it('is false when either side is missing', () => {
+    expect(productContentEqual(base, null)).toBe(false);
+    expect(productContentEqual(undefined, base)).toBe(false);
+  });
+});
