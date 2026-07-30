@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { productContentEqual } from './store.js';
+import { productContentEqual, DEFAULT_PERK_VARIANT } from './store.js';
 
 const base = {
   name: 'Tocador',
@@ -67,6 +67,21 @@ describe('productContentEqual', () => {
 
   it('detects an unrelated field change (price)', () => {
     expect(productContentEqual(base, { ...base, price: 599 })).toBe(false);
+  });
+
+  it('detects a perk-variant change', () => {
+    expect(productContentEqual({ ...base, perks: 'bulbs' }, { ...base, perks: 'led' })).toBe(false);
+  });
+
+  // A product saved without a variant has none at all, while the same product
+  // read back from the DB carries the column default. Both mean the same strip,
+  // so this must not count as a content change — otherwise such a product's
+  // updated_at would be bumped on every save.
+  it('treats a missing perk variant as the default', () => {
+    expect(productContentEqual(base, { ...base, perks: DEFAULT_PERK_VARIANT })).toBe(true);
+    expect(
+      productContentEqual({ ...base, perks: '' }, { ...base, perks: DEFAULT_PERK_VARIANT }),
+    ).toBe(true);
   });
 
   it('is false when either side is missing', () => {

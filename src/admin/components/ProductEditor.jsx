@@ -1,11 +1,28 @@
 import { useState } from 'react';
 import { BTN_GHOST } from '../ui.js';
-import { Field, TextArea } from './Field.jsx';
+import { Field, Select, TextArea } from './Field.jsx';
 import { urlSafe } from '../urlSafe.js';
-import { productMedia } from '../../data/catalog.js';
+import {
+  DEFAULT_PERK_VARIANT,
+  PERK_VARIANTS,
+  productMedia,
+  productPerkVariant,
+  resolveImage,
+} from '../../data/catalog.js';
+import { translations } from '../../i18n/translations.js';
 import ImageField from './ImageField.jsx';
 import ProductImagesEditor from './ProductImagesEditor.jsx';
 import ProductPicker from './ProductPicker.jsx';
+
+// Only the third perk of the strip differs between variants, so the dropdown is
+// labelled with that perk's Spanish text — read straight from the translations
+// so the two can't drift apart.
+const PERK_OPTIONS = PERK_VARIANTS.map((value) => ({
+  value,
+  label:
+    translations.es[`order.perk.${value}`] +
+    (value === DEFAULT_PERK_VARIANT ? ' — по умолчанию' : ''),
+}));
 
 function SectionLabel({ children }) {
   return (
@@ -33,6 +50,8 @@ export default function ProductEditor({
   // (`image`/`images`) in sync so the catalog card, OG image and Schema.org —
   // all photo-only — stay correct without a separate save step.
   const media = productMedia(product);
+  // First photo = the catalog cover (same rule as ProductImagesEditor).
+  const cover = media.find((m) => m.type === 'image')?.src;
   const setMedia = (next) => {
     const photos = next.filter((m) => m.type === 'image').map((m) => m.src);
     set({ media: next, image: photos[0] || '', images: photos, video: '', videoFirst: false });
@@ -58,6 +77,21 @@ export default function ProductEditor({
           {product.price > 0 && (
             <span className="shrink-0 text-xs text-primary/40">€{product.price}</span>
           )}
+          {/* Cover thumbnail — lets you identify a product in the collapsed list
+              without opening it. Always rendered (placeholder when there's no
+              photo yet) so the rows stay aligned. */}
+          <span className="flex h-10 w-10 shrink-0 items-center justify-center overflow-hidden border border-primary/10 bg-surface">
+            {cover ? (
+              <img
+                src={resolveImage(cover, 200)}
+                alt=""
+                loading="lazy"
+                className="h-full w-full object-cover"
+              />
+            ) : (
+              <span className="font-serif text-sm font-light text-primary/20">HS</span>
+            )}
+          </span>
         </button>
         <button type="button" onClick={onDuplicate} title="Дублировать товар" className={BTN_GHOST}>⧉</button>
         <button type="button" onClick={() => onMove(-1)} disabled={isFirst} className={BTN_GHOST}>↑</button>
@@ -131,6 +165,20 @@ export default function ProductEditor({
               onChange={(v) => setDesc('en', v)}
             />
           </div>
+          <SectionLabel>Блок с иконками под кнопкой заказа</SectionLabel>
+          <div className="grid gap-3 sm:grid-cols-2">
+            <Select
+              label="Третий пункт"
+              value={productPerkVariant(product)}
+              onChange={(v) => set({ perks: v })}
+              options={PERK_OPTIONS}
+            />
+          </div>
+          <p className="mt-2 text-xs leading-relaxed text-primary/40">
+            Первые два пункта — «Entrega confiable» и «Instalación gratuita» — одинаковы
+            у всех товаров. Здесь выбирается только третий, вместе со своей иконкой.
+          </p>
+
           <SectionLabel>Фото и видео</SectionLabel>
           <ProductImagesEditor media={media} onChange={setMedia} />
 

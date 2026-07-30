@@ -3,7 +3,7 @@ import { Navigate, useParams } from 'react-router-dom';
 import { Link } from '../components/LocalizedLink.jsx';
 import { useLanguage } from '../i18n/LanguageContext.jsx';
 import { useCatalog } from '../catalog/CatalogContext.jsx';
-import { productDescription, productImages, productMedia, productReference, computeRelated, resolveImage } from '../data/catalog.js';
+import { productDescription, productImages, productMedia, productPerkVariant, productReference, computeRelated, resolveImage } from '../data/catalog.js';
 import { trackPixel } from '../lib/track.js';
 import JsonLd from '../components/JsonLd.jsx';
 import SocialMeta from '../components/SocialMeta.jsx';
@@ -50,11 +50,42 @@ function IconBulb({ className = '' }) {
   );
 }
 
-function OrderPerks({ t }) {
+function IconBulbRays({ className = '' }) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className={`h-6 w-6 shrink-0 ${className}`}>
+      <path d="M12 2v2" />
+      <path d="M5.6 4.6 7 6" />
+      <path d="M18.4 4.6 17 6" />
+      <path d="M3 11h2" />
+      <path d="M19 11h2" />
+      <path d="M12 7a4.5 4.5 0 0 0-2.7 8.1c.45.34.7.87.7 1.43V17h4v-.47c0-.56.25-1.09.7-1.43A4.5 4.5 0 0 0 12 7z" />
+      <path d="M10 20h4" />
+    </svg>
+  );
+}
+
+function IconAward({ className = '' }) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className={`h-6 w-6 shrink-0 ${className}`}>
+      <circle cx="12" cy="9" r="6" />
+      <path d="M8.3 13.9 7 21.5l5-2.9 5 2.9-1.3-7.6" />
+    </svg>
+  );
+}
+
+// Third perk per variant — see PERK_VARIANTS in data/catalog.js. The first two
+// (delivery, installation) are the same for every product.
+const PERK_ICONS = {
+  bulbs: IconBulb,
+  led: IconBulbRays,
+  quality: IconAward,
+};
+
+function OrderPerks({ t, variant }) {
   const perks = [
     { Icon: IconTruck, label: t('order.perk.delivery') },
     { Icon: IconTools, label: t('order.perk.installation') },
-    { Icon: IconBulb, label: t('order.perk.bulbs') },
+    { Icon: PERK_ICONS[variant], label: t(`order.perk.${variant}`) },
   ];
   return (
     <div className="mt-6 grid w-full grid-cols-3 divide-x divide-primary/10 rounded-2xl border border-primary/10 bg-surface sm:w-auto">
@@ -405,7 +436,7 @@ export default function Product() {
                 {t('order.button')}
               </Button>
             </div>
-            <OrderPerks t={t} />
+            <OrderPerks t={t} variant={productPerkVariant(product)} />
 
           </Reveal>
         </div>

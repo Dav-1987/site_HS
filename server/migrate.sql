@@ -45,6 +45,14 @@ ALTER TABLE products ADD COLUMN IF NOT EXISTS subtitle TEXT NOT NULL DEFAULT '';
 ALTER TABLE products ADD COLUMN IF NOT EXISTS video_first BOOLEAN NOT NULL DEFAULT false;
 -- Unified ordered media list (photos + videos): [{ "type": "image"|"video", "src": "..." }]
 ALTER TABLE products ADD COLUMN IF NOT EXISTS media JSONB NOT NULL DEFAULT '[]'::jsonb;
+-- Variant of the 3-icon "order perks" strip under the order button: names the
+-- third perk ('bulbs' | 'led' | 'quality'); the first two are the same for every
+-- product. See PERK_VARIANTS in src/data/catalog.js.
+ALTER TABLE products ADD COLUMN IF NOT EXISTS perks TEXT NOT NULL DEFAULT 'bulbs';
+-- Default switched to 'quality' after the column already existed. Kept as a
+-- separate statement so installs created with the old default converge too;
+-- it only affects future inserts and rewrites no existing row.
+ALTER TABLE products ALTER COLUMN perks SET DEFAULT 'quality';
 -- Real per-row last-modified time, for accurate sitemap <lastmod> (see store.js
 -- writeCatalog: only bumped when the row's content actually changed, since the
 -- editor always re-saves the whole catalog via DELETE+INSERT).

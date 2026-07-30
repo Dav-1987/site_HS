@@ -85,6 +85,27 @@ export function productImages(product) {
   return product?.image ? [product.image] : [];
 }
 
+// ─── Order perks strip ────────────────────────────────────────────────────────
+//
+// The three-icon row under the order button on a product page. Every variant
+// shares the first two perks (delivery, installation); only the third differs,
+// so each product advertises whichever claim is actually true for it — a free
+// set of bulbs, built-in professional LED lighting, or plain build quality.
+// The variant key is stored per product in `product.perks` (see the admin's
+// ProductEditor) and names the i18n key of that third perk: `order.perk.<key>`.
+export const PERK_VARIANTS = ['bulbs', 'led', 'quality'];
+export const DEFAULT_PERK_VARIANT = 'quality';
+
+/**
+ * The perk variant a product advertises. Products with no variant set (and any
+ * unknown value) fall back to the default, so the strip never renders a missing
+ * translation key.
+ */
+export function productPerkVariant(product) {
+  const variant = product?.perks;
+  return PERK_VARIANTS.includes(variant) ? variant : DEFAULT_PERK_VARIANT;
+}
+
 /**
  * Discount info. `oldPrice` is the pre-discount price; it's shown struck through
  * next to the current `price` only when it is set and strictly higher.

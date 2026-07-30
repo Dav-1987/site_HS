@@ -11,7 +11,11 @@ import {
   visibleCategories,
   OTHER_MODELS_SLUG,
   moveProductsToCategory,
+  productPerkVariant,
+  PERK_VARIANTS,
+  DEFAULT_PERK_VARIANT,
 } from './catalog.js';
+import { translations } from '../i18n/translations.js';
 
 // Small catalog fixture: cat(slug, ...productIds)
 const cat = (slug, ...ids) => ({
@@ -135,6 +139,30 @@ describe('productMedia', () => {
   it('returns an empty array when nothing is set', () => {
     expect(productMedia({})).toEqual([]);
     expect(productMedia(null)).toEqual([]);
+  });
+});
+
+describe('productPerkVariant', () => {
+  it('returns the variant the product selected', () => {
+    expect(productPerkVariant({ perks: 'led' })).toBe('led');
+    expect(productPerkVariant({ perks: 'quality' })).toBe('quality');
+    expect(productPerkVariant({ perks: 'bulbs' })).toBe('bulbs');
+  });
+
+  // Products saved before the field existed have no `perks` at all — they must
+  // keep showing the original strip rather than a missing translation key.
+  it('falls back to the default for missing, empty or unknown values', () => {
+    expect(productPerkVariant({})).toBe(DEFAULT_PERK_VARIANT);
+    expect(productPerkVariant(null)).toBe(DEFAULT_PERK_VARIANT);
+    expect(productPerkVariant({ perks: '' })).toBe(DEFAULT_PERK_VARIANT);
+    expect(productPerkVariant({ perks: 'ledd' })).toBe(DEFAULT_PERK_VARIANT);
+  });
+
+  it('every variant has a translation in both languages', () => {
+    for (const v of PERK_VARIANTS) {
+      expect(translations.es[`order.perk.${v}`]).toBeTruthy();
+      expect(translations.en[`order.perk.${v}`]).toBeTruthy();
+    }
   });
 });
 

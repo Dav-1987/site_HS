@@ -32,6 +32,18 @@ function normalizeMedia(p) {
   return p?.videoFirst ? [...video, ...photos] : [...photos, ...video];
 }
 
+// Which variant of the three-icon "order perks" strip a product shows. Mirrors
+// PERK_VARIANTS / productPerkVariant() in src/data/catalog.js — a row with no
+// variant set (and any unknown value) falls back to the default. Normalizing on
+// both read and write keeps productContentEqual exact, so such a row doesn't
+// look "changed" on the next save.
+const PERK_VARIANTS = ['bulbs', 'led', 'quality'];
+export const DEFAULT_PERK_VARIANT = 'quality';
+
+function normalizePerks(p) {
+  return PERK_VARIANTS.includes(p?.perks) ? p.perks : DEFAULT_PERK_VARIANT;
+}
+
 function shapeCategory(cat, products) {
   return {
     slug: cat.slug,
@@ -59,6 +71,7 @@ function shapeCategory(cat, products) {
       subtitle: p.subtitle ?? '',
       description: { es: p.description_es ?? '', en: p.description_en ?? '' },
       related: Array.isArray(p.related) ? p.related : [],
+      perks: normalizePerks(p),
       updatedAt: p.updated_at instanceof Date ? p.updated_at.toISOString() : p.updated_at,
     })),
   };
@@ -115,7 +128,8 @@ export function productContentEqual(a, b) {
     a.subtitle === b.subtitle &&
     a.description?.es === b.description?.es &&
     a.description?.en === b.description?.en &&
-    JSON.stringify(a.related ?? []) === JSON.stringify(b.related ?? [])
+    JSON.stringify(a.related ?? []) === JSON.stringify(b.related ?? []) &&
+    normalizePerks(a) === normalizePerks(b)
   );
 }
 
@@ -195,8 +209,8 @@ export async function writeCatalog(categories) {
 
         await client.query(
           `INSERT INTO products
-             (id, category_slug, name, price, old_price, image, image_mobile, images, material_es, material_en, size, reference, subtitle, video, video_first, media, description_es, description_en, related, position, updated_at)
-           VALUES ($1,$2,$3,$4,$5,$6,$7,$8::jsonb,$9,$10,$11,$12,$13,$14,$15,$16::jsonb,$17,$18,$19::jsonb,$20,$21)`,
+             (id, category_slug, name, price, old_price, image, image_mobile, images, material_es, material_en, size, reference, subtitle, video, video_first, media, description_es, description_en, related, perks, position, updated_at)
+           VALUES ($1,$2,$3,$4,$5,$6,$7,$8::jsonb,$9,$10,$11,$12,$13,$14,$15,$16::jsonb,$17,$18,$19::jsonb,$20,$21,$22)`,
           [
             p.id,
             c.slug,
@@ -218,6 +232,7 @@ export async function writeCatalog(categories) {
             p.description?.es ?? '',
             p.description?.en ?? '',
             JSON.stringify(Array.isArray(p.related) ? p.related : []),
+            normalizePerks(p),
             pi,
             productUpdatedAt,
           ],
