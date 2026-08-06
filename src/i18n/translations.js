@@ -32,25 +32,25 @@ export const translations = {
       'Nueve familias de mobiliario, un mismo lenguaje minimalista.',
 
     // --- SEO meta (page <title>/<meta description>, not visible UI copy) ---
-    'home.meta.title': 'HS Muebles — Tocadores y mobiliario minimalista | España',
+    'home.meta.title': 'Mirage Muebles — Tocadores y mobiliario minimalista | España',
     'home.meta.description':
       'Muebles de tocador, espejos, consolas y estanterías de diseño minimalista. Envío, montaje e instalación gratis en toda España.',
-    'home.og.title': 'HS Muebles — Mobiliario minimalista',
+    'home.og.title': 'Mirage Muebles — Mobiliario minimalista',
     'home.og.description':
       'Tocadores, espejos y mobiliario de diseño minimalista. Envío y montaje gratis.',
-    'catalog.meta.title': 'Catálogo de muebles — Tocadores, espejos y más | HS Muebles',
+    'catalog.meta.title': 'Catálogo de muebles — Tocadores, espejos y más | Mirage Muebles',
     'catalog.meta.description':
-      'Explora las {count} colecciones de HS Muebles: tocadores loft, espejos de cuerpo entero, estanterías, cómodas, consolas y mesas de manicura. Diseño minimalista.',
-    'catalog.og.title': 'Catálogo completo | HS Muebles',
+      'Explora las {count} colecciones de Mirage Muebles: tocadores loft, espejos de cuerpo entero, estanterías, cómodas, consolas y mesas de manicura. Diseño minimalista.',
+    'catalog.og.title': 'Catálogo completo | Mirage Muebles',
     'catalog.og.description':
       '{count} colecciones de mobiliario minimalista: tocadores, espejos, cómodas y más.',
-    'category.meta.title': '{name} — Muebles minimalistas | HS Muebles',
+    'category.meta.title': '{name} — Muebles minimalistas | Mirage Muebles',
     'category.meta.description':
-      'Colección {name} de HS Muebles — {count} piezas de mobiliario minimalista. Envío, montaje e instalación gratuitos.',
+      'Colección {name} de Mirage Muebles — {count} piezas de mobiliario minimalista. Envío, montaje e instalación gratuitos.',
     'contact.meta.description':
-      'Contacta con HS Muebles: tienda de muebles minimalistas en España. Teléfono, email, Instagram y TikTok. Envío, montaje e instalación gratis.',
+      'Contacta con Mirage Muebles: tienda de muebles minimalistas en España. Teléfono, email, Instagram y TikTok. Envío, montaje e instalación gratis.',
     'contact.og.description':
-      'Contacta con HS Muebles. Envío, montaje e instalación gratis en toda España.',
+      'Contacta con Mirage Muebles. Envío, montaje e instalación gratis en toda España.',
 
     // --- Category / product ---
     'category.products': 'piezas',
@@ -157,9 +157,9 @@ export const translations = {
     'legal.website': 'Sitio web',
     'legal.email': 'Correo electrónico',
     'legal.p1':
-      'Todos los contenidos de este sitio web, incluidos textos, imágenes, gráficos y elementos de diseño, son propiedad de HS Muebles y no pueden ser copiados, reproducidos, distribuidos o utilizados sin autorización previa.',
+      'Todos los contenidos de este sitio web, incluidos textos, imágenes, gráficos y elementos de diseño, son propiedad de Mirage Muebles y no pueden ser copiados, reproducidos, distribuidos o utilizados sin autorización previa.',
     'legal.p2':
-      'HS Muebles no se responsabiliza de los daños o perjuicios derivados del uso de este sitio web.',
+      'Mirage Muebles no se responsabiliza de los daños o perjuicios derivados del uso de este sitio web.',
     'legal.p3': 'Para cualquier consulta, puede contactarnos en {email}.',
 
     // --- Cookie banner ---
@@ -201,25 +201,25 @@ export const translations = {
     'catalog.subtitle': 'Nine furniture families, one minimalist language.',
 
     // --- SEO meta (page <title>/<meta description>, not visible UI copy) ---
-    'home.meta.title': 'HS Muebles — Vanity Furniture & Minimalist Design | Spain',
+    'home.meta.title': 'Mirage Muebles — Vanity Furniture & Minimalist Design | Spain',
     'home.meta.description':
       'Vanity furniture, mirrors, console tables and shelving in minimalist design. Free shipping, assembly and installation across Spain.',
-    'home.og.title': 'HS Muebles — Minimalist Furniture',
+    'home.og.title': 'Mirage Muebles — Minimalist Furniture',
     'home.og.description':
       'Vanity furniture, mirrors and minimalist design pieces. Free shipping and assembly.',
-    'catalog.meta.title': 'Furniture Catalog — Vanities, Mirrors & More | HS Muebles',
+    'catalog.meta.title': 'Furniture Catalog — Vanities, Mirrors & More | Mirage Muebles',
     'catalog.meta.description':
-      "Explore HS Muebles' {count} collections: loft dressing tables, full-length mirrors, shelving, dressers, console tables and manicure tables. Minimalist design.",
-    'catalog.og.title': 'Full Catalog | HS Muebles',
+      "Explore Mirage Muebles' {count} collections: loft dressing tables, full-length mirrors, shelving, dressers, console tables and manicure tables. Minimalist design.",
+    'catalog.og.title': 'Full Catalog | Mirage Muebles',
     'catalog.og.description':
       '{count} collections of minimalist furniture: vanities, mirrors, dressers and more.',
-    'category.meta.title': '{name} — Minimalist Furniture | HS Muebles',
+    'category.meta.title': '{name} — Minimalist Furniture | Mirage Muebles',
     'category.meta.description':
-      '{name} collection by HS Muebles — {count} pieces of minimalist furniture. Free shipping, assembly and installation.',
+      '{name} collection by Mirage Muebles — {count} pieces of minimalist furniture. Free shipping, assembly and installation.',
     'contact.meta.description':
-      'Contact HS Muebles: minimalist furniture store in Spain. Phone, email, Instagram and TikTok. Free shipping, assembly and installation.',
+      'Contact Mirage Muebles: minimalist furniture store in Spain. Phone, email, Instagram and TikTok. Free shipping, assembly and installation.',
     'contact.og.description':
-      'Contact HS Muebles. Free shipping, assembly and installation across Spain.',
+      'Contact Mirage Muebles. Free shipping, assembly and installation across Spain.',
 
     // --- Category / product ---
     'category.products': 'pieces',
@@ -326,8 +326,8 @@ export const translations = {
     'legal.website': 'Website',
     'legal.email': 'Email',
     'legal.p1':
-      'All content on this website, including text, images, graphics and design elements, is the property of HS Muebles and may not be copied, reproduced, distributed or used without prior permission.',
-    'legal.p2': 'HS Muebles is not responsible for any damages resulting from the use of this website.',
+      'All content on this website, including text, images, graphics and design elements, is the property of Mirage Muebles and may not be copied, reproduced, distributed or used without prior permission.',
+    'legal.p2': 'Mirage Muebles is not responsible for any damages resulting from the use of this website.',
     'legal.p3': 'For any questions, please contact us at {email}.',
 
     // --- Cookie banner ---

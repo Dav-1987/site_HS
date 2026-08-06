@@ -25,7 +25,7 @@ export default function LoginScreen({ onSuccess }) {
   return (
     <div className="flex min-h-screen items-center justify-center bg-surface px-6">
       <form onSubmit={submit} className="w-full max-w-sm border border-primary/10 bg-background p-10">
-        <p className="mb-2 text-xs uppercase tracking-[0.3em] text-accent">HS Muebles</p>
+        <p className="mb-2 text-xs uppercase tracking-[0.3em] text-accent">Mirage Muebles</p>
         <h1 className="mb-8 font-serif text-3xl font-light text-primary">Панель управления</h1>
         <Field
           label="Пароль"

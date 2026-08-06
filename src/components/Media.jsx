@@ -34,7 +34,7 @@ export default function Media({ id, idMobile = '', alt = '', w = 900, className 
         role={alt ? 'img' : undefined}
         aria-label={alt || undefined}
       >
-        <span className="font-serif text-3xl font-light text-primary/25">HS</span>
+        <span className="font-serif text-3xl font-light text-primary/25">M</span>
       </div>
     );
   }

@@ -89,7 +89,7 @@ export default function ProductEditor({
                 className="h-full w-full object-cover"
               />
             ) : (
-              <span className="font-serif text-sm font-light text-primary/20">HS</span>
+              <span className="font-serif text-sm font-light text-primary/20">M</span>
             )}
           </span>
         </button>

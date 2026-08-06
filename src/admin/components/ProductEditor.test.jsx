@@ -56,7 +56,7 @@ describe('ProductEditor — collapsed row thumbnail', () => {
   it('falls back to the placeholder when the product has no photo', () => {
     const { container } = renderEditor({ ...product, media: [{ type: 'video', src: '/uploads/clip.mp4' }] });
     expect(container.querySelector('img')).toBeNull();
-    expect(screen.getByText('HS')).toBeTruthy();
+    expect(screen.getByText('M')).toBeTruthy();
   });
 });
 

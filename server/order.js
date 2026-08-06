@@ -36,7 +36,7 @@ export function validateOrder(body) {
 
 /** Plain-text order summary shared by the Telegram and email notifications. */
 export function formatOrderText({ name, phone, address, comment, productName, productId, price }) {
-  const out = ['🛒 Nueva solicitud — HS Muebles', ''];
+  const out = ['🛒 Nueva solicitud — Mirage Muebles', ''];
   out.push(`Producto: ${productName}${productId ? ` [${productId}]` : ''}`);
   if (typeof price === 'number' && Number.isFinite(price)) out.push(`Precio: ${price} €`);
   out.push('');

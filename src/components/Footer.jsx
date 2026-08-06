@@ -147,7 +147,7 @@ export default function Footer() {
         {/* Bottom bar */}
         <div className="mt-16 flex flex-col items-start justify-between gap-4 border-t border-primary/10 pt-8 text-xs text-primary/40 md:flex-row md:items-center">
           <p>
-            © {year} HS Muebles. {t('footer.rights')}
+            © {year} Mirage Muebles. {t('footer.rights')}
           </p>
           <div className="flex gap-6">
             <Link to="/legal-notice" className="transition-colors hover:text-accent">

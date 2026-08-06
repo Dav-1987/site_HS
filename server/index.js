@@ -399,7 +399,7 @@ app.post('/api/order', orderRateLimit, async (req, res) => {
     let emailError = null;
     if (emailConfigured()) {
       try {
-        await sendOrderEmail('Nueva solicitud de pedido — HS Muebles', text);
+        await sendOrderEmail('Nueva solicitud de pedido — Mirage Muebles', text);
         emailSent = true;
       } catch (err) {
         emailError = err;
@@ -602,7 +602,7 @@ app.get('*', (req, res) => {
 // ─── Start ────────────────────────────────────────────────────────────────────
 
 app.listen(PORT, '0.0.0.0', () => {
-  console.log(`HS API → http://0.0.0.0:${PORT}`);
+  console.log(`Mirage API → http://0.0.0.0:${PORT}`);
   runCleanup();
   setInterval(runCleanup, 60 * 60 * 1000); // hourly
 });

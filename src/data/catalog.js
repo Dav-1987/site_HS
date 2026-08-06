@@ -1,5 +1,5 @@
 // ============================================================
-// HS Muebles — Catalog helpers
+// Mirage Muebles — Catalog helpers
 // The DATA now lives in catalog.default.json (single source of
 // truth, shared with the Netlify function that seeds the DB).
 // At runtime the live catalog comes from /api/catalog via

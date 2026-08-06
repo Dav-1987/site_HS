@@ -16,12 +16,12 @@ export default function PrivacyPolicy() {
 
   return (
     <>
-      <title>{t('privacy.title')} | HS Muebles</title>
+      <title>{t('privacy.title')} | Mirage Muebles</title>
       <meta name="description" content={t('privacy.intro')} />
       <link rel="canonical" href={canonicalUrl} />
       <HreflangLinks esPath={esPath} />
       <SocialMeta
-        title={`${t('privacy.title')} | HS Muebles`}
+        title={`${t('privacy.title')} | Mirage Muebles`}
         description={t('privacy.intro')}
         url={canonicalUrl}
       />

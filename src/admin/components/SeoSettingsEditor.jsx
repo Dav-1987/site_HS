@@ -42,7 +42,7 @@ export default function SeoSettingsEditor({ settings, onChange }) {
               type="text"
               value={seo.title}
               onChange={(e) => set({ title: e.target.value })}
-              placeholder="HS Muebles — Mobiliario minimalista"
+              placeholder="Mirage Muebles — Mobiliario minimalista"
               className={FIELD_CLASS}
             />
           </div>

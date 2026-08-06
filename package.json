@@ -1,7 +1,7 @@
 {
   "name": "site_hs",
   "version": "1.0.0",
-  "description": "HS Muebles — modern minimalist furniture store (ES/EN)",
+  "description": "Mirage Muebles — modern minimalist furniture store (ES/EN)",
   "private": true,
   "type": "module",
   "scripts": {

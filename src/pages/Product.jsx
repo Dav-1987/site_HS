@@ -207,12 +207,12 @@ export default function Product() {
 
   return (
     <>
-      <title>{`${pageTitle} — ${category.name[lang]} | HS Muebles`}</title>
+      <title>{`${pageTitle} — ${category.name[lang]} | Mirage Muebles`}</title>
       <meta name="description" content={metaDesc} />
       <link rel="canonical" href={canonicalUrl} />
       <HreflangLinks esPath={esPath} />
       <SocialMeta
-        title={`${pageTitle} | HS Muebles`}
+        title={`${pageTitle} | Mirage Muebles`}
         description={metaDesc}
         url={canonicalUrl}
         type="product"

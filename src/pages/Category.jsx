@@ -41,7 +41,7 @@ export default function Category() {
       <link rel="canonical" href={canonicalUrl} />
       <HreflangLinks esPath={esPath} />
       <SocialMeta
-        title={`${catName} | HS Muebles`}
+        title={`${catName} | Mirage Muebles`}
         description={catDesc}
         url={canonicalUrl}
         image={resolveImage(category.image, 1600)}

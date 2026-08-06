@@ -3,7 +3,7 @@ import { resolveImage } from '../data/catalog.js';
 import { SITE, absUrl } from '../seo/schema.js';
 
 // Last-resort fallback when neither the page nor the admin set a preview image.
-const FALLBACK_IMAGE = `${SITE}/logo-hs.png`;
+const FALLBACK_IMAGE = `${SITE}/logo-mirage.png`;
 
 /**
  * Open Graph + Twitter Card tags, emitted consistently for every page.
@@ -23,7 +23,7 @@ export default function SocialMeta({ title, description, url, type = 'website', 
   const desc = description ? description.replace(/\s+/g, ' ').trim() : undefined;
   return (
     <>
-      <meta property="og:site_name" content="HS Muebles" />
+      <meta property="og:site_name" content="Mirage Muebles" />
       <meta property="og:title" content={title} />
       {desc && <meta property="og:description" content={desc} />}
       <meta property="og:url" content={url} />

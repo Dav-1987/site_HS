@@ -16,12 +16,12 @@ export default function LegalNotice() {
 
   return (
     <>
-      <title>{t('legal.title')} | HS Muebles</title>
+      <title>{t('legal.title')} | Mirage Muebles</title>
       <meta name="description" content={t('legal.p1')} />
       <link rel="canonical" href={canonicalUrl} />
       <HreflangLinks esPath={esPath} />
       <SocialMeta
-        title={`${t('legal.title')} | HS Muebles`}
+        title={`${t('legal.title')} | Mirage Muebles`}
         description={t('legal.p1')}
         url={canonicalUrl}
       />
@@ -38,7 +38,7 @@ export default function LegalNotice() {
               <dt className="w-28 shrink-0 text-[11px] uppercase tracking-[0.2em] text-primary/40">
                 {t('legal.companyLabel')}
               </dt>
-              <dd className="text-sm text-primary">HS Muebles</dd>
+              <dd className="text-sm text-primary">Mirage Muebles</dd>
             </div>
             <div className="flex items-center gap-5 py-4">
               <dt className="w-28 shrink-0 text-[11px] uppercase tracking-[0.2em] text-primary/40">

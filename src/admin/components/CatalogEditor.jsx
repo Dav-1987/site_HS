@@ -58,7 +58,7 @@ export default function CatalogEditor({ onLogout }) {
       <header className="sticky top-0 z-30 border-b border-primary/10 bg-background/90 backdrop-blur-md">
         <div className="mx-auto flex max-w-5xl items-center gap-4 px-6 py-4">
           <div>
-            <p className="text-[11px] uppercase tracking-[0.3em] text-accent">HS Muebles</p>
+            <p className="text-[11px] uppercase tracking-[0.3em] text-accent">Mirage Muebles</p>
             <h1 className="font-serif text-2xl font-light text-primary">Каталог</h1>
           </div>
           <div className="ml-auto flex items-center gap-4">

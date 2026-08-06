@@ -156,7 +156,7 @@ export default function ProductImagesEditor({ media, onChange }) {
                 <img src={src} alt="" className="h-full w-full object-cover pointer-events-none" />
               ) : (
                 <div className="flex h-full w-full items-center justify-center">
-                  <span className="font-serif text-xl font-light text-primary/20">HS</span>
+                  <span className="font-serif text-xl font-light text-primary/20">M</span>
                 </div>
               )}
 

@@ -1,5 +1,5 @@
 // ============================================================
-// HS Muebles — Schema.org (JSON-LD) builders
+// Mirage Muebles — Schema.org (JSON-LD) builders
 // Pure functions returning plain objects; rendered into the page
 // via <JsonLd>. All URLs are absolute (rich results require it).
 // ============================================================
@@ -14,8 +14,8 @@ import {
 import { withLang } from '../i18n/routing.js';
 
 export const SITE = 'https://hsmuebles.es';
-const ORG_NAME = 'HS Muebles';
-const LOGO = `${SITE}/logo-hs.png`;
+const ORG_NAME = 'Mirage Muebles';
+const LOGO = `${SITE}/logo-mirage.png`;
 
 /** Make any image/path absolute against the site origin. */
 export function absUrl(path) {

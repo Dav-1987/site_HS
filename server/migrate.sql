@@ -1,4 +1,4 @@
--- HS Muebles — полная схема БД для VPS
+-- Mirage Muebles — полная схема БД для VPS
 -- Запускать: psql -U hs_user -d hs_muebles -f migrate.sql
 
 -- Категории

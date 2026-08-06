@@ -130,12 +130,12 @@ export default function Contact() {
 
   return (
     <>
-      <title>{`${t('contact.title')} | HS Muebles`}</title>
+      <title>{`${t('contact.title')} | Mirage Muebles`}</title>
       <meta name="description" content={t('contact.meta.description')} />
       <link rel="canonical" href={canonicalUrl} />
       <HreflangLinks esPath={esPath} />
       <SocialMeta
-        title={`${t('contact.title')} | HS Muebles`}
+        title={`${t('contact.title')} | Mirage Muebles`}
         description={t('contact.og.description')}
         url={canonicalUrl}
       />
