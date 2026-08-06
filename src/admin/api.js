@@ -30,6 +30,14 @@ export function logout() {
   return fetch('/api/admin/login', { method: 'DELETE' }).then(asJson);
 }
 
+export function changePassword(currentPassword, newPassword) {
+  return fetch('/api/admin/change-password', {
+    method: 'POST',
+    headers: { 'content-type': 'application/json' },
+    body: JSON.stringify({ currentPassword, newPassword }),
+  }).then(asJson);
+}
+
 export function fetchCatalog() {
   return fetch('/api/catalog', { method: 'GET' }).then(asJson);
 }

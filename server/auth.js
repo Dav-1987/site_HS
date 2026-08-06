@@ -2,7 +2,8 @@
 // Replaced Netlify.env.get() → process.env
 // Replaced req.headers.get() → req.headers[] (Express style)
 
-import { createHash, createHmac, timingSafeEqual } from 'node:crypto';
+import { createHash, createHmac, timingSafeEqual, randomBytes, scryptSync } from 'node:crypto';
+import pool from './db.js';
 
 const COOKIE_NAME = 'hs_admin';
 const DEFAULT_MAX_AGE_S = 60 * 60 * 24 * 7; // 7 days
@@ -11,6 +12,34 @@ function secret() {
   const s = process.env.ADMIN_SECRET;
   if (!s) throw new Error('ADMIN_SECRET is not configured');
   return s;
+}
+
+function hashPassword(password) {
+  const salt = randomBytes(16).toString('hex');
+  const hash = scryptSync(password, salt, 64).toString('hex');
+  return `${salt}:${hash}`;
+}
+
+function verifyHash(password, stored) {
+  const [salt, hash] = stored.split(':');
+  if (!salt || !hash) return false;
+  const candidate = scryptSync(password, salt, 64);
+  const expected = Buffer.from(hash, 'hex');
+  if (candidate.length !== expected.length) return false;
+  return timingSafeEqual(candidate, expected);
+}
+
+async function readStoredHash() {
+  const { rows } = await pool.query("SELECT value FROM site_settings WHERE key = 'admin_auth'");
+  return rows[0]?.value?.hash ?? null;
+}
+
+async function writeStoredHash(hash) {
+  await pool.query(
+    `INSERT INTO site_settings (key, value) VALUES ('admin_auth', $1::jsonb)
+     ON CONFLICT (key) DO UPDATE SET value = EXCLUDED.value`,
+    [JSON.stringify({ hash })],
+  );
 }
 
 function b64url(input) {
@@ -30,10 +59,23 @@ function safeEqual(a, b) {
   return timingSafeEqual(ah, bh);
 }
 
-export function verifyPassword(input) {
+export async function verifyPassword(input) {
+  if (typeof input !== 'string' || input.length === 0) return false;
+  const storedHash = await readStoredHash();
+  if (storedHash) return verifyHash(input, storedHash);
   const expected = process.env.ADMIN_PASSWORD;
-  if (!expected || typeof input !== 'string' || input.length === 0) return false;
+  if (!expected) return false;
   return safeEqual(input, expected);
+}
+
+/** Verifies the current password, then stores the new one (hashed) in the DB. */
+export async function changePassword(currentPassword, newPassword) {
+  if (typeof newPassword !== 'string' || newPassword.length < 8) {
+    throw new Error('New password must be at least 8 characters');
+  }
+  const ok = await verifyPassword(currentPassword);
+  if (!ok) throw new Error('Incorrect current password');
+  await writeStoredHash(hashPassword(newPassword));
 }
 
 export function createSessionToken(maxAgeS = DEFAULT_MAX_AGE_S) {

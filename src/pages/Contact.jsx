@@ -6,6 +6,19 @@ import SocialMeta from '../components/SocialMeta.jsx';
 import HreflangLinks from '../components/HreflangLinks.jsx';
 import { trackPixel } from '../lib/track.js';
 
+// Derives a display handle ("@name") from a social profile URL so the
+// visible label always matches the link an admin sets, instead of drifting
+// out of sync with a hardcoded string.
+function handleFromUrl(url) {
+  try {
+    const segment = new URL(url).pathname.split('/').filter(Boolean)[0] || '';
+    if (!segment) return url;
+    return segment.startsWith('@') ? segment : `@${segment}`;
+  } catch {
+    return url;
+  }
+}
+
 function IconInstagram() {
   return (
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="h-5 w-5 shrink-0">
@@ -75,7 +88,7 @@ export default function Contact() {
       content: (
         <a href={contact.instagram} target="_blank" rel="noopener noreferrer"
           className="text-primary transition-colors hover:text-accent">
-          @hs.muebles.es
+          {handleFromUrl(contact.instagram)}
         </a>
       ),
     },
@@ -85,7 +98,7 @@ export default function Contact() {
       content: (
         <a href={contact.tiktok} target="_blank" rel="noopener noreferrer"
           className="text-primary transition-colors hover:text-accent">
-          @hsmuebles
+          {handleFromUrl(contact.tiktok)}
         </a>
       ),
     },

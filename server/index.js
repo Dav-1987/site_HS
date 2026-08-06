@@ -7,7 +7,7 @@ import { fileURLToPath } from 'node:url';
 import sharp from 'sharp';
 
 import pool from './db.js';
-import { verifyPassword, createSessionToken, sessionCookie, clearCookie, isAuthenticated } from './auth.js';
+import { verifyPassword, changePassword, createSessionToken, sessionCookie, clearCookie, isAuthenticated } from './auth.js';
 import { readOrSeedCatalog, writeCatalog, recordVersion, listVersions, getVersionData,
          extractUploadKeys, scheduleForDeletion, unscheduleFiles,
          getFilesReadyToDelete, purgePendingRecords } from './store.js';
@@ -54,9 +54,20 @@ function handleLoginDelete(req, res) {
   res.setHeader('Set-Cookie', clearCookie());
   res.json({ ok: true });
 }
-function handleLoginPost(req, res) {
-  if (!verifyPassword(req.body?.password)) {
+async function handleLoginPost(req, res) {
+  if (!(await verifyPassword(req.body?.password))) {
     return res.status(401).json({ error: 'Incorrect password' });
+  }
+  const token = createSessionToken();
+  res.setHeader('Set-Cookie', sessionCookie(token));
+  res.json({ ok: true });
+}
+
+async function handleChangePassword(req, res) {
+  try {
+    await changePassword(req.body?.currentPassword, req.body?.newPassword);
+  } catch (err) {
+    return res.status(400).json({ error: err.message });
   }
   const token = createSessionToken();
   res.setHeader('Set-Cookie', sessionCookie(token));
@@ -65,7 +76,7 @@ function handleLoginPost(req, res) {
 
 const loginRateLimit = rateLimit({
   windowMs: 60 * 1000,
-  max: 5,
+  max: 10,
   standardHeaders: true,
   legacyHeaders: false,
   message: { error: 'Too many login attempts, try again in a minute' },
@@ -74,6 +85,7 @@ const loginRateLimit = rateLimit({
 app.get(['/api/admin/login', '/api/admin-login'], handleLoginGet);
 app.delete(['/api/admin/login', '/api/admin-login'], handleLoginDelete);
 app.post(['/api/admin/login', '/api/admin-login'], loginRateLimit, handleLoginPost);
+app.post('/api/admin/change-password', loginRateLimit, handleChangePassword);
 
 // ─── Orphaned-upload cleanup ──────────────────────────────────────────────────
 
