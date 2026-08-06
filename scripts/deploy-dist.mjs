@@ -9,8 +9,9 @@
  * Instead we upload into a staging dir and swap it in atomically on the server,
  * which prunes stale chunks every deploy with only ssh + scp:
  *   1. scp dist  → dist.new   (fresh, complete copy)
- *   2. mv dist → dist.old, mv dist.new → dist   (near-instant rename swap)
- *   3. rm dist.old
+ *   2. normalize permissions so nginx can read the uploaded build
+ *   3. mv dist → dist.old, mv dist.new → dist   (near-instant rename swap)
+ *   4. rm dist.old
  *
  * Commands run via execFileSync with an argv array (no local shell), so the
  * remote command string is passed verbatim to the server's shell — no cmd.exe /
@@ -28,8 +29,9 @@ function run(cmd, args) {
 // 1. Clean staging dir, then upload the fresh build into it.
 run('ssh', [HOST, `rm -rf ${BASE}/dist.new`]);
 run('scp', ['-r', 'dist', `${HOST}:${BASE}/dist.new`]);
+run('ssh', [HOST, `chmod -R a+rX ${BASE}/dist.new`]);
 
-// 2. Atomic-ish swap: old build aside, new build live, drop the old one.
+// 3. Atomic-ish swap: old build aside, new build live, drop the old one.
 run('ssh', [
   HOST,
   `rm -rf ${BASE}/dist.old && ` +
