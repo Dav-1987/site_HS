@@ -93,10 +93,16 @@ export default function Header() {
         <Link
           to="/"
           className="flex items-center gap-2.5 font-serif text-xl tracking-tight text-primary md:text-2xl"
-          aria-label="HS Muebles"
+          aria-label="Mirage Muebles"
         >
-          <img src="/logo-hs.png" alt="" className="h-7 w-7 md:h-9 md:w-9" />
-          <span className="text-accent">Muebles</span>
+          <img
+            src="/logo-mirage.png"
+            alt=""
+            width="438"
+            height="339"
+            className="h-7 w-auto object-contain md:h-9"
+          />
+          <span className="text-accent">Mirage Muebles</span>
         </Link>
 
         {/* Desktop navigation */}

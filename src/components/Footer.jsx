@@ -69,8 +69,14 @@ export default function Footer() {
           {/* Brand + socials + contacts */}
           <div className="max-w-sm">
             <Link to="/" className="flex items-center gap-3 font-serif text-3xl tracking-tight text-primary">
-              <img src="/logo-hs.png" alt="" className="h-9 w-9" />
-              <span className="text-accent">Muebles</span>
+              <img
+                src="/logo-mirage.png"
+                alt=""
+                width="438"
+                height="339"
+                className="h-9 w-auto object-contain"
+              />
+              <span className="text-accent">Mirage Muebles</span>
             </Link>
             <p className="mt-5 max-w-sm text-sm leading-relaxed text-secondary">
               {t('footer.tagline')}
