@@ -41,6 +41,18 @@ export function resolveRedirect(pathname, productIndex) {
   const lang = parts[0] === 'en' ? ['en'] : [];
   const rest = parts.slice(lang.length);
 
+  if (rest.length === 2 && rest[0] === 'categoria') {
+    const legacySlug = rest[1];
+    const canonicalSlug = MERGED_CATEGORIES.get(legacySlug) ?? legacySlug;
+    return `/${[...lang, canonicalSlug].join('/')}`;
+  }
+
+  if (rest.length === 2 && rest[0] === 'producto') {
+    const id = rest[1];
+    const actual = productIndex?.get(id);
+    return actual ? `/${[...lang, actual, id].join('/')}` : null;
+  }
+
   if (rest.length === 1) {
     const merged = MERGED_CATEGORIES.get(rest[0]);
     return merged ? `/${[...lang, merged].join('/')}` : null;
@@ -48,7 +60,7 @@ export function resolveRedirect(pathname, productIndex) {
 
   if (rest.length === 2) {
     const [slug, id] = rest;
-    const actual = productIndex.get(id);
+    const actual = productIndex?.get(id);
     return actual && actual !== slug ? `/${[...lang, actual, id].join('/')}` : null;
   }
 

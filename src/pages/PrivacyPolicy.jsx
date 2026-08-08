@@ -16,7 +16,7 @@ export default function PrivacyPolicy() {
 
   return (
     <>
-      <title>{t('privacy.title')} | Mirage Muebles</title>
+      <title>{`${t('privacy.title')} | Mirage Muebles`}</title>
       <meta name="description" content={t('privacy.intro')} />
       <link rel="canonical" href={canonicalUrl} />
       <HreflangLinks esPath={esPath} />

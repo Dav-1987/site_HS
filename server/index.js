@@ -568,11 +568,12 @@ app.all('/api/*', (req, res) => {
 // с одним из prerender-маршрутов (см. scripts/prerender.mjs), которые лежат в
 // dist/<route>/index.html и обслуживаются static-мидлварой выше (строка 39)
 // до того, как дойдёт до этого catch-all. Единственные легитимные маршруты,
-// не имеющие prerender-снапшота — чисто клиентские (/admin, легаси-редиректы).
-// Для них отдаём 200, для всего остального — 404, чтобы Google не считал
+// не имеющие prerender-снапшота — чисто клиентские (/admin). Legacy catalog
+// URLs are handled by the real 301 middleware below, never by the SPA.
+// Для /admin отдаём 200, для всего остального — 404, чтобы Google не считал
 // несуществующие страницы soft-404 (текст "не найдено" со статусом 200).
 
-const CLIENT_ONLY_ROUTES = [/^\/admin(\/|$)/, /^\/categoria\//, /^\/producto\//];
+const CLIENT_ONLY_ROUTES = [/^\/admin(\/|$)/];
 
 // ─── Legacy URL redirects ────────────────────────────────────────────────────
 //

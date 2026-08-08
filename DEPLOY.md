@@ -34,6 +34,11 @@ ssh root@185.202.172.59 "certbot --nginx -d hsmuebles.es -d www.hsmuebles.es --r
 ssh root@185.202.172.59 "certbot renew --dry-run"
 ```
 
+**Канонический хост:** публичным является только `https://hsmuebles.es`.
+Nginx должен одним `301` перенаправлять `http://hsmuebles.es`,
+`http://www.hsmuebles.es` и `https://www.hsmuebles.es` на тот же путь и query
+на `https://hsmuebles.es`. IP-адрес не должен отдавать копию сайта.
+
 ### Подключение к серверу
 ```bash
 ssh root@185.202.172.59
@@ -84,16 +89,13 @@ ssh root@185.202.172.59
 Когда изменился и фронтенд (src/) и бэкенд (server/):
 
 ```bash
-# 1. Собрать фронтенд (без Netlify плагина!)
-npm run build -- --config vite.config.vps.js
+# 1. Проверить, собрать SEO-снимки и атомарно развернуть фронтенд
+npm run deploy:seo
 
-# 2. Скопировать dist/ на сервер
-scp -r dist root@185.202.172.59:/var/www/hs-muebles/
+# 2. Скопировать изменённые файлы сервера
+scp server/index.js server/redirects.js server/store.js server/settings.js server/auth.js server/order.js server/notify.js root@185.202.172.59:/var/www/hs-muebles/server/
 
-# 3. Скопировать изменённые файлы сервера
-scp server/index.js server/store.js server/settings.js server/auth.js server/order.js server/notify.js root@185.202.172.59:/var/www/hs-muebles/server/
-
-# 4. Перезапустить API
+# 3. Перезапустить API
 ssh root@185.202.172.59 "pm2 restart hs-api"
 ```
 
@@ -132,8 +134,7 @@ ssh root@185.202.172.59 "pm2 restart hs-api"
 Когда изменился только src/ (React компоненты, страницы, стили):
 
 ```bash
-npm run build -- --config vite.config.vps.js
-scp -r dist root@185.202.172.59:/var/www/hs-muebles/
+npm run deploy:seo
 ```
 Перезапуск PM2 **не нужен** — статика отдаётся напрямую.
 
@@ -248,3 +249,7 @@ ORDER_EMAIL_FROM=...     # отправитель (по умолчанию SMTP_
    `pm2 restart hs-api --update-env`
 
 5. **SQL миграции** — применять вручную через psql перед деплоем бэкенда
+
+6. **Обычный `npm run build` не деплоить** — он создаёт только SPA-оболочку без
+   prerender-страниц и sitemap. Для любого публичного фронтенд-деплоя использовать
+   `npm run deploy:seo`; встроенный SEO-гейт остановит публикацию неполной сборки.

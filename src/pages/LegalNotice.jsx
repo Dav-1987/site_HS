@@ -16,7 +16,7 @@ export default function LegalNotice() {
 
   return (
     <>
-      <title>{t('legal.title')} | Mirage Muebles</title>
+      <title>{`${t('legal.title')} | Mirage Muebles`}</title>
       <meta name="description" content={t('legal.p1')} />
       <link rel="canonical" href={canonicalUrl} />
       <HreflangLinks esPath={esPath} />

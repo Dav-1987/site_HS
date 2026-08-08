@@ -3,6 +3,7 @@ import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
 import { buildRoutes } from '../src/routes.js';
 import { withLang } from '../src/i18n/routing.js';
+import { assertSeoBuild } from './seo-build-check.js';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const DIST = join(__dirname, '../dist');
@@ -64,5 +65,7 @@ ${u.alternates.map((a) => `    <xhtml:link rel="alternate" hreflang="${a.hreflan
 </urlset>
 `;
 
+const report = assertSeoBuild(DIST, allUrls);
 writeFileSync(join(DIST, 'sitemap.xml'), xml, 'utf8');
 console.log(`✅ sitemap.xml — ${allUrls.length} URLs`);
+console.log(`✅ SEO build gate — ${report.checked} prerendered pages validated`);
