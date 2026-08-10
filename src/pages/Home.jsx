@@ -27,9 +27,19 @@ function Hero() {
           a warm, styled interior with a calm zone behind the centered headline. */}
       <div className="absolute inset-0">
         {settings.hero.video ? (
-          <VideoMedia src={settings.hero.video} poster={resolveImage(settings.hero.image, 1600)} autoPlay />
+          <VideoMedia
+            src={settings.hero.video}
+            poster={resolveImage(settings.hero.image, 1600)}
+            autoPlay
+          />
         ) : (
-          <Media id={settings.hero.image} idMobile={settings.hero.imageMobile} alt={t('hero.eyebrow')} w={2000} eager />
+          <Media
+            id={settings.hero.image}
+            idMobile={settings.hero.imageMobile}
+            alt={t('hero.eyebrow')}
+            w={2000}
+            eager
+          />
         )}
       </div>
 
@@ -43,7 +53,7 @@ function Hero() {
 
       {/* Eyebrow — sits in normal flow at the top, just under the header, so it
           can never overlap the centered content below it even on short screens. */}
-      <p className="relative z-10 px-6 pt-[clamp(4.5rem,11vh,7rem)] text-[10px] font-semibold uppercase tracking-[0.2em] text-accent sm:text-sm sm:tracking-[0.4em] lg:pt-[clamp(6rem,11vh,7rem)]">
+      <p className="relative z-10 px-6 pt-[clamp(4.5rem,11vh,7rem)] text-xs font-semibold uppercase tracking-[0.2em] text-accent-text sm:text-sm sm:tracking-[0.4em] lg:pt-[clamp(6rem,11vh,7rem)]">
         {t('hero.eyebrow')}
       </p>
 
@@ -134,7 +144,10 @@ function CategoriesSection() {
         title={t('section.categories.title')}
       />
       {/* Four collections, one desktop row — no orphan card on a second line. */}
-      <Reveal stagger className="grid grid-cols-2 gap-3 sm:grid-cols-2 lg:grid-cols-4 md:gap-6 lg:gap-8">
+      <Reveal
+        stagger
+        className="grid grid-cols-2 gap-3 sm:grid-cols-2 lg:grid-cols-4 md:gap-6 lg:gap-8"
+      >
         {categories.map((c) => (
           <CategoryCard key={c.slug} category={c} />
         ))}

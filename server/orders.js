@@ -4,18 +4,48 @@
 
 import pool from './db.js';
 
-export async function saveOrder({ name, phone, address, comment, productId, productName, price, telegramSent, emailSent }) {
+export async function saveOrder({
+  eventId,
+  name,
+  phone,
+  address,
+  comment,
+  productId,
+  productName,
+  price,
+}) {
   const { rows } = await pool.query(
-    `INSERT INTO orders (name, phone, address, comment, product_id, product_name, price, telegram_sent, email_sent)
-     VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9)
+    `INSERT INTO orders (event_id, name, phone, address, comment, product_id, product_name, price)
+     VALUES ($1,$2,$3,$4,$5,$6,$7,$8)
+     ON CONFLICT (event_id) WHERE event_id IS NOT NULL DO NOTHING
      RETURNING id`,
-    [name, phone, address ?? '', comment ?? '', productId ?? '', productName ?? '', Number.isFinite(price) ? price : null, telegramSent, emailSent],
+    [
+      eventId,
+      name,
+      phone,
+      address ?? '',
+      comment ?? '',
+      productId,
+      productName,
+      Number.isFinite(price) ? price : null,
+    ],
   );
-  return rows[0].id;
+  if (rows[0]) return { id: rows[0].id, created: true };
+
+  // A concurrent INSERT with the same event id may have made us wait at the
+  // unique index. Use a second statement so it gets a fresh MVCC snapshot and
+  // can always see the committed winner.
+  const existing = await pool.query('SELECT id FROM orders WHERE event_id = $1', [eventId]);
+  if (!existing.rows[0]) throw new Error('Idempotent order could not be resolved');
+  return { id: existing.rows[0].id, created: false };
 }
 
 export async function markOrderTelegramSent(id) {
   await pool.query('UPDATE orders SET telegram_sent = true WHERE id = $1', [id]);
+}
+
+export async function markOrderEmailSent(id) {
+  await pool.query('UPDATE orders SET email_sent = true WHERE id = $1', [id]);
 }
 
 /** Delete an order by id. Returns false if no row matched. */

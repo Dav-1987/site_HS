@@ -7,6 +7,7 @@
 // letter) without rejecting legitimate international numbers — nobody can be
 // called back from a bad number, so this is worth a hard reject.
 const PHONE_CHARS_RE = /^\+?[0-9\s\-().]+$/;
+const EVENT_ID_RE = /^[A-Za-z0-9._:-]+$/;
 
 export function isValidPhone(phone) {
   if (typeof phone !== 'string') return false;
@@ -28,9 +29,31 @@ export function validateOrder(body) {
   if (body.address && body.address.length > 300) return 'address is too long';
   if (body.comment !== undefined && typeof body.comment !== 'string') return 'invalid comment';
   if (body.comment && body.comment.length > 2000) return 'comment is too long';
-  if (typeof body.productName !== 'string' || !body.productName.trim()) return 'productName is required';
-  if (body.price !== undefined && (typeof body.price !== 'number' || !Number.isFinite(body.price) || body.price < 0))
-    return 'invalid price';
+  if (typeof body.productId !== 'string' || !body.productId.trim()) return 'productId is required';
+  if (body.productId.length > 100) return 'productId is too long';
+  if (typeof body.eventId !== 'string' || !body.eventId.trim()) return 'eventId is required';
+  if (body.eventId.length > 128 || !EVENT_ID_RE.test(body.eventId)) return 'invalid eventId';
+  return null;
+}
+
+/**
+ * Resolve the product fields the server is willing to trust for an order.
+ * Client-supplied names and prices are deliberately ignored: the live catalog
+ * is the source of truth for both the label shown to staff and the current
+ * payable price.
+ */
+export function resolveOrderProduct(categories, productId) {
+  for (const category of categories ?? []) {
+    const product = category?.products?.find((item) => item.id === productId);
+    if (!product) continue;
+    const subtitle = typeof product.subtitle === 'string' ? product.subtitle.trim() : '';
+    const name = typeof product.name === 'string' ? product.name.trim() : '';
+    return {
+      productId: product.id,
+      productName: `${name}${subtitle ? ` ${subtitle}` : ''}`.trim(),
+      price: Number.isFinite(product.price) && product.price >= 0 ? product.price : 0,
+    };
+  }
   return null;
 }
 

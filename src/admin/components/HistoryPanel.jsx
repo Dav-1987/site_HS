@@ -63,7 +63,7 @@ export default function HistoryPanel({ onClose, onRestored }) {
                 <p className="text-sm text-primary">
                   {fmt(v.createdAt)}
                   {i === 0 && (
-                    <span className="ml-2 text-[10px] uppercase tracking-[0.15em] text-accent">
+                    <span className="ml-2 text-xs uppercase tracking-[0.15em] text-accent-text">
                       текущая
                     </span>
                   )}

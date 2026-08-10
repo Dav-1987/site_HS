@@ -96,3 +96,9 @@ CREATE INDEX IF NOT EXISTS idx_orders_created ON orders (created_at DESC);
 ALTER TABLE orders ADD COLUMN IF NOT EXISTS price INTEGER;
 
 ALTER TABLE orders ADD COLUMN IF NOT EXISTS address TEXT NOT NULL DEFAULT '';
+
+-- Stable browser-generated request id. The partial unique index keeps legacy
+-- rows (which have NULL here) valid while making every new order idempotent.
+ALTER TABLE orders ADD COLUMN IF NOT EXISTS event_id TEXT;
+CREATE UNIQUE INDEX IF NOT EXISTS idx_orders_event_id
+  ON orders (event_id) WHERE event_id IS NOT NULL;

@@ -8,6 +8,7 @@ export default {
         primary: 'rgb(var(--color-primary) / <alpha-value>)',
         secondary: 'rgb(var(--color-secondary) / <alpha-value>)',
         accent: 'rgb(var(--color-accent) / <alpha-value>)',
+        'accent-text': 'rgb(var(--color-accent-text) / <alpha-value>)',
         surface: 'rgb(var(--color-surface) / <alpha-value>)',
         danger: 'rgb(var(--color-danger) / <alpha-value>)',
         sale: 'rgb(var(--color-sale) / <alpha-value>)',

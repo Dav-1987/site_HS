@@ -11,6 +11,9 @@ dist/
 # Local tooling state
 .netlify
 
+# Local Wallapop preparation records (device-only working data)
+local-data/
+
 # Google service account keys — never commit (private credentials)
 *-service_account.json
 *.iam.gserviceaccount.com.json

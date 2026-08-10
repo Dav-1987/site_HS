@@ -47,9 +47,7 @@ export default function CatalogEditor({ onLogout }) {
     );
   }
   if (!categories) {
-    return (
-      <div className="mx-auto max-w-4xl px-6 py-20 text-primary/50">Загрузка каталога…</div>
-    );
+    return <div className="mx-auto max-w-4xl px-6 py-20 text-primary/50">Загрузка каталога…</div>;
   }
 
   return (
@@ -58,13 +56,13 @@ export default function CatalogEditor({ onLogout }) {
       <header className="sticky top-0 z-30 border-b border-primary/10 bg-background/90 backdrop-blur-md">
         <div className="mx-auto flex max-w-5xl items-center gap-4 px-6 py-4">
           <div>
-            <p className="text-[11px] uppercase tracking-[0.3em] text-accent">Mirage Muebles</p>
+            <p className="text-xs uppercase tracking-[0.3em] text-accent-text">Mirage Muebles</p>
             <h1 className="font-serif text-2xl font-light text-primary">Каталог</h1>
           </div>
           <div className="ml-auto flex items-center gap-4">
             {status && <span className="text-xs text-primary/60">{status}</span>}
             {(dirty || settingsDirty) && !status && (
-              <span className="text-xs text-accent">Есть несохранённые изменения</span>
+              <span className="text-xs text-accent-text">Есть несохранённые изменения</span>
             )}
             <button type="button" onClick={() => setShowOrders(true)} className={BTN_GHOST}>
               Заявки
@@ -135,7 +133,11 @@ export default function CatalogEditor({ onLogout }) {
           />
         ))}
 
-        <button type="button" onClick={addCategory} className={`${BTN_GHOST} w-full justify-center py-4`}>
+        <button
+          type="button"
+          onClick={addCategory}
+          className={`${BTN_GHOST} w-full justify-center py-4`}
+        >
           + Добавить категорию
         </button>
       </main>

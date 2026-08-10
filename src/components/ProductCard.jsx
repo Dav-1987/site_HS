@@ -7,7 +7,12 @@ import { useLanguage } from '../i18n/LanguageContext.jsx';
 import { productMedia } from '../data/catalog.js';
 
 /** Product tile: swipeable photo/video carousel + discount-aware price. */
-export default function ProductCard({ product, categorySlug, categoryName, aspectClassName = 'aspect-[4/5]' }) {
+export default function ProductCard({
+  product,
+  categorySlug,
+  categoryName,
+  aspectClassName = 'aspect-[4/5]',
+}) {
   const { lang, t } = useLanguage();
   const slug = categorySlug || product.categorySlug;
   // Canonical product URL is /<categorySlug>/<id>; the legacy /producto/<id>
@@ -80,8 +85,12 @@ export default function ProductCard({ product, categorySlug, categoryName, aspec
       <div
         ref={cardRef}
         className={`relative mb-5 ${aspectClassName} touch-pan-y overflow-hidden bg-surface [container-type:inline-size]`}
-        onPointerDown={(e) => { if (e.pointerType !== 'touch') startSwipe(e.clientX); }}
-        onPointerUp={(e) => { if (e.pointerType !== 'touch') endSwipe(e.clientX); }}
+        onPointerDown={(e) => {
+          if (e.pointerType !== 'touch') startSwipe(e.clientX);
+        }}
+        onPointerUp={(e) => {
+          if (e.pointerType !== 'touch') endSwipe(e.clientX);
+        }}
         onTouchStart={(e) => startSwipe(e.touches[0].clientX)}
         onTouchEnd={(e) => endSwipe(e.changedTouches[0].clientX)}
       >
@@ -131,7 +140,7 @@ export default function ProductCard({ product, categorySlug, categoryName, aspec
               type="button"
               aria-label={t('carousel.prev')}
               onClick={() => go(-1)}
-              className="absolute left-2 top-1/2 flex h-9 w-9 -translate-y-1/2 items-center justify-center bg-background/80 text-lg text-primary opacity-0 transition-opacity duration-300 hover:bg-background focus-visible:opacity-100 group-hover:opacity-100"
+              className="touch-target absolute left-1 top-1/2 flex -translate-y-1/2 items-center justify-center bg-background/80 text-lg text-primary opacity-0 transition-opacity duration-300 hover:bg-background focus-visible:opacity-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent group-hover:opacity-100"
             >
               ‹
             </button>
@@ -139,11 +148,11 @@ export default function ProductCard({ product, categorySlug, categoryName, aspec
               type="button"
               aria-label={t('carousel.next')}
               onClick={() => go(1)}
-              className="absolute right-2 top-1/2 flex h-9 w-9 -translate-y-1/2 items-center justify-center bg-background/80 text-lg text-primary opacity-0 transition-opacity duration-300 hover:bg-background focus-visible:opacity-100 group-hover:opacity-100"
+              className="touch-target absolute right-1 top-1/2 flex -translate-y-1/2 items-center justify-center bg-background/80 text-lg text-primary opacity-0 transition-opacity duration-300 hover:bg-background focus-visible:opacity-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent group-hover:opacity-100"
             >
               ›
             </button>
-            <div className="absolute bottom-3 left-1/2 flex -translate-x-1/2 gap-1.5">
+            <div className="no-scrollbar absolute bottom-0 left-1/2 flex max-w-full -translate-x-1/2 overflow-x-auto">
               {media.map((m, i) => (
                 <button
                   key={m.src + i}
@@ -154,18 +163,28 @@ export default function ProductCard({ product, categorySlug, categoryName, aspec
                     e.preventDefault();
                     setIdx(i);
                   }}
-                  className={`h-1.5 w-1.5 rounded-full transition-colors ${
-                    i === idx ? 'bg-primary' : 'bg-primary/30'
-                  }`}
-                />
+                  className="touch-target flex flex-none items-center justify-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-accent"
+                >
+                  <span
+                    aria-hidden="true"
+                    className={`h-1.5 w-1.5 rounded-full transition-colors ${
+                      i === idx ? 'bg-primary' : 'bg-primary/30'
+                    }`}
+                  />
+                </button>
               ))}
             </div>
           </>
         )}
       </div>
 
-      <Link to={to} aria-label={label} tabIndex={-1} className="block border-t border-primary/10 pt-4">
-        <h3 className="font-serif text-xl text-primary transition-colors duration-300 group-hover:text-accent">
+      <Link
+        to={to}
+        aria-label={label}
+        tabIndex={-1}
+        className="block border-t border-primary/10 pt-4"
+      >
+        <h3 className="font-serif text-xl text-primary transition-colors duration-300 group-hover:text-accent-text">
           {product.name}
           {/* Own line + nowrap: on a narrow 2-column card the dimensions used to
               break mid-string ("… 140" / "cm"), which read as a stray line. */}

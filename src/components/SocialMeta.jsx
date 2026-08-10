@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { useSettings } from '../settings/SettingsContext.jsx';
 import { resolveImage } from '../data/catalog.js';
 import { SITE, absUrl } from '../seo/schema.js';
@@ -16,9 +17,15 @@ const FALLBACK_IMAGE = `${SITE}/logo-mirage.png`;
  */
 export default function SocialMeta({ title, description, url, type = 'website', image }) {
   const { settings } = useSettings();
-  const seoFallback = settings?.seo?.image
-    ? resolveImage(settings.seo.image, 1600)
-    : null;
+  useEffect(() => {
+    // Signals that the lazy page containing the complete SEO head has committed.
+    // ClientReady uses this boundary to reconcile prerendered and React-owned
+    // head nodes without ever exposing an empty metadata window.
+    document.documentElement.dataset.reactHeadReady = window.location.pathname;
+    window.dispatchEvent(new Event('react-head-ready'));
+  }, [url]);
+
+  const seoFallback = settings?.seo?.image ? resolveImage(settings.seo.image, 1600) : null;
   const img = absUrl(image) || absUrl(seoFallback) || FALLBACK_IMAGE;
   const desc = description ? description.replace(/\s+/g, ' ').trim() : undefined;
   return (

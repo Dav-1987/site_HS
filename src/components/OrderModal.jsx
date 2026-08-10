@@ -1,6 +1,5 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useId, useRef, useState } from 'react';
 import { useLanguage } from '../i18n/LanguageContext.jsx';
-import { productDiscount } from '../data/catalog.js';
 import {
   trackPixel,
   setPixelUserData,
@@ -8,8 +7,6 @@ import {
   getFbCookies,
   trackGoogleAdsLead,
 } from '../lib/track.js';
-
-const TITLE_ID = 'order-modal-title';
 
 // Mirrors server/order.js's isValidPhone — kept in sync manually since client
 // and server are separate deploy targets. Loosely validates digits with an
@@ -25,6 +22,16 @@ function isValidPhone(phone) {
 
 export default function OrderModal({ product, isOpen, onClose }) {
   const { t } = useLanguage();
+  const idPrefix = useId();
+  const fieldIds = {
+    title: `${idPrefix}-title`,
+    name: `${idPrefix}-name`,
+    nameError: `${idPrefix}-name-error`,
+    phone: `${idPrefix}-phone`,
+    phoneError: `${idPrefix}-phone-error`,
+    address: `${idPrefix}-address`,
+    comment: `${idPrefix}-comment`,
+  };
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
   const [address, setAddress] = useState('');
@@ -34,6 +41,7 @@ export default function OrderModal({ product, isOpen, onClose }) {
   const [sent, setSent] = useState(false);
   const [serverError, setServerError] = useState('');
   const dialogRef = useRef(null);
+  const eventIdRef = useRef('');
 
   // onClose is a fresh arrow function on every render of the parent — keep it
   // in a ref so the focus-trap effect below only re-runs on isOpen flips, not
@@ -86,13 +94,25 @@ export default function OrderModal({ product, isOpen, onClose }) {
 
   useEffect(() => {
     document.body.style.overflow = isOpen ? 'hidden' : '';
-    return () => { document.body.style.overflow = ''; };
+    return () => {
+      document.body.style.overflow = '';
+    };
   }, [isOpen]);
 
   useEffect(() => {
     if (isOpen) {
-      setName(''); setPhone(''); setAddress(''); setComment('');
-      setErrors({}); setSending(false); setSent(false); setServerError('');
+      setName('');
+      setPhone('');
+      setAddress('');
+      setComment('');
+      setErrors({});
+      setSending(false);
+      setSent(false);
+      setServerError('');
+      // Keep one id across network retries while this order dialog is open.
+      // The server uses it as the durable idempotency key.
+      eventIdRef.current =
+        window.crypto?.randomUUID?.() ?? `${Date.now()}-${Math.random().toString(36).slice(2)}`;
     }
   }, [isOpen]);
 
@@ -121,8 +141,7 @@ export default function OrderModal({ product, isOpen, onClose }) {
     setSending(true);
     setServerError('');
     try {
-      const eventId =
-        window.crypto?.randomUUID?.() ?? `${Date.now()}-${Math.random().toString(36).slice(2)}`;
+      const eventId = eventIdRef.current;
       const { fbp, fbc } = getFbCookies();
       const res = await fetch('/api/order', {
         method: 'POST',
@@ -132,15 +151,13 @@ export default function OrderModal({ product, isOpen, onClose }) {
           phone,
           address: address.trim() || undefined,
           comment: comment.trim() || undefined,
-          productName: productLabel,
           productId: product.id,
-          price: productDiscount(product).price,
           // Conversions API: shared event_id (dedup with the browser Lead) + match keys.
           eventId,
           fbp,
           fbc,
           eventSourceUrl: window.location.href,
-          _gotcha: e.currentTarget._gotcha.value,
+          _gotcha: e.currentTarget.elements.namedItem('_gotcha')?.value ?? '',
         }),
       });
       const data = await res.json();
@@ -169,16 +186,20 @@ export default function OrderModal({ product, isOpen, onClose }) {
       className="fixed inset-0 z-[100] flex items-center justify-center p-4"
       role="dialog"
       aria-modal="true"
-      aria-labelledby={TITLE_ID}
+      aria-labelledby={fieldIds.title}
     >
-      <div className="absolute inset-0 bg-primary/40 backdrop-blur-sm" onClick={onClose} aria-hidden="true" />
+      <div
+        className="absolute inset-0 bg-primary/40 backdrop-blur-sm"
+        onClick={onClose}
+        aria-hidden="true"
+      />
 
       <div className="relative w-full max-w-md bg-background shadow-floating">
         <button
           type="button"
           onClick={onClose}
           aria-label={t('nav.close')}
-          className="absolute right-4 top-4 flex h-8 w-8 items-center justify-center text-xl text-primary/30 transition-colors hover:text-primary"
+          className="touch-target absolute right-2 top-2 flex items-center justify-center text-xl text-primary/50 transition-colors hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
         >
           ×
         </button>
@@ -186,7 +207,7 @@ export default function OrderModal({ product, isOpen, onClose }) {
         <div className="p-8 pt-10">
           {sent ? (
             <div className="py-4 text-center">
-              <p id={TITLE_ID} className="font-serif text-2xl font-light text-primary">
+              <p id={fieldIds.title} className="font-serif text-2xl font-light text-primary">
                 {t('order.success.title').replace('{name}', name.trim())}
               </p>
               <p className="mt-3 text-sm leading-relaxed text-secondary">
@@ -195,93 +216,140 @@ export default function OrderModal({ product, isOpen, onClose }) {
               <button
                 type="button"
                 onClick={onClose}
-                className="mt-8 text-xs uppercase tracking-[0.2em] text-accent hover:underline"
+                className="touch-target mt-6 inline-flex items-center px-2 text-xs uppercase tracking-[0.2em] text-accent-text hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
               >
                 {t('nav.close')}
               </button>
             </div>
           ) : (
             <>
-              <p className="mb-1 text-[10px] uppercase tracking-[0.25em] text-accent">
+              <p className="mb-1 text-xs uppercase tracking-[0.25em] text-accent-text">
                 {t('order.modal.eyebrow')}
               </p>
-              <h2 id={TITLE_ID} className="font-serif text-xl font-light text-primary">{productLabel}</h2>
+              <h2 id={fieldIds.title} className="font-serif text-xl font-light text-primary">
+                {productLabel}
+              </h2>
 
               <form onSubmit={handleSubmit} className="mt-6 space-y-4" noValidate>
                 <div>
-                  <label className="mb-1 block text-[11px] uppercase tracking-[0.2em] text-primary/50">
+                  <label
+                    htmlFor={fieldIds.name}
+                    className="mb-1 block text-xs uppercase tracking-[0.2em] text-primary/70"
+                  >
                     {t('order.form.name')} *
                   </label>
                   <input
+                    id={fieldIds.name}
                     type="text"
                     name="name"
                     autoComplete="name"
                     value={name}
-                    onChange={(e) => { setName(e.target.value); setErrors((p) => ({ ...p, name: '' })); }}
+                    onChange={(e) => {
+                      setName(e.target.value);
+                      setErrors((p) => ({ ...p, name: '' }));
+                    }}
                     placeholder={t('order.form.name.placeholder')}
-                    className="w-full border border-primary/20 bg-transparent px-3 py-2.5 text-sm text-primary outline-none transition-colors focus:border-accent"
+                    aria-invalid={Boolean(errors.name)}
+                    aria-describedby={errors.name ? fieldIds.nameError : undefined}
+                    className="w-full border border-primary/20 bg-transparent px-3 py-2.5 text-sm text-primary outline-none transition-colors focus:border-accent focus-visible:ring-2 focus-visible:ring-accent/40"
                   />
-                  {errors.name && <p className="mt-1 text-xs text-red-500">{errors.name}</p>}
+                  {errors.name && (
+                    <p id={fieldIds.nameError} role="alert" className="mt-1 text-xs text-danger">
+                      {errors.name}
+                    </p>
+                  )}
                 </div>
 
                 <div>
-                  <label className="mb-1 block text-[11px] uppercase tracking-[0.2em] text-primary/50">
+                  <label
+                    htmlFor={fieldIds.phone}
+                    className="mb-1 block text-xs uppercase tracking-[0.2em] text-primary/70"
+                  >
                     {t('order.form.phone')} *
                   </label>
                   <input
+                    id={fieldIds.phone}
                     type="tel"
                     name="phone"
                     autoComplete="tel"
                     inputMode="tel"
                     value={phone}
-                    onChange={(e) => { setPhone(e.target.value); setErrors((p) => ({ ...p, phone: '' })); }}
+                    onChange={(e) => {
+                      setPhone(e.target.value);
+                      setErrors((p) => ({ ...p, phone: '' }));
+                    }}
                     placeholder={t('order.form.phone.placeholder')}
-                    className="w-full border border-primary/20 bg-transparent px-3 py-2.5 text-sm text-primary outline-none transition-colors focus:border-accent"
+                    aria-invalid={Boolean(errors.phone)}
+                    aria-describedby={errors.phone ? fieldIds.phoneError : undefined}
+                    className="w-full border border-primary/20 bg-transparent px-3 py-2.5 text-sm text-primary outline-none transition-colors focus:border-accent focus-visible:ring-2 focus-visible:ring-accent/40"
                   />
-                  {errors.phone && <p className="mt-1 text-xs text-red-500">{errors.phone}</p>}
+                  {errors.phone && (
+                    <p id={fieldIds.phoneError} role="alert" className="mt-1 text-xs text-danger">
+                      {errors.phone}
+                    </p>
+                  )}
                 </div>
 
                 <div>
-                  <label className="mb-1 block text-[11px] uppercase tracking-[0.2em] text-primary/50">
+                  <label
+                    htmlFor={fieldIds.address}
+                    className="mb-1 block text-xs uppercase tracking-[0.2em] text-primary/70"
+                  >
                     {t('order.form.address')}
                   </label>
                   <input
+                    id={fieldIds.address}
                     type="text"
                     name="address"
                     autoComplete="street-address"
                     value={address}
                     onChange={(e) => setAddress(e.target.value)}
                     placeholder={t('order.form.address.placeholder')}
-                    className="w-full border border-primary/20 bg-transparent px-3 py-2.5 text-sm text-primary outline-none transition-colors focus:border-accent"
+                    className="w-full border border-primary/20 bg-transparent px-3 py-2.5 text-sm text-primary outline-none transition-colors focus:border-accent focus-visible:ring-2 focus-visible:ring-accent/40"
                   />
                 </div>
 
                 <div>
-                  <label className="mb-1 block text-[11px] uppercase tracking-[0.2em] text-primary/50">
+                  <label
+                    htmlFor={fieldIds.comment}
+                    className="mb-1 block text-xs uppercase tracking-[0.2em] text-primary/70"
+                  >
                     {t('order.form.comment')}
                   </label>
                   <textarea
+                    id={fieldIds.comment}
+                    name="comment"
                     value={comment}
                     onChange={(e) => setComment(e.target.value)}
                     rows={3}
                     placeholder={t('order.form.comment.placeholder')}
-                    className="w-full resize-none border border-primary/20 bg-transparent px-3 py-2.5 text-sm text-primary outline-none transition-colors focus:border-accent"
+                    className="w-full resize-none border border-primary/20 bg-transparent px-3 py-2.5 text-sm text-primary outline-none transition-colors focus:border-accent focus-visible:ring-2 focus-visible:ring-accent/40"
                   />
                 </div>
 
-                {serverError && <p className="text-xs text-red-500">{serverError}</p>}
+                {serverError && (
+                  <p role="alert" aria-live="assertive" className="text-xs text-danger">
+                    {serverError}
+                  </p>
+                )}
 
-                <input type="text" name="_gotcha" className="hidden" tabIndex={-1} aria-hidden="true" />
+                <input
+                  type="text"
+                  name="_gotcha"
+                  className="hidden"
+                  tabIndex={-1}
+                  aria-hidden="true"
+                />
 
                 <button
                   type="submit"
                   disabled={sending}
                   aria-busy={sending}
-                  className="w-full bg-primary py-3.5 text-xs uppercase tracking-[0.25em] text-background transition-colors hover:bg-accent disabled:opacity-50"
+                  className="touch-target w-full bg-primary px-4 text-xs uppercase tracking-[0.25em] text-background transition-colors hover:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 disabled:opacity-50"
                 >
                   {sending ? t('order.form.sending') : t('order.form.submit')}
                 </button>
-                <p className="text-center text-[10px] leading-relaxed text-primary/40">
+                <p className="text-center text-xs leading-relaxed text-primary/60">
                   {t('order.form.privacyNotice')}
                 </p>
               </form>

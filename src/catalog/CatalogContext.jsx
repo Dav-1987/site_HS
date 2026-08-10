@@ -27,17 +27,16 @@ function writeCache(categories) {
 }
 
 /**
- * Holds the live catalog. Starts from localStorage cache (fastest, up-to-date
- * after any previous visit), or `initialCatalog` (only passed by the SSR/
- * prerender entry point — see entry-server.jsx), or empty; then hydrates from
- * /api/catalog and persists the result back to localStorage. The bundled
- * default dataset is only ever loaded (dynamically, off the critical path) if
- * the API is unreachable and there's nothing else to show — prerendering
- * already covers the "meaningful content on first paint" case, so shipping
- * the whole catalog to every visitor's browser isn't worth the bundle size.
+ * Holds the live catalog. Hydration starts from `initialCatalog`, matching the
+ * prerender exactly; client-only routes start from localStorage or empty. Both
+ * paths then refresh from /api/catalog and persist the result back to cache.
+ * The bundled default dataset is loaded dynamically for hydration or as the
+ * last-resort offline fallback, so it stays outside the critical JS chunk.
  */
 export function CatalogProvider({ children, initialCatalog }) {
-  const [categories, setCategories] = useState(() => readCache() ?? initialCatalog ?? []);
+  // During hydration the prerendered catalog must win over any stale browser
+  // cache so the first client tree is byte-for-byte equivalent to the SSR tree.
+  const [categories, setCategories] = useState(() => initialCatalog ?? readCache() ?? []);
   const [loaded, setLoaded] = useState(false);
   const hasStartingData = useRef(categories.length > 0);
 

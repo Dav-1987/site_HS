@@ -3,6 +3,7 @@ import { Routes, Route, Navigate, useParams, useLocation } from 'react-router-do
 import { useCatalog } from './catalog/CatalogContext.jsx';
 import Layout from './components/Layout.jsx';
 import ErrorBoundary from './components/ErrorBoundary.jsx';
+import RouteFallback from './components/RouteFallback.jsx';
 import { trackPixel } from './lib/track.js';
 
 const Home = lazy(() => import('./pages/Home.jsx'));
@@ -14,6 +15,7 @@ const PrivacyPolicy = lazy(() => import('./pages/PrivacyPolicy.jsx'));
 const LegalNotice = lazy(() => import('./pages/LegalNotice.jsx'));
 const NotFound = lazy(() => import('./pages/NotFound.jsx'));
 const Admin = lazy(() => import('./pages/Admin.jsx'));
+const WallapopPanel = import.meta.env.DEV ? lazy(() => import('./pages/WallapopPanel.jsx')) : null;
 
 /** Old /categoria/:slug URLs → canonical /:slug (kept so saved links survive).
  *  Spanish-only: this legacy URL form never existed under /en. */
@@ -91,7 +93,24 @@ export default function App() {
     <ErrorBoundary key={location.pathname}>
       <Routes>
         {/* Admin lives outside the marketing Layout (no header/footer). */}
-        <Route path="/admin" element={<Suspense fallback={null}><Admin /></Suspense>} />
+        <Route
+          path="/admin"
+          element={
+            <Suspense fallback={<RouteFallback fullPage />}>
+              <Admin />
+            </Suspense>
+          }
+        />
+        {WallapopPanel && (
+          <Route
+            path="/wallapop"
+            element={
+              <Suspense fallback={<RouteFallback fullPage />}>
+                <WallapopPanel />
+              </Suspense>
+            }
+          />
+        )}
 
         {/* Spanish — default, unprefixed. */}
         <Route path="/" element={<Layout />}>

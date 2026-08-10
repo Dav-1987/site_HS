@@ -26,7 +26,7 @@ const PERK_OPTIONS = PERK_VARIANTS.map((value) => ({
 
 function SectionLabel({ children }) {
   return (
-    <div className="mt-5 mb-2 border-t border-primary/10 pt-4 text-[11px] font-medium uppercase tracking-[0.22em] text-accent/70 first:mt-0 first:border-t-0 first:pt-0">
+    <div className="mt-5 mb-2 border-t border-primary/10 pt-4 text-xs font-medium uppercase tracking-[0.22em] text-accent-text first:mt-0 first:border-t-0 first:pt-0">
       {children}
     </div>
   );
@@ -66,10 +66,14 @@ export default function ProductEditor({
           onClick={() => setOpen((o) => !o)}
           className="flex flex-1 items-center gap-3 text-left min-w-0"
         >
-          <span className={`shrink-0 text-base transition-transform ${open ? 'rotate-45' : ''}`}>+</span>
+          <span className={`shrink-0 text-base transition-transform ${open ? 'rotate-45' : ''}`}>
+            +
+          </span>
           <span className="truncate font-serif text-lg font-light text-primary">
             {product.name || <span className="text-primary/30">Новый товар</span>}
-            {product.subtitle && <span className="ml-2 text-sm text-primary/40">{product.subtitle}</span>}
+            {product.subtitle && (
+              <span className="ml-2 text-sm text-primary/40">{product.subtitle}</span>
+            )}
           </span>
           {product.reference && (
             <span className="shrink-0 text-sm font-bold text-primary">{product.reference}</span>
@@ -93,10 +97,23 @@ export default function ProductEditor({
             )}
           </span>
         </button>
-        <button type="button" onClick={onDuplicate} title="Дублировать товар" className={BTN_GHOST}>⧉</button>
-        <button type="button" onClick={() => onMove(-1)} disabled={isFirst} className={BTN_GHOST}>↑</button>
-        <button type="button" onClick={() => onMove(1)} disabled={isLast} className={BTN_GHOST}>↓</button>
-        <button type="button" onClick={onRemove} title="Удалить товар" className="text-xs uppercase tracking-[0.18em] text-red-600 hover:underline px-2">×</button>
+        <button type="button" onClick={onDuplicate} title="Дублировать товар" className={BTN_GHOST}>
+          ⧉
+        </button>
+        <button type="button" onClick={() => onMove(-1)} disabled={isFirst} className={BTN_GHOST}>
+          ↑
+        </button>
+        <button type="button" onClick={() => onMove(1)} disabled={isLast} className={BTN_GHOST}>
+          ↓
+        </button>
+        <button
+          type="button"
+          onClick={onRemove}
+          title="Удалить товар"
+          className="text-xs uppercase tracking-[0.18em] text-red-600 hover:underline px-2"
+        >
+          ×
+        </button>
       </div>
 
       {/* Body */}
@@ -143,13 +160,22 @@ export default function ProductEditor({
             />
           </div>
           <p className="mt-2 text-xs text-primary/40">
-            «Старая цена» больше текущей → показывается зачёркнутой рядом с актуальной. 0 — без скидки.
+            «Старая цена» больше текущей → показывается зачёркнутой рядом с актуальной. 0 — без
+            скидки.
           </p>
 
           <SectionLabel>Материал</SectionLabel>
           <div className="grid gap-3 sm:grid-cols-2">
-            <Field label="Материал (исп.)" value={product.material?.es} onChange={(v) => setMat('es', v)} />
-            <Field label="Материал (англ.)" value={product.material?.en} onChange={(v) => setMat('en', v)} />
+            <Field
+              label="Материал (исп.)"
+              value={product.material?.es}
+              onChange={(v) => setMat('es', v)}
+            />
+            <Field
+              label="Материал (англ.)"
+              value={product.material?.en}
+              onChange={(v) => setMat('en', v)}
+            />
           </div>
 
           <SectionLabel>Описание</SectionLabel>
@@ -175,8 +201,8 @@ export default function ProductEditor({
             />
           </div>
           <p className="mt-2 text-xs leading-relaxed text-primary/40">
-            Первые два пункта — «Entrega confiable» и «Instalación gratuita» — одинаковы
-            у всех товаров. Здесь выбирается только третий, вместе со своей иконкой.
+            Первые два пункта — «Entrega confiable» и «Instalación gratuita» — одинаковы у всех
+            товаров. Здесь выбирается только третий, вместе со своей иконкой.
           </p>
 
           <SectionLabel>Фото и видео</SectionLabel>
@@ -195,8 +221,8 @@ export default function ProductEditor({
 
           <SectionLabel>Похожие товары («You may also like»)</SectionLabel>
           <p className="mb-2 text-xs leading-relaxed text-primary/40">
-            Что показывать в блоке на странице этого товара. Пусто — берутся товары
-            из этой же категории.
+            Что показывать в блоке на странице этого товара. Пусто — берутся товары из этой же
+            категории.
           </p>
           <ProductPicker
             value={product.related || []}

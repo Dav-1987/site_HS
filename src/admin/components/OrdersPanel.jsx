@@ -45,9 +45,7 @@ export default function OrdersPanel({ onClose }) {
 
         {error && <p className="mb-4 text-sm text-red-600">{error}</p>}
         {!orders && !error && <p className="text-primary/50">Загрузка…</p>}
-        {orders && orders.length === 0 && (
-          <p className="text-primary/50">Пока нет заявок.</p>
-        )}
+        {orders && orders.length === 0 && <p className="text-primary/50">Пока нет заявок.</p>}
 
         <ul className="space-y-3">
           {orders?.map((o) => (
@@ -59,10 +57,10 @@ export default function OrdersPanel({ onClose }) {
                 </div>
                 <div className="flex shrink-0 items-center gap-3">
                   <div className="flex gap-1.5 text-[10px] uppercase tracking-[0.1em]">
-                    <span className={o.telegramSent ? 'text-accent' : 'text-primary/30'}>
+                    <span className={o.telegramSent ? 'text-accent-text' : 'text-primary/30'}>
                       Telegram {o.telegramSent ? '✓' : '✗'}
                     </span>
-                    <span className={o.emailSent ? 'text-accent' : 'text-primary/30'}>
+                    <span className={o.emailSent ? 'text-accent-text' : 'text-primary/30'}>
                       Email {o.emailSent ? '✓' : '✗'}
                     </span>
                   </div>
@@ -78,7 +76,9 @@ export default function OrdersPanel({ onClose }) {
                 </div>
               </div>
               <p className="mt-2 text-sm text-primary/80">
-                <a href={`tel:${o.phone}`} className="hover:text-accent">{o.phone}</a>
+                <a href={`tel:${o.phone}`} className="hover:text-accent-text">
+                  {o.phone}
+                </a>
               </p>
               {o.productName && (
                 <p className="mt-1 text-sm text-primary/70">
@@ -87,7 +87,7 @@ export default function OrdersPanel({ onClose }) {
                 </p>
               )}
               {typeof o.price === 'number' && (
-                <p className="mt-1 text-sm text-accent">{o.price} €</p>
+                <p className="mt-1 text-sm text-accent-text">{o.price} €</p>
               )}
               {o.address && <p className="mt-1 text-sm text-primary/70">{o.address}</p>}
               {o.comment && <p className="mt-1 text-sm text-primary/60">{o.comment}</p>}

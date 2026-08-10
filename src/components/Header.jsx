@@ -29,8 +29,8 @@ function LangToggle({ className = '' }) {
             onClick={() => switchTo(l.code)}
             aria-label={`${l.label}`}
             aria-pressed={lang === l.code}
-            className={`transition-colors duration-300 ${
-              lang === l.code ? 'text-accent' : 'text-primary/70 hover:text-primary'
+            className={`touch-target inline-flex items-center justify-center px-1 transition-colors duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 ${
+              lang === l.code ? 'text-accent-text' : 'text-primary/70 hover:text-primary'
             }`}
           >
             {l.label}
@@ -102,7 +102,7 @@ export default function Header() {
             height="339"
             className="h-7 w-auto object-contain md:h-9"
           />
-          <span className="text-accent">Mirage Muebles</span>
+          <span className="text-accent-text">Mirage Muebles</span>
         </Link>
 
         {/* Desktop navigation */}
@@ -122,7 +122,7 @@ export default function Header() {
                   <Link
                     key={c.slug}
                     to={`/${c.slug}`}
-                    className="group/item flex items-center justify-between border-b border-primary/5 py-2.5 text-sm text-primary/70 transition-colors duration-300 hover:text-accent focus-visible:outline-none focus-visible:text-accent"
+                    className="group/item flex items-center justify-between border-b border-primary/5 py-2.5 text-sm text-primary/70 transition-colors duration-300 hover:text-accent-text focus-visible:outline-none focus-visible:text-accent-text"
                   >
                     <span>{c.name[lang]}</span>
                     <span
@@ -151,7 +151,7 @@ export default function Header() {
             onClick={() => setMobileOpen((v) => !v)}
             aria-label={mobileOpen ? t('nav.close') : t('nav.menu')}
             aria-expanded={mobileOpen}
-            className="flex h-10 w-10 flex-col items-center justify-center gap-[5px] lg:hidden"
+            className="touch-target flex flex-col items-center justify-center gap-[5px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent lg:hidden"
           >
             <span
               className={`h-px w-6 bg-primary transition-transform duration-300 ${
@@ -180,7 +180,10 @@ export default function Header() {
         style={{ height: mobileOpen ? 'calc(100dvh - 3.5rem)' : 0 }}
       >
         <nav className="flex flex-col px-6 py-8" aria-label={t('nav.menu')}>
-          <NavLink to="/" className="border-b border-primary/10 py-4 font-serif text-2xl font-light">
+          <NavLink
+            to="/"
+            className="border-b border-primary/10 py-4 font-serif text-2xl font-light"
+          >
             {t('nav.home')}
           </NavLink>
 
@@ -206,15 +209,14 @@ export default function Header() {
           >
             <div className="overflow-hidden">
               <div className="flex flex-col border-b border-primary/10 py-2">
-                <Link to="/catalogo" className="py-2 text-sm uppercase tracking-[0.15em] text-accent">
+                <Link
+                  to="/catalogo"
+                  className="py-2 text-sm uppercase tracking-[0.15em] text-accent-text"
+                >
                   {t('common.viewAll')}
                 </Link>
                 {categories.map((c) => (
-                  <Link
-                    key={c.slug}
-                    to={`/${c.slug}`}
-                    className="py-2 text-base text-primary/70"
-                  >
+                  <Link key={c.slug} to={`/${c.slug}`} className="py-2 text-base text-primary/70">
                     {c.name[lang]}
                   </Link>
                 ))}
@@ -228,7 +230,6 @@ export default function Header() {
           >
             {t('nav.contact')}
           </NavLink>
-
         </nav>
       </div>
     </header>

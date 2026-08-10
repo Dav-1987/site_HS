@@ -55,7 +55,7 @@ export default function CategoryCard({ category }) {
           <h3 className="font-serif text-base font-light leading-tight text-background md:text-2xl lg:text-3xl">
             {category.name[lang]}
           </h3>
-          <p className="mt-1 text-[9px] uppercase tracking-[0.2em] text-background/60 md:mt-1.5 md:text-[11px]">
+          <p className="mt-1 text-xs uppercase tracking-[0.2em] text-background/80 md:mt-1.5">
             {category.products.length} {t('category.products')}
           </p>
         </div>

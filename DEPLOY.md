@@ -100,7 +100,10 @@ ssh root@185.202.172.59 "pm2 restart hs-api"
 ```
 
 > Если менялся `server/package.json` (новые зависимости), перед перезапуском:
-> `ssh root@185.202.172.59 "cd /var/www/hs-muebles/server && npm install"`
+> `ssh root@185.202.172.59 "cd /var/www/hs-muebles/server && npm ci --omit=dev"`
+>
+> Клиент и API требуют Node.js 20.9 или новее. На VPS перед обновлением
+> зависимостей проверьте `node --version`.
 
 ---
 
@@ -114,8 +117,12 @@ ssh root@185.202.172.59 "pm2 restart hs-api"
 несколько ботов), `vite build` там рисковал уронить и сайт, и соседей.
 
 - Workflow: `.github/workflows/rebuild-deploy.yml` (`workflow_dispatch`) —
-  `catalog:pull` (свежие данные из живого `/api/catalog`) → `build:seo` →
-  деплой на VPS по SSH тем же `scripts/deploy-dist.mjs`.
+  запускается только для `main`; выполняет чистую установку клиентских и серверных
+  зависимостей → security-аудит → lint и тесты → `catalog:pull` → `build:seo`
+  с браузерной проверкой → сохраняет проверенный `dist` как артефакт → деплоит
+  на VPS по SSH через `scripts/deploy-dist.mjs`.
+- После переключения релиза workflow проверяет публичный маркер сборки и
+  `/api/health`. При ошибке предыдущая версия `dist` восстанавливается автоматически.
 - Триггерит и опрашивает статус `server/rebuild.js` через GitHub API —
   нужен `GH_REBUILD_TOKEN` в `.env` (fine-grained PAT, только этот репозиторий,
   Actions: Read and write; см. `.env.example`). Без токена кнопка в админке
@@ -223,7 +230,7 @@ ORDER_EMAIL_FROM=...     # отправитель (по умолчанию SMTP_
 
 После правки `.env`: `pm2 restart hs-api --update-env`.
 Каждая заявка дублируется в логи PM2 (`pm2 logs hs-api`) — даже если оба канала упали.
-Требуется пакет `nodemailer` (`cd /var/www/hs-muebles/server && npm install`).
+Требуется пакет `nodemailer` (`cd /var/www/hs-muebles/server && npm ci --omit=dev`).
 
 ---
 

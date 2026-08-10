@@ -26,12 +26,12 @@ export default function OtherModelsCard() {
       className="group block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-4 focus-visible:ring-offset-background"
     >
       <article className="flex aspect-[4/5] flex-col items-center justify-center gap-5 border border-primary/15 bg-surface px-4 text-center transition-colors duration-500 group-hover:border-accent/50">
-        <h3 className="font-serif text-xl font-light leading-tight tracking-tight text-primary transition-colors duration-300 group-hover:text-accent md:text-2xl">
+        <h3 className="font-serif text-xl font-light leading-tight tracking-tight text-primary transition-colors duration-300 group-hover:text-accent-text md:text-2xl">
           {name}
         </h3>
         <span
           aria-hidden="true"
-          className="flex h-10 w-10 items-center justify-center rounded-full border border-primary/20 text-primary/60 transition-all duration-500 group-hover:border-accent group-hover:text-accent"
+          className="touch-target flex items-center justify-center rounded-full border border-primary/20 text-primary/60 transition-all duration-500 group-hover:border-accent group-hover:text-accent-text"
         >
           →
         </span>

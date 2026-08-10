@@ -3,6 +3,7 @@ import { Outlet, useLocation } from 'react-router-dom';
 import Header from './Header.jsx';
 import Footer from './Footer.jsx';
 import CookieBanner from './CookieBanner.jsx';
+import RouteFallback from './RouteFallback.jsx';
 import { gsap, ScrollTrigger } from '../lib/gsap.js';
 import { useLanguage } from '../i18n/LanguageContext.jsx';
 import { useSettings } from '../settings/SettingsContext.jsx';
@@ -81,7 +82,7 @@ export default function Layout() {
       </a>
       <Header />
       <main id="main-content" className={`flex-1 ${isHome ? '' : 'pt-14 lg:pt-20'}`}>
-        <Suspense fallback={null}>
+        <Suspense fallback={<RouteFallback />}>
           <Outlet />
         </Suspense>
       </main>

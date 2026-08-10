@@ -38,7 +38,9 @@ function UploadSlot({ kind, src, onUploaded, label }) {
               <img src={resolveImage(src, 200)} alt="" className="h-full w-full object-cover" />
             )
           ) : (
-            <div className="flex h-full w-full items-center justify-center text-[10px] text-primary/25">—</div>
+            <div className="flex h-full w-full items-center justify-center text-[10px] text-primary/25">
+              —
+            </div>
           )}
         </div>
         <label className={`${BTN_GHOST} cursor-pointer`}>
@@ -88,8 +90,7 @@ export default function FeaturedCardsEditor({ value, onChange, allProducts }) {
 
   // "Name · ARTÍCULO · Category" so products that share a name (e.g. "Tocador")
   // can be told apart by their reference (артикул) in the dropdown.
-  const optionLabel = (p) =>
-    [p.name, p.reference, p.categoryName].filter(Boolean).join(' · ');
+  const optionLabel = (p) => [p.name, p.reference, p.categoryName].filter(Boolean).join(' · ');
   const labelOf = (id) => {
     const p = allProducts.find((x) => x.id === id);
     return p ? optionLabel(p) : `${id} (удалён?)`;
@@ -111,9 +112,9 @@ export default function FeaturedCardsEditor({ value, onChange, allProducts }) {
         <div className="space-y-4 border-t border-primary/10 px-5 py-6">
           <p className="text-xs leading-relaxed text-primary/45">
             Карточки блока «Featured pieces» на главной. Каждая ведёт на выбранный товар и
-            показывает его название и цену. Обложка видна всегда; видео проигрывается при
-            наведении курсора (ПК) или когда карточка полностью видна (моб.). Клик/тап — переход
-            на товар. Пусто — подборка формируется автоматически.
+            показывает его название и цену. Обложка видна всегда; видео проигрывается при наведении
+            курсора (ПК) или когда карточка полностью видна (моб.). Клик/тап — переход на товар.
+            Пусто — подборка формируется автоматически.
           </p>
 
           {cards.map((card, i) => {
@@ -128,7 +129,12 @@ export default function FeaturedCardsEditor({ value, onChange, allProducts }) {
                   <span className="min-w-0 flex-1 truncate text-sm text-primary">
                     {card.productId ? labelOf(card.productId) : 'Товар не выбран'}
                   </span>
-                  <button type="button" onClick={() => move(i, -1)} disabled={i === 0} className={BTN_GHOST}>
+                  <button
+                    type="button"
+                    onClick={() => move(i, -1)}
+                    disabled={i === 0}
+                    className={BTN_GHOST}
+                  >
                     ↑
                   </button>
                   <button
@@ -164,7 +170,9 @@ export default function FeaturedCardsEditor({ value, onChange, allProducts }) {
                     ))}
                   </select>
                   {!card.productId && (
-                    <p className="mt-1 text-xs text-accent">Без товара карточка не покажется на сайте.</p>
+                    <p className="mt-1 text-xs text-accent-text">
+                      Без товара карточка не покажется на сайте.
+                    </p>
                   )}
                 </div>
 

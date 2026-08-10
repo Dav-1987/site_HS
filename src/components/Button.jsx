@@ -6,7 +6,7 @@ const BASE =
 const VARIANTS = {
   outline: 'border border-primary/20 text-primary hover:bg-primary hover:text-background',
   solid: 'bg-primary text-background hover:bg-accent hover:text-primary',
-  ghost: 'px-0 text-primary hover:text-accent',
+  ghost: 'px-0 text-primary hover:text-accent-text',
 };
 
 /** Polymorphic CTA — renders a router Link, an anchor, or a button. */

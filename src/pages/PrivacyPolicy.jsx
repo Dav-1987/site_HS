@@ -32,14 +32,20 @@ export default function PrivacyPolicy() {
           </h1>
         </Reveal>
 
-        <Reveal delay={0.1} className="mt-10 max-w-xl space-y-5 text-sm leading-relaxed text-secondary">
+        <Reveal
+          delay={0.1}
+          className="mt-10 max-w-xl space-y-5 text-sm leading-relaxed text-secondary"
+        >
           <p>{t('privacy.intro')}</p>
           <p>{t('privacy.p1')}</p>
           <p>{t('privacy.p2')}</p>
           <p>{t('privacy.p3')}</p>
           <p>
             {before}
-            <a href={`mailto:${email}`} className="text-primary underline transition-colors hover:text-accent">
+            <a
+              href={`mailto:${email}`}
+              className="text-primary underline transition-colors hover:text-accent-text"
+            >
               {email}
             </a>
             {after}

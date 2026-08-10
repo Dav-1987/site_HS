@@ -104,8 +104,13 @@ export default function FeaturedCard({ item, aspectClassName = 'aspect-[4/5]' })
         <DiscountBadge product={item} />
       </Link>
 
-      <Link to={to} aria-label={label} tabIndex={-1} className="block border-t border-primary/10 pt-4">
-        <h3 className="font-serif text-xl text-primary transition-colors duration-300 group-hover:text-accent">
+      <Link
+        to={to}
+        aria-label={label}
+        tabIndex={-1}
+        className="block border-t border-primary/10 pt-4"
+      >
+        <h3 className="font-serif text-xl text-primary transition-colors duration-300 group-hover:text-accent-text">
           {item.name}
           {item.subtitle && (
             <span className="block whitespace-nowrap text-xs text-primary/45 sm:text-sm">

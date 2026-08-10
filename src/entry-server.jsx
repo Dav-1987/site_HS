@@ -7,9 +7,8 @@
  * all fetch/document access lives in useEffect — so on the server the tree
  * renders from the bundled default catalog (loaded once below, then passed in
  * as `initialCatalog`) and defaultSettings, which is exactly the content we
- * want crawlers to see. The client bundle never imports the catalog dataset
- * this way — see data/catalog.js — this SSR-only entry point is the sole
- * place that loads it eagerly.
+ * want crawlers to see. The client loads the same code-split catalog chunk
+ * before hydration (see main.jsx), then refreshes from the live API.
  *
  * Routes are code-split with React.lazy (great for the client bundle), so the
  * prerender must wait for every Suspense boundary before saving the snapshot.
@@ -26,6 +25,7 @@ import { SettingsProvider } from './settings/SettingsContext.jsx';
 import { LanguageProvider } from './i18n/LanguageContext.jsx';
 import { CatalogProvider } from './catalog/CatalogContext.jsx';
 import { loadDefaultCatalog } from './data/catalog.js';
+import { defaultSettings } from './data/settings.js';
 
 const RENDER_TIMEOUT_MS = 15_000;
 
@@ -78,7 +78,7 @@ export async function render(url) {
   const tree = (
     <StrictMode>
       <StaticRouter location={url}>
-        <SettingsProvider>
+        <SettingsProvider initialSettings={defaultSettings}>
           <LanguageProvider>
             <CatalogProvider initialCatalog={initialCatalog}>
               <App />

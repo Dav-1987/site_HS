@@ -1,11 +1,12 @@
 import { describe, it, expect } from 'vitest';
-import { validateOrder, formatOrderText, isValidPhone } from './order.js';
+import { validateOrder, formatOrderText, isValidPhone, resolveOrderProduct } from './order.js';
 
 const validBody = {
   name: 'Ana',
   phone: '+34 600 000 000',
   comment: '',
-  productName: 'Tocador Aria',
+  productId: 'p1',
+  eventId: '86e127af-27e6-4a49-82a5-3af82e19ed25',
 };
 
 describe('validateOrder', () => {
@@ -18,9 +19,10 @@ describe('validateOrder', () => {
     expect(validateOrder({ ...validBody, phone: '' })).toMatch(/phone/);
   });
 
-  it('requires productName', () => {
-    expect(validateOrder({ ...validBody, productName: '' })).toMatch(/productName/);
-    expect(validateOrder({ ...validBody, productName: '   ' })).toMatch(/productName/);
+  it('requires a product id and a stable event id', () => {
+    expect(validateOrder({ ...validBody, productId: '' })).toMatch(/productId/);
+    expect(validateOrder({ ...validBody, eventId: '' })).toMatch(/eventId/);
+    expect(validateOrder({ ...validBody, eventId: 'contains spaces' })).toMatch(/eventId/);
   });
 
   it('rejects oversized fields', () => {
@@ -46,12 +48,30 @@ describe('validateOrder', () => {
     expect(validateOrder({ ...validBody, phone: '600-000-OOPS' })).toMatch(/phone/);
   });
 
-  it('accepts an omitted price but rejects an invalid one', () => {
+  it('does not trust or validate client-supplied product labels and prices', () => {
     expect(validateOrder(validBody)).toBeNull();
-    expect(validateOrder({ ...validBody, price: 450 })).toBeNull();
-    expect(validateOrder({ ...validBody, price: -1 })).toMatch(/price/);
-    expect(validateOrder({ ...validBody, price: 'free' })).toMatch(/price/);
-    expect(validateOrder({ ...validBody, price: NaN })).toMatch(/price/);
+    expect(validateOrder({ ...validBody, productName: 'Forged', price: -1 })).toBeNull();
+  });
+});
+
+describe('resolveOrderProduct', () => {
+  const catalog = [
+    {
+      slug: 'tocadores',
+      products: [{ id: 'p1', name: 'Tocador Aria', subtitle: 'Pro', price: 450 }],
+    },
+  ];
+
+  it('derives the label and price from the live server catalog', () => {
+    expect(resolveOrderProduct(catalog, 'p1')).toEqual({
+      productId: 'p1',
+      productName: 'Tocador Aria Pro',
+      price: 450,
+    });
+  });
+
+  it('returns null for an unknown product id', () => {
+    expect(resolveOrderProduct(catalog, 'missing')).toBeNull();
   });
 });
 
@@ -125,7 +145,11 @@ describe('formatOrderText', () => {
     });
     expect(withAddress).toContain('Dirección: Calle Falsa 123, Madrid');
 
-    const withoutAddress = formatOrderText({ name: 'Ana', phone: '600', productName: 'Tocador Aria' });
+    const withoutAddress = formatOrderText({
+      name: 'Ana',
+      phone: '600',
+      productName: 'Tocador Aria',
+    });
     expect(withoutAddress).not.toContain('Dirección');
   });
 });

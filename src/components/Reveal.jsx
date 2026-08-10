@@ -25,27 +25,47 @@ export default function Reveal({
     if (!el) return undefined;
 
     const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const targets = stagger ? Array.from(el.children) : el;
+    let ctx;
+    let observer;
 
-    if (reduce) {
-      gsap.set(targets, { opacity: 1, y: 0 });
-      return undefined;
+    const startReveal = () => {
+      const targets = stagger ? Array.from(el.children) : el;
+      if (stagger && targets.length === 0) return false;
+
+      if (reduce) {
+        gsap.set(targets, { opacity: 1, y: 0 });
+        return true;
+      }
+
+      ctx = gsap.context(() => {
+        gsap.set(targets, { opacity: 0, y });
+        gsap.to(targets, {
+          opacity: 1,
+          y: 0,
+          duration: 1,
+          ease: 'power3.out',
+          delay,
+          stagger: stagger ? 0.1 : 0,
+          scrollTrigger: { trigger: el, start },
+        });
+      }, ref);
+      return true;
+    };
+
+    // Catalog-backed grids can mount empty and receive cards later. Calling
+    // GSAP with [] logs "target not found" and permanently skips the reveal,
+    // so wait for the first real child instead.
+    if (!startReveal() && typeof MutationObserver !== 'undefined') {
+      observer = new MutationObserver(() => {
+        if (startReveal()) observer.disconnect();
+      });
+      observer.observe(el, { childList: true });
     }
 
-    const ctx = gsap.context(() => {
-      gsap.set(targets, { opacity: 0, y });
-      gsap.to(targets, {
-        opacity: 1,
-        y: 0,
-        duration: 1,
-        ease: 'power3.out',
-        delay,
-        stagger: stagger ? 0.1 : 0,
-        scrollTrigger: { trigger: el, start },
-      });
-    }, ref);
-
-    return () => ctx.revert();
+    return () => {
+      observer?.disconnect();
+      ctx?.revert();
+    };
   }, [delay, y, stagger, start]);
 
   return (

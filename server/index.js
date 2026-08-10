@@ -7,14 +7,36 @@ import { fileURLToPath } from 'node:url';
 import sharp from 'sharp';
 
 import pool from './db.js';
-import { verifyPassword, changePassword, createSessionToken, sessionCookie, clearCookie, isAuthenticated } from './auth.js';
-import { readOrSeedCatalog, writeCatalog, recordVersion, listVersions, getVersionData,
-         extractUploadKeys, scheduleForDeletion, unscheduleFiles,
-         getFilesReadyToDelete, purgePendingRecords } from './store.js';
+import {
+  verifyPassword,
+  changePassword,
+  createSessionToken,
+  sessionCookie,
+  clearCookie,
+  isAuthenticated,
+} from './auth.js';
+import {
+  readOrSeedCatalog,
+  writeCatalog,
+  recordVersion,
+  listVersions,
+  getVersionData,
+  extractUploadKeys,
+  scheduleForDeletion,
+  unscheduleFiles,
+  getFilesReadyToDelete,
+  purgePendingRecords,
+} from './store.js';
 import { readSettings, writeSettings } from './settings.js';
-import { validateOrder, formatOrderText } from './order.js';
+import { validateOrder, formatOrderText, resolveOrderProduct } from './order.js';
 import { telegramConfigured, emailConfigured, sendTelegram, sendOrderEmail } from './notify.js';
-import { saveOrder, markOrderTelegramSent, listOrders, deleteOrder } from './orders.js';
+import {
+  saveOrder,
+  markOrderTelegramSent,
+  markOrderEmailSent,
+  listOrders,
+  deleteOrder,
+} from './orders.js';
 import { metaCapiConfigured, sendLeadEvent } from './meta-capi.js';
 import { buildProductIndex, resolveRedirect } from './redirects.js';
 import { rebuildConfigured, triggerRebuild, getLatestRun } from './rebuild.js';
@@ -33,10 +55,13 @@ const PORT = process.env.PORT || 4000;
 const DIST_DIR = join(__dirname, '../dist');
 
 // Загруженные картинки
-app.use('/uploads', express.static(UPLOADS_DIR, {
-  maxAge: '1y',
-  immutable: true,
-}));
+app.use(
+  '/uploads',
+  express.static(UPLOADS_DIR, {
+    maxAge: '1y',
+    immutable: true,
+  }),
+);
 
 // Фронтенд (React SPA)
 app.use(express.static(DIST_DIR));
@@ -119,11 +144,16 @@ async function runCleanup() {
         unlinkSync(join(UPLOADS_DIR, filename));
         const base = filename.replace(/\.[^.]+$/, '');
         for (const w of WEBP_SIZES) {
-          try { unlinkSync(join(UPLOADS_DIR, `${base}_${w}.webp`)); } catch {}
+          try {
+            unlinkSync(join(UPLOADS_DIR, `${base}_${w}.webp`));
+          } catch {}
         }
         console.log(`[cleanup] deleted: ${filename}`);
       } catch (err) {
-        if (err.code !== 'ENOENT') { console.error(`[cleanup] failed to delete ${filename}:`, err); continue; }
+        if (err.code !== 'ENOENT') {
+          console.error(`[cleanup] failed to delete ${filename}:`, err);
+          continue;
+        }
       }
       done.push(filename);
     }
@@ -192,7 +222,11 @@ async function handleCatalogSave(req, res) {
     if (removed.size) scheduleForDeletion(removed).catch(console.error);
     if (reAdded.size) unscheduleFiles(reAdded).catch(console.error);
 
-    try { await recordVersion(saved); } catch (e) { console.error('recordVersion failed', e); }
+    try {
+      await recordVersion(saved);
+    } catch (e) {
+      console.error('recordVersion failed', e);
+    }
     res.json({ ok: true, categories: saved });
   } catch (err) {
     console.error('catalog save failed', err);
@@ -225,7 +259,11 @@ app.post('/api/versions', async (req, res) => {
     if (!data) return res.status(404).json({ error: 'Version not found' });
     await writeCatalog(data);
     const saved = await readOrSeedCatalog();
-    try { await recordVersion(saved); } catch (e) { console.error('recordVersion (restore) failed', e); }
+    try {
+      await recordVersion(saved);
+    } catch (e) {
+      console.error('recordVersion (restore) failed', e);
+    }
     res.json({ ok: true, categories: saved });
   } catch (err) {
     console.error('versions POST failed', err);
@@ -341,14 +379,19 @@ app.post('/api/upload', (req, res) => {
     done = true;
     req.destroy();
     ws.destroy();
-    try { unlinkSync(tmpPath); } catch {}
+    try {
+      unlinkSync(tmpPath);
+    } catch {}
     if (!res.headersSent) res.status(code).json({ error: msg });
   };
 
   req.on('data', (chunk) => {
     if (done) return;
     size += chunk.length;
-    if (size > maxBytes) { fail(413, `File too large (max ${isVideo ? '200' : '5'} MB)`); return; }
+    if (size > maxBytes) {
+      fail(413, `File too large (max ${isVideo ? '200' : '5'} MB)`);
+      return;
+    }
     hash.update(chunk);
     ws.write(chunk);
   });
@@ -356,7 +399,10 @@ app.post('/api/upload', (req, res) => {
   req.on('end', () => {
     if (done) return;
     ws.end(async () => {
-      if (size === 0) { fail(400, 'Empty file'); return; }
+      if (size === 0) {
+        fail(400, 'Empty file');
+        return;
+      }
       done = true;
       const base = hash.digest('hex').slice(0, 32);
       const key = `${base}.${ext}`;
@@ -365,7 +411,9 @@ app.post('/api/upload', (req, res) => {
         renameSync(tmpPath, finalPath);
       } catch (err) {
         console.error('upload rename failed', err);
-        try { unlinkSync(tmpPath); } catch {}
+        try {
+          unlinkSync(tmpPath);
+        } catch {}
         if (!res.headersSent) res.status(500).json({ error: 'Failed to store file' });
         return;
       }
@@ -398,44 +446,42 @@ app.post('/api/order', orderRateLimit, async (req, res) => {
   if (invalid) return res.status(400).json({ error: invalid });
 
   try {
-    const text = formatOrderText(req.body);
-    // Always logged, so the order survives in PM2 logs even if both channels fail.
-    console.log(`[order] new request:\n${text}`);
-
-    if (!telegramConfigured() && !emailConfigured()) {
-      console.error('[order] no notification channel configured (TELEGRAM_* / SMTP_* env vars)');
-      return res.status(503).json({ error: 'Order service is not configured' });
+    const authoritativeProduct = resolveOrderProduct(await readOrSeedCatalog(), req.body.productId);
+    if (!authoritativeProduct) {
+      return res.status(404).json({ error: 'Product not found' });
     }
 
-    let emailSent = false;
-    let emailError = null;
+    const durableOrder = {
+      eventId: req.body.eventId,
+      name: req.body.name.trim(),
+      phone: req.body.phone.trim(),
+      address: req.body.address?.trim() ?? '',
+      comment: req.body.comment?.trim() ?? '',
+      ...authoritativeProduct,
+    };
+
+    // The database is the acceptance boundary: nothing external is notified
+    // until a durable, idempotent row exists. A repeated eventId returns the
+    // original success without creating or notifying a second order.
+    const { id: orderId, created } = await saveOrder(durableOrder);
+    if (!created) return res.json({ ok: true });
+
+    const text = formatOrderText(durableOrder);
+    console.log(`[order] saved id=${orderId} product=${durableOrder.productId}`);
+
+    if (!telegramConfigured() && !emailConfigured()) {
+      console.error('[order] saved but no notification channel is configured');
+    }
+
     if (emailConfigured()) {
       try {
         await sendOrderEmail('Nueva solicitud de pedido — Mirage Muebles', text);
-        emailSent = true;
+        await markOrderEmailSent(orderId);
       } catch (err) {
-        emailError = err;
+        // The order is already durable and visible in /admin. Notification
+        // failures must not tell the customer to retry and create a duplicate.
+        console.error('[order] email notify failed:', err);
       }
-    }
-
-    // Durable record — Telegram/email above are best-effort notifications, this
-    // row is what keeps the order from being lost if both channels fail or PM2
-    // logs get rotated/truncated.
-    let orderId = null;
-    try {
-      orderId = await saveOrder({
-        name: req.body.name,
-        phone: req.body.phone,
-        address: req.body.address,
-        comment: req.body.comment,
-        productId: req.body.productId,
-        productName: req.body.productName,
-        price: req.body.price,
-        telegramSent: false,
-        emailSent,
-      });
-    } catch (err) {
-      console.error('[order] DB save failed:', err);
     }
 
     // Telegram delivery retries internally (see notify.js) to ride out a lossy
@@ -445,14 +491,11 @@ app.post('/api/order', orderRateLimit, async (req, res) => {
     if (telegramConfigured()) {
       sendTelegram(text)
         .then(() => {
-          if (orderId) markOrderTelegramSent(orderId).catch((err) => console.error('[order] DB update failed:', err));
+          markOrderTelegramSent(orderId).catch((err) =>
+            console.error('[order] DB update failed:', err),
+          );
         })
         .catch((err) => console.error('[order] Telegram notify failed:', err.message));
-    }
-
-    if (emailConfigured() && !emailSent) {
-      console.error('[order] notify failed:', emailError);
-      return res.status(502).json({ error: 'Failed to send order' });
     }
 
     // Meta Conversions API — server-side Lead, best effort. Fire-and-forget so a
@@ -467,8 +510,8 @@ app.post('/api/order', orderRateLimit, async (req, res) => {
         eventSourceUrl: req.body.eventSourceUrl,
         clientIp: req.ip,
         userAgent: req.get('user-agent'),
-        productName: req.body.productName,
-        productId: req.body.productId,
+        productName: durableOrder.productName,
+        productId: durableOrder.productId,
       }).catch((err) => console.error('[order] Meta CAPI failed:', err.message));
     }
 

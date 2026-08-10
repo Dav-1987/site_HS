@@ -38,5 +38,6 @@ describe('RESERVED_SLUGS', () => {
     expect(RESERVED_SLUGS).toContain('catalogo');
     expect(RESERVED_SLUGS).toContain('contacto');
     expect(RESERVED_SLUGS).toContain('admin');
+    expect(RESERVED_SLUGS).toContain('wallapop');
   });
 });

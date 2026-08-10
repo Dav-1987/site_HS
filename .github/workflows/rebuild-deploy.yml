@@ -1,22 +1,23 @@
 name: Rebuild & Deploy
 
-# Manual only — triggered by the "Пересобрать сайт" button in /admin (see
-# server/index.js, POST /api/admin/rebuild) via the GitHub API, or by hand
-# from the Actions tab. Builds on GitHub's runner (plenty of CPU/RAM) rather
-# than the VPS, which is a small shared box already tight on both — see
-# DEPLOY.md.
+# Manual only: triggered by the rebuild button in /admin (see
+# server/index.js, POST /api/admin/rebuild) via the GitHub API, or by hand.
 on:
   workflow_dispatch:
 
-# Two rebuilds racing would both scp into the same dist.new/dist.old on the
-# VPS (see scripts/deploy-dist.mjs) — queue instead of running in parallel.
 concurrency:
   group: rebuild-deploy
   cancel-in-progress: false
 
+permissions:
+  contents: read
+
 jobs:
   rebuild:
+    if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
+    timeout-minutes: 30
+    environment: production
     steps:
       - uses: actions/checkout@v4
 
@@ -24,14 +25,32 @@ jobs:
         with:
           node-version: 20
           cache: npm
+          cache-dependency-path: |
+            package-lock.json
+            server/package-lock.json
 
       - run: npm ci
+      - run: npm ci --prefix server
 
-      # Fresh catalog from the live DB (via the public /api/catalog endpoint)
-      # — prerendering otherwise ships whatever was last committed.
+      - name: Reject vulnerable dependencies
+        run: npm run audit:security
+
+      - name: Lint and test
+        run: npm run verify
+
+      # Prerender the current catalog instead of stale committed data.
       - run: npm run catalog:pull
 
-      - run: npm run build:seo
+      - name: Build and run the browser hydration check
+        run: npm run build:seo
+
+      - name: Preserve the verified release artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: dist-${{ github.sha }}
+          path: dist
+          if-no-files-found: error
+          retention-days: 7
 
       - uses: webfactory/ssh-agent@v0.9.0
         with:
@@ -40,4 +59,7 @@ jobs:
       - name: Trust the VPS host key
         run: mkdir -p ~/.ssh && echo "${{ secrets.VPS_HOST_KEY }}" >> ~/.ssh/known_hosts
 
-      - run: node scripts/deploy-dist.mjs
+      - name: Deploy with smoke-check and automatic rollback
+        env:
+          RELEASE_ID: ${{ github.sha }}
+        run: node scripts/deploy-dist.mjs

@@ -32,7 +32,7 @@ function LoginForm({ onSuccess, onWantChange }) {
       <button
         type="button"
         onClick={onWantChange}
-        className="mt-4 w-full text-center text-xs text-primary/40 underline-offset-2 hover:text-accent hover:underline"
+        className="mt-4 w-full text-center text-xs text-primary/60 underline-offset-2 hover:text-accent-text hover:underline"
       >
         Сменить пароль
       </button>
@@ -80,7 +80,12 @@ function ChangePasswordForm({ onSuccess, onCancel }) {
           autoFocus
         />
         <Field label="Новый пароль" type="password" value={next} onChange={setNext} />
-        <Field label="Повторите новый пароль" type="password" value={confirm} onChange={setConfirm} />
+        <Field
+          label="Повторите новый пароль"
+          type="password"
+          value={confirm}
+          onChange={setConfirm}
+        />
       </div>
       {error && <p className="mt-4 text-sm text-red-600">{error}</p>}
       <button type="submit" disabled={busy} className={`${BTN_SOLID} mt-8 w-full justify-center`}>
@@ -89,7 +94,7 @@ function ChangePasswordForm({ onSuccess, onCancel }) {
       <button
         type="button"
         onClick={onCancel}
-        className="mt-4 w-full text-center text-xs text-primary/40 underline-offset-2 hover:text-accent hover:underline"
+        className="mt-4 w-full text-center text-xs text-primary/60 underline-offset-2 hover:text-accent-text hover:underline"
       >
         Назад ко входу
       </button>
@@ -103,7 +108,7 @@ export default function LoginScreen({ onSuccess }) {
   return (
     <div className="flex min-h-screen items-center justify-center bg-surface px-6">
       <div className="w-full max-w-sm border border-primary/10 bg-background p-10">
-        <p className="mb-2 text-xs uppercase tracking-[0.3em] text-accent">Mirage Muebles</p>
+        <p className="mb-2 text-xs uppercase tracking-[0.3em] text-accent-text">Mirage Muebles</p>
         <h1 className="mb-8 font-serif text-3xl font-light text-primary">
           {mode === 'login' ? 'Панель управления' : 'Смена пароля'}
         </h1>

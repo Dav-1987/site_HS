@@ -3,7 +3,15 @@
 // shared, so the admin inputs are sanitized as the user types.
 
 /** Paths owned by app routes — a category with such a slug would be unreachable. */
-export const RESERVED_SLUGS = ['admin', 'catalogo', 'categoria', 'contacto', 'producto', 'en'];
+export const RESERVED_SLUGS = [
+  'admin',
+  'wallapop',
+  'catalogo',
+  'categoria',
+  'contacto',
+  'producto',
+  'en',
+];
 
 /**
  * Make a value safe to use as a URL segment: strip accents (á→a, ñ→n),

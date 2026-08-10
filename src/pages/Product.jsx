@@ -3,7 +3,15 @@ import { Navigate, useParams } from 'react-router-dom';
 import { Link } from '../components/LocalizedLink.jsx';
 import { useLanguage } from '../i18n/LanguageContext.jsx';
 import { useCatalog } from '../catalog/CatalogContext.jsx';
-import { productDescription, productImages, productMedia, productPerkVariant, productReference, computeRelated, resolveImage } from '../data/catalog.js';
+import {
+  productDescription,
+  productImages,
+  productMedia,
+  productPerkVariant,
+  productReference,
+  computeRelated,
+  resolveImage,
+} from '../data/catalog.js';
 import { trackPixel } from '../lib/track.js';
 import JsonLd from '../components/JsonLd.jsx';
 import SocialMeta from '../components/SocialMeta.jsx';
@@ -23,7 +31,15 @@ import NotFound from './NotFound.jsx';
 
 function IconTruck({ className = '' }) {
   return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className={`h-6 w-6 shrink-0 ${className}`}>
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={`h-6 w-6 shrink-0 ${className}`}
+    >
       <rect x="1" y="6" width="14" height="11" rx="1" />
       <path d="M15 9h4l3 3v5h-7z" />
       <circle cx="6" cy="19" r="1.75" />
@@ -34,7 +50,15 @@ function IconTruck({ className = '' }) {
 
 function IconTools({ className = '' }) {
   return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className={`h-6 w-6 shrink-0 ${className}`}>
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={`h-6 w-6 shrink-0 ${className}`}
+    >
       <path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L2.6 18.4a1.5 1.5 0 0 0 2.12 2.12L11.4 13.8a4 4 0 0 0 5.4-5.4l-2.5 2.5-2-2z" />
     </svg>
   );
@@ -42,7 +66,15 @@ function IconTools({ className = '' }) {
 
 function IconBulb({ className = '' }) {
   return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className={`h-6 w-6 shrink-0 ${className}`}>
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={`h-6 w-6 shrink-0 ${className}`}
+    >
       <path d="M9 18h6" />
       <path d="M10 21h4" />
       <path d="M12 3a6 6 0 0 0-4 10.47c.53.5.9 1.16 1 1.88V16h6v-.65c.1-.72.47-1.38 1-1.88A6 6 0 0 0 12 3z" />
@@ -52,7 +84,15 @@ function IconBulb({ className = '' }) {
 
 function IconBulbRays({ className = '' }) {
   return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className={`h-6 w-6 shrink-0 ${className}`}>
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={`h-6 w-6 shrink-0 ${className}`}
+    >
       <path d="M12 2v2" />
       <path d="M5.6 4.6 7 6" />
       <path d="M18.4 4.6 17 6" />
@@ -66,7 +106,15 @@ function IconBulbRays({ className = '' }) {
 
 function IconAward({ className = '' }) {
   return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className={`h-6 w-6 shrink-0 ${className}`}>
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={`h-6 w-6 shrink-0 ${className}`}
+    >
       <circle cx="12" cy="9" r="6" />
       <path d="M8.3 13.9 7 21.5l5-2.9 5 2.9-1.3-7.6" />
     </svg>
@@ -91,8 +139,8 @@ function OrderPerks({ t, variant }) {
     <div className="mt-6 grid w-full grid-cols-3 divide-x divide-primary/10 rounded-2xl border border-primary/10 bg-surface sm:w-auto">
       {perks.map(({ Icon, label }) => (
         <div key={label} className="flex flex-col items-center gap-2 px-3 py-5 text-center sm:px-6">
-          <Icon className="text-accent" />
-          <span className="text-[0.65rem] font-medium uppercase leading-tight tracking-widest text-primary/70">
+          <Icon className="text-accent-text" />
+          <span className="text-xs font-medium uppercase leading-tight tracking-widest text-primary/70">
             {label}
           </span>
         </div>
@@ -124,6 +172,7 @@ export default function Product() {
   const [zoom, setZoom] = useState(false);
   const [orderOpen, setOrderOpen] = useState(false);
   const startX = useRef(null);
+  const suppressZoom = useRef(false);
 
   // Reset gallery state when navigating between products.
   useEffect(() => {
@@ -176,7 +225,8 @@ export default function Product() {
     setActive(i);
     setThumbStart((s) => {
       if (i < s) return i;
-      if (i >= s + THUMB_VISIBLE) return Math.min(i - THUMB_VISIBLE + 1, gallery.length - THUMB_VISIBLE);
+      if (i >= s + THUMB_VISIBLE)
+        return Math.min(i - THUMB_VISIBLE + 1, gallery.length - THUMB_VISIBLE);
       return s;
     });
   };
@@ -194,15 +244,14 @@ export default function Product() {
   // same `subtitle` (dimensions) within a category — fold in the reference
   // (always present, always unique) so every page gets a distinct <title>.
   const ref = (product.reference || productReference(product.name) || '').trim();
-  const pageTitle = [
-    product.name,
-    product.subtitle,
-    ref && `(${ref})`,
-  ].filter(Boolean).join(' ');
+  const pageTitle = [product.name, product.subtitle, ref && `(${ref})`].filter(Boolean).join(' ');
   const ogImage = resolveImage(images[0], 1600);
   const specs = [
     { label: t('product.collectionLabel'), value: category.name[lang] },
-    { label: t('product.skuLabel'), value: product.reference?.trim() || productReference(product.name) },
+    {
+      label: t('product.skuLabel'),
+      value: product.reference?.trim() || productReference(product.name),
+    },
   ];
 
   return (
@@ -233,16 +282,13 @@ export default function Product() {
         {/* Breadcrumb */}
         <nav
           aria-label="breadcrumb"
-          className="mb-6 flex flex-wrap items-center gap-2 text-[9px] md:text-[11px] uppercase tracking-[0.08em] text-primary/40"
+          className="mb-6 flex flex-wrap items-center gap-2 text-xs uppercase tracking-[0.08em] text-primary/60"
         >
-          <Link to="/catalogo" className="transition-colors hover:text-accent">
+          <Link to="/catalogo" className="transition-colors hover:text-accent-text">
             {t('nav.catalog')}
           </Link>
           <span aria-hidden="true">/</span>
-          <Link
-            to={`/${category.slug}`}
-            className="transition-colors hover:text-accent"
-          >
+          <Link to={`/${category.slug}`} className="transition-colors hover:text-accent-text">
             {category.name[lang]}
           </Link>
         </nav>
@@ -255,14 +301,16 @@ export default function Product() {
               to={`/${category.slug}`}
               aria-hidden="true"
               tabIndex={-1}
-              className="text-xs uppercase tracking-[0.25em] text-accent"
+              className="text-xs uppercase tracking-[0.25em] text-accent-text"
             >
               {category.name[lang]}
             </Link>
             <h1 className="mt-2 font-serif leading-[1.05] tracking-tight text-primary">
               <span className="text-[clamp(2.25rem,8vw,3rem)] font-light">{product.name}</span>
               {product.subtitle && (
-                <span className="ml-2 text-base font-light text-primary/50">{product.subtitle}</span>
+                <span className="ml-2 text-base font-light text-primary/50">
+                  {product.subtitle}
+                </span>
               )}
             </h1>
           </div>
@@ -270,15 +318,18 @@ export default function Product() {
           {/* Gallery */}
           <Reveal className="lg:col-span-5">
             <div
-              className={`group relative aspect-[4/5] overflow-hidden bg-surface [container-type:inline-size] ${!isVideoActive ? 'cursor-zoom-in' : ''}`}
-              onClick={!isVideoActive ? () => setZoom(true) : undefined}
+              className="group relative aspect-[4/5] overflow-hidden bg-surface [container-type:inline-size]"
               onTouchStart={(e) => {
                 startX.current = e.touches[0].clientX;
+                suppressZoom.current = false;
               }}
               onTouchEnd={(e) => {
                 if (startX.current == null) return;
                 const dx = e.changedTouches[0].clientX - startX.current;
-                if (multi && Math.abs(dx) > 40) goImage(dx < 0 ? 1 : -1);
+                if (multi && Math.abs(dx) > 40) {
+                  suppressZoom.current = true;
+                  goImage(dx < 0 ? 1 : -1);
+                }
                 startX.current = null;
               }}
             >
@@ -295,16 +346,29 @@ export default function Product() {
                   onClick={(e) => e.stopPropagation()}
                 />
               ) : (
-                <Media
-                  id={activeItem.src}
-                  idMobile={activeIdx === firstPhotoIdx ? product.imageMobile : ''}
-                  alt={`${product.name} — ${category.name[lang]}`}
-                  w={1400}
-                />
+                <button
+                  type="button"
+                  aria-label={`${t('product.zoom')}: ${product.name}`}
+                  onClick={() => {
+                    if (suppressZoom.current) {
+                      suppressZoom.current = false;
+                      return;
+                    }
+                    setZoom(true);
+                  }}
+                  className="absolute inset-0 h-full w-full cursor-zoom-in text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-accent"
+                >
+                  <Media
+                    id={activeItem.src}
+                    idMobile={activeIdx === firstPhotoIdx ? product.imageMobile : ''}
+                    alt={`${product.name} — ${category.name[lang]}`}
+                    w={1400}
+                  />
+                </button>
               )}
               <DiscountBadge product={product} />
               {!isVideoActive && (
-                <span className="pointer-events-none absolute bottom-3 right-3 bg-background/85 px-3 py-1.5 text-[10px] uppercase tracking-[0.18em] text-primary opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+                <span className="pointer-events-none absolute bottom-3 right-3 bg-background/85 px-3 py-1.5 text-xs uppercase tracking-[0.18em] text-primary opacity-0 transition-opacity duration-300 group-hover:opacity-100">
                   {t('product.zoom')}
                 </span>
               )}
@@ -313,16 +377,22 @@ export default function Product() {
                   <button
                     type="button"
                     aria-label={t('carousel.prev')}
-                    onClick={(e) => { e.stopPropagation(); goImage(-1); }}
-                    className="absolute left-3 top-1/2 flex h-10 w-10 -translate-y-1/2 items-center justify-center bg-background/80 text-xl text-primary transition-opacity duration-300 hover:bg-background md:opacity-0 md:group-hover:opacity-100"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      goImage(-1);
+                    }}
+                    className="touch-target absolute left-1 top-1/2 z-10 flex -translate-y-1/2 items-center justify-center bg-background/80 text-xl text-primary transition-opacity duration-300 hover:bg-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent md:opacity-0 md:group-hover:opacity-100"
                   >
                     ‹
                   </button>
                   <button
                     type="button"
                     aria-label={t('carousel.next')}
-                    onClick={(e) => { e.stopPropagation(); goImage(1); }}
-                    className="absolute right-3 top-1/2 flex h-10 w-10 -translate-y-1/2 items-center justify-center bg-background/80 text-xl text-primary transition-opacity duration-300 hover:bg-background md:opacity-0 md:group-hover:opacity-100"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      goImage(1);
+                    }}
+                    className="touch-target absolute right-1 top-1/2 z-10 flex -translate-y-1/2 items-center justify-center bg-background/80 text-xl text-primary transition-opacity duration-300 hover:bg-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent md:opacity-0 md:group-hover:opacity-100"
                   >
                     ›
                   </button>
@@ -336,14 +406,16 @@ export default function Product() {
                     type="button"
                     aria-label={t('carousel.prev')}
                     onClick={() => shiftStrip(-1)}
-                    className="absolute left-0 top-0 z-10 flex h-full w-8 items-center justify-center bg-gradient-to-r from-background via-background/80 to-transparent text-xl text-primary"
+                    className="touch-target absolute left-0 top-0 z-10 flex h-full items-center justify-center bg-gradient-to-r from-background via-background/80 to-transparent text-xl text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
                   >
                     ‹
                   </button>
                 )}
                 <div
                   className="grid grid-cols-4 gap-3 md:gap-4"
-                  onTouchStart={(e) => { startX.current = e.touches[0].clientX; }}
+                  onTouchStart={(e) => {
+                    startX.current = e.touches[0].clientX;
+                  }}
                   onTouchEnd={(e) => {
                     if (startX.current == null) return;
                     const dx = e.changedTouches[0].clientX - startX.current;
@@ -370,7 +442,11 @@ export default function Product() {
                             <span className="text-3xl text-primary/30">▶</span>
                           </div>
                         ) : (
-                          <Media id={item.src} alt={`${product.name} ${t('product.gallery')} ${i + 1}`} w={300} />
+                          <Media
+                            id={item.src}
+                            alt={`${product.name} ${t('product.gallery')} ${i + 1}`}
+                            w={300}
+                          />
                         )}
                       </button>
                     );
@@ -381,7 +457,7 @@ export default function Product() {
                     type="button"
                     aria-label={t('carousel.next')}
                     onClick={() => shiftStrip(1)}
-                    className="absolute right-0 top-0 z-10 flex h-full w-8 items-center justify-center bg-gradient-to-l from-background via-background/80 to-transparent text-xl text-primary"
+                    className="touch-target absolute right-0 top-0 z-10 flex h-full items-center justify-center bg-gradient-to-l from-background via-background/80 to-transparent text-xl text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
                   >
                     ›
                   </button>
@@ -394,7 +470,7 @@ export default function Product() {
           <Reveal delay={0.1} className="lg:col-span-7 lg:pl-4">
             <Link
               to={`/${category.slug}`}
-              className="hidden text-xs uppercase tracking-[0.25em] text-accent transition-colors hover:text-primary lg:inline-block"
+              className="hidden text-xs uppercase tracking-[0.25em] text-accent-text transition-colors hover:text-primary lg:inline-block"
             >
               {category.name[lang]}
             </Link>
@@ -419,7 +495,7 @@ export default function Product() {
                   key={s.label}
                   className="flex items-center justify-between border-b border-primary/10 py-4"
                 >
-                  <dt className="text-xs uppercase tracking-[0.2em] text-primary/40">{s.label}</dt>
+                  <dt className="text-xs uppercase tracking-[0.2em] text-secondary">{s.label}</dt>
                   <dd className="text-sm text-primary">{s.value}</dd>
                 </div>
               ))}
@@ -437,7 +513,6 @@ export default function Product() {
               </Button>
             </div>
             <OrderPerks t={t} variant={productPerkVariant(product)} />
-
           </Reveal>
         </div>
       </article>
@@ -455,9 +530,7 @@ export default function Product() {
       )}
 
       {/* Related */}
-      {related.length > 0 && (
-        <RelatedCarousel related={related} title={t('product.related')} />
-      )}
+      {related.length > 0 && <RelatedCarousel related={related} title={t('product.related')} />}
     </>
   );
 }

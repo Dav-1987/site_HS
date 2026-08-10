@@ -9,8 +9,9 @@
 :root {
   --color-background: 247 245 242; /* #F7F5F2 warm off-white */
   --color-primary: 43 43 43; /* #2B2B2B soft charcoal (never pure black) */
-  --color-secondary: 124 116 104; /* #7C7468 warm taupe text */
+  --color-secondary: 116 107 95; /* #746B5F, 4.81:1 on background */
   --color-accent: 196 162 101; /* #C4A265 muted gold */
+  --color-accent-text: 138 106 47; /* #8A6A2F, 4.61:1 on background */
   --color-surface: 239 234 226; /* #EFEAE2 warm card/section surface */
   --color-danger: 176 58 46; /* #B03A2E warm brick — form/validation errors only */
   --color-sale: 79 138 40; /* #4F8A28 salad green — discount badge only */
@@ -48,6 +49,12 @@
 }
 
 @layer utilities {
+  /* Shared WCAG-friendly pointer target without prescribing its visual shape. */
+  .touch-target {
+    min-width: 44px;
+    min-height: 44px;
+  }
+
   .no-scrollbar {
     scrollbar-width: none;
   }

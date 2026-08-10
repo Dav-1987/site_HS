@@ -12,7 +12,7 @@ const expected = {
 
 function validPage(extraHead = '') {
   return `<!doctype html><html lang="es"><head>
-    <title>Catálogo | Mirage Muebles</title>
+    <title data-prerender-head>Catálogo | Mirage Muebles</title>
     <meta name="description" content="Todas las colecciones" />
     <link rel="canonical" href="https://hsmuebles.es/catalogo" />
     <link rel="alternate" hreflang="es" href="https://hsmuebles.es/catalogo" />
@@ -38,7 +38,9 @@ describe('validateSeoPage', () => {
       '<link rel="canonical" href="https://www.hsmuebles.es/catalogo" />',
     );
     const errors = validateSeoPage(html, expected).errors;
-    expect(errors).toContain('canonical is https://www.hsmuebles.es/catalogo, expected https://hsmuebles.es/catalogo');
+    expect(errors).toContain(
+      'canonical is https://www.hsmuebles.es/catalogo, expected https://hsmuebles.es/catalogo',
+    );
     expect(errors).toContain('sitemap page contains noindex');
   });
 });

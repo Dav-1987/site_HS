@@ -33,8 +33,10 @@ export function validateSeoPage(html, expected) {
   const errors = [];
   const tags = tagsInHead(html);
   const head = html.match(/<head\b[^>]*>([\s\S]*?)<\/head>/i)?.[1] ?? '';
-  const title = head.match(/<title>([\s\S]*?)<\/title>/i)?.[1]?.trim();
-  const description = tags.find((tag) => tag.name?.toLowerCase() === 'description')?.content?.trim();
+  const title = head.match(/<title\b[^>]*>([\s\S]*?)<\/title>/i)?.[1]?.trim();
+  const description = tags
+    .find((tag) => tag.name?.toLowerCase() === 'description')
+    ?.content?.trim();
   const canonicals = tags.filter((tag) => tag.rel?.toLowerCase() === 'canonical');
   const robots = tags.find((tag) => tag.name?.toLowerCase() === 'robots')?.content ?? '';
   const alternates = tags.filter((tag) => tag.rel?.toLowerCase() === 'alternate' && tag.hreflang);
@@ -50,7 +52,8 @@ export function validateSeoPage(html, expected) {
     errors.push(`canonical is ${canonicals[0].href}, expected ${expected.loc}`);
   }
   if (/\bnoindex\b/i.test(robots)) errors.push('sitemap page contains noindex');
-  if (htmlLang !== expectedLang) errors.push(`html lang is ${htmlLang || 'missing'}, expected ${expectedLang}`);
+  if (htmlLang !== expectedLang)
+    errors.push(`html lang is ${htmlLang || 'missing'}, expected ${expectedLang}`);
 
   for (const alternate of expected.alternates) {
     const actual = alternates.find((tag) => tag.hreflang?.toLowerCase() === alternate.hreflang);
@@ -82,15 +85,21 @@ export function assertSeoBuild(distDir, urls) {
       const language = languageFor(expected.loc);
       const key = `${language}:${title}`;
       const previous = titlesByLanguage.get(key);
-      if (previous) failures.push(`${expected.loc}: duplicate ${language} title also used by ${previous}`);
+      if (previous)
+        failures.push(`${expected.loc}: duplicate ${language} title also used by ${previous}`);
       else titlesByLanguage.set(key, expected.loc);
     }
   }
 
   if (failures.length) {
-    const preview = failures.slice(0, 30).map((failure) => `  - ${failure}`).join('\n');
+    const preview = failures
+      .slice(0, 30)
+      .map((failure) => `  - ${failure}`)
+      .join('\n');
     const remainder = failures.length > 30 ? `\n  ...and ${failures.length - 30} more` : '';
-    throw new Error(`SEO build validation failed (${failures.length} issues):\n${preview}${remainder}`);
+    throw new Error(
+      `SEO build validation failed (${failures.length} issues):\n${preview}${remainder}`,
+    );
   }
 
   return { checked: urls.length };

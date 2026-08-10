@@ -76,7 +76,12 @@ export function CarouselTrack({
         onScroll={syncState}
         onMouseDown={(e) => {
           const el = trackRef.current;
-          dragRef.current = { active: true, startX: e.pageX, scrollLeft: el.scrollLeft, moved: false };
+          dragRef.current = {
+            active: true,
+            startX: e.pageX,
+            scrollLeft: el.scrollLeft,
+            moved: false,
+          };
           el.style.cursor = 'grabbing';
           el.style.scrollSnapType = 'none';
         }}
@@ -140,7 +145,7 @@ export function CarouselArrows({ carousel }) {
         onClick={() => scroll(-1)}
         disabled={atStart}
         aria-label={t('carousel.prev')}
-        className="flex h-10 w-10 items-center justify-center border border-primary/20 text-xl text-primary/60 transition-colors duration-200 hover:border-primary/40 hover:text-primary disabled:opacity-25"
+        className="touch-target flex items-center justify-center border border-primary/20 text-xl text-primary/60 transition-colors duration-200 hover:border-primary/40 hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent disabled:opacity-25"
       >
         ‹
       </button>
@@ -149,7 +154,7 @@ export function CarouselArrows({ carousel }) {
         onClick={() => scroll(1)}
         disabled={atEnd}
         aria-label={t('carousel.next')}
-        className="flex h-10 w-10 items-center justify-center border border-primary/20 text-xl text-primary/60 transition-colors duration-200 hover:border-primary/40 hover:text-primary disabled:opacity-25"
+        className="touch-target flex items-center justify-center border border-primary/20 text-xl text-primary/60 transition-colors duration-200 hover:border-primary/40 hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent disabled:opacity-25"
       >
         ›
       </button>
@@ -163,17 +168,23 @@ export function CarouselDots({ products, carousel }) {
   const { activeIdx, goTo } = carousel;
 
   return (
-    <div className="flex items-center gap-2">
+    <div className="no-scrollbar flex max-w-full items-center overflow-x-auto">
       {products.map((_, i) => (
         <button
           key={i}
           type="button"
           aria-label={`${t('carousel.goTo')} ${i + 1}`}
+          aria-current={i === activeIdx}
           onClick={() => goTo(i)}
-          className={`h-1.5 rounded-full transition-all duration-300 ${
-            i === activeIdx ? 'w-6 bg-accent' : 'w-1.5 bg-primary/25'
-          }`}
-        />
+          className="touch-target flex flex-none items-center justify-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-accent"
+        >
+          <span
+            aria-hidden="true"
+            className={`h-1.5 rounded-full transition-all duration-300 ${
+              i === activeIdx ? 'w-6 bg-accent' : 'w-1.5 bg-primary/25'
+            }`}
+          />
+        </button>
       ))}
     </div>
   );
@@ -193,7 +204,7 @@ export default function ProductCarousel({ products }) {
   return (
     <>
       <CarouselTrack products={products} carousel={carousel} />
-      <div className="mt-8 flex items-center px-6 md:px-12 lg:px-20">
+      <div className="mt-8 flex flex-wrap items-center gap-y-2 px-6 md:px-12 lg:px-20">
         <CarouselDots products={products} carousel={carousel} />
         <div className="ml-auto">
           <CarouselArrows carousel={carousel} />

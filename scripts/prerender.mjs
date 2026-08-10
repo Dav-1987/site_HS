@@ -29,9 +29,7 @@ const DIST = join(ROOT, 'dist');
 const SSR_DIR = join(ROOT, 'dist-ssr');
 
 // ── Routes ──────────────────────────────────────────────────────────────────
-const catalog = JSON.parse(
-  readFileSync(join(ROOT, 'src/data/catalog.default.json'), 'utf8'),
-);
+const catalog = JSON.parse(readFileSync(join(ROOT, 'src/data/catalog.default.json'), 'utf8'));
 
 // Every ES route (src/routes.js) plus its /en mirror (src/i18n/routing.js) —
 // same list App.jsx's router serves at runtime.
@@ -42,7 +40,7 @@ const routes = esPaths.flatMap((path) => [
 ]);
 
 // ── Head hoisting ─────────────────────────────────────────────────────────────
-// renderToStaticMarkup emits any <title>/<meta>/<link> the page declares inline
+// React's server renderer emits any <title>/<meta>/<link> the page declares inline
 // in the body. Pull them out, deduplicate (last occurrence wins — most specific),
 // and return { headTags, body } so they can be placed in the document <head>.
 // Matches a full <title>…</title> OR a self-closing/void <meta>/<link> tag.
@@ -81,7 +79,15 @@ function extractHead(html) {
 }
 
 // ── Compose final document ────────────────────────────────────────────────────
-function compose(template, appHtml, lang) {
+function escapeAttribute(value) {
+  return value.replace(/&/g, '&amp;').replace(/"/g, '&quot;');
+}
+
+function markPrerenderHeadTag(tag) {
+  return tag.replace(/^<(title|meta|link)\b/i, '<$1 data-prerender-head');
+}
+
+function compose(template, appHtml, lang, path) {
   const { headTags, body } = extractHead(appHtml);
   let out = template.replace(/<html lang="es">/, `<html lang="${lang}">`);
 
@@ -91,12 +97,13 @@ function compose(template, appHtml, lang) {
   }
 
   // Inject hoisted head tags just before </head>.
-  out = out.replace(/<\/head>/i, `${headTags.join('\n    ')}\n  </head>`);
+  const markedHeadTags = headTags.map(markPrerenderHeadTag);
+  out = out.replace(/<\/head>/i, `${markedHeadTags.join('\n    ')}\n  </head>`);
 
   // Inject the rendered page into #root.
   out = out.replace(
     /<div id="root">\s*<\/div>/i,
-    `<div id="root">${body}</div>`,
+    `<div id="root" data-prerender-path="${escapeAttribute(path)}">${body}</div>`,
   );
   return out;
 }
@@ -141,7 +148,7 @@ async function main() {
   for (const { path, lang } of routes) {
     try {
       const appHtml = await render(path);
-      saveRoute(path, compose(template, appHtml, lang));
+      saveRoute(path, compose(template, appHtml, lang, path));
       ok++;
       process.stdout.write(`  ✅ ${path}\n`);
     } catch (err) {

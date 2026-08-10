@@ -41,7 +41,11 @@ export default function ProductImagesEditor({ media, onChange }) {
   };
   const onDrop = (e, i) => {
     e.preventDefault();
-    if (dragIdx === null || dragIdx === i) { setDragIdx(null); setOverIdx(null); return; }
+    if (dragIdx === null || dragIdx === i) {
+      setDragIdx(null);
+      setOverIdx(null);
+      return;
+    }
     const next = [...items];
     const [dragged] = next.splice(dragIdx, 1);
     next.splice(i, 0, dragged);
@@ -49,7 +53,10 @@ export default function ProductImagesEditor({ media, onChange }) {
     setDragIdx(null);
     setOverIdx(null);
   };
-  const onDragEnd = () => { setDragIdx(null); setOverIdx(null); };
+  const onDragEnd = () => {
+    setDragIdx(null);
+    setOverIdx(null);
+  };
 
   // Multi-upload helper shared by photo/video add tiles.
   const uploadMany = async (files, kind) => {
@@ -108,7 +115,9 @@ export default function ProductImagesEditor({ media, onChange }) {
 
   return (
     <div>
-      <span className={LABEL}>Фото и видео — перетаскивайте в любом порядке (первое фото — обложка каталога)</span>
+      <span className={LABEL}>
+        Фото и видео — перетаскивайте в любом порядке (первое фото — обложка каталога)
+      </span>
 
       {/* Drag-to-reorder media grid */}
       <div className="mt-2 grid grid-cols-4 gap-2 sm:grid-cols-5 lg:grid-cols-6">
@@ -146,12 +155,19 @@ export default function ProductImagesEditor({ media, onChange }) {
 
               {/* Video marker */}
               {isVid && (
-                <span className="pointer-events-none absolute right-1 top-1 z-10 bg-primary/70 px-1 py-0.5 text-[9px] text-background">▶</span>
+                <span className="pointer-events-none absolute right-1 top-1 z-10 bg-primary/70 px-1 py-0.5 text-[9px] text-background">
+                  ▶
+                </span>
               )}
 
               {/* Thumbnail */}
               {isVid ? (
-                <video src={src} muted playsInline className="h-full w-full object-cover pointer-events-none" />
+                <video
+                  src={src}
+                  muted
+                  playsInline
+                  className="h-full w-full object-cover pointer-events-none"
+                />
               ) : src ? (
                 <img src={src} alt="" className="h-full w-full object-cover pointer-events-none" />
               ) : (
@@ -187,7 +203,7 @@ export default function ProductImagesEditor({ media, onChange }) {
 
         {/* Add photos */}
         <label
-          className="aspect-square cursor-pointer border border-dashed border-primary/20 bg-transparent flex flex-col items-center justify-center gap-1 text-primary/30 transition-colors hover:border-accent hover:text-accent"
+          className="aspect-square cursor-pointer border border-dashed border-primary/20 bg-transparent flex flex-col items-center justify-center gap-1 text-primary/40 transition-colors hover:border-accent hover:text-accent-text"
           onDragOver={(e) => e.preventDefault()}
         >
           {photoUploading ? (
@@ -209,7 +225,7 @@ export default function ProductImagesEditor({ media, onChange }) {
         </label>
 
         {/* Add videos */}
-        <label className="aspect-square cursor-pointer border border-dashed border-primary/20 bg-transparent flex flex-col items-center justify-center gap-1 text-primary/30 transition-colors hover:border-accent hover:text-accent">
+        <label className="aspect-square cursor-pointer border border-dashed border-primary/20 bg-transparent flex flex-col items-center justify-center gap-1 text-primary/40 transition-colors hover:border-accent hover:text-accent-text">
           {videoUploading ? (
             <span className="text-[10px] uppercase tracking-[0.1em]">{videoProgress}</span>
           ) : (
@@ -230,14 +246,16 @@ export default function ProductImagesEditor({ media, onChange }) {
       </div>
 
       <p className="mt-2 text-xs leading-relaxed text-primary/40">
-        Видео: MP4, WebM, MOV, макс. 200 МБ. Порядок плиток = порядок в галерее товара.
-        Держите хотя бы одно фото — первое фото используется как обложка в каталоге.
+        Видео: MP4, WebM, MOV, макс. 200 МБ. Порядок плиток = порядок в галерее товара. Держите хотя
+        бы одно фото — первое фото используется как обложка в каталоге.
       </p>
 
       {errors.length > 0 && (
         <div className="mt-2 space-y-1">
           {errors.map((msg, i) => (
-            <p key={i} className="text-xs text-red-600">{msg}</p>
+            <p key={i} className="text-xs text-red-600">
+              {msg}
+            </p>
           ))}
         </div>
       )}

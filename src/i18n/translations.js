@@ -28,8 +28,7 @@ export const translations = {
     // --- Catalog page ---
     'catalog.eyebrow': 'Catálogo',
     'catalog.title': 'Todas las colecciones',
-    'catalog.subtitle':
-      'Nueve familias de mobiliario, un mismo lenguaje minimalista.',
+    'catalog.subtitle': 'Nueve familias de mobiliario, un mismo lenguaje minimalista.',
 
     // --- SEO meta (page <title>/<meta description>, not visible UI copy) ---
     'home.meta.title': 'Mirage Muebles — Tocadores y mobiliario minimalista | España',
@@ -71,7 +70,8 @@ export const translations = {
     'product.video': 'Vídeo',
     'product.zoom': 'Ampliar',
     'product.customOrderTitle': 'Fabricación a medida',
-    'product.customOrderText': 'Este artículo puede fabricarse en las dimensiones que necesites. Contáctanos para recibir presupuesto personalizado.',
+    'product.customOrderText':
+      'Este artículo puede fabricarse en las dimensiones que necesites. Contáctanos para recibir presupuesto personalizado.',
 
     // --- Order modal ---
     'order.button': '¡PEDIR AHORA!',
@@ -102,8 +102,7 @@ export const translations = {
     // --- Contact ---
     'contact.eyebrow': 'Contacto',
     'contact.title': 'Contacto',
-    'contact.subtitle':
-      'Escríbenos y te responderemos en menos de 24 horas laborables.',
+    'contact.subtitle': 'Escríbenos y te responderemos en menos de 24 horas laborables.',
     'contact.prefill': 'Me interesa esta pieza:',
     'contact.form.name': 'Nombre',
     'contact.form.email': 'Correo electrónico',
@@ -122,7 +121,8 @@ export const translations = {
     'a11y.skipToContent': 'Saltar al contenido',
     'notFound.text': 'La página que buscas no existe.',
     'error.boundary.title': 'Algo ha ido mal',
-    'error.boundary.body': 'Ha ocurrido un error inesperado. Inténtalo de nuevo o vuelve al inicio.',
+    'error.boundary.body':
+      'Ha ocurrido un error inesperado. Inténtalo de nuevo o vuelve al inicio.',
 
     // --- A11y: carousel + lightbox ---
     'carousel.prev': 'Anterior',
@@ -163,12 +163,14 @@ export const translations = {
     'legal.p3': 'Para cualquier consulta, puede contactarnos en {email}.',
 
     // --- Cookie banner ---
-    'cookie.message': 'Utilizamos cookies para mejorar tu experiencia y analizar el tráfico del sitio web.',
+    'cookie.message':
+      'Utilizamos cookies para mejorar tu experiencia y analizar el tráfico del sitio web.',
     'cookie.accept': 'Aceptar',
     'cookie.reject': 'Rechazar',
 
     // --- Common ---
     'common.viewAll': 'Ver todo',
+    'common.loading': 'Cargando contenido',
     'common.currency': '€',
   },
 
@@ -185,7 +187,8 @@ export const translations = {
     'hero.title.1': 'Comfort and style',
     'hero.title.2': 'for your',
     'hero.title.3': '',
-    'hero.subtitle': 'We create uniquely designed furniture, tailored to your measurements and style.',
+    'hero.subtitle':
+      'We create uniquely designed furniture, tailored to your measurements and style.',
     'hero.promo': 'Big discounts across the entire collection!',
     'hero.cta': 'View catalog',
 
@@ -240,7 +243,8 @@ export const translations = {
     'product.video': 'Video',
     'product.zoom': 'Zoom',
     'product.customOrderTitle': 'Made to your measurements',
-    'product.customOrderText': 'This item can be made in any dimensions you need. Contact us for a personalised quote.',
+    'product.customOrderText':
+      'This item can be made in any dimensions you need. Contact us for a personalised quote.',
 
     // --- Order modal ---
     'order.button': 'ORDER NOW!',
@@ -271,8 +275,7 @@ export const translations = {
     // --- Contact ---
     'contact.eyebrow': 'Contact',
     'contact.title': 'Contacts',
-    'contact.subtitle':
-      'Write to us and we will reply within 24 working hours.',
+    'contact.subtitle': 'Write to us and we will reply within 24 working hours.',
     'contact.prefill': "I'm interested in this piece:",
     'contact.form.name': 'Name',
     'contact.form.email': 'Email',
@@ -327,7 +330,8 @@ export const translations = {
     'legal.email': 'Email',
     'legal.p1':
       'All content on this website, including text, images, graphics and design elements, is the property of Mirage Muebles and may not be copied, reproduced, distributed or used without prior permission.',
-    'legal.p2': 'Mirage Muebles is not responsible for any damages resulting from the use of this website.',
+    'legal.p2':
+      'Mirage Muebles is not responsible for any damages resulting from the use of this website.',
     'legal.p3': 'For any questions, please contact us at {email}.',
 
     // --- Cookie banner ---
@@ -337,6 +341,7 @@ export const translations = {
 
     // --- Common ---
     'common.viewAll': 'View all',
+    'common.loading': 'Loading content',
     'common.currency': '€',
   },
 };

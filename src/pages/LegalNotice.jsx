@@ -35,27 +35,30 @@ export default function LegalNotice() {
         <Reveal delay={0.1} className="mt-10 max-w-xl">
           <dl className="divide-y divide-primary/10 border-t border-primary/10">
             <div className="flex items-center gap-5 py-4">
-              <dt className="w-28 shrink-0 text-[11px] uppercase tracking-[0.2em] text-primary/40">
+              <dt className="w-28 shrink-0 text-xs uppercase tracking-[0.2em] text-secondary">
                 {t('legal.companyLabel')}
               </dt>
               <dd className="text-sm text-primary">Mirage Muebles</dd>
             </div>
             <div className="flex items-center gap-5 py-4">
-              <dt className="w-28 shrink-0 text-[11px] uppercase tracking-[0.2em] text-primary/40">
+              <dt className="w-28 shrink-0 text-xs uppercase tracking-[0.2em] text-secondary">
                 {t('legal.website')}
               </dt>
               <dd className="text-sm">
-                <a href={SITE} className="text-primary transition-colors hover:text-accent">
+                <a href={SITE} className="text-primary transition-colors hover:text-accent-text">
                   hsmuebles.es
                 </a>
               </dd>
             </div>
             <div className="flex items-center gap-5 py-4">
-              <dt className="w-28 shrink-0 text-[11px] uppercase tracking-[0.2em] text-primary/40">
+              <dt className="w-28 shrink-0 text-xs uppercase tracking-[0.2em] text-secondary">
                 {t('legal.email')}
               </dt>
               <dd className="text-sm">
-                <a href={`mailto:${email}`} className="text-primary transition-colors hover:text-accent">
+                <a
+                  href={`mailto:${email}`}
+                  className="text-primary transition-colors hover:text-accent-text"
+                >
                   {email}
                 </a>
               </dd>
@@ -67,7 +70,10 @@ export default function LegalNotice() {
             <p>{t('legal.p2')}</p>
             <p>
               {before}
-              <a href={`mailto:${email}`} className="text-primary underline transition-colors hover:text-accent">
+              <a
+                href={`mailto:${email}`}
+                className="text-primary underline transition-colors hover:text-accent-text"
+              >
                 {email}
               </a>
               {after}

@@ -20,21 +20,24 @@ export default function CookieBanner() {
     <div
       role="dialog"
       aria-label="Cookies"
+      aria-describedby="cookie-message"
       className="fixed bottom-4 left-4 right-4 z-[90] max-w-sm rounded-md border border-primary/10 bg-background/85 p-4 shadow-floating backdrop-blur-sm sm:left-auto sm:right-4"
     >
-      <p className="text-xs leading-relaxed text-secondary">{t('cookie.message')}</p>
+      <p id="cookie-message" className="text-sm leading-relaxed text-secondary">
+        {t('cookie.message')}
+      </p>
       <div className="mt-3 flex justify-end gap-3">
         <button
           type="button"
           onClick={dismiss}
-          className="text-[11px] uppercase tracking-[0.15em] text-primary/50 transition-colors hover:text-primary"
+          className="touch-target px-2 text-xs uppercase tracking-[0.15em] text-primary/70 transition-colors hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
         >
           {t('cookie.reject')}
         </button>
         <button
           type="button"
           onClick={dismiss}
-          className="bg-primary px-4 py-1.5 text-[11px] uppercase tracking-[0.15em] text-background transition-colors hover:bg-accent"
+          className="touch-target bg-primary px-4 text-xs uppercase tracking-[0.15em] text-background transition-colors hover:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2"
         >
           {t('cookie.accept')}
         </button>

@@ -1,729 +1,845 @@
 [
   {
-    "slug": "tocadores-loft",
+    "slug": "espejos-de-cuerpo-entero",
     "name": {
-      "es": "Tocadores Loft",
-      "en": "Loft Dressing Tables"
+      "es": "Espejos",
+      "en": "Mirrors"
     },
     "tagline": {
-      "es": "Industrial cálido, líneas francas",
-      "en": "Warm industrial, honest lines"
+      "es": "Reflejo de cuerpo entero",
+      "en": "Full-length reflection"
     },
     "description": {
-      "es": "Tocadores de inspiración loft: estructura metálica, maderas nobles y un punto urbano. Pensados para espacios abiertos y luminosos.",
-      "en": "Loft-inspired dressing tables: metal frame, noble woods and an urban edge. Made for open, light-filled spaces."
+      "es": "Espejos de pie y de pared a gran escala. Amplían la luz y el espacio con un marco mínimo y elegante.",
+      "en": "Large floor and wall mirrors. They expand light and space with a minimal, elegant frame."
     },
-    "image": "/uploads/28d19308d09ec8d998279309b4a01628.jpg",
+    "image": "/uploads/d4a0534c2e1889b52c0a1fd5e594d313.jpg",
     "imageMobile": "",
     "video": "",
-    "updatedAt": "2026-07-06T13:40:42.817Z",
+    "updatedAt": "2026-08-06T12:24:54.769Z",
     "products": [
       {
-        "id": "Tocador-M-05-3",
-        "name": "Tocador",
-        "price": 499,
-        "oldPrice": 600,
-        "image": "/uploads/d29e04e4fdb3901cd31b050922d2692b.jpg",
+        "id": "Espejo-Alto-F-05",
+        "name": "Espejo ",
+        "price": 239,
+        "oldPrice": 340,
+        "image": "/uploads/3611a23d86e72c7bf209810bfdd9a592.jpg",
         "imageMobile": "",
         "images": [
-          "/uploads/d29e04e4fdb3901cd31b050922d2692b.jpg",
-          "/uploads/f7d3fe0b66ec85ce5a429891a71ae10d.jpg"
+          "/uploads/3611a23d86e72c7bf209810bfdd9a592.jpg",
+          "/uploads/d4a0534c2e1889b52c0a1fd5e594d313.jpg",
+          "/uploads/d06b789eccfa06ee2ac1d809ca79c18a.jpg",
+          "/uploads/0ba3cc2bdb9c8d870a9bd7267b6f1246.jpg",
+          "/uploads/0bd1296bb724d005b21c17dba5226a95.jpg",
+          "/uploads/6dcf11aaf9714fef0f9894384a99b445.jpg",
+          "/uploads/d603698878cd854b406e8f87e6787c4b.jpg"
         ],
         "video": "",
         "videoFirst": false,
         "media": [
           {
-            "src": "/uploads/015e7089509b625cd540eba2539e6a67.mp4",
-            "type": "video"
-          },
-          {
-            "src": "/uploads/d29e04e4fdb3901cd31b050922d2692b.jpg",
+            "src": "/uploads/3611a23d86e72c7bf209810bfdd9a592.jpg",
             "type": "image"
           },
           {
-            "src": "/uploads/f7d3fe0b66ec85ce5a429891a71ae10d.jpg",
+            "src": "/uploads/d4a0534c2e1889b52c0a1fd5e594d313.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/d06b789eccfa06ee2ac1d809ca79c18a.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/0ba3cc2bdb9c8d870a9bd7267b6f1246.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/0bd1296bb724d005b21c17dba5226a95.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/6dcf11aaf9714fef0f9894384a99b445.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/d603698878cd854b406e8f87e6787c4b.jpg",
             "type": "image"
           }
         ],
         "material": {
-          "es": "Melamina, Metal",
-          "en": "Melamine-faced Chipboard, Metal"
+          "es": "Latón",
+          "en": "Brass"
         },
-        "size": "90 × 40 × 170 cm",
-        "reference": "M-05-3",
-        "subtitle": "90 × 40 × 170 cm",
+        "size": "80 × 180 cm",
+        "reference": "F-05",
+        "subtitle": "80 × 180 cm",
         "description": {
-          "es": "Medidas: \n•  ancho 90cm\n•  prof. 40cm\n•  altura 90cm\n\nEspejo 90x80cm \n\n🎁 Bombillas LED de regalo ",
-          "en": "Dimensions:\n• Width: 90 cm\n• Depth: 40 cm\n• Height: 90 cm\n\nMirror: 90 × 80 cm\n\n🎁 Free LED bulbs included"
+          "es": "Medidas:\n• ancho 80cm\n• altura 180cm\n\n🎁 Bombillas LED de regalo",
+          "en": "Dimensions:\n• Width: 80 cm\n• Height: 180 cm\n\n🎁 Free LED bulbs included"
         },
         "related": [],
         "perks": "bulbs",
         "updatedAt": "2026-07-27T08:03:16.285Z"
       },
       {
-        "id": "Tocador-M-05",
-        "name": "Tocador",
-        "price": 489,
-        "oldPrice": 590,
-        "image": "/uploads/25076fa903e9891b55d0c515854a2ad8.jpg",
+        "id": "Espejo-Alto-F-03",
+        "name": "Espejo ",
+        "price": 199,
+        "oldPrice": 300,
+        "image": "/uploads/c4ed1648ac2194b2c57ef23dfa6ddf05.jpg",
         "imageMobile": "",
         "images": [
-          "/uploads/25076fa903e9891b55d0c515854a2ad8.jpg",
-          "/uploads/33736e9b59355ce7cb958e83f5a4a8dc.jpg",
-          "/uploads/998a2403ed372166ba31f28bf3023421.jpg"
+          "/uploads/c4ed1648ac2194b2c57ef23dfa6ddf05.jpg",
+          "/uploads/347068d281899cbefaee020cf1777c45.jpg",
+          "/uploads/b37d46eae8b283a0000d7cfa430d5945.jpg",
+          "/uploads/52886d9f4b4258d8c8d6ad81f18033e2.jpg",
+          "/uploads/402d558b25563dd655b5bd7a7c3f5222.jpg"
         ],
         "video": "",
         "videoFirst": false,
         "media": [
           {
-            "src": "/uploads/25076fa903e9891b55d0c515854a2ad8.jpg",
+            "src": "/uploads/c4ed1648ac2194b2c57ef23dfa6ddf05.jpg",
             "type": "image"
           },
           {
-            "src": "/uploads/9954214466d37037b64d80d219f3ff00.mp4",
-            "type": "video"
-          },
-          {
-            "src": "/uploads/33736e9b59355ce7cb958e83f5a4a8dc.jpg",
+            "src": "/uploads/347068d281899cbefaee020cf1777c45.jpg",
             "type": "image"
           },
           {
-            "src": "/uploads/998a2403ed372166ba31f28bf3023421.jpg",
+            "src": "/uploads/b37d46eae8b283a0000d7cfa430d5945.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/52886d9f4b4258d8c8d6ad81f18033e2.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/402d558b25563dd655b5bd7a7c3f5222.jpg",
             "type": "image"
           }
         ],
         "material": {
-          "es": "Lacado mate",
-          "en": "Matte lacquer"
+          "es": "Latón",
+          "en": "Brass"
         },
-        "size": "90 × 40 × 170 cm",
-        "reference": "M-05",
-        "subtitle": "90 × 40 × 170 cm",
+        "size": "70 × 170 cm",
+        "reference": "F-03",
+        "subtitle": "70 × 170 cm",
         "description": {
-          "es": "Medidas: \n•  ancho 90cm\n•  prof. 40cm\n•  altura 90cm\n\nEspejo 90x80cm \n\n🎁 Bombillas LED de regalo ",
-          "en": "Dimensions:\n• Width: 90 cm\n• Depth: 40 cm\n• Height: 90 cm\n\nMirror: 90 × 80 cm\n\n🎁 Free LED bulbs included"
+          "es": "Medidas:\n• ancho 70cm\n• altura 170cm\n\n🎁 Bombillas LED de regalo",
+          "en": "Dimensions:\n• Width: 70 cm\n• Height: 170 cm\n\n🎁 Free LED bulbs included"
+        },
+        "related": [],
+        "perks": "bulbs",
+        "updatedAt": "2026-08-06T12:07:06.614Z"
+      },
+      {
+        "id": "Espejo-Alto-F-07",
+        "name": "Espejo ",
+        "price": 299,
+        "oldPrice": 400,
+        "image": "/uploads/66efc3b8287f3bd90ea766667f9bfc86.jpg",
+        "imageMobile": "",
+        "images": [
+          "/uploads/66efc3b8287f3bd90ea766667f9bfc86.jpg",
+          "/uploads/d4c575b8ed3c10b660dc535132129844.jpg",
+          "/uploads/dd5760fb735fb2231d2df2eab2f538be.jpg"
+        ],
+        "video": "",
+        "videoFirst": false,
+        "media": [
+          {
+            "src": "/uploads/66efc3b8287f3bd90ea766667f9bfc86.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/d4c575b8ed3c10b660dc535132129844.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/dd5760fb735fb2231d2df2eab2f538be.jpg",
+            "type": "image"
+          }
+        ],
+        "material": {
+          "es": "Latón",
+          "en": "Brass"
+        },
+        "size": "80 × 180 cm",
+        "reference": "F-07",
+        "subtitle": "80 × 180 cm",
+        "description": {
+          "es": "Medidas:\n• ancho 80cm\n• altura 180cm\n\n🎁 Bombillas LED de regalo",
+          "en": "Dimensions:\n• Width: 80 cm\n• Height: 180 cm\n\n🎁 Free LED bulbs included"
+        },
+        "related": [],
+        "perks": "bulbs",
+        "updatedAt": "2026-08-06T12:28:31.573Z"
+      },
+      {
+        "id": "Espejo-Alto-F-06",
+        "name": "Espejo ",
+        "price": 259,
+        "oldPrice": 380,
+        "image": "/uploads/16c45b90baae50744af08e3aa9c749bc.jpg",
+        "imageMobile": "",
+        "images": [
+          "/uploads/16c45b90baae50744af08e3aa9c749bc.jpg",
+          "/uploads/b7ac42e53d525d870bd23a65d5c7c034.jpg",
+          "/uploads/db1eb869f8852905c29906ba3d880f69.jpg",
+          "/uploads/1de4780d7fcf55660ec7e4f7da36a0b6.jpg",
+          "/uploads/417a4af7b21a7bee4a5679be1e2237f1.jpg",
+          "/uploads/6ad6e4ad73f4cbf45b4ec723359ccf6f.jpg",
+          "/uploads/6b9f02778140be75085a280dd74ab8cf.jpg",
+          "/uploads/2b28b952b8d4b5071266635c46845c2d.jpg"
+        ],
+        "video": "",
+        "videoFirst": false,
+        "media": [
+          {
+            "src": "/uploads/16c45b90baae50744af08e3aa9c749bc.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/b7ac42e53d525d870bd23a65d5c7c034.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/db1eb869f8852905c29906ba3d880f69.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/1de4780d7fcf55660ec7e4f7da36a0b6.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/417a4af7b21a7bee4a5679be1e2237f1.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/6ad6e4ad73f4cbf45b4ec723359ccf6f.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/6b9f02778140be75085a280dd74ab8cf.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/2b28b952b8d4b5071266635c46845c2d.jpg",
+            "type": "image"
+          }
+        ],
+        "material": {
+          "es": "Latón",
+          "en": "Brass"
+        },
+        "size": "80 × 185 cm",
+        "reference": "F-06",
+        "subtitle": "80 × 185 cm",
+        "description": {
+          "es": "Medidas:\n• ancho 80cm\n• altura 185cm\n\n🎁 Bombillas LED de regalo",
+          "en": "Dimensions:\n• Width: 80 cm\n• Height: 185 cm\n\n🎁 Free LED bulbs included"
+        },
+        "related": [],
+        "perks": "bulbs",
+        "updatedAt": "2026-08-06T12:28:08.043Z"
+      },
+      {
+        "id": "Espejo-Alto-F-01",
+        "name": "Espejo ",
+        "price": 169,
+        "oldPrice": 270,
+        "image": "/uploads/a692727d48ead1768c4a09a1900fdf13.jpg",
+        "imageMobile": "",
+        "images": [
+          "/uploads/a692727d48ead1768c4a09a1900fdf13.jpg",
+          "/uploads/cd6570c587d43aa52f7beb5a87fa619e.jpg",
+          "/uploads/84bf97b3813a701e85ae7ba0067a9de5.jpg",
+          "/uploads/40affe79d4c2cb428cc83948543a3f79.jpg",
+          "/uploads/661c29e072d44afa7330aa9f5e215770.jpg"
+        ],
+        "video": "",
+        "videoFirst": false,
+        "media": [
+          {
+            "src": "/uploads/a692727d48ead1768c4a09a1900fdf13.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/cd6570c587d43aa52f7beb5a87fa619e.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/84bf97b3813a701e85ae7ba0067a9de5.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/40affe79d4c2cb428cc83948543a3f79.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/661c29e072d44afa7330aa9f5e215770.jpg",
+            "type": "image"
+          }
+        ],
+        "material": {
+          "es": "Latón",
+          "en": "Brass"
+        },
+        "size": "70 × 170 cm",
+        "reference": "F-01",
+        "subtitle": "70 × 170 cm",
+        "description": {
+          "es": "Medidas:\n• ancho 70cm\n• altura 170cm\n\n🎁 Bombillas LED de regalo",
+          "en": "Dimensions:\n• Width: 70 cm\n• Height: 170 cm\n\n🎁 Free LED bulbs included"
+        },
+        "related": [],
+        "perks": "bulbs",
+        "updatedAt": "2026-08-06T12:05:29.080Z"
+      },
+      {
+        "id": "Espejo-Alto-F-04",
+        "name": "Espejo ",
+        "price": 229,
+        "oldPrice": 330,
+        "image": "/uploads/f1a4522de8cd487bcd30a904aa6f692e.jpg",
+        "imageMobile": "",
+        "images": [
+          "/uploads/f1a4522de8cd487bcd30a904aa6f692e.jpg",
+          "/uploads/7009143358661be9bb89a1ca97724527.jpg",
+          "/uploads/8e63d26e8c402c66616670f4d9c31410.jpg",
+          "/uploads/b80a39c25c7ff7d64cdbac811a010c21.jpg",
+          "/uploads/b94454f0c22a91a1b1c4926446b94de4.jpg",
+          "/uploads/dadf7f8e739fecc50d168ce5b5d588f3.jpg"
+        ],
+        "video": "",
+        "videoFirst": false,
+        "media": [
+          {
+            "src": "/uploads/f1a4522de8cd487bcd30a904aa6f692e.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/7009143358661be9bb89a1ca97724527.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/8e63d26e8c402c66616670f4d9c31410.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/b80a39c25c7ff7d64cdbac811a010c21.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/b94454f0c22a91a1b1c4926446b94de4.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/dadf7f8e739fecc50d168ce5b5d588f3.jpg",
+            "type": "image"
+          }
+        ],
+        "material": {
+          "es": "Latón",
+          "en": "Brass"
+        },
+        "size": "70 × 175 cm",
+        "reference": "F-04",
+        "subtitle": "70 × 175 cm",
+        "description": {
+          "es": "Medidas:\n• ancho 70cm\n• altura 175cm\n\n🎁 Bombillas LED de regalo",
+          "en": "Dimensions:\n• Width: 70 cm\n• Height: 175 cm\n\n🎁 Free LED bulbs included"
+        },
+        "related": [],
+        "perks": "bulbs",
+        "updatedAt": "2026-08-06T12:27:38.760Z"
+      },
+      {
+        "id": "Espejo-Alto-F-08",
+        "name": "Espejo ",
+        "price": 329,
+        "oldPrice": 450,
+        "image": "/uploads/756f8c6ff6502724e6947db02769de1b.jpg",
+        "imageMobile": "",
+        "images": [
+          "/uploads/756f8c6ff6502724e6947db02769de1b.jpg",
+          "/uploads/a01d5c0e56751aa12ad432df6065b234.jpg"
+        ],
+        "video": "",
+        "videoFirst": false,
+        "media": [
+          {
+            "src": "/uploads/756f8c6ff6502724e6947db02769de1b.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/a01d5c0e56751aa12ad432df6065b234.jpg",
+            "type": "image"
+          }
+        ],
+        "material": {
+          "es": "Latón",
+          "en": "Brass"
+        },
+        "size": "80 × 185 cm",
+        "reference": "F-08",
+        "subtitle": "80 × 185 cm",
+        "description": {
+          "es": "Medidas:\n• ancho 80cm\n• altura 185cm\n\n🎁 Bombillas LED de regalo",
+          "en": "Dimensions:\n• Width: 80 cm\n• Height: 185 cm\n\n🎁 Free LED bulbs included"
         },
         "related": [],
         "perks": "bulbs",
         "updatedAt": "2026-07-27T08:03:16.285Z"
       },
       {
-        "id": "Tocador-M-02-3",
-        "name": "Tocador",
+        "id": "Espejo-Alto-F-02",
+        "name": "Espejo ",
+        "price": 189,
+        "oldPrice": 290,
+        "image": "/uploads/3f17f75401458f2be6e6e8fd3035521b.jpg",
+        "imageMobile": "",
+        "images": [
+          "/uploads/3f17f75401458f2be6e6e8fd3035521b.jpg",
+          "/uploads/388aa907bbef1e3a31ccbdbe26f4a311.jpg",
+          "/uploads/2e2db1e7954bf2d921ff5fb9a6876db7.jpg",
+          "/uploads/5a5594eba5dbb9136c1aff0e85487445.jpg",
+          "/uploads/ce18b1ebc488af5607ee9f869808d801.jpg",
+          "/uploads/672515c8039de443e72d75d4ac8cba7d.jpg"
+        ],
+        "video": "",
+        "videoFirst": false,
+        "media": [
+          {
+            "src": "/uploads/3f17f75401458f2be6e6e8fd3035521b.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/388aa907bbef1e3a31ccbdbe26f4a311.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/2e2db1e7954bf2d921ff5fb9a6876db7.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/5a5594eba5dbb9136c1aff0e85487445.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/ce18b1ebc488af5607ee9f869808d801.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/672515c8039de443e72d75d4ac8cba7d.jpg",
+            "type": "image"
+          }
+        ],
+        "material": {
+          "es": "Latón",
+          "en": "Brass"
+        },
+        "size": "70 × 175 cm",
+        "reference": "F-02",
+        "subtitle": "70 × 175 cm",
+        "description": {
+          "es": "Medidas:\n• ancho 70cm\n• altura 175cm\n\n🎁 Bombillas LED de regalo",
+          "en": "Dimensions:\n• Width: 70 cm\n• Height: 175 cm\n\n🎁 Free LED bulbs included"
+        },
+        "related": [],
+        "perks": "bulbs",
+        "updatedAt": "2026-07-27T08:03:16.285Z"
+      },
+      {
+        "id": "Espejo-Alto-F-09",
+        "name": "Espejo ",
+        "price": 329,
+        "oldPrice": 450,
+        "image": "/uploads/50395d6b1c82cbde618ebf5a32628a64.jpg",
+        "imageMobile": "",
+        "images": [
+          "/uploads/50395d6b1c82cbde618ebf5a32628a64.jpg",
+          "/uploads/5c2d20da2b256cb7deaf28cf2094bbac.jpg",
+          "/uploads/351c0279b611aa4e3037ca270a89b248.jpg"
+        ],
+        "video": "",
+        "videoFirst": false,
+        "media": [
+          {
+            "src": "/uploads/50395d6b1c82cbde618ebf5a32628a64.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/5c2d20da2b256cb7deaf28cf2094bbac.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/351c0279b611aa4e3037ca270a89b248.jpg",
+            "type": "image"
+          }
+        ],
+        "material": {
+          "es": "Latón",
+          "en": "Brass"
+        },
+        "size": "80 × 180 cm",
+        "reference": "F-09",
+        "subtitle": "80 × 180 cm",
+        "description": {
+          "es": "Medidas:\n• ancho 80cm\n• altura 180cm\n\n🎁 Bombillas LED de regalo",
+          "en": "Dimensions:\n• Width: 80 cm\n• Height: 180 cm\n\n🎁 Free LED bulbs included"
+        },
+        "related": [],
+        "perks": "bulbs",
+        "updatedAt": "2026-08-06T12:29:31.820Z"
+      },
+      {
+        "id": "Espejo-Alto-D11",
+        "name": "Espejo",
         "price": 399,
-        "oldPrice": 750,
-        "image": "/uploads/845578ae92ec61b012ddbc1e57416c0a.jpg",
-        "imageMobile": "",
-        "images": [
-          "/uploads/845578ae92ec61b012ddbc1e57416c0a.jpg",
-          "/uploads/bb99a1b818c27bc91e8344a0152c6185.jpg",
-          "/uploads/4aefea52dd7c011db8c60ff8c0d21bbb.jpg",
-          "/uploads/3836301925f9a188f0941940e6b0e600.jpg",
-          "/uploads/8f6e758f472b74ee4036a8cb390f4183.jpg",
-          "/uploads/827558981c11ea9432aad1b2bdcba8bb.jpg"
-        ],
-        "video": "",
-        "videoFirst": false,
-        "media": [
-          {
-            "src": "/uploads/845578ae92ec61b012ddbc1e57416c0a.jpg",
-            "type": "image"
-          },
-          {
-            "src": "/uploads/bb99a1b818c27bc91e8344a0152c6185.jpg",
-            "type": "image"
-          },
-          {
-            "src": "/uploads/4aefea52dd7c011db8c60ff8c0d21bbb.jpg",
-            "type": "image"
-          },
-          {
-            "src": "/uploads/3836301925f9a188f0941940e6b0e600.jpg",
-            "type": "image"
-          },
-          {
-            "src": "/uploads/8f6e758f472b74ee4036a8cb390f4183.jpg",
-            "type": "image"
-          },
-          {
-            "src": "/uploads/827558981c11ea9432aad1b2bdcba8bb.jpg",
-            "type": "image"
-          }
-        ],
-        "material": {
-          "es": "Lacado mate",
-          "en": "Matte lacquer"
-        },
-        "size": "70 × 40 × 170 cm",
-        "reference": "M-02-3",
-        "subtitle": "70 × 40 × 170 cm",
-        "description": {
-          "es": "Medidas: \n•  ancho 70cm\n•  prof. 40cm\n•  altura 90cm\n\nEspejo 70x80cm \n\n🎁 Bombillas LED de regalo ",
-          "en": "Dimensions:\n• Width: 70 cm\n• Depth: 40 cm\n• Height: 90 cm\n\nMirror: 70 × 80 cm\n\n🎁 Free LED bulbs included"
-        },
-        "related": [],
-        "perks": "bulbs",
-        "updatedAt": "2026-07-27T08:03:16.285Z"
-      },
-      {
-        "id": "Tocador-M-01",
-        "name": "Tocador",
-        "price": 359,
-        "oldPrice": 510,
-        "image": "/uploads/3008e04ff3a1bb8e3234559be7061b3f.jpg",
-        "imageMobile": "",
-        "images": [
-          "/uploads/3008e04ff3a1bb8e3234559be7061b3f.jpg",
-          "/uploads/3ee281ae8993f1d2c211e10cef9675d4.jpg",
-          "/uploads/eb0c6a14b77ca84e7f5cfc85c1f03c98.jpg"
-        ],
-        "video": "",
-        "videoFirst": false,
-        "media": [
-          {
-            "src": "/uploads/3008e04ff3a1bb8e3234559be7061b3f.jpg",
-            "type": "image"
-          },
-          {
-            "src": "/uploads/3ee281ae8993f1d2c211e10cef9675d4.jpg",
-            "type": "image"
-          },
-          {
-            "src": "/uploads/eb0c6a14b77ca84e7f5cfc85c1f03c98.jpg",
-            "type": "image"
-          }
-        ],
-        "material": {
-          "es": "Roble",
-          "en": "Oak"
-        },
-        "size": "70 × 40 × 170 cm",
-        "reference": "M-01",
-        "subtitle": "70 × 40 × 170 cm",
-        "description": {
-          "es": "Medidas: \n•  ancho 70cm\n•  prof. 40cm\n•  altura 90cm\n\nEspejo 70x80cm \n\n🎁 Bombillas LED de regalo ",
-          "en": "Dimensions:\n• Width: 70 cm\n• Depth: 40 cm\n• Height: 90 cm\n\nMirror: 70 × 80 cm\n\n🎁 Free LED bulbs included"
-        },
-        "related": [],
-        "perks": "bulbs",
-        "updatedAt": "2026-07-27T08:03:16.285Z"
-      },
-      {
-        "id": "Tocador-M-01-2",
-        "name": "Tocador",
-        "price": 379,
         "oldPrice": 530,
-        "image": "/uploads/f206eec158c7f30fd96334523906ab23.jpg",
+        "image": "/uploads/cb29167c19772103aaca90768ce2a9bb.jpg",
         "imageMobile": "",
         "images": [
-          "/uploads/f206eec158c7f30fd96334523906ab23.jpg",
-          "/uploads/b59c4e2501ad3ec067510d579d30ac03.jpg",
-          "/uploads/223fb69e7b8f2cf5f351695c0cf170a0.jpg",
-          "/uploads/38deb5caa51c10abee6910373bd1927e.jpg",
-          "/uploads/0c74dff9bddd2030abd259097137ce8b.jpg",
-          "/uploads/eb43661cfdff1ff9647c6d61a3da36e5.jpg"
+          "/uploads/cb29167c19772103aaca90768ce2a9bb.jpg",
+          "/uploads/b14fe9d72a43616cdb0d39989850cd1f.jpg",
+          "/uploads/15fb26ac83bb8ab2fffa36ee7f307f7a.jpg",
+          "/uploads/31ec8456841d6867a90c8ce99b34ac30.jpg",
+          "/uploads/b179756a4c8393a54b446508816b8546.jpg",
+          "/uploads/1892fc33a4af8d8b7c012a31484c792d.jpg",
+          "/uploads/f3fd8da2d29f97e9fc3db4ecc3377c7c.jpg",
+          "/uploads/609c3d4a0cd80d5b2c466cadbeae975c.jpg",
+          "/uploads/7bf21a72ad5b111969ed3b174d3ff275.jpg",
+          "/uploads/bb811c0af4aad4967313f15ad2ffaa40.jpg",
+          "/uploads/29911e2f36e4a478205fd0f5b6970079.jpg",
+          "/uploads/cfd91dd80b02589ad5613d310128e916.jpg",
+          "/uploads/404c09234b1bf6706ce3f914e8719a8c.jpg",
+          "/uploads/78932e3f6956254faa367f9b51786763.jpg"
         ],
         "video": "",
         "videoFirst": false,
         "media": [
           {
-            "src": "/uploads/f206eec158c7f30fd96334523906ab23.jpg",
+            "src": "/uploads/cb29167c19772103aaca90768ce2a9bb.jpg",
             "type": "image"
           },
           {
-            "src": "/uploads/b59c4e2501ad3ec067510d579d30ac03.jpg",
+            "src": "/uploads/b14fe9d72a43616cdb0d39989850cd1f.jpg",
             "type": "image"
           },
           {
-            "src": "/uploads/223fb69e7b8f2cf5f351695c0cf170a0.jpg",
+            "src": "/uploads/15fb26ac83bb8ab2fffa36ee7f307f7a.jpg",
             "type": "image"
           },
           {
-            "src": "/uploads/38deb5caa51c10abee6910373bd1927e.jpg",
+            "src": "/uploads/31ec8456841d6867a90c8ce99b34ac30.jpg",
             "type": "image"
           },
           {
-            "src": "/uploads/0c74dff9bddd2030abd259097137ce8b.jpg",
+            "src": "/uploads/b179756a4c8393a54b446508816b8546.jpg",
             "type": "image"
           },
           {
-            "src": "/uploads/eb43661cfdff1ff9647c6d61a3da36e5.jpg",
+            "src": "/uploads/1892fc33a4af8d8b7c012a31484c792d.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/f3fd8da2d29f97e9fc3db4ecc3377c7c.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/609c3d4a0cd80d5b2c466cadbeae975c.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/7bf21a72ad5b111969ed3b174d3ff275.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/bb811c0af4aad4967313f15ad2ffaa40.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/29911e2f36e4a478205fd0f5b6970079.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/cfd91dd80b02589ad5613d310128e916.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/404c09234b1bf6706ce3f914e8719a8c.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/78932e3f6956254faa367f9b51786763.jpg",
             "type": "image"
           }
         ],
         "material": {
-          "es": "Lacado mate",
-          "en": "Matte lacquer"
+          "es": "Latón",
+          "en": "Brass"
         },
-        "size": "70 × 40 × 170 cm",
-        "reference": "M-01-2",
-        "subtitle": "70 × 40 × 170 cm",
+        "size": "70 × 175 cm",
+        "reference": "D-11",
+        "subtitle": "70 × 175 cm",
         "description": {
-          "es": "Medidas: \n•  ancho 70cm\n•  prof. 40cm\n•  altura 90cm\n\nEspejo 70x80cm \n\n🎁 Bombillas LED de regalo ",
-          "en": "Dimensions:\n• Width: 70 cm\n• Depth: 40 cm\n• Height: 90 cm\n\nMirror: 70 × 80 cm\n\n🎁 Free LED bulbs included"
+          "es": "Medidas: \n•  ancho 70cm\n•  altura 175cm",
+          "en": "Dimensions:\n• Width: 70 cm\n• Height: 175 cm"
         },
         "related": [],
-        "perks": "bulbs",
-        "updatedAt": "2026-07-27T08:03:16.285Z"
+        "perks": "quality",
+        "updatedAt": "2026-08-06T12:03:09.430Z"
       },
       {
-        "id": "Tocador-M-04",
-        "name": "Tocador",
-        "price": 439,
-        "oldPrice": 580,
-        "image": "/uploads/95a57f1bc404f3b29fdb3d38f225feee.jpg",
+        "id": "Espejo-Alto-D05",
+        "name": "Espejo ",
+        "price": 229,
+        "oldPrice": 340,
+        "image": "/uploads/9d966433630f7f064a9b147e4bc69580.jpg",
         "imageMobile": "",
         "images": [
-          "/uploads/95a57f1bc404f3b29fdb3d38f225feee.jpg",
-          "/uploads/3f4865e828e2982a03aa007440e4cde7.jpg",
-          "/uploads/69352e02cf3a13b91aac770a5aa90204.jpg",
-          "/uploads/d4f60cbf1fa1df692e500d7c6bccfa53.jpg"
+          "/uploads/9d966433630f7f064a9b147e4bc69580.jpg",
+          "/uploads/6be7c2df6b1c0ab91690b9f131a94322.jpg"
         ],
         "video": "",
         "videoFirst": false,
         "media": [
           {
-            "src": "/uploads/ee3ea3ec9ed9c3a39d8ca1c7ee50b6bf.mp4",
+            "src": "/uploads/67819fa06da08ac64706f95859e34e87.mp4",
             "type": "video"
           },
           {
-            "src": "/uploads/95a57f1bc404f3b29fdb3d38f225feee.jpg",
+            "src": "/uploads/9d966433630f7f064a9b147e4bc69580.jpg",
             "type": "image"
           },
           {
-            "src": "/uploads/3f4865e828e2982a03aa007440e4cde7.jpg",
+            "src": "/uploads/6be7c2df6b1c0ab91690b9f131a94322.jpg",
             "type": "image"
           },
           {
-            "src": "/uploads/69352e02cf3a13b91aac770a5aa90204.jpg",
-            "type": "image"
-          },
-          {
-            "src": "/uploads/d4f60cbf1fa1df692e500d7c6bccfa53.jpg",
-            "type": "image"
-          }
-        ],
-        "material": {
-          "es": "Lacado mate",
-          "en": "Matte lacquer"
-        },
-        "size": "90 × 40 × 170 cm",
-        "reference": "M-04",
-        "subtitle": "90 × 40 × 170 cm",
-        "description": {
-          "es": "Medidas: \n•  ancho 90cm\n•  prof. 40cm\n•  altura 90cm\n\nEspejo 90x80cm \n\n🎁 Bombillas LED de regalo ",
-          "en": "Dimensions:\n• Width: 90 cm\n• Depth: 40 cm\n• Height: 90 cm\n\nMirror: 90 × 80 cm\n\n🎁 Free LED bulbs included"
-        },
-        "related": [],
-        "perks": "bulbs",
-        "updatedAt": "2026-07-27T08:03:16.285Z"
-      },
-      {
-        "id": "Tocador-M-06",
-        "name": "Tocador",
-        "price": 549,
-        "oldPrice": 660,
-        "image": "/uploads/771c0092caedde9b643cd77b72be35bf.jpg",
-        "imageMobile": "",
-        "images": [
-          "/uploads/771c0092caedde9b643cd77b72be35bf.jpg",
-          "/uploads/da01b73579e06002f6a1f07a27313507.jpg"
-        ],
-        "video": "",
-        "videoFirst": false,
-        "media": [
-          {
-            "src": "/uploads/771c0092caedde9b643cd77b72be35bf.jpg",
-            "type": "image"
-          },
-          {
-            "src": "/uploads/da01b73579e06002f6a1f07a27313507.jpg",
-            "type": "image"
-          }
-        ],
-        "material": {
-          "es": "Lacado mate",
-          "en": "Matte lacquer"
-        },
-        "size": "100 × 40 × 180 cm",
-        "reference": "M-06",
-        "subtitle": "100 × 40 × 180 cm",
-        "description": {
-          "es": "Medidas: \n•  ancho 100cm\n•  prof. 40cm\n•  altura 90cm\n\nEspejo 100 x 80cm \n\n🎁 Bombillas LED de regalo ",
-          "en": "Dimensions:\n• Width: 100 cm\n• Depth: 40 cm\n• Height: 90 cm\n\nMirror: 100 × 80 cm\n\n🎁 Free LED bulbs included"
-        },
-        "related": [],
-        "perks": "bulbs",
-        "updatedAt": "2026-07-27T08:03:16.285Z"
-      },
-      {
-        "id": "Tocador-M-08",
-        "name": "Tocador",
-        "price": 799,
-        "oldPrice": 980,
-        "image": "/uploads/1b7e0b3553b37f44f001bb06894a728b.jpg",
-        "imageMobile": "",
-        "images": [
-          "/uploads/1b7e0b3553b37f44f001bb06894a728b.jpg",
-          "/uploads/92a5ec1b2d34c63dc870165bdab5bcc8.jpg",
-          "/uploads/701f63eef85d351518663f13582976ca.jpg",
-          "/uploads/7aff7c74a3a9946779db558d977e6231.jpg"
-        ],
-        "video": "",
-        "videoFirst": false,
-        "media": [
-          {
-            "src": "/uploads/1b7e0b3553b37f44f001bb06894a728b.jpg",
-            "type": "image"
-          },
-          {
-            "src": "/uploads/92a5ec1b2d34c63dc870165bdab5bcc8.jpg",
-            "type": "image"
-          },
-          {
-            "src": "/uploads/701f63eef85d351518663f13582976ca.jpg",
-            "type": "image"
-          },
-          {
-            "src": "/uploads/7aff7c74a3a9946779db558d977e6231.jpg",
-            "type": "image"
-          }
-        ],
-        "material": {
-          "es": "Lacado mate",
-          "en": "Matte lacquer"
-        },
-        "size": "180 × 45 × 180 cm",
-        "reference": "M-08",
-        "subtitle": "180 × 45 × 180 cm",
-        "description": {
-          "es": "Medidas: \n•  ancho 180cm\n•  prof. 45cm\n•  altura 90cm\n\nEspejo 180x80cm \n\n🎁 Bombillas LED de regalo ",
-          "en": "Dimensions:\n• Width: 180 cm\n• Depth: 45 cm\n• Height: 90 cm\n\nMirror: 180 × 80 cm\n\n🎁 Free LED bulbs included"
-        },
-        "related": [],
-        "perks": "bulbs",
-        "updatedAt": "2026-07-27T08:03:16.285Z"
-      },
-      {
-        "id": "Tocador-M-07",
-        "name": "Tocador",
-        "price": 599,
-        "oldPrice": 750,
-        "image": "/uploads/5c4a491791888b4ee6bd2f8b0386a4b1.jpg",
-        "imageMobile": "",
-        "images": [
-          "/uploads/5c4a491791888b4ee6bd2f8b0386a4b1.jpg",
-          "/uploads/4e72de2107b5d37d557a180c0090acd9.jpg",
-          "/uploads/d950e151c02be9eece8f6e6b7a06cf21.jpg",
-          "/uploads/74921cfd9765168a2c371707922e6b5b.jpg",
-          "/uploads/6e9ad76da8eef2427cfcbdc2bddf3cfc.jpg"
-        ],
-        "video": "",
-        "videoFirst": false,
-        "media": [
-          {
-            "src": "/uploads/54109d82b7e31a566a9928c8639ead13.mp4",
+            "src": "/uploads/713528639637b8cabccbae67336bf6f6.mp4",
             "type": "video"
-          },
-          {
-            "src": "/uploads/5c4a491791888b4ee6bd2f8b0386a4b1.jpg",
-            "type": "image"
-          },
-          {
-            "src": "/uploads/4e72de2107b5d37d557a180c0090acd9.jpg",
-            "type": "image"
-          },
-          {
-            "src": "/uploads/d950e151c02be9eece8f6e6b7a06cf21.jpg",
-            "type": "image"
-          },
-          {
-            "src": "/uploads/74921cfd9765168a2c371707922e6b5b.jpg",
-            "type": "image"
-          },
-          {
-            "src": "/uploads/6e9ad76da8eef2427cfcbdc2bddf3cfc.jpg",
-            "type": "image"
           }
         ],
         "material": {
-          "es": "Lacado mate",
-          "en": "Matte lacquer"
+          "es": "Latón",
+          "en": "Brass"
         },
-        "size": "100 × 40 × 170 cm",
-        "reference": "M-07",
-        "subtitle": "100 × 40 × 170 cm",
+        "size": "50 × 40 × 180 cm",
+        "reference": "D-05",
+        "subtitle": "50 × 40 × 180 cm",
         "description": {
-          "es": "Medidas: \n•  ancho 100cm\n•  prof. 40cm\n•  altura 90cm\n\nEspejo 100x80cm ",
-          "en": "Dimensions:\n• Width: 100 cm\n• Depth: 40 cm\n• Height: 90 cm\n\nMirror: 100 × 80 cm"
+          "es": "Medidas: \n•  ancho 55cm\n•  prof. 40cm\n•  altura 180cm\n\nEspejo 50x160cm",
+          "en": "Dimensions:\n• Width: 55 cm\n• Depth: 40 cm\n• Height: 180 cm\n\nMirror: 50 × 160 cm"
         },
         "related": [],
-        "perks": "bulbs",
-        "updatedAt": "2026-07-27T08:03:16.285Z"
+        "perks": "quality",
+        "updatedAt": "2026-07-29T16:12:59.123Z"
       },
       {
-        "id": "Tocador-M-05-4",
-        "name": "Tocador",
-        "price": 519,
-        "oldPrice": 620,
-        "image": "/uploads/d9ff98b097c0c20ff0dda9946e3f9f89.jpg",
+        "id": "Espejo-Alto-D10",
+        "name": "Espejo ",
+        "price": 379,
+        "oldPrice": 500,
+        "image": "/uploads/418284049907464f82bf359c7970df1d.jpg",
         "imageMobile": "",
         "images": [
-          "/uploads/d9ff98b097c0c20ff0dda9946e3f9f89.jpg",
-          "/uploads/e94864cec2a00dc449acbd96ed56bd9f.jpg",
-          "/uploads/b6f95212346cb9831cc7e1e988f1b668.jpg",
-          "/uploads/05a33116a197c4f3e1592fbd684af2ec.jpg",
-          "/uploads/f9681bac5b5bf263dfa5d1b79749017b.jpg"
+          "/uploads/418284049907464f82bf359c7970df1d.jpg",
+          "/uploads/54100888b0c3f3511e786744e46578d8.jpg",
+          "/uploads/6efd8e96ddc2a7032d4499be36ce10c3.jpg",
+          "/uploads/f0d52565d40f9e842b8728a2c49a4203.jpg",
+          "/uploads/b08c70a89c7a373e2f4791d2eb10ae23.jpg",
+          "/uploads/eeb5cecd80e19188e33d316e730e61cc.jpg",
+          "/uploads/5ef097f895dcad2f71504bc57293d340.jpg"
         ],
         "video": "",
         "videoFirst": false,
         "media": [
           {
-            "src": "/uploads/d9ff98b097c0c20ff0dda9946e3f9f89.jpg",
+            "src": "/uploads/418284049907464f82bf359c7970df1d.jpg",
             "type": "image"
           },
           {
-            "src": "/uploads/e94864cec2a00dc449acbd96ed56bd9f.jpg",
+            "src": "/uploads/54100888b0c3f3511e786744e46578d8.jpg",
             "type": "image"
           },
           {
-            "src": "/uploads/b6f95212346cb9831cc7e1e988f1b668.jpg",
+            "src": "/uploads/6efd8e96ddc2a7032d4499be36ce10c3.jpg",
             "type": "image"
           },
           {
-            "src": "/uploads/05a33116a197c4f3e1592fbd684af2ec.jpg",
+            "src": "/uploads/f0d52565d40f9e842b8728a2c49a4203.jpg",
             "type": "image"
           },
           {
-            "src": "/uploads/f9681bac5b5bf263dfa5d1b79749017b.jpg",
+            "src": "/uploads/b08c70a89c7a373e2f4791d2eb10ae23.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/eeb5cecd80e19188e33d316e730e61cc.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/5ef097f895dcad2f71504bc57293d340.jpg",
             "type": "image"
           }
         ],
         "material": {
-          "es": "Lacado mate",
-          "en": "Matte lacquer"
+          "es": "Latón",
+          "en": "Brass"
         },
-        "size": "90 × 40 × 170 cm",
-        "reference": "M-05-4",
-        "subtitle": "90 × 40 × 170 cm",
+        "size": "65 × 170 cm",
+        "reference": "D-10",
+        "subtitle": "65 × 170 cm",
         "description": {
-          "es": "Medidas: \n•  ancho 90cm\n•  prof. 40cm\n•  altura 90cm\n\nEspejo 90x80cm \n\n🎁 Bombillas LED de regalo ",
-          "en": "Dimensions:\n• Width: 90 cm\n• Depth: 40 cm\n• Height: 90 cm\n\nMirror: 90 × 80 cm\n\n🎁 Free LED bulbs included"
+          "es": "Medidas: \n•  ancho 65cm\n•  altura 170cm",
+          "en": "Dimensions:\n• Width: 65 cm\n• Height: 170 cm"
         },
         "related": [],
-        "perks": "bulbs",
-        "updatedAt": "2026-07-27T08:03:16.285Z"
+        "perks": "led",
+        "updatedAt": "2026-07-29T16:12:59.123Z"
       },
       {
-        "id": "Tocador-M-02",
-        "name": "Tocador",
-        "price": 392,
-        "oldPrice": 540,
-        "image": "/uploads/618594913f925884ed5ecf4b85bcac04.jpg",
+        "id": "Espejo-Alto-D06",
+        "name": "Espejo ",
+        "price": 259,
+        "oldPrice": 390,
+        "image": "/uploads/2bdbe4a9ee6b085d9acd001698b84648.jpg",
         "imageMobile": "",
         "images": [
-          "/uploads/618594913f925884ed5ecf4b85bcac04.jpg",
-          "/uploads/1d6d4a9f248fc940809b8158797cba5e.jpg",
-          "/uploads/9a09ddbaf56aa865453704ffe6fa19db.jpg",
-          "/uploads/a1ced1440aa8ba30b3ef59ece44041dc.jpg",
-          "/uploads/60bb2f674f247278f8393272047dd77a.jpg",
-          "/uploads/fd08f8a09ad56bd0470d3317f580f92a.jpg"
+          "/uploads/2bdbe4a9ee6b085d9acd001698b84648.jpg",
+          "/uploads/d5404b0518549c0ff50ddb73588cafaf.jpg",
+          "/uploads/bfb2e193700b5d85b163d09f64b1dd5c.jpg"
         ],
         "video": "",
         "videoFirst": false,
         "media": [
           {
-            "src": "/uploads/62d448e7ec4acbce3c4d5c35acb8cd9a.mp4",
-            "type": "video"
-          },
-          {
-            "src": "/uploads/618594913f925884ed5ecf4b85bcac04.jpg",
+            "src": "/uploads/2bdbe4a9ee6b085d9acd001698b84648.jpg",
             "type": "image"
           },
           {
-            "src": "/uploads/1d6d4a9f248fc940809b8158797cba5e.jpg",
+            "src": "/uploads/d5404b0518549c0ff50ddb73588cafaf.jpg",
             "type": "image"
           },
           {
-            "src": "/uploads/9a09ddbaf56aa865453704ffe6fa19db.jpg",
-            "type": "image"
-          },
-          {
-            "src": "/uploads/a1ced1440aa8ba30b3ef59ece44041dc.jpg",
-            "type": "image"
-          },
-          {
-            "src": "/uploads/60bb2f674f247278f8393272047dd77a.jpg",
-            "type": "image"
-          },
-          {
-            "src": "/uploads/fd08f8a09ad56bd0470d3317f580f92a.jpg",
+            "src": "/uploads/bfb2e193700b5d85b163d09f64b1dd5c.jpg",
             "type": "image"
           }
         ],
         "material": {
-          "es": "Nogal",
-          "en": "Walnut"
+          "es": "Latón",
+          "en": "Brass"
         },
-        "size": "70 × 40 × 170 cm",
-        "reference": "M-02",
-        "subtitle": "70 × 40 × 170 cm",
+        "size": "70 × 175 cm",
+        "reference": "D-06",
+        "subtitle": "70 × 175 cm",
         "description": {
-          "es": "Medidas: \n•  ancho 70cm\n•  prof. 40cm\n•  altura 90cm\n\nEspejo 70x80cm \n\n🎁 Bombillas LED de regalo ",
-          "en": "Dimensions:\n• Width: 70 cm\n• Depth: 40 cm\n• Height: 90 cm\n\nMirror: 70 × 80 cm\n\n🎁 Free LED bulbs included"
+          "es": "Medidas: \n•  ancho 70cm\n•  prof. 30cm\n•  altura 175cm",
+          "en": "Dimensions:\n• Width: 70 cm\n• Depth: 30 cm\n• Height: 175 cm"
         },
         "related": [],
-        "perks": "bulbs",
-        "updatedAt": "2026-07-27T08:03:16.285Z"
+        "perks": "led",
+        "updatedAt": "2026-07-29T16:13:24.874Z"
       },
       {
-        "id": "Tocador-M-04-2",
-        "name": "Tocador",
-        "price": 439,
-        "oldPrice": 580,
-        "image": "/uploads/d464fee6601f991ad76f4bf674cbc80b.jpg",
+        "id": "Espejo-Alto-D09",
+        "name": "Espejo ",
+        "price": 299,
+        "oldPrice": 420,
+        "image": "/uploads/851ece18aff29006726fbcd048c52845.jpg",
         "imageMobile": "",
         "images": [
-          "/uploads/d464fee6601f991ad76f4bf674cbc80b.jpg",
-          "/uploads/5e55de193f06d3cb72f6f8ff2d83cadf.jpg",
-          "/uploads/db73e014ec8957050e376a047aa523cc.jpg",
-          "/uploads/1d1c67e11b4e82824956c7afea2b61bd.jpg",
-          "/uploads/4be934e77e0ac770378f00546a49de9a.jpg"
+          "/uploads/851ece18aff29006726fbcd048c52845.jpg",
+          "/uploads/6dd50533a5325c6f873956892bcde038.jpg",
+          "/uploads/91537a37126271bbbd5a5aca715c6e49.jpg"
         ],
         "video": "",
         "videoFirst": false,
         "media": [
           {
-            "src": "/uploads/d464fee6601f991ad76f4bf674cbc80b.jpg",
+            "src": "/uploads/851ece18aff29006726fbcd048c52845.jpg",
             "type": "image"
           },
           {
-            "src": "/uploads/5e55de193f06d3cb72f6f8ff2d83cadf.jpg",
+            "src": "/uploads/6dd50533a5325c6f873956892bcde038.jpg",
             "type": "image"
           },
           {
-            "src": "/uploads/db73e014ec8957050e376a047aa523cc.jpg",
-            "type": "image"
-          },
-          {
-            "src": "/uploads/1d1c67e11b4e82824956c7afea2b61bd.jpg",
-            "type": "image"
-          },
-          {
-            "src": "/uploads/4be934e77e0ac770378f00546a49de9a.jpg",
+            "src": "/uploads/91537a37126271bbbd5a5aca715c6e49.jpg",
             "type": "image"
           }
         ],
         "material": {
-          "es": "Lacado mate",
-          "en": "Matte lacquer"
+          "es": "Latón",
+          "en": "Brass"
         },
-        "size": "90 × 40 × 170 cm",
-        "reference": "M-04-2",
-        "subtitle": "90 × 40 × 170 cm",
+        "size": "60 × 175 cm",
+        "reference": "D-09",
+        "subtitle": "60 × 175 cm",
         "description": {
-          "es": "Medidas: \n•  ancho 90cm\n•  prof. 40cm\n•  altura 90cm\n\nEspejo 90x80cm \n\n🎁 Bombillas LED de regalo ",
-          "en": "Dimensions:\n• Width: 90 cm\n• Depth: 40 cm\n• Height: 90 cm\n\nMirror: 90 × 80 cm\n\n🎁 Free LED bulbs included"
+          "es": "Medidas: \n•  ancho 60cm\n•  prof. 30cm\n•  altura 175cm",
+          "en": "Dimensions:\n• Width: 60 cm\n• Depth: 30 cm\n• Height: 175 cm"
         },
         "related": [],
-        "perks": "bulbs",
-        "updatedAt": "2026-07-27T08:03:16.285Z"
+        "perks": "led",
+        "updatedAt": "2026-07-29T16:12:59.123Z"
       },
       {
-        "id": "Tocador-M-02-2",
-        "name": "Tocador",
-        "price": 399,
-        "oldPrice": 550,
-        "image": "/uploads/8a120f849d5d094ea636de110f5da616.jpg",
+        "id": "Espejo-Alto-F-10",
+        "name": "Espejo ",
+        "price": 459,
+        "oldPrice": 640,
+        "image": "/uploads/b6d9b9b4042567b8b059b230fdf2d6a0.jpg",
         "imageMobile": "",
         "images": [
-          "/uploads/8a120f849d5d094ea636de110f5da616.jpg",
-          "/uploads/30e1cd59dee2d9a7a6a90227a62715e6.jpg",
-          "/uploads/d0aa1477d1ba07673ec23ca90e763f36.jpg",
-          "/uploads/439e0d482755f0538fc57440cd9dbb92.jpg",
-          "/uploads/7dad8b49160dd3327743cc9e2eccda35.jpg"
+          "/uploads/b6d9b9b4042567b8b059b230fdf2d6a0.jpg",
+          "/uploads/60620e0f6cc2c3d99c39c9c9e2ce3a51.jpg",
+          "/uploads/3db0ef3fcfc425fc1c00555ebdf84fa3.jpg",
+          "/uploads/fb0b3272e49d86397dc6cb1ab7035e14.jpg",
+          "/uploads/c6486f05319779ac1dfbc07ee6d50ec3.jpg"
         ],
         "video": "",
         "videoFirst": false,
         "media": [
           {
-            "src": "/uploads/8a120f849d5d094ea636de110f5da616.jpg",
+            "src": "/uploads/b6d9b9b4042567b8b059b230fdf2d6a0.jpg",
             "type": "image"
           },
           {
-            "src": "/uploads/30e1cd59dee2d9a7a6a90227a62715e6.jpg",
+            "src": "/uploads/60620e0f6cc2c3d99c39c9c9e2ce3a51.jpg",
             "type": "image"
           },
           {
-            "src": "/uploads/d0aa1477d1ba07673ec23ca90e763f36.jpg",
+            "src": "/uploads/3db0ef3fcfc425fc1c00555ebdf84fa3.jpg",
             "type": "image"
           },
           {
-            "src": "/uploads/439e0d482755f0538fc57440cd9dbb92.jpg",
+            "src": "/uploads/fb0b3272e49d86397dc6cb1ab7035e14.jpg",
             "type": "image"
           },
           {
-            "src": "/uploads/7dad8b49160dd3327743cc9e2eccda35.jpg",
+            "src": "/uploads/c6486f05319779ac1dfbc07ee6d50ec3.jpg",
             "type": "image"
           }
         ],
         "material": {
-          "es": "Lacado mate",
-          "en": "Matte lacquer"
+          "es": "Latón",
+          "en": "Brass"
         },
-        "size": "70 × 40 × 170 cm",
-        "reference": "M-02-2",
-        "subtitle": "70 × 40 × 170 cm",
+        "size": "60 × 170 cm",
+        "reference": "F-10",
+        "subtitle": "60 × 170 cm",
         "description": {
-          "es": "Medidas: \n•  ancho 70cm\n•  prof. 40cm\n•  altura 90cm\n\nEspejo 70x80cm \n\n🎁 Bombillas LED de regalo ",
-          "en": "Dimensions:\n• Width: 70 cm\n• Depth: 40 cm\n• Height: 90 cm\n\nMirror: 70 × 80 cm\n\n🎁 Free LED bulbs included"
+          "es": "Medidas:\n• ancho 60cm\n• altura 170cm",
+          "en": "Dimensions:\n• Width: 60 cm\n• Height: 170 cm"
         },
         "related": [],
-        "perks": "bulbs",
-        "updatedAt": "2026-07-27T08:03:16.285Z"
-      },
-      {
-        "id": "Tocador-M-09",
-        "name": "Tocador",
-        "price": 899,
-        "oldPrice": 1150,
-        "image": "/uploads/6b9f3f461853b147eaae7334acf3b38a.jpg",
-        "imageMobile": "",
-        "images": [
-          "/uploads/6b9f3f461853b147eaae7334acf3b38a.jpg",
-          "/uploads/624c9ca6375c1f59191cc01d1b6568c2.jpg",
-          "/uploads/b7de40acec7fd0484a8e488918c9ea57.jpg"
-        ],
-        "video": "",
-        "videoFirst": false,
-        "media": [
-          {
-            "src": "/uploads/6b9f3f461853b147eaae7334acf3b38a.jpg",
-            "type": "image"
-          },
-          {
-            "src": "/uploads/624c9ca6375c1f59191cc01d1b6568c2.jpg",
-            "type": "image"
-          },
-          {
-            "src": "/uploads/b7de40acec7fd0484a8e488918c9ea57.jpg",
-            "type": "image"
-          }
-        ],
-        "material": {
-          "es": "Lacado mate",
-          "en": "Matte lacquer"
-        },
-        "size": "180 × 45 × 180 cm",
-        "reference": "M-09",
-        "subtitle": "180 × 45 × 180 cm",
-        "description": {
-          "es": "Medidas: \n•  ancho 180cm\n•  prof. 45cm\n•  altura 90cm\n\nEspejo 180x80cm \n\n🎁 Bombillas LED de regalo ",
-          "en": "Dimensions:\n• Width: 180 cm\n• Depth: 45 cm\n• Height: 90 cm\n\nMirror: 180 × 80 cm\n\n🎁 Free LED bulbs included"
-        },
-        "related": [],
-        "perks": "bulbs",
-        "updatedAt": "2026-07-27T08:03:16.285Z"
+        "perks": "led",
+        "updatedAt": "2026-07-29T16:12:59.123Z"
       }
     ]
   },
@@ -741,11 +857,467 @@
       "es": "Tocadores clásicos reinterpretados. Superficies limpias, cajones suaves y proporciones serenas para tu rincón de belleza.",
       "en": "Classic dressing tables, reinterpreted. Clean surfaces, soft-close drawers and serene proportions for your beauty corner."
     },
-    "image": "/uploads/69e509cd596e0c3c732fbc03a07e7dcd.jpg",
+    "image": "/uploads/0f6a9d65f0833e4f64c04982e32007fe.jpg",
     "imageMobile": "",
     "video": "",
-    "updatedAt": "2026-07-06T13:40:42.817Z",
+    "updatedAt": "2026-08-06T11:17:56.452Z",
     "products": [
+      {
+        "id": "Tocador-L-01",
+        "name": "Tocador",
+        "price": 439,
+        "oldPrice": 590,
+        "image": "/uploads/610e34128c48c5782743f5e24acfae22.jpg",
+        "imageMobile": "",
+        "images": [
+          "/uploads/610e34128c48c5782743f5e24acfae22.jpg",
+          "/uploads/e0980a765b7cc797d59df245233508fc.jpg",
+          "/uploads/fea9cde58a2ca7b9e49b0383374c7967.jpg"
+        ],
+        "video": "",
+        "videoFirst": false,
+        "media": [
+          {
+            "src": "/uploads/610e34128c48c5782743f5e24acfae22.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/e0980a765b7cc797d59df245233508fc.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/fea9cde58a2ca7b9e49b0383374c7967.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/c58f69a36cfdf8f55049f308a004c303.mp4",
+            "type": "video"
+          }
+        ],
+        "material": {
+          "es": "Lacado mate",
+          "en": "Matte lacquer"
+        },
+        "size": "100 × 40 × 160 cm",
+        "reference": "L-01",
+        "subtitle": "100 × 40 × 160 cm",
+        "description": {
+          "es": "Medidas: \n•  ancho 100cm\n•  prof. 40cm\n•  altura 80cm\n\nEspejo 100x80cm \n\n🎁 Bombillas LED de regalo ",
+          "en": "Dimensions:\n• Width: 100 cm\n• Depth: 40 cm\n• Height: 80 cm\n\nMirror: 100 × 80 cm\n\n🎁 Free LED bulbs included"
+        },
+        "related": [
+          "toc-alba",
+          "toc-vera",
+          "toc-mara",
+          "toc-lina"
+        ],
+        "perks": "bulbs",
+        "updatedAt": "2026-08-06T12:37:02.377Z"
+      },
+      {
+        "id": "Tocador-L-08",
+        "name": "Tocador",
+        "price": 639,
+        "oldPrice": 800,
+        "image": "/uploads/0f6a9d65f0833e4f64c04982e32007fe.jpg",
+        "imageMobile": "",
+        "images": [
+          "/uploads/0f6a9d65f0833e4f64c04982e32007fe.jpg",
+          "/uploads/8ee3496582b269374d611e94c9cd8d0d.jpg",
+          "/uploads/43c168d0b071b89ef8b4043e4d2dcb0c.jpg",
+          "/uploads/aabb351e2f4dab134dc270307be07a7d.jpg",
+          "/uploads/5739026ccb514d3da9b71c58348bbe41.jpg"
+        ],
+        "video": "",
+        "videoFirst": false,
+        "media": [
+          {
+            "src": "/uploads/0f6a9d65f0833e4f64c04982e32007fe.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/8ee3496582b269374d611e94c9cd8d0d.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/43c168d0b071b89ef8b4043e4d2dcb0c.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/aabb351e2f4dab134dc270307be07a7d.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/5739026ccb514d3da9b71c58348bbe41.jpg",
+            "type": "image"
+          }
+        ],
+        "material": {
+          "es": "Lacado mate",
+          "en": "Matte lacquer"
+        },
+        "size": "130 × 40 × 160 cm",
+        "reference": "L-08",
+        "subtitle": "130 × 40 × 160 cm",
+        "description": {
+          "es": "Medidas: \n•  ancho 130cm\n•  prof. 40cm\n•  altura 80cm\n\nEspejo 120x80cm \n\n🎁 Bombillas LED de regalo ",
+          "en": "Dimensions:\n• Width: 130 cm\n• Depth: 40 cm\n• Height: 80 cm\n\nMirror: 120 × 80 cm\n\n🎁 Free LED bulbs included"
+        },
+        "related": [
+          "toc-alba",
+          "toc-vera",
+          "toc-mara",
+          "toc-lina"
+        ],
+        "perks": "bulbs",
+        "updatedAt": "2026-08-06T11:14:39.904Z"
+      },
+      {
+        "id": "Tocador-L-06",
+        "name": "Tocador",
+        "price": 559,
+        "oldPrice": 750,
+        "image": "/uploads/0a1128c2018c997ff3dd871a210b1fe7.jpg",
+        "imageMobile": "",
+        "images": [
+          "/uploads/0a1128c2018c997ff3dd871a210b1fe7.jpg",
+          "/uploads/4095578b64bac0bb1e2a6608dbac463c.jpg",
+          "/uploads/1776dd75500c9d92703d05af5fc1c1e0.jpg",
+          "/uploads/4307916214e07d3027a47e57dd88a2a1.jpg",
+          "/uploads/870b772e154068c0d59ed5ac9862fb51.jpg"
+        ],
+        "video": "",
+        "videoFirst": false,
+        "media": [
+          {
+            "src": "/uploads/0a1128c2018c997ff3dd871a210b1fe7.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/4095578b64bac0bb1e2a6608dbac463c.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/1776dd75500c9d92703d05af5fc1c1e0.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/4307916214e07d3027a47e57dd88a2a1.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/870b772e154068c0d59ed5ac9862fb51.jpg",
+            "type": "image"
+          }
+        ],
+        "material": {
+          "es": "Lacado mate",
+          "en": "Matte lacquer"
+        },
+        "size": "120 × 40 × 160 cm",
+        "reference": "L-06",
+        "subtitle": "120 × 40 × 160 cm",
+        "description": {
+          "es": "Medidas: \n•  ancho 120cm\n•  prof. 40cm\n•  altura 80cm\n\nEspejo 120x80cm \n\n🎁 Bombillas LED de regalo ",
+          "en": "Dimensions:\n• Width: 120 cm\n• Depth: 40 cm\n• Height: 80 cm\n\nMirror: 120 × 80 cm\n\n🎁 Free LED bulbs included"
+        },
+        "related": [
+          "toc-alba",
+          "toc-vera",
+          "toc-mara",
+          "toc-lina"
+        ],
+        "perks": "bulbs",
+        "updatedAt": "2026-07-27T08:03:16.285Z"
+      },
+      {
+        "id": "Tocador-T-04-2",
+        "name": "Tocador",
+        "price": 699,
+        "oldPrice": 910,
+        "image": "/uploads/3880b7877440246f485fce6434b0a446.jpg",
+        "imageMobile": "",
+        "images": [
+          "/uploads/3880b7877440246f485fce6434b0a446.jpg",
+          "/uploads/047394f33c389daa5c6c213fd3415857.jpg",
+          "/uploads/1c2eca8c8be99ed903e0d4519bcda28e.jpg"
+        ],
+        "video": "",
+        "videoFirst": false,
+        "media": [
+          {
+            "src": "/uploads/3880b7877440246f485fce6434b0a446.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/047394f33c389daa5c6c213fd3415857.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/1c2eca8c8be99ed903e0d4519bcda28e.jpg",
+            "type": "image"
+          }
+        ],
+        "material": {
+          "es": "Lacado mate",
+          "en": "Matte lacquer"
+        },
+        "size": "140 × 60 × 76 cm",
+        "reference": "T-04-2",
+        "subtitle": "140 × 60 × 76 cm",
+        "description": {
+          "es": "Medidas: \n•  ancho 70cm\n•  prof. 40cm\n•  altura 90cm\n\nEspejo 70x80cm ",
+          "en": "Dimensions:\n• Width: 70 cm\n• Depth: 40 cm\n• Height: 90 cm\n\nMirror: 70 × 80 cm"
+        },
+        "related": [
+          "toc-alba",
+          "toc-vera",
+          "toc-mara",
+          "toc-lina"
+        ],
+        "perks": "led",
+        "updatedAt": "2026-08-06T12:39:18.790Z"
+      },
+      {
+        "id": "Tocador-L-07",
+        "name": "Tocador",
+        "price": 599,
+        "oldPrice": 770,
+        "image": "/uploads/b9d5084f27248439f6416003c9dbe954.jpg",
+        "imageMobile": "",
+        "images": [
+          "/uploads/b9d5084f27248439f6416003c9dbe954.jpg",
+          "/uploads/70981415b5713d811350e5139dc313cc.jpg"
+        ],
+        "video": "",
+        "videoFirst": false,
+        "media": [
+          {
+            "src": "/uploads/b9d5084f27248439f6416003c9dbe954.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/70981415b5713d811350e5139dc313cc.jpg",
+            "type": "image"
+          }
+        ],
+        "material": {
+          "es": "Lacado mate",
+          "en": "Matte lacquer"
+        },
+        "size": "130 × 40 × 160 cm",
+        "reference": "L-07",
+        "subtitle": "130 × 40 × 160 cm",
+        "description": {
+          "es": "Medidas: \n•  ancho 130cm\n•  prof. 40cm\n•  altura 80cm\n\nEspejo 120x80cm \n\n🎁 Bombillas LED de regalo ",
+          "en": "Dimensions:\n• Width: 130 cm\n• Depth: 40 cm\n• Height: 80 cm\n\nMirror: 120 × 80 cm\n\n🎁 Free LED bulbs included"
+        },
+        "related": [
+          "toc-alba",
+          "toc-vera",
+          "toc-mara",
+          "toc-lina"
+        ],
+        "perks": "bulbs",
+        "updatedAt": "2026-07-27T08:03:16.285Z"
+      },
+      {
+        "id": "Tocador-L-02",
+        "name": "Tocador",
+        "price": 459,
+        "oldPrice": 620,
+        "image": "/uploads/9afe0cb269d80f1661f77bbc2b58ba56.jpg",
+        "imageMobile": "",
+        "images": [
+          "/uploads/9afe0cb269d80f1661f77bbc2b58ba56.jpg"
+        ],
+        "video": "",
+        "videoFirst": false,
+        "media": [
+          {
+            "src": "/uploads/9afe0cb269d80f1661f77bbc2b58ba56.jpg",
+            "type": "image"
+          }
+        ],
+        "material": {
+          "es": "Lacado mate",
+          "en": "Matte lacquer"
+        },
+        "size": "100 × 40 × 160 cm",
+        "reference": "L-02",
+        "subtitle": "100 × 40 × 160 cm",
+        "description": {
+          "es": "Medidas: \n•  ancho 100cm\n•  prof. 40cm\n•  altura 80cm\n\nEspejo 100x80cm \n\n🎁 Bombillas LED de regalo ",
+          "en": "Dimensions:\n• Width: 100 cm\n• Depth: 40 cm\n• Height: 80 cm\n\nMirror: 100 × 80 cm\n\n🎁 Free LED bulbs included"
+        },
+        "related": [
+          "toc-alba",
+          "toc-vera",
+          "toc-mara",
+          "toc-lina"
+        ],
+        "perks": "bulbs",
+        "updatedAt": "2026-07-27T08:03:16.285Z"
+      },
+      {
+        "id": "Tocador-L-11",
+        "name": "Tocador",
+        "price": 789,
+        "oldPrice": 990,
+        "image": "/uploads/5d62ce9c4b521050eea08da62fe173b7.jpg",
+        "imageMobile": "",
+        "images": [
+          "/uploads/5d62ce9c4b521050eea08da62fe173b7.jpg",
+          "/uploads/a61e6ece71ed74512ad3ce85f1fac5b8.jpg",
+          "/uploads/26d2ab4dce45b7fc5e0e6a4bb6dcd9e7.jpg",
+          "/uploads/0d6ecc746689ca5d255c77cd7ab74ede.jpg"
+        ],
+        "video": "",
+        "videoFirst": false,
+        "media": [
+          {
+            "src": "/uploads/5d62ce9c4b521050eea08da62fe173b7.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/a61e6ece71ed74512ad3ce85f1fac5b8.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/26d2ab4dce45b7fc5e0e6a4bb6dcd9e7.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/0d6ecc746689ca5d255c77cd7ab74ede.jpg",
+            "type": "image"
+          }
+        ],
+        "material": {
+          "es": "Lacado mate",
+          "en": "Matte lacquer"
+        },
+        "size": "150 × 40 × 160 cm",
+        "reference": "L-11",
+        "subtitle": "150 × 40 × 160 cm",
+        "description": {
+          "es": "Medidas: \n•  ancho 150cm\n•  prof. 40cm\n•  altura 80cm\n\nEspejo: 100x80cm \nEstanterías: 20×80cm\n\n🎁 Estanterías de regalo",
+          "en": "Dimensions:\n• Width: 150 cm\n• Depth: 40 cm\n• Height: 80 cm\n\nMirror: 100 × 80 cm\nShelves: 20 × 80 cm\n\n🎁 Shelves included"
+        },
+        "related": [
+          "toc-alba",
+          "toc-vera",
+          "toc-mara",
+          "toc-lina"
+        ],
+        "perks": "led",
+        "updatedAt": "2026-08-06T11:04:48.720Z"
+      },
+      {
+        "id": "Tocador-L-10",
+        "name": "Tocador",
+        "price": 699,
+        "oldPrice": 878,
+        "image": "/uploads/cd737dc85696bc1a997250a2fc851991.jpg",
+        "imageMobile": "",
+        "images": [
+          "/uploads/cd737dc85696bc1a997250a2fc851991.jpg",
+          "/uploads/0eec651e922a25d0cb500fff9a3b4b25.jpg",
+          "/uploads/fb87417dc9a83df88eac5c2ede1037a1.jpg",
+          "/uploads/3a4b9b799746b2fa07be8638c5850776.jpg"
+        ],
+        "video": "",
+        "videoFirst": false,
+        "media": [
+          {
+            "src": "/uploads/cd737dc85696bc1a997250a2fc851991.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/0eec651e922a25d0cb500fff9a3b4b25.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/fb87417dc9a83df88eac5c2ede1037a1.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/3a4b9b799746b2fa07be8638c5850776.jpg",
+            "type": "image"
+          }
+        ],
+        "material": {
+          "es": "Lacado mate",
+          "en": "Matte lacquer"
+        },
+        "size": "130 × 40 × 160 cm",
+        "reference": "L-10",
+        "subtitle": "130 × 40 × 160 cm",
+        "description": {
+          "es": "Medidas: \n•  ancho 130cm\n•  prof. 40cm\n•  altura 80cm\n\nEspejo 130x80cm \n\n🎁 Bombillas LED de regalo ",
+          "en": "Dimensions:\n• Width: 130 cm\n• Depth: 40 cm\n• Height: 80 cm\n\nMirror: 130 × 80 cm\n\n🎁 Free LED bulbs included"
+        },
+        "related": [
+          "toc-alba",
+          "toc-vera",
+          "toc-mara",
+          "toc-lina"
+        ],
+        "perks": "bulbs",
+        "updatedAt": "2026-08-06T12:39:51.168Z"
+      },
+      {
+        "id": "Tocador-L-05",
+        "name": "Tocador",
+        "price": 549,
+        "oldPrice": 710,
+        "image": "/uploads/9e0731b2c36d5ade397d3dabdff10b85.jpg",
+        "imageMobile": "",
+        "images": [
+          "/uploads/9e0731b2c36d5ade397d3dabdff10b85.jpg",
+          "/uploads/c9ffed394c9aab9febc9a476220be9dc.jpg",
+          "/uploads/8231c468c7f41849e894f08d075f21cf.jpg",
+          "/uploads/7962cf103f4a68e83ba19772519d5ffa.jpg"
+        ],
+        "video": "",
+        "videoFirst": false,
+        "media": [
+          {
+            "src": "/uploads/9e0731b2c36d5ade397d3dabdff10b85.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/c9ffed394c9aab9febc9a476220be9dc.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/8231c468c7f41849e894f08d075f21cf.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/7962cf103f4a68e83ba19772519d5ffa.jpg",
+            "type": "image"
+          }
+        ],
+        "material": {
+          "es": "Lacado mate",
+          "en": "Matte lacquer"
+        },
+        "size": "120 × 40 × 160 cm",
+        "reference": "L-05",
+        "subtitle": "120 × 40 × 160 cm",
+        "description": {
+          "es": "Medidas: \n•  ancho 120cm\n•  prof. 40cm\n•  altura 80cm\n\nEspejo 120x80cm \n\n🎁 Bombillas LED de regalo ",
+          "en": "Dimensions:\n• Width: 120 cm\n• Depth: 40 cm\n• Height: 80 cm\n\nMirror: 120 × 80 cm\n\n🎁 Free LED bulbs included"
+        },
+        "related": [
+          "toc-alba",
+          "toc-vera",
+          "toc-mara",
+          "toc-lina"
+        ],
+        "perks": "bulbs",
+        "updatedAt": "2026-07-27T08:03:16.285Z"
+      },
       {
         "id": "Tocador-T-04",
         "name": "Tocador",
@@ -796,39 +1368,72 @@
           "toc-mara",
           "toc-lina"
         ],
-        "perks": "bulbs",
-        "updatedAt": "2026-07-27T08:03:16.285Z"
+        "perks": "led",
+        "updatedAt": "2026-08-06T11:10:49.480Z"
       },
       {
-        "id": "Tocador-L-08",
+        "id": "Tocador-L-04",
         "name": "Tocador",
-        "price": 639,
-        "oldPrice": 800,
-        "image": "/uploads/8ee3496582b269374d611e94c9cd8d0d.jpg",
+        "price": 519,
+        "oldPrice": 680,
+        "image": "/uploads/579dd96462de4e0faa0e7598e7076db3.jpg",
         "imageMobile": "",
         "images": [
-          "/uploads/8ee3496582b269374d611e94c9cd8d0d.jpg",
-          "/uploads/43c168d0b071b89ef8b4043e4d2dcb0c.jpg",
-          "/uploads/aabb351e2f4dab134dc270307be07a7d.jpg",
-          "/uploads/5739026ccb514d3da9b71c58348bbe41.jpg"
+          "/uploads/579dd96462de4e0faa0e7598e7076db3.jpg"
         ],
         "video": "",
         "videoFirst": false,
         "media": [
           {
-            "src": "/uploads/8ee3496582b269374d611e94c9cd8d0d.jpg",
+            "src": "/uploads/579dd96462de4e0faa0e7598e7076db3.jpg",
+            "type": "image"
+          }
+        ],
+        "material": {
+          "es": "Lacado mate",
+          "en": "Matte lacquer"
+        },
+        "size": "120 × 40 × 160 cm",
+        "reference": "L-04",
+        "subtitle": "120 × 40 × 160 cm",
+        "description": {
+          "es": "Medidas: \n•  ancho 120cm\n•  prof. 40cm\n•  altura 80cm\n\nEspejo 120x80cm \n\n🎁 Bombillas LED de regalo ",
+          "en": "Dimensions:\n• Width: 120 cm\n• Depth: 40 cm\n• Height: 80 cm\n\nMirror: 120 × 80 cm\n\n🎁 Free LED bulbs included"
+        },
+        "related": [
+          "toc-alba",
+          "toc-vera",
+          "toc-mara",
+          "toc-lina"
+        ],
+        "perks": "bulbs",
+        "updatedAt": "2026-07-27T08:03:16.285Z"
+      },
+      {
+        "id": "Tocador-L-09",
+        "name": "Tocador",
+        "price": 659,
+        "oldPrice": 850,
+        "image": "/uploads/971d2424b776b8f5605162b52e6bbca7.jpg",
+        "imageMobile": "",
+        "images": [
+          "/uploads/971d2424b776b8f5605162b52e6bbca7.jpg",
+          "/uploads/d8b038ae2e45089d7bc30910a4792e37.jpg",
+          "/uploads/8dc673cc24584254fed4cd0b70dba01a.jpg"
+        ],
+        "video": "",
+        "videoFirst": false,
+        "media": [
+          {
+            "src": "/uploads/971d2424b776b8f5605162b52e6bbca7.jpg",
             "type": "image"
           },
           {
-            "src": "/uploads/43c168d0b071b89ef8b4043e4d2dcb0c.jpg",
+            "src": "/uploads/d8b038ae2e45089d7bc30910a4792e37.jpg",
             "type": "image"
           },
           {
-            "src": "/uploads/aabb351e2f4dab134dc270307be07a7d.jpg",
-            "type": "image"
-          },
-          {
-            "src": "/uploads/5739026ccb514d3da9b71c58348bbe41.jpg",
+            "src": "/uploads/8dc673cc24584254fed4cd0b70dba01a.jpg",
             "type": "image"
           }
         ],
@@ -837,11 +1442,54 @@
           "en": "Matte lacquer"
         },
         "size": "130 × 40 × 160 cm",
-        "reference": "L-08",
+        "reference": "L-09",
         "subtitle": "130 × 40 × 160 cm",
         "description": {
-          "es": "Medidas: \n•  ancho 130cm\n•  prof. 40cm\n•  altura 80cm\n\nEspejo 120x80cm \n\n🎁 Bombillas LED de regalo ",
-          "en": "Dimensions:\n• Width: 130 cm\n• Depth: 40 cm\n• Height: 80 cm\n\nMirror: 120 × 80 cm\n\n🎁 Free LED bulbs included"
+          "es": "Medidas: \n•  ancho 130cm\n•  prof. 40cm\n•  altura 80cm\n\nEspejo 130x80cm \n\n🎁 Bombillas LED de regalo ",
+          "en": "Dimensions:\n• Width: 130 cm\n• Depth: 40 cm\n• Height: 80 cm\n\nMirror: 130 × 80 cm\n\n🎁 Free LED bulbs included"
+        },
+        "related": [
+          "toc-alba",
+          "toc-vera",
+          "toc-mara",
+          "toc-lina"
+        ],
+        "perks": "bulbs",
+        "updatedAt": "2026-07-27T08:03:16.285Z"
+      },
+      {
+        "id": "Tocador-L-03",
+        "name": "Tocador",
+        "price": 489,
+        "oldPrice": 650,
+        "image": "/uploads/9daa4d23729a59d67c2b07eac6745f9f.jpg",
+        "imageMobile": "",
+        "images": [
+          "/uploads/9daa4d23729a59d67c2b07eac6745f9f.jpg",
+          "/uploads/a3ff82728006bd879616fca437c8a1d0.jpg"
+        ],
+        "video": "",
+        "videoFirst": false,
+        "media": [
+          {
+            "src": "/uploads/9daa4d23729a59d67c2b07eac6745f9f.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/a3ff82728006bd879616fca437c8a1d0.jpg",
+            "type": "image"
+          }
+        ],
+        "material": {
+          "es": "Lacado mate",
+          "en": "Matte lacquer"
+        },
+        "size": "100 × 40 × 160 cm",
+        "reference": "L-03",
+        "subtitle": "100 × 40 × 160 cm",
+        "description": {
+          "es": "Medidas: \n•  ancho 100cm\n•  prof. 40cm\n•  altura 80cm\n\nEspejo 100x80cm \n\n🎁 Bombillas LED de regalo ",
+          "en": "Dimensions:\n• Width: 100 cm\n• Depth: 40 cm\n• Height: 80 cm\n\nMirror: 100 × 80 cm\n\n🎁 Free LED bulbs included"
         },
         "related": [
           "toc-alba",
@@ -1086,1272 +1734,734 @@
         ],
         "perks": "bulbs",
         "updatedAt": "2026-07-27T08:03:16.285Z"
-      },
-      {
-        "id": "Tocador-L-01",
-        "name": "Tocador",
-        "price": 439,
-        "oldPrice": 590,
-        "image": "/uploads/e0980a765b7cc797d59df245233508fc.jpg",
-        "imageMobile": "",
-        "images": [
-          "/uploads/e0980a765b7cc797d59df245233508fc.jpg",
-          "/uploads/610e34128c48c5782743f5e24acfae22.jpg",
-          "/uploads/fea9cde58a2ca7b9e49b0383374c7967.jpg"
-        ],
-        "video": "",
-        "videoFirst": false,
-        "media": [
-          {
-            "src": "/uploads/e0980a765b7cc797d59df245233508fc.jpg",
-            "type": "image"
-          },
-          {
-            "src": "/uploads/610e34128c48c5782743f5e24acfae22.jpg",
-            "type": "image"
-          },
-          {
-            "src": "/uploads/fea9cde58a2ca7b9e49b0383374c7967.jpg",
-            "type": "image"
-          }
-        ],
-        "material": {
-          "es": "Lacado mate",
-          "en": "Matte lacquer"
-        },
-        "size": "100 × 40 × 160 cm",
-        "reference": "L-01",
-        "subtitle": "100 × 40 × 160 cm",
-        "description": {
-          "es": "Medidas: \n•  ancho 100cm\n•  prof. 40cm\n•  altura 80cm\n\nEspejo 100x80cm \n\n🎁 Bombillas LED de regalo ",
-          "en": "Dimensions:\n• Width: 100 cm\n• Depth: 40 cm\n• Height: 80 cm\n\nMirror: 100 × 80 cm\n\n🎁 Free LED bulbs included"
-        },
-        "related": [
-          "toc-alba",
-          "toc-vera",
-          "toc-mara",
-          "toc-lina"
-        ],
-        "perks": "bulbs",
-        "updatedAt": "2026-07-27T08:03:16.285Z"
-      },
-      {
-        "id": "Tocador-L-02",
-        "name": "Tocador",
-        "price": 459,
-        "oldPrice": 620,
-        "image": "/uploads/9afe0cb269d80f1661f77bbc2b58ba56.jpg",
-        "imageMobile": "",
-        "images": [
-          "/uploads/9afe0cb269d80f1661f77bbc2b58ba56.jpg"
-        ],
-        "video": "",
-        "videoFirst": false,
-        "media": [
-          {
-            "src": "/uploads/9afe0cb269d80f1661f77bbc2b58ba56.jpg",
-            "type": "image"
-          }
-        ],
-        "material": {
-          "es": "Lacado mate",
-          "en": "Matte lacquer"
-        },
-        "size": "100 × 40 × 160 cm",
-        "reference": "L-02",
-        "subtitle": "100 × 40 × 160 cm",
-        "description": {
-          "es": "Medidas: \n•  ancho 100cm\n•  prof. 40cm\n•  altura 80cm\n\nEspejo 100x80cm \n\n🎁 Bombillas LED de regalo ",
-          "en": "Dimensions:\n• Width: 100 cm\n• Depth: 40 cm\n• Height: 80 cm\n\nMirror: 100 × 80 cm\n\n🎁 Free LED bulbs included"
-        },
-        "related": [
-          "toc-alba",
-          "toc-vera",
-          "toc-mara",
-          "toc-lina"
-        ],
-        "perks": "bulbs",
-        "updatedAt": "2026-07-27T08:03:16.285Z"
-      },
-      {
-        "id": "Tocador-L-03",
-        "name": "Tocador",
-        "price": 489,
-        "oldPrice": 650,
-        "image": "/uploads/9daa4d23729a59d67c2b07eac6745f9f.jpg",
-        "imageMobile": "",
-        "images": [
-          "/uploads/9daa4d23729a59d67c2b07eac6745f9f.jpg",
-          "/uploads/a3ff82728006bd879616fca437c8a1d0.jpg"
-        ],
-        "video": "",
-        "videoFirst": false,
-        "media": [
-          {
-            "src": "/uploads/9daa4d23729a59d67c2b07eac6745f9f.jpg",
-            "type": "image"
-          },
-          {
-            "src": "/uploads/a3ff82728006bd879616fca437c8a1d0.jpg",
-            "type": "image"
-          }
-        ],
-        "material": {
-          "es": "Lacado mate",
-          "en": "Matte lacquer"
-        },
-        "size": "100 × 40 × 160 cm",
-        "reference": "L-03",
-        "subtitle": "100 × 40 × 160 cm",
-        "description": {
-          "es": "Medidas: \n•  ancho 100cm\n•  prof. 40cm\n•  altura 80cm\n\nEspejo 100x80cm \n\n🎁 Bombillas LED de regalo ",
-          "en": "Dimensions:\n• Width: 100 cm\n• Depth: 40 cm\n• Height: 80 cm\n\nMirror: 100 × 80 cm\n\n🎁 Free LED bulbs included"
-        },
-        "related": [
-          "toc-alba",
-          "toc-vera",
-          "toc-mara",
-          "toc-lina"
-        ],
-        "perks": "bulbs",
-        "updatedAt": "2026-07-27T08:03:16.285Z"
-      },
-      {
-        "id": "Tocador-L-04",
-        "name": "Tocador",
-        "price": 519,
-        "oldPrice": 680,
-        "image": "/uploads/579dd96462de4e0faa0e7598e7076db3.jpg",
-        "imageMobile": "",
-        "images": [
-          "/uploads/579dd96462de4e0faa0e7598e7076db3.jpg"
-        ],
-        "video": "",
-        "videoFirst": false,
-        "media": [
-          {
-            "src": "/uploads/579dd96462de4e0faa0e7598e7076db3.jpg",
-            "type": "image"
-          }
-        ],
-        "material": {
-          "es": "Lacado mate",
-          "en": "Matte lacquer"
-        },
-        "size": "120 × 40 × 160 cm",
-        "reference": "L-04",
-        "subtitle": "120 × 40 × 160 cm",
-        "description": {
-          "es": "Medidas: \n•  ancho 120cm\n•  prof. 40cm\n•  altura 80cm\n\nEspejo 120x80cm \n\n🎁 Bombillas LED de regalo ",
-          "en": "Dimensions:\n• Width: 120 cm\n• Depth: 40 cm\n• Height: 80 cm\n\nMirror: 120 × 80 cm\n\n🎁 Free LED bulbs included"
-        },
-        "related": [
-          "toc-alba",
-          "toc-vera",
-          "toc-mara",
-          "toc-lina"
-        ],
-        "perks": "bulbs",
-        "updatedAt": "2026-07-27T08:03:16.285Z"
-      },
-      {
-        "id": "Tocador-L-05",
-        "name": "Tocador",
-        "price": 549,
-        "oldPrice": 710,
-        "image": "/uploads/9e0731b2c36d5ade397d3dabdff10b85.jpg",
-        "imageMobile": "",
-        "images": [
-          "/uploads/9e0731b2c36d5ade397d3dabdff10b85.jpg",
-          "/uploads/c9ffed394c9aab9febc9a476220be9dc.jpg",
-          "/uploads/8231c468c7f41849e894f08d075f21cf.jpg",
-          "/uploads/7962cf103f4a68e83ba19772519d5ffa.jpg"
-        ],
-        "video": "",
-        "videoFirst": false,
-        "media": [
-          {
-            "src": "/uploads/9e0731b2c36d5ade397d3dabdff10b85.jpg",
-            "type": "image"
-          },
-          {
-            "src": "/uploads/c9ffed394c9aab9febc9a476220be9dc.jpg",
-            "type": "image"
-          },
-          {
-            "src": "/uploads/8231c468c7f41849e894f08d075f21cf.jpg",
-            "type": "image"
-          },
-          {
-            "src": "/uploads/7962cf103f4a68e83ba19772519d5ffa.jpg",
-            "type": "image"
-          }
-        ],
-        "material": {
-          "es": "Lacado mate",
-          "en": "Matte lacquer"
-        },
-        "size": "120 × 40 × 160 cm",
-        "reference": "L-05",
-        "subtitle": "120 × 40 × 160 cm",
-        "description": {
-          "es": "Medidas: \n•  ancho 120cm\n•  prof. 40cm\n•  altura 80cm\n\nEspejo 120x80cm \n\n🎁 Bombillas LED de regalo ",
-          "en": "Dimensions:\n• Width: 120 cm\n• Depth: 40 cm\n• Height: 80 cm\n\nMirror: 120 × 80 cm\n\n🎁 Free LED bulbs included"
-        },
-        "related": [
-          "toc-alba",
-          "toc-vera",
-          "toc-mara",
-          "toc-lina"
-        ],
-        "perks": "bulbs",
-        "updatedAt": "2026-07-27T08:03:16.285Z"
-      },
-      {
-        "id": "Tocador-L-06",
-        "name": "Tocador",
-        "price": 559,
-        "oldPrice": 750,
-        "image": "/uploads/0a1128c2018c997ff3dd871a210b1fe7.jpg",
-        "imageMobile": "",
-        "images": [
-          "/uploads/0a1128c2018c997ff3dd871a210b1fe7.jpg",
-          "/uploads/4095578b64bac0bb1e2a6608dbac463c.jpg",
-          "/uploads/1776dd75500c9d92703d05af5fc1c1e0.jpg",
-          "/uploads/4307916214e07d3027a47e57dd88a2a1.jpg",
-          "/uploads/870b772e154068c0d59ed5ac9862fb51.jpg"
-        ],
-        "video": "",
-        "videoFirst": false,
-        "media": [
-          {
-            "src": "/uploads/0a1128c2018c997ff3dd871a210b1fe7.jpg",
-            "type": "image"
-          },
-          {
-            "src": "/uploads/4095578b64bac0bb1e2a6608dbac463c.jpg",
-            "type": "image"
-          },
-          {
-            "src": "/uploads/1776dd75500c9d92703d05af5fc1c1e0.jpg",
-            "type": "image"
-          },
-          {
-            "src": "/uploads/4307916214e07d3027a47e57dd88a2a1.jpg",
-            "type": "image"
-          },
-          {
-            "src": "/uploads/870b772e154068c0d59ed5ac9862fb51.jpg",
-            "type": "image"
-          }
-        ],
-        "material": {
-          "es": "Lacado mate",
-          "en": "Matte lacquer"
-        },
-        "size": "120 × 40 × 160 cm",
-        "reference": "L-06",
-        "subtitle": "120 × 40 × 160 cm",
-        "description": {
-          "es": "Medidas: \n•  ancho 120cm\n•  prof. 40cm\n•  altura 80cm\n\nEspejo 120x80cm \n\n🎁 Bombillas LED de regalo ",
-          "en": "Dimensions:\n• Width: 120 cm\n• Depth: 40 cm\n• Height: 80 cm\n\nMirror: 120 × 80 cm\n\n🎁 Free LED bulbs included"
-        },
-        "related": [
-          "toc-alba",
-          "toc-vera",
-          "toc-mara",
-          "toc-lina"
-        ],
-        "perks": "bulbs",
-        "updatedAt": "2026-07-27T08:03:16.285Z"
-      },
-      {
-        "id": "Tocador-L-07",
-        "name": "Tocador",
-        "price": 599,
-        "oldPrice": 770,
-        "image": "/uploads/b9d5084f27248439f6416003c9dbe954.jpg",
-        "imageMobile": "",
-        "images": [
-          "/uploads/b9d5084f27248439f6416003c9dbe954.jpg",
-          "/uploads/70981415b5713d811350e5139dc313cc.jpg"
-        ],
-        "video": "",
-        "videoFirst": false,
-        "media": [
-          {
-            "src": "/uploads/b9d5084f27248439f6416003c9dbe954.jpg",
-            "type": "image"
-          },
-          {
-            "src": "/uploads/70981415b5713d811350e5139dc313cc.jpg",
-            "type": "image"
-          }
-        ],
-        "material": {
-          "es": "Lacado mate",
-          "en": "Matte lacquer"
-        },
-        "size": "130 × 40 × 160 cm",
-        "reference": "L-07",
-        "subtitle": "130 × 40 × 160 cm",
-        "description": {
-          "es": "Medidas: \n•  ancho 130cm\n•  prof. 40cm\n•  altura 80cm\n\nEspejo 120x80cm \n\n🎁 Bombillas LED de regalo ",
-          "en": "Dimensions:\n• Width: 130 cm\n• Depth: 40 cm\n• Height: 80 cm\n\nMirror: 120 × 80 cm\n\n🎁 Free LED bulbs included"
-        },
-        "related": [
-          "toc-alba",
-          "toc-vera",
-          "toc-mara",
-          "toc-lina"
-        ],
-        "perks": "bulbs",
-        "updatedAt": "2026-07-27T08:03:16.285Z"
-      },
-      {
-        "id": "Tocador-L-09",
-        "name": "Tocador",
-        "price": 659,
-        "oldPrice": 850,
-        "image": "/uploads/971d2424b776b8f5605162b52e6bbca7.jpg",
-        "imageMobile": "",
-        "images": [
-          "/uploads/971d2424b776b8f5605162b52e6bbca7.jpg",
-          "/uploads/d8b038ae2e45089d7bc30910a4792e37.jpg",
-          "/uploads/8dc673cc24584254fed4cd0b70dba01a.jpg"
-        ],
-        "video": "",
-        "videoFirst": false,
-        "media": [
-          {
-            "src": "/uploads/971d2424b776b8f5605162b52e6bbca7.jpg",
-            "type": "image"
-          },
-          {
-            "src": "/uploads/d8b038ae2e45089d7bc30910a4792e37.jpg",
-            "type": "image"
-          },
-          {
-            "src": "/uploads/8dc673cc24584254fed4cd0b70dba01a.jpg",
-            "type": "image"
-          }
-        ],
-        "material": {
-          "es": "Lacado mate",
-          "en": "Matte lacquer"
-        },
-        "size": "130 × 40 × 160 cm",
-        "reference": "L-09",
-        "subtitle": "130 × 40 × 160 cm",
-        "description": {
-          "es": "Medidas: \n•  ancho 130cm\n•  prof. 40cm\n•  altura 80cm\n\nEspejo 130x80cm \n\n🎁 Bombillas LED de regalo ",
-          "en": "Dimensions:\n• Width: 130 cm\n• Depth: 40 cm\n• Height: 80 cm\n\nMirror: 130 × 80 cm\n\n🎁 Free LED bulbs included"
-        },
-        "related": [
-          "toc-alba",
-          "toc-vera",
-          "toc-mara",
-          "toc-lina"
-        ],
-        "perks": "bulbs",
-        "updatedAt": "2026-07-27T08:03:16.285Z"
-      },
-      {
-        "id": "Tocador-L-10",
-        "name": "Tocador",
-        "price": 699,
-        "oldPrice": 878,
-        "image": "/uploads/0eec651e922a25d0cb500fff9a3b4b25.jpg",
-        "imageMobile": "",
-        "images": [
-          "/uploads/0eec651e922a25d0cb500fff9a3b4b25.jpg",
-          "/uploads/cd737dc85696bc1a997250a2fc851991.jpg",
-          "/uploads/fb87417dc9a83df88eac5c2ede1037a1.jpg",
-          "/uploads/3a4b9b799746b2fa07be8638c5850776.jpg"
-        ],
-        "video": "",
-        "videoFirst": false,
-        "media": [
-          {
-            "src": "/uploads/0eec651e922a25d0cb500fff9a3b4b25.jpg",
-            "type": "image"
-          },
-          {
-            "src": "/uploads/cd737dc85696bc1a997250a2fc851991.jpg",
-            "type": "image"
-          },
-          {
-            "src": "/uploads/fb87417dc9a83df88eac5c2ede1037a1.jpg",
-            "type": "image"
-          },
-          {
-            "src": "/uploads/3a4b9b799746b2fa07be8638c5850776.jpg",
-            "type": "image"
-          }
-        ],
-        "material": {
-          "es": "Lacado mate",
-          "en": "Matte lacquer"
-        },
-        "size": "130 × 40 × 160 cm",
-        "reference": "L-10",
-        "subtitle": "130 × 40 × 160 cm",
-        "description": {
-          "es": "Medidas: \n•  ancho 130cm\n•  prof. 40cm\n•  altura 80cm\n\nEspejo 130x80cm \n\n🎁 Bombillas LED de regalo ",
-          "en": "Dimensions:\n• Width: 130 cm\n• Depth: 40 cm\n• Height: 80 cm\n\nMirror: 130 × 80 cm\n\n🎁 Free LED bulbs included"
-        },
-        "related": [
-          "toc-alba",
-          "toc-vera",
-          "toc-mara",
-          "toc-lina"
-        ],
-        "perks": "bulbs",
-        "updatedAt": "2026-07-27T08:03:16.285Z"
       }
     ]
   },
   {
-    "slug": "espejos-de-cuerpo-entero",
+    "slug": "tocadores-loft",
     "name": {
-      "es": "Espejos",
-      "en": "Mirrors"
+      "es": "Tocadores Loft",
+      "en": "Loft Dressing Tables"
     },
     "tagline": {
-      "es": "Reflejo de cuerpo entero",
-      "en": "Full-length reflection"
+      "es": "Industrial cálido, líneas francas",
+      "en": "Warm industrial, honest lines"
     },
     "description": {
-      "es": "Espejos de pie y de pared a gran escala. Amplían la luz y el espacio con un marco mínimo y elegante.",
-      "en": "Large floor and wall mirrors. They expand light and space with a minimal, elegant frame."
+      "es": "Tocadores de inspiración loft: estructura metálica, maderas nobles y un punto urbano. Pensados para espacios abiertos y luminosos.",
+      "en": "Loft-inspired dressing tables: metal frame, noble woods and an urban edge. Made for open, light-filled spaces."
     },
-    "image": "/uploads/6efd8e96ddc2a7032d4499be36ce10c3.jpg",
+    "image": "/uploads/28d19308d09ec8d998279309b4a01628.jpg",
     "imageMobile": "",
     "video": "",
-    "updatedAt": "2026-07-26T10:33:12.885Z",
+    "updatedAt": "2026-07-06T13:40:42.817Z",
     "products": [
       {
-        "id": "Espejo-Alto-D11",
-        "name": "Espejo",
+        "id": "Tocador-M-05-3",
+        "name": "Tocador",
+        "price": 499,
+        "oldPrice": 600,
+        "image": "/uploads/d29e04e4fdb3901cd31b050922d2692b.jpg",
+        "imageMobile": "",
+        "images": [
+          "/uploads/d29e04e4fdb3901cd31b050922d2692b.jpg",
+          "/uploads/f7d3fe0b66ec85ce5a429891a71ae10d.jpg"
+        ],
+        "video": "",
+        "videoFirst": false,
+        "media": [
+          {
+            "src": "/uploads/015e7089509b625cd540eba2539e6a67.mp4",
+            "type": "video"
+          },
+          {
+            "src": "/uploads/d29e04e4fdb3901cd31b050922d2692b.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/f7d3fe0b66ec85ce5a429891a71ae10d.jpg",
+            "type": "image"
+          }
+        ],
+        "material": {
+          "es": "Melamina, Metal",
+          "en": "Melamine-faced Chipboard, Metal"
+        },
+        "size": "90 × 40 × 170 cm",
+        "reference": "M-05-3",
+        "subtitle": "90 × 40 × 170 cm",
+        "description": {
+          "es": "Medidas: \n•  ancho 90cm\n•  prof. 40cm\n•  altura 90cm\n\nEspejo 90x80cm \n\n🎁 Bombillas LED de regalo ",
+          "en": "Dimensions:\n• Width: 90 cm\n• Depth: 40 cm\n• Height: 90 cm\n\nMirror: 90 × 80 cm\n\n🎁 Free LED bulbs included"
+        },
+        "related": [],
+        "perks": "bulbs",
+        "updatedAt": "2026-07-27T08:03:16.285Z"
+      },
+      {
+        "id": "Tocador-M-05",
+        "name": "Tocador",
+        "price": 489,
+        "oldPrice": 590,
+        "image": "/uploads/25076fa903e9891b55d0c515854a2ad8.jpg",
+        "imageMobile": "",
+        "images": [
+          "/uploads/25076fa903e9891b55d0c515854a2ad8.jpg",
+          "/uploads/33736e9b59355ce7cb958e83f5a4a8dc.jpg",
+          "/uploads/998a2403ed372166ba31f28bf3023421.jpg"
+        ],
+        "video": "",
+        "videoFirst": false,
+        "media": [
+          {
+            "src": "/uploads/25076fa903e9891b55d0c515854a2ad8.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/9954214466d37037b64d80d219f3ff00.mp4",
+            "type": "video"
+          },
+          {
+            "src": "/uploads/33736e9b59355ce7cb958e83f5a4a8dc.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/998a2403ed372166ba31f28bf3023421.jpg",
+            "type": "image"
+          }
+        ],
+        "material": {
+          "es": "Lacado mate",
+          "en": "Matte lacquer"
+        },
+        "size": "90 × 40 × 170 cm",
+        "reference": "M-05",
+        "subtitle": "90 × 40 × 170 cm",
+        "description": {
+          "es": "Medidas: \n•  ancho 90cm\n•  prof. 40cm\n•  altura 90cm\n\nEspejo 90x80cm \n\n🎁 Bombillas LED de regalo ",
+          "en": "Dimensions:\n• Width: 90 cm\n• Depth: 40 cm\n• Height: 90 cm\n\nMirror: 90 × 80 cm\n\n🎁 Free LED bulbs included"
+        },
+        "related": [],
+        "perks": "bulbs",
+        "updatedAt": "2026-07-27T08:03:16.285Z"
+      },
+      {
+        "id": "Tocador-M-02-3",
+        "name": "Tocador",
         "price": 399,
-        "oldPrice": 530,
-        "image": "/uploads/b14fe9d72a43616cdb0d39989850cd1f.jpg",
+        "oldPrice": 550,
+        "image": "/uploads/845578ae92ec61b012ddbc1e57416c0a.jpg",
         "imageMobile": "",
         "images": [
-          "/uploads/b14fe9d72a43616cdb0d39989850cd1f.jpg",
-          "/uploads/15fb26ac83bb8ab2fffa36ee7f307f7a.jpg",
-          "/uploads/31ec8456841d6867a90c8ce99b34ac30.jpg",
-          "/uploads/b179756a4c8393a54b446508816b8546.jpg",
-          "/uploads/1892fc33a4af8d8b7c012a31484c792d.jpg",
-          "/uploads/f3fd8da2d29f97e9fc3db4ecc3377c7c.jpg",
-          "/uploads/609c3d4a0cd80d5b2c466cadbeae975c.jpg",
-          "/uploads/7bf21a72ad5b111969ed3b174d3ff275.jpg",
-          "/uploads/a8a21ec6b66e12990371996b7f1ad3db.jpg",
-          "/uploads/bb811c0af4aad4967313f15ad2ffaa40.jpg",
-          "/uploads/29911e2f36e4a478205fd0f5b6970079.jpg",
-          "/uploads/cfd91dd80b02589ad5613d310128e916.jpg",
-          "/uploads/404c09234b1bf6706ce3f914e8719a8c.jpg",
-          "/uploads/78932e3f6956254faa367f9b51786763.jpg",
-          "/uploads/243f5ad407d439c10e86c4da34d94445.jpg"
+          "/uploads/845578ae92ec61b012ddbc1e57416c0a.jpg",
+          "/uploads/bb99a1b818c27bc91e8344a0152c6185.jpg",
+          "/uploads/4aefea52dd7c011db8c60ff8c0d21bbb.jpg",
+          "/uploads/3836301925f9a188f0941940e6b0e600.jpg",
+          "/uploads/8f6e758f472b74ee4036a8cb390f4183.jpg",
+          "/uploads/827558981c11ea9432aad1b2bdcba8bb.jpg"
         ],
         "video": "",
         "videoFirst": false,
         "media": [
           {
-            "src": "/uploads/b14fe9d72a43616cdb0d39989850cd1f.jpg",
+            "src": "/uploads/845578ae92ec61b012ddbc1e57416c0a.jpg",
             "type": "image"
           },
           {
-            "src": "/uploads/15fb26ac83bb8ab2fffa36ee7f307f7a.jpg",
+            "src": "/uploads/bb99a1b818c27bc91e8344a0152c6185.jpg",
             "type": "image"
           },
           {
-            "src": "/uploads/31ec8456841d6867a90c8ce99b34ac30.jpg",
+            "src": "/uploads/4aefea52dd7c011db8c60ff8c0d21bbb.jpg",
             "type": "image"
           },
           {
-            "src": "/uploads/b179756a4c8393a54b446508816b8546.jpg",
+            "src": "/uploads/3836301925f9a188f0941940e6b0e600.jpg",
             "type": "image"
           },
           {
-            "src": "/uploads/1892fc33a4af8d8b7c012a31484c792d.jpg",
+            "src": "/uploads/8f6e758f472b74ee4036a8cb390f4183.jpg",
             "type": "image"
           },
           {
-            "src": "/uploads/f3fd8da2d29f97e9fc3db4ecc3377c7c.jpg",
-            "type": "image"
-          },
-          {
-            "src": "/uploads/609c3d4a0cd80d5b2c466cadbeae975c.jpg",
-            "type": "image"
-          },
-          {
-            "src": "/uploads/7bf21a72ad5b111969ed3b174d3ff275.jpg",
-            "type": "image"
-          },
-          {
-            "src": "/uploads/a8a21ec6b66e12990371996b7f1ad3db.jpg",
-            "type": "image"
-          },
-          {
-            "src": "/uploads/bb811c0af4aad4967313f15ad2ffaa40.jpg",
-            "type": "image"
-          },
-          {
-            "src": "/uploads/29911e2f36e4a478205fd0f5b6970079.jpg",
-            "type": "image"
-          },
-          {
-            "src": "/uploads/cfd91dd80b02589ad5613d310128e916.jpg",
-            "type": "image"
-          },
-          {
-            "src": "/uploads/404c09234b1bf6706ce3f914e8719a8c.jpg",
-            "type": "image"
-          },
-          {
-            "src": "/uploads/78932e3f6956254faa367f9b51786763.jpg",
-            "type": "image"
-          },
-          {
-            "src": "/uploads/243f5ad407d439c10e86c4da34d94445.jpg",
+            "src": "/uploads/827558981c11ea9432aad1b2bdcba8bb.jpg",
             "type": "image"
           }
         ],
         "material": {
-          "es": "Latón",
-          "en": "Brass"
+          "es": "Lacado mate",
+          "en": "Matte lacquer"
         },
-        "size": "70 × 175 cm",
-        "reference": "D-11",
-        "subtitle": "70 × 175 cm",
+        "size": "70 × 40 × 170 cm",
+        "reference": "M-02-3",
+        "subtitle": "70 × 40 × 170 cm",
         "description": {
-          "es": "Medidas: \n•  ancho 70cm\n•  altura 175cm",
-          "en": "Dimensions:\n• Width: 70 cm\n• Height: 175 cm"
+          "es": "Medidas: \n•  ancho 70cm\n•  prof. 40cm\n•  altura 90cm\n\nEspejo 70x80cm \n\n🎁 Bombillas LED de regalo ",
+          "en": "Dimensions:\n• Width: 70 cm\n• Depth: 40 cm\n• Height: 90 cm\n\nMirror: 70 × 80 cm\n\n🎁 Free LED bulbs included"
         },
         "related": [],
-        "perks": "quality",
-        "updatedAt": "2026-07-29T16:12:59.123Z"
+        "perks": "bulbs",
+        "updatedAt": "2026-08-06T11:54:44.182Z"
       },
       {
-        "id": "Espejo-Alto-D06",
-        "name": "Espejo ",
-        "price": 259,
-        "oldPrice": 390,
-        "image": "/uploads/2bdbe4a9ee6b085d9acd001698b84648.jpg",
+        "id": "Tocador-M-01",
+        "name": "Tocador",
+        "price": 359,
+        "oldPrice": 510,
+        "image": "/uploads/3008e04ff3a1bb8e3234559be7061b3f.jpg",
         "imageMobile": "",
         "images": [
-          "/uploads/2bdbe4a9ee6b085d9acd001698b84648.jpg",
-          "/uploads/d5404b0518549c0ff50ddb73588cafaf.jpg",
-          "/uploads/bfb2e193700b5d85b163d09f64b1dd5c.jpg"
+          "/uploads/3008e04ff3a1bb8e3234559be7061b3f.jpg",
+          "/uploads/3ee281ae8993f1d2c211e10cef9675d4.jpg",
+          "/uploads/eb0c6a14b77ca84e7f5cfc85c1f03c98.jpg"
         ],
         "video": "",
         "videoFirst": false,
         "media": [
           {
-            "src": "/uploads/2bdbe4a9ee6b085d9acd001698b84648.jpg",
+            "src": "/uploads/3008e04ff3a1bb8e3234559be7061b3f.jpg",
             "type": "image"
           },
           {
-            "src": "/uploads/d5404b0518549c0ff50ddb73588cafaf.jpg",
+            "src": "/uploads/3ee281ae8993f1d2c211e10cef9675d4.jpg",
             "type": "image"
           },
           {
-            "src": "/uploads/bfb2e193700b5d85b163d09f64b1dd5c.jpg",
+            "src": "/uploads/eb0c6a14b77ca84e7f5cfc85c1f03c98.jpg",
             "type": "image"
           }
         ],
         "material": {
-          "es": "Latón",
-          "en": "Brass"
+          "es": "Roble",
+          "en": "Oak"
         },
-        "size": "70 × 175 cm",
-        "reference": "D-06",
-        "subtitle": "70 × 175 cm",
+        "size": "70 × 40 × 170 cm",
+        "reference": "M-01",
+        "subtitle": "70 × 40 × 170 cm",
         "description": {
-          "es": "Medidas: \n•  ancho 70cm\n•  prof. 30cm\n•  altura 175cm",
-          "en": "Dimensions:\n• Width: 70 cm\n• Depth: 30 cm\n• Height: 175 cm"
+          "es": "Medidas: \n•  ancho 70cm\n•  prof. 40cm\n•  altura 90cm\n\nEspejo 70x80cm \n\n🎁 Bombillas LED de regalo ",
+          "en": "Dimensions:\n• Width: 70 cm\n• Depth: 40 cm\n• Height: 90 cm\n\nMirror: 70 × 80 cm\n\n🎁 Free LED bulbs included"
         },
         "related": [],
-        "perks": "led",
-        "updatedAt": "2026-07-29T16:13:24.874Z"
+        "perks": "bulbs",
+        "updatedAt": "2026-07-27T08:03:16.285Z"
       },
       {
-        "id": "Espejo-Alto-D10",
-        "name": "Espejo ",
+        "id": "Tocador-M-02",
+        "name": "Tocador",
+        "price": 399,
+        "oldPrice": 540,
+        "image": "/uploads/618594913f925884ed5ecf4b85bcac04.jpg",
+        "imageMobile": "",
+        "images": [
+          "/uploads/618594913f925884ed5ecf4b85bcac04.jpg",
+          "/uploads/1d6d4a9f248fc940809b8158797cba5e.jpg",
+          "/uploads/9a09ddbaf56aa865453704ffe6fa19db.jpg",
+          "/uploads/a1ced1440aa8ba30b3ef59ece44041dc.jpg",
+          "/uploads/60bb2f674f247278f8393272047dd77a.jpg",
+          "/uploads/fd08f8a09ad56bd0470d3317f580f92a.jpg"
+        ],
+        "video": "",
+        "videoFirst": false,
+        "media": [
+          {
+            "src": "/uploads/62d448e7ec4acbce3c4d5c35acb8cd9a.mp4",
+            "type": "video"
+          },
+          {
+            "src": "/uploads/618594913f925884ed5ecf4b85bcac04.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/1d6d4a9f248fc940809b8158797cba5e.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/9a09ddbaf56aa865453704ffe6fa19db.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/a1ced1440aa8ba30b3ef59ece44041dc.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/60bb2f674f247278f8393272047dd77a.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/fd08f8a09ad56bd0470d3317f580f92a.jpg",
+            "type": "image"
+          }
+        ],
+        "material": {
+          "es": "Nogal",
+          "en": "Walnut"
+        },
+        "size": "70 × 40 × 170 cm",
+        "reference": "M-02",
+        "subtitle": "70 × 40 × 170 cm",
+        "description": {
+          "es": "Medidas: \n•  ancho 70cm\n•  prof. 40cm\n•  altura 90cm\n\nEspejo 70x80cm \n\n🎁 Bombillas LED de regalo ",
+          "en": "Dimensions:\n• Width: 70 cm\n• Depth: 40 cm\n• Height: 90 cm\n\nMirror: 70 × 80 cm\n\n🎁 Free LED bulbs included"
+        },
+        "related": [],
+        "perks": "bulbs",
+        "updatedAt": "2026-08-06T12:50:23.658Z"
+      },
+      {
+        "id": "Tocador-M-01-2",
+        "name": "Tocador",
         "price": 379,
-        "oldPrice": 500,
-        "image": "/uploads/418284049907464f82bf359c7970df1d.jpg",
+        "oldPrice": 530,
+        "image": "/uploads/f206eec158c7f30fd96334523906ab23.jpg",
         "imageMobile": "",
         "images": [
-          "/uploads/418284049907464f82bf359c7970df1d.jpg",
-          "/uploads/54100888b0c3f3511e786744e46578d8.jpg",
-          "/uploads/6efd8e96ddc2a7032d4499be36ce10c3.jpg",
-          "/uploads/f0d52565d40f9e842b8728a2c49a4203.jpg",
-          "/uploads/b08c70a89c7a373e2f4791d2eb10ae23.jpg",
-          "/uploads/eeb5cecd80e19188e33d316e730e61cc.jpg",
-          "/uploads/5ef097f895dcad2f71504bc57293d340.jpg"
+          "/uploads/f206eec158c7f30fd96334523906ab23.jpg",
+          "/uploads/b59c4e2501ad3ec067510d579d30ac03.jpg",
+          "/uploads/223fb69e7b8f2cf5f351695c0cf170a0.jpg",
+          "/uploads/38deb5caa51c10abee6910373bd1927e.jpg",
+          "/uploads/0c74dff9bddd2030abd259097137ce8b.jpg",
+          "/uploads/eb43661cfdff1ff9647c6d61a3da36e5.jpg"
         ],
         "video": "",
         "videoFirst": false,
         "media": [
           {
-            "src": "/uploads/418284049907464f82bf359c7970df1d.jpg",
+            "src": "/uploads/f206eec158c7f30fd96334523906ab23.jpg",
             "type": "image"
           },
           {
-            "src": "/uploads/54100888b0c3f3511e786744e46578d8.jpg",
+            "src": "/uploads/b59c4e2501ad3ec067510d579d30ac03.jpg",
             "type": "image"
           },
           {
-            "src": "/uploads/6efd8e96ddc2a7032d4499be36ce10c3.jpg",
+            "src": "/uploads/223fb69e7b8f2cf5f351695c0cf170a0.jpg",
             "type": "image"
           },
           {
-            "src": "/uploads/f0d52565d40f9e842b8728a2c49a4203.jpg",
+            "src": "/uploads/38deb5caa51c10abee6910373bd1927e.jpg",
             "type": "image"
           },
           {
-            "src": "/uploads/b08c70a89c7a373e2f4791d2eb10ae23.jpg",
+            "src": "/uploads/0c74dff9bddd2030abd259097137ce8b.jpg",
             "type": "image"
           },
           {
-            "src": "/uploads/eeb5cecd80e19188e33d316e730e61cc.jpg",
-            "type": "image"
-          },
-          {
-            "src": "/uploads/5ef097f895dcad2f71504bc57293d340.jpg",
+            "src": "/uploads/eb43661cfdff1ff9647c6d61a3da36e5.jpg",
             "type": "image"
           }
         ],
         "material": {
-          "es": "Latón",
-          "en": "Brass"
+          "es": "Lacado mate",
+          "en": "Matte lacquer"
         },
-        "size": "65 × 170 cm",
-        "reference": "D-10",
-        "subtitle": "65 × 170 cm",
+        "size": "70 × 40 × 170 cm",
+        "reference": "M-01-2",
+        "subtitle": "70 × 40 × 170 cm",
         "description": {
-          "es": "Medidas: \n•  ancho 65cm\n•  altura 170cm",
-          "en": "Dimensions:\n• Width: 65 cm\n• Height: 170 cm"
+          "es": "Medidas: \n•  ancho 70cm\n•  prof. 40cm\n•  altura 90cm\n\nEspejo 70x80cm \n\n🎁 Bombillas LED de regalo ",
+          "en": "Dimensions:\n• Width: 70 cm\n• Depth: 40 cm\n• Height: 90 cm\n\nMirror: 70 × 80 cm\n\n🎁 Free LED bulbs included"
         },
         "related": [],
-        "perks": "led",
-        "updatedAt": "2026-07-29T16:12:59.123Z"
+        "perks": "bulbs",
+        "updatedAt": "2026-07-27T08:03:16.285Z"
       },
       {
-        "id": "Espejo-Alto-D05",
-        "name": "Espejo ",
-        "price": 229,
-        "oldPrice": 340,
-        "image": "/uploads/9d966433630f7f064a9b147e4bc69580.jpg",
+        "id": "Tocador-M-06",
+        "name": "Tocador",
+        "price": 549,
+        "oldPrice": 660,
+        "image": "/uploads/771c0092caedde9b643cd77b72be35bf.jpg",
         "imageMobile": "",
         "images": [
-          "/uploads/9d966433630f7f064a9b147e4bc69580.jpg",
-          "/uploads/6be7c2df6b1c0ab91690b9f131a94322.jpg"
+          "/uploads/771c0092caedde9b643cd77b72be35bf.jpg",
+          "/uploads/da01b73579e06002f6a1f07a27313507.jpg"
         ],
         "video": "",
         "videoFirst": false,
         "media": [
           {
-            "src": "/uploads/67819fa06da08ac64706f95859e34e87.mp4",
+            "src": "/uploads/771c0092caedde9b643cd77b72be35bf.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/da01b73579e06002f6a1f07a27313507.jpg",
+            "type": "image"
+          }
+        ],
+        "material": {
+          "es": "Lacado mate",
+          "en": "Matte lacquer"
+        },
+        "size": "100 × 40 × 180 cm",
+        "reference": "M-06",
+        "subtitle": "100 × 40 × 180 cm",
+        "description": {
+          "es": "Medidas: \n•  ancho 100cm\n•  prof. 40cm\n•  altura 90cm\n\nEspejo 100 x 80cm \n\n🎁 Bombillas LED de regalo ",
+          "en": "Dimensions:\n• Width: 100 cm\n• Depth: 40 cm\n• Height: 90 cm\n\nMirror: 100 × 80 cm\n\n🎁 Free LED bulbs included"
+        },
+        "related": [],
+        "perks": "bulbs",
+        "updatedAt": "2026-07-27T08:03:16.285Z"
+      },
+      {
+        "id": "Tocador-M-04",
+        "name": "Tocador",
+        "price": 439,
+        "oldPrice": 580,
+        "image": "/uploads/95a57f1bc404f3b29fdb3d38f225feee.jpg",
+        "imageMobile": "",
+        "images": [
+          "/uploads/95a57f1bc404f3b29fdb3d38f225feee.jpg",
+          "/uploads/3f4865e828e2982a03aa007440e4cde7.jpg",
+          "/uploads/69352e02cf3a13b91aac770a5aa90204.jpg",
+          "/uploads/d4f60cbf1fa1df692e500d7c6bccfa53.jpg"
+        ],
+        "video": "",
+        "videoFirst": false,
+        "media": [
+          {
+            "src": "/uploads/ee3ea3ec9ed9c3a39d8ca1c7ee50b6bf.mp4",
             "type": "video"
           },
           {
-            "src": "/uploads/9d966433630f7f064a9b147e4bc69580.jpg",
+            "src": "/uploads/95a57f1bc404f3b29fdb3d38f225feee.jpg",
             "type": "image"
           },
           {
-            "src": "/uploads/6be7c2df6b1c0ab91690b9f131a94322.jpg",
+            "src": "/uploads/3f4865e828e2982a03aa007440e4cde7.jpg",
             "type": "image"
           },
           {
-            "src": "/uploads/713528639637b8cabccbae67336bf6f6.mp4",
+            "src": "/uploads/69352e02cf3a13b91aac770a5aa90204.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/d4f60cbf1fa1df692e500d7c6bccfa53.jpg",
+            "type": "image"
+          }
+        ],
+        "material": {
+          "es": "Lacado mate",
+          "en": "Matte lacquer"
+        },
+        "size": "90 × 40 × 170 cm",
+        "reference": "M-04",
+        "subtitle": "90 × 40 × 170 cm",
+        "description": {
+          "es": "Medidas: \n•  ancho 90cm\n•  prof. 40cm\n•  altura 90cm\n\nEspejo 90x80cm \n\n🎁 Bombillas LED de regalo ",
+          "en": "Dimensions:\n• Width: 90 cm\n• Depth: 40 cm\n• Height: 90 cm\n\nMirror: 90 × 80 cm\n\n🎁 Free LED bulbs included"
+        },
+        "related": [],
+        "perks": "bulbs",
+        "updatedAt": "2026-07-27T08:03:16.285Z"
+      },
+      {
+        "id": "Tocador-M-05-4",
+        "name": "Tocador",
+        "price": 519,
+        "oldPrice": 620,
+        "image": "/uploads/d9ff98b097c0c20ff0dda9946e3f9f89.jpg",
+        "imageMobile": "",
+        "images": [
+          "/uploads/d9ff98b097c0c20ff0dda9946e3f9f89.jpg",
+          "/uploads/e94864cec2a00dc449acbd96ed56bd9f.jpg",
+          "/uploads/b6f95212346cb9831cc7e1e988f1b668.jpg",
+          "/uploads/05a33116a197c4f3e1592fbd684af2ec.jpg",
+          "/uploads/f9681bac5b5bf263dfa5d1b79749017b.jpg"
+        ],
+        "video": "",
+        "videoFirst": false,
+        "media": [
+          {
+            "src": "/uploads/d9ff98b097c0c20ff0dda9946e3f9f89.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/e94864cec2a00dc449acbd96ed56bd9f.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/b6f95212346cb9831cc7e1e988f1b668.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/05a33116a197c4f3e1592fbd684af2ec.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/f9681bac5b5bf263dfa5d1b79749017b.jpg",
+            "type": "image"
+          }
+        ],
+        "material": {
+          "es": "Lacado mate",
+          "en": "Matte lacquer"
+        },
+        "size": "90 × 40 × 170 cm",
+        "reference": "M-05-4",
+        "subtitle": "90 × 40 × 170 cm",
+        "description": {
+          "es": "Medidas: \n•  ancho 90cm\n•  prof. 40cm\n•  altura 90cm\n\nEspejo 90x80cm \n\n🎁 Bombillas LED de regalo ",
+          "en": "Dimensions:\n• Width: 90 cm\n• Depth: 40 cm\n• Height: 90 cm\n\nMirror: 90 × 80 cm\n\n🎁 Free LED bulbs included"
+        },
+        "related": [],
+        "perks": "bulbs",
+        "updatedAt": "2026-07-27T08:03:16.285Z"
+      },
+      {
+        "id": "Tocador-M-08",
+        "name": "Tocador",
+        "price": 799,
+        "oldPrice": 980,
+        "image": "/uploads/1b7e0b3553b37f44f001bb06894a728b.jpg",
+        "imageMobile": "",
+        "images": [
+          "/uploads/1b7e0b3553b37f44f001bb06894a728b.jpg",
+          "/uploads/92a5ec1b2d34c63dc870165bdab5bcc8.jpg",
+          "/uploads/701f63eef85d351518663f13582976ca.jpg",
+          "/uploads/7aff7c74a3a9946779db558d977e6231.jpg"
+        ],
+        "video": "",
+        "videoFirst": false,
+        "media": [
+          {
+            "src": "/uploads/1b7e0b3553b37f44f001bb06894a728b.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/92a5ec1b2d34c63dc870165bdab5bcc8.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/701f63eef85d351518663f13582976ca.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/7aff7c74a3a9946779db558d977e6231.jpg",
+            "type": "image"
+          }
+        ],
+        "material": {
+          "es": "Lacado mate",
+          "en": "Matte lacquer"
+        },
+        "size": "180 × 45 × 180 cm",
+        "reference": "M-08",
+        "subtitle": "180 × 45 × 180 cm",
+        "description": {
+          "es": "Medidas: \n•  ancho 180cm\n•  prof. 45cm\n•  altura 90cm\n\nEspejo 180x80cm \n\n🎁 Bombillas LED de regalo ",
+          "en": "Dimensions:\n• Width: 180 cm\n• Depth: 45 cm\n• Height: 90 cm\n\nMirror: 180 × 80 cm\n\n🎁 Free LED bulbs included"
+        },
+        "related": [],
+        "perks": "bulbs",
+        "updatedAt": "2026-07-27T08:03:16.285Z"
+      },
+      {
+        "id": "Tocador-M-07",
+        "name": "Tocador",
+        "price": 599,
+        "oldPrice": 750,
+        "image": "/uploads/5c4a491791888b4ee6bd2f8b0386a4b1.jpg",
+        "imageMobile": "",
+        "images": [
+          "/uploads/5c4a491791888b4ee6bd2f8b0386a4b1.jpg",
+          "/uploads/4e72de2107b5d37d557a180c0090acd9.jpg",
+          "/uploads/d950e151c02be9eece8f6e6b7a06cf21.jpg",
+          "/uploads/74921cfd9765168a2c371707922e6b5b.jpg",
+          "/uploads/6e9ad76da8eef2427cfcbdc2bddf3cfc.jpg"
+        ],
+        "video": "",
+        "videoFirst": false,
+        "media": [
+          {
+            "src": "/uploads/54109d82b7e31a566a9928c8639ead13.mp4",
             "type": "video"
-          }
-        ],
-        "material": {
-          "es": "Latón",
-          "en": "Brass"
-        },
-        "size": "50 × 40 × 180 cm",
-        "reference": "D-05",
-        "subtitle": "50 × 40 × 180 cm",
-        "description": {
-          "es": "Medidas: \n•  ancho 55cm\n•  prof. 40cm\n•  altura 180cm\n\nEspejo 50x160cm",
-          "en": "Dimensions:\n• Width: 55 cm\n• Depth: 40 cm\n• Height: 180 cm\n\nMirror: 50 × 160 cm"
-        },
-        "related": [],
-        "perks": "quality",
-        "updatedAt": "2026-07-29T16:12:59.123Z"
-      },
-      {
-        "id": "Espejo-Alto-D09",
-        "name": "Espejo ",
-        "price": 299,
-        "oldPrice": 420,
-        "image": "/uploads/851ece18aff29006726fbcd048c52845.jpg",
-        "imageMobile": "",
-        "images": [
-          "/uploads/851ece18aff29006726fbcd048c52845.jpg",
-          "/uploads/6dd50533a5325c6f873956892bcde038.jpg",
-          "/uploads/91537a37126271bbbd5a5aca715c6e49.jpg"
-        ],
-        "video": "",
-        "videoFirst": false,
-        "media": [
+          },
           {
-            "src": "/uploads/851ece18aff29006726fbcd048c52845.jpg",
+            "src": "/uploads/5c4a491791888b4ee6bd2f8b0386a4b1.jpg",
             "type": "image"
           },
           {
-            "src": "/uploads/6dd50533a5325c6f873956892bcde038.jpg",
+            "src": "/uploads/4e72de2107b5d37d557a180c0090acd9.jpg",
             "type": "image"
           },
           {
-            "src": "/uploads/91537a37126271bbbd5a5aca715c6e49.jpg",
+            "src": "/uploads/d950e151c02be9eece8f6e6b7a06cf21.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/74921cfd9765168a2c371707922e6b5b.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/6e9ad76da8eef2427cfcbdc2bddf3cfc.jpg",
             "type": "image"
           }
         ],
         "material": {
-          "es": "Latón",
-          "en": "Brass"
+          "es": "Lacado mate",
+          "en": "Matte lacquer"
         },
-        "size": "60 × 175 cm",
-        "reference": "D-09",
-        "subtitle": "60 × 175 cm",
+        "size": "100 × 40 × 170 cm",
+        "reference": "M-07",
+        "subtitle": "100 × 40 × 170 cm",
         "description": {
-          "es": "Medidas: \n•  ancho 60cm\n•  prof. 30cm\n•  altura 175cm",
-          "en": "Dimensions:\n• Width: 60 cm\n• Depth: 30 cm\n• Height: 175 cm"
-        },
-        "related": [],
-        "perks": "led",
-        "updatedAt": "2026-07-29T16:12:59.123Z"
-      },
-      {
-        "id": "Espejo-Alto-F-01",
-        "name": "Espejo ",
-        "price": 169,
-        "oldPrice": 270,
-        "image": "/uploads/cd6570c587d43aa52f7beb5a87fa619e.jpg",
-        "imageMobile": "",
-        "images": [
-          "/uploads/cd6570c587d43aa52f7beb5a87fa619e.jpg",
-          "/uploads/84bf97b3813a701e85ae7ba0067a9de5.jpg",
-          "/uploads/40affe79d4c2cb428cc83948543a3f79.jpg",
-          "/uploads/661c29e072d44afa7330aa9f5e215770.jpg",
-          "/uploads/a692727d48ead1768c4a09a1900fdf13.jpg"
-        ],
-        "video": "",
-        "videoFirst": false,
-        "media": [
-          {
-            "src": "/uploads/cd6570c587d43aa52f7beb5a87fa619e.jpg",
-            "type": "image"
-          },
-          {
-            "src": "/uploads/84bf97b3813a701e85ae7ba0067a9de5.jpg",
-            "type": "image"
-          },
-          {
-            "src": "/uploads/40affe79d4c2cb428cc83948543a3f79.jpg",
-            "type": "image"
-          },
-          {
-            "src": "/uploads/661c29e072d44afa7330aa9f5e215770.jpg",
-            "type": "image"
-          },
-          {
-            "src": "/uploads/a692727d48ead1768c4a09a1900fdf13.jpg",
-            "type": "image"
-          }
-        ],
-        "material": {
-          "es": "Latón",
-          "en": "Brass"
-        },
-        "size": "70 × 170 cm",
-        "reference": "F-01",
-        "subtitle": "70 × 170 cm",
-        "description": {
-          "es": "Medidas:\n• ancho 70cm\n• altura 170cm\n\n🎁 Bombillas LED de regalo",
-          "en": "Dimensions:\n• Width: 70 cm\n• Height: 170 cm\n\n🎁 Free LED bulbs included"
+          "es": "Medidas: \n•  ancho 100cm\n•  prof. 40cm\n•  altura 90cm\n\nEspejo 100x80cm ",
+          "en": "Dimensions:\n• Width: 100 cm\n• Depth: 40 cm\n• Height: 90 cm\n\nMirror: 100 × 80 cm"
         },
         "related": [],
         "perks": "bulbs",
         "updatedAt": "2026-07-27T08:03:16.285Z"
       },
       {
-        "id": "Espejo-Alto-F-02",
-        "name": "Espejo ",
-        "price": 189,
-        "oldPrice": 290,
-        "image": "/uploads/3f17f75401458f2be6e6e8fd3035521b.jpg",
+        "id": "Tocador-M-04-2",
+        "name": "Tocador",
+        "price": 439,
+        "oldPrice": 580,
+        "image": "/uploads/d464fee6601f991ad76f4bf674cbc80b.jpg",
         "imageMobile": "",
         "images": [
-          "/uploads/3f17f75401458f2be6e6e8fd3035521b.jpg",
-          "/uploads/388aa907bbef1e3a31ccbdbe26f4a311.jpg",
-          "/uploads/2e2db1e7954bf2d921ff5fb9a6876db7.jpg",
-          "/uploads/5a5594eba5dbb9136c1aff0e85487445.jpg",
-          "/uploads/ce18b1ebc488af5607ee9f869808d801.jpg",
-          "/uploads/672515c8039de443e72d75d4ac8cba7d.jpg"
+          "/uploads/d464fee6601f991ad76f4bf674cbc80b.jpg",
+          "/uploads/5e55de193f06d3cb72f6f8ff2d83cadf.jpg",
+          "/uploads/db73e014ec8957050e376a047aa523cc.jpg",
+          "/uploads/1d1c67e11b4e82824956c7afea2b61bd.jpg",
+          "/uploads/4be934e77e0ac770378f00546a49de9a.jpg"
         ],
         "video": "",
         "videoFirst": false,
         "media": [
           {
-            "src": "/uploads/3f17f75401458f2be6e6e8fd3035521b.jpg",
+            "src": "/uploads/d464fee6601f991ad76f4bf674cbc80b.jpg",
             "type": "image"
           },
           {
-            "src": "/uploads/388aa907bbef1e3a31ccbdbe26f4a311.jpg",
+            "src": "/uploads/5e55de193f06d3cb72f6f8ff2d83cadf.jpg",
             "type": "image"
           },
           {
-            "src": "/uploads/2e2db1e7954bf2d921ff5fb9a6876db7.jpg",
+            "src": "/uploads/db73e014ec8957050e376a047aa523cc.jpg",
             "type": "image"
           },
           {
-            "src": "/uploads/5a5594eba5dbb9136c1aff0e85487445.jpg",
+            "src": "/uploads/1d1c67e11b4e82824956c7afea2b61bd.jpg",
             "type": "image"
           },
           {
-            "src": "/uploads/ce18b1ebc488af5607ee9f869808d801.jpg",
-            "type": "image"
-          },
-          {
-            "src": "/uploads/672515c8039de443e72d75d4ac8cba7d.jpg",
+            "src": "/uploads/4be934e77e0ac770378f00546a49de9a.jpg",
             "type": "image"
           }
         ],
         "material": {
-          "es": "Latón",
-          "en": "Brass"
+          "es": "Lacado mate",
+          "en": "Matte lacquer"
         },
-        "size": "70 × 175 cm",
-        "reference": "F-02",
-        "subtitle": "70 × 175 cm",
+        "size": "90 × 40 × 170 cm",
+        "reference": "M-04-2",
+        "subtitle": "90 × 40 × 170 cm",
         "description": {
-          "es": "Medidas:\n• ancho 70cm\n• altura 175cm\n\n🎁 Bombillas LED de regalo",
-          "en": "Dimensions:\n• Width: 70 cm\n• Height: 175 cm\n\n🎁 Free LED bulbs included"
+          "es": "Medidas: \n•  ancho 90cm\n•  prof. 40cm\n•  altura 90cm\n\nEspejo 90x80cm \n\n🎁 Bombillas LED de regalo ",
+          "en": "Dimensions:\n• Width: 90 cm\n• Depth: 40 cm\n• Height: 90 cm\n\nMirror: 90 × 80 cm\n\n🎁 Free LED bulbs included"
         },
         "related": [],
         "perks": "bulbs",
         "updatedAt": "2026-07-27T08:03:16.285Z"
       },
       {
-        "id": "Espejo-Alto-F-03",
-        "name": "Espejo ",
-        "price": 199,
-        "oldPrice": 300,
-        "image": "/uploads/347068d281899cbefaee020cf1777c45.jpg",
+        "id": "Tocador-M-02-2",
+        "name": "Tocador",
+        "price": 399,
+        "oldPrice": 550,
+        "image": "/uploads/8a120f849d5d094ea636de110f5da616.jpg",
         "imageMobile": "",
         "images": [
-          "/uploads/347068d281899cbefaee020cf1777c45.jpg",
-          "/uploads/b37d46eae8b283a0000d7cfa430d5945.jpg",
-          "/uploads/52886d9f4b4258d8c8d6ad81f18033e2.jpg",
-          "/uploads/c4ed1648ac2194b2c57ef23dfa6ddf05.jpg",
-          "/uploads/402d558b25563dd655b5bd7a7c3f5222.jpg"
+          "/uploads/8a120f849d5d094ea636de110f5da616.jpg",
+          "/uploads/30e1cd59dee2d9a7a6a90227a62715e6.jpg",
+          "/uploads/d0aa1477d1ba07673ec23ca90e763f36.jpg",
+          "/uploads/439e0d482755f0538fc57440cd9dbb92.jpg",
+          "/uploads/7dad8b49160dd3327743cc9e2eccda35.jpg"
         ],
         "video": "",
         "videoFirst": false,
         "media": [
           {
-            "src": "/uploads/347068d281899cbefaee020cf1777c45.jpg",
+            "src": "/uploads/8a120f849d5d094ea636de110f5da616.jpg",
             "type": "image"
           },
           {
-            "src": "/uploads/b37d46eae8b283a0000d7cfa430d5945.jpg",
+            "src": "/uploads/30e1cd59dee2d9a7a6a90227a62715e6.jpg",
             "type": "image"
           },
           {
-            "src": "/uploads/52886d9f4b4258d8c8d6ad81f18033e2.jpg",
+            "src": "/uploads/d0aa1477d1ba07673ec23ca90e763f36.jpg",
             "type": "image"
           },
           {
-            "src": "/uploads/c4ed1648ac2194b2c57ef23dfa6ddf05.jpg",
+            "src": "/uploads/439e0d482755f0538fc57440cd9dbb92.jpg",
             "type": "image"
           },
           {
-            "src": "/uploads/402d558b25563dd655b5bd7a7c3f5222.jpg",
+            "src": "/uploads/7dad8b49160dd3327743cc9e2eccda35.jpg",
             "type": "image"
           }
         ],
         "material": {
-          "es": "Latón",
-          "en": "Brass"
+          "es": "Lacado mate",
+          "en": "Matte lacquer"
         },
-        "size": "70 × 170 cm",
-        "reference": "F-03",
-        "subtitle": "70 × 170 cm",
+        "size": "70 × 40 × 170 cm",
+        "reference": "M-02-2",
+        "subtitle": "70 × 40 × 170 cm",
         "description": {
-          "es": "Medidas:\n• ancho 70cm\n• altura 170cm\n\n🎁 Bombillas LED de regalo",
-          "en": "Dimensions:\n• Width: 70 cm\n• Height: 170 cm\n\n🎁 Free LED bulbs included"
+          "es": "Medidas: \n•  ancho 70cm\n•  prof. 40cm\n•  altura 90cm\n\nEspejo 70x80cm \n\n🎁 Bombillas LED de regalo ",
+          "en": "Dimensions:\n• Width: 70 cm\n• Depth: 40 cm\n• Height: 90 cm\n\nMirror: 70 × 80 cm\n\n🎁 Free LED bulbs included"
         },
         "related": [],
         "perks": "bulbs",
         "updatedAt": "2026-07-27T08:03:16.285Z"
       },
       {
-        "id": "Espejo-Alto-F-04",
-        "name": "Espejo ",
-        "price": 229,
-        "oldPrice": 330,
-        "image": "/uploads/8e63d26e8c402c66616670f4d9c31410.jpg",
+        "id": "Tocador-M-09",
+        "name": "Tocador",
+        "price": 899,
+        "oldPrice": 1150,
+        "image": "/uploads/6b9f3f461853b147eaae7334acf3b38a.jpg",
         "imageMobile": "",
         "images": [
-          "/uploads/8e63d26e8c402c66616670f4d9c31410.jpg",
-          "/uploads/f1a4522de8cd487bcd30a904aa6f692e.jpg",
-          "/uploads/7009143358661be9bb89a1ca97724527.jpg",
-          "/uploads/b94454f0c22a91a1b1c4926446b94de4.jpg",
-          "/uploads/b80a39c25c7ff7d64cdbac811a010c21.jpg",
-          "/uploads/dadf7f8e739fecc50d168ce5b5d588f3.jpg"
+          "/uploads/6b9f3f461853b147eaae7334acf3b38a.jpg",
+          "/uploads/624c9ca6375c1f59191cc01d1b6568c2.jpg",
+          "/uploads/b7de40acec7fd0484a8e488918c9ea57.jpg"
         ],
         "video": "",
         "videoFirst": false,
         "media": [
           {
-            "src": "/uploads/8e63d26e8c402c66616670f4d9c31410.jpg",
+            "src": "/uploads/6b9f3f461853b147eaae7334acf3b38a.jpg",
             "type": "image"
           },
           {
-            "src": "/uploads/f1a4522de8cd487bcd30a904aa6f692e.jpg",
+            "src": "/uploads/624c9ca6375c1f59191cc01d1b6568c2.jpg",
             "type": "image"
           },
           {
-            "src": "/uploads/7009143358661be9bb89a1ca97724527.jpg",
-            "type": "image"
-          },
-          {
-            "src": "/uploads/b94454f0c22a91a1b1c4926446b94de4.jpg",
-            "type": "image"
-          },
-          {
-            "src": "/uploads/b80a39c25c7ff7d64cdbac811a010c21.jpg",
-            "type": "image"
-          },
-          {
-            "src": "/uploads/dadf7f8e739fecc50d168ce5b5d588f3.jpg",
+            "src": "/uploads/b7de40acec7fd0484a8e488918c9ea57.jpg",
             "type": "image"
           }
         ],
         "material": {
-          "es": "Latón",
-          "en": "Brass"
+          "es": "Lacado mate",
+          "en": "Matte lacquer"
         },
-        "size": "70 × 170 cm",
-        "reference": "F-04",
-        "subtitle": "70 × 170 cm",
+        "size": "180 × 45 × 180 cm",
+        "reference": "M-09",
+        "subtitle": "180 × 45 × 180 cm",
         "description": {
-          "es": "Medidas:\n• ancho 70cm\n• altura 170cm\n\n🎁 Bombillas LED de regalo",
-          "en": "Dimensions:\n• Width: 70 cm\n• Height: 170 cm\n\n🎁 Free LED bulbs included"
+          "es": "Medidas: \n•  ancho 180cm\n•  prof. 45cm\n•  altura 90cm\n\nEspejo 180x80cm \n\n🎁 Bombillas LED de regalo ",
+          "en": "Dimensions:\n• Width: 180 cm\n• Depth: 45 cm\n• Height: 90 cm\n\nMirror: 180 × 80 cm\n\n🎁 Free LED bulbs included"
         },
         "related": [],
         "perks": "bulbs",
         "updatedAt": "2026-07-27T08:03:16.285Z"
-      },
-      {
-        "id": "Espejo-Alto-F-05",
-        "name": "Espejo ",
-        "price": 239,
-        "oldPrice": 340,
-        "image": "/uploads/3611a23d86e72c7bf209810bfdd9a592.jpg",
-        "imageMobile": "",
-        "images": [
-          "/uploads/3611a23d86e72c7bf209810bfdd9a592.jpg",
-          "/uploads/d4a0534c2e1889b52c0a1fd5e594d313.jpg",
-          "/uploads/d06b789eccfa06ee2ac1d809ca79c18a.jpg",
-          "/uploads/0ba3cc2bdb9c8d870a9bd7267b6f1246.jpg",
-          "/uploads/0bd1296bb724d005b21c17dba5226a95.jpg",
-          "/uploads/6dcf11aaf9714fef0f9894384a99b445.jpg",
-          "/uploads/d603698878cd854b406e8f87e6787c4b.jpg"
-        ],
-        "video": "",
-        "videoFirst": false,
-        "media": [
-          {
-            "src": "/uploads/3611a23d86e72c7bf209810bfdd9a592.jpg",
-            "type": "image"
-          },
-          {
-            "src": "/uploads/d4a0534c2e1889b52c0a1fd5e594d313.jpg",
-            "type": "image"
-          },
-          {
-            "src": "/uploads/d06b789eccfa06ee2ac1d809ca79c18a.jpg",
-            "type": "image"
-          },
-          {
-            "src": "/uploads/0ba3cc2bdb9c8d870a9bd7267b6f1246.jpg",
-            "type": "image"
-          },
-          {
-            "src": "/uploads/0bd1296bb724d005b21c17dba5226a95.jpg",
-            "type": "image"
-          },
-          {
-            "src": "/uploads/6dcf11aaf9714fef0f9894384a99b445.jpg",
-            "type": "image"
-          },
-          {
-            "src": "/uploads/d603698878cd854b406e8f87e6787c4b.jpg",
-            "type": "image"
-          }
-        ],
-        "material": {
-          "es": "Latón",
-          "en": "Brass"
-        },
-        "size": "80 × 180 cm",
-        "reference": "F-05",
-        "subtitle": "80 × 180 cm",
-        "description": {
-          "es": "Medidas:\n• ancho 80cm\n• altura 180cm\n\n🎁 Bombillas LED de regalo",
-          "en": "Dimensions:\n• Width: 80 cm\n• Height: 180 cm\n\n🎁 Free LED bulbs included"
-        },
-        "related": [],
-        "perks": "bulbs",
-        "updatedAt": "2026-07-27T08:03:16.285Z"
-      },
-      {
-        "id": "Espejo-Alto-F-06",
-        "name": "Espejo ",
-        "price": 259,
-        "oldPrice": 380,
-        "image": "/uploads/db1eb869f8852905c29906ba3d880f69.jpg",
-        "imageMobile": "",
-        "images": [
-          "/uploads/db1eb869f8852905c29906ba3d880f69.jpg",
-          "/uploads/1de4780d7fcf55660ec7e4f7da36a0b6.jpg",
-          "/uploads/417a4af7b21a7bee4a5679be1e2237f1.jpg",
-          "/uploads/6ad6e4ad73f4cbf45b4ec723359ccf6f.jpg",
-          "/uploads/b7ac42e53d525d870bd23a65d5c7c034.jpg",
-          "/uploads/6b9f02778140be75085a280dd74ab8cf.jpg",
-          "/uploads/2b28b952b8d4b5071266635c46845c2d.jpg"
-        ],
-        "video": "",
-        "videoFirst": false,
-        "media": [
-          {
-            "src": "/uploads/db1eb869f8852905c29906ba3d880f69.jpg",
-            "type": "image"
-          },
-          {
-            "src": "/uploads/1de4780d7fcf55660ec7e4f7da36a0b6.jpg",
-            "type": "image"
-          },
-          {
-            "src": "/uploads/417a4af7b21a7bee4a5679be1e2237f1.jpg",
-            "type": "image"
-          },
-          {
-            "src": "/uploads/6ad6e4ad73f4cbf45b4ec723359ccf6f.jpg",
-            "type": "image"
-          },
-          {
-            "src": "/uploads/b7ac42e53d525d870bd23a65d5c7c034.jpg",
-            "type": "image"
-          },
-          {
-            "src": "/uploads/6b9f02778140be75085a280dd74ab8cf.jpg",
-            "type": "image"
-          },
-          {
-            "src": "/uploads/2b28b952b8d4b5071266635c46845c2d.jpg",
-            "type": "image"
-          }
-        ],
-        "material": {
-          "es": "Latón",
-          "en": "Brass"
-        },
-        "size": "80 × 185 cm",
-        "reference": "F-06",
-        "subtitle": "80 × 185 cm",
-        "description": {
-          "es": "Medidas:\n• ancho 80cm\n• altura 185cm\n\n🎁 Bombillas LED de regalo",
-          "en": "Dimensions:\n• Width: 80 cm\n• Height: 185 cm\n\n🎁 Free LED bulbs included"
-        },
-        "related": [],
-        "perks": "bulbs",
-        "updatedAt": "2026-07-27T08:03:16.285Z"
-      },
-      {
-        "id": "Espejo-Alto-F-07",
-        "name": "Espejo ",
-        "price": 299,
-        "oldPrice": 400,
-        "image": "/uploads/d4c575b8ed3c10b660dc535132129844.jpg",
-        "imageMobile": "",
-        "images": [
-          "/uploads/d4c575b8ed3c10b660dc535132129844.jpg",
-          "/uploads/66efc3b8287f3bd90ea766667f9bfc86.jpg",
-          "/uploads/dd5760fb735fb2231d2df2eab2f538be.jpg"
-        ],
-        "video": "",
-        "videoFirst": false,
-        "media": [
-          {
-            "src": "/uploads/d4c575b8ed3c10b660dc535132129844.jpg",
-            "type": "image"
-          },
-          {
-            "src": "/uploads/66efc3b8287f3bd90ea766667f9bfc86.jpg",
-            "type": "image"
-          },
-          {
-            "src": "/uploads/dd5760fb735fb2231d2df2eab2f538be.jpg",
-            "type": "image"
-          }
-        ],
-        "material": {
-          "es": "Latón",
-          "en": "Brass"
-        },
-        "size": "80 × 180 cm",
-        "reference": "F-07",
-        "subtitle": "80 × 180 cm",
-        "description": {
-          "es": "Medidas:\n• ancho 80cm\n• altura 180cm\n\n🎁 Bombillas LED de regalo",
-          "en": "Dimensions:\n• Width: 80 cm\n• Height: 180 cm\n\n🎁 Free LED bulbs included"
-        },
-        "related": [],
-        "perks": "bulbs",
-        "updatedAt": "2026-07-27T08:03:16.285Z"
-      },
-      {
-        "id": "Espejo-Alto-F-08",
-        "name": "Espejo ",
-        "price": 329,
-        "oldPrice": 450,
-        "image": "/uploads/756f8c6ff6502724e6947db02769de1b.jpg",
-        "imageMobile": "",
-        "images": [
-          "/uploads/756f8c6ff6502724e6947db02769de1b.jpg",
-          "/uploads/a01d5c0e56751aa12ad432df6065b234.jpg"
-        ],
-        "video": "",
-        "videoFirst": false,
-        "media": [
-          {
-            "src": "/uploads/756f8c6ff6502724e6947db02769de1b.jpg",
-            "type": "image"
-          },
-          {
-            "src": "/uploads/a01d5c0e56751aa12ad432df6065b234.jpg",
-            "type": "image"
-          }
-        ],
-        "material": {
-          "es": "Latón",
-          "en": "Brass"
-        },
-        "size": "80 × 185 cm",
-        "reference": "F-08",
-        "subtitle": "80 × 185 cm",
-        "description": {
-          "es": "Medidas:\n• ancho 80cm\n• altura 185cm\n\n🎁 Bombillas LED de regalo",
-          "en": "Dimensions:\n• Width: 80 cm\n• Height: 185 cm\n\n🎁 Free LED bulbs included"
-        },
-        "related": [],
-        "perks": "bulbs",
-        "updatedAt": "2026-07-27T08:03:16.285Z"
-      },
-      {
-        "id": "Espejo-Alto-F-09",
-        "name": "Espejo ",
-        "price": 329,
-        "oldPrice": 450,
-        "image": "/uploads/5c2d20da2b256cb7deaf28cf2094bbac.jpg",
-        "imageMobile": "",
-        "images": [
-          "/uploads/5c2d20da2b256cb7deaf28cf2094bbac.jpg",
-          "/uploads/50395d6b1c82cbde618ebf5a32628a64.jpg",
-          "/uploads/351c0279b611aa4e3037ca270a89b248.jpg"
-        ],
-        "video": "",
-        "videoFirst": false,
-        "media": [
-          {
-            "src": "/uploads/5c2d20da2b256cb7deaf28cf2094bbac.jpg",
-            "type": "image"
-          },
-          {
-            "src": "/uploads/50395d6b1c82cbde618ebf5a32628a64.jpg",
-            "type": "image"
-          },
-          {
-            "src": "/uploads/351c0279b611aa4e3037ca270a89b248.jpg",
-            "type": "image"
-          }
-        ],
-        "material": {
-          "es": "Latón",
-          "en": "Brass"
-        },
-        "size": "80 × 180 cm",
-        "reference": "F-09",
-        "subtitle": "80 × 180 cm",
-        "description": {
-          "es": "Medidas:\n• ancho 80cm\n• altura 180cm\n\n🎁 Bombillas LED de regalo",
-          "en": "Dimensions:\n• Width: 80 cm\n• Height: 180 cm\n\n🎁 Free LED bulbs included"
-        },
-        "related": [],
-        "perks": "bulbs",
-        "updatedAt": "2026-07-27T08:03:16.285Z"
-      },
-      {
-        "id": "Espejo-Alto-F-10",
-        "name": "Espejo ",
-        "price": 459,
-        "oldPrice": 640,
-        "image": "/uploads/b6d9b9b4042567b8b059b230fdf2d6a0.jpg",
-        "imageMobile": "",
-        "images": [
-          "/uploads/b6d9b9b4042567b8b059b230fdf2d6a0.jpg",
-          "/uploads/60620e0f6cc2c3d99c39c9c9e2ce3a51.jpg",
-          "/uploads/3db0ef3fcfc425fc1c00555ebdf84fa3.jpg",
-          "/uploads/fb0b3272e49d86397dc6cb1ab7035e14.jpg",
-          "/uploads/c6486f05319779ac1dfbc07ee6d50ec3.jpg"
-        ],
-        "video": "",
-        "videoFirst": false,
-        "media": [
-          {
-            "src": "/uploads/b6d9b9b4042567b8b059b230fdf2d6a0.jpg",
-            "type": "image"
-          },
-          {
-            "src": "/uploads/60620e0f6cc2c3d99c39c9c9e2ce3a51.jpg",
-            "type": "image"
-          },
-          {
-            "src": "/uploads/3db0ef3fcfc425fc1c00555ebdf84fa3.jpg",
-            "type": "image"
-          },
-          {
-            "src": "/uploads/fb0b3272e49d86397dc6cb1ab7035e14.jpg",
-            "type": "image"
-          },
-          {
-            "src": "/uploads/c6486f05319779ac1dfbc07ee6d50ec3.jpg",
-            "type": "image"
-          }
-        ],
-        "material": {
-          "es": "Latón",
-          "en": "Brass"
-        },
-        "size": "60 × 170 cm",
-        "reference": "F-10",
-        "subtitle": "60 × 170 cm",
-        "description": {
-          "es": "Medidas:\n• ancho 60cm\n• altura 170cm",
-          "en": "Dimensions:\n• Width: 60 cm\n• Height: 170 cm"
-        },
-        "related": [],
-        "perks": "led",
-        "updatedAt": "2026-07-29T16:12:59.123Z"
       }
     ]
   },
@@ -2503,6 +2613,44 @@
         "updatedAt": "2026-07-29T16:14:43.149Z"
       },
       {
+        "id": "Estanteria-E-01",
+        "name": "Estantería",
+        "price": 199,
+        "oldPrice": 320,
+        "image": "/uploads/d28c174bb94ff71d2d46dc07648a8d28.jpg",
+        "imageMobile": "",
+        "images": [
+          "/uploads/d28c174bb94ff71d2d46dc07648a8d28.jpg",
+          "/uploads/2d96600fa4cf9c2cdfa5b81fcef75d70.jpg"
+        ],
+        "video": "",
+        "videoFirst": false,
+        "media": [
+          {
+            "src": "/uploads/d28c174bb94ff71d2d46dc07648a8d28.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/2d96600fa4cf9c2cdfa5b81fcef75d70.jpg",
+            "type": "image"
+          }
+        ],
+        "material": {
+          "es": "Roble",
+          "en": "Oak"
+        },
+        "size": "40 × 40 × 170 cm",
+        "reference": "E-01",
+        "subtitle": "40 × 40 × 170 cm",
+        "description": {
+          "es": "Medidas: \n•  ancho 40cm\n•  prof. 40cm\n•  altura 170cm",
+          "en": "Dimensions:\n• Width: 40 cm\n• Depth: 40 cm\n• Height: 170 cm"
+        },
+        "related": [],
+        "perks": "quality",
+        "updatedAt": "2026-07-29T16:14:43.149Z"
+      },
+      {
         "id": "Estanteria-E-02",
         "name": "Estantería",
         "price": 259,
@@ -2602,6 +2750,59 @@
         "updatedAt": "2026-07-29T16:14:43.149Z"
       },
       {
+        "id": "Estanteria-E-03",
+        "name": "Estantería",
+        "price": 359,
+        "oldPrice": 470,
+        "image": "/uploads/89144ffbf7054d00ca68184620c44cf5.jpg",
+        "imageMobile": "",
+        "images": [
+          "/uploads/89144ffbf7054d00ca68184620c44cf5.jpg",
+          "/uploads/ee6e64fe8f0875dacc577dbddb188310.jpg",
+          "/uploads/1288355537f0316657f468cde0cb31d1.jpg",
+          "/uploads/8917bc1283661a77875d6c2d6b2e7356.jpg",
+          "/uploads/a615b011b5009cca984e0bac92667550.jpg"
+        ],
+        "video": "",
+        "videoFirst": false,
+        "media": [
+          {
+            "src": "/uploads/89144ffbf7054d00ca68184620c44cf5.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/ee6e64fe8f0875dacc577dbddb188310.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/1288355537f0316657f468cde0cb31d1.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/8917bc1283661a77875d6c2d6b2e7356.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/a615b011b5009cca984e0bac92667550.jpg",
+            "type": "image"
+          }
+        ],
+        "material": {
+          "es": "Lacado mate",
+          "en": "Matte lacquer"
+        },
+        "size": "45 × 35 × 180 cm",
+        "reference": "E-03",
+        "subtitle": "45 × 35 × 180 cm",
+        "description": {
+          "es": "Medidas: \n•  ancho 45cm\n•  prof. 35cm\n•  altura 180cm",
+          "en": "Dimensions:\n• Width: 45 cm\n• Depth: 35 cm\n• Height: 180 cm"
+        },
+        "related": [],
+        "perks": "quality",
+        "updatedAt": "2026-07-29T16:14:43.149Z"
+      },
+      {
         "id": "Estanteria-E-11",
         "name": "Estantería",
         "price": 599,
@@ -2654,38 +2855,57 @@
         "updatedAt": "2026-07-29T16:14:43.149Z"
       },
       {
-        "id": "Estanteria-E-01",
+        "id": "Estanteria-E-07",
         "name": "Estantería",
-        "price": 199,
-        "oldPrice": 320,
-        "image": "/uploads/d28c174bb94ff71d2d46dc07648a8d28.jpg",
+        "price": 399,
+        "oldPrice": 520,
+        "image": "/uploads/1e4634edcadb5498252c80f4974bcfb3.jpg",
         "imageMobile": "",
         "images": [
-          "/uploads/d28c174bb94ff71d2d46dc07648a8d28.jpg",
-          "/uploads/2d96600fa4cf9c2cdfa5b81fcef75d70.jpg"
+          "/uploads/1e4634edcadb5498252c80f4974bcfb3.jpg",
+          "/uploads/5c65f9143e57f6944ff744bb8c751a15.jpg",
+          "/uploads/326cf916307b10641aad5dd330b219d4.jpg",
+          "/uploads/c086b3481141d4ec4ae89a634c99fc51.jpg",
+          "/uploads/9f53ae11f4096a008c4905a4ed6f1f69.jpg"
         ],
         "video": "",
         "videoFirst": false,
         "media": [
           {
-            "src": "/uploads/d28c174bb94ff71d2d46dc07648a8d28.jpg",
+            "src": "/uploads/eb26f5d1082cacfe35aa74e934bfce73.mp4",
+            "type": "video"
+          },
+          {
+            "src": "/uploads/1e4634edcadb5498252c80f4974bcfb3.jpg",
             "type": "image"
           },
           {
-            "src": "/uploads/2d96600fa4cf9c2cdfa5b81fcef75d70.jpg",
+            "src": "/uploads/5c65f9143e57f6944ff744bb8c751a15.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/326cf916307b10641aad5dd330b219d4.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/c086b3481141d4ec4ae89a634c99fc51.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/9f53ae11f4096a008c4905a4ed6f1f69.jpg",
             "type": "image"
           }
         ],
         "material": {
-          "es": "Roble",
-          "en": "Oak"
+          "es": "Lacado mate",
+          "en": "Matte lacquer"
         },
-        "size": "40 × 40 × 170 cm",
-        "reference": "E-01",
-        "subtitle": "40 × 40 × 170 cm",
+        "size": "80 × 40 × 150 cm",
+        "reference": "E-07",
+        "subtitle": "80 × 40 × 150 cm",
         "description": {
-          "es": "Medidas: \n•  ancho 40cm\n•  prof. 40cm\n•  altura 170cm",
-          "en": "Dimensions:\n• Width: 40 cm\n• Depth: 40 cm\n• Height: 170 cm"
+          "es": "Medidas: \n•  ancho 80cm\n•  prof. 40cm\n•  altura 150cm",
+          "en": "Dimensions:\n• Width: 80 cm\n• Depth: 40 cm\n• Height: 150 cm"
         },
         "related": [],
         "perks": "quality",
@@ -2766,116 +2986,6 @@
         "description": {
           "es": "Medidas: \n•  ancho 80cm\n•  prof. 40cm\n•  altura 190cm",
           "en": "Dimensions:\n• Width: 80 cm\n• Depth: 40 cm\n• Height: 190 cm"
-        },
-        "related": [],
-        "perks": "quality",
-        "updatedAt": "2026-07-29T16:14:43.149Z"
-      },
-      {
-        "id": "Estanteria-E-07",
-        "name": "Estantería",
-        "price": 399,
-        "oldPrice": 520,
-        "image": "/uploads/1e4634edcadb5498252c80f4974bcfb3.jpg",
-        "imageMobile": "",
-        "images": [
-          "/uploads/1e4634edcadb5498252c80f4974bcfb3.jpg",
-          "/uploads/5c65f9143e57f6944ff744bb8c751a15.jpg",
-          "/uploads/326cf916307b10641aad5dd330b219d4.jpg",
-          "/uploads/c086b3481141d4ec4ae89a634c99fc51.jpg",
-          "/uploads/9f53ae11f4096a008c4905a4ed6f1f69.jpg"
-        ],
-        "video": "",
-        "videoFirst": false,
-        "media": [
-          {
-            "src": "/uploads/eb26f5d1082cacfe35aa74e934bfce73.mp4",
-            "type": "video"
-          },
-          {
-            "src": "/uploads/1e4634edcadb5498252c80f4974bcfb3.jpg",
-            "type": "image"
-          },
-          {
-            "src": "/uploads/5c65f9143e57f6944ff744bb8c751a15.jpg",
-            "type": "image"
-          },
-          {
-            "src": "/uploads/326cf916307b10641aad5dd330b219d4.jpg",
-            "type": "image"
-          },
-          {
-            "src": "/uploads/c086b3481141d4ec4ae89a634c99fc51.jpg",
-            "type": "image"
-          },
-          {
-            "src": "/uploads/9f53ae11f4096a008c4905a4ed6f1f69.jpg",
-            "type": "image"
-          }
-        ],
-        "material": {
-          "es": "Lacado mate",
-          "en": "Matte lacquer"
-        },
-        "size": "80 × 40 × 150 cm",
-        "reference": "E-07",
-        "subtitle": "80 × 40 × 150 cm",
-        "description": {
-          "es": "Medidas: \n•  ancho 80cm\n•  prof. 40cm\n•  altura 150cm",
-          "en": "Dimensions:\n• Width: 80 cm\n• Depth: 40 cm\n• Height: 150 cm"
-        },
-        "related": [],
-        "perks": "quality",
-        "updatedAt": "2026-07-29T16:14:43.149Z"
-      },
-      {
-        "id": "Estanteria-E-03",
-        "name": "Estantería",
-        "price": 359,
-        "oldPrice": 470,
-        "image": "/uploads/89144ffbf7054d00ca68184620c44cf5.jpg",
-        "imageMobile": "",
-        "images": [
-          "/uploads/89144ffbf7054d00ca68184620c44cf5.jpg",
-          "/uploads/ee6e64fe8f0875dacc577dbddb188310.jpg",
-          "/uploads/1288355537f0316657f468cde0cb31d1.jpg",
-          "/uploads/8917bc1283661a77875d6c2d6b2e7356.jpg",
-          "/uploads/a615b011b5009cca984e0bac92667550.jpg"
-        ],
-        "video": "",
-        "videoFirst": false,
-        "media": [
-          {
-            "src": "/uploads/89144ffbf7054d00ca68184620c44cf5.jpg",
-            "type": "image"
-          },
-          {
-            "src": "/uploads/ee6e64fe8f0875dacc577dbddb188310.jpg",
-            "type": "image"
-          },
-          {
-            "src": "/uploads/1288355537f0316657f468cde0cb31d1.jpg",
-            "type": "image"
-          },
-          {
-            "src": "/uploads/8917bc1283661a77875d6c2d6b2e7356.jpg",
-            "type": "image"
-          },
-          {
-            "src": "/uploads/a615b011b5009cca984e0bac92667550.jpg",
-            "type": "image"
-          }
-        ],
-        "material": {
-          "es": "Lacado mate",
-          "en": "Matte lacquer"
-        },
-        "size": "45 × 35 × 180 cm",
-        "reference": "E-03",
-        "subtitle": "45 × 35 × 180 cm",
-        "description": {
-          "es": "Medidas: \n•  ancho 45cm\n•  prof. 35cm\n•  altura 180cm",
-          "en": "Dimensions:\n• Width: 45 cm\n• Depth: 35 cm\n• Height: 180 cm"
         },
         "related": [],
         "perks": "quality",

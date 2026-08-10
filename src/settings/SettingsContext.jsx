@@ -19,8 +19,12 @@ function getInitialSettings() {
  * the next load is also flash-free. Falls back to the bundled default when
  * both cache and API are unavailable.
  */
-export function SettingsProvider({ children }) {
-  const [settings, setSettings] = useState(getInitialSettings);
+export function SettingsProvider({ children, initialSettings }) {
+  // As with the catalog, hydration must start from the same settings snapshot
+  // the server rendered. Cache/API updates are applied only after the commit.
+  const [settings, setSettings] = useState(() =>
+    initialSettings ? mergeSettings(initialSettings) : getInitialSettings(),
+  );
 
   useEffect(() => {
     let alive = true;
@@ -29,7 +33,9 @@ export function SettingsProvider({ children }) {
       .then((data) => {
         if (alive && data?.settings) {
           setSettings(mergeSettings(data.settings));
-          try { localStorage.setItem(CACHE_KEY, JSON.stringify(data.settings)); } catch {}
+          try {
+            localStorage.setItem(CACHE_KEY, JSON.stringify(data.settings));
+          } catch {}
         }
       })
       .catch(() => {});
