@@ -85,7 +85,14 @@ function contrastRatio(foreground, background) {
 }
 
 try {
-  browser = await puppeteer.launch({ headless: true });
+  browser = await puppeteer.launch({
+    headless: true,
+    // GitHub-hosted runners disable the user namespaces Chromium's sandbox
+    // expects. Keep the normal sandbox locally and relax it only inside CI.
+    ...(process.env.CI
+      ? { args: ['--no-sandbox', '--disable-setuid-sandbox', '--disable-dev-shm-usage'] }
+      : {}),
+  });
   const page = await browser.newPage();
   await page.setViewport({ width: 390, height: 844, deviceScaleFactor: 1 });
   const hydrationErrors = [];
