@@ -12,6 +12,7 @@ const order = {
   eventId: 'event-123',
   name: 'Ana',
   phone: '+34 600 000 000',
+  postalCode: '28001',
   address: '',
   comment: '',
   productId: 'p1',

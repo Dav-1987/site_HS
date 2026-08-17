@@ -163,7 +163,7 @@ export default function ProductCard({
                     e.preventDefault();
                     setIdx(i);
                   }}
-                  className="touch-target flex flex-none items-center justify-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-accent"
+                  className="flex min-h-[44px] flex-none items-center justify-center px-1.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-accent"
                 >
                   <span
                     aria-hidden="true"

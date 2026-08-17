@@ -4,6 +4,7 @@ import { validateOrder, formatOrderText, isValidPhone, resolveOrderProduct } fro
 const validBody = {
   name: 'Ana',
   phone: '+34 600 000 000',
+  postalCode: '28001',
   comment: '',
   productId: 'p1',
   eventId: '86e127af-27e6-4a49-82a5-3af82e19ed25',
@@ -14,9 +15,18 @@ describe('validateOrder', () => {
     expect(validateOrder(validBody)).toBeNull();
   });
 
-  it('requires name and phone', () => {
+  it('requires name, phone and postal code', () => {
     expect(validateOrder({ ...validBody, name: '  ' })).toMatch(/name/);
     expect(validateOrder({ ...validBody, phone: '' })).toMatch(/phone/);
+    expect(validateOrder({ ...validBody, postalCode: '  ' })).toMatch(/postalCode/);
+    expect(validateOrder({ ...validBody, postalCode: undefined })).toMatch(/postalCode/);
+  });
+
+  it('rejects a malformed postal code', () => {
+    expect(validateOrder({ ...validBody, postalCode: '!!' })).toMatch(/postalCode/);
+    expect(validateOrder({ ...validBody, postalCode: '2' })).toMatch(/postalCode/);
+    expect(validateOrder({ ...validBody, postalCode: '1'.repeat(21) })).toMatch(/postalCode/);
+    expect(validateOrder({ ...validBody, postalCode: 'SW1A 1AA' })).toBeNull();
   });
 
   it('requires a product id and a stable event id', () => {
@@ -151,5 +161,15 @@ describe('formatOrderText', () => {
       productName: 'Tocador Aria',
     });
     expect(withoutAddress).not.toContain('Dirección');
+  });
+
+  it('includes the postal code when present', () => {
+    const text = formatOrderText({
+      name: 'Ana',
+      phone: '600',
+      postalCode: '28001',
+      productName: 'Tocador Aria',
+    });
+    expect(text).toContain('Código Postal: 28001');
   });
 });

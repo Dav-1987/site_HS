@@ -89,7 +89,11 @@ export default function OrdersPanel({ onClose }) {
               {typeof o.price === 'number' && (
                 <p className="mt-1 text-sm text-accent-text">{o.price} €</p>
               )}
-              {o.address && <p className="mt-1 text-sm text-primary/70">{o.address}</p>}
+              {(o.postalCode || o.address) && (
+                <p className="mt-1 text-sm text-primary/70">
+                  {[o.postalCode, o.address].filter(Boolean).join(', ')}
+                </p>
+              )}
               {o.comment && <p className="mt-1 text-sm text-primary/60">{o.comment}</p>}
             </li>
           ))}

@@ -8,6 +8,7 @@ export async function saveOrder({
   eventId,
   name,
   phone,
+  postalCode,
   address,
   comment,
   productId,
@@ -15,14 +16,15 @@ export async function saveOrder({
   price,
 }) {
   const { rows } = await pool.query(
-    `INSERT INTO orders (event_id, name, phone, address, comment, product_id, product_name, price)
-     VALUES ($1,$2,$3,$4,$5,$6,$7,$8)
+    `INSERT INTO orders (event_id, name, phone, postal_code, address, comment, product_id, product_name, price)
+     VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9)
      ON CONFLICT (event_id) WHERE event_id IS NOT NULL DO NOTHING
      RETURNING id`,
     [
       eventId,
       name,
       phone,
+      postalCode ?? '',
       address ?? '',
       comment ?? '',
       productId,
@@ -58,7 +60,7 @@ const MAX_ORDERS_LISTED = 500;
 
 export async function listOrders() {
   const { rows } = await pool.query(
-    `SELECT id, created_at, name, phone, address, comment, product_id, product_name, price, telegram_sent, email_sent
+    `SELECT id, created_at, name, phone, postal_code, address, comment, product_id, product_name, price, telegram_sent, email_sent
      FROM orders ORDER BY created_at DESC LIMIT $1`,
     [MAX_ORDERS_LISTED],
   );
@@ -67,6 +69,7 @@ export async function listOrders() {
     createdAt: r.created_at,
     name: r.name,
     phone: r.phone,
+    postalCode: r.postal_code,
     address: r.address,
     comment: r.comment,
     productId: r.product_id,

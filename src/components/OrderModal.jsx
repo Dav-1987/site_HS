@@ -20,6 +20,12 @@ function isValidPhone(phone) {
   return digits >= 7 && digits <= 15;
 }
 
+// Mirrors server/order.js's isValidPostalCode — same manual-sync caveat.
+const POSTAL_CODE_RE = /^[A-Za-z0-9][A-Za-z0-9\s-]{1,10}[A-Za-z0-9]$/;
+function isValidPostalCode(postalCode) {
+  return POSTAL_CODE_RE.test(postalCode.trim());
+}
+
 export default function OrderModal({ product, isOpen, onClose }) {
   const { t } = useLanguage();
   const idPrefix = useId();
@@ -29,11 +35,14 @@ export default function OrderModal({ product, isOpen, onClose }) {
     nameError: `${idPrefix}-name-error`,
     phone: `${idPrefix}-phone`,
     phoneError: `${idPrefix}-phone-error`,
+    postalCode: `${idPrefix}-postal-code`,
+    postalCodeError: `${idPrefix}-postal-code-error`,
     address: `${idPrefix}-address`,
     comment: `${idPrefix}-comment`,
   };
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
+  const [postalCode, setPostalCode] = useState('');
   const [address, setAddress] = useState('');
   const [comment, setComment] = useState('');
   const [errors, setErrors] = useState({});
@@ -103,6 +112,7 @@ export default function OrderModal({ product, isOpen, onClose }) {
     if (isOpen) {
       setName('');
       setPhone('');
+      setPostalCode('');
       setAddress('');
       setComment('');
       setErrors({});
@@ -125,6 +135,8 @@ export default function OrderModal({ product, isOpen, onClose }) {
     if (!name.trim()) e.name = t('order.form.error.required');
     if (!phone.trim()) e.phone = t('order.form.error.required');
     else if (!isValidPhone(phone)) e.phone = t('order.form.error.phone');
+    if (!postalCode.trim()) e.postalCode = t('order.form.error.required');
+    else if (!isValidPostalCode(postalCode)) e.postalCode = t('order.form.error.postalCode');
     return e;
   };
 
@@ -149,6 +161,7 @@ export default function OrderModal({ product, isOpen, onClose }) {
         body: JSON.stringify({
           name,
           phone,
+          postalCode,
           address: address.trim() || undefined,
           comment: comment.trim() || undefined,
           productId: product.id,
@@ -286,6 +299,40 @@ export default function OrderModal({ product, isOpen, onClose }) {
                   {errors.phone && (
                     <p id={fieldIds.phoneError} role="alert" className="mt-1 text-xs text-danger">
                       {errors.phone}
+                    </p>
+                  )}
+                </div>
+
+                <div>
+                  <label
+                    htmlFor={fieldIds.postalCode}
+                    className="mb-1 block text-xs uppercase tracking-[0.2em] text-primary/70"
+                  >
+                    {t('order.form.postalCode')} *
+                  </label>
+                  <input
+                    id={fieldIds.postalCode}
+                    type="text"
+                    name="postalCode"
+                    autoComplete="postal-code"
+                    inputMode="numeric"
+                    value={postalCode}
+                    onChange={(e) => {
+                      setPostalCode(e.target.value);
+                      setErrors((p) => ({ ...p, postalCode: '' }));
+                    }}
+                    placeholder={t('order.form.postalCode.placeholder')}
+                    aria-invalid={Boolean(errors.postalCode)}
+                    aria-describedby={errors.postalCode ? fieldIds.postalCodeError : undefined}
+                    className="w-full border border-primary/20 bg-transparent px-3 py-2.5 text-sm text-primary outline-none transition-colors focus:border-accent focus-visible:ring-2 focus-visible:ring-accent/40"
+                  />
+                  {errors.postalCode && (
+                    <p
+                      id={fieldIds.postalCodeError}
+                      role="alert"
+                      className="mt-1 text-xs text-danger"
+                    >
+                      {errors.postalCode}
                     </p>
                   )}
                 </div>

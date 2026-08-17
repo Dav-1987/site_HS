@@ -455,6 +455,7 @@ app.post('/api/order', orderRateLimit, async (req, res) => {
       eventId: req.body.eventId,
       name: req.body.name.trim(),
       phone: req.body.phone.trim(),
+      postalCode: req.body.postalCode.trim(),
       address: req.body.address?.trim() ?? '',
       comment: req.body.comment?.trim() ?? '',
       ...authoritativeProduct,

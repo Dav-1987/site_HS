@@ -169,6 +169,8 @@ export function CarouselDots({ products, carousel }) {
 
   return (
     <div className="no-scrollbar flex max-w-full items-center overflow-x-auto">
+      {/* Full 44px tall pointer target, but only as wide as the dot plus a
+          little padding — a 44px-wide button spaces the dots far apart. */}
       {products.map((_, i) => (
         <button
           key={i}
@@ -176,7 +178,7 @@ export function CarouselDots({ products, carousel }) {
           aria-label={`${t('carousel.goTo')} ${i + 1}`}
           aria-current={i === activeIdx}
           onClick={() => goTo(i)}
-          className="touch-target flex flex-none items-center justify-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-accent"
+          className="flex min-h-[44px] flex-none items-center justify-center px-1.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-accent"
         >
           <span
             aria-hidden="true"

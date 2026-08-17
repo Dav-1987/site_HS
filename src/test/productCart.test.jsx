@@ -56,13 +56,16 @@ describe('product page order flow', () => {
     fireEvent.click(screen.getByText(/¡PEDIR AHORA!/i));
     const name = screen.getByLabelText(/Nombre/i);
     const phone = screen.getByLabelText(/Teléfono/i);
+    const postalCode = screen.getByLabelText(/Código Postal/i);
     fireEvent.click(screen.getByText(/Enviar solicitud/i));
     const errors = screen.getAllByRole('alert');
-    expect(errors).toHaveLength(2);
+    expect(errors).toHaveLength(3);
     expect(name.getAttribute('aria-invalid')).toBe('true');
     expect(phone.getAttribute('aria-invalid')).toBe('true');
+    expect(postalCode.getAttribute('aria-invalid')).toBe('true');
     expect(name.getAttribute('aria-describedby')).toBe(errors[0].id);
     expect(phone.getAttribute('aria-describedby')).toBe(errors[1].id);
+    expect(postalCode.getAttribute('aria-describedby')).toBe(errors[2].id);
     expect(document.activeElement).toBe(name);
   });
 
@@ -107,6 +110,7 @@ describe('product page order flow', () => {
     fireEvent.change(screen.getByPlaceholderText('+34 600 000 000'), {
       target: { value: '+34 600 000 000' },
     });
+    fireEvent.change(screen.getByPlaceholderText('28001'), { target: { value: '28001' } });
 
     const submit = screen.getByText(/Enviar solicitud/i);
     fireEvent.click(submit);

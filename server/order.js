@@ -9,12 +9,22 @@
 const PHONE_CHARS_RE = /^\+?[0-9\s\-().]+$/;
 const EVENT_ID_RE = /^[A-Za-z0-9._:-]+$/;
 
+// Spanish postal codes are 5 digits, but the form is also used by customers
+// abroad, so this stays loose: alphanumerics with spaces/dashes, 3–12 chars.
+// Enough to reject empty/garbage input without rejecting a real code.
+const POSTAL_CODE_RE = /^[A-Za-z0-9][A-Za-z0-9\s-]{1,10}[A-Za-z0-9]$/;
+
 export function isValidPhone(phone) {
   if (typeof phone !== 'string') return false;
   const trimmed = phone.trim();
   if (!trimmed || !PHONE_CHARS_RE.test(trimmed)) return false;
   const digits = (trimmed.match(/\d/g) || []).length;
   return digits >= 7 && digits <= 15;
+}
+
+export function isValidPostalCode(postalCode) {
+  if (typeof postalCode !== 'string') return false;
+  return POSTAL_CODE_RE.test(postalCode.trim());
 }
 
 /** Validate the customer payload; returns an error string or null. */
@@ -25,6 +35,10 @@ export function validateOrder(body) {
   if (typeof body.phone !== 'string' || !body.phone.trim()) return 'phone is required';
   if (body.phone.length > 50) return 'phone is too long';
   if (!isValidPhone(body.phone)) return 'phone is not a valid phone number';
+  if (typeof body.postalCode !== 'string' || !body.postalCode.trim())
+    return 'postalCode is required';
+  if (body.postalCode.length > 20) return 'postalCode is too long';
+  if (!isValidPostalCode(body.postalCode)) return 'postalCode is not a valid postal code';
   if (body.address !== undefined && typeof body.address !== 'string') return 'invalid address';
   if (body.address && body.address.length > 300) return 'address is too long';
   if (body.comment !== undefined && typeof body.comment !== 'string') return 'invalid comment';
@@ -58,13 +72,23 @@ export function resolveOrderProduct(categories, productId) {
 }
 
 /** Plain-text order summary shared by the Telegram and email notifications. */
-export function formatOrderText({ name, phone, address, comment, productName, productId, price }) {
+export function formatOrderText({
+  name,
+  phone,
+  postalCode,
+  address,
+  comment,
+  productName,
+  productId,
+  price,
+}) {
   const out = ['🛒 Nueva solicitud — Mirage Muebles', ''];
   out.push(`Producto: ${productName}${productId ? ` [${productId}]` : ''}`);
   if (typeof price === 'number' && Number.isFinite(price)) out.push(`Precio: ${price} €`);
   out.push('');
   out.push(`Cliente: ${name.trim()}`);
   out.push(`Teléfono: ${phone.trim()}`);
+  if (postalCode?.trim()) out.push(`Código Postal: ${postalCode.trim()}`);
   if (address?.trim()) out.push(`Dirección: ${address.trim()}`);
   if (comment?.trim()) out.push(`Comentarios: ${comment.trim()}`);
   return out.join('\n');

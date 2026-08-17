@@ -97,6 +97,9 @@ ALTER TABLE orders ADD COLUMN IF NOT EXISTS price INTEGER;
 
 ALTER TABLE orders ADD COLUMN IF NOT EXISTS address TEXT NOT NULL DEFAULT '';
 
+-- Required on the form since 2026-08; legacy rows keep the empty default.
+ALTER TABLE orders ADD COLUMN IF NOT EXISTS postal_code TEXT NOT NULL DEFAULT '';
+
 -- Stable browser-generated request id. The partial unique index keeps legacy
 -- rows (which have NULL here) valid while making every new order idempotent.
 ALTER TABLE orders ADD COLUMN IF NOT EXISTS event_id TEXT;
