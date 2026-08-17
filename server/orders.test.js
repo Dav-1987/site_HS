@@ -42,6 +42,30 @@ describe('saveOrder idempotency', () => {
     ]);
   });
 
+  it('stores the attribution snapshot as sanitized JSON', async () => {
+    query.mockResolvedValueOnce({ rows: [{ id: 42 }] });
+
+    await saveOrder({
+      ...order,
+      attribution: { utm_source: 'ig', utm_campaign: 'agosto', evil: 'DROP TABLE orders' },
+    });
+
+    const params = query.mock.calls[0][1];
+    expect(JSON.parse(params[params.length - 1])).toEqual({
+      utm_source: 'ig',
+      utm_campaign: 'agosto',
+    });
+  });
+
+  it('stores NULL when the order carries no usable attribution', async () => {
+    query.mockResolvedValueOnce({ rows: [{ id: 43 }] });
+
+    await saveOrder(order);
+
+    const params = query.mock.calls[0][1];
+    expect(params[params.length - 1]).toBeNull();
+  });
+
   it('rejects when the durable INSERT fails', async () => {
     query.mockRejectedValueOnce(new Error('database unavailable'));
 

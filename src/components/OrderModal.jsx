@@ -7,6 +7,7 @@ import {
   getFbCookies,
   trackGoogleAdsLead,
 } from '../lib/track.js';
+import { getAttribution } from '../lib/attribution.js';
 
 // Mirrors server/order.js's isValidPhone — kept in sync manually since client
 // and server are separate deploy targets. Loosely validates digits with an
@@ -165,6 +166,8 @@ export default function OrderModal({ product, isOpen, onClose }) {
           address: address.trim() || undefined,
           comment: comment.trim() || undefined,
           productId: product.id,
+          // Which channel brought this visitor (captured on their landing page).
+          attribution: getAttribution() ?? undefined,
           // Conversions API: shared event_id (dedup with the browser Lead) + match keys.
           eventId,
           fbp,

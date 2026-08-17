@@ -47,6 +47,14 @@ describe('validateOrder', () => {
     expect(validateOrder({ ...validBody, address: 'Calle Falsa 123, Madrid' })).toBeNull();
   });
 
+  it('accepts an omitted attribution but rejects a non-object one', () => {
+    expect(validateOrder({ ...validBody, attribution: undefined })).toBeNull();
+    expect(validateOrder({ ...validBody, attribution: null })).toBeNull();
+    expect(validateOrder({ ...validBody, attribution: { utm_source: 'ig' } })).toBeNull();
+    expect(validateOrder({ ...validBody, attribution: 'ig' })).toMatch(/attribution/);
+    expect(validateOrder({ ...validBody, attribution: ['ig'] })).toMatch(/attribution/);
+  });
+
   it('rejects non-object payloads', () => {
     expect(validateOrder(null)).toBeTruthy();
     expect(validateOrder('x')).toBeTruthy();
@@ -161,6 +169,19 @@ describe('formatOrderText', () => {
       productName: 'Tocador Aria',
     });
     expect(withoutAddress).not.toContain('Dirección');
+  });
+
+  it('always names the traffic source, falling back to direct', () => {
+    const fromAd = formatOrderText({
+      name: 'Ana',
+      phone: '600',
+      productName: 'Tocador Aria',
+      attribution: { network: 'meta_ads', utm_source: 'ig', utm_campaign: 'agosto' },
+    });
+    expect(fromAd).toContain('Fuente: Meta Ads · Instagram — «agosto»');
+
+    const unknown = formatOrderText({ name: 'Ana', phone: '600', productName: 'Tocador Aria' });
+    expect(unknown).toContain('Fuente: Directo / desconocido');
   });
 
   it('includes the postal code when present', () => {

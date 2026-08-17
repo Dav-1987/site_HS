@@ -1,6 +1,8 @@
 // Pure helpers for the public order endpoint: payload validation and message
 // formatting. Side-effect free so they can be unit-tested without Express.
 
+import { describeAttribution } from './attribution.js';
+
 // Loosely validates a phone number: digits with optional leading + and
 // spaces/dashes/parens as separators (however the customer chose to type it),
 // with a plausible digit count. Catches typos/garbage ("abc", "12", a stray
@@ -45,6 +47,14 @@ export function validateOrder(body) {
   if (body.comment && body.comment.length > 2000) return 'comment is too long';
   if (typeof body.productId !== 'string' || !body.productId.trim()) return 'productId is required';
   if (body.productId.length > 100) return 'productId is too long';
+  // Attribution is best-effort telemetry: a missing or malformed snapshot must
+  // never cost the customer their order, so it is sanitized, not rejected.
+  if (
+    body.attribution !== undefined &&
+    body.attribution !== null &&
+    (typeof body.attribution !== 'object' || Array.isArray(body.attribution))
+  )
+    return 'invalid attribution';
   if (typeof body.eventId !== 'string' || !body.eventId.trim()) return 'eventId is required';
   if (body.eventId.length > 128 || !EVENT_ID_RE.test(body.eventId)) return 'invalid eventId';
   return null;
@@ -81,6 +91,7 @@ export function formatOrderText({
   productName,
   productId,
   price,
+  attribution,
 }) {
   const out = ['🛒 Nueva solicitud — Mirage Muebles', ''];
   out.push(`Producto: ${productName}${productId ? ` [${productId}]` : ''}`);
@@ -91,5 +102,7 @@ export function formatOrderText({
   if (postalCode?.trim()) out.push(`Código Postal: ${postalCode.trim()}`);
   if (address?.trim()) out.push(`Dirección: ${address.trim()}`);
   if (comment?.trim()) out.push(`Comentarios: ${comment.trim()}`);
+  out.push('');
+  out.push(`Fuente: ${describeAttribution(attribution)}`);
   return out.join('\n');
 }

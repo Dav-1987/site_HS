@@ -15,6 +15,7 @@ import { CatalogProvider } from './catalog/CatalogContext.jsx';
 import { loadDefaultCatalog } from './data/catalog.js';
 import { defaultSettings } from './data/settings.js';
 import ClientReady from './components/ClientReady.jsx';
+import { captureAttribution } from './lib/attribution.js';
 
 function normalizePath(path) {
   return path.length > 1 ? path.replace(/\/+$/, '') : path;
@@ -38,6 +39,10 @@ function clientTree({ initialCatalog, initialSettings } = {}) {
 }
 
 async function startClient() {
+  // Before anything can navigate away from the landing URL: the campaign
+  // parameters only exist on this first page view.
+  captureAttribution();
+
   const rootElement = document.getElementById('root');
   const prerenderPath = rootElement.dataset.prerenderPath;
   const shouldHydrate =

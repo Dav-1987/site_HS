@@ -100,6 +100,11 @@ ALTER TABLE orders ADD COLUMN IF NOT EXISTS address TEXT NOT NULL DEFAULT '';
 -- Required on the form since 2026-08; legacy rows keep the empty default.
 ALTER TABLE orders ADD COLUMN IF NOT EXISTS postal_code TEXT NOT NULL DEFAULT '';
 
+-- Where the visitor came from (click ids, utm parameters, referrer), captured
+-- on the landing page. Stored raw so the human-readable label stays derived
+-- (server/attribution.js) and can be improved for past orders too.
+ALTER TABLE orders ADD COLUMN IF NOT EXISTS attribution JSONB;
+
 -- Stable browser-generated request id. The partial unique index keeps legacy
 -- rows (which have NULL here) valid while making every new order idempotent.
 ALTER TABLE orders ADD COLUMN IF NOT EXISTS event_id TEXT;

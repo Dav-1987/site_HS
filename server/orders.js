@@ -3,6 +3,7 @@
 // delivery or a log rotation never means the order itself is lost.
 
 import pool from './db.js';
+import { describeAttribution, sanitizeAttribution } from './attribution.js';
 
 export async function saveOrder({
   eventId,
@@ -14,10 +15,12 @@ export async function saveOrder({
   productId,
   productName,
   price,
+  attribution,
 }) {
+  const sanitizedAttribution = sanitizeAttribution(attribution);
   const { rows } = await pool.query(
-    `INSERT INTO orders (event_id, name, phone, postal_code, address, comment, product_id, product_name, price)
-     VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9)
+    `INSERT INTO orders (event_id, name, phone, postal_code, address, comment, product_id, product_name, price, attribution)
+     VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10)
      ON CONFLICT (event_id) WHERE event_id IS NOT NULL DO NOTHING
      RETURNING id`,
     [
@@ -30,6 +33,7 @@ export async function saveOrder({
       productId,
       productName,
       Number.isFinite(price) ? price : null,
+      sanitizedAttribution ? JSON.stringify(sanitizedAttribution) : null,
     ],
   );
   if (rows[0]) return { id: rows[0].id, created: true };
@@ -60,7 +64,7 @@ const MAX_ORDERS_LISTED = 500;
 
 export async function listOrders() {
   const { rows } = await pool.query(
-    `SELECT id, created_at, name, phone, postal_code, address, comment, product_id, product_name, price, telegram_sent, email_sent
+    `SELECT id, created_at, name, phone, postal_code, address, comment, product_id, product_name, price, attribution, telegram_sent, email_sent
      FROM orders ORDER BY created_at DESC LIMIT $1`,
     [MAX_ORDERS_LISTED],
   );
@@ -75,6 +79,8 @@ export async function listOrders() {
     productId: r.product_id,
     productName: r.product_name,
     price: r.price === null ? null : Number(r.price),
+    // The label is derived, never stored — see server/attribution.js.
+    attributionLabel: describeAttribution(r.attribution),
     telegramSent: r.telegram_sent,
     emailSent: r.email_sent,
   }));

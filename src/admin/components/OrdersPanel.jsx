@@ -95,6 +95,11 @@ export default function OrdersPanel({ onClose }) {
                 </p>
               )}
               {o.comment && <p className="mt-1 text-sm text-primary/60">{o.comment}</p>}
+              {o.attributionLabel && (
+                <p className="mt-2 text-xs uppercase tracking-[0.1em] text-primary/45">
+                  Fuente: {o.attributionLabel}
+                </p>
+              )}
             </li>
           ))}
         </ul>
