@@ -107,3 +107,27 @@ describe('ProductEditor — visibility', () => {
     expect(screen.getByText(/отдаёт 404/)).toBeTruthy();
   });
 });
+
+describe('ProductEditor — sale badge switch', () => {
+  const checkbox = () => screen.getByLabelText(/Показывать плашку со скидкой/);
+
+  it('is checked for a product with no switch set', () => {
+    renderEditor();
+    expand();
+    expect(checkbox().checked).toBe(true);
+  });
+
+  it('writes the switch back through onChange', () => {
+    const onChange = vi.fn();
+    renderEditor(product, onChange);
+    expand();
+    fireEvent.click(checkbox());
+    expect(onChange).toHaveBeenCalledWith(expect.objectContaining({ showDiscountBadge: false }));
+  });
+
+  it('reflects a product that already has it off', () => {
+    renderEditor({ ...product, showDiscountBadge: false });
+    expand();
+    expect(checkbox().checked).toBe(false);
+  });
+});

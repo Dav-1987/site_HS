@@ -9,6 +9,13 @@ const api = vi.hoisted(() => ({
 
 vi.mock('./api.js', () => api);
 
+// Both cases render the whole approved catalog — 56 cards, each with its own
+// image and controls — which is slow in jsdom and started tipping over the
+// default 5s timeout once the suite grew enough to run this file alongside
+// everything else. Scoped to this file rather than raised globally, so the
+// default stays a useful guard everywhere else.
+vi.setConfig({ testTimeout: 20000 });
+
 describe('WallapopPanel', () => {
   beforeEach(() => {
     api.loadWallapopState.mockReset();

@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { BTN_GHOST, BTN_SOLID, INPUT } from '../ui.js';
 import { Field, TextArea } from './Field.jsx';
 import { urlSafe, RESERVED_SLUGS } from '../urlSafe.js';
-import { DEFAULT_VISIBILITY } from '../../data/catalog.js';
+import { DEFAULT_VISIBILITY, isTileEntryCategory } from '../../data/catalog.js';
 import ImageField from './ImageField.jsx';
 import VideoField from './VideoField.jsx';
 import ProductEditor from './ProductEditor.jsx';
@@ -77,6 +77,7 @@ export default function CategoryEditor({
           material: { es: '', en: '' },
           size: '',
           visibility: DEFAULT_VISIBILITY,
+          showDiscountBadge: true,
         },
       ],
     });
@@ -120,6 +121,14 @@ export default function CategoryEditor({
 
       {open && (
         <div className="space-y-6 border-t border-primary/10 px-5 py-6">
+          {isTileEntryCategory(category) && (
+            <p className="border-l-2 border-primary/20 bg-background px-3 py-2 text-xs leading-relaxed text-primary/60">
+              Этот раздел не показывается в списке коллекций — ни в меню, ни на главной, ни в
+              каталоге. Вход в него один: плитка с его названием в конце сетки товаров каждой
+              категории. Поэтому «Показывать» здесь означает «плитка есть», а «Скрыть из списков» —
+              «плитки нет, раздел открывается только по прямой ссылке».
+            </p>
+          )}
           <VisibilityNote entity={category} kind="category" />
           <div className="grid gap-3 sm:grid-cols-2">
             <div>

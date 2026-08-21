@@ -1,6 +1,7 @@
 import { describe, it, expect } from 'vitest';
 import {
   productDiscount,
+  showsDiscountBadge,
   computeFeatured,
   computeRelated,
   resolveFeaturedCards,
@@ -9,6 +10,7 @@ import {
   productMedia,
   isHiddenCategory,
   isListed,
+  isTileEntryCategory,
   isOff,
   listedProducts,
   liveCatalog,
@@ -48,6 +50,34 @@ describe('productDiscount', () => {
     expect(d.oldPrice).toBe(0);
     expect(d.onSale).toBe(false);
     expect(d.percent).toBe(0);
+  });
+});
+
+describe('showsDiscountBadge', () => {
+  // The badge predates the switch, so anything but an explicit `false` keeps it.
+  it('is on for a product with no switch set', () => {
+    expect(showsDiscountBadge({})).toBe(true);
+    expect(showsDiscountBadge(null)).toBe(true);
+    expect(showsDiscountBadge({ showDiscountBadge: true })).toBe(true);
+  });
+
+  it('is off only when explicitly turned off', () => {
+    expect(showsDiscountBadge({ showDiscountBadge: false })).toBe(false);
+  });
+
+  it('gates the badge without touching the struck-through price', () => {
+    const sale = { price: 690, oldPrice: 790 };
+    const noBadge = { ...sale, showDiscountBadge: false };
+    expect(productDiscount(sale).badge).toBe(true);
+    expect(productDiscount(noBadge).badge).toBe(false);
+    // Still a sale — the price stays struck through and the percent is intact.
+    expect(productDiscount(noBadge).onSale).toBe(true);
+    expect(productDiscount(noBadge).oldPrice).toBe(790);
+    expect(productDiscount(noBadge).percent).toBe(13);
+  });
+
+  it('never shows a badge on a product that is not on sale', () => {
+    expect(productDiscount({ price: 700, showDiscountBadge: true }).badge).toBe(false);
   });
 });
 
@@ -258,13 +288,25 @@ describe('computeRelated', () => {
 });
 
 describe('hidden categories', () => {
-  const hidden = { ...cat(OTHER_MODELS_SLUG, 'h1', 'h2'), visibility: 'unlisted' };
+  const hidden = cat(OTHER_MODELS_SLUG, 'h1', 'h2');
   const categories = [cat('c1', 'p1', 'p2'), cat('c2', 'p3'), hidden];
 
-  it('flags an unlisted section and filters it out of listings', () => {
+  it('flags the tile-entry section and filters it out of listings', () => {
     expect(isHiddenCategory(hidden)).toBe(true);
     expect(isHiddenCategory(categories[0])).toBe(false);
     expect(visibleCategories(categories).map((c) => c.slug)).toEqual(['c1', 'c2']);
+  });
+
+  // Its own tile is where it is surfaced, so it stays out of the category
+  // listings whichever way its visibility switch is set — that switch governs
+  // the tile (see OtherModelsCard), not a place in the grids.
+  it('stays out of the listings whether it is public or unlisted', () => {
+    expect(isTileEntryCategory(hidden)).toBe(true);
+    expect(isTileEntryCategory(categories[0])).toBe(false);
+    for (const visibility of ['public', 'unlisted']) {
+      const withFlag = [...categories.slice(0, 2), { ...hidden, visibility }];
+      expect(visibleCategories(withFlag).map((c) => c.slug)).toEqual(['c1', 'c2']);
+    }
   });
 
   it('keeps hidden products out of a visible product’s related list', () => {

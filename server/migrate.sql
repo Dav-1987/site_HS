@@ -132,3 +132,10 @@ DO $$ BEGIN
 END $$;
 
 ALTER TABLE products ADD COLUMN IF NOT EXISTS visibility TEXT NOT NULL DEFAULT 'public';
+
+-- Per-product switch for the "-N%" sale badge in the corner of the photo
+-- (see showsDiscountBadge in src/data/catalog.js). Positive and on by default:
+-- the badge has always been shown whenever a higher old price is set, and this
+-- only adds a way to keep the struck-through old price while leaving the photo
+-- itself clean. NULL/absent reads as true everywhere.
+ALTER TABLE products ADD COLUMN IF NOT EXISTS show_discount_badge BOOLEAN NOT NULL DEFAULT true;

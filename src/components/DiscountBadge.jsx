@@ -14,10 +14,14 @@ import { productDiscount } from '../data/catalog.js';
  *
  * Requires the image wrapper to carry `[container-type:inline-size]` —
  * without it `cqw` would resolve against the viewport instead.
+ *
+ * Renders nothing when the product isn't on sale, or when the badge is switched
+ * off for it in /admin (see showsDiscountBadge) — in which case the discount is
+ * still visible as the struck-through old price next to the current one.
  */
 export default function DiscountBadge({ product, className = '' }) {
-  const { onSale, percent } = productDiscount(product);
-  if (!onSale) return null;
+  const { badge, percent } = productDiscount(product);
+  if (!badge) return null;
 
   return (
     <span

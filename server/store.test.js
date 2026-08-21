@@ -105,3 +105,13 @@ describe('productContentEqual — visibility', () => {
     ).toBe(false);
   });
 });
+
+describe('productContentEqual — sale badge switch', () => {
+  it('treats a missing switch as on', () => {
+    expect(productContentEqual(base, { ...base, showDiscountBadge: true })).toBe(true);
+  });
+
+  it('detects the switch being turned off', () => {
+    expect(productContentEqual(base, { ...base, showDiscountBadge: false })).toBe(false);
+  });
+});

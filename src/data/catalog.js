@@ -107,8 +107,21 @@ export function productPerkVariant(product) {
 }
 
 /**
+ * Whether the "-N%" badge is drawn in the corner of the product's photos. An
+ * admin switch, on unless explicitly turned off — the badge predates the switch,
+ * so a product saved without the field (and the whole legacy catalog) keeps it.
+ * Turning it off leaves the struck-through old price alone: the discount still
+ * reads in the price, the photo just stays clean.
+ */
+export function showsDiscountBadge(product) {
+  return product?.showDiscountBadge !== false;
+}
+
+/**
  * Discount info. `oldPrice` is the pre-discount price; it's shown struck through
- * next to the current `price` only when it is set and strictly higher.
+ * next to the current `price` only when it is set and strictly higher. `badge`
+ * additionally honours the per-product switch above, so every place that draws
+ * the badge (catalog card, Featured card, product page) obeys it from one rule.
  */
 export function productDiscount(product) {
   const oldPrice = Number(product?.oldPrice) || 0;
@@ -116,6 +129,7 @@ export function productDiscount(product) {
   const onSale = oldPrice > price && price > 0;
   return {
     onSale,
+    badge: onSale && showsDiscountBadge(product),
     oldPrice,
     price,
     percent: onSale ? Math.round((1 - price / oldPrice) * 100) : 0,
@@ -165,11 +179,27 @@ export function productReference(name) {
 //                A category set to 'off' takes its products' pages with it.
 //                The rows stay in the database; this is not a delete.
 //
-// "Otros Modelos" — a real, browsable section whose only entry point is the tile
-// at the end of every other category's grid (see OtherModelsCard) — used to be
-// hidden by a hardcoded slug list right here. It is now simply 'unlisted' data,
-// migrated once in server/migrate.sql.
 export const OTHER_MODELS_SLUG = 'otros-modelos';
+
+// Sections that are surfaced by their own dedicated entry point instead of the
+// standard category listings. "Otros Modelos" — the bucket five small
+// categories were folded into — has a tile at the end of every category's
+// product grid (see OtherModelsCard); putting it in the header menu, the home
+// collections grid and /catalogo on top of that would only duplicate that door,
+// and those grids are laid out for exactly four collections in a row.
+//
+// This says WHERE a section is surfaced, not WHETHER: its own `visibility`
+// still decides that, and for such a section it governs the tile. 'public'
+// lights the tile up, 'unlisted' takes the tile away too — leaving the page
+// reachable by direct link and in Google, but with no link to it anywhere on
+// the site. That is the whole point: the tile is a link like any other, so
+// "hidden from listings" has to mean hidden from it as well.
+const TILE_ENTRY_SLUGS = new Set([OTHER_MODELS_SLUG]);
+
+/** True for a section whose only door is its own tile, not the category grids. */
+export function isTileEntryCategory(category) {
+  return TILE_ENTRY_SLUGS.has(category?.slug);
+}
 
 export const VISIBILITY = ['public', 'unlisted', 'off'];
 export const DEFAULT_VISIBILITY = 'public';
@@ -189,14 +219,18 @@ export function isOff(entity) {
   return visibilityOf(entity) === 'off';
 }
 
-/** True for categories that must never appear in a category listing. */
+/**
+ * True for categories that must never appear in a category listing — either
+ * because they are not public, or because they are surfaced by their own tile
+ * instead (see TILE_ENTRY_SLUGS).
+ */
 export function isHiddenCategory(category) {
-  return !isListed(category);
+  return !isListed(category) || isTileEntryCategory(category);
 }
 
 /** The categories a visitor may see listed. */
 export function visibleCategories(categories) {
-  return categories.filter(isListed);
+  return categories.filter((c) => !isHiddenCategory(c));
 }
 
 /** A category's products minus the ones hidden from listings. */

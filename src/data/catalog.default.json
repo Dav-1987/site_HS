@@ -81,6 +81,7 @@
         "related": [],
         "perks": "bulbs",
         "visibility": "public",
+        "showDiscountBadge": true,
         "updatedAt": "2026-07-27T08:03:16.285Z"
       },
       {
@@ -135,6 +136,7 @@
         "related": [],
         "perks": "bulbs",
         "visibility": "public",
+        "showDiscountBadge": true,
         "updatedAt": "2026-08-06T12:07:06.614Z"
       },
       {
@@ -179,6 +181,7 @@
         "related": [],
         "perks": "bulbs",
         "visibility": "public",
+        "showDiscountBadge": true,
         "updatedAt": "2026-08-06T12:28:31.573Z"
       },
       {
@@ -248,6 +251,7 @@
         "related": [],
         "perks": "bulbs",
         "visibility": "public",
+        "showDiscountBadge": true,
         "updatedAt": "2026-08-06T12:28:08.043Z"
       },
       {
@@ -302,6 +306,7 @@
         "related": [],
         "perks": "bulbs",
         "visibility": "public",
+        "showDiscountBadge": true,
         "updatedAt": "2026-08-06T12:05:29.080Z"
       },
       {
@@ -361,6 +366,7 @@
         "related": [],
         "perks": "bulbs",
         "visibility": "public",
+        "showDiscountBadge": true,
         "updatedAt": "2026-08-06T12:27:38.760Z"
       },
       {
@@ -400,6 +406,7 @@
         "related": [],
         "perks": "bulbs",
         "visibility": "public",
+        "showDiscountBadge": true,
         "updatedAt": "2026-07-27T08:03:16.285Z"
       },
       {
@@ -459,6 +466,7 @@
         "related": [],
         "perks": "bulbs",
         "visibility": "public",
+        "showDiscountBadge": true,
         "updatedAt": "2026-07-27T08:03:16.285Z"
       },
       {
@@ -503,6 +511,7 @@
         "related": [],
         "perks": "bulbs",
         "visibility": "public",
+        "showDiscountBadge": true,
         "updatedAt": "2026-08-06T12:29:31.820Z"
       },
       {
@@ -602,6 +611,7 @@
         "related": [],
         "perks": "quality",
         "visibility": "public",
+        "showDiscountBadge": true,
         "updatedAt": "2026-08-06T12:03:09.430Z"
       },
       {
@@ -649,6 +659,7 @@
         "related": [],
         "perks": "quality",
         "visibility": "public",
+        "showDiscountBadge": true,
         "updatedAt": "2026-07-29T16:12:59.123Z"
       },
       {
@@ -713,6 +724,7 @@
         "related": [],
         "perks": "led",
         "visibility": "public",
+        "showDiscountBadge": true,
         "updatedAt": "2026-07-29T16:12:59.123Z"
       },
       {
@@ -757,6 +769,7 @@
         "related": [],
         "perks": "led",
         "visibility": "public",
+        "showDiscountBadge": true,
         "updatedAt": "2026-07-29T16:13:24.874Z"
       },
       {
@@ -801,6 +814,7 @@
         "related": [],
         "perks": "led",
         "visibility": "public",
+        "showDiscountBadge": true,
         "updatedAt": "2026-07-29T16:12:59.123Z"
       },
       {
@@ -855,6 +869,7 @@
         "related": [],
         "perks": "led",
         "visibility": "public",
+        "showDiscountBadge": true,
         "updatedAt": "2026-07-29T16:12:59.123Z"
       }
     ]
@@ -930,6 +945,7 @@
         ],
         "perks": "bulbs",
         "visibility": "public",
+        "showDiscountBadge": true,
         "updatedAt": "2026-08-06T12:37:02.377Z"
       },
       {
@@ -989,6 +1005,7 @@
         ],
         "perks": "bulbs",
         "visibility": "public",
+        "showDiscountBadge": true,
         "updatedAt": "2026-08-06T11:14:39.904Z"
       },
       {
@@ -1048,6 +1065,7 @@
         ],
         "perks": "bulbs",
         "visibility": "public",
+        "showDiscountBadge": true,
         "updatedAt": "2026-07-27T08:03:16.285Z"
       },
       {
@@ -1097,6 +1115,7 @@
         ],
         "perks": "led",
         "visibility": "public",
+        "showDiscountBadge": true,
         "updatedAt": "2026-08-06T12:39:18.790Z"
       },
       {
@@ -1141,6 +1160,7 @@
         ],
         "perks": "bulbs",
         "visibility": "public",
+        "showDiscountBadge": true,
         "updatedAt": "2026-07-27T08:03:16.285Z"
       },
       {
@@ -1180,6 +1200,7 @@
         ],
         "perks": "bulbs",
         "visibility": "public",
+        "showDiscountBadge": true,
         "updatedAt": "2026-07-27T08:03:16.285Z"
       },
       {
@@ -1234,6 +1255,7 @@
         ],
         "perks": "led",
         "visibility": "public",
+        "showDiscountBadge": true,
         "updatedAt": "2026-08-06T11:04:48.720Z"
       },
       {
@@ -1288,6 +1310,7 @@
         ],
         "perks": "bulbs",
         "visibility": "public",
+        "showDiscountBadge": true,
         "updatedAt": "2026-08-06T12:39:51.168Z"
       },
       {
@@ -1342,6 +1365,7 @@
         ],
         "perks": "bulbs",
         "visibility": "public",
+        "showDiscountBadge": true,
         "updatedAt": "2026-07-27T08:03:16.285Z"
       },
       {
@@ -1396,6 +1420,7 @@
         ],
         "perks": "led",
         "visibility": "public",
+        "showDiscountBadge": true,
         "updatedAt": "2026-08-06T11:10:49.480Z"
       },
       {
@@ -1435,6 +1460,7 @@
         ],
         "perks": "bulbs",
         "visibility": "public",
+        "showDiscountBadge": true,
         "updatedAt": "2026-07-27T08:03:16.285Z"
       },
       {
@@ -1484,6 +1510,7 @@
         ],
         "perks": "bulbs",
         "visibility": "public",
+        "showDiscountBadge": true,
         "updatedAt": "2026-07-27T08:03:16.285Z"
       },
       {
@@ -1528,6 +1555,7 @@
         ],
         "perks": "bulbs",
         "visibility": "public",
+        "showDiscountBadge": true,
         "updatedAt": "2026-07-27T08:03:16.285Z"
       },
       {
@@ -1596,6 +1624,7 @@
         ],
         "perks": "bulbs",
         "visibility": "public",
+        "showDiscountBadge": true,
         "updatedAt": "2026-07-27T08:03:16.285Z"
       },
       {
@@ -1655,6 +1684,7 @@
         ],
         "perks": "bulbs",
         "visibility": "public",
+        "showDiscountBadge": true,
         "updatedAt": "2026-07-27T08:03:16.285Z"
       },
       {
@@ -1714,6 +1744,7 @@
         ],
         "perks": "bulbs",
         "visibility": "public",
+        "showDiscountBadge": true,
         "updatedAt": "2026-07-27T08:03:16.285Z"
       },
       {
@@ -1767,6 +1798,7 @@
         ],
         "perks": "bulbs",
         "visibility": "public",
+        "showDiscountBadge": true,
         "updatedAt": "2026-07-27T08:03:16.285Z"
       }
     ]
@@ -1789,7 +1821,7 @@
     "imageMobile": "",
     "video": "",
     "visibility": "public",
-    "updatedAt": "2026-07-06T13:40:42.817Z",
+    "updatedAt": "2026-08-21T13:50:44.102Z",
     "products": [
       {
         "id": "Tocador-M-05-3",
@@ -1832,6 +1864,7 @@
         "related": [],
         "perks": "bulbs",
         "visibility": "public",
+        "showDiscountBadge": true,
         "updatedAt": "2026-07-27T08:03:16.285Z"
       },
       {
@@ -1880,6 +1913,7 @@
         "related": [],
         "perks": "bulbs",
         "visibility": "public",
+        "showDiscountBadge": true,
         "updatedAt": "2026-07-27T08:03:16.285Z"
       },
       {
@@ -1939,6 +1973,7 @@
         "related": [],
         "perks": "bulbs",
         "visibility": "public",
+        "showDiscountBadge": true,
         "updatedAt": "2026-08-06T11:54:44.182Z"
       },
       {
@@ -1983,6 +2018,7 @@
         "related": [],
         "perks": "bulbs",
         "visibility": "public",
+        "showDiscountBadge": true,
         "updatedAt": "2026-07-27T08:03:16.285Z"
       },
       {
@@ -2046,6 +2082,7 @@
         "related": [],
         "perks": "bulbs",
         "visibility": "public",
+        "showDiscountBadge": true,
         "updatedAt": "2026-08-06T12:50:23.658Z"
       },
       {
@@ -2105,6 +2142,7 @@
         "related": [],
         "perks": "bulbs",
         "visibility": "public",
+        "showDiscountBadge": true,
         "updatedAt": "2026-07-27T08:03:16.285Z"
       },
       {
@@ -2144,6 +2182,7 @@
         "related": [],
         "perks": "bulbs",
         "visibility": "public",
+        "showDiscountBadge": true,
         "updatedAt": "2026-07-27T08:03:16.285Z"
       },
       {
@@ -2197,6 +2236,7 @@
         "related": [],
         "perks": "bulbs",
         "visibility": "public",
+        "showDiscountBadge": true,
         "updatedAt": "2026-07-27T08:03:16.285Z"
       },
       {
@@ -2251,6 +2291,7 @@
         "related": [],
         "perks": "bulbs",
         "visibility": "public",
+        "showDiscountBadge": true,
         "updatedAt": "2026-07-27T08:03:16.285Z"
       },
       {
@@ -2300,6 +2341,7 @@
         "related": [],
         "perks": "bulbs",
         "visibility": "public",
+        "showDiscountBadge": true,
         "updatedAt": "2026-07-27T08:03:16.285Z"
       },
       {
@@ -2358,6 +2400,7 @@
         "related": [],
         "perks": "bulbs",
         "visibility": "public",
+        "showDiscountBadge": true,
         "updatedAt": "2026-07-27T08:03:16.285Z"
       },
       {
@@ -2412,6 +2455,7 @@
         "related": [],
         "perks": "bulbs",
         "visibility": "public",
+        "showDiscountBadge": true,
         "updatedAt": "2026-07-27T08:03:16.285Z"
       },
       {
@@ -2466,6 +2510,7 @@
         "related": [],
         "perks": "bulbs",
         "visibility": "public",
+        "showDiscountBadge": true,
         "updatedAt": "2026-07-27T08:03:16.285Z"
       },
       {
@@ -2510,6 +2555,7 @@
         "related": [],
         "perks": "bulbs",
         "visibility": "public",
+        "showDiscountBadge": true,
         "updatedAt": "2026-07-27T08:03:16.285Z"
       }
     ]
@@ -2590,6 +2636,7 @@
         "related": [],
         "perks": "quality",
         "visibility": "public",
+        "showDiscountBadge": true,
         "updatedAt": "2026-07-29T16:14:43.149Z"
       },
       {
@@ -2662,6 +2709,7 @@
         "related": [],
         "perks": "quality",
         "visibility": "public",
+        "showDiscountBadge": true,
         "updatedAt": "2026-07-29T16:14:43.149Z"
       },
       {
@@ -2701,6 +2749,7 @@
         "related": [],
         "perks": "quality",
         "visibility": "public",
+        "showDiscountBadge": true,
         "updatedAt": "2026-07-29T16:14:43.149Z"
       },
       {
@@ -2744,6 +2793,7 @@
         "related": [],
         "perks": "quality",
         "visibility": "public",
+        "showDiscountBadge": true,
         "updatedAt": "2026-07-29T16:14:43.149Z"
       },
       {
@@ -2802,6 +2852,7 @@
         "related": [],
         "perks": "quality",
         "visibility": "public",
+        "showDiscountBadge": true,
         "updatedAt": "2026-07-29T16:14:43.149Z"
       },
       {
@@ -2856,6 +2907,7 @@
         "related": [],
         "perks": "quality",
         "visibility": "public",
+        "showDiscountBadge": true,
         "updatedAt": "2026-07-29T16:14:43.149Z"
       },
       {
@@ -2909,6 +2961,7 @@
         "related": [],
         "perks": "quality",
         "visibility": "public",
+        "showDiscountBadge": true,
         "updatedAt": "2026-07-29T16:14:43.149Z"
       },
       {
@@ -2967,6 +3020,7 @@
         "related": [],
         "perks": "quality",
         "visibility": "public",
+        "showDiscountBadge": true,
         "updatedAt": "2026-07-29T16:14:43.149Z"
       },
       {
@@ -3006,6 +3060,7 @@
         "related": [],
         "perks": "quality",
         "visibility": "public",
+        "showDiscountBadge": true,
         "updatedAt": "2026-07-29T16:14:43.149Z"
       },
       {
@@ -3049,6 +3104,7 @@
         "related": [],
         "perks": "quality",
         "visibility": "public",
+        "showDiscountBadge": true,
         "updatedAt": "2026-07-29T16:14:43.149Z"
       }
     ]
@@ -3070,7 +3126,7 @@
     "image": "/uploads/c58f2d4e90565ec8413875e47a2d2220.jpg",
     "imageMobile": "",
     "video": "",
-    "visibility": "unlisted",
+    "visibility": "public",
     "updatedAt": "2026-07-26T21:32:07.310Z",
     "products": [
       {
@@ -3130,6 +3186,7 @@
         "related": [],
         "perks": "bulbs",
         "visibility": "public",
+        "showDiscountBadge": true,
         "updatedAt": "2026-07-27T08:03:16.285Z"
       },
       {
@@ -3184,6 +3241,7 @@
         "related": [],
         "perks": "bulbs",
         "visibility": "public",
+        "showDiscountBadge": true,
         "updatedAt": "2026-07-27T08:03:16.285Z"
       },
       {
@@ -3238,6 +3296,7 @@
         "related": [],
         "perks": "bulbs",
         "visibility": "public",
+        "showDiscountBadge": true,
         "updatedAt": "2026-07-27T08:03:16.285Z"
       },
       {
@@ -3272,6 +3331,7 @@
         "related": [],
         "perks": "bulbs",
         "visibility": "public",
+        "showDiscountBadge": true,
         "updatedAt": "2026-07-27T08:03:16.285Z"
       },
       {
@@ -3316,6 +3376,7 @@
         "related": [],
         "perks": "bulbs",
         "visibility": "public",
+        "showDiscountBadge": true,
         "updatedAt": "2026-07-27T08:03:16.285Z"
       },
       {
@@ -3394,6 +3455,7 @@
         "related": [],
         "perks": "bulbs",
         "visibility": "public",
+        "showDiscountBadge": true,
         "updatedAt": "2026-07-27T08:03:16.285Z"
       },
       {
@@ -3467,6 +3529,7 @@
         "related": [],
         "perks": "bulbs",
         "visibility": "public",
+        "showDiscountBadge": true,
         "updatedAt": "2026-07-27T08:03:16.285Z"
       },
       {
@@ -3520,6 +3583,7 @@
         "related": [],
         "perks": "bulbs",
         "visibility": "public",
+        "showDiscountBadge": true,
         "updatedAt": "2026-07-27T08:03:16.285Z"
       },
       {
@@ -3559,6 +3623,7 @@
         "related": [],
         "perks": "led",
         "visibility": "public",
+        "showDiscountBadge": true,
         "updatedAt": "2026-07-29T16:19:58.160Z"
       },
       {
@@ -3607,6 +3672,7 @@
         "related": [],
         "perks": "led",
         "visibility": "public",
+        "showDiscountBadge": true,
         "updatedAt": "2026-07-29T16:19:58.160Z"
       },
       {
@@ -3651,6 +3717,7 @@
         "related": [],
         "perks": "led",
         "visibility": "public",
+        "showDiscountBadge": true,
         "updatedAt": "2026-07-29T16:19:58.160Z"
       },
       {
@@ -3704,6 +3771,7 @@
         "related": [],
         "perks": "led",
         "visibility": "public",
+        "showDiscountBadge": true,
         "updatedAt": "2026-07-29T16:19:58.160Z"
       },
       {
@@ -3738,6 +3806,7 @@
         "related": [],
         "perks": "bulbs",
         "visibility": "public",
+        "showDiscountBadge": true,
         "updatedAt": "2026-07-27T08:03:16.285Z"
       },
       {
@@ -3797,6 +3866,7 @@
         "related": [],
         "perks": "bulbs",
         "visibility": "public",
+        "showDiscountBadge": true,
         "updatedAt": "2026-07-27T08:03:16.285Z"
       },
       {
@@ -3851,6 +3921,7 @@
         "related": [],
         "perks": "bulbs",
         "visibility": "public",
+        "showDiscountBadge": true,
         "updatedAt": "2026-07-27T08:03:16.285Z"
       },
       {
@@ -3905,6 +3976,7 @@
         "related": [],
         "perks": "bulbs",
         "visibility": "public",
+        "showDiscountBadge": true,
         "updatedAt": "2026-07-27T08:03:16.285Z"
       },
       {
@@ -3964,6 +4036,7 @@
         ],
         "perks": "bulbs",
         "visibility": "public",
+        "showDiscountBadge": true,
         "updatedAt": "2026-07-27T08:03:16.285Z"
       },
       {
@@ -4028,6 +4101,7 @@
         ],
         "perks": "bulbs",
         "visibility": "public",
+        "showDiscountBadge": true,
         "updatedAt": "2026-07-27T08:03:16.285Z"
       },
       {
@@ -4092,6 +4166,7 @@
         ],
         "perks": "bulbs",
         "visibility": "public",
+        "showDiscountBadge": true,
         "updatedAt": "2026-07-27T08:03:16.285Z"
       },
       {
@@ -4136,6 +4211,7 @@
         "related": [],
         "perks": "quality",
         "visibility": "public",
+        "showDiscountBadge": true,
         "updatedAt": "2026-07-29T16:19:58.160Z"
       },
       {
@@ -4290,6 +4366,7 @@
         "related": [],
         "perks": "quality",
         "visibility": "public",
+        "showDiscountBadge": true,
         "updatedAt": "2026-07-29T16:19:58.160Z"
       },
       {
@@ -4339,6 +4416,7 @@
         "related": [],
         "perks": "quality",
         "visibility": "public",
+        "showDiscountBadge": true,
         "updatedAt": "2026-07-29T16:19:58.160Z"
       },
       {
@@ -4373,6 +4451,7 @@
         "related": [],
         "perks": "quality",
         "visibility": "public",
+        "showDiscountBadge": true,
         "updatedAt": "2026-07-29T16:19:58.160Z"
       },
       {
@@ -4407,6 +4486,7 @@
         "related": [],
         "perks": "quality",
         "visibility": "public",
+        "showDiscountBadge": true,
         "updatedAt": "2026-07-29T16:19:58.160Z"
       },
       {
@@ -4446,6 +4526,7 @@
         "related": [],
         "perks": "quality",
         "visibility": "public",
+        "showDiscountBadge": true,
         "updatedAt": "2026-07-29T16:19:58.160Z"
       },
       {
@@ -4513,6 +4594,7 @@
         "related": [],
         "perks": "quality",
         "visibility": "public",
+        "showDiscountBadge": true,
         "updatedAt": "2026-07-29T16:19:58.160Z"
       },
       {
@@ -4576,6 +4658,7 @@
         "related": [],
         "perks": "quality",
         "visibility": "public",
+        "showDiscountBadge": true,
         "updatedAt": "2026-07-29T16:19:58.160Z"
       },
       {
@@ -4619,6 +4702,7 @@
         "related": [],
         "perks": "quality",
         "visibility": "public",
+        "showDiscountBadge": true,
         "updatedAt": "2026-07-29T16:19:58.160Z"
       },
       {
@@ -4672,6 +4756,7 @@
         "related": [],
         "perks": "quality",
         "visibility": "public",
+        "showDiscountBadge": true,
         "updatedAt": "2026-07-29T16:19:58.160Z"
       },
       {
@@ -4731,6 +4816,7 @@
         "related": [],
         "perks": "quality",
         "visibility": "public",
+        "showDiscountBadge": true,
         "updatedAt": "2026-07-29T16:19:58.160Z"
       },
       {
@@ -4775,6 +4861,7 @@
         "related": [],
         "perks": "quality",
         "visibility": "public",
+        "showDiscountBadge": true,
         "updatedAt": "2026-07-29T16:19:58.160Z"
       },
       {
@@ -4809,6 +4896,7 @@
         "related": [],
         "perks": "quality",
         "visibility": "public",
+        "showDiscountBadge": true,
         "updatedAt": "2026-07-29T16:19:58.160Z"
       },
       {
@@ -4853,6 +4941,7 @@
         "related": [],
         "perks": "led",
         "visibility": "public",
+        "showDiscountBadge": true,
         "updatedAt": "2026-07-29T16:19:58.160Z"
       },
       {
@@ -4902,6 +4991,7 @@
         "related": [],
         "perks": "bulbs",
         "visibility": "public",
+        "showDiscountBadge": true,
         "updatedAt": "2026-07-27T08:03:16.285Z"
       },
       {
@@ -4986,6 +5076,7 @@
         "related": [],
         "perks": "quality",
         "visibility": "public",
+        "showDiscountBadge": true,
         "updatedAt": "2026-07-29T16:19:58.160Z"
       },
       {
@@ -5050,6 +5141,7 @@
         "related": [],
         "perks": "led",
         "visibility": "public",
+        "showDiscountBadge": true,
         "updatedAt": "2026-07-29T16:19:58.160Z"
       },
       {
@@ -5104,6 +5196,7 @@
         "related": [],
         "perks": "bulbs",
         "visibility": "public",
+        "showDiscountBadge": true,
         "updatedAt": "2026-07-27T08:03:16.285Z"
       },
       {
@@ -5188,6 +5281,7 @@
         "related": [],
         "perks": "led",
         "visibility": "public",
+        "showDiscountBadge": true,
         "updatedAt": "2026-07-29T16:19:58.160Z"
       },
       {
@@ -5247,6 +5341,7 @@
         "related": [],
         "perks": "led",
         "visibility": "public",
+        "showDiscountBadge": true,
         "updatedAt": "2026-07-29T16:19:58.160Z"
       },
       {
@@ -5306,6 +5401,7 @@
         "related": [],
         "perks": "bulbs",
         "visibility": "public",
+        "showDiscountBadge": true,
         "updatedAt": "2026-07-27T08:03:16.285Z"
       },
       {
@@ -5395,6 +5491,7 @@
         "related": [],
         "perks": "led",
         "visibility": "public",
+        "showDiscountBadge": true,
         "updatedAt": "2026-07-29T16:19:58.160Z"
       },
       {
@@ -5474,6 +5571,7 @@
         "related": [],
         "perks": "quality",
         "visibility": "public",
+        "showDiscountBadge": true,
         "updatedAt": "2026-07-29T16:19:58.160Z"
       },
       {
@@ -5538,6 +5636,7 @@
         "related": [],
         "perks": "bulbs",
         "visibility": "public",
+        "showDiscountBadge": true,
         "updatedAt": "2026-07-27T08:03:16.285Z"
       },
       {
@@ -5622,6 +5721,7 @@
         "related": [],
         "perks": "quality",
         "visibility": "public",
+        "showDiscountBadge": true,
         "updatedAt": "2026-07-29T16:19:58.160Z"
       },
       {
@@ -5686,6 +5786,7 @@
         "related": [],
         "perks": "bulbs",
         "visibility": "public",
+        "showDiscountBadge": true,
         "updatedAt": "2026-07-27T08:03:16.285Z"
       },
       {
@@ -5760,6 +5861,7 @@
         "related": [],
         "perks": "quality",
         "visibility": "public",
+        "showDiscountBadge": true,
         "updatedAt": "2026-07-29T16:19:58.160Z"
       },
       {
@@ -5849,6 +5951,7 @@
         "related": [],
         "perks": "quality",
         "visibility": "public",
+        "showDiscountBadge": true,
         "updatedAt": "2026-07-29T16:19:58.160Z"
       },
       {
@@ -5897,6 +6000,7 @@
         "related": [],
         "perks": "quality",
         "visibility": "public",
+        "showDiscountBadge": true,
         "updatedAt": "2026-07-29T16:19:58.160Z"
       },
       {
@@ -5946,6 +6050,7 @@
         "related": [],
         "perks": "quality",
         "visibility": "public",
+        "showDiscountBadge": true,
         "updatedAt": "2026-07-29T16:19:58.160Z"
       },
       {
@@ -5995,6 +6100,7 @@
         "related": [],
         "perks": "quality",
         "visibility": "public",
+        "showDiscountBadge": true,
         "updatedAt": "2026-07-29T16:19:58.160Z"
       },
       {
@@ -6048,6 +6154,7 @@
         "related": [],
         "perks": "quality",
         "visibility": "public",
+        "showDiscountBadge": true,
         "updatedAt": "2026-07-29T16:19:58.160Z"
       },
       {
@@ -6106,6 +6213,7 @@
         "related": [],
         "perks": "quality",
         "visibility": "public",
+        "showDiscountBadge": true,
         "updatedAt": "2026-07-29T16:19:58.160Z"
       },
       {
@@ -6189,6 +6297,7 @@
         "related": [],
         "perks": "quality",
         "visibility": "public",
+        "showDiscountBadge": true,
         "updatedAt": "2026-07-29T16:19:58.160Z"
       },
       {
@@ -6283,6 +6392,7 @@
         "related": [],
         "perks": "quality",
         "visibility": "public",
+        "showDiscountBadge": true,
         "updatedAt": "2026-07-29T16:19:58.160Z"
       },
       {
@@ -6402,6 +6512,7 @@
         "related": [],
         "perks": "quality",
         "visibility": "public",
+        "showDiscountBadge": true,
         "updatedAt": "2026-07-29T16:19:58.160Z"
       },
       {
@@ -6496,6 +6607,7 @@
         "related": [],
         "perks": "quality",
         "visibility": "public",
+        "showDiscountBadge": true,
         "updatedAt": "2026-07-29T16:19:58.160Z"
       },
       {
@@ -6559,6 +6671,7 @@
         "related": [],
         "perks": "quality",
         "visibility": "public",
+        "showDiscountBadge": true,
         "updatedAt": "2026-07-29T16:19:58.160Z"
       },
       {
@@ -6613,6 +6726,7 @@
         "related": [],
         "perks": "quality",
         "visibility": "public",
+        "showDiscountBadge": true,
         "updatedAt": "2026-07-29T16:19:58.160Z"
       },
       {
@@ -6671,6 +6785,7 @@
         "related": [],
         "perks": "quality",
         "visibility": "public",
+        "showDiscountBadge": true,
         "updatedAt": "2026-07-29T16:19:58.160Z"
       },
       {
@@ -6720,6 +6835,7 @@
         "related": [],
         "perks": "quality",
         "visibility": "public",
+        "showDiscountBadge": true,
         "updatedAt": "2026-07-29T16:19:58.160Z"
       },
       {
@@ -6774,6 +6890,7 @@
         "related": [],
         "perks": "quality",
         "visibility": "public",
+        "showDiscountBadge": true,
         "updatedAt": "2026-07-29T16:19:58.160Z"
       },
       {
@@ -6817,6 +6934,7 @@
         "related": [],
         "perks": "quality",
         "visibility": "public",
+        "showDiscountBadge": true,
         "updatedAt": "2026-07-29T16:19:58.160Z"
       },
       {
@@ -6866,6 +6984,7 @@
         "related": [],
         "perks": "quality",
         "visibility": "public",
+        "showDiscountBadge": true,
         "updatedAt": "2026-07-29T16:19:58.160Z"
       },
       {
@@ -6934,6 +7053,7 @@
         "related": [],
         "perks": "quality",
         "visibility": "public",
+        "showDiscountBadge": true,
         "updatedAt": "2026-07-29T16:19:58.160Z"
       },
       {
@@ -6978,6 +7098,7 @@
         "related": [],
         "perks": "quality",
         "visibility": "public",
+        "showDiscountBadge": true,
         "updatedAt": "2026-07-29T16:19:58.160Z"
       },
       {
@@ -7017,6 +7138,7 @@
         "related": [],
         "perks": "quality",
         "visibility": "public",
+        "showDiscountBadge": true,
         "updatedAt": "2026-07-29T16:19:58.160Z"
       },
       {
@@ -7061,6 +7183,7 @@
         "related": [],
         "perks": "quality",
         "visibility": "public",
+        "showDiscountBadge": true,
         "updatedAt": "2026-07-29T16:19:58.160Z"
       },
       {
@@ -7120,6 +7243,7 @@
         "related": [],
         "perks": "quality",
         "visibility": "public",
+        "showDiscountBadge": true,
         "updatedAt": "2026-07-29T16:19:58.160Z"
       }
     ]

@@ -1,22 +1,28 @@
 import { Link } from './LocalizedLink.jsx';
 import { useLanguage } from '../i18n/LanguageContext.jsx';
 import { useCatalog } from '../catalog/CatalogContext.jsx';
-import { findCategory, OTHER_MODELS_SLUG } from '../data/catalog.js';
+import { findCategory, isListed, OTHER_MODELS_SLUG } from '../data/catalog.js';
 
 /**
- * Tile that closes every category grid and leads to the hidden "Otros Modelos"
+ * Tile that closes every category grid and leads to the "Otros Modelos"
  * section — the section's only entry point anywhere on the site (it is kept out
- * of the catalog grid, the home page and the header menu on purpose).
+ * of the catalog grid, the home page and the header menu on purpose; see
+ * TILE_ENTRY_SLUGS).
  *
  * Shaped like a product card's photo (same 4:5 box, same grid cell) but carries
- * the section name instead of an image. Renders nothing if the section has been
- * removed in /admin, so the grid never shows a dead link.
+ * the section name instead of an image.
+ *
+ * Being the section's only door, the tile is what its `visibility` switch
+ * actually controls: it renders while the section is public, and disappears the
+ * moment /admin hides it, so "hidden from listings" leaves no link behind.
+ * It also renders nothing if the section has been deleted outright, so the grid
+ * never shows a dead link.
  */
 export default function OtherModelsCard() {
   const { lang } = useLanguage();
   const { allCategories } = useCatalog();
   const category = findCategory(allCategories, OTHER_MODELS_SLUG);
-  if (!category) return null;
+  if (!category || !isListed(category)) return null;
 
   const name = category.name[lang] ?? category.name.es;
 

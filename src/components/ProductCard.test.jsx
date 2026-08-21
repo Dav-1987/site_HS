@@ -53,3 +53,21 @@ describe('ProductCard', () => {
     expect(screen.getByText('M')).toBeTruthy();
   });
 });
+
+describe('ProductCard — sale badge', () => {
+  const sale = { ...withPhoto, price: 690, oldPrice: 790 };
+
+  it('shows the badge and the struck-through old price for a sale product', () => {
+    renderCard(sale);
+    expect(screen.getByText('-13%')).toBeTruthy();
+    expect(screen.getByText(/790/)).toBeTruthy();
+  });
+
+  it('hides the badge when the product switches it off, keeping the old price', () => {
+    renderCard({ ...sale, showDiscountBadge: false });
+    expect(screen.queryByText('-13%')).toBeNull();
+    // The discount still reads in the price — that is the point of the switch.
+    expect(screen.getByText(/790/)).toBeTruthy();
+    expect(screen.getByText(/690/)).toBeTruthy();
+  });
+});

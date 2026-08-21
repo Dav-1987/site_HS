@@ -5,9 +5,11 @@ import { urlSafe } from '../urlSafe.js';
 import {
   DEFAULT_PERK_VARIANT,
   PERK_VARIANTS,
+  productDiscount,
   productMedia,
   productPerkVariant,
   resolveImage,
+  showsDiscountBadge,
 } from '../../data/catalog.js';
 import { translations } from '../../i18n/translations.js';
 import ImageField from './ImageField.jsx';
@@ -53,6 +55,9 @@ export default function ProductEditor({
   const media = productMedia(product);
   // First photo = the catalog cover (same rule as ProductImagesEditor).
   const cover = media.find((m) => m.type === 'image')?.src;
+  // Live discount percent, so the badge checkbox names the exact figure the
+  // photo would carry ("−13%") instead of an abstract one.
+  const { percent } = productDiscount(product);
   const setMedia = (next) => {
     const photos = next.filter((m) => m.type === 'image').map((m) => m.src);
     set({ media: next, image: photos[0] || '', images: photos, video: '', videoFirst: false });
@@ -171,6 +176,23 @@ export default function ProductEditor({
             «Старая цена» больше текущей → показывается зачёркнутой рядом с актуальной. 0 — без
             скидки.
           </p>
+          <label className="mt-3 flex items-start gap-2">
+            <input
+              type="checkbox"
+              checked={showsDiscountBadge(product)}
+              onChange={(e) => set({ showDiscountBadge: e.target.checked })}
+              className="mt-0.5 h-4 w-4 shrink-0 accent-accent"
+            />
+            <span>
+              <span className="block text-sm text-primary">
+                Показывать плашку со скидкой на фото
+              </span>
+              <span className="block text-xs leading-relaxed text-primary/40">
+                Уголок «−{percent || 'N'}%» на фотографиях товара — в каталоге, на главной и на
+                странице товара. Если снять галку, зачёркнутая старая цена останется.
+              </span>
+            </span>
+          </label>
 
           <SectionLabel>Материал</SectionLabel>
           <div className="grid gap-3 sm:grid-cols-2">
