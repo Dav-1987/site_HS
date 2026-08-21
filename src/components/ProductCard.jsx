@@ -51,6 +51,11 @@ export default function ProductCard({
     startX.current = null;
   };
 
+  // A product can legitimately have no media at all: /admin's "+ Добавить товар"
+  // creates one with an empty gallery, and it may well be saved before the
+  // photos are uploaded. `item` is then undefined — `Media` renders the branded
+  // placeholder for an empty id (the same fallback it uses when a photo fails to
+  // load), and the video branch below can't be reached without a real item.
   const item = media[idx] || media[0];
   const isVideo = item?.type === 'video';
 
@@ -123,7 +128,7 @@ export default function ProductCard({
             />
           ) : (
             <Media
-              id={item.src}
+              id={item?.src}
               idMobile={idx === 0 ? product.imageMobile : ''}
               alt={label}
               w={700}

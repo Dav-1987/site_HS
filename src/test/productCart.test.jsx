@@ -10,12 +10,12 @@ import Product from '../pages/Product.jsx';
 const category = defaultCatalog[0];
 const product = category.products[0];
 
-function renderProduct() {
+function renderProduct(catalog = defaultCatalog, path = `/${category.slug}/${product.id}`) {
   return render(
-    <MemoryRouter initialEntries={[`/${category.slug}/${product.id}`]}>
+    <MemoryRouter initialEntries={[path]}>
       <SettingsProvider>
         <LanguageProvider>
-          <CatalogProvider initialCatalog={defaultCatalog}>
+          <CatalogProvider initialCatalog={catalog}>
             <Routes>
               <Route path="/:categorySlug/:id" element={<Product />} />
             </Routes>
@@ -123,5 +123,36 @@ describe('product page order flow', () => {
     expect(payloads[0]).toMatchObject({ productId: product.id });
     expect(payloads[0]).not.toHaveProperty('productName');
     expect(payloads[0]).not.toHaveProperty('price');
+  });
+});
+
+// Same regression as ProductCard: a product saved before its photos were
+// uploaded (see addProduct in the admin's CategoryEditor) must still render.
+describe('product page without photos', () => {
+  const photoless = [
+    {
+      ...category,
+      products: [
+        {
+          id: 'Tocador-Nuevo',
+          name: 'Tocador nuevo',
+          price: 0,
+          oldPrice: 0,
+          images: [],
+          media: [],
+          material: { es: '', en: '' },
+          size: '',
+          description: { es: '', en: '' },
+        },
+      ],
+    },
+  ];
+
+  it('renders the page with the placeholder instead of throwing', () => {
+    const { container } = renderProduct(photoless, `/${category.slug}/Tocador-Nuevo`);
+    expect(container.querySelector('h1').textContent).toContain('Tocador nuevo');
+    expect(screen.getByText(/¡PEDIR AHORA!/i)).toBeTruthy();
+    // The gallery slot shows the branded placeholder, not a broken image.
+    expect(container.querySelector('img')).toBeNull();
   });
 });

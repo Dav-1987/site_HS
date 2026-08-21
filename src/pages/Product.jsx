@@ -218,6 +218,10 @@ export default function Product() {
   const multi = gallery.length > 1;
   const THUMB_VISIBLE = 4;
   const activeIdx = Math.min(active, gallery.length - 1);
+  // Undefined for a product with no photos and no video yet — /admin can create
+  // and save one (see addProduct in CategoryEditor). `Media` shows the branded
+  // placeholder for an empty id, and the video branch needs a real item, so the
+  // page still renders (name, price, specs, order button) instead of throwing.
   const activeItem = gallery[activeIdx];
   const isVideoActive = activeItem?.type === 'video';
 
@@ -359,7 +363,7 @@ export default function Product() {
                   className="absolute inset-0 h-full w-full cursor-zoom-in text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-accent"
                 >
                   <Media
-                    id={activeItem.src}
+                    id={activeItem?.src}
                     idMobile={activeIdx === firstPhotoIdx ? product.imageMobile : ''}
                     alt={`${product.name} — ${category.name[lang]}`}
                     w={1400}
