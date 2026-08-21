@@ -9,6 +9,7 @@ import FeaturedCardsEditor from './FeaturedCardsEditor.jsx';
 import TextsEditor from './TextsEditor.jsx';
 import ContactEditor from './ContactEditor.jsx';
 import SeoSettingsEditor from './SeoSettingsEditor.jsx';
+import BlocksEditor from './BlocksEditor.jsx';
 import CategoryEditor from './CategoryEditor.jsx';
 
 export default function CatalogEditor({ onLogout }) {
@@ -114,6 +115,12 @@ export default function CatalogEditor({ onLogout }) {
           />
         )}
         {settings && <SeoSettingsEditor settings={settings} onChange={updateSettings} />}
+        {settings && (
+          <BlocksEditor
+            blocks={settings.blocks}
+            onChange={(blocks) => updateSettings({ ...settings, blocks })}
+          />
+        )}
 
         {categories.map((c, ci) => (
           <CategoryEditor

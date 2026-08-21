@@ -6,7 +6,7 @@ import {
   saveSettings,
 } from './api.js';
 import { defaultSettings, mergeSettings } from '../data/settings.js';
-import { moveProductsToCategory } from '../data/catalog.js';
+import { DEFAULT_VISIBILITY, isListed, isOff, moveProductsToCategory } from '../data/catalog.js';
 
 // Unsaved-edits draft, kept in localStorage so a reload/closed-tab accident
 // doesn't wipe out in-progress work. Cleared once the user saves or
@@ -54,7 +54,10 @@ export function useCatalogEditor() {
   const [status, setStatus] = useState('');
   const [showHistory, setShowHistory] = useState(false);
 
-  // Flat list of every product (for the Featured / related pickers).
+  // Flat list of every product (for the Featured / related pickers). `hidden`
+  // marks the ones those sections would drop — the product itself is not listed,
+  // or its whole section is off — so a card that stops rendering is explainable
+  // from the picker instead of looking like a bug.
   const allProducts = useMemo(
     () =>
       (categories || []).flatMap((c) =>
@@ -63,6 +66,7 @@ export function useCatalogEditor() {
           name: p.name || p.id,
           reference: p.reference || '',
           categoryName: c.name?.es || c.slug || '',
+          hidden: !isListed(p) || isOff(c),
         })),
       ),
     [categories],
@@ -165,6 +169,7 @@ export function useCatalogEditor() {
         description: { es: '', en: '' },
         image: '',
         imageMobile: '',
+        visibility: DEFAULT_VISIBILITY,
         products: [],
       },
     ]);

@@ -2,9 +2,11 @@ import { useState } from 'react';
 import { BTN_GHOST, BTN_SOLID, INPUT } from '../ui.js';
 import { Field, TextArea } from './Field.jsx';
 import { urlSafe, RESERVED_SLUGS } from '../urlSafe.js';
+import { DEFAULT_VISIBILITY } from '../../data/catalog.js';
 import ImageField from './ImageField.jsx';
 import VideoField from './VideoField.jsx';
 import ProductEditor from './ProductEditor.jsx';
+import VisibilitySelect, { VisibilityBadge, VisibilityNote } from './VisibilitySelect.jsx';
 
 export default function CategoryEditor({
   category,
@@ -74,6 +76,7 @@ export default function CategoryEditor({
           images: [],
           material: { es: '', en: '' },
           size: '',
+          visibility: DEFAULT_VISIBILITY,
         },
       ],
     });
@@ -102,7 +105,13 @@ export default function CategoryEditor({
           <span className="text-xs uppercase tracking-[0.18em] text-primary/40">
             {category.products.length} тов.
           </span>
+          <VisibilityBadge entity={category} />
         </button>
+        <VisibilitySelect
+          value={category.visibility}
+          onChange={(visibility) => set({ visibility })}
+          title="Видимость категории"
+        />
         <button type="button" onClick={onDuplicate} title="Дублировать категорию" className={BTN_GHOST}>⧉</button>
         <button type="button" onClick={() => onMove(-1)} disabled={isFirst} className={BTN_GHOST}>↑</button>
         <button type="button" onClick={() => onMove(1)} disabled={isLast} className={BTN_GHOST}>↓</button>
@@ -111,6 +120,7 @@ export default function CategoryEditor({
 
       {open && (
         <div className="space-y-6 border-t border-primary/10 px-5 py-6">
+          <VisibilityNote entity={category} kind="category" />
           <div className="grid gap-3 sm:grid-cols-2">
             <div>
               <Field

@@ -167,6 +167,12 @@ async function runCleanup() {
 
 // ─── /api/catalog ─────────────────────────────────────────────────────────────
 
+// Three-state visibility (see src/data/catalog.js). Absent is fine — it means
+// 'public' — but a value outside the set is rejected rather than silently
+// normalized, since it would otherwise publish a section someone meant to hide.
+const VISIBILITY = ['public', 'unlisted', 'off'];
+const badVisibility = (v) => v !== undefined && !VISIBILITY.includes(v);
+
 function validateCatalog(categories) {
   if (!Array.isArray(categories)) return 'categories must be an array';
   const slugs = new Set();
@@ -176,12 +182,16 @@ function validateCatalog(categories) {
     if (slugs.has(c.slug)) return `duplicate category slug: ${c.slug}`;
     slugs.add(c.slug);
     if (!c.name?.es || !c.name?.en) return `category "${c.slug}" needs name.es and name.en`;
+    if (badVisibility(c.visibility))
+      return `category "${c.slug}" has an unknown visibility: ${c.visibility}`;
     if (!Array.isArray(c.products)) return `category "${c.slug}" needs a products array`;
     for (const p of c.products) {
       if (!p?.id || typeof p.id !== 'string') return `every product in "${c.slug}" needs an id`;
       if (ids.has(p.id)) return `duplicate product id: ${p.id}`;
       ids.add(p.id);
       if (!p.name) return `product "${p.id}" needs a name`;
+      if (badVisibility(p.visibility))
+        return `product "${p.id}" has an unknown visibility: ${p.visibility}`;
       if (p.related !== undefined) {
         if (!Array.isArray(p.related)) return `product "${p.id}" related must be an array`;
         if (p.related.length > 50) return `product "${p.id}" has too many related items`;

@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { resolveImage } from '../../data/catalog.js';
 import { uploadImage, uploadVideo } from '../api.js';
 import { INPUT, LABEL, BTN_GHOST } from '../ui.js';
+import { productOptionLabel } from '../productLabel.js';
 
 // A single image/video upload slot with thumbnail preview, used for a card's
 // cover (image) and its video.
@@ -88,9 +89,7 @@ export default function FeaturedCardsEditor({ value, onChange, allProducts }) {
   };
   const add = () => onChange([...cards, { productId: '', cover: '', video: '' }]);
 
-  // "Name · ARTÍCULO · Category" so products that share a name (e.g. "Tocador")
-  // can be told apart by their reference (артикул) in the dropdown.
-  const optionLabel = (p) => [p.name, p.reference, p.categoryName].filter(Boolean).join(' · ');
+  const optionLabel = productOptionLabel;
   const labelOf = (id) => {
     const p = allProducts.find((x) => x.id === id);
     return p ? optionLabel(p) : `${id} (удалён?)`;

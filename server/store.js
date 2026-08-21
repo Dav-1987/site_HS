@@ -44,6 +44,18 @@ function normalizePerks(p) {
   return PERK_VARIANTS.includes(p?.perks) ? p.perks : DEFAULT_PERK_VARIANT;
 }
 
+// Three-state visibility of a category/product ('public' | 'unlisted' | 'off').
+// Mirrors VISIBILITY / visibilityOf() in src/data/catalog.js — anything unknown
+// (including a row written before the column existed) reads as 'public'.
+// Normalized on both read and write so such a row doesn't look "changed" on the
+// next save (see categoryContentEqual / productContentEqual).
+const VISIBILITY = ['public', 'unlisted', 'off'];
+export const DEFAULT_VISIBILITY = 'public';
+
+function normalizeVisibility(entity) {
+  return VISIBILITY.includes(entity?.visibility) ? entity.visibility : DEFAULT_VISIBILITY;
+}
+
 function shapeCategory(cat, products) {
   return {
     slug: cat.slug,
@@ -53,6 +65,7 @@ function shapeCategory(cat, products) {
     image: cat.image,
     imageMobile: cat.image_mobile ?? '',
     video: cat.video ?? '',
+    visibility: normalizeVisibility(cat),
     updatedAt: cat.updated_at instanceof Date ? cat.updated_at.toISOString() : cat.updated_at,
     products: products.map((p) => ({
       id: p.id,
@@ -72,6 +85,7 @@ function shapeCategory(cat, products) {
       description: { es: p.description_es ?? '', en: p.description_en ?? '' },
       related: Array.isArray(p.related) ? p.related : [],
       perks: normalizePerks(p),
+      visibility: normalizeVisibility(p),
       updatedAt: p.updated_at instanceof Date ? p.updated_at.toISOString() : p.updated_at,
     })),
   };
@@ -91,7 +105,8 @@ function categoryContentEqual(a, b) {
     a.description?.en === b.description?.en &&
     a.image === b.image &&
     a.imageMobile === b.imageMobile &&
-    a.video === b.video
+    a.video === b.video &&
+    normalizeVisibility(a) === normalizeVisibility(b)
   );
 }
 
@@ -129,7 +144,8 @@ export function productContentEqual(a, b) {
     a.description?.es === b.description?.es &&
     a.description?.en === b.description?.en &&
     JSON.stringify(a.related ?? []) === JSON.stringify(b.related ?? []) &&
-    normalizePerks(a) === normalizePerks(b)
+    normalizePerks(a) === normalizePerks(b) &&
+    normalizeVisibility(a) === normalizeVisibility(b)
   );
 }
 
@@ -173,8 +189,8 @@ export async function writeCatalog(categories) {
 
       await client.query(
         `INSERT INTO categories
-           (slug, name_es, name_en, tagline_es, tagline_en, description_es, description_en, image, image_mobile, video, position, updated_at)
-         VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12)`,
+           (slug, name_es, name_en, tagline_es, tagline_en, description_es, description_en, image, image_mobile, video, visibility, position, updated_at)
+         VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13)`,
         [
           c.slug,
           c.name?.es ?? '',
@@ -186,6 +202,7 @@ export async function writeCatalog(categories) {
           c.image ?? '',
           c.imageMobile ?? '',
           c.video ?? '',
+          normalizeVisibility(c),
           ci,
           categoryUpdatedAt,
         ],
@@ -209,8 +226,8 @@ export async function writeCatalog(categories) {
 
         await client.query(
           `INSERT INTO products
-             (id, category_slug, name, price, old_price, image, image_mobile, images, material_es, material_en, size, reference, subtitle, video, video_first, media, description_es, description_en, related, perks, position, updated_at)
-           VALUES ($1,$2,$3,$4,$5,$6,$7,$8::jsonb,$9,$10,$11,$12,$13,$14,$15,$16::jsonb,$17,$18,$19::jsonb,$20,$21,$22)`,
+             (id, category_slug, name, price, old_price, image, image_mobile, images, material_es, material_en, size, reference, subtitle, video, video_first, media, description_es, description_en, related, perks, visibility, position, updated_at)
+           VALUES ($1,$2,$3,$4,$5,$6,$7,$8::jsonb,$9,$10,$11,$12,$13,$14,$15,$16::jsonb,$17,$18,$19::jsonb,$20,$21,$22,$23)`,
           [
             p.id,
             c.slug,
@@ -233,6 +250,7 @@ export async function writeCatalog(categories) {
             p.description?.en ?? '',
             JSON.stringify(Array.isArray(p.related) ? p.related : []),
             normalizePerks(p),
+            normalizeVisibility(p),
             pi,
             productUpdatedAt,
           ],

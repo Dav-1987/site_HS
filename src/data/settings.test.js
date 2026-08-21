@@ -32,3 +32,25 @@ describe('mergeSettings — featuredCards', () => {
     expect(mergeSettings({ featuredCards: 'nope' }).featuredCards).toEqual([]);
   });
 });
+
+describe('mergeSettings — blocks', () => {
+  it('defaults every block to on when absent', () => {
+    expect(mergeSettings({}).blocks).toEqual({
+      featured: true,
+      collections: true,
+      heroPromo: true,
+    });
+  });
+
+  it('turns off only the blocks explicitly set to false', () => {
+    const out = mergeSettings({ blocks: { featured: false, collections: true } });
+    expect(out.blocks).toEqual({ featured: false, collections: true, heroPromo: true });
+  });
+
+  // A settings object saved before a switch existed (or with junk in it) must
+  // never blank a section — only an explicit `false` switches one off.
+  it('ignores non-boolean values and unknown keys', () => {
+    const out = mergeSettings({ blocks: { featured: 'nope', mystery: false } });
+    expect(out.blocks).toEqual({ featured: true, collections: true, heroPromo: true });
+  });
+});

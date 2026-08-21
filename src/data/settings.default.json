@@ -25,6 +25,11 @@
     "title": "",
     "description": ""
   },
+  "blocks": {
+    "featured": true,
+    "collections": true,
+    "heroPromo": true
+  },
   "texts": {
     "es": {
       "hero.title.2": "para su hogar",

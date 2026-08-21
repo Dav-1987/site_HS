@@ -5,7 +5,14 @@
 // script got updated, the other didn't. English routes are derived from
 // these via withLang() rather than listed separately, for the same reason.
 
-export function buildRoutes(catalog) {
+import { liveCatalog } from './data/catalog.js';
+
+// Sections and products switched off in /admin have no route at all: no
+// prerendered snapshot (so the SPA fallback answers a real 404) and no sitemap
+// entry. Unlisted ones keep both — the whole point of that state is that the
+// page stays live and indexed, it just isn't linked to from anywhere.
+export function buildRoutes(rawCatalog) {
+  const catalog = liveCatalog(rawCatalog);
   return [
     { path: '/', priority: '1.0', changefreq: 'weekly', catalogAggregate: true },
     { path: '/catalogo', priority: '0.9', changefreq: 'weekly', catalogAggregate: true },

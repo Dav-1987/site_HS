@@ -8,6 +8,11 @@ import {
   productImages,
   productMedia,
   isHiddenCategory,
+  isListed,
+  isOff,
+  listedProducts,
+  liveCatalog,
+  visibilityOf,
   visibleCategories,
   OTHER_MODELS_SLUG,
   moveProductsToCategory,
@@ -189,7 +194,11 @@ describe('computeFeatured', () => {
 
 describe('resolveFeaturedCards', () => {
   const categories = [
-    { slug: 'c1', name: { es: 'C1', en: 'C1' }, products: [{ id: 'p1', name: 'P1', images: ['ph1'] }] },
+    {
+      slug: 'c1',
+      name: { es: 'C1', en: 'C1' },
+      products: [{ id: 'p1', name: 'P1', images: ['ph1'] }],
+    },
     { slug: 'c2', name: { es: 'C2', en: 'C2' }, products: [{ id: 'p2', name: 'P2' }] },
   ];
 
@@ -249,10 +258,10 @@ describe('computeRelated', () => {
 });
 
 describe('hidden categories', () => {
-  const hidden = cat(OTHER_MODELS_SLUG, 'h1', 'h2');
+  const hidden = { ...cat(OTHER_MODELS_SLUG, 'h1', 'h2'), visibility: 'unlisted' };
   const categories = [cat('c1', 'p1', 'p2'), cat('c2', 'p3'), hidden];
 
-  it('flags the "other models" section and filters it out of listings', () => {
+  it('flags an unlisted section and filters it out of listings', () => {
     expect(isHiddenCategory(hidden)).toBe(true);
     expect(isHiddenCategory(categories[0])).toBe(false);
     expect(visibleCategories(categories).map((c) => c.slug)).toEqual(['c1', 'c2']);
@@ -275,6 +284,121 @@ describe('hidden categories', () => {
   it('drops hidden ids from a hidden product’s explicit related list', () => {
     const product = hidden.products[0]; // h1
     const out = computeRelated(categories, product, hidden, ['h2', 'p3']);
+    expect(out.map((p) => p.id)).toEqual(['p3']);
+  });
+});
+
+describe('visibility', () => {
+  // cat()/its products default to no `visibility` field at all — the "old data"
+  // case, which must read as fully public.
+  const plain = cat('c1', 'p1', 'p2');
+
+  it('reads a missing or unknown value as public', () => {
+    expect(visibilityOf(plain)).toBe('public');
+    expect(visibilityOf({ visibility: 'nonsense' })).toBe('public');
+    expect(visibilityOf(undefined)).toBe('public');
+    expect(isListed(plain)).toBe(true);
+    expect(isOff(plain)).toBe(false);
+  });
+
+  it('treats both unlisted and off as "not listed"', () => {
+    expect(isListed({ visibility: 'unlisted' })).toBe(false);
+    expect(isListed({ visibility: 'off' })).toBe(false);
+    expect(isOff({ visibility: 'unlisted' })).toBe(false);
+    expect(isOff({ visibility: 'off' })).toBe(true);
+  });
+
+  it('keeps unlisted and off categories out of the listings', () => {
+    const categories = [
+      plain,
+      { ...cat('c2', 'p3'), visibility: 'unlisted' },
+      { ...cat('c3', 'p4'), visibility: 'off' },
+    ];
+    expect(visibleCategories(categories).map((c) => c.slug)).toEqual(['c1']);
+  });
+
+  it('drops hidden products from a category listing', () => {
+    const category = {
+      ...plain,
+      products: [
+        { id: 'p1', name: 'p1' },
+        { id: 'p2', name: 'p2', visibility: 'unlisted' },
+        { id: 'p3', name: 'p3', visibility: 'off' },
+      ],
+    };
+    expect(listedProducts(category).map((p) => p.id)).toEqual(['p1']);
+  });
+
+  describe('liveCatalog', () => {
+    const categories = [
+      {
+        ...cat('c1'),
+        products: [
+          { id: 'p1', name: 'p1' },
+          { id: 'p2', name: 'p2', visibility: 'off' },
+        ],
+      },
+      { ...cat('c2', 'p3'), visibility: 'unlisted' },
+      { ...cat('c3', 'p4'), visibility: 'off' },
+    ];
+    const live = liveCatalog(categories);
+
+    it('removes off categories entirely and off products from the rest', () => {
+      expect(live.map((c) => c.slug)).toEqual(['c1', 'c2']);
+      expect(live[0].products.map((p) => p.id)).toEqual(['p1']);
+    });
+
+    it('keeps unlisted sections — their pages still work', () => {
+      expect(live[1].slug).toBe('c2');
+      expect(live[1].products.map((p) => p.id)).toEqual(['p3']);
+    });
+
+    it('returns a category with nothing to strip by reference', () => {
+      const untouched = [cat('c1', 'p1')];
+      expect(liveCatalog(untouched)[0]).toBe(untouched[0]);
+    });
+  });
+
+  it('keeps a hidden product off the auto-curated Featured row', () => {
+    const categories = [
+      {
+        ...cat('c1'),
+        products: [
+          { id: 'p1', name: 'p1', visibility: 'unlisted' },
+          { id: 'p2', name: 'p2' },
+        ],
+      },
+    ];
+    expect(computeFeatured(categories, []).map((p) => p.id)).toEqual(['p2']);
+  });
+
+  it('skips a hidden product hand-picked for Featured', () => {
+    const categories = [
+      {
+        ...cat('c1'),
+        products: [
+          { id: 'p1', name: 'p1', visibility: 'unlisted' },
+          { id: 'p2', name: 'p2' },
+        ],
+      },
+    ];
+    expect(computeFeatured(categories, ['p1', 'p2']).map((p) => p.id)).toEqual(['p2']);
+    expect(
+      resolveFeaturedCards(categories, [{ productId: 'p1' }, { productId: 'p2' }]).map((p) => p.id),
+    ).toEqual(['p2']);
+  });
+
+  it('keeps a hidden sibling out of the related row', () => {
+    const category = {
+      ...cat('c1'),
+      products: [
+        { id: 'p1', name: 'p1' },
+        { id: 'p2', name: 'p2', visibility: 'unlisted' },
+        { id: 'p3', name: 'p3' },
+      ],
+    };
+    const categories = [category];
+    const out = computeRelated(categories, category.products[0], category, []);
     expect(out.map((p) => p.id)).toEqual(['p3']);
   });
 });

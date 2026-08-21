@@ -16,6 +16,7 @@
     "image": "/uploads/d4a0534c2e1889b52c0a1fd5e594d313.jpg",
     "imageMobile": "",
     "video": "",
+    "visibility": "public",
     "updatedAt": "2026-08-06T12:24:54.769Z",
     "products": [
       {
@@ -79,6 +80,7 @@
         },
         "related": [],
         "perks": "bulbs",
+        "visibility": "public",
         "updatedAt": "2026-07-27T08:03:16.285Z"
       },
       {
@@ -132,6 +134,7 @@
         },
         "related": [],
         "perks": "bulbs",
+        "visibility": "public",
         "updatedAt": "2026-08-06T12:07:06.614Z"
       },
       {
@@ -175,6 +178,7 @@
         },
         "related": [],
         "perks": "bulbs",
+        "visibility": "public",
         "updatedAt": "2026-08-06T12:28:31.573Z"
       },
       {
@@ -243,6 +247,7 @@
         },
         "related": [],
         "perks": "bulbs",
+        "visibility": "public",
         "updatedAt": "2026-08-06T12:28:08.043Z"
       },
       {
@@ -296,6 +301,7 @@
         },
         "related": [],
         "perks": "bulbs",
+        "visibility": "public",
         "updatedAt": "2026-08-06T12:05:29.080Z"
       },
       {
@@ -354,6 +360,7 @@
         },
         "related": [],
         "perks": "bulbs",
+        "visibility": "public",
         "updatedAt": "2026-08-06T12:27:38.760Z"
       },
       {
@@ -392,6 +399,7 @@
         },
         "related": [],
         "perks": "bulbs",
+        "visibility": "public",
         "updatedAt": "2026-07-27T08:03:16.285Z"
       },
       {
@@ -450,6 +458,7 @@
         },
         "related": [],
         "perks": "bulbs",
+        "visibility": "public",
         "updatedAt": "2026-07-27T08:03:16.285Z"
       },
       {
@@ -493,6 +502,7 @@
         },
         "related": [],
         "perks": "bulbs",
+        "visibility": "public",
         "updatedAt": "2026-08-06T12:29:31.820Z"
       },
       {
@@ -591,6 +601,7 @@
         },
         "related": [],
         "perks": "quality",
+        "visibility": "public",
         "updatedAt": "2026-08-06T12:03:09.430Z"
       },
       {
@@ -637,6 +648,7 @@
         },
         "related": [],
         "perks": "quality",
+        "visibility": "public",
         "updatedAt": "2026-07-29T16:12:59.123Z"
       },
       {
@@ -700,6 +712,7 @@
         },
         "related": [],
         "perks": "led",
+        "visibility": "public",
         "updatedAt": "2026-07-29T16:12:59.123Z"
       },
       {
@@ -743,6 +756,7 @@
         },
         "related": [],
         "perks": "led",
+        "visibility": "public",
         "updatedAt": "2026-07-29T16:13:24.874Z"
       },
       {
@@ -786,6 +800,7 @@
         },
         "related": [],
         "perks": "led",
+        "visibility": "public",
         "updatedAt": "2026-07-29T16:12:59.123Z"
       },
       {
@@ -839,6 +854,7 @@
         },
         "related": [],
         "perks": "led",
+        "visibility": "public",
         "updatedAt": "2026-07-29T16:12:59.123Z"
       }
     ]
@@ -860,6 +876,7 @@
     "image": "/uploads/0f6a9d65f0833e4f64c04982e32007fe.jpg",
     "imageMobile": "",
     "video": "",
+    "visibility": "public",
     "updatedAt": "2026-08-06T11:17:56.452Z",
     "products": [
       {
@@ -912,6 +929,7 @@
           "toc-lina"
         ],
         "perks": "bulbs",
+        "visibility": "public",
         "updatedAt": "2026-08-06T12:37:02.377Z"
       },
       {
@@ -970,6 +988,7 @@
           "toc-lina"
         ],
         "perks": "bulbs",
+        "visibility": "public",
         "updatedAt": "2026-08-06T11:14:39.904Z"
       },
       {
@@ -1028,6 +1047,7 @@
           "toc-lina"
         ],
         "perks": "bulbs",
+        "visibility": "public",
         "updatedAt": "2026-07-27T08:03:16.285Z"
       },
       {
@@ -1076,6 +1096,7 @@
           "toc-lina"
         ],
         "perks": "led",
+        "visibility": "public",
         "updatedAt": "2026-08-06T12:39:18.790Z"
       },
       {
@@ -1119,6 +1140,7 @@
           "toc-lina"
         ],
         "perks": "bulbs",
+        "visibility": "public",
         "updatedAt": "2026-07-27T08:03:16.285Z"
       },
       {
@@ -1157,6 +1179,7 @@
           "toc-lina"
         ],
         "perks": "bulbs",
+        "visibility": "public",
         "updatedAt": "2026-07-27T08:03:16.285Z"
       },
       {
@@ -1210,6 +1233,7 @@
           "toc-lina"
         ],
         "perks": "led",
+        "visibility": "public",
         "updatedAt": "2026-08-06T11:04:48.720Z"
       },
       {
@@ -1263,6 +1287,7 @@
           "toc-lina"
         ],
         "perks": "bulbs",
+        "visibility": "public",
         "updatedAt": "2026-08-06T12:39:51.168Z"
       },
       {
@@ -1316,6 +1341,7 @@
           "toc-lina"
         ],
         "perks": "bulbs",
+        "visibility": "public",
         "updatedAt": "2026-07-27T08:03:16.285Z"
       },
       {
@@ -1369,6 +1395,7 @@
           "toc-lina"
         ],
         "perks": "led",
+        "visibility": "public",
         "updatedAt": "2026-08-06T11:10:49.480Z"
       },
       {
@@ -1407,6 +1434,7 @@
           "toc-lina"
         ],
         "perks": "bulbs",
+        "visibility": "public",
         "updatedAt": "2026-07-27T08:03:16.285Z"
       },
       {
@@ -1455,6 +1483,7 @@
           "toc-lina"
         ],
         "perks": "bulbs",
+        "visibility": "public",
         "updatedAt": "2026-07-27T08:03:16.285Z"
       },
       {
@@ -1498,6 +1527,7 @@
           "toc-lina"
         ],
         "perks": "bulbs",
+        "visibility": "public",
         "updatedAt": "2026-07-27T08:03:16.285Z"
       },
       {
@@ -1565,6 +1595,7 @@
           "toc-lina"
         ],
         "perks": "bulbs",
+        "visibility": "public",
         "updatedAt": "2026-07-27T08:03:16.285Z"
       },
       {
@@ -1623,6 +1654,7 @@
           "toc-lina"
         ],
         "perks": "bulbs",
+        "visibility": "public",
         "updatedAt": "2026-07-27T08:03:16.285Z"
       },
       {
@@ -1681,6 +1713,7 @@
           "toc-lina"
         ],
         "perks": "bulbs",
+        "visibility": "public",
         "updatedAt": "2026-07-27T08:03:16.285Z"
       },
       {
@@ -1733,6 +1766,7 @@
           "toc-mara"
         ],
         "perks": "bulbs",
+        "visibility": "public",
         "updatedAt": "2026-07-27T08:03:16.285Z"
       }
     ]
@@ -1754,6 +1788,7 @@
     "image": "/uploads/28d19308d09ec8d998279309b4a01628.jpg",
     "imageMobile": "",
     "video": "",
+    "visibility": "public",
     "updatedAt": "2026-07-06T13:40:42.817Z",
     "products": [
       {
@@ -1796,6 +1831,7 @@
         },
         "related": [],
         "perks": "bulbs",
+        "visibility": "public",
         "updatedAt": "2026-07-27T08:03:16.285Z"
       },
       {
@@ -1843,6 +1879,7 @@
         },
         "related": [],
         "perks": "bulbs",
+        "visibility": "public",
         "updatedAt": "2026-07-27T08:03:16.285Z"
       },
       {
@@ -1901,6 +1938,7 @@
         },
         "related": [],
         "perks": "bulbs",
+        "visibility": "public",
         "updatedAt": "2026-08-06T11:54:44.182Z"
       },
       {
@@ -1944,6 +1982,7 @@
         },
         "related": [],
         "perks": "bulbs",
+        "visibility": "public",
         "updatedAt": "2026-07-27T08:03:16.285Z"
       },
       {
@@ -2006,6 +2045,7 @@
         },
         "related": [],
         "perks": "bulbs",
+        "visibility": "public",
         "updatedAt": "2026-08-06T12:50:23.658Z"
       },
       {
@@ -2064,6 +2104,7 @@
         },
         "related": [],
         "perks": "bulbs",
+        "visibility": "public",
         "updatedAt": "2026-07-27T08:03:16.285Z"
       },
       {
@@ -2102,6 +2143,7 @@
         },
         "related": [],
         "perks": "bulbs",
+        "visibility": "public",
         "updatedAt": "2026-07-27T08:03:16.285Z"
       },
       {
@@ -2154,6 +2196,7 @@
         },
         "related": [],
         "perks": "bulbs",
+        "visibility": "public",
         "updatedAt": "2026-07-27T08:03:16.285Z"
       },
       {
@@ -2207,6 +2250,7 @@
         },
         "related": [],
         "perks": "bulbs",
+        "visibility": "public",
         "updatedAt": "2026-07-27T08:03:16.285Z"
       },
       {
@@ -2255,6 +2299,7 @@
         },
         "related": [],
         "perks": "bulbs",
+        "visibility": "public",
         "updatedAt": "2026-07-27T08:03:16.285Z"
       },
       {
@@ -2312,6 +2357,7 @@
         },
         "related": [],
         "perks": "bulbs",
+        "visibility": "public",
         "updatedAt": "2026-07-27T08:03:16.285Z"
       },
       {
@@ -2365,6 +2411,7 @@
         },
         "related": [],
         "perks": "bulbs",
+        "visibility": "public",
         "updatedAt": "2026-07-27T08:03:16.285Z"
       },
       {
@@ -2418,6 +2465,7 @@
         },
         "related": [],
         "perks": "bulbs",
+        "visibility": "public",
         "updatedAt": "2026-07-27T08:03:16.285Z"
       },
       {
@@ -2461,6 +2509,7 @@
         },
         "related": [],
         "perks": "bulbs",
+        "visibility": "public",
         "updatedAt": "2026-07-27T08:03:16.285Z"
       }
     ]
@@ -2482,6 +2531,7 @@
     "image": "/uploads/7bd218a764fa9eb6ace48128ccd2a33a.jpg",
     "imageMobile": "",
     "video": "",
+    "visibility": "public",
     "updatedAt": "2026-07-06T13:40:42.817Z",
     "products": [
       {
@@ -2539,6 +2589,7 @@
         },
         "related": [],
         "perks": "quality",
+        "visibility": "public",
         "updatedAt": "2026-07-29T16:14:43.149Z"
       },
       {
@@ -2610,6 +2661,7 @@
         },
         "related": [],
         "perks": "quality",
+        "visibility": "public",
         "updatedAt": "2026-07-29T16:14:43.149Z"
       },
       {
@@ -2648,6 +2700,7 @@
         },
         "related": [],
         "perks": "quality",
+        "visibility": "public",
         "updatedAt": "2026-07-29T16:14:43.149Z"
       },
       {
@@ -2690,6 +2743,7 @@
         },
         "related": [],
         "perks": "quality",
+        "visibility": "public",
         "updatedAt": "2026-07-29T16:14:43.149Z"
       },
       {
@@ -2747,6 +2801,7 @@
         },
         "related": [],
         "perks": "quality",
+        "visibility": "public",
         "updatedAt": "2026-07-29T16:14:43.149Z"
       },
       {
@@ -2800,6 +2855,7 @@
         },
         "related": [],
         "perks": "quality",
+        "visibility": "public",
         "updatedAt": "2026-07-29T16:14:43.149Z"
       },
       {
@@ -2852,6 +2908,7 @@
         },
         "related": [],
         "perks": "quality",
+        "visibility": "public",
         "updatedAt": "2026-07-29T16:14:43.149Z"
       },
       {
@@ -2909,6 +2966,7 @@
         },
         "related": [],
         "perks": "quality",
+        "visibility": "public",
         "updatedAt": "2026-07-29T16:14:43.149Z"
       },
       {
@@ -2947,6 +3005,7 @@
         },
         "related": [],
         "perks": "quality",
+        "visibility": "public",
         "updatedAt": "2026-07-29T16:14:43.149Z"
       },
       {
@@ -2989,6 +3048,7 @@
         },
         "related": [],
         "perks": "quality",
+        "visibility": "public",
         "updatedAt": "2026-07-29T16:14:43.149Z"
       }
     ]
@@ -3010,6 +3070,7 @@
     "image": "/uploads/c58f2d4e90565ec8413875e47a2d2220.jpg",
     "imageMobile": "",
     "video": "",
+    "visibility": "unlisted",
     "updatedAt": "2026-07-26T21:32:07.310Z",
     "products": [
       {
@@ -3068,6 +3129,7 @@
         },
         "related": [],
         "perks": "bulbs",
+        "visibility": "public",
         "updatedAt": "2026-07-27T08:03:16.285Z"
       },
       {
@@ -3121,6 +3183,7 @@
         },
         "related": [],
         "perks": "bulbs",
+        "visibility": "public",
         "updatedAt": "2026-07-27T08:03:16.285Z"
       },
       {
@@ -3174,6 +3237,7 @@
         },
         "related": [],
         "perks": "bulbs",
+        "visibility": "public",
         "updatedAt": "2026-07-27T08:03:16.285Z"
       },
       {
@@ -3207,6 +3271,7 @@
         },
         "related": [],
         "perks": "bulbs",
+        "visibility": "public",
         "updatedAt": "2026-07-27T08:03:16.285Z"
       },
       {
@@ -3250,6 +3315,7 @@
         },
         "related": [],
         "perks": "bulbs",
+        "visibility": "public",
         "updatedAt": "2026-07-27T08:03:16.285Z"
       },
       {
@@ -3327,6 +3393,7 @@
         },
         "related": [],
         "perks": "bulbs",
+        "visibility": "public",
         "updatedAt": "2026-07-27T08:03:16.285Z"
       },
       {
@@ -3399,6 +3466,7 @@
         },
         "related": [],
         "perks": "bulbs",
+        "visibility": "public",
         "updatedAt": "2026-07-27T08:03:16.285Z"
       },
       {
@@ -3451,6 +3519,7 @@
         },
         "related": [],
         "perks": "bulbs",
+        "visibility": "public",
         "updatedAt": "2026-07-27T08:03:16.285Z"
       },
       {
@@ -3489,6 +3558,7 @@
         },
         "related": [],
         "perks": "led",
+        "visibility": "public",
         "updatedAt": "2026-07-29T16:19:58.160Z"
       },
       {
@@ -3536,6 +3606,7 @@
         },
         "related": [],
         "perks": "led",
+        "visibility": "public",
         "updatedAt": "2026-07-29T16:19:58.160Z"
       },
       {
@@ -3579,6 +3650,7 @@
         },
         "related": [],
         "perks": "led",
+        "visibility": "public",
         "updatedAt": "2026-07-29T16:19:58.160Z"
       },
       {
@@ -3631,6 +3703,7 @@
         },
         "related": [],
         "perks": "led",
+        "visibility": "public",
         "updatedAt": "2026-07-29T16:19:58.160Z"
       },
       {
@@ -3664,6 +3737,7 @@
         },
         "related": [],
         "perks": "bulbs",
+        "visibility": "public",
         "updatedAt": "2026-07-27T08:03:16.285Z"
       },
       {
@@ -3722,6 +3796,7 @@
         },
         "related": [],
         "perks": "bulbs",
+        "visibility": "public",
         "updatedAt": "2026-07-27T08:03:16.285Z"
       },
       {
@@ -3775,6 +3850,7 @@
         },
         "related": [],
         "perks": "bulbs",
+        "visibility": "public",
         "updatedAt": "2026-07-27T08:03:16.285Z"
       },
       {
@@ -3828,6 +3904,7 @@
         },
         "related": [],
         "perks": "bulbs",
+        "visibility": "public",
         "updatedAt": "2026-07-27T08:03:16.285Z"
       },
       {
@@ -3886,6 +3963,7 @@
           "toc-vera-copy-mq6vhosq"
         ],
         "perks": "bulbs",
+        "visibility": "public",
         "updatedAt": "2026-07-27T08:03:16.285Z"
       },
       {
@@ -3949,6 +4027,7 @@
           "toc-alba"
         ],
         "perks": "bulbs",
+        "visibility": "public",
         "updatedAt": "2026-07-27T08:03:16.285Z"
       },
       {
@@ -4012,6 +4091,7 @@
           "toc-lina"
         ],
         "perks": "bulbs",
+        "visibility": "public",
         "updatedAt": "2026-07-27T08:03:16.285Z"
       },
       {
@@ -4055,6 +4135,7 @@
         },
         "related": [],
         "perks": "quality",
+        "visibility": "public",
         "updatedAt": "2026-07-29T16:19:58.160Z"
       },
       {
@@ -4208,6 +4289,7 @@
         },
         "related": [],
         "perks": "quality",
+        "visibility": "public",
         "updatedAt": "2026-07-29T16:19:58.160Z"
       },
       {
@@ -4256,6 +4338,7 @@
         },
         "related": [],
         "perks": "quality",
+        "visibility": "public",
         "updatedAt": "2026-07-29T16:19:58.160Z"
       },
       {
@@ -4289,6 +4372,7 @@
         },
         "related": [],
         "perks": "quality",
+        "visibility": "public",
         "updatedAt": "2026-07-29T16:19:58.160Z"
       },
       {
@@ -4322,6 +4406,7 @@
         },
         "related": [],
         "perks": "quality",
+        "visibility": "public",
         "updatedAt": "2026-07-29T16:19:58.160Z"
       },
       {
@@ -4360,6 +4445,7 @@
         },
         "related": [],
         "perks": "quality",
+        "visibility": "public",
         "updatedAt": "2026-07-29T16:19:58.160Z"
       },
       {
@@ -4426,6 +4512,7 @@
         },
         "related": [],
         "perks": "quality",
+        "visibility": "public",
         "updatedAt": "2026-07-29T16:19:58.160Z"
       },
       {
@@ -4488,6 +4575,7 @@
         },
         "related": [],
         "perks": "quality",
+        "visibility": "public",
         "updatedAt": "2026-07-29T16:19:58.160Z"
       },
       {
@@ -4530,6 +4618,7 @@
         },
         "related": [],
         "perks": "quality",
+        "visibility": "public",
         "updatedAt": "2026-07-29T16:19:58.160Z"
       },
       {
@@ -4582,6 +4671,7 @@
         },
         "related": [],
         "perks": "quality",
+        "visibility": "public",
         "updatedAt": "2026-07-29T16:19:58.160Z"
       },
       {
@@ -4640,6 +4730,7 @@
         },
         "related": [],
         "perks": "quality",
+        "visibility": "public",
         "updatedAt": "2026-07-29T16:19:58.160Z"
       },
       {
@@ -4683,6 +4774,7 @@
         },
         "related": [],
         "perks": "quality",
+        "visibility": "public",
         "updatedAt": "2026-07-29T16:19:58.160Z"
       },
       {
@@ -4716,6 +4808,7 @@
         },
         "related": [],
         "perks": "quality",
+        "visibility": "public",
         "updatedAt": "2026-07-29T16:19:58.160Z"
       },
       {
@@ -4759,6 +4852,7 @@
         },
         "related": [],
         "perks": "led",
+        "visibility": "public",
         "updatedAt": "2026-07-29T16:19:58.160Z"
       },
       {
@@ -4807,6 +4901,7 @@
         },
         "related": [],
         "perks": "bulbs",
+        "visibility": "public",
         "updatedAt": "2026-07-27T08:03:16.285Z"
       },
       {
@@ -4890,6 +4985,7 @@
         },
         "related": [],
         "perks": "quality",
+        "visibility": "public",
         "updatedAt": "2026-07-29T16:19:58.160Z"
       },
       {
@@ -4953,6 +5049,7 @@
         },
         "related": [],
         "perks": "led",
+        "visibility": "public",
         "updatedAt": "2026-07-29T16:19:58.160Z"
       },
       {
@@ -5006,6 +5103,7 @@
         },
         "related": [],
         "perks": "bulbs",
+        "visibility": "public",
         "updatedAt": "2026-07-27T08:03:16.285Z"
       },
       {
@@ -5089,6 +5187,7 @@
         },
         "related": [],
         "perks": "led",
+        "visibility": "public",
         "updatedAt": "2026-07-29T16:19:58.160Z"
       },
       {
@@ -5147,6 +5246,7 @@
         },
         "related": [],
         "perks": "led",
+        "visibility": "public",
         "updatedAt": "2026-07-29T16:19:58.160Z"
       },
       {
@@ -5205,6 +5305,7 @@
         },
         "related": [],
         "perks": "bulbs",
+        "visibility": "public",
         "updatedAt": "2026-07-27T08:03:16.285Z"
       },
       {
@@ -5293,6 +5394,7 @@
         },
         "related": [],
         "perks": "led",
+        "visibility": "public",
         "updatedAt": "2026-07-29T16:19:58.160Z"
       },
       {
@@ -5371,6 +5473,7 @@
         },
         "related": [],
         "perks": "quality",
+        "visibility": "public",
         "updatedAt": "2026-07-29T16:19:58.160Z"
       },
       {
@@ -5434,6 +5537,7 @@
         },
         "related": [],
         "perks": "bulbs",
+        "visibility": "public",
         "updatedAt": "2026-07-27T08:03:16.285Z"
       },
       {
@@ -5517,6 +5621,7 @@
         },
         "related": [],
         "perks": "quality",
+        "visibility": "public",
         "updatedAt": "2026-07-29T16:19:58.160Z"
       },
       {
@@ -5580,6 +5685,7 @@
         },
         "related": [],
         "perks": "bulbs",
+        "visibility": "public",
         "updatedAt": "2026-07-27T08:03:16.285Z"
       },
       {
@@ -5653,6 +5759,7 @@
         },
         "related": [],
         "perks": "quality",
+        "visibility": "public",
         "updatedAt": "2026-07-29T16:19:58.160Z"
       },
       {
@@ -5741,6 +5848,7 @@
         },
         "related": [],
         "perks": "quality",
+        "visibility": "public",
         "updatedAt": "2026-07-29T16:19:58.160Z"
       },
       {
@@ -5788,6 +5896,7 @@
         },
         "related": [],
         "perks": "quality",
+        "visibility": "public",
         "updatedAt": "2026-07-29T16:19:58.160Z"
       },
       {
@@ -5836,6 +5945,7 @@
         },
         "related": [],
         "perks": "quality",
+        "visibility": "public",
         "updatedAt": "2026-07-29T16:19:58.160Z"
       },
       {
@@ -5884,6 +5994,7 @@
         },
         "related": [],
         "perks": "quality",
+        "visibility": "public",
         "updatedAt": "2026-07-29T16:19:58.160Z"
       },
       {
@@ -5936,6 +6047,7 @@
         },
         "related": [],
         "perks": "quality",
+        "visibility": "public",
         "updatedAt": "2026-07-29T16:19:58.160Z"
       },
       {
@@ -5993,6 +6105,7 @@
         },
         "related": [],
         "perks": "quality",
+        "visibility": "public",
         "updatedAt": "2026-07-29T16:19:58.160Z"
       },
       {
@@ -6075,6 +6188,7 @@
         },
         "related": [],
         "perks": "quality",
+        "visibility": "public",
         "updatedAt": "2026-07-29T16:19:58.160Z"
       },
       {
@@ -6168,6 +6282,7 @@
         },
         "related": [],
         "perks": "quality",
+        "visibility": "public",
         "updatedAt": "2026-07-29T16:19:58.160Z"
       },
       {
@@ -6286,6 +6401,7 @@
         },
         "related": [],
         "perks": "quality",
+        "visibility": "public",
         "updatedAt": "2026-07-29T16:19:58.160Z"
       },
       {
@@ -6379,6 +6495,7 @@
         },
         "related": [],
         "perks": "quality",
+        "visibility": "public",
         "updatedAt": "2026-07-29T16:19:58.160Z"
       },
       {
@@ -6441,6 +6558,7 @@
         },
         "related": [],
         "perks": "quality",
+        "visibility": "public",
         "updatedAt": "2026-07-29T16:19:58.160Z"
       },
       {
@@ -6494,6 +6612,7 @@
         },
         "related": [],
         "perks": "quality",
+        "visibility": "public",
         "updatedAt": "2026-07-29T16:19:58.160Z"
       },
       {
@@ -6551,6 +6670,7 @@
         },
         "related": [],
         "perks": "quality",
+        "visibility": "public",
         "updatedAt": "2026-07-29T16:19:58.160Z"
       },
       {
@@ -6599,6 +6719,7 @@
         },
         "related": [],
         "perks": "quality",
+        "visibility": "public",
         "updatedAt": "2026-07-29T16:19:58.160Z"
       },
       {
@@ -6652,6 +6773,7 @@
         },
         "related": [],
         "perks": "quality",
+        "visibility": "public",
         "updatedAt": "2026-07-29T16:19:58.160Z"
       },
       {
@@ -6694,6 +6816,7 @@
         },
         "related": [],
         "perks": "quality",
+        "visibility": "public",
         "updatedAt": "2026-07-29T16:19:58.160Z"
       },
       {
@@ -6742,6 +6865,7 @@
         },
         "related": [],
         "perks": "quality",
+        "visibility": "public",
         "updatedAt": "2026-07-29T16:19:58.160Z"
       },
       {
@@ -6809,6 +6933,7 @@
         },
         "related": [],
         "perks": "quality",
+        "visibility": "public",
         "updatedAt": "2026-07-29T16:19:58.160Z"
       },
       {
@@ -6852,6 +6977,7 @@
         },
         "related": [],
         "perks": "quality",
+        "visibility": "public",
         "updatedAt": "2026-07-29T16:19:58.160Z"
       },
       {
@@ -6890,6 +7016,7 @@
         },
         "related": [],
         "perks": "quality",
+        "visibility": "public",
         "updatedAt": "2026-07-29T16:19:58.160Z"
       },
       {
@@ -6933,6 +7060,7 @@
         },
         "related": [],
         "perks": "quality",
+        "visibility": "public",
         "updatedAt": "2026-07-29T16:19:58.160Z"
       },
       {
@@ -6991,6 +7119,7 @@
         },
         "related": [],
         "perks": "quality",
+        "visibility": "public",
         "updatedAt": "2026-07-29T16:19:58.160Z"
       }
     ]

@@ -82,3 +82,28 @@ describe('ProductEditor — order perks variant', () => {
     expect(onChange).toHaveBeenCalledWith(expect.objectContaining({ perks: 'quality' }));
   });
 });
+
+describe('ProductEditor — visibility', () => {
+  const select = () => screen.getByLabelText('Видимость товара');
+
+  it('defaults to "показывать" for a product with no visibility set', () => {
+    renderEditor();
+    expect(select().value).toBe('public');
+    expect(screen.queryByText(/скрыт из списков|снят с сайта/)).toBeNull();
+  });
+
+  it('writes the chosen state back through onChange', () => {
+    const onChange = vi.fn();
+    renderEditor(product, onChange);
+    fireEvent.change(select(), { target: { value: 'unlisted' } });
+    expect(onChange).toHaveBeenCalledWith(expect.objectContaining({ visibility: 'unlisted' }));
+  });
+
+  it('badges a hidden product in the collapsed row and explains it when opened', () => {
+    renderEditor({ ...product, visibility: 'off' });
+    expect(select().value).toBe('off');
+    expect(screen.getByText('снят с сайта')).toBeTruthy();
+    expand();
+    expect(screen.getByText(/отдаёт 404/)).toBeTruthy();
+  });
+});

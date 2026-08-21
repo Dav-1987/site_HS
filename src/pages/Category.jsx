@@ -11,7 +11,7 @@ import NotFound from './NotFound.jsx';
 import JsonLd from '../components/JsonLd.jsx';
 import SocialMeta from '../components/SocialMeta.jsx';
 import HreflangLinks from '../components/HreflangLinks.jsx';
-import { isHiddenCategory, resolveImage } from '../data/catalog.js';
+import { listedProducts, OTHER_MODELS_SLUG, resolveImage } from '../data/catalog.js';
 import { breadcrumbSchema, productListSchema } from '../seo/schema.js';
 
 const SITE = 'https://hsmuebles.es';
@@ -26,10 +26,14 @@ export default function Category() {
   if (!category) return <NotFound />;
 
   const related = categories.filter((c) => c.slug !== category.slug).slice(0, 3);
+  // The section's own page still opens when it is unlisted, but a product hidden
+  // from listings stays off the grid (and out of the count and the schema) here
+  // too — this is a listing like any other.
+  const products = listedProducts(category);
   const catName = category.name[lang] ?? category.name.es;
   const catDesc = t('category.meta.description')
     .replace('{name}', catName)
-    .replace('{count}', category.products.length);
+    .replace('{count}', products.length);
   const esPath = `/${category.slug}`;
   const canonicalUrl = `${SITE}${localize(esPath)}`;
   const catalogUrl = `${SITE}${localize('/catalogo')}`;
@@ -53,7 +57,7 @@ export default function Category() {
             { name: t('nav.catalog'), url: catalogUrl },
             { name: category.name[lang], url: canonicalUrl },
           ]),
-          productListSchema(category.products, category.slug, lang),
+          productListSchema(products, category.slug, lang),
         ]}
       />
       {/* Header */}
@@ -74,19 +78,19 @@ export default function Category() {
             {category.name[lang]}
           </h1>
           <p className="mt-6 text-xs uppercase tracking-[0.2em] text-secondary">
-            {category.products.length} {t('category.products')}
+            {products.length} {t('category.products')}
           </p>
         </Reveal>
       </section>
 
       {/* Products */}
       <section className="px-6 pb-12 pt-6 md:px-12 md:pb-16 md:pt-8 lg:px-20">
-        {category.products.length > 0 ? (
+        {products.length > 0 ? (
           <Reveal
             stagger
             className="grid grid-cols-2 gap-x-6 gap-y-12 md:grid-cols-3 md:gap-x-8 lg:grid-cols-4"
           >
-            {category.products.map((p) => (
+            {products.map((p) => (
               <ProductCard
                 key={p.id}
                 product={p}
@@ -96,7 +100,7 @@ export default function Category() {
             ))}
             {/* Closes every visible grid — the only door into "Otros Modelos".
                 Omitted on that section's own page, where it would self-link. */}
-            {!isHiddenCategory(category) && <OtherModelsCard />}
+            {category.slug !== OTHER_MODELS_SLUG && <OtherModelsCard />}
           </Reveal>
         ) : (
           <p className="py-16 text-center text-secondary">{t('category.empty')}</p>

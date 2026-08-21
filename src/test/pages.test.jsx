@@ -11,17 +11,39 @@ import NotFound from '../pages/NotFound.jsx';
 
 // Render a page inside the same provider stack as main.jsx. With no backend,
 // the contexts stay on the bundled default catalog (see test/setup.js).
-function renderPage(ui, route = '/') {
+function renderPage(ui, route = '/', { settings, catalog } = {}) {
   return render(
     <MemoryRouter initialEntries={[route]}>
-      <SettingsProvider>
+      <SettingsProvider initialSettings={settings}>
         <LanguageProvider>
-          <CatalogProvider>{ui}</CatalogProvider>
+          <CatalogProvider initialCatalog={catalog}>{ui}</CatalogProvider>
         </LanguageProvider>
       </SettingsProvider>
     </MemoryRouter>,
   );
 }
+
+// Minimal category shaped the way the providers expect it.
+const makeCategory = (slug, name, visibility) => ({
+  slug,
+  name: { es: name, en: name },
+  tagline: { es: '', en: '' },
+  description: { es: '', en: '' },
+  image: '',
+  visibility,
+  products: [
+    {
+      id: `${slug}-1`,
+      name,
+      price: 100,
+      image: '/uploads/a.jpg',
+      images: ['/uploads/a.jpg'],
+      media: [{ type: 'image', src: '/uploads/a.jpg' }],
+      material: { es: '', en: '' },
+      size: '',
+    },
+  ],
+});
 
 describe('page smoke render', () => {
   it('Home renders the hero subtitle', () => {
@@ -43,5 +65,53 @@ describe('page smoke render', () => {
   it('NotFound renders the 404 code', () => {
     renderPage(<NotFound />);
     expect(screen.getByText('404')).toBeTruthy();
+  });
+});
+
+// Home sections that /admin can switch off wholesale (settings.blocks).
+describe('home page blocks', () => {
+  const promo = /Grandes descuentos en toda la colección/i;
+  const collections = /Explora por categoría/i;
+  // The grid needs something to list — with no backend the providers start
+  // empty, and an empty collections section doesn't render at all.
+  const catalog = [makeCategory('c1', 'Colección uno')];
+
+  it('renders the promo line and the collections grid by default', () => {
+    renderPage(<Home />, '/', { catalog });
+    expect(screen.getByText(promo)).toBeTruthy();
+    expect(screen.getByText(collections)).toBeTruthy();
+  });
+
+  it('drops the promo line when its switch is off', () => {
+    renderPage(<Home />, '/', { catalog, settings: { blocks: { heroPromo: false } } });
+    expect(screen.queryByText(promo)).toBeNull();
+    expect(screen.getByText(collections)).toBeTruthy();
+  });
+
+  it('drops the collections grid when its switch is off', () => {
+    renderPage(<Home />, '/', { catalog, settings: { blocks: { collections: false } } });
+    expect(screen.queryByText(collections)).toBeNull();
+    expect(screen.getByText(promo)).toBeTruthy();
+  });
+
+  it('drops the collections grid when every section is hidden', () => {
+    renderPage(<Home />, '/', { catalog: [makeCategory('c1', 'Oculta', 'unlisted')] });
+    expect(screen.queryByText(collections)).toBeNull();
+  });
+});
+
+// Category visibility, end to end through the providers (see src/data/catalog.js).
+describe('catalog listing respects visibility', () => {
+  it('lists only the public sections', () => {
+    renderPage(<Catalog />, '/catalogo', {
+      catalog: [
+        makeCategory('c1', 'Visible uno'),
+        makeCategory('c2', 'Oculto de listas', 'unlisted'),
+        makeCategory('c3', 'Fuera del sitio', 'off'),
+      ],
+    });
+    expect(screen.getByText('Visible uno')).toBeTruthy();
+    expect(screen.queryByText('Oculto de listas')).toBeNull();
+    expect(screen.queryByText('Fuera del sitio')).toBeNull();
   });
 });

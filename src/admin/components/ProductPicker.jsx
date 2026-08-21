@@ -1,4 +1,5 @@
 import { INPUT, BTN_GHOST } from '../ui.js';
+import { productOptionLabel } from '../productLabel.js';
 
 // Ordered multi-select over the whole catalog: pick products (by id) for the
 // "Featured" home section or a product's "related" list. Shows the chosen items
@@ -6,8 +7,7 @@ import { INPUT, BTN_GHOST } from '../ui.js';
 // products) still render with their id so they can be removed.
 export default function ProductPicker({ value, onChange, allProducts, excludeId, emptyHint }) {
   const ids = Array.isArray(value) ? value : [];
-  // "Name · ARTÍCULO · Category" so same-named products are distinguishable.
-  const optionLabel = (p) => [p.name, p.reference, p.categoryName].filter(Boolean).join(' · ');
+  const optionLabel = productOptionLabel;
   const labelOf = (id) => {
     const p = allProducts.find((x) => x.id === id);
     return p ? optionLabel(p) : `${id} (удалён?)`;

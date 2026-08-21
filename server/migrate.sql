@@ -110,3 +110,25 @@ ALTER TABLE orders ADD COLUMN IF NOT EXISTS attribution JSONB;
 ALTER TABLE orders ADD COLUMN IF NOT EXISTS event_id TEXT;
 CREATE UNIQUE INDEX IF NOT EXISTS idx_orders_event_id
   ON orders (event_id) WHERE event_id IS NOT NULL;
+
+-- ─── Visibility ──────────────────────────────────────────────────────────────
+-- Three states, admin-editable (see VISIBILITY in src/data/catalog.js):
+--   'public'   — listed everywhere (default)
+--   'unlisted' — no links to it anywhere on the site, but the page still works
+--                and stays in the sitemap/index
+--   'off'      — page 404s, dropped from the sitemap and the prerender
+-- A category set to 'off' cascades to its products' pages.
+--
+-- The backfill sits inside the "column did not exist" branch so it runs exactly
+-- once: "Otros Modelos" used to be hidden by a hardcoded slug list in
+-- src/data/catalog.js, and this is the migration of that state into data. An
+-- unconditional UPDATE here would silently re-hide it after every deploy.
+DO $$ BEGIN
+  IF NOT EXISTS (SELECT 1 FROM information_schema.columns
+                 WHERE table_name = 'categories' AND column_name = 'visibility') THEN
+    ALTER TABLE categories ADD COLUMN visibility TEXT NOT NULL DEFAULT 'public';
+    UPDATE categories SET visibility = 'unlisted' WHERE slug = 'otros-modelos';
+  END IF;
+END $$;
+
+ALTER TABLE products ADD COLUMN IF NOT EXISTS visibility TEXT NOT NULL DEFAULT 'public';

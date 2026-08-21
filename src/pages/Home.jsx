@@ -68,11 +68,13 @@ function Hero() {
           <p className="mx-auto mt-[clamp(0.875rem,3.5vh,2rem)] max-w-md text-base leading-relaxed text-primary">
             {t('hero.subtitle')}
           </p>
-          <div className="mx-auto mt-[clamp(0.875rem,3.5vh,2rem)] max-w-lg space-y-3">
-            <p className="text-lg font-bold uppercase tracking-[0.15em] text-primary">
-              {t('hero.promo')}
-            </p>
-          </div>
+          {settings.blocks?.heroPromo !== false && (
+            <div className="mx-auto mt-[clamp(0.875rem,3.5vh,2rem)] max-w-lg space-y-3">
+              <p className="text-lg font-bold uppercase tracking-[0.15em] text-primary">
+                {t('hero.promo')}
+              </p>
+            </div>
+          )}
           <div className="mt-[clamp(1rem,4vh,2.5rem)] flex justify-center">
             <Button to="/catalogo" variant="solid">
               {t('hero.cta')}
@@ -103,7 +105,7 @@ function FeaturedSection() {
   );
   const items = cards.length ? cards : fallback;
   const carousel = useCarousel();
-  if (!items.length) return null;
+  if (!items.length || settings.blocks?.featured === false) return null;
 
   return (
     <section className="py-14 md:hidden">
@@ -137,6 +139,8 @@ function FeaturedSection() {
 function CategoriesSection() {
   const { t } = useLanguage();
   const { categories } = useCatalog();
+  const { settings } = useSettings();
+  if (!categories.length || settings.blocks?.collections === false) return null;
   return (
     <section className="bg-surface px-3 py-14 md:px-12 md:py-20 lg:px-20">
       <SectionHeader

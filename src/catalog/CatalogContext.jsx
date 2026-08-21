@@ -3,6 +3,8 @@ import {
   loadDefaultCatalog,
   findCategory,
   findProduct,
+  liveCatalog,
+  listedProducts,
   visibleCategories,
 } from '../data/catalog.js';
 
@@ -72,20 +74,28 @@ export function CatalogProvider({ children, initialCatalog }) {
     };
   }, []);
 
-  // `categories` is what every listing renders — hidden sections (see
-  // isHiddenCategory) are filtered out of it. `allCategories` keeps them, for
-  // lookups by slug/id: a hidden section still has a working page and product
-  // URLs, it's just never listed.
-  const value = useMemo(
-    () => ({
-      categories: visibleCategories(categories),
-      allCategories: categories,
+  // Visibility is applied once, here, so every route, lookup and listing on the
+  // site agrees on it (see src/data/catalog.js):
+  //  - `live` drops everything switched off entirely. It's what the lookups
+  //    search, so an off slug/id simply isn't found and the page 404s.
+  //  - `allCategories` is that live catalog: unlisted sections still have a
+  //    working page and product URLs, they're just never linked to.
+  //  - `categories` is what every listing renders — public sections only, each
+  //    with the products hidden from listings already stripped out.
+  const value = useMemo(() => {
+    const live = liveCatalog(categories);
+    const listed = visibleCategories(live).map((c) => {
+      const products = listedProducts(c);
+      return products.length === c.products.length ? c : { ...c, products };
+    });
+    return {
+      categories: listed,
+      allCategories: live,
       loaded,
-      getCategory: (slug) => findCategory(categories, slug),
-      getProduct: (id) => findProduct(categories, id),
-    }),
-    [categories, loaded],
-  );
+      getCategory: (slug) => findCategory(live, slug),
+      getProduct: (id) => findProduct(live, id),
+    };
+  }, [categories, loaded]);
 
   return <CatalogContext.Provider value={value}>{children}</CatalogContext.Provider>;
 }

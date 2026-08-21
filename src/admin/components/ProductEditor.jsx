@@ -13,6 +13,7 @@ import { translations } from '../../i18n/translations.js';
 import ImageField from './ImageField.jsx';
 import ProductImagesEditor from './ProductImagesEditor.jsx';
 import ProductPicker from './ProductPicker.jsx';
+import VisibilitySelect, { VisibilityBadge, VisibilityNote } from './VisibilitySelect.jsx';
 
 // Only the third perk of the strip differs between variants, so the dropdown is
 // labelled with that perk's Spanish text — read straight from the translations
@@ -96,7 +97,13 @@ export default function ProductEditor({
               <span className="font-serif text-sm font-light text-primary/20">M</span>
             )}
           </span>
+          <VisibilityBadge entity={product} />
         </button>
+        <VisibilitySelect
+          value={product.visibility}
+          onChange={(visibility) => set({ visibility })}
+          title="Видимость товара"
+        />
         <button type="button" onClick={onDuplicate} title="Дублировать товар" className={BTN_GHOST}>
           ⧉
         </button>
@@ -119,6 +126,7 @@ export default function ProductEditor({
       {/* Body */}
       {open && (
         <div className="border-t border-primary/10 p-4">
+          <VisibilityNote entity={product} kind="product" />
           <SectionLabel>Основная информация</SectionLabel>
           <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
             <Field label="Название" value={product.name} onChange={(v) => set({ name: v })} />

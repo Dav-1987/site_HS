@@ -90,6 +90,19 @@ function sanitizeSeo(seo) {
   };
 }
 
+/**
+ * On/off switches for whole sections of the site (see BLOCKS). Anything that
+ * isn't an explicit `false` stays on, so a settings object saved before a switch
+ * existed never blanks the section it controls.
+ */
+export const BLOCKS = ['featured', 'collections', 'heroPromo'];
+
+function sanitizeBlocks(blocks) {
+  const out = {};
+  for (const key of BLOCKS) out[key] = blocks?.[key] !== false;
+  return out;
+}
+
 export function mergeSettings(input) {
   const image = input?.hero?.image;
   const imageMobile = input?.hero?.imageMobile;
@@ -106,5 +119,6 @@ export function mergeSettings(input) {
     texts: sanitizeTexts(input?.texts),
     contact: sanitizeContact(input?.contact),
     seo: sanitizeSeo(input?.seo),
+    blocks: sanitizeBlocks(input?.blocks),
   };
 }

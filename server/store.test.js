@@ -89,3 +89,19 @@ describe('productContentEqual', () => {
     expect(productContentEqual(undefined, base)).toBe(false);
   });
 });
+
+describe('productContentEqual — visibility', () => {
+  it('treats a missing visibility as public', () => {
+    expect(productContentEqual(base, { ...base, visibility: 'public' })).toBe(true);
+    expect(productContentEqual(base, { ...base, visibility: 'nonsense' })).toBe(true);
+  });
+
+  // Hiding a product is a content change: the sitemap's <lastmod> for its page
+  // should move, and the row must not keep the old timestamp.
+  it('detects a change of visibility', () => {
+    expect(productContentEqual(base, { ...base, visibility: 'unlisted' })).toBe(false);
+    expect(
+      productContentEqual({ ...base, visibility: 'unlisted' }, { ...base, visibility: 'off' }),
+    ).toBe(false);
+  });
+});

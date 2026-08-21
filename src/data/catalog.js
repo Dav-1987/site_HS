@@ -148,29 +148,75 @@ export function productReference(name) {
   return out.replace(/\s+/g, ' ').trim();
 }
 
-// ─── Hidden categories ────────────────────────────────────────────────────────
+// ─── Visibility ───────────────────────────────────────────────────────────────
 //
-// "Otros Modelos" is a real, browsable category (own page, own product URLs,
-// editable in /admin like any other) that is deliberately kept out of every
-// category listing — catalog grid, home page, header dropdown, the "related
-// collections" strip. The only way in is the tile at the end of each visible
-// category's product grid (see OtherModelsCard).
+// Every category and every product carries a three-state `visibility`, editable
+// in /admin (and backed by a real Postgres column — see server/migrate.sql):
 //
-// The flag lives here rather than on the category row because the catalog
-// round-trips through Postgres on every admin save: an unknown JSON field would
-// be silently dropped by writeCatalog (see server/store.js) and the section
-// would quietly resurface in the catalog.
+//   'public'   — listed everywhere. The default: anything with a missing or
+//                unrecognised value is treated as public, so the whole catalog
+//                keeps working unchanged.
+//   'unlisted' — no link to it anywhere on the site (header menu, home page,
+//                /catalogo, product grids, Featured, "related"), but the page
+//                itself still works and stays in the sitemap and the index.
+//                Meant for "take it off the shop window without losing the
+//                Google ranking or breaking the links already out there".
+//   'off'      — the page 404s and drops out of the sitemap and the prerender.
+//                A category set to 'off' takes its products' pages with it.
+//                The rows stay in the database; this is not a delete.
+//
+// "Otros Modelos" — a real, browsable section whose only entry point is the tile
+// at the end of every other category's grid (see OtherModelsCard) — used to be
+// hidden by a hardcoded slug list right here. It is now simply 'unlisted' data,
+// migrated once in server/migrate.sql.
 export const OTHER_MODELS_SLUG = 'otros-modelos';
-const HIDDEN_CATEGORY_SLUGS = new Set([OTHER_MODELS_SLUG]);
+
+export const VISIBILITY = ['public', 'unlisted', 'off'];
+export const DEFAULT_VISIBILITY = 'public';
+
+/** A category's/product's visibility, with anything unknown read as the default. */
+export function visibilityOf(entity) {
+  return VISIBILITY.includes(entity?.visibility) ? entity.visibility : DEFAULT_VISIBILITY;
+}
+
+/** True when the category/product may appear in a listing (i.e. it is public). */
+export function isListed(entity) {
+  return visibilityOf(entity) === 'public';
+}
+
+/** True when the category/product is off the site entirely (its page must 404). */
+export function isOff(entity) {
+  return visibilityOf(entity) === 'off';
+}
 
 /** True for categories that must never appear in a category listing. */
 export function isHiddenCategory(category) {
-  return HIDDEN_CATEGORY_SLUGS.has(category?.slug);
+  return !isListed(category);
 }
 
 /** The categories a visitor may see listed. */
 export function visibleCategories(categories) {
-  return categories.filter((c) => !isHiddenCategory(c));
+  return categories.filter(isListed);
+}
+
+/** A category's products minus the ones hidden from listings. */
+export function listedProducts(category) {
+  return (category?.products ?? []).filter(isListed);
+}
+
+/**
+ * The catalog with everything switched off removed — off categories entirely,
+ * and off products from the categories that remain. Applied once at the edge
+ * (see CatalogContext), so nothing downstream can resolve a slug or product id
+ * that is supposed to 404, and every route/lookup/listing agrees on it.
+ */
+export function liveCatalog(categories) {
+  return (categories ?? [])
+    .filter((c) => !isOff(c))
+    .map((c) => {
+      const products = (c.products ?? []).filter((p) => !isOff(p));
+      return products.length === (c.products ?? []).length ? c : { ...c, products };
+    });
 }
 
 /** Lookup helper used by the dynamic category route. */
@@ -194,14 +240,16 @@ function withCategory(product, category) {
 
 /**
  * Resolve a list of product ids (admin-curated, ordered) into card-ready
- * products. Missing/stale ids are skipped so the section never breaks.
+ * products. Missing/stale ids are skipped so the section never breaks — and so
+ * are products hidden from listings: hiding a product has to take it off the
+ * home page too, or the flag would do nothing where it is most visible.
  */
 function resolveIds(categories, ids, { exclude } = {}) {
   const out = [];
   for (const id of ids) {
     if (exclude && id === exclude) continue;
     const found = findProduct(categories, id);
-    if (found) out.push(withCategory(found.product, found.category));
+    if (found && isListed(found.product)) out.push(withCategory(found.product, found.category));
   }
   return out;
 }
@@ -231,13 +279,13 @@ export function computeFeatured(categories, featuredIds) {
   const out = [];
   for (const [ci, pi] of picks) {
     const c = visible[ci];
-    const p = c?.products?.[pi];
+    const p = listedProducts(c)[pi];
     if (c && p) out.push(withCategory(p, c));
   }
   // Fallback: take the first product of the first categories.
   if (out.length === 0) {
     for (const c of visible) {
-      const p = c?.products?.[0];
+      const p = listedProducts(c)[0];
       if (p) out.push(withCategory(p, c));
       if (out.length >= 4) break;
     }
@@ -250,8 +298,8 @@ export function computeFeatured(categories, featuredIds) {
  * `{ productId, cover, video }`; the output is the resolved product (shaped with
  * its category slug/name) augmented with `featuredCover` + `featuredVideo`, so it
  * slots straight into the carousel track. Cards whose `productId` is missing/stale
- * are skipped so the section never breaks. `cover` falls back to the product's
- * first photo when not set.
+ * — or whose product is hidden from listings — are skipped so the section never
+ * breaks. `cover` falls back to the product's first photo when not set.
  */
 export function resolveFeaturedCards(categories, cards) {
   if (!Array.isArray(cards)) return [];
@@ -259,7 +307,7 @@ export function resolveFeaturedCards(categories, cards) {
   for (const card of cards) {
     if (!card || typeof card !== 'object') continue;
     const found = findProduct(categories, card.productId);
-    if (!found) continue;
+    if (!found || !isListed(found.product)) continue;
     const product = withCategory(found.product, found.category);
     const cover = card.cover || productImages(found.product)[0] || '';
     out.push({ ...product, featuredCover: cover, featuredVideo: card.video || '' });
@@ -290,14 +338,14 @@ export function computeRelated(categories, product, category, relatedIds, limit 
     // One piece per visible collection — a way back into the main catalog.
     return visible
       .map((c) => {
-        const p = c.products.find((x) => x.id !== product.id);
+        const p = listedProducts(c).find((x) => x.id !== product.id);
         return p ? withCategory(p, c) : null;
       })
       .filter(Boolean)
       .slice(0, limit);
   }
 
-  return category.products
+  return listedProducts(category)
     .filter((p) => p.id !== product.id)
     .slice(0, limit)
     .map((p) => withCategory(p, category));
