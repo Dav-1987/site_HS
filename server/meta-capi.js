@@ -8,7 +8,9 @@
 
 import { createHash } from 'node:crypto';
 
-const GRAPH_VERSION = process.env.META_GRAPH_VERSION || 'v21.0';
+// Meta supports each version for ~2 years from release; v21.0 (Oct 2024) is
+// close to that line. Override with META_GRAPH_VERSION when bumping again.
+const GRAPH_VERSION = process.env.META_GRAPH_VERSION || 'v26.0';
 
 export function metaCapiConfigured() {
   return Boolean(process.env.META_PIXEL_ID && process.env.META_CAPI_TOKEN);
@@ -29,7 +31,7 @@ function normalizePhone(raw) {
  */
 export function buildLeadEvent({
   name, phone, eventId, fbp, fbc, eventSourceUrl,
-  clientIp, userAgent, productName, productId,
+  clientIp, userAgent, productName, productId, value,
 }) {
   const parts = (name || '').trim().toLowerCase().split(/\s+/).filter(Boolean);
   const ph = normalizePhone(phone);
@@ -46,6 +48,13 @@ export function buildLeadEvent({
   const custom_data = { content_type: 'product' };
   if (productName) custom_data.content_name = productName;
   if (productId) custom_data.content_ids = [productId];
+  // Must match what the browser Lead sends, or the two halves of a deduplicated
+  // event disagree on value. Taken from the catalog server-side, never from the
+  // request body — the client must not be able to price its own conversion.
+  if (Number(value) > 0) {
+    custom_data.value = Number(value);
+    custom_data.currency = 'EUR';
+  }
 
   const event = {
     event_name: 'Lead',

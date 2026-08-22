@@ -4,7 +4,9 @@ import {
   buildUserData,
   setPixelUserData,
   trackGoogleAdsLead,
+  trackGa4Lead,
   GOOGLE_ADS_ID,
+  GA4_ID,
   META_PIXEL_ID,
 } from './track.js';
 
@@ -56,6 +58,34 @@ describe('trackGoogleAdsLead', () => {
   it('is a no-op (does not throw) when gtag is absent', () => {
     delete window.gtag;
     expect(() => trackGoogleAdsLead()).not.toThrow();
+  });
+});
+
+describe('trackGa4Lead', () => {
+  it('sends generate_lead to GA4 only, with value and currency', () => {
+    const gtag = vi.fn();
+    window.gtag = gtag;
+    trackGa4Lead({ value: 199 });
+    expect(gtag).toHaveBeenCalledWith('event', 'generate_lead', {
+      send_to: GA4_ID,
+      currency: 'EUR',
+      value: 199,
+    });
+  });
+
+  it('omits value when the product has no price', () => {
+    const gtag = vi.fn();
+    window.gtag = gtag;
+    trackGa4Lead({ value: 0 });
+    expect(gtag).toHaveBeenCalledWith('event', 'generate_lead', {
+      send_to: GA4_ID,
+      currency: 'EUR',
+    });
+  });
+
+  it('is a no-op (does not throw) when gtag is absent', () => {
+    delete window.gtag;
+    expect(() => trackGa4Lead({ value: 199 })).not.toThrow();
   });
 });
 

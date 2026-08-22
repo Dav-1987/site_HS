@@ -6,8 +6,10 @@ import {
   buildUserData,
   getFbCookies,
   trackGoogleAdsLead,
+  trackGa4Lead,
 } from '../lib/track.js';
 import { getAttribution } from '../lib/attribution.js';
+import { productDiscount, productLabel } from '../data/catalog.js';
 
 // Mirrors server/order.js's isValidPhone — kept in sync manually since client
 // and server are separate deploy targets. Loosely validates digits with an
@@ -124,12 +126,28 @@ export default function OrderModal({ product, isOpen, onClose }) {
       // The server uses it as the durable idempotency key.
       eventIdRef.current =
         window.crypto?.randomUUID?.() ?? `${Date.now()}-${Math.random().toString(36).slice(2)}`;
+      // Opening the form is the only signal between viewing a product and
+      // actually sending a request. Leads are rare enough that Meta cannot
+      // optimise on them alone, so give it this mid-funnel step too.
+      trackPixel('InitiateCheckout', {
+        content_type: 'product',
+        content_ids: [product.id],
+        content_name: productLabel(product),
+        ...(productDiscount(product).price > 0
+          ? { value: productDiscount(product).price, currency: 'EUR' }
+          : null),
+      });
     }
+    // `product` is read only to describe the dialog that just opened; it cannot
+    // change while the dialog is open, so re-running on it would only re-fire
+    // the event.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isOpen]);
 
   if (!isOpen) return null;
 
-  const productLabel = `${product.name}${product.subtitle ? ' ' + product.subtitle : ''}`;
+  const label = productLabel(product);
+  const { price } = productDiscount(product);
 
   const validate = () => {
     const e = {};
@@ -184,11 +202,21 @@ export default function OrderModal({ product, isOpen, onClose }) {
       setPixelUserData(buildUserData({ name, phone }));
       trackPixel(
         'Lead',
-        { content_type: 'product', content_ids: [product.id], content_name: productLabel },
+        {
+          content_type: 'product',
+          content_ids: [product.id],
+          content_name: label,
+          // The product's price, not a lead's expected worth — Meta only needs a
+          // consistent scale to tell a cheap enquiry from an expensive one.
+          ...(price > 0 ? { value: price, currency: 'EUR' } : null),
+        },
         { eventID: eventId },
       );
-      // Google Ads "Lead" conversion, fired on the same successful submit.
+      // Google Ads "Lead" conversion, fired on the same successful submit. Its
+      // value is fixed at 1 EUR by the conversion action itself, so the product
+      // price goes to GA4 and Meta only.
       trackGoogleAdsLead();
+      trackGa4Lead({ value: price });
     } catch {
       setServerError(t('order.form.error.generic'));
     } finally {
@@ -243,7 +271,7 @@ export default function OrderModal({ product, isOpen, onClose }) {
                 {t('order.modal.eyebrow')}
               </p>
               <h2 id={fieldIds.title} className="font-serif text-xl font-light text-primary">
-                {productLabel}
+                {label}
               </h2>
 
               <form onSubmit={handleSubmit} className="mt-6 space-y-4" noValidate>

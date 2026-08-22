@@ -1,6 +1,7 @@
 import { describe, it, expect } from 'vitest';
 import {
   productDiscount,
+  productLabel,
   showsDiscountBadge,
   computeFeatured,
   computeRelated,
@@ -29,6 +30,22 @@ const cat = (slug, ...ids) => ({
   slug,
   name: { es: slug, en: slug },
   products: ids.map((id) => ({ id, name: id })),
+});
+
+describe('productLabel', () => {
+  it('joins the bare type word with the dimensions that tell items apart', () => {
+    expect(productLabel({ name: 'Espejo ', subtitle: '70 × 170 cm' })).toBe('Espejo 70 × 170 cm');
+  });
+
+  it('collapses the stray whitespace admin-entered names carry', () => {
+    expect(productLabel({ name: '  Tocador  ', subtitle: ' T-20 ' })).toBe('Tocador T-20');
+  });
+
+  it('falls back to the name alone when there is no subtitle', () => {
+    expect(productLabel({ name: 'Consola' })).toBe('Consola');
+    expect(productLabel({})).toBe('');
+    expect(productLabel(undefined)).toBe('');
+  });
 });
 
 describe('productDiscount', () => {

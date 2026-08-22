@@ -5,7 +5,9 @@ import { useLanguage } from '../i18n/LanguageContext.jsx';
 import { useCatalog } from '../catalog/CatalogContext.jsx';
 import {
   productDescription,
+  productDiscount,
   productImages,
+  productLabel,
   productMedia,
   productPerkVariant,
   productReference,
@@ -186,10 +188,15 @@ export default function Product() {
     if (!loaded) return;
     const match = getProduct(id);
     if (match) {
+      // `value`/`currency` are sent explicitly: left to itself the pixel scrapes
+      // the rendered "199 €" off the page, cannot parse the symbol into an ISO
+      // code, and drops the value with a console warning.
+      const { price } = productDiscount(match.product);
       trackPixel('ViewContent', {
         content_type: 'product',
         content_ids: [match.product.id],
-        content_name: match.product.name,
+        content_name: productLabel(match.product),
+        ...(price > 0 ? { value: price, currency: 'EUR' } : null),
       });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps

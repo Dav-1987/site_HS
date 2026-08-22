@@ -136,6 +136,22 @@ export function productDiscount(product) {
   };
 }
 
+/**
+ * Full human label for a product: the type word plus the dimensions that
+ * actually tell two items apart ("Espejo 70 × 170 cm"). `name` alone is not
+ * enough — for a whole category it is the same bare word ("Espejo "), so
+ * analytics, the order notification and Product schema would all report every
+ * item under one indistinguishable title. Collapses the stray whitespace that
+ * admin-entered names carry.
+ */
+export function productLabel(product) {
+  return [product?.name, product?.subtitle]
+    .filter(Boolean)
+    .join(' ')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
 // Furniture-type words that prefix product names (e.g. "Tocador T-01") and
 // shouldn't repeat in the "Referencia" spec row, which is meant to read as
 // a bare model code. Longer phrases are listed before the words they

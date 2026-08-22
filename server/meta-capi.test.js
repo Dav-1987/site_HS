@@ -37,6 +37,17 @@ describe('buildLeadEvent', () => {
     expect(ev.custom_data).toMatchObject({ content_type: 'product', content_name: 'Tocador', content_ids: ['T-20'] });
   });
 
+  it('carries the product value so it matches the browser Lead', () => {
+    const ev = buildLeadEvent({ name: 'Ana', phone: '612345678', value: 199 });
+    expect(ev.custom_data).toMatchObject({ value: 199, currency: 'EUR' });
+  });
+
+  it('leaves value out when the product has no price', () => {
+    const ev = buildLeadEvent({ name: 'Ana', phone: '612345678', value: 0 });
+    expect(ev.custom_data.value).toBeUndefined();
+    expect(ev.custom_data.currency).toBeUndefined();
+  });
+
   it('omits fields that are missing', () => {
     const ev = buildLeadEvent({ name: '', phone: '' });
     expect(ev.user_data.ph).toBeUndefined();

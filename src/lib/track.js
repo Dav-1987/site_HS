@@ -77,6 +77,25 @@ export function trackGoogleAdsLead() {
   }
 }
 
+// GA4 measurement id, shared with the base gtag.js in index.html.
+export const GA4_ID = 'G-F59Y5J11MF';
+
+/**
+ * Mirror the lead into GA4 as the standard `generate_lead` event. The Google
+ * Ads conversion above goes only to the Ads account, so without this GA4 has no
+ * idea a lead happened and the two platforms cannot be reconciled. Pinned to
+ * `send_to: GA4_ID` so it does not also land in Ads as a stray unmapped event.
+ */
+export function trackGa4Lead({ value, currency = 'EUR' } = {}) {
+  if (typeof window !== 'undefined' && typeof window.gtag === 'function') {
+    window.gtag('event', 'generate_lead', {
+      send_to: GA4_ID,
+      currency,
+      ...(value > 0 ? { value } : null),
+    });
+  }
+}
+
 /**
  * Read Meta's browser identifiers for server-side (Conversions API) matching:
  * `_fbp` (browser id) and `_fbc` (click id). When `_fbc` isn't set yet but the

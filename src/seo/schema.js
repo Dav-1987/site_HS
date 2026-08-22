@@ -8,6 +8,7 @@ import {
   productImages,
   productDescription,
   productDiscount,
+  productLabel,
   productReference,
   resolveImage,
 } from '../data/catalog.js';
@@ -107,7 +108,7 @@ export function productSchema(product, category, lang = 'es') {
   return clean({
     '@context': 'https://schema.org',
     '@type': 'Product',
-    name: product.name,
+    name: productLabel(product),
     description: productDescription(product, category, lang),
     image: images,
     sku,

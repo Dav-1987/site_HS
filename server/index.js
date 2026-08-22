@@ -524,6 +524,7 @@ app.post('/api/order', orderRateLimit, async (req, res) => {
         userAgent: req.get('user-agent'),
         productName: durableOrder.productName,
         productId: durableOrder.productId,
+        value: durableOrder.price,
       }).catch((err) => console.error('[order] Meta CAPI failed:', err.message));
     }
 
