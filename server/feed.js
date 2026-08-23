@@ -35,6 +35,13 @@ const LANG = 'es';
 
 // Google accepts one main image plus ten more.
 const MAX_EXTRA_IMAGES = 10;
+// Meta's Shop refuses to sell an item whose quantity is 0 or absent, and every
+// item in the feed is made to order rather than picked off a shelf — there is no
+// stock count to report and none is kept anywhere. A flat number stands in for
+// "as many as you want", which is the documented way to say that; the honest
+// part of the signal, whether the product can be had at all, stays with
+// isInStock. Google ignores the field.
+const MADE_TO_ORDER_QUANTITY = 100;
 // Merchant Center truncates past these; nothing in the catalog comes close
 // (longest title 34 chars, longest description 119), but a future paste of a
 // long description should be cut here rather than rejected on Google's side.
@@ -115,6 +122,7 @@ function itemXml({ product, category, images }) {
     tag('g:image_link', images[0]),
     ...images.slice(1, 1 + MAX_EXTRA_IMAGES).map((src) => tag('g:additional_image_link', src)),
     tag('g:availability', isInStock(product) ? 'in_stock' : 'out_of_stock'),
+    tag('g:quantity_to_sell_on_facebook', isInStock(product) ? MADE_TO_ORDER_QUANTITY : 0),
     // A discounted product ships its pre-discount price as `price` and the
     // current one as `sale_price`, which is how Shopping draws the same
     // struck-through pair the product page shows.

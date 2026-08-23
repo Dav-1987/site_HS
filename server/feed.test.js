@@ -176,6 +176,20 @@ describe('buildGoogleFeed — the XML', () => {
       // Still a priced, complete item — it just cannot be bought right now.
       expect(fields(xml, 'price')[0]).toBe('499.00 EUR');
     });
+
+    // Meta's Shop hides any item whose quantity is 0 or missing, so the same
+    // switch has to drive the count as well as the availability string.
+    it('carries a sellable quantity that follows the same switch', () => {
+      expect(fields(buildGoogleFeed(catalog([product()])), 'quantity_to_sell_on_facebook')[0]).toBe(
+        '100',
+      );
+      expect(
+        fields(
+          buildGoogleFeed(catalog([product({ inStock: false })])),
+          'quantity_to_sell_on_facebook',
+        )[0],
+      ).toBe('0');
+    });
   });
 
   it('carries the fixed fields Google needs for own-brand goods', () => {
