@@ -34,11 +34,11 @@ function TextRow({ textKey, texts, onSet }) {
       <code className="text-[10px] text-primary/35">{textKey}</code>
       <div className="mt-1 grid gap-3 sm:grid-cols-2">
         <label className="block">
-          <span className={LABEL}>ES</span>
+          <span className={`${LABEL} notranslate`} translate="no">ES</span>
           {field('es')}
         </label>
         <label className="block">
-          <span className={LABEL}>EN</span>
+          <span className={`${LABEL} notranslate`} translate="no">EN</span>
           {field('en')}
         </label>
       </div>
