@@ -205,7 +205,7 @@ function buildVanityWallapopDescription(product) {
 }
 
 function listingNoun(categorySlug) {
-  if (categorySlug === 'espejos-de-cuerpo-entero') return 'Espejo de cuerpo entero';
+  if (categorySlug === 'espejos') return 'Espejo de cuerpo entero';
   if (categorySlug === 'tocadores-loft') return 'Tocador de maquillaje estilo loft';
   if (categorySlug === 'tocadores') return 'Tocador de maquillaje';
   if (categorySlug === 'estanterias') return 'Estantería';
@@ -219,7 +219,7 @@ export function buildWallapopTitle(product, category) {
 }
 
 export function buildWallapopDescription(product, category) {
-  if (category.slug === 'espejos-de-cuerpo-entero') {
+  if (category.slug === 'espejos') {
     return buildMirrorWallapopDescription(product);
   }
 

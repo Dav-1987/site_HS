@@ -1,5 +1,5 @@
 export const INCLUDED_CATEGORY_SLUGS = [
-  'espejos-de-cuerpo-entero',
+  'espejos',
   'tocadores',
   'tocadores-loft',
   'estanterias',
@@ -9,7 +9,7 @@ const COMMON_CATEGORY = 'Hogar y jardín';
 const COMMON_SECTION = 'Muebles, decoración y jardín';
 
 export const WALLAPOP_CATEGORY_MAP = {
-  'espejos-de-cuerpo-entero': {
+  espejos: {
     category: COMMON_CATEGORY,
     section: COMMON_SECTION,
     type: 'Espejos',

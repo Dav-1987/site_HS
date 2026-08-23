@@ -37,10 +37,14 @@
   "texts": {
     "es": {
       "hero.title.2": "para su hogar",
-      "product.sizeLabel": "Medidas (total)"
+      "home.meta.title": "Mirage Muebles | Tu hogar, tu estilo. Nosotros ponemos la calidez",
+      "product.sizeLabel": "Medidas (total)",
+      "home.meta.description": "⭐⭐⭐⭐⭐\nMuebles modernos y elegantes para transformar tu hogar 🪞\nTocadores, espejos, estanterías y mucho más 🤍 \n🔥 ¡Grandes descuentos! \n🚚 Entrega disponible"
     },
     "en": {
-      "hero.title.2": "for your home"
+      "hero.title.2": "for your home",
+      "home.meta.title": "Mirage Muebles | Your home, your style. We bring the warmth.",
+      "home.meta.description": "⭐⭐⭐⭐⭐\nModern and elegant furniture to transform your home 🪞\nVanity tables, mirrors, shelving and much more 🤍\n🔥 Big discounts!\n🚚 Delivery available"
     }
   },
   "contact": {
@@ -52,8 +56,8 @@
   },
   "seo": {
     "image": "",
-    "title": "",
-    "description": "⭐⭐⭐⭐⭐\nMuebles modernos y elegantes para transformar tu hogar 🪞\nDescubre tocadores, espejos, estanterías y mucho más 🤍\n🔥 ¡Grandes descuentos y ofertas especiales!\n🚚 Entrega disponible | 🛒 Compra fácil y cómoda"
+    "title": "Mirage Muebles | Tu hogar, tu estilo. Nosotros ponemos la calidez",
+    "description": "⭐⭐⭐⭐⭐\nMuebles modernos y elegantes para transformar tu hogar 🪞\nTocadores, espejos, estanterías y mucho más 🤍 \n🔥 ¡Grandes descuentos! \n🚚 Entrega disponible"
   },
   "blocks": {
     "featured": true,

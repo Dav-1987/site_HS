@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import defaultCatalog from '../data/catalog.default.json';
-import { WALLAPOP_CATEGORY_MAP } from './categories.js';
+import { INCLUDED_CATEGORY_SLUGS, WALLAPOP_CATEGORY_MAP } from './categories.js';
 import {
   buildPanelState,
   buildWallapopDescription,
@@ -39,6 +39,23 @@ const EXPECTED_COMPACT_PROMOTION_FOOTER = [
   '📩 Entrega disponible. Escríbenos ahora y reserva el tuyo antes de que termine la promoción',
 ].join('\n');
 
+describe('the slugs this module is pinned to', () => {
+  // Categories carry no id, so their slug is their identity — and the admin can
+  // rename one at any time. When that happened to `espejos-de-cuerpo-entero`
+  // the category simply stopped matching and every mirror vanished from the
+  // panel without a word. These two assertions turn the next rename into a
+  // failing test instead of fifteen quietly missing listings.
+  const catalogSlugs = new Set(defaultCatalog.map((category) => category.slug));
+
+  it.each(INCLUDED_CATEGORY_SLUGS)('still finds the "%s" category in the catalog', (slug) => {
+    expect(catalogSlugs).toContain(slug);
+  });
+
+  it('maps every included category to a Wallapop category', () => {
+    expect(Object.keys(WALLAPOP_CATEGORY_MAP).sort()).toEqual([...INCLUDED_CATEGORY_SLUGS].sort());
+  });
+});
+
 describe('Wallapop listing preparation', () => {
   it('imports only the four approved site categories', () => {
     const state = buildPanelState(defaultCatalog, null, '2026-08-06T12:00:00.000Z');
@@ -60,7 +77,7 @@ describe('Wallapop listing preparation', () => {
       expect(record.titleEs).toContain(record.size);
       expect(record.productId).toBeTruthy();
       expect(record.reference).toBeTruthy();
-      if (record.siteCategorySlug === 'espejos-de-cuerpo-entero') {
+      if (record.siteCategorySlug === 'espejos') {
         expect(record.descriptionEs).toContain('• Tipo: espejo de pie / de cuerpo entero');
         expect(record.descriptionEs).not.toContain('• Estado: nuevo');
       } else if (record.siteCategorySlug === 'estanterias') {
@@ -81,7 +98,7 @@ describe('Wallapop listing preparation', () => {
   });
 
   it('creates the approved mirror description with width before height', () => {
-    const category = defaultCatalog.find((item) => item.slug === 'espejos-de-cuerpo-entero');
+    const category = defaultCatalog.find((item) => item.slug === 'espejos');
     const product = category.products.find((item) => item.reference === 'F-05');
     const description = buildWallapopDescription(product, category);
 
@@ -98,7 +115,7 @@ describe('Wallapop listing preparation', () => {
   });
 
   it('uses the matching site perk in every mirror description', () => {
-    const category = defaultCatalog.find((item) => item.slug === 'espejos-de-cuerpo-entero');
+    const category = defaultCatalog.find((item) => item.slug === 'espejos');
     const expectedPerks = {
       bulbs: '🎁 Bombillas LED de regalo',
       led: '💡 Iluminación LED profesional',
@@ -113,7 +130,7 @@ describe('Wallapop listing preparation', () => {
   });
 
   it('removes the luminosity claim only from premium mirror descriptions', () => {
-    const category = defaultCatalog.find((item) => item.slug === 'espejos-de-cuerpo-entero');
+    const category = defaultCatalog.find((item) => item.slug === 'espejos');
     const premiumProducts = category.products.filter((item) => item.perks === 'quality');
     const regularProduct = category.products.find((item) => item.perks !== 'quality');
     const premiumIntro =
@@ -129,7 +146,7 @@ describe('Wallapop listing preparation', () => {
   });
 
   it('uses the detailed site measurements when the product title differs', () => {
-    const category = defaultCatalog.find((item) => item.slug === 'espejos-de-cuerpo-entero');
+    const category = defaultCatalog.find((item) => item.slug === 'espejos');
     const product = category.products.find((item) => item.reference === 'D-05');
 
     expect(product.size).toBe('50 × 40 × 180 cm');
@@ -273,7 +290,7 @@ describe('Wallapop listing preparation', () => {
         const description = buildWallapopDescription(product, category);
         const detailsMarker = '• Tipo:';
         const expectedFooter =
-          category.slug === 'espejos-de-cuerpo-entero' ||
+          category.slug === 'espejos' ||
           category.slug === 'estanterias' ||
           category.slug.startsWith('tocadores')
             ? EXPECTED_COMPACT_PROMOTION_FOOTER
