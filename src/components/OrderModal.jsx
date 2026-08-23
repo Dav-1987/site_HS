@@ -7,6 +7,8 @@ import {
   getFbCookies,
   trackGoogleAdsLead,
   trackGa4Lead,
+  buildGoogleUserData,
+  setGoogleAdsUserData,
 } from '../lib/track.js';
 import { getAttribution } from '../lib/attribution.js';
 import { productDiscount, productLabel } from '../data/catalog.js';
@@ -212,6 +214,9 @@ export default function OrderModal({ product, isOpen, onClose }) {
         },
         { eventID: eventId },
       );
+      // Enhanced conversions: the customer data has to be set before the
+      // conversion fires, not after — gtag reads whatever is set at that moment.
+      setGoogleAdsUserData(buildGoogleUserData({ name, phone, postalCode }));
       // Google Ads "Lead" conversion, fired on the same successful submit. Its
       // value is fixed at 1 EUR by the conversion action itself, so the product
       // price goes to GA4 and Meta only.

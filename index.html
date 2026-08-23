@@ -33,7 +33,11 @@
       gtag('js', new Date());
 
       gtag('config', 'G-F59Y5J11MF');
-      gtag('config', 'AW-18251052543');
+      // allow_enhanced_conversions lets the tag send the hashed name/phone the
+      // order form collects, so a conversion still reaches its ad click when the
+      // _gcl_aw cookie is gone — a different device, Safari's cookie lifetime,
+      // an in-app browser. See setGoogleAdsUserData in src/lib/track.js.
+      gtag('config', 'AW-18251052543', { allow_enhanced_conversions: true });
     </script>
     <!-- Meta Pixel -->
     <script>

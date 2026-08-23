@@ -5,6 +5,8 @@ import {
   setPixelUserData,
   trackGoogleAdsLead,
   trackGa4Lead,
+  buildGoogleUserData,
+  setGoogleAdsUserData,
   GOOGLE_ADS_ID,
   GA4_ID,
   META_PIXEL_ID,
@@ -86,6 +88,52 @@ describe('trackGa4Lead', () => {
   it('is a no-op (does not throw) when gtag is absent', () => {
     delete window.gtag;
     expect(() => trackGa4Lead({ value: 199 })).not.toThrow();
+  });
+});
+
+describe('buildGoogleUserData', () => {
+  it('formats the phone as E.164 for Google, unlike the digits Meta wants', () => {
+    expect(buildGoogleUserData({ phone: '612 345 678' }).phone_number).toBe('+34612345678');
+    expect(buildGoogleUserData({ phone: '0034612345678' }).phone_number).toBe('+34612345678');
+  });
+
+  it('builds the address block Google matches on, with the country beside it', () => {
+    expect(buildGoogleUserData({ name: 'María García', postalCode: '28001' }).address).toEqual({
+      first_name: 'María',
+      last_name: 'García',
+      postal_code: '28001',
+      country: 'ES',
+    });
+  });
+
+  it('keeps the name as typed — the tag normalizes before hashing', () => {
+    expect(buildGoogleUserData({ name: 'María García' }).address.first_name).toBe('María');
+  });
+
+  it('leaves out an address nobody filled in rather than sending a bare country', () => {
+    expect(buildGoogleUserData({ phone: '612345678' }).address).toBeUndefined();
+    expect(buildGoogleUserData({})).toEqual({});
+  });
+});
+
+describe('setGoogleAdsUserData', () => {
+  it('sets user_data so the next conversion is matched against it', () => {
+    const gtag = vi.fn();
+    window.gtag = gtag;
+    setGoogleAdsUserData({ phone_number: '+34612345678' });
+    expect(gtag).toHaveBeenCalledWith('set', 'user_data', { phone_number: '+34612345678' });
+  });
+
+  it('does nothing for empty data', () => {
+    const gtag = vi.fn();
+    window.gtag = gtag;
+    setGoogleAdsUserData({});
+    expect(gtag).not.toHaveBeenCalled();
+  });
+
+  it('is a no-op (does not throw) when gtag is absent', () => {
+    delete window.gtag;
+    expect(() => setGoogleAdsUserData({ phone_number: '+34612345678' })).not.toThrow();
   });
 });
 

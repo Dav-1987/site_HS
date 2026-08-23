@@ -21,6 +21,18 @@ export function trackPixel(event, params, options) {
 }
 
 /**
+ * A Spanish phone as typed into the form → bare digits with the country code.
+ * Mirrors `normalizePhone` in server/meta-capi.js, which does the same to the
+ * server's copy of the same number; the two must agree or the deduplicated
+ * halves of a Lead carry different identities.
+ */
+function normalizeEsPhone(phone) {
+  const digits = (phone || '').replace(/\D/g, '').replace(/^00/, '');
+  if (!digits) return '';
+  return digits.length === 9 ? `34${digits}` : digits; // bare national number
+}
+
+/**
  * Build Meta advanced-matching fields from a name + Spanish phone. Values are
  * normalized (digits-only phone with country code, lower-cased name) but NOT
  * hashed here — fbevents.js SHA-256-hashes them in the browser before they
@@ -28,8 +40,7 @@ export function trackPixel(event, params, options) {
  */
 export function buildUserData({ name, phone } = {}) {
   const data = {};
-  let digits = (phone || '').replace(/\D/g, '').replace(/^00/, '');
-  if (digits.length === 9) digits = '34' + digits; // bare Spanish national number
+  const digits = normalizeEsPhone(phone);
   if (digits) data.ph = digits;
   const parts = (name || '').trim().toLowerCase().split(/\s+/).filter(Boolean);
   if (parts[0]) data.fn = parts[0];
@@ -74,6 +85,52 @@ export function trackGoogleAdsLead() {
       value: 1.0,
       currency: 'EUR',
     });
+  }
+}
+
+/**
+ * Build the enhanced-conversions payload from what the order form collects.
+ * Google matches on either the phone or a complete address, so both are sent:
+ * we have no email, and email is what matches best, so the two weaker signals
+ * together are what we have. Shapes and key names are Google's, not ours —
+ * `phone_number` must be E.164, and the address block is only worth sending
+ * with a country beside it.
+ *
+ * Values go out in the clear from here; the Google tag normalizes and
+ * SHA-256-hashes them in the browser before anything leaves the page.
+ */
+export function buildGoogleUserData({ name, phone, postalCode } = {}) {
+  const data = {};
+  const digits = normalizeEsPhone(phone);
+  if (digits) data.phone_number = `+${digits}`;
+
+  const address = {};
+  const parts = (name || '').trim().split(/\s+/).filter(Boolean);
+  if (parts[0]) address.first_name = parts[0];
+  if (parts.length > 1) address.last_name = parts.slice(1).join(' ');
+  const zip = (postalCode || '').trim();
+  if (zip) address.postal_code = zip;
+  if (Object.keys(address).length > 0) {
+    address.country = 'ES'; // the form is Spain-only; there is no field to read
+    data.address = address;
+  }
+  return data;
+}
+
+/**
+ * Attach the customer data Google should match this conversion against. Must
+ * run *before* the conversion event — gtag reads whatever `user_data` is set at
+ * the moment the event fires, so calling it afterwards silently matches on
+ * nothing. No-op when gtag is unavailable or there is nothing to match on.
+ */
+export function setGoogleAdsUserData(userData) {
+  if (
+    typeof window !== 'undefined' &&
+    typeof window.gtag === 'function' &&
+    userData &&
+    Object.keys(userData).length > 0
+  ) {
+    window.gtag('set', 'user_data', userData);
   }
 }
 
