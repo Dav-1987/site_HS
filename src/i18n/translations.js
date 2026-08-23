@@ -43,7 +43,7 @@ export const translations = {
     'catalog.og.title': 'Catálogo completo | Mirage Muebles',
     'catalog.og.description':
       '{count} colecciones de mobiliario minimalista: tocadores, espejos, cómodas y más.',
-    'category.meta.title': '{name} | Muebles minimalistas | Mirage Muebles',
+    'category.meta.title': '{name} | Mirage Muebles',
     'category.meta.description':
       'Colección {name} de Mirage Muebles — {count} piezas de mobiliario minimalista. Envío, montaje e instalación gratuitos.',
     'contact.meta.description':
@@ -219,7 +219,7 @@ export const translations = {
     'catalog.og.title': 'Full Catalog | Mirage Muebles',
     'catalog.og.description':
       '{count} collections of minimalist furniture: vanities, mirrors, dressers and more.',
-    'category.meta.title': '{name} | Minimalist Furniture | Mirage Muebles',
+    'category.meta.title': '{name} | Mirage Muebles',
     'category.meta.description':
       '{name} collection by Mirage Muebles — {count} pieces of minimalist furniture. Free shipping, assembly and installation.',
     'contact.meta.description':
