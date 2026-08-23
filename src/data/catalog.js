@@ -118,6 +118,22 @@ export function showsDiscountBadge(product) {
 }
 
 /**
+ * Whether the product can be ordered right now. An admin switch, on unless
+ * explicitly turned off — the catalog predates the field, so anything saved
+ * without it stays orderable.
+ *
+ * Deliberately separate from visibility: an out-of-stock product keeps its
+ * place in every listing, its page and the sitemap. Only three things change —
+ * the corner badge ("Agotado" instead of the discount, see ProductBadge), the
+ * dimmed photo, and the dead order button; the Offer's availability in Product
+ * schema follows from the same flag, which is what keeps the product feed and
+ * the landing page telling Merchant Center the same story.
+ */
+export function isInStock(product) {
+  return product?.inStock !== false;
+}
+
+/**
  * Discount info. `oldPrice` is the pre-discount price; it's shown struck through
  * next to the current `price` only when it is set and strictly higher. `badge`
  * additionally honours the per-product switch above, so every place that draws

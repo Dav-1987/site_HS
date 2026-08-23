@@ -1,12 +1,14 @@
 import { Link } from './LocalizedLink.jsx';
 
 const BASE =
-  'inline-flex items-center justify-center gap-3 px-7 py-3.5 text-xs uppercase tracking-[0.2em] transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background';
+  'inline-flex items-center justify-center gap-3 px-7 py-3.5 text-xs uppercase tracking-[0.2em] transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:cursor-not-allowed disabled:opacity-60';
 
 const VARIANTS = {
-  outline: 'border border-primary/20 text-primary hover:bg-primary hover:text-background',
-  solid: 'bg-primary text-background hover:bg-accent hover:text-primary',
-  ghost: 'px-0 text-primary hover:text-accent-text',
+  outline:
+    'border border-primary/20 text-primary hover:bg-primary hover:text-background disabled:hover:bg-transparent disabled:hover:text-primary',
+  solid:
+    'bg-primary text-background hover:bg-accent hover:text-primary disabled:hover:bg-primary disabled:hover:text-background',
+  ghost: 'px-0 text-primary hover:text-accent-text disabled:hover:text-primary',
 };
 
 /** Polymorphic CTA — renders a router Link, an anchor, or a button. */

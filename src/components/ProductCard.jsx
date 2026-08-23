@@ -2,9 +2,9 @@ import { useEffect, useRef, useState } from 'react';
 import { Link } from './LocalizedLink.jsx';
 import Media from './Media.jsx';
 import Price from './Price.jsx';
-import DiscountBadge from './DiscountBadge.jsx';
+import ProductBadge, { SOLD_OUT_MEDIA } from './ProductBadge.jsx';
 import { useLanguage } from '../i18n/LanguageContext.jsx';
-import { productMedia } from '../data/catalog.js';
+import { isInStock, productMedia } from '../data/catalog.js';
 
 /** Product tile: swipeable photo/video carousel + discount-aware price. */
 export default function ProductCard({
@@ -14,6 +14,7 @@ export default function ProductCard({
   aspectClassName = 'aspect-[4/5]',
 }) {
   const { lang, t } = useLanguage();
+  const dim = isInStock(product) ? '' : SOLD_OUT_MEDIA;
   const slug = categorySlug || product.categorySlug;
   // Canonical product URL is /<categorySlug>/<id>; the legacy /producto/<id>
   // form still works as a redirect if the slug is ever missing.
@@ -124,7 +125,7 @@ export default function ProductCard({
               playsInline
               preload="metadata"
               aria-label={label}
-              className="pointer-events-none h-full w-full bg-surface object-cover"
+              className={`pointer-events-none h-full w-full bg-surface object-cover ${dim}`}
             />
           ) : (
             <Media
@@ -132,12 +133,12 @@ export default function ProductCard({
               idMobile={idx === 0 ? product.imageMobile : ''}
               alt={label}
               w={700}
-              className="transition-transform duration-700 ease-out group-hover:scale-[1.04]"
+              className={`transition-transform duration-700 ease-out group-hover:scale-[1.04] ${dim}`}
             />
           )}
         </Link>
 
-        <DiscountBadge product={product} />
+        <ProductBadge product={product} />
 
         {multi && (
           <>

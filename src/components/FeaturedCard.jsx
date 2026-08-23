@@ -2,8 +2,9 @@ import { useEffect, useRef, useState } from 'react';
 import { Link } from './LocalizedLink.jsx';
 import Media from './Media.jsx';
 import Price from './Price.jsx';
-import DiscountBadge from './DiscountBadge.jsx';
+import ProductBadge, { SOLD_OUT_MEDIA } from './ProductBadge.jsx';
 import { useLanguage } from '../i18n/LanguageContext.jsx';
+import { isInStock } from '../data/catalog.js';
 
 /** True on devices that have a real hover-capable pointer (desktop mouse). */
 function hoverCapable() {
@@ -27,6 +28,7 @@ function hoverCapable() {
  */
 export default function FeaturedCard({ item, aspectClassName = 'aspect-[4/5]' }) {
   const { lang } = useLanguage();
+  const soldOut = !isInStock(item);
   const slug = item.categorySlug;
   const to = slug ? `/${slug}/${item.id}` : `/producto/${item.id}`;
   const label = item.category ? `${item.name} — ${item.category[lang]}` : item.name;
@@ -85,7 +87,9 @@ export default function FeaturedCard({ item, aspectClassName = 'aspect-[4/5]' })
           id={cover}
           alt={label}
           w={700}
-          className="transition-transform duration-700 ease-out group-hover:scale-[1.04]"
+          className={`transition-transform duration-700 ease-out group-hover:scale-[1.04] ${
+            soldOut ? SOLD_OUT_MEDIA : ''
+          }`}
         />
         {video && (
           <video
@@ -97,11 +101,11 @@ export default function FeaturedCard({ item, aspectClassName = 'aspect-[4/5]' })
             preload="none"
             aria-hidden="true"
             className={`pointer-events-none absolute inset-0 h-full w-full object-cover transition-opacity duration-500 ${
-              playing ? 'opacity-100' : 'opacity-0'
-            }`}
+              soldOut ? 'grayscale' : ''
+            } ${playing ? 'opacity-100' : 'opacity-0'}`}
           />
         )}
-        <DiscountBadge product={item} />
+        <ProductBadge product={item} />
       </Link>
 
       <Link

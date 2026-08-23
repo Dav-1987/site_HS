@@ -1,5 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import {
+  isInStock,
   productDiscount,
   productLabel,
   showsDiscountBadge,
@@ -95,6 +96,41 @@ describe('showsDiscountBadge', () => {
 
   it('never shows a badge on a product that is not on sale', () => {
     expect(productDiscount({ price: 700, showDiscountBadge: true }).badge).toBe(false);
+  });
+});
+
+describe('isInStock', () => {
+  // The catalog predates the field, so anything but an explicit `false` is a
+  // product that can still be ordered — including every row saved before the
+  // column existed.
+  it('is true for a product with no switch set', () => {
+    expect(isInStock({})).toBe(true);
+    expect(isInStock(null)).toBe(true);
+    expect(isInStock({ inStock: true })).toBe(true);
+  });
+
+  it('is false only when explicitly turned off', () => {
+    expect(isInStock({ inStock: false })).toBe(false);
+  });
+
+  // Availability is a separate axis from visibility: running out must not take
+  // the product off the site, or the page would lose its internal links and its
+  // place in the listings for the duration.
+  it('does not affect where the product is listed', () => {
+    const soldOut = { id: 'p1', visibility: 'public', inStock: false };
+    expect(isListed(soldOut)).toBe(true);
+    expect(isOff(soldOut)).toBe(false);
+    expect(listedProducts({ products: [soldOut] })).toEqual([soldOut]);
+    expect(liveCatalog([{ slug: 'c', products: [soldOut] }])[0].products).toEqual([soldOut]);
+  });
+
+  // ...and neither does it touch the discount: the corner badge is swapped by
+  // ProductBadge, while the struck-through old price stays as it was.
+  it('leaves the discount calculation alone', () => {
+    const d = productDiscount({ price: 690, oldPrice: 790, inStock: false });
+    expect(d.onSale).toBe(true);
+    expect(d.badge).toBe(true);
+    expect(d.percent).toBe(13);
   });
 });
 

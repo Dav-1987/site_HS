@@ -78,6 +78,7 @@ export default function CategoryEditor({
           size: '',
           visibility: DEFAULT_VISIBILITY,
           showDiscountBadge: true,
+          inStock: true,
         },
       ],
     });

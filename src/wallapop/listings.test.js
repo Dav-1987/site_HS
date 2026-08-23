@@ -68,6 +68,25 @@ describe('Wallapop listing preparation', () => {
     expect(records.some((record) => record.siteCategorySlug === 'otros-modelos')).toBe(false);
   });
 
+  it('leaves out products that are out of stock', () => {
+    const soldOutFirst = defaultCatalog.map((category) => ({
+      ...category,
+      products: category.products.map((product, i) =>
+        i === 0 ? { ...product, inStock: false } : product,
+      ),
+    }));
+    const records = panelRecords(buildPanelState(soldOutFirst, null, '2026-08-06T12:00:00.000Z'));
+    const dropped = defaultCatalog
+      .filter((c) => Object.keys(WALLAPOP_CATEGORY_MAP).includes(c.slug))
+      .map((c) => c.products[0].id);
+
+    expect(dropped.length).toBeGreaterThan(0);
+    expect(records).toHaveLength(56 - dropped.length);
+    for (const id of dropped) {
+      expect(records.some((record) => record.productId === id)).toBe(false);
+    }
+  });
+
   it('creates Spanish titles without references and keeps the product link fields', () => {
     const state = buildPanelState(defaultCatalog, null, '2026-08-06T12:00:00.000Z');
     const records = panelRecords(state);

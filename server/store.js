@@ -63,6 +63,13 @@ function normalizeShowDiscountBadge(p) {
   return p?.showDiscountBadge !== false;
 }
 
+// Whether the product can be ordered right now. Mirrors isInStock() in
+// src/data/catalog.js: on unless explicitly false, so a row written before the
+// column existed stays orderable and doesn't look "changed" on the next save.
+function normalizeInStock(p) {
+  return p?.inStock !== false;
+}
+
 function shapeCategory(cat, products) {
   return {
     slug: cat.slug,
@@ -94,6 +101,7 @@ function shapeCategory(cat, products) {
       perks: normalizePerks(p),
       visibility: normalizeVisibility(p),
       showDiscountBadge: p.show_discount_badge !== false,
+      inStock: p.in_stock !== false,
       updatedAt: p.updated_at instanceof Date ? p.updated_at.toISOString() : p.updated_at,
     })),
   };
@@ -154,7 +162,8 @@ export function productContentEqual(a, b) {
     JSON.stringify(a.related ?? []) === JSON.stringify(b.related ?? []) &&
     normalizePerks(a) === normalizePerks(b) &&
     normalizeVisibility(a) === normalizeVisibility(b) &&
-    normalizeShowDiscountBadge(a) === normalizeShowDiscountBadge(b)
+    normalizeShowDiscountBadge(a) === normalizeShowDiscountBadge(b) &&
+    normalizeInStock(a) === normalizeInStock(b)
   );
 }
 
@@ -235,8 +244,8 @@ export async function writeCatalog(categories) {
 
         await client.query(
           `INSERT INTO products
-             (id, category_slug, name, price, old_price, image, image_mobile, images, material_es, material_en, size, reference, subtitle, video, video_first, media, description_es, description_en, related, perks, visibility, show_discount_badge, position, updated_at)
-           VALUES ($1,$2,$3,$4,$5,$6,$7,$8::jsonb,$9,$10,$11,$12,$13,$14,$15,$16::jsonb,$17,$18,$19::jsonb,$20,$21,$22,$23,$24)`,
+             (id, category_slug, name, price, old_price, image, image_mobile, images, material_es, material_en, size, reference, subtitle, video, video_first, media, description_es, description_en, related, perks, visibility, show_discount_badge, in_stock, position, updated_at)
+           VALUES ($1,$2,$3,$4,$5,$6,$7,$8::jsonb,$9,$10,$11,$12,$13,$14,$15,$16::jsonb,$17,$18,$19::jsonb,$20,$21,$22,$23,$24,$25)`,
           [
             p.id,
             c.slug,
@@ -261,6 +270,7 @@ export async function writeCatalog(categories) {
             normalizePerks(p),
             normalizeVisibility(p),
             normalizeShowDiscountBadge(p),
+            normalizeInStock(p),
             pi,
             productUpdatedAt,
           ],

@@ -16,6 +16,7 @@ import ImageField from './ImageField.jsx';
 import ProductImagesEditor from './ProductImagesEditor.jsx';
 import ProductPicker from './ProductPicker.jsx';
 import VisibilitySelect, { VisibilityBadge, VisibilityNote } from './VisibilitySelect.jsx';
+import StockToggle, { StockBadge, StockNote } from './StockToggle.jsx';
 
 // Only the third perk of the strip differs between variants, so the dropdown is
 // labelled with that perk's Spanish text — read straight from the translations
@@ -103,12 +104,14 @@ export default function ProductEditor({
             )}
           </span>
           <VisibilityBadge entity={product} />
+          <StockBadge product={product} />
         </button>
         <VisibilitySelect
           value={product.visibility}
           onChange={(visibility) => set({ visibility })}
           title="Видимость товара"
         />
+        <StockToggle product={product} onChange={(inStock) => set({ inStock })} />
         <button type="button" onClick={onDuplicate} title="Дублировать товар" className={BTN_GHOST}>
           ⧉
         </button>
@@ -132,6 +135,7 @@ export default function ProductEditor({
       {open && (
         <div className="border-t border-primary/10 p-4">
           <VisibilityNote entity={product} kind="product" />
+          <StockNote product={product} />
           <SectionLabel>Основная информация</SectionLabel>
           <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
             <Field label="Название" value={product.name} onChange={(v) => set({ name: v })} />

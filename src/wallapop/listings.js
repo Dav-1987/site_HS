@@ -1,5 +1,6 @@
 import { productImages } from '../data/catalog.js';
 import { isIncludedCategory, wallapopCategoryFor } from './categories.js';
+import { isInStock } from '../data/catalog.js';
 
 export const LISTING_STATUSES = ['not_published', 'published', 'sold'];
 
@@ -305,6 +306,11 @@ export function buildPanelState(categories, savedState, now = new Date().toISOSt
   for (const category of categories) {
     if (!isIncludedCategory(category.slug)) continue;
     for (const product of category.products ?? []) {
+      // Nothing to list for a product that is out of stock: this panel exists
+      // to prepare Wallapop ads, and an ad for something unbuyable is a wasted
+      // listing. It returns the moment stock does — its saved status and notes
+      // do not, exactly as for a product dropped from the catalog.
+      if (!isInStock(product)) continue;
       const previous = previousProducts[product.id];
       const source = sourceRecord(product, category);
       products[product.id] = {

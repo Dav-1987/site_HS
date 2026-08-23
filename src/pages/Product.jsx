@@ -4,6 +4,7 @@ import { Link } from '../components/LocalizedLink.jsx';
 import { useLanguage } from '../i18n/LanguageContext.jsx';
 import { useCatalog } from '../catalog/CatalogContext.jsx';
 import {
+  isInStock,
   productDescription,
   productDiscount,
   productImages,
@@ -22,7 +23,7 @@ import { productSchema, breadcrumbSchema } from '../seo/schema.js';
 
 const SITE = 'https://hsmuebles.es';
 import Media from '../components/Media.jsx';
-import DiscountBadge from '../components/DiscountBadge.jsx';
+import ProductBadge, { SOLD_OUT_MEDIA } from '../components/ProductBadge.jsx';
 import Reveal from '../components/Reveal.jsx';
 import Button from '../components/Button.jsx';
 import Price from '../components/Price.jsx';
@@ -207,6 +208,8 @@ export default function Product() {
   if (!found) return <NotFound />;
 
   const { product, category } = found;
+  const soldOut = !isInStock(product);
+  const dim = soldOut ? SOLD_OUT_MEDIA : '';
 
   // Canonical URL: if the category slug in the URL is stale or wrong
   // (renamed category, moved product), redirect to the correct one.
@@ -353,7 +356,7 @@ export default function Product() {
                   muted
                   loop
                   playsInline
-                  className="h-full w-full bg-black object-contain"
+                  className={`h-full w-full bg-black object-contain ${dim}`}
                   onClick={(e) => e.stopPropagation()}
                 />
               ) : (
@@ -367,7 +370,7 @@ export default function Product() {
                     }
                     setZoom(true);
                   }}
-                  className="absolute inset-0 h-full w-full cursor-zoom-in text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-accent"
+                  className={`absolute inset-0 h-full w-full cursor-zoom-in text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-accent ${dim}`}
                 >
                   <Media
                     id={activeItem?.src}
@@ -377,7 +380,7 @@ export default function Product() {
                   />
                 </button>
               )}
-              <DiscountBadge product={product} />
+              <ProductBadge product={product} />
               {!isVideoActive && (
                 <span className="pointer-events-none absolute bottom-3 right-3 bg-background/85 px-3 py-1.5 text-xs uppercase tracking-[0.18em] text-primary opacity-0 transition-opacity duration-300 group-hover:opacity-100">
                   {t('product.zoom')}
@@ -444,9 +447,13 @@ export default function Product() {
                         onClick={() => activateImage(i)}
                         aria-label={isVid ? t('product.video') : `${t('product.gallery')} ${i + 1}`}
                         aria-current={i === activeIdx}
+                        // Filter only: the strip already runs its own opacity
+                        // (dimmed until active), so SOLD_OUT_MEDIA's opacity
+                        // would fight it — but leaving the thumbs in colour
+                        // under a greyed-out main photo reads as a glitch.
                         className={`relative aspect-[4/5] overflow-hidden bg-surface transition-opacity duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent ${
-                          i === activeIdx ? 'ring-1 ring-accent' : 'opacity-60 hover:opacity-100'
-                        }`}
+                          soldOut ? 'grayscale' : ''
+                        } ${i === activeIdx ? 'ring-1 ring-accent' : 'opacity-60 hover:opacity-100'}`}
                       >
                         {isVid ? (
                           <div className="flex h-full w-full items-center justify-center bg-surface">
@@ -517,10 +524,11 @@ export default function Product() {
               <Button
                 type="button"
                 variant="solid"
+                disabled={soldOut}
                 onClick={() => setOrderOpen(true)}
                 className="w-full sm:w-auto"
               >
-                {t('order.button')}
+                {soldOut ? t('product.soldOut') : t('order.button')}
               </Button>
             </div>
             <OrderPerks t={t} variant={productPerkVariant(product)} />

@@ -139,3 +139,10 @@ ALTER TABLE products ADD COLUMN IF NOT EXISTS visibility TEXT NOT NULL DEFAULT '
 -- only adds a way to keep the struck-through old price while leaving the photo
 -- itself clean. NULL/absent reads as true everywhere.
 ALTER TABLE products ADD COLUMN IF NOT EXISTS show_discount_badge BOOLEAN NOT NULL DEFAULT true;
+
+-- Whether the product can be ordered right now. Deliberately NOT a visibility
+-- state: an out-of-stock product keeps its place in every listing, its page and
+-- the sitemap — only the corner badge, the order button and the Offer's
+-- availability change. On by default, so every existing row (and any row
+-- written before the column) stays orderable.
+ALTER TABLE products ADD COLUMN IF NOT EXISTS in_stock BOOLEAN NOT NULL DEFAULT true;

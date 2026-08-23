@@ -5,6 +5,7 @@
 // ============================================================
 
 import {
+  isInStock,
   productImages,
   productDescription,
   productDiscount,
@@ -98,7 +99,9 @@ export function productSchema(product, category, lang = 'es') {
           '@type': 'Offer',
           price,
           priceCurrency: 'EUR',
-          availability: 'https://schema.org/InStock',
+          availability: isInStock(product)
+            ? 'https://schema.org/InStock'
+            : 'https://schema.org/OutOfStock',
           itemCondition: 'https://schema.org/NewCondition',
           url,
           seller: { '@type': 'Organization', name: ORG_NAME },

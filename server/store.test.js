@@ -115,3 +115,22 @@ describe('productContentEqual — sale badge switch', () => {
     expect(productContentEqual(base, { ...base, showDiscountBadge: false })).toBe(false);
   });
 });
+
+// Availability has to bump updated_at like any other content change: the flag
+// changes the page's Offer, so the prerendered HTML and the sitemap's <lastmod>
+// both go stale until the next rebuild.
+describe('productContentEqual — stock', () => {
+  it('treats an untouched flag as equal to an explicit true (legacy row)', () => {
+    expect(productContentEqual(base, { ...base, inStock: true })).toBe(true);
+  });
+
+  it('detects a product going out of stock', () => {
+    expect(productContentEqual(base, { ...base, inStock: false })).toBe(false);
+  });
+
+  it('detects a product coming back in stock', () => {
+    const soldOut = { ...base, inStock: false };
+    expect(productContentEqual(soldOut, { ...soldOut, inStock: true })).toBe(false);
+    expect(productContentEqual(soldOut, { ...soldOut })).toBe(true);
+  });
+});

@@ -54,6 +54,36 @@ describe('ProductCard', () => {
   });
 });
 
+describe('ProductCard — sold out', () => {
+  const sale = { ...withPhoto, price: 690, oldPrice: 790 };
+
+  it('replaces the sale badge with "Agotado"', () => {
+    renderCard({ ...sale, inStock: false });
+    expect(screen.getByText('Agotado')).toBeTruthy();
+    expect(screen.queryByText('-13%')).toBeNull();
+  });
+
+  it('dims the photo without dimming the badge', () => {
+    const { container } = renderCard({ ...sale, inStock: false });
+    expect(container.querySelector('img').className).toContain('grayscale');
+    expect(screen.getByText('Agotado').className).not.toContain('grayscale');
+  });
+
+  // The card still links to the product and still shows what it costs — the
+  // product stays on the site, it just cannot be ordered right now.
+  it('keeps the link and the price', () => {
+    const { container } = renderCard({ ...sale, inStock: false });
+    expect(container.querySelector('a').getAttribute('href')).toBe('/tocadores/Tocador-M-01');
+    expect(screen.getByText(/690/)).toBeTruthy();
+  });
+
+  it('leaves an in-stock card untouched', () => {
+    const { container } = renderCard(sale);
+    expect(screen.queryByText('Agotado')).toBeNull();
+    expect(container.querySelector('img').className).not.toContain('grayscale');
+  });
+});
+
 describe('ProductCard — sale badge', () => {
   const sale = { ...withPhoto, price: 690, oldPrice: 790 };
 
