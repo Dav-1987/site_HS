@@ -3,7 +3,7 @@
 // CSP), so callers never have to guard `window.fbq` themselves.
 
 // Must match the id in index.html's pixel bootstrap.
-export const META_PIXEL_ID = '1469441981616987';
+export const META_PIXEL_ID = '2527019284431321';
 
 /**
  * Fire a Meta Pixel standard or custom event. Safe to call before fbevents.js
