@@ -93,7 +93,8 @@ ssh root@185.202.172.59
 npm run deploy:seo
 
 # 2. Скопировать изменённые файлы сервера
-scp server/index.js server/redirects.js server/store.js server/settings.js server/auth.js server/order.js server/notify.js root@185.202.172.59:/var/www/hs-muebles/server/
+scp server/index.js server/redirects.js server/store.js server/settings.js server/auth.js server/order.js server/notify.js server/feed.js root@185.202.172.59:/var/www/hs-muebles/server/
+scp src/data/catalog.js root@185.202.172.59:/var/www/hs-muebles/src/data/
 
 # 3. Перезапустить API
 ssh root@185.202.172.59 "pm2 restart hs-api"
@@ -152,7 +153,7 @@ npm run deploy:seo
 Когда изменились только server/*.js файлы:
 
 ```bash
-scp server/index.js server/store.js server/settings.js root@185.202.172.59:/var/www/hs-muebles/server/
+scp server/index.js server/store.js server/settings.js server/feed.js root@185.202.172.59:/var/www/hs-muebles/server/
 ssh root@185.202.172.59 "pm2 restart hs-api"
 ```
 
@@ -267,7 +268,18 @@ ORDER_EMAIL_FROM=...     # отправитель (по умолчанию SMTP_
    какое-то время отдаёт данные без нового поля, и фронтенд отработает по значению
    по умолчанию — например, покажет раздел, который должен быть скрыт.
 
-8. **`src/data/settings.default.json` тоже деплоится.** `server/settings.js` читает
+8. **`src/data/catalog.js` тоже деплоится.** `server/feed.js` импортирует его
+   (`../src/data/catalog.js`) — товарный фид намеренно считает цену, скидку, заголовок
+   и наличие тем же кодом, что и страница товара, иначе фид и посадочная разъезжаются
+   и Merchant Center отклоняет товары. Файла нет на VPS → API **не стартует**:
+   `scp src/data/catalog.js root@185.202.172.59:/var/www/hs-muebles/src/data/`
+
+9. **Роут фида требует правила в nginx.** `/feed/google.xml` отдаёт Express, но
+   `location /` сначала ищет файл на диске, поэтому нужен отдельный `location /feed/`
+   с `proxy_pass http://127.0.0.1:4000` (уже добавлен). Без него — молчаливый 404,
+   и Merchant Center просто не заберёт фид.
+
+10. **`src/data/settings.default.json` тоже деплоится.** `server/settings.js` читает
    этот файл с диска (`../src/data/settings.default.json`), поэтому при добавлении
    новых настроек его нужно копировать вместе с серверными файлами:
    `scp src/data/settings.default.json root@185.202.172.59:/var/www/hs-muebles/src/data/`
