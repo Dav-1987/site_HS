@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { useSettings } from '../settings/SettingsContext.jsx';
 import { resolveImage } from '../data/catalog.js';
 import { SITE, absUrl } from '../seo/schema.js';
+import { shareDescription } from '../seo/description.js';
 
 // Last-resort fallback when neither the page nor the admin set a preview image.
 const FALLBACK_IMAGE = `${SITE}/logo-mirage.png`;
@@ -11,7 +12,8 @@ const FALLBACK_IMAGE = `${SITE}/logo-mirage.png`;
  * - `image` is made absolute (social scrapers reject relative URLs).
  * - When a page passes no image, the admin-set default (settings.seo.image)
  *   is used, then the logo as a last resort.
- * - `description` whitespace is collapsed (catalog copy can contain newlines).
+ * - `description` is tidied by shareDescription, which keeps deliberate line
+ *   breaks (Telegram renders them) but collapses stray spacing.
  * React 19 hoists these <meta> tags into <head>; the prerenderer keeps them
  * there too, so link previews work without running JS.
  */
@@ -27,7 +29,7 @@ export default function SocialMeta({ title, description, url, type = 'website', 
 
   const seoFallback = settings?.seo?.image ? resolveImage(settings.seo.image, 1600) : null;
   const img = absUrl(image) || absUrl(seoFallback) || FALLBACK_IMAGE;
-  const desc = description ? description.replace(/\s+/g, ' ').trim() : undefined;
+  const desc = shareDescription(description);
   return (
     <>
       <meta property="og:site_name" content="Mirage Muebles" />
