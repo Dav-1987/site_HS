@@ -87,3 +87,25 @@ await writeFile(
   JSON.stringify({ client_id: clientId, client_secret: clientSecret, refresh_token: tokens.refresh_token }, null, 2),
 );
 console.log(`\nSaved refresh token to ${outPath}`);
+
+// google-ads-lib.mjs reads google-ads-credentials.json, not the file above —
+// that one also holds the developer token and customer id. Without this the
+// report scripts would keep presenting the token that was just replaced and
+// fail with `invalid_grant`, which reads like the new token never worked.
+const credsPath = 'secrets/google-ads-credentials.json';
+try {
+  const existing = JSON.parse(await readFile(credsPath, 'utf8'));
+  await writeFile(
+    credsPath,
+    JSON.stringify({ ...existing, refresh_token: tokens.refresh_token }, null, 2),
+  );
+  console.log(`Refreshed the token in ${credsPath} too`);
+} catch (err) {
+  if (err.code === 'ENOENT') {
+    console.log(`\n${credsPath} does not exist yet — create it with client_id,`);
+    console.log('client_secret, refresh_token, developer_token and customer_id');
+    console.log('before the report scripts will run.');
+  } else {
+    throw err;
+  }
+}
