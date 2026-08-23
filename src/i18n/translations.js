@@ -37,7 +37,7 @@ export const translations = {
     'home.og.title': 'Mirage Muebles | Mobiliario minimalista',
     'home.og.description':
       'Tocadores, espejos y mobiliario de diseño minimalista. Envío y montaje gratis.',
-    'catalog.meta.title': 'Catálogo de muebles | Tocadores, espejos y más | Mirage Muebles',
+    'catalog.meta.title': 'Catálogo de muebles | Mirage Muebles',
     'catalog.meta.description':
       'Explora las {count} colecciones de Mirage Muebles: tocadores loft, espejos de cuerpo entero, estanterías, cómodas, consolas y mesas de manicura. Diseño minimalista.',
     'catalog.og.title': 'Catálogo completo | Mirage Muebles',
@@ -213,7 +213,7 @@ export const translations = {
     'home.og.title': 'Mirage Muebles | Minimalist Furniture',
     'home.og.description':
       'Vanity furniture, mirrors and minimalist design pieces. Free shipping and assembly.',
-    'catalog.meta.title': 'Furniture Catalog | Vanities, Mirrors & More | Mirage Muebles',
+    'catalog.meta.title': 'Furniture Catalog | Mirage Muebles',
     'catalog.meta.description':
       "Explore Mirage Muebles' {count} collections: loft dressing tables, full-length mirrors, shelving, dressers, console tables and manicure tables. Minimalist design.",
     'catalog.og.title': 'Full Catalog | Mirage Muebles',
