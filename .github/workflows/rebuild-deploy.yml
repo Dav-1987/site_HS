@@ -38,8 +38,11 @@ jobs:
       - name: Lint and test
         run: npm run verify
 
-      # Prerender the current catalog instead of stale committed data.
-      - run: npm run catalog:pull
+      # Prerender the current catalog and admin settings instead of stale
+      # committed data. Settings matter here beyond freshness: the prerenderer
+      # has no network, so the admin's share title/description/image only reach
+      # link previews if they are baked in before the build.
+      - run: npm run data:pull
 
       - name: Build and run the browser hydration check
         run: npm run build:seo
