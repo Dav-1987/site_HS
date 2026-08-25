@@ -169,10 +169,17 @@ export function feedProducts(categories) {
 //    100 × 40 × 160 cm" does not say which, and a parent is never wrong.
 //  - Manicure tables have no category of their own (the nearest, Peluquería y
 //    cosmética, covers chairs only), so they ship as plain Mesas.
+//
+// Estanterías is the one place where the sibling categories are easy to
+// confuse: 6372 "Estantes y estanterías" is a shelf you hang on a wall, 465
+// "Librerías y estanterías" is a unit that stands on the floor. Every shelving
+// piece in the catalog is 150–200 cm tall and 35–40 cm deep, so it is the
+// second — under 6372 Pinterest would show a two-metre unit to someone looking
+// for a board to put above a desk.
 const PINTEREST_CATEGORIES = [
   [/^tocador/, '4148'], // Mobiliario > Armarios y almacenamiento > Tocadores
   [/^espejo/, '595'], // Casa y jardín > Decoración > Espejos
-  [/^estanteria/, '6372'], // Mobiliario > Estanterías > Estantes y estanterías
+  [/^estanteria/, '465'], // Mobiliario > Estanterías > Librerías y estanterías
   [/^consola/, '1602'], // Mobiliario > Mesas > Mesas decorativas > Consolas para sofás
   [/^comoda/, '4195'], // Mobiliario > Armarios y almacenamiento > Aparadores del dormitorio
   [/^mesa/, '6392'], // Mobiliario > Mesas

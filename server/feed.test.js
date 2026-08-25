@@ -299,7 +299,9 @@ describe('buildPinterestFeed', () => {
     const cases = [
       ['Tocador', '4148'],
       ['Espejo', '595'],
-      ['Estantería', '6372'],
+      // 465 is the free-standing unit, not 6372, the wall shelf — every
+      // shelving piece in the catalog is 150–200 cm tall.
+      ['Estantería', '465'],
       ['Consola', '1602'],
       ['Comoda', '4195'],
       ['Mesa', '6392'],
@@ -312,7 +314,7 @@ describe('buildPinterestFeed', () => {
   it('ignores accents, so Estantería and Estanteria are one word', () => {
     expect(
       fields(buildPinterestFeed(label({ name: 'Estanteria' })), 'google_product_category'),
-    ).toEqual(['6372']);
+    ).toEqual(['465']);
   });
 
   // A wrong category costs more than no category: it puts a mirror in front of
