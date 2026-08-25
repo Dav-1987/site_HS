@@ -237,10 +237,14 @@ function commonItemLines({ product, category, images }, { facebookQuantity }) {
     ...(onSale ? [tag('g:sale_price', money(price))] : []),
     tag('g:brand', BRAND),
     tag('g:condition', 'new'),
-    // Made to order under our own brand: there is no GTIN and no manufacturer
-    // part number. `reference` is not offered as an mpn precisely because of
-    // those duplicates.
-    tag('g:identifier_exists', 'no'),
+    // Made to order under our own brand, so there is no GTIN — but there is a
+    // manufacturer part number, because we are the manufacturer. It is
+    // product.id rather than product.reference: the latter is what the spec
+    // list shows the customer and is not unique, with M-01…M-05 each shared by
+    // a dressing table and a manicure table. The same value is published as
+    // sku/mpn in the page's Product schema, so the feed and the landing page
+    // Google compares it against agree.
+    tag('g:mpn', product.id),
     // Our own taxonomy, which both platforms take as a classification hint and
     // which Shopping campaigns can be split by.
     tag('g:product_type', category.name?.[LANG] ?? category.slug),

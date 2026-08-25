@@ -10,7 +10,6 @@ import {
   productDescription,
   productDiscount,
   productLabel,
-  productReference,
   resolveImage,
 } from '../data/catalog.js';
 import { withLang } from '../i18n/routing.js';
@@ -29,7 +28,9 @@ export function absUrl(path) {
 /** Drop undefined/empty keys so we never emit half-empty schema nodes. */
 function clean(obj) {
   return Object.fromEntries(
-    Object.entries(obj).filter(([, v]) => v !== undefined && v !== '' && !(Array.isArray(v) && v.length === 0)),
+    Object.entries(obj).filter(
+      ([, v]) => v !== undefined && v !== '' && !(Array.isArray(v) && v.length === 0),
+    ),
   );
 }
 
@@ -87,7 +88,14 @@ export function breadcrumbSchema(trail) {
 /** Product + Offer node. */
 export function productSchema(product, category, lang = 'es') {
   const { price } = productDiscount(product);
-  const sku = product.reference?.trim() || productReference(product.name);
+  // product.id, not product.reference. `reference` is the number shown to the
+  // customer in the spec list and it is not unique: M-01…M-05 each belong to
+  // both a dressing table and a manicure table, two different pieces. An sku or
+  // mpn that points at two products identifies neither, and Google pairs brand
+  // with mpn to tell our piece apart from anyone else's. `product.id` is unique
+  // across all 124 items, and since we manufacture under our own brand our own
+  // article number is genuinely the manufacturer part number.
+  const sku = product.id;
   const url = `${SITE}${withLang(`/${category.slug}/${product.id}`, lang)}`;
   const images = productImages(product)
     .map((img) => absUrl(resolveImage(img, 1600)))

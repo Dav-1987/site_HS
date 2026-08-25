@@ -92,13 +92,25 @@ describe('buildGoogleFeed — the XML', () => {
     ).toBeNull();
   });
 
-  // Five references are duplicated across the catalog (M-01…M-05 appear twice),
-  // so the reference cannot be the feed id — Google requires it unique.
+  // Five references are duplicated across the catalog (M-01…M-05 appear twice,
+  // once on a dressing table and once on a manicure table), so the reference
+  // can be neither the feed id nor the mpn — both have to be unique.
   it('identifies items by product id, not by reference', () => {
-    const xml = buildGoogleFeed(catalog([product()]));
+    const xml = buildGoogleFeed(catalog([product({ reference: 'M-01' })]));
     expect(fields(xml, 'id')[0]).toBe('Tocador-M-01');
-    expect(xml).not.toContain('<g:mpn>');
-    expect(fields(xml, 'identifier_exists')[0]).toBe('no');
+    expect(fields(xml, 'mpn')[0]).toBe('Tocador-M-01');
+    expect(fields(xml, 'mpn')[0]).not.toBe('M-01');
+  });
+
+  // Claiming no identifier exists while the landing page publishes an mpn is
+  // the contradiction this replaced: Google reads both and compares them.
+  it('no longer claims the product has no identifier', () => {
+    expect(buildGoogleFeed(catalog([product()]))).not.toContain('identifier_exists');
+    expect(buildPinterestFeed(catalog([product()]))).not.toContain('identifier_exists');
+  });
+
+  it('gives Pinterest the same mpn', () => {
+    expect(fields(buildPinterestFeed(catalog([product()])), 'mpn')[0]).toBe('Tocador-M-01');
   });
 
   // The name alone is the same bare word for a whole category ("Tocador" ×50),
