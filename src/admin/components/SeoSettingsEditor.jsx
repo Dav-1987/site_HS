@@ -52,7 +52,7 @@ export default function SeoSettingsEditor({ settings, onChange }) {
               rows={3}
               value={seo.description}
               onChange={(e) => set({ description: e.target.value })}
-              placeholder="Tocadores, espejos y mobiliario de diseño minimalista. Envío y montaje gratis."
+              placeholder="Tocadores, espejos y mobiliario de diseño minimalista. Montaje gratis."
               className={`${FIELD_CLASS} resize-y`}
             />
           </div>

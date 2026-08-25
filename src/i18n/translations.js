@@ -33,10 +33,10 @@ export const translations = {
     // --- SEO meta (page <title>/<meta description>, not visible UI copy) ---
     'home.meta.title': 'Mirage Muebles | Tocadores y mobiliario minimalista | España',
     'home.meta.description':
-      'Muebles de tocador, espejos, consolas y estanterías de diseño minimalista. Envío a toda España.',
+      'Muebles de tocador, espejos, consolas y estanterías de diseño minimalista. Montaje e instalación gratis.',
     'home.og.title': 'Mirage Muebles | Mobiliario minimalista',
     'home.og.description':
-      'Tocadores, espejos y mobiliario de diseño minimalista, hecho en España.',
+      'Tocadores, espejos y mobiliario de diseño minimalista. Montaje gratis.',
     'catalog.meta.title': 'Catálogo de muebles | Mirage Muebles',
     'catalog.meta.description':
       'Explora las {count} colecciones de Mirage Muebles: tocadores loft, espejos de cuerpo entero, estanterías, cómodas, consolas y mesas de manicura. Diseño minimalista.',
@@ -45,11 +45,11 @@ export const translations = {
       '{count} colecciones de mobiliario minimalista: tocadores, espejos, cómodas y más.',
     'category.meta.title': '{name} | Mirage Muebles',
     'category.meta.description':
-      'Colección {name} de Mirage Muebles — {count} piezas de mobiliario minimalista. Envío a toda España.',
+      'Colección {name} de Mirage Muebles — {count} piezas de mobiliario minimalista. Montaje e instalación gratuitos.',
     'contact.meta.description':
-      'Contacta con Mirage Muebles: tienda de muebles minimalistas en España. Teléfono, email, Instagram y TikTok.',
+      'Contacta con Mirage Muebles: tienda de muebles minimalistas en España. Teléfono, email, Instagram y TikTok. Montaje e instalación gratis.',
     'contact.og.description':
-      'Contacta con Mirage Muebles. Tienda de mobiliario minimalista en España.',
+      'Contacta con Mirage Muebles. Mobiliario minimalista con montaje e instalación gratis.',
 
     // --- Category / product ---
     'category.products': 'piezas',
@@ -151,6 +151,7 @@ export const translations = {
       'El coste del envío depende de la dirección de entrega. Te lo confirmamos antes de tramitar el pedido, junto con el resto de los datos.',
     'shipping.time':
       'El plazo de entrega habitual es de 3 a 5 días desde la confirmación del pedido.',
+    'shipping.assembly': 'El montaje y la instalación están incluidos sin coste adicional.',
     'shipping.how':
       'Tras recibir tu solicitud desde la ficha del producto, te contactamos por teléfono para confirmar la dirección, el coste del envío y la fecha de entrega.',
     'returns.title': 'Devoluciones',
@@ -228,10 +229,10 @@ export const translations = {
     // --- SEO meta (page <title>/<meta description>, not visible UI copy) ---
     'home.meta.title': 'Mirage Muebles | Vanity Furniture & Minimalist Design | Spain',
     'home.meta.description':
-      'Vanity furniture, mirrors, console tables and shelving in minimalist design. We ship anywhere in Spain.',
+      'Vanity furniture, mirrors, console tables and shelving in minimalist design. Free assembly and installation.',
     'home.og.title': 'Mirage Muebles | Minimalist Furniture',
     'home.og.description':
-      'Vanity furniture, mirrors and minimalist design pieces, made in Spain.',
+      'Vanity furniture, mirrors and minimalist design pieces. Free assembly.',
     'catalog.meta.title': 'Furniture Catalog | Mirage Muebles',
     'catalog.meta.description':
       "Explore Mirage Muebles' {count} collections: loft dressing tables, full-length mirrors, shelving, dressers, console tables and manicure tables. Minimalist design.",
@@ -240,11 +241,11 @@ export const translations = {
       '{count} collections of minimalist furniture: vanities, mirrors, dressers and more.',
     'category.meta.title': '{name} | Mirage Muebles',
     'category.meta.description':
-      '{name} collection by Mirage Muebles — {count} pieces of minimalist furniture. We ship anywhere in Spain.',
+      '{name} collection by Mirage Muebles — {count} pieces of minimalist furniture. Free assembly and installation.',
     'contact.meta.description':
-      'Contact Mirage Muebles: minimalist furniture store in Spain. Phone, email, Instagram and TikTok.',
+      'Contact Mirage Muebles: minimalist furniture store in Spain. Phone, email, Instagram and TikTok. Free assembly and installation.',
     'contact.og.description':
-      'Contact Mirage Muebles. Minimalist furniture store in Spain.',
+      'Contact Mirage Muebles. Minimalist furniture with free assembly and installation.',
 
     // --- Category / product ---
     'category.products': 'pieces',
@@ -344,6 +345,7 @@ export const translations = {
     'shipping.cost':
       'The shipping cost depends on the delivery address. We confirm it with you before processing the order, along with the rest of the details.',
     'shipping.time': 'Delivery usually takes 3 to 5 days from order confirmation.',
+    'shipping.assembly': 'Assembly and installation are included at no extra cost.',
     'shipping.how':
       'Once we receive your request from the product page, we call you to confirm the address, the shipping cost and the delivery date.',
     'returns.title': 'Returns',

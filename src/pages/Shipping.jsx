@@ -41,6 +41,7 @@ export default function Shipping() {
           <p>{t('shipping.intro')}</p>
           <p>{t('shipping.cost')}</p>
           <p>{t('shipping.time')}</p>
+          <p>{t('shipping.assembly')}</p>
           <p>{t('shipping.how')}</p>
           <PolicyContact />
         </Reveal>
