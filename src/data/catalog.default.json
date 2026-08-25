@@ -82,7 +82,8 @@
         "perks": "bulbs",
         "visibility": "public",
         "showDiscountBadge": true,
-        "updatedAt": "2026-07-27T08:03:16.285Z"
+        "inStock": true,
+        "updatedAt": "2026-08-23T15:34:43.460Z"
       },
       {
         "id": "Espejo-Alto-F-03",
@@ -137,6 +138,7 @@
         "perks": "bulbs",
         "visibility": "public",
         "showDiscountBadge": true,
+        "inStock": true,
         "updatedAt": "2026-08-06T12:07:06.614Z"
       },
       {
@@ -182,6 +184,7 @@
         "perks": "bulbs",
         "visibility": "public",
         "showDiscountBadge": true,
+        "inStock": true,
         "updatedAt": "2026-08-06T12:28:31.573Z"
       },
       {
@@ -252,6 +255,7 @@
         "perks": "bulbs",
         "visibility": "public",
         "showDiscountBadge": true,
+        "inStock": true,
         "updatedAt": "2026-08-06T12:28:08.043Z"
       },
       {
@@ -307,6 +311,7 @@
         "perks": "bulbs",
         "visibility": "public",
         "showDiscountBadge": true,
+        "inStock": true,
         "updatedAt": "2026-08-06T12:05:29.080Z"
       },
       {
@@ -367,6 +372,7 @@
         "perks": "bulbs",
         "visibility": "public",
         "showDiscountBadge": true,
+        "inStock": true,
         "updatedAt": "2026-08-06T12:27:38.760Z"
       },
       {
@@ -407,6 +413,7 @@
         "perks": "bulbs",
         "visibility": "public",
         "showDiscountBadge": true,
+        "inStock": true,
         "updatedAt": "2026-07-27T08:03:16.285Z"
       },
       {
@@ -467,6 +474,7 @@
         "perks": "bulbs",
         "visibility": "public",
         "showDiscountBadge": true,
+        "inStock": true,
         "updatedAt": "2026-07-27T08:03:16.285Z"
       },
       {
@@ -512,6 +520,7 @@
         "perks": "bulbs",
         "visibility": "public",
         "showDiscountBadge": true,
+        "inStock": true,
         "updatedAt": "2026-08-06T12:29:31.820Z"
       },
       {
@@ -612,6 +621,7 @@
         "perks": "quality",
         "visibility": "public",
         "showDiscountBadge": true,
+        "inStock": true,
         "updatedAt": "2026-08-06T12:03:09.430Z"
       },
       {
@@ -660,6 +670,7 @@
         "perks": "quality",
         "visibility": "public",
         "showDiscountBadge": true,
+        "inStock": true,
         "updatedAt": "2026-07-29T16:12:59.123Z"
       },
       {
@@ -725,6 +736,7 @@
         "perks": "led",
         "visibility": "public",
         "showDiscountBadge": true,
+        "inStock": true,
         "updatedAt": "2026-07-29T16:12:59.123Z"
       },
       {
@@ -770,6 +782,7 @@
         "perks": "led",
         "visibility": "public",
         "showDiscountBadge": true,
+        "inStock": true,
         "updatedAt": "2026-07-29T16:13:24.874Z"
       },
       {
@@ -815,6 +828,7 @@
         "perks": "led",
         "visibility": "public",
         "showDiscountBadge": true,
+        "inStock": true,
         "updatedAt": "2026-07-29T16:12:59.123Z"
       },
       {
@@ -870,6 +884,7 @@
         "perks": "led",
         "visibility": "public",
         "showDiscountBadge": true,
+        "inStock": true,
         "updatedAt": "2026-07-29T16:12:59.123Z"
       }
     ]
@@ -946,6 +961,7 @@
         "perks": "bulbs",
         "visibility": "public",
         "showDiscountBadge": true,
+        "inStock": true,
         "updatedAt": "2026-08-06T12:37:02.377Z"
       },
       {
@@ -1006,6 +1022,7 @@
         "perks": "bulbs",
         "visibility": "public",
         "showDiscountBadge": true,
+        "inStock": true,
         "updatedAt": "2026-08-06T11:14:39.904Z"
       },
       {
@@ -1066,6 +1083,7 @@
         "perks": "bulbs",
         "visibility": "public",
         "showDiscountBadge": true,
+        "inStock": true,
         "updatedAt": "2026-07-27T08:03:16.285Z"
       },
       {
@@ -1116,6 +1134,7 @@
         "perks": "led",
         "visibility": "public",
         "showDiscountBadge": true,
+        "inStock": true,
         "updatedAt": "2026-08-06T12:39:18.790Z"
       },
       {
@@ -1161,6 +1180,7 @@
         "perks": "bulbs",
         "visibility": "public",
         "showDiscountBadge": true,
+        "inStock": true,
         "updatedAt": "2026-07-27T08:03:16.285Z"
       },
       {
@@ -1201,6 +1221,7 @@
         "perks": "bulbs",
         "visibility": "public",
         "showDiscountBadge": true,
+        "inStock": true,
         "updatedAt": "2026-07-27T08:03:16.285Z"
       },
       {
@@ -1256,6 +1277,7 @@
         "perks": "led",
         "visibility": "public",
         "showDiscountBadge": true,
+        "inStock": true,
         "updatedAt": "2026-08-06T11:04:48.720Z"
       },
       {
@@ -1311,6 +1333,7 @@
         "perks": "bulbs",
         "visibility": "public",
         "showDiscountBadge": true,
+        "inStock": true,
         "updatedAt": "2026-08-06T12:39:51.168Z"
       },
       {
@@ -1366,6 +1389,7 @@
         "perks": "bulbs",
         "visibility": "public",
         "showDiscountBadge": true,
+        "inStock": true,
         "updatedAt": "2026-07-27T08:03:16.285Z"
       },
       {
@@ -1421,6 +1445,7 @@
         "perks": "led",
         "visibility": "public",
         "showDiscountBadge": true,
+        "inStock": true,
         "updatedAt": "2026-08-06T11:10:49.480Z"
       },
       {
@@ -1461,6 +1486,7 @@
         "perks": "bulbs",
         "visibility": "public",
         "showDiscountBadge": true,
+        "inStock": true,
         "updatedAt": "2026-07-27T08:03:16.285Z"
       },
       {
@@ -1511,6 +1537,7 @@
         "perks": "bulbs",
         "visibility": "public",
         "showDiscountBadge": true,
+        "inStock": true,
         "updatedAt": "2026-07-27T08:03:16.285Z"
       },
       {
@@ -1556,6 +1583,7 @@
         "perks": "bulbs",
         "visibility": "public",
         "showDiscountBadge": true,
+        "inStock": true,
         "updatedAt": "2026-07-27T08:03:16.285Z"
       },
       {
@@ -1625,6 +1653,7 @@
         "perks": "bulbs",
         "visibility": "public",
         "showDiscountBadge": true,
+        "inStock": true,
         "updatedAt": "2026-07-27T08:03:16.285Z"
       },
       {
@@ -1685,6 +1714,7 @@
         "perks": "bulbs",
         "visibility": "public",
         "showDiscountBadge": true,
+        "inStock": true,
         "updatedAt": "2026-07-27T08:03:16.285Z"
       },
       {
@@ -1745,6 +1775,7 @@
         "perks": "bulbs",
         "visibility": "public",
         "showDiscountBadge": true,
+        "inStock": true,
         "updatedAt": "2026-07-27T08:03:16.285Z"
       },
       {
@@ -1799,6 +1830,7 @@
         "perks": "bulbs",
         "visibility": "public",
         "showDiscountBadge": true,
+        "inStock": true,
         "updatedAt": "2026-07-27T08:03:16.285Z"
       }
     ]
@@ -1865,6 +1897,7 @@
         "perks": "bulbs",
         "visibility": "public",
         "showDiscountBadge": true,
+        "inStock": true,
         "updatedAt": "2026-08-21T14:29:52.140Z"
       },
       {
@@ -1914,6 +1947,7 @@
         "perks": "bulbs",
         "visibility": "public",
         "showDiscountBadge": true,
+        "inStock": true,
         "updatedAt": "2026-07-27T08:03:16.285Z"
       },
       {
@@ -1974,6 +2008,7 @@
         "perks": "bulbs",
         "visibility": "public",
         "showDiscountBadge": true,
+        "inStock": true,
         "updatedAt": "2026-08-06T11:54:44.182Z"
       },
       {
@@ -2019,6 +2054,7 @@
         "perks": "bulbs",
         "visibility": "public",
         "showDiscountBadge": true,
+        "inStock": true,
         "updatedAt": "2026-07-27T08:03:16.285Z"
       },
       {
@@ -2083,6 +2119,7 @@
         "perks": "bulbs",
         "visibility": "public",
         "showDiscountBadge": true,
+        "inStock": true,
         "updatedAt": "2026-08-06T12:50:23.658Z"
       },
       {
@@ -2143,6 +2180,7 @@
         "perks": "bulbs",
         "visibility": "public",
         "showDiscountBadge": true,
+        "inStock": true,
         "updatedAt": "2026-07-27T08:03:16.285Z"
       },
       {
@@ -2183,6 +2221,7 @@
         "perks": "bulbs",
         "visibility": "public",
         "showDiscountBadge": true,
+        "inStock": true,
         "updatedAt": "2026-07-27T08:03:16.285Z"
       },
       {
@@ -2237,6 +2276,7 @@
         "perks": "bulbs",
         "visibility": "public",
         "showDiscountBadge": true,
+        "inStock": true,
         "updatedAt": "2026-07-27T08:03:16.285Z"
       },
       {
@@ -2292,6 +2332,7 @@
         "perks": "bulbs",
         "visibility": "public",
         "showDiscountBadge": true,
+        "inStock": true,
         "updatedAt": "2026-07-27T08:03:16.285Z"
       },
       {
@@ -2342,6 +2383,7 @@
         "perks": "bulbs",
         "visibility": "public",
         "showDiscountBadge": true,
+        "inStock": true,
         "updatedAt": "2026-07-27T08:03:16.285Z"
       },
       {
@@ -2401,6 +2443,7 @@
         "perks": "bulbs",
         "visibility": "public",
         "showDiscountBadge": true,
+        "inStock": true,
         "updatedAt": "2026-07-27T08:03:16.285Z"
       },
       {
@@ -2456,6 +2499,7 @@
         "perks": "bulbs",
         "visibility": "public",
         "showDiscountBadge": true,
+        "inStock": true,
         "updatedAt": "2026-07-27T08:03:16.285Z"
       },
       {
@@ -2511,6 +2555,7 @@
         "perks": "bulbs",
         "visibility": "public",
         "showDiscountBadge": true,
+        "inStock": true,
         "updatedAt": "2026-07-27T08:03:16.285Z"
       },
       {
@@ -2556,6 +2601,7 @@
         "perks": "bulbs",
         "visibility": "public",
         "showDiscountBadge": true,
+        "inStock": true,
         "updatedAt": "2026-07-27T08:03:16.285Z"
       }
     ]
@@ -2637,6 +2683,7 @@
         "perks": "quality",
         "visibility": "public",
         "showDiscountBadge": true,
+        "inStock": true,
         "updatedAt": "2026-07-29T16:14:43.149Z"
       },
       {
@@ -2710,6 +2757,7 @@
         "perks": "quality",
         "visibility": "public",
         "showDiscountBadge": true,
+        "inStock": true,
         "updatedAt": "2026-07-29T16:14:43.149Z"
       },
       {
@@ -2750,6 +2798,7 @@
         "perks": "quality",
         "visibility": "public",
         "showDiscountBadge": true,
+        "inStock": true,
         "updatedAt": "2026-07-29T16:14:43.149Z"
       },
       {
@@ -2794,6 +2843,7 @@
         "perks": "quality",
         "visibility": "public",
         "showDiscountBadge": true,
+        "inStock": true,
         "updatedAt": "2026-07-29T16:14:43.149Z"
       },
       {
@@ -2853,6 +2903,7 @@
         "perks": "quality",
         "visibility": "public",
         "showDiscountBadge": true,
+        "inStock": true,
         "updatedAt": "2026-07-29T16:14:43.149Z"
       },
       {
@@ -2908,6 +2959,7 @@
         "perks": "quality",
         "visibility": "public",
         "showDiscountBadge": true,
+        "inStock": true,
         "updatedAt": "2026-07-29T16:14:43.149Z"
       },
       {
@@ -2962,6 +3014,7 @@
         "perks": "quality",
         "visibility": "public",
         "showDiscountBadge": true,
+        "inStock": true,
         "updatedAt": "2026-07-29T16:14:43.149Z"
       },
       {
@@ -3021,6 +3074,7 @@
         "perks": "quality",
         "visibility": "public",
         "showDiscountBadge": true,
+        "inStock": true,
         "updatedAt": "2026-07-29T16:14:43.149Z"
       },
       {
@@ -3061,6 +3115,7 @@
         "perks": "quality",
         "visibility": "public",
         "showDiscountBadge": true,
+        "inStock": true,
         "updatedAt": "2026-07-29T16:14:43.149Z"
       },
       {
@@ -3105,6 +3160,7 @@
         "perks": "quality",
         "visibility": "public",
         "showDiscountBadge": true,
+        "inStock": true,
         "updatedAt": "2026-07-29T16:14:43.149Z"
       }
     ]
@@ -3187,6 +3243,7 @@
         "perks": "bulbs",
         "visibility": "public",
         "showDiscountBadge": true,
+        "inStock": true,
         "updatedAt": "2026-07-27T08:03:16.285Z"
       },
       {
@@ -3242,6 +3299,7 @@
         "perks": "bulbs",
         "visibility": "public",
         "showDiscountBadge": true,
+        "inStock": true,
         "updatedAt": "2026-07-27T08:03:16.285Z"
       },
       {
@@ -3297,6 +3355,7 @@
         "perks": "bulbs",
         "visibility": "public",
         "showDiscountBadge": true,
+        "inStock": true,
         "updatedAt": "2026-07-27T08:03:16.285Z"
       },
       {
@@ -3332,6 +3391,7 @@
         "perks": "bulbs",
         "visibility": "public",
         "showDiscountBadge": true,
+        "inStock": true,
         "updatedAt": "2026-07-27T08:03:16.285Z"
       },
       {
@@ -3377,6 +3437,7 @@
         "perks": "bulbs",
         "visibility": "public",
         "showDiscountBadge": true,
+        "inStock": true,
         "updatedAt": "2026-07-27T08:03:16.285Z"
       },
       {
@@ -3456,6 +3517,7 @@
         "perks": "bulbs",
         "visibility": "public",
         "showDiscountBadge": true,
+        "inStock": true,
         "updatedAt": "2026-07-27T08:03:16.285Z"
       },
       {
@@ -3530,6 +3592,7 @@
         "perks": "bulbs",
         "visibility": "public",
         "showDiscountBadge": true,
+        "inStock": true,
         "updatedAt": "2026-07-27T08:03:16.285Z"
       },
       {
@@ -3584,6 +3647,7 @@
         "perks": "bulbs",
         "visibility": "public",
         "showDiscountBadge": true,
+        "inStock": true,
         "updatedAt": "2026-07-27T08:03:16.285Z"
       },
       {
@@ -3624,6 +3688,7 @@
         "perks": "led",
         "visibility": "public",
         "showDiscountBadge": true,
+        "inStock": true,
         "updatedAt": "2026-07-29T16:19:58.160Z"
       },
       {
@@ -3673,6 +3738,7 @@
         "perks": "led",
         "visibility": "public",
         "showDiscountBadge": true,
+        "inStock": true,
         "updatedAt": "2026-07-29T16:19:58.160Z"
       },
       {
@@ -3718,6 +3784,7 @@
         "perks": "led",
         "visibility": "public",
         "showDiscountBadge": true,
+        "inStock": true,
         "updatedAt": "2026-07-29T16:19:58.160Z"
       },
       {
@@ -3772,6 +3839,7 @@
         "perks": "led",
         "visibility": "public",
         "showDiscountBadge": true,
+        "inStock": true,
         "updatedAt": "2026-07-29T16:19:58.160Z"
       },
       {
@@ -3807,6 +3875,7 @@
         "perks": "bulbs",
         "visibility": "public",
         "showDiscountBadge": true,
+        "inStock": true,
         "updatedAt": "2026-07-27T08:03:16.285Z"
       },
       {
@@ -3867,6 +3936,7 @@
         "perks": "bulbs",
         "visibility": "public",
         "showDiscountBadge": true,
+        "inStock": true,
         "updatedAt": "2026-07-27T08:03:16.285Z"
       },
       {
@@ -3922,6 +3992,7 @@
         "perks": "bulbs",
         "visibility": "public",
         "showDiscountBadge": true,
+        "inStock": true,
         "updatedAt": "2026-07-27T08:03:16.285Z"
       },
       {
@@ -3977,6 +4048,7 @@
         "perks": "bulbs",
         "visibility": "public",
         "showDiscountBadge": true,
+        "inStock": true,
         "updatedAt": "2026-07-27T08:03:16.285Z"
       },
       {
@@ -4037,6 +4109,7 @@
         "perks": "bulbs",
         "visibility": "public",
         "showDiscountBadge": true,
+        "inStock": true,
         "updatedAt": "2026-07-27T08:03:16.285Z"
       },
       {
@@ -4090,7 +4163,7 @@
         "reference": "T-02",
         "subtitle": "80 × 40 × 160 cm",
         "description": {
-          "es": "Dimensions:\n• Width: 80 cm\n• Depth: 40 cm\n• Height: 80 cm\n\nMirror: 60 × 80 cm\n\n🎁 Free LED bulbs included",
+          "es": "Medidas: \n•  ancho 80cm\n•  prof. 40cm\n•  altura 80cm\n\nEspejo 60x80cm \n\n🎁 Bombillas LED de regalo ",
           "en": "Dimensions:\n• Width: 80 cm\n• Depth: 40 cm\n• Height: 80 cm\n\nMirror: 60 × 80 cm\n\n🎁 Free LED bulbs included"
         },
         "related": [
@@ -4102,7 +4175,8 @@
         "perks": "bulbs",
         "visibility": "public",
         "showDiscountBadge": true,
-        "updatedAt": "2026-07-27T08:03:16.285Z"
+        "inStock": true,
+        "updatedAt": "2026-08-25T14:47:24.315Z"
       },
       {
         "id": "Tocador-T-03",
@@ -4167,6 +4241,7 @@
         "perks": "bulbs",
         "visibility": "public",
         "showDiscountBadge": true,
+        "inStock": true,
         "updatedAt": "2026-07-27T08:03:16.285Z"
       },
       {
@@ -4212,6 +4287,7 @@
         "perks": "quality",
         "visibility": "public",
         "showDiscountBadge": true,
+        "inStock": true,
         "updatedAt": "2026-07-29T16:19:58.160Z"
       },
       {
@@ -4367,6 +4443,7 @@
         "perks": "quality",
         "visibility": "public",
         "showDiscountBadge": true,
+        "inStock": true,
         "updatedAt": "2026-07-29T16:19:58.160Z"
       },
       {
@@ -4417,6 +4494,7 @@
         "perks": "quality",
         "visibility": "public",
         "showDiscountBadge": true,
+        "inStock": true,
         "updatedAt": "2026-07-29T16:19:58.160Z"
       },
       {
@@ -4452,6 +4530,7 @@
         "perks": "quality",
         "visibility": "public",
         "showDiscountBadge": true,
+        "inStock": true,
         "updatedAt": "2026-07-29T16:19:58.160Z"
       },
       {
@@ -4487,6 +4566,7 @@
         "perks": "quality",
         "visibility": "public",
         "showDiscountBadge": true,
+        "inStock": true,
         "updatedAt": "2026-07-29T16:19:58.160Z"
       },
       {
@@ -4527,6 +4607,7 @@
         "perks": "quality",
         "visibility": "public",
         "showDiscountBadge": true,
+        "inStock": true,
         "updatedAt": "2026-07-29T16:19:58.160Z"
       },
       {
@@ -4595,6 +4676,7 @@
         "perks": "quality",
         "visibility": "public",
         "showDiscountBadge": true,
+        "inStock": true,
         "updatedAt": "2026-07-29T16:19:58.160Z"
       },
       {
@@ -4659,6 +4741,7 @@
         "perks": "quality",
         "visibility": "public",
         "showDiscountBadge": true,
+        "inStock": true,
         "updatedAt": "2026-07-29T16:19:58.160Z"
       },
       {
@@ -4703,6 +4786,7 @@
         "perks": "quality",
         "visibility": "public",
         "showDiscountBadge": true,
+        "inStock": true,
         "updatedAt": "2026-07-29T16:19:58.160Z"
       },
       {
@@ -4757,6 +4841,7 @@
         "perks": "quality",
         "visibility": "public",
         "showDiscountBadge": true,
+        "inStock": true,
         "updatedAt": "2026-07-29T16:19:58.160Z"
       },
       {
@@ -4817,6 +4902,7 @@
         "perks": "quality",
         "visibility": "public",
         "showDiscountBadge": true,
+        "inStock": true,
         "updatedAt": "2026-07-29T16:19:58.160Z"
       },
       {
@@ -4862,6 +4948,7 @@
         "perks": "quality",
         "visibility": "public",
         "showDiscountBadge": true,
+        "inStock": true,
         "updatedAt": "2026-07-29T16:19:58.160Z"
       },
       {
@@ -4897,6 +4984,7 @@
         "perks": "quality",
         "visibility": "public",
         "showDiscountBadge": true,
+        "inStock": true,
         "updatedAt": "2026-07-29T16:19:58.160Z"
       },
       {
@@ -4942,6 +5030,7 @@
         "perks": "led",
         "visibility": "public",
         "showDiscountBadge": true,
+        "inStock": true,
         "updatedAt": "2026-07-29T16:19:58.160Z"
       },
       {
@@ -4992,6 +5081,7 @@
         "perks": "bulbs",
         "visibility": "public",
         "showDiscountBadge": true,
+        "inStock": true,
         "updatedAt": "2026-07-27T08:03:16.285Z"
       },
       {
@@ -5077,6 +5167,7 @@
         "perks": "quality",
         "visibility": "public",
         "showDiscountBadge": true,
+        "inStock": true,
         "updatedAt": "2026-07-29T16:19:58.160Z"
       },
       {
@@ -5142,6 +5233,7 @@
         "perks": "led",
         "visibility": "public",
         "showDiscountBadge": true,
+        "inStock": true,
         "updatedAt": "2026-07-29T16:19:58.160Z"
       },
       {
@@ -5197,6 +5289,7 @@
         "perks": "bulbs",
         "visibility": "public",
         "showDiscountBadge": true,
+        "inStock": true,
         "updatedAt": "2026-07-27T08:03:16.285Z"
       },
       {
@@ -5282,6 +5375,7 @@
         "perks": "led",
         "visibility": "public",
         "showDiscountBadge": true,
+        "inStock": true,
         "updatedAt": "2026-07-29T16:19:58.160Z"
       },
       {
@@ -5342,6 +5436,7 @@
         "perks": "led",
         "visibility": "public",
         "showDiscountBadge": true,
+        "inStock": true,
         "updatedAt": "2026-07-29T16:19:58.160Z"
       },
       {
@@ -5402,6 +5497,7 @@
         "perks": "bulbs",
         "visibility": "public",
         "showDiscountBadge": true,
+        "inStock": true,
         "updatedAt": "2026-07-27T08:03:16.285Z"
       },
       {
@@ -5492,6 +5588,7 @@
         "perks": "led",
         "visibility": "public",
         "showDiscountBadge": true,
+        "inStock": true,
         "updatedAt": "2026-07-29T16:19:58.160Z"
       },
       {
@@ -5572,6 +5669,7 @@
         "perks": "quality",
         "visibility": "public",
         "showDiscountBadge": true,
+        "inStock": true,
         "updatedAt": "2026-07-29T16:19:58.160Z"
       },
       {
@@ -5637,6 +5735,7 @@
         "perks": "bulbs",
         "visibility": "public",
         "showDiscountBadge": true,
+        "inStock": true,
         "updatedAt": "2026-07-27T08:03:16.285Z"
       },
       {
@@ -5722,6 +5821,7 @@
         "perks": "quality",
         "visibility": "public",
         "showDiscountBadge": true,
+        "inStock": true,
         "updatedAt": "2026-07-29T16:19:58.160Z"
       },
       {
@@ -5787,6 +5887,7 @@
         "perks": "bulbs",
         "visibility": "public",
         "showDiscountBadge": true,
+        "inStock": true,
         "updatedAt": "2026-07-27T08:03:16.285Z"
       },
       {
@@ -5862,6 +5963,7 @@
         "perks": "quality",
         "visibility": "public",
         "showDiscountBadge": true,
+        "inStock": true,
         "updatedAt": "2026-07-29T16:19:58.160Z"
       },
       {
@@ -5952,6 +6054,7 @@
         "perks": "quality",
         "visibility": "public",
         "showDiscountBadge": true,
+        "inStock": true,
         "updatedAt": "2026-07-29T16:19:58.160Z"
       },
       {
@@ -6001,6 +6104,7 @@
         "perks": "quality",
         "visibility": "public",
         "showDiscountBadge": true,
+        "inStock": true,
         "updatedAt": "2026-07-29T16:19:58.160Z"
       },
       {
@@ -6051,6 +6155,7 @@
         "perks": "quality",
         "visibility": "public",
         "showDiscountBadge": true,
+        "inStock": true,
         "updatedAt": "2026-07-29T16:19:58.160Z"
       },
       {
@@ -6101,6 +6206,7 @@
         "perks": "quality",
         "visibility": "public",
         "showDiscountBadge": true,
+        "inStock": true,
         "updatedAt": "2026-07-29T16:19:58.160Z"
       },
       {
@@ -6155,6 +6261,7 @@
         "perks": "quality",
         "visibility": "public",
         "showDiscountBadge": true,
+        "inStock": true,
         "updatedAt": "2026-07-29T16:19:58.160Z"
       },
       {
@@ -6214,6 +6321,7 @@
         "perks": "quality",
         "visibility": "public",
         "showDiscountBadge": true,
+        "inStock": true,
         "updatedAt": "2026-07-29T16:19:58.160Z"
       },
       {
@@ -6298,6 +6406,7 @@
         "perks": "quality",
         "visibility": "public",
         "showDiscountBadge": true,
+        "inStock": true,
         "updatedAt": "2026-07-29T16:19:58.160Z"
       },
       {
@@ -6393,6 +6502,7 @@
         "perks": "quality",
         "visibility": "public",
         "showDiscountBadge": true,
+        "inStock": true,
         "updatedAt": "2026-07-29T16:19:58.160Z"
       },
       {
@@ -6513,6 +6623,7 @@
         "perks": "quality",
         "visibility": "public",
         "showDiscountBadge": true,
+        "inStock": true,
         "updatedAt": "2026-07-29T16:19:58.160Z"
       },
       {
@@ -6608,6 +6719,7 @@
         "perks": "quality",
         "visibility": "public",
         "showDiscountBadge": true,
+        "inStock": true,
         "updatedAt": "2026-07-29T16:19:58.160Z"
       },
       {
@@ -6672,6 +6784,7 @@
         "perks": "quality",
         "visibility": "public",
         "showDiscountBadge": true,
+        "inStock": true,
         "updatedAt": "2026-07-29T16:19:58.160Z"
       },
       {
@@ -6727,6 +6840,7 @@
         "perks": "quality",
         "visibility": "public",
         "showDiscountBadge": true,
+        "inStock": true,
         "updatedAt": "2026-07-29T16:19:58.160Z"
       },
       {
@@ -6786,6 +6900,7 @@
         "perks": "quality",
         "visibility": "public",
         "showDiscountBadge": true,
+        "inStock": true,
         "updatedAt": "2026-07-29T16:19:58.160Z"
       },
       {
@@ -6836,6 +6951,7 @@
         "perks": "quality",
         "visibility": "public",
         "showDiscountBadge": true,
+        "inStock": true,
         "updatedAt": "2026-07-29T16:19:58.160Z"
       },
       {
@@ -6891,6 +7007,7 @@
         "perks": "quality",
         "visibility": "public",
         "showDiscountBadge": true,
+        "inStock": true,
         "updatedAt": "2026-07-29T16:19:58.160Z"
       },
       {
@@ -6935,6 +7052,7 @@
         "perks": "quality",
         "visibility": "public",
         "showDiscountBadge": true,
+        "inStock": true,
         "updatedAt": "2026-07-29T16:19:58.160Z"
       },
       {
@@ -6985,6 +7103,7 @@
         "perks": "quality",
         "visibility": "public",
         "showDiscountBadge": true,
+        "inStock": true,
         "updatedAt": "2026-07-29T16:19:58.160Z"
       },
       {
@@ -7054,6 +7173,7 @@
         "perks": "quality",
         "visibility": "public",
         "showDiscountBadge": true,
+        "inStock": true,
         "updatedAt": "2026-07-29T16:19:58.160Z"
       },
       {
@@ -7099,6 +7219,7 @@
         "perks": "quality",
         "visibility": "public",
         "showDiscountBadge": true,
+        "inStock": true,
         "updatedAt": "2026-07-29T16:19:58.160Z"
       },
       {
@@ -7139,6 +7260,7 @@
         "perks": "quality",
         "visibility": "public",
         "showDiscountBadge": true,
+        "inStock": true,
         "updatedAt": "2026-07-29T16:19:58.160Z"
       },
       {
@@ -7184,6 +7306,7 @@
         "perks": "quality",
         "visibility": "public",
         "showDiscountBadge": true,
+        "inStock": true,
         "updatedAt": "2026-07-29T16:19:58.160Z"
       },
       {
@@ -7244,6 +7367,7 @@
         "perks": "quality",
         "visibility": "public",
         "showDiscountBadge": true,
+        "inStock": true,
         "updatedAt": "2026-07-29T16:19:58.160Z"
       }
     ]
