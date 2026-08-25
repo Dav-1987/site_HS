@@ -48,6 +48,35 @@ const MADE_TO_ORDER_QUANTITY = 100;
 const MAX_TITLE = 150;
 const MAX_DESCRIPTION = 5000;
 
+// Merchant Center's content policy keeps `description` for describing the
+// product: gifts, discounts, sales and calls to buy belong to a promotions feed,
+// not here, and 51 of the catalog's descriptions end on a line offering free LED
+// bulbs. That line is a real argument on the product page and stays there — it
+// is dropped on the way into the feed instead, so the shop keeps its offer and
+// Google gets a description of the furniture.
+//
+// Matched by meaning rather than by a list of ids, so a gift written into a new
+// product tomorrow is handled without anyone remembering this rule exists.
+const PROMO_LINE =
+  /\b(regalos?|gratis|gratuit[oa]s?|descuentos?|ofertas?|promoci[oó]n|rebajas?|sin coste)\b/i;
+
+/**
+ * The description minus its promotional lines. Only whole lines go: the offer
+ * always sits on its own line, and dropping a clause mid-sentence would leave
+ * worse text than it removed. Falls back to the product's title if a
+ * description turns out to be nothing but promotion — Google rejects an empty
+ * one, and no catalog entry is currently in that state.
+ */
+function cleanDescription(text, fallback) {
+  const kept = String(text ?? '')
+    .split('\n')
+    .filter((line) => !PROMO_LINE.test(line))
+    .join('\n')
+    .replace(/\n{3,}/g, '\n\n')
+    .trim();
+  return kept || fallback;
+}
+
 const ESCAPES = { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&apos;' };
 
 /**
@@ -117,7 +146,13 @@ function itemXml({ product, category, images }) {
     // the catalog (M-01…M-05 appear twice) and Google needs this unique.
     tag('g:id', product.id),
     tag('g:title', productLabel(product).slice(0, MAX_TITLE)),
-    tag('g:description', productDescription(product, category, LANG).slice(0, MAX_DESCRIPTION)),
+    tag(
+      'g:description',
+      cleanDescription(productDescription(product, category, LANG), productLabel(product)).slice(
+        0,
+        MAX_DESCRIPTION,
+      ),
+    ),
     tag('g:link', `${SITE}/${category.slug}/${product.id}`),
     tag('g:image_link', images[0]),
     ...images.slice(1, 1 + MAX_EXTRA_IMAGES).map((src) => tag('g:additional_image_link', src)),

@@ -201,6 +201,59 @@ describe('buildGoogleFeed — the XML', () => {
     expect(xml).not.toContain('<g:google_product_category>');
   });
 
+  // Merchant Center forbids promotional text in the description. The gift line
+  // is a real argument on the product page, so it is dropped here rather than
+  // there — the shop keeps its offer, Google gets the furniture described.
+  describe('promotional text', () => {
+    const gift = { es: 'Medidas:\n• ancho 80cm\n\n🎁 Bombillas LED de regalo' };
+
+    it('drops the gift line and keeps the measurements', () => {
+      const xml = buildGoogleFeed(catalog([product({ description: gift })]));
+      const desc = fields(xml, 'description')[0];
+      expect(desc).not.toContain('regalo');
+      expect(desc).toContain('ancho 80cm');
+    });
+
+    it('leaves no blank gap where the line used to be', () => {
+      const xml = buildGoogleFeed(catalog([product({ description: gift })]));
+      expect(fields(xml, 'description')[0]).toBe('Medidas:\n• ancho 80cm');
+    });
+
+    it('catches the other wordings a promotion arrives in', () => {
+      for (const line of [
+        'Estanterías de regalo',
+        'Envío gratis',
+        'Montaje gratuito',
+        '20% de descuento',
+        'Oferta especial',
+        'Aprovecha la promoción',
+        'Sin coste adicional',
+      ]) {
+        const xml = buildGoogleFeed(
+          catalog([product({ description: { es: `Medidas: 80cm\n${line}` } })]),
+        );
+        expect(fields(xml, 'description')[0]).toBe('Medidas: 80cm');
+      }
+    });
+
+    // Whole lines only — a promotion always sits on its own, and cutting a
+    // clause out of a sentence would read worse than leaving it.
+    it('keeps a line that merely resembles one of the words', () => {
+      const xml = buildGoogleFeed(
+        catalog([product({ description: { es: 'La empresa ofrece envío a toda España.' } })]),
+      );
+      expect(fields(xml, 'description')[0]).toBe('La empresa ofrece envío a toda España.');
+    });
+
+    // Google rejects an item with no description at all.
+    it('falls back to the title when nothing survives', () => {
+      const xml = buildGoogleFeed(
+        catalog([product({ description: { es: '🎁 Bombillas LED de regalo' } })]),
+      );
+      expect(fields(xml, 'description')[0]).toBe('Tocador 90 × 40 × 170 cm');
+    });
+  });
+
   it('falls back to the generated description when none was written', () => {
     const xml = buildGoogleFeed(catalog([product({ description: { es: '', en: '' } })]));
     const desc = fields(xml, 'description')[0];
