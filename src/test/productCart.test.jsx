@@ -39,7 +39,7 @@ describe('product page order flow', () => {
     expect(screen.queryByRole('dialog')).toBeNull();
     fireEvent.click(screen.getByText(/¡PEDIR AHORA!/i));
     expect(screen.getByRole('dialog')).toBeTruthy();
-    expect(screen.getByText(/Solicitar producto/i)).toBeTruthy();
+    expect(screen.getByText(/Realizar pedido/i)).toBeTruthy();
     expect(screen.getByRole('dialog').textContent).toContain(product.name);
   });
 
@@ -57,7 +57,7 @@ describe('product page order flow', () => {
     const name = screen.getByLabelText(/Nombre/i);
     const phone = screen.getByLabelText(/Teléfono/i);
     const postalCode = screen.getByLabelText(/Código Postal/i);
-    fireEvent.click(screen.getByText(/Enviar solicitud/i));
+    fireEvent.click(screen.getByText(/Confirmar pedido/i));
     const errors = screen.getAllByRole('alert');
     expect(errors).toHaveLength(3);
     expect(name.getAttribute('aria-invalid')).toBe('true');
@@ -82,7 +82,7 @@ describe('product page order flow', () => {
     fireEvent.click(screen.getByText(/¡PEDIR AHORA!/i));
     fireEvent.change(screen.getByPlaceholderText('Tu nombre'), { target: { value: 'Ana' } });
     fireEvent.change(screen.getByPlaceholderText('+34 600 000 000'), { target: { value: 'abc' } });
-    fireEvent.click(screen.getByText(/Enviar solicitud/i));
+    fireEvent.click(screen.getByText(/Confirmar pedido/i));
     expect(screen.getByText(/Introduce un número de teléfono válido/i)).toBeTruthy();
   });
 
@@ -112,7 +112,7 @@ describe('product page order flow', () => {
     });
     fireEvent.change(screen.getByPlaceholderText('28001'), { target: { value: '28001' } });
 
-    const submit = screen.getByText(/Enviar solicitud/i);
+    const submit = screen.getByText(/Confirmar pedido/i);
     fireEvent.click(submit);
     await waitFor(() => expect(payloads).toHaveLength(1));
     await waitFor(() => expect(submit.disabled).toBe(false));

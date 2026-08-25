@@ -48,7 +48,7 @@ const makeCategory = (slug, name, visibility) => ({
 describe('page smoke render', () => {
   it('Home renders the hero subtitle', () => {
     renderPage(<Home />);
-    expect(screen.getByText(/Creamos muebles de diseño único/i)).toBeTruthy();
+    expect(screen.getByText(/Espejos, tocadores y estanterías de diseño propio/i)).toBeTruthy();
   });
 
   it('Catalog renders its title', () => {

@@ -197,7 +197,18 @@ export default function Footer() {
           <p>
             © {year} Mirage Muebles. {t('footer.rights')}
           </p>
-          <div className="flex gap-6">
+          {/* Shipping and returns sit here, not only in the sitemap: a buyer has
+              to be able to find what delivery costs and how to return a piece
+              from any page, and Pinterest's merchant guidelines require a
+              return policy that is easy to find. Both pages existed before
+              this and were reachable by URL only. */}
+          <div className="flex flex-wrap gap-x-6 gap-y-2">
+            <Link to="/envios" className="transition-colors hover:text-accent-text">
+              {t('footer.shipping')}
+            </Link>
+            <Link to="/devoluciones" className="transition-colors hover:text-accent-text">
+              {t('footer.returns')}
+            </Link>
             <Link to="/legal-notice" className="transition-colors hover:text-accent-text">
               {t('footer.legal')}
             </Link>

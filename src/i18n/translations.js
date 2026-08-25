@@ -11,11 +11,11 @@ export const translations = {
     'nav.close': 'Cerrar',
 
     // --- Hero ---
-    'hero.eyebrow': 'Mobiliario de tocador · Hecho en España',
+    'hero.eyebrow': 'Muebles de diseño · Hecho en España',
     'hero.title.1': 'Confort y estilo',
     'hero.title.2': 'para su',
     'hero.title.3': '',
-    'hero.subtitle': 'Creamos muebles de diseño único, adaptados a sus medidas y estilo.',
+    'hero.subtitle': 'Espejos, tocadores y estanterías de diseño propio. Envío a toda España.',
     'hero.promo': '¡Grandes descuentos en toda la colección!',
     'hero.cta': 'Ver catálogo',
 
@@ -31,12 +31,12 @@ export const translations = {
     'catalog.subtitle': 'Nueve familias de mobiliario, un mismo lenguaje minimalista.',
 
     // --- SEO meta (page <title>/<meta description>, not visible UI copy) ---
-    'home.meta.title': 'Mirage Muebles | Tocadores y mobiliario minimalista | España',
+    'home.meta.title': 'Mirage Muebles | Espejos, tocadores y muebles de diseño | España',
     'home.meta.description':
-      'Muebles de tocador, espejos, consolas y estanterías de diseño minimalista. Montaje e instalación gratis.',
-    'home.og.title': 'Mirage Muebles | Mobiliario minimalista',
+      'Espejos, tocadores, estanterías, consolas y cómodas de diseño minimalista. Envío a toda España, montaje incluido.',
+    'home.og.title': 'Mirage Muebles | Muebles de diseño minimalista',
     'home.og.description':
-      'Tocadores, espejos y mobiliario de diseño minimalista. Montaje gratis.',
+      'Espejos, tocadores y muebles de diseño minimalista. Envío a toda España.',
     'catalog.meta.title': 'Catálogo de muebles | Mirage Muebles',
     'catalog.meta.description':
       'Explora las {count} colecciones de Mirage Muebles: tocadores loft, espejos de cuerpo entero, estanterías, cómodas, consolas y mesas de manicura. Diseño minimalista.',
@@ -76,13 +76,13 @@ export const translations = {
 
     // --- Order modal ---
     'order.button': '¡PEDIR AHORA!',
-    'order.perk.delivery': 'Entrega confiable',
-    'order.perk.installation': 'Instalación gratuita',
+    'order.perk.delivery': 'Envío a toda España',
+    'order.perk.installation': 'Montaje incluido',
     'order.perk.bulbs': 'Bombillas LED de regalo',
     'order.perk.led': 'Iluminación LED profesional',
     'order.perk.quality': 'Calidad premium',
     'footer.emailCopied': 'Copiado ✓',
-    'order.modal.eyebrow': 'Solicitar producto',
+    'order.modal.eyebrow': 'Realizar pedido',
     'order.form.name': 'Nombre',
     'order.form.name.placeholder': 'Tu nombre',
     'order.form.phone': 'Teléfono',
@@ -93,7 +93,7 @@ export const translations = {
     'order.form.address.placeholder': 'Calle, número, ciudad',
     'order.form.comment': 'Comentarios adicionales',
     'order.form.comment.placeholder': '¿Algo que debamos saber?',
-    'order.form.submit': 'Enviar solicitud',
+    'order.form.submit': 'Confirmar pedido',
     'order.form.privacyNotice': 'Al enviar este formulario, aceptas nuestra Política de Privacidad',
     'order.form.sending': 'Enviando…',
     'order.form.error.required': 'Este campo es obligatorio.',
@@ -107,6 +107,8 @@ export const translations = {
     'contact.eyebrow': 'Contacto',
     'contact.title': 'Contacto',
     'contact.subtitle': 'Escríbenos y te responderemos en menos de 24 horas laborables.',
+    'contact.custom':
+      'Vendemos modelos acabados, listos para enviar. De forma puntual también fabricamos una pieza a medida: escríbenos y lo vemos.',
     'contact.prefill': 'Me interesa esta pieza:',
     'contact.form.name': 'Nombre',
     'contact.form.email': 'Correo electrónico',
@@ -136,11 +138,13 @@ export const translations = {
     'lightbox.close': 'Cerrar',
 
     // --- Footer ---
-    'footer.tagline': 'Mobiliario de tocador minimalista, hecho en España.',
+    'footer.tagline': 'Muebles de diseño para dormitorio, recibidor y salón. Hechos en España.',
     'footer.explore': 'Explorar',
     'footer.company': 'Empresa',
     'footer.follow': 'Síguenos',
     'footer.rights': 'Todos los derechos reservados.',
+    'footer.shipping': 'Envíos',
+    'footer.returns': 'Devoluciones',
     'footer.legal': 'Aviso legal',
     'footer.privacy': 'Privacidad',
 
@@ -151,9 +155,10 @@ export const translations = {
       'El coste del envío depende de la dirección de entrega. Te lo confirmamos antes de tramitar el pedido, junto con el resto de los datos.',
     'shipping.time':
       'El plazo de entrega habitual es de 3 a 5 días desde la confirmación del pedido.',
-    'shipping.assembly': 'El montaje y la instalación están incluidos sin coste adicional.',
+    'shipping.assembly':
+      'El montaje está incluido en la entrega del producto, sin coste adicional. No se vende por separado.',
     'shipping.how':
-      'Tras recibir tu solicitud desde la ficha del producto, te contactamos por teléfono para confirmar la dirección, el coste del envío y la fecha de entrega.',
+      'Tras realizar el pedido desde la ficha del producto, te llamamos para confirmar la dirección, el coste del envío y la fecha de entrega.',
     'returns.title': 'Devoluciones',
     'returns.intro':
       'Dispones de 14 días desde la recepción del pedido para solicitar la devolución.',
@@ -206,12 +211,12 @@ export const translations = {
     'nav.close': 'Close',
 
     // --- Hero ---
-    'hero.eyebrow': 'Vanity furniture · Made in Spain',
+    'hero.eyebrow': 'Designer furniture · Made in Spain',
     'hero.title.1': 'Comfort and style',
     'hero.title.2': 'for your',
     'hero.title.3': '',
     'hero.subtitle':
-      'We create uniquely designed furniture, tailored to your measurements and style.',
+      'Mirrors, dressing tables and shelving of our own design. Delivery across Spain.',
     'hero.promo': 'Big discounts across the entire collection!',
     'hero.cta': 'View catalog',
 
@@ -227,12 +232,12 @@ export const translations = {
     'catalog.subtitle': 'Nine furniture families, one minimalist language.',
 
     // --- SEO meta (page <title>/<meta description>, not visible UI copy) ---
-    'home.meta.title': 'Mirage Muebles | Vanity Furniture & Minimalist Design | Spain',
+    'home.meta.title': 'Mirage Muebles | Mirrors, Dressing Tables & Minimalist Design | Spain',
     'home.meta.description':
-      'Vanity furniture, mirrors, console tables and shelving in minimalist design. Free assembly and installation.',
+      'Mirrors, dressing tables, shelving, consoles and chests of drawers in minimalist design. Delivery across Spain, assembly included.',
     'home.og.title': 'Mirage Muebles | Minimalist Furniture',
     'home.og.description':
-      'Vanity furniture, mirrors and minimalist design pieces. Free assembly.',
+      'Mirrors, dressing tables and minimalist design furniture. Delivery across Spain.',
     'catalog.meta.title': 'Furniture Catalog | Mirage Muebles',
     'catalog.meta.description':
       "Explore Mirage Muebles' {count} collections: loft dressing tables, full-length mirrors, shelving, dressers, console tables and manicure tables. Minimalist design.",
@@ -272,13 +277,13 @@ export const translations = {
 
     // --- Order modal ---
     'order.button': 'ORDER NOW!',
-    'order.perk.delivery': 'Reliable delivery',
-    'order.perk.installation': 'Free installation',
+    'order.perk.delivery': 'Delivery across Spain',
+    'order.perk.installation': 'Assembly included',
     'order.perk.bulbs': 'Free LED bulbs',
     'order.perk.led': 'Professional LED lighting',
     'order.perk.quality': 'Premium quality',
     'footer.emailCopied': 'Copied ✓',
-    'order.modal.eyebrow': 'Request product',
+    'order.modal.eyebrow': 'Place order',
     'order.form.name': 'Name',
     'order.form.name.placeholder': 'Your name',
     'order.form.phone': 'Phone',
@@ -289,7 +294,7 @@ export const translations = {
     'order.form.address.placeholder': 'Street, number, city',
     'order.form.comment': 'Additional comments',
     'order.form.comment.placeholder': 'Anything we should know?',
-    'order.form.submit': 'Send request',
+    'order.form.submit': 'Confirm order',
     'order.form.privacyNotice': 'By submitting this form, you agree to our Privacy Policy',
     'order.form.sending': 'Sending…',
     'order.form.error.required': 'This field is required.',
@@ -303,6 +308,8 @@ export const translations = {
     'contact.eyebrow': 'Contact',
     'contact.title': 'Contacts',
     'contact.subtitle': 'Write to us and we will reply within 24 working hours.',
+    'contact.custom':
+      'We sell finished models, ready to ship. Occasionally we also build a piece to your measurements — write to us and we will look into it.',
     'contact.prefill': "I'm interested in this piece:",
     'contact.form.name': 'Name',
     'contact.form.email': 'Email',
@@ -331,11 +338,13 @@ export const translations = {
     'lightbox.close': 'Close',
 
     // --- Footer ---
-    'footer.tagline': 'Minimalist vanity furniture, made in Spain.',
+    'footer.tagline': 'Designer furniture for the bedroom, hallway and living room. Made in Spain.',
     'footer.explore': 'Explore',
     'footer.company': 'Company',
     'footer.follow': 'Follow us',
     'footer.rights': 'All rights reserved.',
+    'footer.shipping': 'Shipping',
+    'footer.returns': 'Returns',
     'footer.legal': 'Legal notice',
     'footer.privacy': 'Privacy',
 
@@ -345,17 +354,17 @@ export const translations = {
     'shipping.cost':
       'The shipping cost depends on the delivery address. We confirm it with you before processing the order, along with the rest of the details.',
     'shipping.time': 'Delivery usually takes 3 to 5 days from order confirmation.',
-    'shipping.assembly': 'Assembly and installation are included at no extra cost.',
+    'shipping.assembly':
+      'Assembly is included with the delivery of the product, at no extra cost. It is not sold separately.',
     'shipping.how':
-      'Once we receive your request from the product page, we call you to confirm the address, the shipping cost and the delivery date.',
+      'Once you place your order from the product page, we call you to confirm the address, the shipping cost and the delivery date.',
     'returns.title': 'Returns',
     'returns.intro': 'You have 14 days from receiving your order to request a return.',
     'returns.condition':
       'Returns are accepted provided the packaging is intact and the product shows no damage.',
     'returns.how':
       'To start a return, write to us or call us, telling us your name and the product.',
-    'returns.refund':
-      'Once we have received and checked the product, we refund the amount paid.',
+    'returns.refund': 'Once we have received and checked the product, we refund the amount paid.',
     'policy.contact': 'If you have any questions, write to us or call us:',
     'privacy.title': 'Privacy Policy',
     'privacy.intro': 'We respect your privacy.',

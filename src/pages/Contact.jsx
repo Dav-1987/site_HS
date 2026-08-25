@@ -201,6 +201,10 @@ export default function Contact() {
             {t('contact.title')}
           </h1>
           <p className="mt-5 text-base leading-relaxed text-secondary">{t('contact.subtitle')}</p>
+          {/* Made-to-measure is a real but rare part of the business. It reads
+              as a service when it headlines the home page, so it lives here
+              instead — stated, findable, and in proportion. */}
+          <p className="mt-3 text-base leading-relaxed text-secondary">{t('contact.custom')}</p>
         </Reveal>
 
         <Reveal delay={0.1} className="mt-14 max-w-lg">
