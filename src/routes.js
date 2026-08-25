@@ -19,6 +19,10 @@ export function buildRoutes(rawCatalog) {
     { path: '/contacto', priority: '0.6', changefreq: 'monthly' },
     { path: '/privacy-policy', priority: '0.3', changefreq: 'yearly' },
     { path: '/legal-notice', priority: '0.3', changefreq: 'yearly' },
+    // Required by Merchant Center. Prerendered and in the sitemap so a crawler
+    // gets a real 200; deliberately not linked from anywhere on the site yet.
+    { path: '/envios', priority: '0.3', changefreq: 'yearly' },
+    { path: '/devoluciones', priority: '0.3', changefreq: 'yearly' },
     ...catalog.map((cat) => ({
       path: `/${cat.slug}`,
       priority: '0.8',

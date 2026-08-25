@@ -23,6 +23,8 @@ describe('buildRoutes', () => {
       '/contacto',
       '/privacy-policy',
       '/legal-notice',
+      '/envios',
+      '/devoluciones',
       '/c1',
       '/c1/p1',
       '/c1/p2',
