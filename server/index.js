@@ -38,7 +38,7 @@ import {
   deleteOrder,
 } from './orders.js';
 import { metaCapiConfigured, sendLeadEvent } from './meta-capi.js';
-import { buildGoogleFeed } from './feed.js';
+import { buildGoogleFeed, buildPinterestFeed } from './feed.js';
 import { buildProductIndex, resolveRedirect } from './redirects.js';
 import { rebuildConfigured, triggerRebuild, getLatestRun } from './rebuild.js';
 
@@ -607,37 +607,46 @@ app.get('/api/health', async (req, res) => {
   }
 });
 
-// ─── /feed/google.xml — Google Merchant Center product feed ─────────────────
+// ─── /feed/*.xml — product feeds ────────────────────────────────────────────
 //
 // Generated from the live catalog on request (see server/feed.js). Rebuilt at
-// most once a minute: Google fetches it once a day, so the cache exists to stop
-// a crawler or a refresh loop from re-serialising 124 products per hit, not to
-// hide changes — a minute is well inside the window in which the prerendered
-// landing pages are still catching up anyway.
+// most once a minute: the platforms fetch daily or hourly, so the cache exists
+// to stop a crawler or a refresh loop from re-serialising 124 products per hit,
+// not to hide changes — a minute is well inside the window in which the
+// prerendered landing pages are still catching up anyway.
 //
-// nginx needs an explicit `location /feed/` rule to reach this (see DEPLOY.md);
+// Each feed caches separately: they are fetched by different platforms on
+// different schedules, and one warming the other's cache would serve Pinterest
+// a feed built for Google.
+//
+// nginx needs an explicit `location /feed/` rule to reach these (see DEPLOY.md);
 // without it the request is answered from disk and 404s silently.
 const FEED_TTL_MS = 60 * 1000;
-let feedCache = null;
-let feedCacheAt = 0;
 
-app.get('/feed/google.xml', async (req, res) => {
-  try {
-    if (!feedCache || Date.now() - feedCacheAt > FEED_TTL_MS) {
-      feedCache = buildGoogleFeed(await readOrSeedCatalog());
-      feedCacheAt = Date.now();
+function serveFeed(build) {
+  let cache = null;
+  let cachedAt = 0;
+  return async (req, res) => {
+    try {
+      if (!cache || Date.now() - cachedAt > FEED_TTL_MS) {
+        cache = build(await readOrSeedCatalog());
+        cachedAt = Date.now();
+      }
+      // noindex: a feed is for its platform to fetch, not for Search to index.
+      // It does not affect the platform's own fetch.
+      res.set('X-Robots-Tag', 'noindex');
+      res.type('application/xml; charset=utf-8').send(cache);
+    } catch (err) {
+      console.error('feed build failed', err);
+      // A 5xx makes the platform retry and report a fetch error. Serving a
+      // stale or empty feed instead would quietly pull every item out.
+      res.status(503).type('text/plain').send('feed unavailable');
     }
-    // noindex: the feed is for Merchant Center to fetch, not for Search to
-    // index. It does not affect the Merchant Center fetch itself.
-    res.set('X-Robots-Tag', 'noindex');
-    res.type('application/xml; charset=utf-8').send(feedCache);
-  } catch (err) {
-    console.error('feed build failed', err);
-    // A 5xx makes Google retry and report a fetch error. Serving a stale or
-    // empty feed instead would quietly pull every item out of Shopping.
-    res.status(503).type('text/plain').send('feed unavailable');
-  }
-});
+  };
+}
+
+app.get('/feed/google.xml', serveFeed(buildGoogleFeed));
+app.get('/feed/pinterest.xml', serveFeed(buildPinterestFeed));
 
 // ─── /api/image/:key — legacy redirect to /uploads/:key ──────────────────────
 

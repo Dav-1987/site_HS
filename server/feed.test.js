@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { buildGoogleFeed, feedProducts } from './feed.js';
+import { buildGoogleFeed, buildPinterestFeed, feedProducts } from './feed.js';
 
 function product(over = {}) {
   return {
@@ -84,9 +84,12 @@ describe('buildGoogleFeed — the XML', () => {
       catalog([product({ name: 'Tocador "Loft" & <Espejo>', description: { es: 'a < b & c' } })]),
     );
     expect(xml).not.toContain('<Espejo>');
-    expect(fields(xml, 'title')[0]).toBe('Tocador &quot;Loft&quot; &amp; &lt;Espejo&gt; 90 × 40 × 170 cm');
-    expect(new DOMParser().parseFromString(xml, 'application/xml').querySelector('parsererror'))
-      .toBeNull();
+    expect(fields(xml, 'title')[0]).toBe(
+      'Tocador &quot;Loft&quot; &amp; &lt;Espejo&gt; 90 × 40 × 170 cm',
+    );
+    expect(
+      new DOMParser().parseFromString(xml, 'application/xml').querySelector('parsererror'),
+    ).toBeNull();
   });
 
   // Five references are duplicated across the catalog (M-01…M-05 appear twice),
@@ -265,7 +268,129 @@ describe('buildGoogleFeed — the XML', () => {
     const xml = buildGoogleFeed([]);
     expect(xml).toContain('<channel>');
     expect(xml).not.toContain('<item>');
-    expect(new DOMParser().parseFromString(xml, 'application/xml').querySelector('parsererror'))
-      .toBeNull();
+    expect(
+      new DOMParser().parseFromString(xml, 'application/xml').querySelector('parsererror'),
+    ).toBeNull();
+  });
+});
+
+// ── the Pinterest feed ──────────────────────────────────────────────────────
+//
+// It exists for one tag. These guard the two things a second feed can get
+// wrong: describing the product differently from the first, and categorising by
+// guesswork.
+
+describe('buildPinterestFeed', () => {
+  const label = (over) => catalog([product(over)]);
+
+  it('categorises from the first word of the title, not from the site category', () => {
+    // "Otros Modelos" is the bucket 68 real products sit in; the title decides.
+    const xml = buildPinterestFeed(
+      catalog([product({ name: 'Espejo', subtitle: '80 × 180 cm' })], {
+        slug: 'otros-modelos',
+        name: { es: 'Otros Modelos', en: 'Other models' },
+      }),
+    );
+    expect(fields(xml, 'google_product_category')).toEqual(['595']);
+    expect(fields(xml, 'product_type')).toEqual(['Otros Modelos']);
+  });
+
+  it('maps every noun the catalog actually uses', () => {
+    const cases = [
+      ['Tocador', '4148'],
+      ['Espejo', '595'],
+      ['Estantería', '6372'],
+      ['Consola', '1602'],
+      ['Comoda', '4195'],
+      ['Mesa', '6392'],
+    ];
+    for (const [name, id] of cases) {
+      expect(fields(buildPinterestFeed(label({ name })), 'google_product_category')).toEqual([id]);
+    }
+  });
+
+  it('ignores accents, so Estantería and Estanteria are one word', () => {
+    expect(
+      fields(buildPinterestFeed(label({ name: 'Estanteria' })), 'google_product_category'),
+    ).toEqual(['6372']);
+  });
+
+  // A wrong category costs more than no category: it puts a mirror in front of
+  // people shopping for something else.
+  it('omits the tag rather than guessing at an unknown noun', () => {
+    expect(
+      fields(buildPinterestFeed(label({ name: 'Alfombra' })), 'google_product_category'),
+    ).toEqual([]);
+  });
+
+  it('leaves out the tag Meta named after itself', () => {
+    expect(fields(buildPinterestFeed(label({})), 'quantity_to_sell_on_facebook')).toEqual([]);
+    expect(fields(buildGoogleFeed(label({})), 'quantity_to_sell_on_facebook')).toEqual(['100']);
+  });
+
+  it('never carries google_product_category into the Google feed', () => {
+    expect(fields(buildGoogleFeed(label({})), 'google_product_category')).toEqual([]);
+  });
+
+  // The point of one commonItemLines: the two feeds cannot drift about price,
+  // availability, images or identity.
+  it('describes the product identically to the Google feed', () => {
+    const cat = label({ price: 399, oldPrice: 499 });
+    for (const name of [
+      'id',
+      'title',
+      'description',
+      'link',
+      'image_link',
+      'price',
+      'sale_price',
+      'availability',
+      'brand',
+      'condition',
+      'product_type',
+    ]) {
+      expect(fields(buildPinterestFeed(cat), name)).toEqual(fields(buildGoogleFeed(cat), name));
+    }
+  });
+});
+
+// ── the promotional-line filter ─────────────────────────────────────────────
+//
+// Merchant Center keeps `description` for the product. The filter guards that,
+// and these guard the filter: a real Tocador-T-02 shipped its English gift line
+// to Google because the pattern only knew Spanish.
+
+describe('cleanDescription — what never reaches a feed', () => {
+  const desc = (text) =>
+    fields(buildGoogleFeed(catalog([product({ description: { es: text } })])), 'description')[0];
+
+  it('drops the Spanish gift line 51 products carry', () => {
+    expect(desc('Medidas: 80 cm\n\n🎁 Bombillas LED de regalo')).toBe('Medidas: 80 cm');
+  });
+
+  // The bug: English pasted into the Spanish field walked straight past.
+  it('drops the same line written in English', () => {
+    expect(desc('Medidas: 80 cm\n\n🎁 Free LED bulbs included')).toBe('Medidas: 80 cm');
+  });
+
+  it('drops a gift line on the emoji alone, whatever the wording', () => {
+    expect(desc('Medidas: 80 cm\n\n🎁 Bombillas incluidas')).toBe('Medidas: 80 cm');
+  });
+
+  // 'sale' is salir far more often than it is a discount, and cutting a real
+  // sentence costs more than letting one English word through.
+  it('keeps a sentence where sale is the Spanish verb', () => {
+    const text = 'El cajón sale suavemente.';
+    expect(desc(text)).toBe(text);
+  });
+
+  it('keeps an ordinary description untouched', () => {
+    const text = 'Tocador de melamina con espejo LED.';
+    expect(desc(text)).toBe(text);
+  });
+
+  // Google rejects an empty description, so something must survive.
+  it('falls back to the title when the description is nothing but promotion', () => {
+    expect(desc('🎁 Todo gratis')).toBe('Tocador 90 × 40 × 170 cm');
   });
 });

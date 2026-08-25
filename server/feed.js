@@ -1,7 +1,9 @@
 // ============================================================
-// Mirage Muebles — Google Merchant Center product feed
-// RSS 2.0 + the `g:` namespace. One feed, Spanish / Spain; it
-// serves both Shopping and Meta's dynamic remarketing.
+// Mirage Muebles — product feeds
+// RSS 2.0 + the `g:` namespace, Spanish / Spain. Two feeds over one set of
+// products: /feed/google.xml serves Shopping and Meta's dynamic remarketing,
+// /feed/pinterest.xml serves Pinterest's catalog. They differ by two tags and
+// share every line that describes the product — see commonItemLines.
 // ============================================================
 //
 // Built from the same Postgres rows the site itself renders, on request, rather
@@ -57,8 +59,19 @@ const MAX_DESCRIPTION = 5000;
 //
 // Matched by meaning rather than by a list of ids, so a gift written into a new
 // product tomorrow is handled without anyone remembering this rule exists.
+//
+// English words are matched too, even though the feed only ever reads the `es`
+// description. The catalog keeps both languages in one record and nothing stops
+// the English text from being pasted into the Spanish field — it happened to
+// Tocador-T-02, whose English gift line reached Merchant Center past a
+// Spanish-only filter. The gift emoji is matched on its own for the same
+// reason: it outlives any particular wording, in any language.
+//
+// English "sale" is deliberately absent: in a Spanish description it is far
+// more likely to be salir — "el cajón sale suavemente" — and cutting a real
+// sentence costs more than letting one English word through.
 const PROMO_LINE =
-  /\b(regalos?|gratis|gratuit[oa]s?|descuentos?|ofertas?|promoci[oó]n|rebajas?|sin coste)\b/i;
+  /🎁|\b(regalos?|gratis|gratuit[oa]s?|descuentos?|ofertas?|promoci[oó]n|rebajas?|sin coste|free|gift|bonus|discounts?|offer)\b/i;
 
 /**
  * The description minus its promotional lines. Only whole lines go: the offer
@@ -85,10 +98,12 @@ const ESCAPES = { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&
  * only removed, and one of them anywhere makes the whole feed unparseable.
  */
 function xml(value) {
-  return String(value ?? '')
-    // eslint-disable-next-line no-control-regex
-    .replace(/[\u0000-\u0008\u000B\u000C\u000E-\u001F]/g, '')
-    .replace(/[&<>"']/g, (c) => ESCAPES[c]);
+  return (
+    String(value ?? '')
+      // eslint-disable-next-line no-control-regex
+      .replace(/[\u0000-\u0008\u000B\u000C\u000E-\u001F]/g, '')
+      .replace(/[&<>"']/g, (c) => ESCAPES[c])
+  );
 }
 
 function tag(name, value) {
@@ -139,9 +154,53 @@ export function feedProducts(categories) {
   return out;
 }
 
-function itemXml({ product, category, images }) {
+// Pinterest asks for a Google Product Category and rejects nothing without one,
+// but limits how widely an uncategorised item is shown.
+//
+// The catalog has no field to read it from: `category` is the site's own menu,
+// where 68 of 124 products sit in a single "Otros Modelos" bucket holding
+// mirrors, dressers, consoles and manicure tables together. The product title,
+// however, always opens with the Spanish noun for the piece — six nouns cover
+// the whole catalog — so the category is derived from that rather than from a
+// hand-kept list of ids that a new product would silently fall out of.
+//
+// Two of these are deliberately coarser than the taxonomy allows:
+//  - Tocadores has children for bathroom and bedroom vanities; "Tocador
+//    100 × 40 × 160 cm" does not say which, and a parent is never wrong.
+//  - Manicure tables have no category of their own (the nearest, Peluquería y
+//    cosmética, covers chairs only), so they ship as plain Mesas.
+const PINTEREST_CATEGORIES = [
+  [/^tocador/, '4148'], // Mobiliario > Armarios y almacenamiento > Tocadores
+  [/^espejo/, '595'], // Casa y jardín > Decoración > Espejos
+  [/^estanteria/, '6372'], // Mobiliario > Estanterías > Estantes y estanterías
+  [/^consola/, '1602'], // Mobiliario > Mesas > Mesas decorativas > Consolas para sofás
+  [/^comoda/, '4195'], // Mobiliario > Armarios y almacenamiento > Aparadores del dormitorio
+  [/^mesa/, '6392'], // Mobiliario > Mesas
+];
+
+/**
+ * The Google Product Category id for a product, or '' if its title opens with a
+ * word we do not recognise. Accents are stripped before matching so that
+ * "Estantería" and "Estanteria", "Cómoda" and "Comoda" are the same word.
+ */
+function pinterestCategory(product) {
+  const first = String(productLabel(product) ?? '')
+    .trim()
+    .split(/\s+/)[0]
+    .toLowerCase()
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '');
+  return PINTEREST_CATEGORIES.find(([re]) => re.test(first))?.[1] ?? '';
+}
+
+/**
+ * The lines both feeds agree on. Everything here describes the product itself,
+ * so a divergence would mean the two feeds disagree about what is being sold —
+ * which is the one thing a second feed must never introduce.
+ */
+function commonItemLines({ product, category, images }, { facebookQuantity }) {
   const { price, oldPrice, onSale } = productDiscount(product);
-  const lines = [
+  return [
     // product.id, not product.reference: five references are duplicated across
     // the catalog (M-01…M-05 appear twice) and Google needs this unique.
     tag('g:id', product.id),
@@ -157,7 +216,13 @@ function itemXml({ product, category, images }) {
     tag('g:image_link', images[0]),
     ...images.slice(1, 1 + MAX_EXTRA_IMAGES).map((src) => tag('g:additional_image_link', src)),
     tag('g:availability', isInStock(product) ? 'in_stock' : 'out_of_stock'),
-    tag('g:quantity_to_sell_on_facebook', isInStock(product) ? MADE_TO_ORDER_QUANTITY : 0),
+    // Meta's Shop refuses to sell an item whose quantity is absent; Pinterest
+    // has no use for a field named after another platform. Emitted here rather
+    // than appended by the caller so that the Google feed's field order — and
+    // so its bytes — are exactly what Merchant Center and Meta already ingest.
+    ...(facebookQuantity
+      ? [tag('g:quantity_to_sell_on_facebook', isInStock(product) ? MADE_TO_ORDER_QUANTITY : 0)]
+      : []),
     // A discounted product ships its pre-discount price as `price` and the
     // current one as `sale_price`, which is how Shopping draws the same
     // struck-through pair the product page shows.
@@ -169,20 +234,46 @@ function itemXml({ product, category, images }) {
     // part number. `reference` is not offered as an mpn precisely because of
     // those duplicates.
     tag('g:identifier_exists', 'no'),
-    // Our own taxonomy, which Google takes as a classification hint and which
-    // Shopping campaigns can be split by. `g:google_product_category` is left
-    // out on purpose — Google assigns it itself, and a wrong override is worse
-    // than no override.
+    // Our own taxonomy, which both platforms take as a classification hint and
+    // which Shopping campaigns can be split by.
     tag('g:product_type', category.name?.[LANG] ?? category.slug),
   ];
+}
+
+function wrapItem(lines) {
   return `    <item>\n${lines.join('\n')}\n    </item>`;
 }
 
+function googleItemXml(entry) {
+  return wrapItem([
+    ...commonItemLines(entry, { facebookQuantity: true }),
+    // `g:google_product_category` is deliberately absent here. Google assigns a
+    // category itself and documents the override as being for three cases only
+    // — a category whose extra attributes we are missing, a Shopping campaign
+    // that needs regrouping, and alcohol. None of them is ours, and a wrong
+    // override risks disapproval. Pinterest is the platform that wants the
+    // field, and it gets its own feed below rather than pushing an override
+    // into Google's.
+  ]);
+}
+
+function pinterestItemXml(entry) {
+  const gpc = pinterestCategory(entry.product);
+  return wrapItem([
+    ...commonItemLines(entry, { facebookQuantity: false }),
+    // Pinterest reads this to place a product in its browsable sections; without
+    // it the item still loads but its reach is limited, which is the whole
+    // reason for being on Pinterest. Omitted rather than guessed when the title
+    // says nothing recognisable — no category beats a wrong one.
+    ...(gpc ? [tag('g:google_product_category', gpc)] : []),
+  ]);
+}
+
 /**
- * The whole feed as a string. Pure: hand it the catalog, get the XML — the
- * route decides when to call it and how long to hold the result.
+ * A whole feed as a string. Pure: hand it the catalog, get the XML — the route
+ * decides when to call it and how long to hold the result.
  */
-export function buildGoogleFeed(categories) {
+function buildFeed(categories, itemXml) {
   const items = feedProducts(categories).map(itemXml).join('\n');
   return `<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:g="http://base.google.com/ns/1.0">
@@ -194,4 +285,14 @@ ${items}
   </channel>
 </rss>
 `;
+}
+
+/** The feed Merchant Center and Meta's catalog both fetch. */
+export function buildGoogleFeed(categories) {
+  return buildFeed(categories, googleItemXml);
+}
+
+/** The same products, categorised for Pinterest. See PINTEREST_CATEGORIES. */
+export function buildPinterestFeed(categories) {
+  return buildFeed(categories, pinterestItemXml);
 }
