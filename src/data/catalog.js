@@ -152,6 +152,32 @@ export function productDiscount(product) {
   };
 }
 
+// A product name may carry a display cut: everything before the bar is what a
+// listing shows, the whole string is what the product page, the <title> and the
+// feeds use. "Espejo | de cuerpo entero con bombillas LED y marco blanco" reads
+// as "Espejo" on a card and in full everywhere the words have to earn a search
+// result. The owner decides where the cut falls, because deriving it — first
+// word, first comma — gets "Mesa de manicura" and "Consola con espejo" wrong.
+//
+// A name without a bar behaves exactly as before, so nothing has to be edited
+// before it can be edited one product at a time.
+const NAME_CUT = '|';
+
+/** The whole name, bar removed — product page, <title>, feeds, schema. */
+export function productFullName(product) {
+  return String(product?.name ?? '')
+    .split(NAME_CUT)
+    .join(' ')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+/** The short name a listing shows: everything before the bar. */
+export function productDisplayName(product) {
+  const [head] = String(product?.name ?? '').split(NAME_CUT);
+  return head.replace(/\s+/g, ' ').trim();
+}
+
 /**
  * Full human label for a product: the type word plus the dimensions that
  * actually tell two items apart ("Espejo 70 × 170 cm"). `name` alone is not
@@ -161,11 +187,37 @@ export function productDiscount(product) {
  * admin-entered names carry.
  */
 export function productLabel(product) {
-  return [product?.name, product?.subtitle]
+  return [productFullName(product), product?.subtitle]
     .filter(Boolean)
     .join(' ')
     .replace(/\s+/g, ' ')
     .trim();
+}
+
+// Google shows roughly 155 characters of a description; anything past that is
+// cut mid-word and wasted. The first paragraph is written to stand alone for
+// exactly this reason, which also keeps the gift line — always the last line of
+// a description — out of the snippet without a filter deciding it for us.
+const MAX_META_DESCRIPTION = 155;
+// Below this a paragraph cannot be describing anything, and a search result
+// reading "." is worse than one reading the product's own name. Fifteen
+// descriptions in the catalog are a single full stop.
+const MIN_META_DESCRIPTION = 20;
+
+/**
+ * The description as a search snippet: first paragraph, trimmed to whole words.
+ * Falls back to the label so a product without a real description still says
+ * what it is.
+ */
+export function productMetaDescription(product, category, lang) {
+  const [first = ''] = String(productDescription(product, category, lang) ?? '')
+    .split(/\n\s*\n/)
+    .map((p) => p.replace(/\s+/g, ' ').trim())
+    .filter(Boolean);
+  if (first.length < MIN_META_DESCRIPTION) return productLabel(product);
+  if (first.length <= MAX_META_DESCRIPTION) return first;
+  const cut = first.slice(0, MAX_META_DESCRIPTION);
+  return `${cut.slice(0, cut.lastIndexOf(' ')).trim()}…`;
 }
 
 // Furniture-type words that prefix product names (e.g. "Tocador T-01") and

@@ -6,6 +6,8 @@ import { useCatalog } from '../catalog/CatalogContext.jsx';
 import {
   isInStock,
   productDescription,
+  productFullName,
+  productMetaDescription,
   productDiscount,
   productImages,
   productLabel,
@@ -30,6 +32,7 @@ import Price from '../components/Price.jsx';
 import Lightbox from '../components/Lightbox.jsx';
 import ProductCarousel from '../components/ProductCarousel.jsx';
 import OrderModal from '../components/OrderModal.jsx';
+import ExpandableText from '../components/ExpandableText.jsx';
 import NotFound from './NotFound.jsx';
 
 function IconTruck({ className = '' }) {
@@ -249,7 +252,10 @@ export default function Product() {
     setThumbStart((s) => Math.max(0, Math.min(s + dir, gallery.length - THUMB_VISIBLE)));
 
   const related = computeRelated(categories, product, category, product.related);
-  const metaDesc = productDescription(product, category, lang);
+  // The snippet, not the whole text: Google shows about 155 characters and the
+  // rest is cut mid-word. See productMetaDescription — it also keeps the gift
+  // line, always last, out of the search result without a filter.
+  const metaDesc = productMetaDescription(product, category, lang);
   const esPath = `/${category.slug}/${product.id}`;
   const canonicalUrl = `${SITE}${localize(esPath)}`;
   const categoryUrl = `${SITE}${localize(`/${category.slug}`)}`;
@@ -262,7 +268,8 @@ export default function Product() {
   const ref = (product.reference || productReference(product.name) || '').trim();
   // Collapsed: 19 names carry a trailing space in the catalog ("Espejo "), and
   // a doubled space is visible in a search result.
-  const pageTitle = [product.name, product.subtitle, ref && `(${ref})`]
+  const fullName = productFullName(product);
+  const pageTitle = [fullName, product.subtitle, ref && `(${ref})`]
     .filter(Boolean)
     .join(' ')
     .replace(/\s+/g, ' ')
@@ -334,7 +341,15 @@ export default function Product() {
               {category.name[lang]}
             </Link>
             <h1 className="mt-2 font-serif leading-[1.05] tracking-tight text-primary">
-              <span className="text-[clamp(2.25rem,8vw,3rem)] font-light">{product.name}</span>
+              <span
+                className={`font-light ${
+                  fullName.length > 28
+                    ? 'text-[clamp(1.5rem,5.5vw,2rem)]'
+                    : 'text-[clamp(2.25rem,8vw,3rem)]'
+                }`}
+              >
+                {fullName}
+              </span>
               {product.subtitle && (
                 <span className="ml-2 text-base font-light text-primary/50">
                   {product.subtitle}
@@ -507,7 +522,15 @@ export default function Product() {
               {category.name[lang]}
             </Link>
             <h1 className="hidden font-serif leading-[1.05] tracking-tight text-primary lg:mt-4 lg:block">
-              <span className="text-[clamp(3rem,4.7vw,3.75rem)] font-light">{product.name}</span>
+              <span
+                className={`font-light ${
+                  fullName.length > 28
+                    ? 'text-[clamp(1.75rem,2.6vw,2.25rem)]'
+                    : 'text-[clamp(3rem,4.7vw,3.75rem)]'
+                }`}
+              >
+                {fullName}
+              </span>
               {product.subtitle && (
                 <span className="ml-3 text-lg font-light text-primary/50">{product.subtitle}</span>
               )}
@@ -516,9 +539,10 @@ export default function Product() {
               <Price product={product} className="font-serif text-3xl text-primary" />
             </div>
 
-            <p className="mt-8 max-w-md whitespace-pre-line leading-relaxed text-secondary">
-              {productDescription(product, category, lang)}
-            </p>
+            <ExpandableText
+              className="mt-8 max-w-md"
+              text={productDescription(product, category, lang)}
+            />
 
             {/* Specs */}
             <dl className="mt-10 border-t border-primary/10">

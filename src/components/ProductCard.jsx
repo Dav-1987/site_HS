@@ -4,7 +4,7 @@ import Media from './Media.jsx';
 import Price from './Price.jsx';
 import ProductBadge, { SOLD_OUT_MEDIA } from './ProductBadge.jsx';
 import { useLanguage } from '../i18n/LanguageContext.jsx';
-import { isInStock, productMedia } from '../data/catalog.js';
+import { isInStock, productDisplayName, productFullName, productMedia } from '../data/catalog.js';
 
 /** Product tile: swipeable photo/video carousel + discount-aware price. */
 export default function ProductCard({
@@ -19,7 +19,13 @@ export default function ProductCard({
   // Canonical product URL is /<categorySlug>/<id>; the legacy /producto/<id>
   // form still works as a redirect if the slug is ever missing.
   const to = slug ? `/${slug}/${product.id}` : `/producto/${product.id}`;
-  const label = categoryName ? `${product.name} — ${categoryName[lang]}` : product.name;
+  // A tile shows the short name; the full one, which the product page and the
+  // <title> carry, would wrap a card to four lines. The accessible label keeps
+  // the full name — a screen reader gains from the detail a tile has no room
+  // for. See productDisplayName.
+  const shortName = productDisplayName(product);
+  const fullName = productFullName(product);
+  const label = categoryName ? `${fullName} — ${categoryName[lang]}` : fullName;
 
   // Unified, ordered media (photos + videos), exactly as the product page shows
   // it — so a video-first product plays its video on the card too, and swiping
@@ -191,7 +197,7 @@ export default function ProductCard({
         className="block border-t border-primary/10 pt-4"
       >
         <h3 className="font-serif text-xl text-primary transition-colors duration-300 group-hover:text-accent-text">
-          {product.name}
+          {shortName}
           {/* Own line + nowrap: on a narrow 2-column card the dimensions used to
               break mid-string ("… 140" / "cm"), which read as a stray line. */}
           {product.subtitle && (
