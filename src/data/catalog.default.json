@@ -73,6 +73,7 @@
           "en": "Brass"
         },
         "size": "80 × 180 cm",
+        "mirrorSize": "",
         "reference": "F-05",
         "subtitle": "80 × 180 cm",
         "description": {
@@ -130,6 +131,7 @@
           "en": "Brass"
         },
         "size": "70 × 170 cm",
+        "mirrorSize": "",
         "reference": "F-03",
         "subtitle": "70 × 170 cm",
         "description": {
@@ -177,6 +179,7 @@
           "en": "Brass"
         },
         "size": "80 × 180 cm",
+        "mirrorSize": "",
         "reference": "F-07",
         "subtitle": "80 × 180 cm",
         "description": {
@@ -249,6 +252,7 @@
           "en": "Brass"
         },
         "size": "80 × 185 cm",
+        "mirrorSize": "",
         "reference": "F-06",
         "subtitle": "80 × 185 cm",
         "description": {
@@ -306,6 +310,7 @@
           "en": "Brass"
         },
         "size": "70 × 170 cm",
+        "mirrorSize": "",
         "reference": "F-01",
         "subtitle": "70 × 170 cm",
         "description": {
@@ -368,6 +373,7 @@
           "en": "Brass"
         },
         "size": "70 × 175 cm",
+        "mirrorSize": "",
         "reference": "F-04",
         "subtitle": "70 × 175 cm",
         "description": {
@@ -410,6 +416,7 @@
           "en": "Brass"
         },
         "size": "80 × 185 cm",
+        "mirrorSize": "",
         "reference": "F-08",
         "subtitle": "80 × 185 cm",
         "description": {
@@ -472,6 +479,7 @@
           "en": "Brass"
         },
         "size": "70 × 175 cm",
+        "mirrorSize": "",
         "reference": "F-02",
         "subtitle": "70 × 175 cm",
         "description": {
@@ -519,6 +527,7 @@
           "en": "Brass"
         },
         "size": "80 × 180 cm",
+        "mirrorSize": "",
         "reference": "F-09",
         "subtitle": "80 × 180 cm",
         "description": {
@@ -621,6 +630,7 @@
           "en": "Brass"
         },
         "size": "70 × 175 cm",
+        "mirrorSize": "",
         "reference": "D-11",
         "subtitle": "70 × 175 cm",
         "description": {
@@ -671,6 +681,7 @@
           "en": "Brass"
         },
         "size": "55 × 40 × 180 cm",
+        "mirrorSize": "50 × 160 cm",
         "reference": "D-05",
         "subtitle": "55 × 40 × 180 cm",
         "description": {
@@ -682,7 +693,7 @@
         "visibility": "public",
         "showDiscountBadge": true,
         "inStock": true,
-        "updatedAt": "2026-08-26T20:18:22.771Z"
+        "updatedAt": "2026-08-26T21:57:32.907Z"
       },
       {
         "id": "Espejo-Alto-D10",
@@ -738,6 +749,7 @@
           "en": "Brass"
         },
         "size": "65 × 170 cm",
+        "mirrorSize": "",
         "reference": "D-10",
         "subtitle": "65 × 170 cm",
         "description": {
@@ -785,6 +797,7 @@
           "en": "Brass"
         },
         "size": "70 × 175 cm",
+        "mirrorSize": "",
         "reference": "D-06",
         "subtitle": "70 × 175 cm",
         "description": {
@@ -832,6 +845,7 @@
           "en": "Brass"
         },
         "size": "60 × 175 cm",
+        "mirrorSize": "",
         "reference": "D-09",
         "subtitle": "60 × 175 cm",
         "description": {
@@ -889,6 +903,7 @@
           "en": "Brass"
         },
         "size": "60 × 170 cm",
+        "mirrorSize": "",
         "reference": "F-10",
         "subtitle": "60 × 170 cm",
         "description": {
@@ -962,6 +977,7 @@
           "en": "Matte lacquer"
         },
         "size": "100 × 40 × 160 cm",
+        "mirrorSize": "100 × 80 cm",
         "reference": "L-01",
         "subtitle": "100 × 40 × 160 cm",
         "description": {
@@ -978,7 +994,7 @@
         "visibility": "public",
         "showDiscountBadge": true,
         "inStock": true,
-        "updatedAt": "2026-08-06T12:37:02.377Z"
+        "updatedAt": "2026-08-26T21:57:32.907Z"
       },
       {
         "id": "Tocador-L-08",
@@ -1024,6 +1040,7 @@
           "en": "Matte lacquer"
         },
         "size": "130 × 40 × 160 cm",
+        "mirrorSize": "120 × 80 cm",
         "reference": "L-08",
         "subtitle": "130 × 40 × 160 cm",
         "description": {
@@ -1040,7 +1057,7 @@
         "visibility": "public",
         "showDiscountBadge": true,
         "inStock": true,
-        "updatedAt": "2026-08-06T11:14:39.904Z"
+        "updatedAt": "2026-08-26T21:57:32.907Z"
       },
       {
         "id": "Tocador-L-06",
@@ -1086,6 +1103,7 @@
           "en": "Matte lacquer"
         },
         "size": "120 × 40 × 160 cm",
+        "mirrorSize": "120 × 80 cm",
         "reference": "L-06",
         "subtitle": "120 × 40 × 160 cm",
         "description": {
@@ -1102,7 +1120,7 @@
         "visibility": "public",
         "showDiscountBadge": true,
         "inStock": true,
-        "updatedAt": "2026-07-27T08:03:16.285Z"
+        "updatedAt": "2026-08-26T21:57:32.907Z"
       },
       {
         "id": "Tocador-T-04-2",
@@ -1138,6 +1156,7 @@
           "en": "Matte lacquer"
         },
         "size": "140 × 60 × 76 cm",
+        "mirrorSize": "70 × 80 cm",
         "reference": "T-04-2",
         "subtitle": "140 × 60 × 76 cm",
         "description": {
@@ -1154,7 +1173,7 @@
         "visibility": "public",
         "showDiscountBadge": true,
         "inStock": true,
-        "updatedAt": "2026-08-06T12:39:18.790Z"
+        "updatedAt": "2026-08-26T21:57:32.907Z"
       },
       {
         "id": "Tocador-L-07",
@@ -1185,6 +1204,7 @@
           "en": "Matte lacquer"
         },
         "size": "130 × 40 × 160 cm",
+        "mirrorSize": "120 × 80 cm",
         "reference": "L-07",
         "subtitle": "130 × 40 × 160 cm",
         "description": {
@@ -1201,7 +1221,7 @@
         "visibility": "public",
         "showDiscountBadge": true,
         "inStock": true,
-        "updatedAt": "2026-07-27T08:03:16.285Z"
+        "updatedAt": "2026-08-26T21:57:32.907Z"
       },
       {
         "id": "Tocador-L-02",
@@ -1227,6 +1247,7 @@
           "en": "Matte lacquer"
         },
         "size": "100 × 40 × 160 cm",
+        "mirrorSize": "100 × 80 cm",
         "reference": "L-02",
         "subtitle": "100 × 40 × 160 cm",
         "description": {
@@ -1243,7 +1264,7 @@
         "visibility": "public",
         "showDiscountBadge": true,
         "inStock": true,
-        "updatedAt": "2026-07-27T08:03:16.285Z"
+        "updatedAt": "2026-08-26T21:57:32.907Z"
       },
       {
         "id": "Tocador-L-11",
@@ -1284,6 +1305,7 @@
           "en": "Matte lacquer"
         },
         "size": "150 × 40 × 160 cm",
+        "mirrorSize": "100 × 80 cm",
         "reference": "L-11",
         "subtitle": "150 × 40 × 160 cm",
         "description": {
@@ -1300,7 +1322,7 @@
         "visibility": "public",
         "showDiscountBadge": true,
         "inStock": true,
-        "updatedAt": "2026-08-06T11:04:48.720Z"
+        "updatedAt": "2026-08-26T21:57:32.907Z"
       },
       {
         "id": "Tocador-L-10",
@@ -1341,6 +1363,7 @@
           "en": "Matte lacquer"
         },
         "size": "130 × 40 × 160 cm",
+        "mirrorSize": "130 × 80 cm",
         "reference": "L-10",
         "subtitle": "130 × 40 × 160 cm",
         "description": {
@@ -1357,7 +1380,7 @@
         "visibility": "public",
         "showDiscountBadge": true,
         "inStock": true,
-        "updatedAt": "2026-08-06T12:39:51.168Z"
+        "updatedAt": "2026-08-26T21:57:32.907Z"
       },
       {
         "id": "Tocador-L-05",
@@ -1398,6 +1421,7 @@
           "en": "Matte lacquer"
         },
         "size": "120 × 40 × 160 cm",
+        "mirrorSize": "120 × 80 cm",
         "reference": "L-05",
         "subtitle": "120 × 40 × 160 cm",
         "description": {
@@ -1414,7 +1438,7 @@
         "visibility": "public",
         "showDiscountBadge": true,
         "inStock": true,
-        "updatedAt": "2026-07-27T08:03:16.285Z"
+        "updatedAt": "2026-08-26T21:57:32.907Z"
       },
       {
         "id": "Tocador-T-04",
@@ -1455,6 +1479,7 @@
           "en": "Matte lacquer"
         },
         "size": "140 × 60 × 76 cm",
+        "mirrorSize": "70 × 80 cm",
         "reference": "T-04",
         "subtitle": "140 × 60 × 76 cm",
         "description": {
@@ -1471,7 +1496,7 @@
         "visibility": "public",
         "showDiscountBadge": true,
         "inStock": true,
-        "updatedAt": "2026-08-06T11:10:49.480Z"
+        "updatedAt": "2026-08-26T21:57:32.907Z"
       },
       {
         "id": "Tocador-L-04",
@@ -1497,6 +1522,7 @@
           "en": "Matte lacquer"
         },
         "size": "120 × 40 × 160 cm",
+        "mirrorSize": "120 × 80 cm",
         "reference": "L-04",
         "subtitle": "120 × 40 × 160 cm",
         "description": {
@@ -1513,7 +1539,7 @@
         "visibility": "public",
         "showDiscountBadge": true,
         "inStock": true,
-        "updatedAt": "2026-07-27T08:03:16.285Z"
+        "updatedAt": "2026-08-26T21:57:32.907Z"
       },
       {
         "id": "Tocador-L-09",
@@ -1549,6 +1575,7 @@
           "en": "Matte lacquer"
         },
         "size": "130 × 40 × 160 cm",
+        "mirrorSize": "130 × 80 cm",
         "reference": "L-09",
         "subtitle": "130 × 40 × 160 cm",
         "description": {
@@ -1565,7 +1592,7 @@
         "visibility": "public",
         "showDiscountBadge": true,
         "inStock": true,
-        "updatedAt": "2026-07-27T08:03:16.285Z"
+        "updatedAt": "2026-08-26T21:57:32.907Z"
       },
       {
         "id": "Tocador-L-03",
@@ -1596,6 +1623,7 @@
           "en": "Matte lacquer"
         },
         "size": "100 × 40 × 160 cm",
+        "mirrorSize": "100 × 80 cm",
         "reference": "L-03",
         "subtitle": "100 × 40 × 160 cm",
         "description": {
@@ -1612,7 +1640,7 @@
         "visibility": "public",
         "showDiscountBadge": true,
         "inStock": true,
-        "updatedAt": "2026-07-27T08:03:16.285Z"
+        "updatedAt": "2026-08-26T21:57:32.907Z"
       },
       {
         "id": "Tocador-T-01-2",
@@ -1668,6 +1696,7 @@
           "en": "Walnut"
         },
         "size": "60 × 40 × 160 cm",
+        "mirrorSize": "60 × 80 cm",
         "reference": "T-01-2",
         "subtitle": "60 × 40 × 160 cm",
         "description": {
@@ -1683,7 +1712,7 @@
         "visibility": "public",
         "showDiscountBadge": true,
         "inStock": true,
-        "updatedAt": "2026-07-27T08:03:16.285Z"
+        "updatedAt": "2026-08-26T21:57:32.907Z"
       },
       {
         "id": "Tocador-T-02-2",
@@ -1729,6 +1758,7 @@
           "en": "Matte lacquer"
         },
         "size": "80 × 40 × 160 cm",
+        "mirrorSize": "60 × 80 cm",
         "reference": "T-02-2",
         "subtitle": "80 × 40 × 160 cm",
         "description": {
@@ -1745,7 +1775,7 @@
         "visibility": "public",
         "showDiscountBadge": true,
         "inStock": true,
-        "updatedAt": "2026-07-27T08:03:16.285Z"
+        "updatedAt": "2026-08-26T21:57:32.907Z"
       },
       {
         "id": "Tocador-T-03-2",
@@ -1791,6 +1821,7 @@
           "en": "Matte lacquer"
         },
         "size": "80 × 40 × 160 cm",
+        "mirrorSize": "80 × 80 cm",
         "reference": "T-03-2",
         "subtitle": "80 × 40 × 160 cm",
         "description": {
@@ -1807,7 +1838,7 @@
         "visibility": "public",
         "showDiscountBadge": true,
         "inStock": true,
-        "updatedAt": "2026-07-27T08:03:16.285Z"
+        "updatedAt": "2026-08-26T21:57:32.907Z"
       },
       {
         "id": "Tocador-T-09",
@@ -1848,6 +1879,7 @@
           "en": "Light oak"
         },
         "size": "60 × 40 × 160 cm",
+        "mirrorSize": "60 × 80 cm",
         "reference": "T-09",
         "subtitle": "60 × 40 × 160 cm",
         "description": {
@@ -1863,7 +1895,7 @@
         "visibility": "public",
         "showDiscountBadge": true,
         "inStock": true,
-        "updatedAt": "2026-07-27T08:03:16.285Z"
+        "updatedAt": "2026-08-26T21:57:32.907Z"
       }
     ]
   },
@@ -1920,6 +1952,7 @@
           "en": "Melamine-faced Chipboard, Metal"
         },
         "size": "90 × 40 × 170 cm",
+        "mirrorSize": "90 × 80 cm",
         "reference": "M-05-3",
         "subtitle": "90 × 40 × 170 cm",
         "description": {
@@ -1931,7 +1964,7 @@
         "visibility": "public",
         "showDiscountBadge": true,
         "inStock": true,
-        "updatedAt": "2026-08-21T14:29:52.140Z"
+        "updatedAt": "2026-08-26T21:57:32.907Z"
       },
       {
         "id": "Tocador-M-05",
@@ -1971,6 +2004,7 @@
           "en": "Matte lacquer"
         },
         "size": "90 × 40 × 170 cm",
+        "mirrorSize": "90 × 80 cm",
         "reference": "M-05",
         "subtitle": "90 × 40 × 170 cm",
         "description": {
@@ -1982,7 +2016,7 @@
         "visibility": "public",
         "showDiscountBadge": true,
         "inStock": true,
-        "updatedAt": "2026-07-27T08:03:16.285Z"
+        "updatedAt": "2026-08-26T21:57:32.907Z"
       },
       {
         "id": "Tocador-M-02-3",
@@ -2033,6 +2067,7 @@
           "en": "Matte lacquer"
         },
         "size": "70 × 40 × 170 cm",
+        "mirrorSize": "70 × 80 cm",
         "reference": "M-02-3",
         "subtitle": "70 × 40 × 170 cm",
         "description": {
@@ -2044,7 +2079,7 @@
         "visibility": "public",
         "showDiscountBadge": true,
         "inStock": true,
-        "updatedAt": "2026-08-06T11:54:44.182Z"
+        "updatedAt": "2026-08-26T21:57:32.907Z"
       },
       {
         "id": "Tocador-M-01",
@@ -2080,6 +2115,7 @@
           "en": "Oak"
         },
         "size": "70 × 40 × 170 cm",
+        "mirrorSize": "70 × 80 cm",
         "reference": "M-01",
         "subtitle": "70 × 40 × 170 cm",
         "description": {
@@ -2091,7 +2127,7 @@
         "visibility": "public",
         "showDiscountBadge": true,
         "inStock": true,
-        "updatedAt": "2026-07-27T08:03:16.285Z"
+        "updatedAt": "2026-08-26T21:57:32.907Z"
       },
       {
         "id": "Tocador-M-02",
@@ -2146,6 +2182,7 @@
           "en": "Walnut"
         },
         "size": "70 × 40 × 170 cm",
+        "mirrorSize": "70 × 80 cm",
         "reference": "M-02",
         "subtitle": "70 × 40 × 170 cm",
         "description": {
@@ -2157,7 +2194,7 @@
         "visibility": "public",
         "showDiscountBadge": true,
         "inStock": true,
-        "updatedAt": "2026-08-06T12:50:23.658Z"
+        "updatedAt": "2026-08-26T21:57:32.907Z"
       },
       {
         "id": "Tocador-M-01-2",
@@ -2208,6 +2245,7 @@
           "en": "Matte lacquer"
         },
         "size": "70 × 40 × 170 cm",
+        "mirrorSize": "70 × 80 cm",
         "reference": "M-01-2",
         "subtitle": "70 × 40 × 170 cm",
         "description": {
@@ -2219,7 +2257,7 @@
         "visibility": "public",
         "showDiscountBadge": true,
         "inStock": true,
-        "updatedAt": "2026-07-27T08:03:16.285Z"
+        "updatedAt": "2026-08-26T21:57:32.907Z"
       },
       {
         "id": "Tocador-M-06",
@@ -2250,6 +2288,7 @@
           "en": "Matte lacquer"
         },
         "size": "100 × 40 × 180 cm",
+        "mirrorSize": "100 × 80 cm",
         "reference": "M-06",
         "subtitle": "100 × 40 × 180 cm",
         "description": {
@@ -2261,7 +2300,7 @@
         "visibility": "public",
         "showDiscountBadge": true,
         "inStock": true,
-        "updatedAt": "2026-07-27T08:03:16.285Z"
+        "updatedAt": "2026-08-26T21:57:32.907Z"
       },
       {
         "id": "Tocador-M-04",
@@ -2306,6 +2345,7 @@
           "en": "Matte lacquer"
         },
         "size": "90 × 40 × 170 cm",
+        "mirrorSize": "90 × 80 cm",
         "reference": "M-04",
         "subtitle": "90 × 40 × 170 cm",
         "description": {
@@ -2317,7 +2357,7 @@
         "visibility": "public",
         "showDiscountBadge": true,
         "inStock": true,
-        "updatedAt": "2026-07-27T08:03:16.285Z"
+        "updatedAt": "2026-08-26T21:57:32.907Z"
       },
       {
         "id": "Tocador-M-05-4",
@@ -2363,6 +2403,7 @@
           "en": "Matte lacquer"
         },
         "size": "90 × 40 × 170 cm",
+        "mirrorSize": "90 × 80 cm",
         "reference": "M-05-4",
         "subtitle": "90 × 40 × 170 cm",
         "description": {
@@ -2374,7 +2415,7 @@
         "visibility": "public",
         "showDiscountBadge": true,
         "inStock": true,
-        "updatedAt": "2026-07-27T08:03:16.285Z"
+        "updatedAt": "2026-08-26T21:57:32.907Z"
       },
       {
         "id": "Tocador-M-08",
@@ -2415,6 +2456,7 @@
           "en": "Matte lacquer"
         },
         "size": "180 × 45 × 180 cm",
+        "mirrorSize": "180 × 80 cm",
         "reference": "M-08",
         "subtitle": "180 × 45 × 180 cm",
         "description": {
@@ -2426,7 +2468,7 @@
         "visibility": "public",
         "showDiscountBadge": true,
         "inStock": true,
-        "updatedAt": "2026-07-27T08:03:16.285Z"
+        "updatedAt": "2026-08-26T21:57:32.907Z"
       },
       {
         "id": "Tocador-M-07",
@@ -2476,6 +2518,7 @@
           "en": "Matte lacquer"
         },
         "size": "100 × 40 × 170 cm",
+        "mirrorSize": "100 × 80 cm",
         "reference": "M-07",
         "subtitle": "100 × 40 × 170 cm",
         "description": {
@@ -2487,7 +2530,7 @@
         "visibility": "public",
         "showDiscountBadge": true,
         "inStock": true,
-        "updatedAt": "2026-07-27T08:03:16.285Z"
+        "updatedAt": "2026-08-26T21:57:32.907Z"
       },
       {
         "id": "Tocador-M-04-2",
@@ -2533,6 +2576,7 @@
           "en": "Matte lacquer"
         },
         "size": "90 × 40 × 170 cm",
+        "mirrorSize": "90 × 80 cm",
         "reference": "M-04-2",
         "subtitle": "90 × 40 × 170 cm",
         "description": {
@@ -2544,7 +2588,7 @@
         "visibility": "public",
         "showDiscountBadge": true,
         "inStock": true,
-        "updatedAt": "2026-07-27T08:03:16.285Z"
+        "updatedAt": "2026-08-26T21:57:32.907Z"
       },
       {
         "id": "Tocador-M-02-2",
@@ -2590,6 +2634,7 @@
           "en": "Matte lacquer"
         },
         "size": "70 × 40 × 170 cm",
+        "mirrorSize": "70 × 80 cm",
         "reference": "M-02-2",
         "subtitle": "70 × 40 × 170 cm",
         "description": {
@@ -2601,7 +2646,7 @@
         "visibility": "public",
         "showDiscountBadge": true,
         "inStock": true,
-        "updatedAt": "2026-07-27T08:03:16.285Z"
+        "updatedAt": "2026-08-26T21:57:32.907Z"
       },
       {
         "id": "Tocador-M-09",
@@ -2637,6 +2682,7 @@
           "en": "Matte lacquer"
         },
         "size": "180 × 45 × 180 cm",
+        "mirrorSize": "180 × 80 cm",
         "reference": "M-09",
         "subtitle": "180 × 45 × 180 cm",
         "description": {
@@ -2648,7 +2694,7 @@
         "visibility": "public",
         "showDiscountBadge": true,
         "inStock": true,
-        "updatedAt": "2026-07-27T08:03:16.285Z"
+        "updatedAt": "2026-08-26T21:57:32.907Z"
       }
     ]
   },
@@ -2720,6 +2766,7 @@
           "en": "Matte lacquer"
         },
         "size": "50 × 40 × 190 cm",
+        "mirrorSize": "",
         "reference": "E-04",
         "subtitle": "50 × 40 × 190 cm",
         "description": {
@@ -2795,6 +2842,7 @@
           "en": "Matte lacquer"
         },
         "size": "80 × 40 × 190 cm",
+        "mirrorSize": "",
         "reference": "E-10",
         "subtitle": "80 × 40 × 190 cm",
         "description": {
@@ -2837,6 +2885,7 @@
           "en": "Oak"
         },
         "size": "40 × 40 × 170 cm",
+        "mirrorSize": "",
         "reference": "E-01",
         "subtitle": "40 × 40 × 170 cm",
         "description": {
@@ -2883,6 +2932,7 @@
           "en": "Ash"
         },
         "size": "40 × 40 × 190 cm",
+        "mirrorSize": "",
         "reference": "E-02",
         "subtitle": "40 × 40 × 190 cm",
         "description": {
@@ -2944,6 +2994,7 @@
           "en": "Matte lacquer"
         },
         "size": "86 × 40 × 190 cm",
+        "mirrorSize": "",
         "reference": "E-08",
         "subtitle": "86 × 40 × 190 cm",
         "description": {
@@ -3001,6 +3052,7 @@
           "en": "Matte lacquer"
         },
         "size": "45 × 35 × 180 cm",
+        "mirrorSize": "",
         "reference": "E-03",
         "subtitle": "45 × 35 × 180 cm",
         "description": {
@@ -3057,6 +3109,7 @@
           "en": "Matte lacquer"
         },
         "size": "80 × 40 × 200 cm",
+        "mirrorSize": "",
         "reference": "E-11",
         "subtitle": "80 × 40 × 200 cm",
         "description": {
@@ -3118,6 +3171,7 @@
           "en": "Matte lacquer"
         },
         "size": "80 × 40 × 150 cm",
+        "mirrorSize": "",
         "reference": "E-07",
         "subtitle": "80 × 40 × 150 cm",
         "description": {
@@ -3160,6 +3214,7 @@
           "en": "Matte lacquer"
         },
         "size": "80 × 40 × 190 cm",
+        "mirrorSize": "",
         "reference": "E-09",
         "subtitle": "80 × 40 × 190 cm",
         "description": {
@@ -3206,6 +3261,7 @@
           "en": "Matte lacquer"
         },
         "size": "80 × 40 × 190 cm",
+        "mirrorSize": "",
         "reference": "E-06",
         "subtitle": "80 × 40 × 190 cm",
         "description": {
@@ -3290,6 +3346,7 @@
           "en": "Matte lacquer"
         },
         "size": "90 × 40 × 170 cm",
+        "mirrorSize": "90 × 80 cm",
         "reference": "M-03",
         "subtitle": "90 × 40 × 170 cm",
         "description": {
@@ -3301,7 +3358,7 @@
         "visibility": "public",
         "showDiscountBadge": true,
         "inStock": true,
-        "updatedAt": "2026-07-27T08:03:16.285Z"
+        "updatedAt": "2026-08-26T21:57:32.907Z"
       },
       {
         "id": "Tocador-M-02-4",
@@ -3347,6 +3404,7 @@
           "en": "Matte lacquer"
         },
         "size": "70 × 40 × 170 cm",
+        "mirrorSize": "70 × 80 cm",
         "reference": "M-02-4",
         "subtitle": "70 × 40 × 170 cm",
         "description": {
@@ -3358,7 +3416,7 @@
         "visibility": "public",
         "showDiscountBadge": true,
         "inStock": true,
-        "updatedAt": "2026-07-27T08:03:16.285Z"
+        "updatedAt": "2026-08-26T21:57:32.907Z"
       },
       {
         "id": "Tocador-M-04-3",
@@ -3404,6 +3462,7 @@
           "en": "Matte lacquer"
         },
         "size": "90 × 40 × 170 cm",
+        "mirrorSize": "90 × 80 cm",
         "reference": "M-04-3",
         "subtitle": "90 × 40 × 170 cm",
         "description": {
@@ -3415,7 +3474,7 @@
         "visibility": "public",
         "showDiscountBadge": true,
         "inStock": true,
-        "updatedAt": "2026-07-27T08:03:16.285Z"
+        "updatedAt": "2026-08-26T21:57:32.907Z"
       },
       {
         "id": "Tocador-M-05-2",
@@ -3441,6 +3500,7 @@
           "en": "Matte lacquer"
         },
         "size": "90 × 40 × 170 cm",
+        "mirrorSize": "90 × 80 cm",
         "reference": "M-05-2",
         "subtitle": "90 × 40 × 170 cm",
         "description": {
@@ -3452,7 +3512,7 @@
         "visibility": "public",
         "showDiscountBadge": true,
         "inStock": true,
-        "updatedAt": "2026-07-27T08:03:16.285Z"
+        "updatedAt": "2026-08-26T21:57:32.907Z"
       },
       {
         "id": "Tocador-M-05-5",
@@ -3488,6 +3548,7 @@
           "en": "Matte lacquer"
         },
         "size": "90 × 40 × 170 cm",
+        "mirrorSize": "90 × 80 cm",
         "reference": "M-05-5",
         "subtitle": "90 × 40 × 170 cm",
         "description": {
@@ -3499,7 +3560,7 @@
         "visibility": "public",
         "showDiscountBadge": true,
         "inStock": true,
-        "updatedAt": "2026-07-27T08:03:16.285Z"
+        "updatedAt": "2026-08-26T21:57:32.907Z"
       },
       {
         "id": "Tocador-T-25",
@@ -3569,6 +3630,7 @@
           "en": "Matte lacquer"
         },
         "size": "100 × 40 × 150 cm",
+        "mirrorSize": "85 × 70 cm",
         "reference": "T-25",
         "subtitle": "100 × 40 × 150 cm",
         "description": {
@@ -3580,7 +3642,7 @@
         "visibility": "public",
         "showDiscountBadge": true,
         "inStock": true,
-        "updatedAt": "2026-07-27T08:03:16.285Z"
+        "updatedAt": "2026-08-26T21:57:32.907Z"
       },
       {
         "id": "Tocador-T-26",
@@ -3645,6 +3707,7 @@
           "en": "Matte lacquer"
         },
         "size": "90 × 45 × 180 cm",
+        "mirrorSize": "90 × 90 cm",
         "reference": "T-26",
         "subtitle": "90 × 45 × 180 cm",
         "description": {
@@ -3656,7 +3719,7 @@
         "visibility": "public",
         "showDiscountBadge": true,
         "inStock": true,
-        "updatedAt": "2026-07-27T08:03:16.285Z"
+        "updatedAt": "2026-08-26T21:57:32.907Z"
       },
       {
         "id": "Tocador-T-28",
@@ -3701,6 +3764,7 @@
           "en": "Matte lacquer"
         },
         "size": "90 × 40 × 170 cm",
+        "mirrorSize": "90 × 80 cm",
         "reference": "T-28",
         "subtitle": "90 × 40 × 170 cm",
         "description": {
@@ -3712,7 +3776,7 @@
         "visibility": "public",
         "showDiscountBadge": true,
         "inStock": true,
-        "updatedAt": "2026-07-27T08:03:16.285Z"
+        "updatedAt": "2026-08-26T21:57:32.907Z"
       },
       {
         "id": "Tocador-T-30",
@@ -3743,6 +3807,7 @@
           "en": "Matte lacquer"
         },
         "size": "90 × 40 × 185 cm",
+        "mirrorSize": "Ø d-70cm",
         "reference": "T-30",
         "subtitle": "90 × 40 × 185 cm",
         "description": {
@@ -3754,7 +3819,7 @@
         "visibility": "public",
         "showDiscountBadge": true,
         "inStock": true,
-        "updatedAt": "2026-07-29T16:19:58.160Z"
+        "updatedAt": "2026-08-26T21:57:32.907Z"
       },
       {
         "id": "Tocador-T-31",
@@ -3794,6 +3859,7 @@
           "en": "Matte lacquer"
         },
         "size": "90 × 40 × 180 cm",
+        "mirrorSize": "Ø d-80cm",
         "reference": "T-31",
         "subtitle": "90 × 40 × 180 cm",
         "description": {
@@ -3805,7 +3871,7 @@
         "visibility": "public",
         "showDiscountBadge": true,
         "inStock": true,
-        "updatedAt": "2026-07-29T16:19:58.160Z"
+        "updatedAt": "2026-08-26T21:57:32.907Z"
       },
       {
         "id": "Tocador-T-32",
@@ -3841,6 +3907,7 @@
           "en": "Matte lacquer"
         },
         "size": "130 × 40 × 140 cm",
+        "mirrorSize": "90 × 80 cm",
         "reference": "T-32",
         "subtitle": "130 × 40 × 140 cm",
         "description": {
@@ -3852,7 +3919,7 @@
         "visibility": "public",
         "showDiscountBadge": true,
         "inStock": true,
-        "updatedAt": "2026-07-29T16:19:58.160Z"
+        "updatedAt": "2026-08-26T21:57:32.907Z"
       },
       {
         "id": "Tocador-T-33",
@@ -3897,6 +3964,7 @@
           "en": "Matte lacquer"
         },
         "size": "120 × 40 × 160 cm",
+        "mirrorSize": "Ø d-80cm",
         "reference": "T-33",
         "subtitle": "120 × 40 × 160 cm",
         "description": {
@@ -3908,7 +3976,7 @@
         "visibility": "public",
         "showDiscountBadge": true,
         "inStock": true,
-        "updatedAt": "2026-07-29T16:19:58.160Z"
+        "updatedAt": "2026-08-26T21:57:32.907Z"
       },
       {
         "id": "Tocador-T-35",
@@ -3934,6 +4002,7 @@
           "en": "Matte lacquer"
         },
         "size": "180 × 45 × 170 cm",
+        "mirrorSize": "180 × 80 cm",
         "reference": "T-35",
         "subtitle": "180 × 45 × 170 cm",
         "description": {
@@ -3945,7 +4014,7 @@
         "visibility": "public",
         "showDiscountBadge": true,
         "inStock": true,
-        "updatedAt": "2026-07-27T08:03:16.285Z"
+        "updatedAt": "2026-08-26T21:57:32.907Z"
       },
       {
         "id": "Tocador-T-36",
@@ -3996,6 +4065,7 @@
           "en": "Matte lacquer"
         },
         "size": "180 × 45 × 170 cm",
+        "mirrorSize": "180 × 80 cm",
         "reference": "T-36",
         "subtitle": "180 × 45 × 170 cm",
         "description": {
@@ -4007,7 +4077,7 @@
         "visibility": "public",
         "showDiscountBadge": true,
         "inStock": true,
-        "updatedAt": "2026-07-27T08:03:16.285Z"
+        "updatedAt": "2026-08-26T21:57:32.907Z"
       },
       {
         "id": "Tocador-T-38",
@@ -4053,6 +4123,7 @@
           "en": "Matte lacquer"
         },
         "size": "180 × 45 × 180 cm",
+        "mirrorSize": "180 × 80 cm",
         "reference": "T-38",
         "subtitle": "180 × 45 × 180 cm",
         "description": {
@@ -4064,7 +4135,7 @@
         "visibility": "public",
         "showDiscountBadge": true,
         "inStock": true,
-        "updatedAt": "2026-07-27T08:03:16.285Z"
+        "updatedAt": "2026-08-26T21:57:32.907Z"
       },
       {
         "id": "Tocador-T-39",
@@ -4110,6 +4181,7 @@
           "en": "Matte lacquer"
         },
         "size": "180 × 45 × 180 cm",
+        "mirrorSize": "180 × 80 cm",
         "reference": "T-39",
         "subtitle": "180 × 45 × 180 cm",
         "description": {
@@ -4121,7 +4193,7 @@
         "visibility": "public",
         "showDiscountBadge": true,
         "inStock": true,
-        "updatedAt": "2026-07-27T08:03:16.285Z"
+        "updatedAt": "2026-08-26T21:57:32.907Z"
       },
       {
         "id": "Tocador-T-01",
@@ -4167,6 +4239,7 @@
           "en": "Oak"
         },
         "size": "60 × 40 × 160 cm",
+        "mirrorSize": "60 × 80 cm",
         "reference": "T-01",
         "subtitle": "60 × 40 × 160 cm",
         "description": {
@@ -4183,7 +4256,7 @@
         "visibility": "public",
         "showDiscountBadge": true,
         "inStock": true,
-        "updatedAt": "2026-07-27T08:03:16.285Z"
+        "updatedAt": "2026-08-26T21:57:32.907Z"
       },
       {
         "id": "Tocador-T-02",
@@ -4234,6 +4307,7 @@
           "en": "Matte lacquer"
         },
         "size": "80 × 40 × 160 cm",
+        "mirrorSize": "60 × 80 cm",
         "reference": "T-02",
         "subtitle": "80 × 40 × 160 cm",
         "description": {
@@ -4250,7 +4324,7 @@
         "visibility": "public",
         "showDiscountBadge": true,
         "inStock": true,
-        "updatedAt": "2026-08-25T14:47:24.315Z"
+        "updatedAt": "2026-08-26T21:57:32.907Z"
       },
       {
         "id": "Tocador-T-03",
@@ -4301,6 +4375,7 @@
           "en": "Matte lacquer"
         },
         "size": "80 × 40 × 160 cm",
+        "mirrorSize": "80 × 80 cm",
         "reference": "T-03",
         "subtitle": "80 × 40 × 160 cm",
         "description": {
@@ -4317,7 +4392,7 @@
         "visibility": "public",
         "showDiscountBadge": true,
         "inStock": true,
-        "updatedAt": "2026-07-27T08:03:16.285Z"
+        "updatedAt": "2026-08-26T21:57:32.907Z"
       },
       {
         "id": "Espejo-Alto-D01",
@@ -4353,6 +4428,7 @@
           "en": "Brass"
         },
         "size": "60 × 170 cm",
+        "mirrorSize": "",
         "reference": "D-01",
         "subtitle": "60 × 170 cm",
         "description": {
@@ -4510,6 +4586,7 @@
           "en": "Brass"
         },
         "size": "60 × 170 cm",
+        "mirrorSize": "",
         "reference": "D-02",
         "subtitle": "60 × 170 cm",
         "description": {
@@ -4562,6 +4639,7 @@
           "en": "Brass"
         },
         "size": "60 × 170 cm",
+        "mirrorSize": "",
         "reference": "D-03",
         "subtitle": "60 × 170 cm",
         "description": {
@@ -4599,6 +4677,7 @@
           "en": "Brass"
         },
         "size": "50 × 35 × 160 cm",
+        "mirrorSize": "50 × 140 cm",
         "reference": "D-04",
         "subtitle": "50 × 35 × 160 cm",
         "description": {
@@ -4610,7 +4689,7 @@
         "visibility": "public",
         "showDiscountBadge": true,
         "inStock": true,
-        "updatedAt": "2026-07-29T16:19:58.160Z"
+        "updatedAt": "2026-08-26T21:57:32.907Z"
       },
       {
         "id": "Espejo-Alto-D07",
@@ -4636,6 +4715,7 @@
           "en": "Brass"
         },
         "size": "45 × 175 cm",
+        "mirrorSize": "40 × 160 cm",
         "reference": "D-07",
         "subtitle": "45 × 175 cm",
         "description": {
@@ -4647,7 +4727,7 @@
         "visibility": "public",
         "showDiscountBadge": true,
         "inStock": true,
-        "updatedAt": "2026-07-29T16:19:58.160Z"
+        "updatedAt": "2026-08-26T21:57:32.907Z"
       },
       {
         "id": "Espejo-Alto-D08",
@@ -4678,6 +4758,7 @@
           "en": "Brass"
         },
         "size": "45 × 175 cm",
+        "mirrorSize": "40 × 160 cm",
         "reference": "D-08",
         "subtitle": "45 × 175 cm",
         "description": {
@@ -4689,7 +4770,7 @@
         "visibility": "public",
         "showDiscountBadge": true,
         "inStock": true,
-        "updatedAt": "2026-07-29T16:19:58.160Z"
+        "updatedAt": "2026-08-26T21:57:32.907Z"
       },
       {
         "id": "Estanteria-E-02-2",
@@ -4748,6 +4829,7 @@
           "en": "Walnut"
         },
         "size": "40 × 40 × 190 cm",
+        "mirrorSize": "",
         "reference": "E-02-2",
         "subtitle": "40 × 40 × 190 cm",
         "description": {
@@ -4814,6 +4896,7 @@
           "en": "Matte lacquer"
         },
         "size": "45 × 35 × 180 cm",
+        "mirrorSize": "",
         "reference": "E-03-2",
         "subtitle": "45 × 35 × 180 cm",
         "description": {
@@ -4860,6 +4943,7 @@
           "en": "Matte lacquer"
         },
         "size": "50 × 40 × 190 cm",
+        "mirrorSize": "",
         "reference": "E-04-2",
         "subtitle": "50 × 40 × 190 cm",
         "description": {
@@ -4916,6 +5000,7 @@
           "en": "Matte lacquer"
         },
         "size": "50 × 40 × 190 cm",
+        "mirrorSize": "",
         "reference": "E-04-3",
         "subtitle": "50 × 40 × 190 cm",
         "description": {
@@ -4978,6 +5063,7 @@
           "en": "Matte lacquer"
         },
         "size": "50 × 40 × 190 cm",
+        "mirrorSize": "",
         "reference": "E-04-4",
         "subtitle": "50 × 40 × 190 cm",
         "description": {
@@ -5025,6 +5111,7 @@
           "en": "Matte lacquer"
         },
         "size": "40 × 30 × 200 cm",
+        "mirrorSize": "",
         "reference": "E-05",
         "subtitle": "40 × 30 × 200 cm",
         "description": {
@@ -5062,6 +5149,7 @@
           "en": "Matte lacquer"
         },
         "size": "40 × 30 × 200 cm",
+        "mirrorSize": "",
         "reference": "E-05-2",
         "subtitle": "40 × 30 × 200 cm",
         "description": {
@@ -5109,6 +5197,7 @@
           "en": "Brass"
         },
         "size": "Ø d-70cm",
+        "mirrorSize": "",
         "reference": "K-12",
         "subtitle": "Ø d-70cm",
         "description": {
@@ -5161,6 +5250,7 @@
           "en": "Brass"
         },
         "size": "80 x 65cm",
+        "mirrorSize": "",
         "reference": "K-09",
         "subtitle": "80 x 65cm",
         "description": {
@@ -5248,6 +5338,7 @@
           "en": "Brass"
         },
         "size": "86 x 85cm",
+        "mirrorSize": "",
         "reference": "K-05",
         "subtitle": "86 x 85cm",
         "description": {
@@ -5315,6 +5406,7 @@
           "en": "Brass"
         },
         "size": "Ø d-80cm",
+        "mirrorSize": "",
         "reference": "K-13",
         "subtitle": "Ø d-80cm",
         "description": {
@@ -5372,6 +5464,7 @@
           "en": "Brass"
         },
         "size": "Ø d-90cm",
+        "mirrorSize": "",
         "reference": "K-14",
         "subtitle": "Ø d-90cm",
         "description": {
@@ -5459,6 +5552,7 @@
           "en": "Brass"
         },
         "size": "80 x 60cm",
+        "mirrorSize": "",
         "reference": "K-10",
         "subtitle": "80 x 60cm",
         "description": {
@@ -5521,6 +5615,7 @@
           "en": "Brass"
         },
         "size": "Ø d-90cm",
+        "mirrorSize": "",
         "reference": "K-15",
         "subtitle": "Ø d-90cm",
         "description": {
@@ -5583,6 +5678,7 @@
           "en": "Brass"
         },
         "size": "70 x 63cm",
+        "mirrorSize": "",
         "reference": "K-07",
         "subtitle": "70 x 63cm",
         "description": {
@@ -5675,6 +5771,7 @@
           "en": "Brass"
         },
         "size": "65 x 80cm",
+        "mirrorSize": "",
         "reference": "K-11",
         "subtitle": "65 x 80cm",
         "description": {
@@ -5757,6 +5854,7 @@
           "en": "Brass"
         },
         "size": "Ø d-80cm",
+        "mirrorSize": "",
         "reference": "K-01",
         "subtitle": "Ø d-80cm",
         "description": {
@@ -5824,6 +5922,7 @@
           "en": "Brass"
         },
         "size": "Ø d-70cm",
+        "mirrorSize": "",
         "reference": "K-06",
         "subtitle": "Ø d-70cm",
         "description": {
@@ -5911,6 +6010,7 @@
           "en": "Brass"
         },
         "size": "90 x 70cm",
+        "mirrorSize": "",
         "reference": "K-04",
         "subtitle": "90 x 70cm",
         "description": {
@@ -5978,6 +6078,7 @@
           "en": "Brass"
         },
         "size": "Ø d-80cm",
+        "mirrorSize": "",
         "reference": "K-08",
         "subtitle": "Ø d-80cm",
         "description": {
@@ -6055,6 +6156,7 @@
           "en": "Brass"
         },
         "size": "Ø d-70cm",
+        "mirrorSize": "",
         "reference": "K-02",
         "subtitle": "Ø d-70cm",
         "description": {
@@ -6147,6 +6249,7 @@
           "en": "Brass"
         },
         "size": "80 x 80cm",
+        "mirrorSize": "",
         "reference": "K-03",
         "subtitle": "80 x 80cm",
         "description": {
@@ -6198,6 +6301,7 @@
           "en": "Light oak"
         },
         "size": "40 × 40 × 70cm",
+        "mirrorSize": "",
         "reference": "B-01",
         "subtitle": "40 × 40 × 70cm",
         "description": {
@@ -6250,6 +6354,7 @@
           "en": "Light oak"
         },
         "size": "70 × 40 × 70cm",
+        "mirrorSize": "",
         "reference": "B-02",
         "subtitle": "70 × 40 × 70cm",
         "description": {
@@ -6302,6 +6407,7 @@
           "en": "Light oak"
         },
         "size": "40 × 40 × 120cm",
+        "mirrorSize": "",
         "reference": "B-03",
         "subtitle": "40 × 40 × 120cm",
         "description": {
@@ -6358,6 +6464,7 @@
           "en": "Light oak"
         },
         "size": "40 × 40 × 120cm",
+        "mirrorSize": "",
         "reference": "B-04",
         "subtitle": "40 × 40 × 120cm",
         "description": {
@@ -6419,6 +6526,7 @@
           "en": "Light oak"
         },
         "size": "60 × 40 × 150cm",
+        "mirrorSize": "",
         "reference": "B-05",
         "subtitle": "60 × 40 × 150cm",
         "description": {
@@ -6505,6 +6613,7 @@
           "en": "Oak"
         },
         "size": "120 × 40 × 80cm",
+        "mirrorSize": "80 × 80 cm",
         "reference": "A-01",
         "subtitle": "120 × 40 × 80cm",
         "description": {
@@ -6516,7 +6625,7 @@
         "visibility": "public",
         "showDiscountBadge": true,
         "inStock": true,
-        "updatedAt": "2026-07-29T16:19:58.160Z"
+        "updatedAt": "2026-08-26T21:57:32.907Z"
       },
       {
         "id": "Consola-Con-Espejo-A02",
@@ -6602,6 +6711,7 @@
           "en": "Oak"
         },
         "size": "120 × 40 × 80cm",
+        "mirrorSize": "Ø d-80cm",
         "reference": "A-02",
         "subtitle": "120 × 40 × 80cm",
         "description": {
@@ -6613,7 +6723,7 @@
         "visibility": "public",
         "showDiscountBadge": true,
         "inStock": true,
-        "updatedAt": "2026-07-29T16:19:58.160Z"
+        "updatedAt": "2026-08-26T21:57:32.907Z"
       },
       {
         "id": "Consola-Con-Espejo-A03",
@@ -6724,6 +6834,7 @@
           "en": "Oak"
         },
         "size": "120 × 33 × 80cm",
+        "mirrorSize": "Ø d-70cm",
         "reference": "A-03",
         "subtitle": "120 × 33 × 80cm",
         "description": {
@@ -6735,7 +6846,7 @@
         "visibility": "public",
         "showDiscountBadge": true,
         "inStock": true,
-        "updatedAt": "2026-07-29T16:19:58.160Z"
+        "updatedAt": "2026-08-26T21:57:32.907Z"
       },
       {
         "id": "Consola-Con-Espejo-A04",
@@ -6821,6 +6932,7 @@
           "en": "Oak"
         },
         "size": "120 × 33 × 80cm",
+        "mirrorSize": "90 × 70 cm",
         "reference": "A-04",
         "subtitle": "120 × 33 × 80cm",
         "description": {
@@ -6832,7 +6944,7 @@
         "visibility": "public",
         "showDiscountBadge": true,
         "inStock": true,
-        "updatedAt": "2026-07-29T16:19:58.160Z"
+        "updatedAt": "2026-08-26T21:57:32.907Z"
       },
       {
         "id": "Consola-S06",
@@ -6887,6 +6999,7 @@
           "en": "Light oak"
         },
         "size": "130 × 40 × 80cm",
+        "mirrorSize": "",
         "reference": "S-06",
         "subtitle": "130 × 40 × 80cm",
         "description": {
@@ -6944,6 +7057,7 @@
           "en": "Light oak"
         },
         "size": "110 × 40 × 80cm",
+        "mirrorSize": "",
         "reference": "S-05",
         "subtitle": "110 × 40 × 80cm",
         "description": {
@@ -7005,6 +7119,7 @@
           "en": "Light oak"
         },
         "size": "150 × 40 × 80cm",
+        "mirrorSize": "",
         "reference": "S-07",
         "subtitle": "150 × 40 × 80cm",
         "description": {
@@ -7057,6 +7172,7 @@
           "en": "Light oak"
         },
         "size": "80 × 40 × 80cm",
+        "mirrorSize": "",
         "reference": "S-01",
         "subtitle": "80 × 40 × 80cm",
         "description": {
@@ -7114,6 +7230,7 @@
           "en": "Light oak"
         },
         "size": "120 × 40 × 80cm",
+        "mirrorSize": "",
         "reference": "S-03",
         "subtitle": "120 × 40 × 80cm",
         "description": {
@@ -7160,6 +7277,7 @@
           "en": "Light oak"
         },
         "size": "100 × 40 × 80cm",
+        "mirrorSize": "",
         "reference": "S-02",
         "subtitle": "100 × 40 × 80cm",
         "description": {
@@ -7212,6 +7330,7 @@
           "en": "Light oak"
         },
         "size": "150 × 40 × 80cm",
+        "mirrorSize": "",
         "reference": "S-04",
         "subtitle": "150 × 40 × 80cm",
         "description": {
@@ -7283,6 +7402,7 @@
           "en": "Light oak"
         },
         "size": "110 x 50 x 80cm",
+        "mirrorSize": "",
         "reference": "M-01",
         "subtitle": "110 x 50 x 80cm",
         "description": {
@@ -7330,6 +7450,7 @@
           "en": "Light oak"
         },
         "size": "100 x 50 x 80cm",
+        "mirrorSize": "",
         "reference": "M-02",
         "subtitle": "100 x 50 x 80cm",
         "description": {
@@ -7372,6 +7493,7 @@
           "en": "Light oak"
         },
         "size": "110 x 50 x 80cm",
+        "mirrorSize": "",
         "reference": "M-03",
         "subtitle": "110 x 50 x 80cm",
         "description": {
@@ -7419,6 +7541,7 @@
           "en": "Light oak"
         },
         "size": "120 x 50 x 80cm",
+        "mirrorSize": "",
         "reference": "M-04",
         "subtitle": "120 x 50 x 80cm",
         "description": {
@@ -7481,6 +7604,7 @@
           "en": "Light oak"
         },
         "size": "120 x 50 x 80cm",
+        "mirrorSize": "",
         "reference": "M-05",
         "subtitle": "120 x 50 x 80cm",
         "description": {
