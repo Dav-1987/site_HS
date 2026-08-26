@@ -5,6 +5,7 @@ import {
   productDisplayName,
   productFullName,
   productLabel,
+  productMirrorSize,
   showsDiscountBadge,
   computeFeatured,
   computeRelated,
@@ -565,5 +566,24 @@ describe('moveProductsToCategory', () => {
 
   it('is a same-reference no-op for an empty id list', () => {
     expect(moveProductsToCategory(categories, 'c1', [], 'c2')).toBe(categories);
+  });
+});
+
+// `size` measures the piece assembled: a table 80cm high under an 80cm mirror
+// is listed as 160cm there. The mirror is a second measurement, and 58 products
+// have one — written into their descriptions until it became a field.
+describe('productMirrorSize', () => {
+  it('reads a rectangular mirror as one line', () => {
+    expect(productMirrorSize({ mirrorSize: '100 × 80 cm' })).toBe('100 × 80cm');
+  });
+
+  it('reads a round one as a diameter', () => {
+    expect(productMirrorSize({ mirrorSize: 'Ø d-70cm' })).toBe('Ø 70cm');
+  });
+
+  it('says nothing for a product that has no separate mirror', () => {
+    expect(productMirrorSize({ size: '60 × 40 × 160 cm' })).toBeNull();
+    expect(productMirrorSize({ mirrorSize: '   ' })).toBeNull();
+    expect(productMirrorSize(undefined)).toBeNull();
   });
 });

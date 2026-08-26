@@ -47,6 +47,11 @@ ALTER TABLE products ADD COLUMN IF NOT EXISTS reference TEXT NOT NULL DEFAULT ''
 -- analytics all report the Spanish name and have no language to pass, so an
 -- empty value here has to keep meaning "use the Spanish one".
 ALTER TABLE products ADD COLUMN IF NOT EXISTS name_en TEXT NOT NULL DEFAULT '';
+-- Size of the mirror a dressing table comes with, apart from `size`, which
+-- measures the piece assembled (an 80cm table under an 80cm mirror is 160cm
+-- there). Was written into the descriptions; kept as a field so rewriting a
+-- description does not take it away. See productMirrorSize.
+ALTER TABLE products ADD COLUMN IF NOT EXISTS mirror_size TEXT NOT NULL DEFAULT '';
 ALTER TABLE products ADD COLUMN IF NOT EXISTS subtitle TEXT NOT NULL DEFAULT '';
 ALTER TABLE products ADD COLUMN IF NOT EXISTS video_first BOOLEAN NOT NULL DEFAULT false;
 -- Unified ordered media list (photos + videos): [{ "type": "image"|"video", "src": "..." }]

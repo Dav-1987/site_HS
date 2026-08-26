@@ -164,6 +164,11 @@ export default function ProductEditor({
               onChange={(v) => set({ reference: v })}
             />
             <Field label="Размер" value={product.size} onChange={(v) => set({ size: v })} />
+            <Field
+              label="Размер зеркала (отдельной строкой в характеристиках; пусто — строки нет)"
+              value={product.mirrorSize}
+              onChange={(v) => set({ mirrorSize: v })}
+            />
           </div>
 
           <SectionLabel>Цена</SectionLabel>

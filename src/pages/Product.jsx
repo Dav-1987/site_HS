@@ -9,6 +9,7 @@ import {
   productDimensions,
   productFullName,
   productMetaDescription,
+  productMirrorSize,
   productDiscount,
   productImages,
   productLabel,
@@ -281,13 +282,23 @@ export default function Product() {
   // into prose that then had to agree with the `size` field, and a description
   // long enough to collapse would have hidden them behind "read more".
   const dimensions = productDimensions(product);
+  const mirrorSize = productMirrorSize(product);
   const specs = [
     { label: t('product.collectionLabel'), value: category.name[lang] },
     ...(dimensions
       ? [
           {
             label: t('product.sizeLabel'),
-            value: dimensions.map((d) => `• ${t(`product.dim.${d.key}`)} ${d.value}`).join(' '),
+            // The mirror goes on its own line: the row above it measures the
+            // piece assembled, so a table 80cm high under an 80cm mirror reads
+            // 160cm there, and running the two together would read as one set
+            // of measurements contradicting itself.
+            value: [
+              dimensions.map((d) => `• ${t(`product.dim.${d.key}`)} ${d.value}`).join(' '),
+              mirrorSize && `• ${t('product.dim.mirror')} ${mirrorSize}`,
+            ]
+              .filter(Boolean)
+              .join('\n'),
           },
         ]
       : []),
@@ -568,7 +579,7 @@ export default function Product() {
                   className="flex flex-wrap items-center justify-between gap-x-6 gap-y-1 border-b border-primary/10 py-4"
                 >
                   <dt className="text-xs uppercase tracking-[0.2em] text-secondary">{s.label}</dt>
-                  <dd className="text-sm text-primary">{s.value}</dd>
+                  <dd className="whitespace-pre-line text-right text-sm text-primary">{s.value}</dd>
                 </div>
               ))}
             </dl>

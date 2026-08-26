@@ -95,6 +95,7 @@ function shapeCategory(cat, products) {
       media: Array.isArray(p.media) ? p.media : [],
       material: { es: p.material_es, en: p.material_en },
       size: p.size,
+      mirrorSize: p.mirror_size ?? '',
       reference: p.reference ?? '',
       subtitle: p.subtitle ?? '',
       description: { es: p.description_es ?? '', en: p.description_en ?? '' },
@@ -157,6 +158,7 @@ export function productContentEqual(a, b) {
     a.material?.es === b.material?.es &&
     a.material?.en === b.material?.en &&
     a.size === b.size &&
+    (a.mirrorSize ?? '') === (b.mirrorSize ?? '') &&
     a.reference === b.reference &&
     a.subtitle === b.subtitle &&
     a.description?.es === b.description?.es &&
@@ -246,8 +248,8 @@ export async function writeCatalog(categories) {
 
         await client.query(
           `INSERT INTO products
-             (id, category_slug, name, name_en, price, old_price, image, image_mobile, images, material_es, material_en, size, reference, subtitle, video, video_first, media, description_es, description_en, related, perks, visibility, show_discount_badge, in_stock, position, updated_at)
-           VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9::jsonb,$10,$11,$12,$13,$14,$15,$16,$17::jsonb,$18,$19,$20::jsonb,$21,$22,$23,$24,$25,$26)`,
+             (id, category_slug, name, name_en, price, old_price, image, image_mobile, images, material_es, material_en, size, mirror_size, reference, subtitle, video, video_first, media, description_es, description_en, related, perks, visibility, show_discount_badge, in_stock, position, updated_at)
+           VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9::jsonb,$10,$11,$12,$13,$14,$15,$16,$17,$18::jsonb,$19,$20,$21::jsonb,$22,$23,$24,$25,$26,$27)`,
           [
             p.id,
             c.slug,
@@ -261,6 +263,7 @@ export async function writeCatalog(categories) {
             p.material?.es ?? '',
             p.material?.en ?? '',
             p.size ?? '',
+            p.mirrorSize ?? '',
             p.reference ?? '',
             p.subtitle ?? '',
             // Legacy single-video fields kept empty once media is the source of truth.
