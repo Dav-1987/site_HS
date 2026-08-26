@@ -21,7 +21,8 @@
     "products": [
       {
         "id": "Espejo-Alto-F-05",
-        "name": "Espejo ",
+        "name": "Espejo | Hollywood de cuerpo entero blanco con bombillas LED",
+        "nameEn": "Mirror | White full-length Hollywood design with LED bulbs",
         "price": 239,
         "oldPrice": 340,
         "image": "/uploads/3611a23d86e72c7bf209810bfdd9a592.jpg",
@@ -75,19 +76,20 @@
         "reference": "F-05",
         "subtitle": "80 × 180 cm",
         "description": {
-          "es": "Medidas:\n• ancho 80cm\n• altura 180cm\n\n🎁 Bombillas LED de regalo",
-          "en": "Dimensions:\n• Width: 80 cm\n• Height: 180 cm\n\n🎁 Free LED bulbs included"
+          "es": "Este espejo Hollywood de cuerpo entero destaca por su amplio marco blanco y sus bombillas LED distribuidas alrededor del cristal, que proporcionan una luz uniforme para maquillarse, peinarse y elegir cada look. Su gran formato permite verse de pies a cabeza y aporta luminosidad y sensación de amplitud. Un espejo de pie moderno y elegante, ideal para dormitorio, vestidor, recibidor, camerino, estudio de maquillaje o salón de belleza. Su diseño blanco combina fácilmente con interiores modernos, minimalistas y clásicos.\n\n🎁 Bombillas LED de regalo",
+          "en": "This full-length Hollywood mirror features a wide white frame and LED bulbs positioned around the glass, providing even front lighting for applying makeup, styling hair and getting ready. Its large format offers a comfortable head-to-toe reflection while making the room feel brighter and more spacious. A modern and elegant floor mirror for a bedroom, dressing room, hallway, makeup studio, backstage dressing room or beauty salon. The clean white finish complements modern, minimalist and classic interiors.\n\n🎁 Free LED bulbs"
         },
         "related": [],
         "perks": "bulbs",
         "visibility": "public",
         "showDiscountBadge": true,
         "inStock": true,
-        "updatedAt": "2026-08-23T15:34:43.460Z"
+        "updatedAt": "2026-08-26T20:16:27.758Z"
       },
       {
         "id": "Espejo-Alto-F-03",
-        "name": "Espejo ",
+        "name": "Espejo | Hollywood sin marco con bombillas LED",
+        "nameEn": "Mirror | Frameless Hollywood design with LED bulbs",
         "price": 199,
         "oldPrice": 300,
         "image": "/uploads/c4ed1648ac2194b2c57ef23dfa6ddf05.jpg",
@@ -131,19 +133,20 @@
         "reference": "F-03",
         "subtitle": "70 × 170 cm",
         "description": {
-          "es": "Medidas:\n• ancho 70cm\n• altura 170cm\n\n🎁 Bombillas LED de regalo",
-          "en": "Dimensions:\n• Width: 70 cm\n• Height: 170 cm\n\n🎁 Free LED bulbs included"
+          "es": "Espejo Hollywood de cuerpo entero con diseño sin marco y bombillas LED instaladas directamente sobre el cristal. Su estética ligera y minimalista amplía visualmente el espacio, mientras la iluminación frontal favorece una imagen clara para maquillaje, peluquería y cuidado personal. Permite comprobar el conjunto completo sin ocupar demasiado espacio. Perfecto como espejo de dormitorio, vestidor, recibidor, camerino, centro de estética o salón de belleza, encaja especialmente bien en ambientes blancos, neutros y contemporáneos.\n\n🎁 Bombillas LED de regalo",
+          "en": "A full-length Hollywood mirror with a frameless design and LED bulbs fitted directly onto the glass. Its light, minimalist appearance visually enlarges the room, while the front lighting provides a clear reflection for makeup, hairstyling and personal care. The tall vertical shape offers a complete head-to-toe view without taking up too much space. Perfect for a bedroom, dressing room, hallway, backstage dressing room, beauty studio or hair salon, especially in bright, neutral and contemporary interiors.\n\n🎁 Free LED bulbs"
         },
         "related": [],
         "perks": "bulbs",
         "visibility": "public",
         "showDiscountBadge": true,
         "inStock": true,
-        "updatedAt": "2026-08-06T12:07:06.614Z"
+        "updatedAt": "2026-08-26T20:16:27.758Z"
       },
       {
         "id": "Espejo-Alto-F-07",
-        "name": "Espejo ",
+        "name": "Espejo | Hollywood de gran formato con bombillas LED",
+        "nameEn": "Mirror | Large Hollywood design with LED bulbs",
         "price": 299,
         "oldPrice": 400,
         "image": "/uploads/66efc3b8287f3bd90ea766667f9bfc86.jpg",
@@ -177,19 +180,20 @@
         "reference": "F-07",
         "subtitle": "80 × 180 cm",
         "description": {
-          "es": "Medidas:\n• ancho 80cm\n• altura 180cm\n\n🎁 Bombillas LED de regalo",
-          "en": "Dimensions:\n• Width: 80 cm\n• Height: 180 cm\n\n🎁 Free LED bulbs included"
+          "es": "Este espejo Hollywood grande combina un formato de cuerpo entero con un perfil fino de acabado plateado y bombillas LED alrededor del cristal. La luz frontal uniforme facilita el maquillaje, el peinado y la elección de ropa, mientras su gran superficie refleja la figura completa con comodidad. Su diseño limpio y profesional funciona como espejo de pie para dormitorio, vestidor o recibidor, y también como espejo de maquillaje para camerino, estudio fotográfico, peluquería, centro de estética o salón de belleza. Una pieza moderna que aporta luz y amplitud visual.\n\n🎁 Bombillas LED de regalo",
+          "en": "This large Hollywood mirror combines a full-length format with a slim silver-effect profile and LED bulbs arranged around the glass. The even front lighting makes applying makeup, styling hair and choosing an outfit easier, while the generous reflective surface provides a comfortable head-to-toe view. Its clean, professional design makes it suitable for a bedroom, dressing room or hallway, as well as a backstage dressing room, photography studio, hair salon, beauty centre or makeup studio. A modern statement mirror that adds light and visual space.\n\n🎁 Free LED bulbs"
         },
         "related": [],
         "perks": "bulbs",
         "visibility": "public",
         "showDiscountBadge": true,
         "inStock": true,
-        "updatedAt": "2026-08-06T12:28:31.573Z"
+        "updatedAt": "2026-08-26T20:16:27.758Z"
       },
       {
         "id": "Espejo-Alto-F-06",
-        "name": "Espejo ",
+        "name": "Espejo | Hollywood blanco con base y bombillas LED",
+        "nameEn": "Mirror | White Hollywood design with base and LED bulbs",
         "price": 259,
         "oldPrice": 380,
         "image": "/uploads/16c45b90baae50744af08e3aa9c749bc.jpg",
@@ -248,19 +252,20 @@
         "reference": "F-06",
         "subtitle": "80 × 185 cm",
         "description": {
-          "es": "Medidas:\n• ancho 80cm\n• altura 185cm\n\n🎁 Bombillas LED de regalo",
-          "en": "Dimensions:\n• Width: 80 cm\n• Height: 185 cm\n\n🎁 Free LED bulbs included"
+          "es": "Espejo Hollywood de cuerpo entero con marco blanco, base estable y bombillas LED perimetrales para una iluminación frontal homogénea. Su gran formato ofrece una visión completa y cómoda, perfecta para maquillaje, peluquería, pruebas de vestuario y cuidado personal. El acabado blanco aporta luminosidad y combina con dormitorios, vestidores, recibidores y espacios de estilo moderno o romántico. También es una excelente opción como espejo profesional para camerino, boutique, estudio de belleza, peluquería o centro de estética. Elegante, funcional y decorativo.\n\n🎁 Bombillas LED de regalo",
+          "en": "A full-length Hollywood mirror with a white frame, stable base and LED bulbs positioned around the perimeter for balanced front lighting. Its generous format provides a clear head-to-toe reflection, ideal for makeup, hairstyling, outfit checks and daily personal care. The white finish brightens the room and works beautifully in bedrooms, dressing rooms, hallways and modern or romantic interiors. It is also an excellent professional mirror for backstage dressing rooms, boutiques, beauty studios, hair salons and makeup areas. Elegant, functional and decorative.\n\n🎁 Free LED bulbs"
         },
         "related": [],
         "perks": "bulbs",
         "visibility": "public",
         "showDiscountBadge": true,
         "inStock": true,
-        "updatedAt": "2026-08-06T12:28:08.043Z"
+        "updatedAt": "2026-08-26T20:16:27.758Z"
       },
       {
         "id": "Espejo-Alto-F-01",
-        "name": "Espejo ",
+        "name": "Espejo | Hollywood blanco clásico con bombillas LED",
+        "nameEn": "Mirror | Classic white Hollywood design with LED bulbs",
         "price": 169,
         "oldPrice": 270,
         "image": "/uploads/a692727d48ead1768c4a09a1900fdf13.jpg",
@@ -304,19 +309,20 @@
         "reference": "F-01",
         "subtitle": "70 × 170 cm",
         "description": {
-          "es": "Medidas:\n• ancho 70cm\n• altura 170cm\n\n🎁 Bombillas LED de regalo",
-          "en": "Dimensions:\n• Width: 70 cm\n• Height: 170 cm\n\n🎁 Free LED bulbs included"
+          "es": "Espejo Hollywood de cuerpo entero con marco blanco y bombillas LED repartidas de forma equilibrada para iluminar el rostro y la silueta. El diseño rectangular clásico ofrece una imagen completa y convierte cualquier rincón en una zona práctica de maquillaje y vestidor. Resulta ideal para dormitorio, recibidor, vestidor o zona de tocador, sin sobrecargar el ambiente. También funciona como espejo profesional para camerino, peluquería, academia de maquillaje, centro de estética o salón de belleza. Su acabado blanco encaja en decoraciones modernas, nórdicas y elegantes.\n\n🎁 Bombillas LED de regalo",
+          "en": "A full-length Hollywood mirror with a classic white frame and evenly positioned LED bulbs that illuminate the face and silhouette. Its rectangular design provides a complete reflection and transforms any corner into a practical makeup and dressing area. Ideal for a bedroom, hallway, dressing room or vanity area without overwhelming the interior. It also works as a professional makeup mirror for backstage dressing rooms, beauty schools, hair salons and beauty studios. The white finish complements modern, Scandinavian and elegant interiors.\n\n🎁 Free LED bulbs"
         },
         "related": [],
         "perks": "bulbs",
         "visibility": "public",
         "showDiscountBadge": true,
         "inStock": true,
-        "updatedAt": "2026-08-06T12:05:29.080Z"
+        "updatedAt": "2026-08-26T20:16:27.758Z"
       },
       {
         "id": "Espejo-Alto-F-04",
-        "name": "Espejo ",
+        "name": "Espejo | Hollywood sin marco con base blanca y bombillas LED",
+        "nameEn": "Mirror | Frameless Hollywood design with white base and LED bulbs",
         "price": 229,
         "oldPrice": 330,
         "image": "/uploads/f1a4522de8cd487bcd30a904aa6f692e.jpg",
@@ -365,19 +371,20 @@
         "reference": "F-04",
         "subtitle": "70 × 175 cm",
         "description": {
-          "es": "Medidas:\n• ancho 70cm\n• altura 175cm\n\n🎁 Bombillas LED de regalo",
-          "en": "Dimensions:\n• Width: 70 cm\n• Height: 175 cm\n\n🎁 Free LED bulbs included"
+          "es": "Espejo Hollywood de cuerpo entero con cristal sin marco, base blanca y bombillas LED frontales que crean una iluminación uniforme para maquillaje, peinado y pruebas de vestuario. El diseño minimalista da protagonismo al reflejo, aporta amplitud visual y se integra con facilidad en espacios claros y contemporáneos. Es un espejo de pie práctico para dormitorio, vestidor, recibidor o zona de tocador. También resulta idóneo para camerinos, boutiques, estudios de maquillaje, peluquerías, centros de estética y salones de belleza.\n\n🎁 Bombillas LED de regalo",
+          "en": "A full-length Hollywood mirror featuring frameless glass, a white base and front-facing LED bulbs that create even lighting for makeup, hairstyling and outfit checks. The minimalist design keeps the focus on the reflection, visually enlarges the room and blends easily with bright contemporary interiors. A practical floor mirror for a bedroom, dressing room, hallway or vanity area. It is also ideal for backstage dressing rooms, boutiques, makeup studios, beauty schools, hair salons and beauty centres looking for a functional Hollywood mirror with lights.\n\n🎁 Free LED bulbs"
         },
         "related": [],
         "perks": "bulbs",
         "visibility": "public",
         "showDiscountBadge": true,
         "inStock": true,
-        "updatedAt": "2026-08-06T12:27:38.760Z"
+        "updatedAt": "2026-08-26T20:16:27.758Z"
       },
       {
         "id": "Espejo-Alto-F-08",
-        "name": "Espejo ",
+        "name": "Espejo | Hollywood de pie sin marco con bombillas LED",
+        "nameEn": "Mirror | Frameless freestanding Hollywood design with LED bulbs",
         "price": 329,
         "oldPrice": 450,
         "image": "/uploads/756f8c6ff6502724e6947db02769de1b.jpg",
@@ -406,19 +413,20 @@
         "reference": "F-08",
         "subtitle": "80 × 185 cm",
         "description": {
-          "es": "Medidas:\n• ancho 80cm\n• altura 185cm\n\n🎁 Bombillas LED de regalo",
-          "en": "Dimensions:\n• Width: 80 cm\n• Height: 185 cm\n\n🎁 Free LED bulbs included"
+          "es": "Espejo Hollywood extragrande de cuerpo entero con diseño sin marco, amplia base y bombillas LED colocadas alrededor del cristal. La iluminación frontal ayuda a ver el rostro, el cabello y la ropa con claridad, mientras su gran formato ofrece un reflejo amplio de pies a cabeza. Su estética limpia y profesional lo convierte en un espejo de pie ideal para dormitorio, vestidor, recibidor, boutique o showroom. También es perfecto como espejo de maquillaje para camerino, peluquería, academia, centro de estética o salón de belleza. Moderno, luminoso y versátil.\n\n🎁 Bombillas LED de regalo",
+          "en": "An extra-large full-length Hollywood mirror with a frameless design, wide base and LED bulbs arranged around the glass. The front lighting provides a clear view of the face, hair and clothing, while the generous format offers a spacious head-to-toe reflection. Its clean and professional appearance makes it an ideal freestanding mirror for a bedroom, dressing room, hallway, boutique or showroom. It is also perfect as a makeup mirror for backstage dressing rooms, hair salons, beauty schools, makeup studios and beauty centres. Modern, bright and versatile.\n\n🎁 Free LED bulbs"
         },
         "related": [],
         "perks": "bulbs",
         "visibility": "public",
         "showDiscountBadge": true,
         "inStock": true,
-        "updatedAt": "2026-07-27T08:03:16.285Z"
+        "updatedAt": "2026-08-26T20:16:27.758Z"
       },
       {
         "id": "Espejo-Alto-F-02",
-        "name": "Espejo ",
+        "name": "Espejo | Hollywood blanco con ruedas y bombillas LED",
+        "nameEn": "Mirror | White Hollywood design with wheels and LED bulbs",
         "price": 189,
         "oldPrice": 290,
         "image": "/uploads/3f17f75401458f2be6e6e8fd3035521b.jpg",
@@ -467,19 +475,20 @@
         "reference": "F-02",
         "subtitle": "70 × 175 cm",
         "description": {
-          "es": "Medidas:\n• ancho 70cm\n• altura 175cm\n\n🎁 Bombillas LED de regalo",
-          "en": "Dimensions:\n• Width: 70 cm\n• Height: 175 cm\n\n🎁 Free LED bulbs included"
+          "es": "Espejo Hollywood de cuerpo entero con marco blanco, base móvil con ruedas y bombillas LED perimetrales. Su formato permite verse de pies a cabeza, mientras la iluminación frontal uniforme facilita el maquillaje, el peinado y la preparación de cada conjunto. Gracias a su estructura móvil puede cambiarse de posición según las necesidades del espacio. Es un espejo de pie funcional para dormitorio, vestidor, recibidor o boutique, y una solución profesional para camerino, estudio de maquillaje, peluquería, academia, centro de estética o salón de belleza.\n\n🎁 Bombillas LED de regalo",
+          "en": "A full-length Hollywood mirror with a white frame, mobile wheeled base and LED bulbs arranged around the perimeter. Its tall format provides a complete head-to-toe view, while the even front lighting makes makeup application, hairstyling and outfit preparation easier. The mobile structure allows the mirror to be repositioned whenever required. A functional floor mirror for a bedroom, dressing room, hallway or boutique, and a professional solution for backstage dressing rooms, makeup studios, beauty schools, hair salons and beauty centres.\n\n🎁 Free LED bulbs"
         },
         "related": [],
         "perks": "bulbs",
         "visibility": "public",
         "showDiscountBadge": true,
         "inStock": true,
-        "updatedAt": "2026-07-27T08:03:16.285Z"
+        "updatedAt": "2026-08-26T20:16:27.758Z"
       },
       {
         "id": "Espejo-Alto-F-09",
-        "name": "Espejo ",
+        "name": "Espejo | Hollywood extragrande con bombillas LED",
+        "nameEn": "Mirror | Extra-large Hollywood design with LED bulbs",
         "price": 329,
         "oldPrice": 450,
         "image": "/uploads/50395d6b1c82cbde618ebf5a32628a64.jpg",
@@ -513,19 +522,20 @@
         "reference": "F-09",
         "subtitle": "80 × 180 cm",
         "description": {
-          "es": "Medidas:\n• ancho 80cm\n• altura 180cm\n\n🎁 Bombillas LED de regalo",
-          "en": "Dimensions:\n• Width: 80 cm\n• Height: 180 cm\n\n🎁 Free LED bulbs included"
+          "es": "Espejo Hollywood extragrande de cuerpo entero con perfil fino de acabado plateado y numerosas bombillas LED alrededor del cristal. La iluminación frontal envolvente ayuda a maquillarse, peinarse y revisar el vestuario con una visión nítida y completa. Su gran formato aporta presencia, profundidad y mayor sensación de amplitud, por lo que funciona como espejo decorativo y espejo de maquillaje. Ideal para dormitorio, vestidor, recibidor, camerino, boutique, estudio fotográfico, peluquería, centro de estética o salón de belleza. Un diseño moderno de inspiración profesional.\n\n🎁 Bombillas LED de regalo",
+          "en": "An extra-large full-length Hollywood mirror with a slim silver-effect profile and numerous LED bulbs arranged around the glass. The surrounding front lighting provides a clear reflection for applying makeup, styling hair and checking an outfit. Its generous format creates a strong visual presence, adds depth and makes the room feel more spacious. Ideal as a decorative mirror or makeup mirror for a bedroom, dressing room, hallway, backstage dressing room, boutique, photography studio, hair salon or beauty centre. A modern design with a professional Hollywood look.\n\n🎁 Free LED bulbs"
         },
         "related": [],
         "perks": "bulbs",
         "visibility": "public",
         "showDiscountBadge": true,
         "inStock": true,
-        "updatedAt": "2026-08-06T12:29:31.820Z"
+        "updatedAt": "2026-08-26T20:16:27.758Z"
       },
       {
         "id": "Espejo-Alto-D11",
-        "name": "Espejo",
+        "name": "Espejo | de cuerpo entero arqueado negro",
+        "nameEn": "Mirror | Black arched full-length design",
         "price": 399,
         "oldPrice": 530,
         "image": "/uploads/cb29167c19772103aaca90768ce2a9bb.jpg",
@@ -614,19 +624,20 @@
         "reference": "D-11",
         "subtitle": "70 × 175 cm",
         "description": {
-          "es": "Medidas: \n•  ancho 70cm\n•  altura 175cm",
-          "en": "Dimensions:\n• Width: 70 cm\n• Height: 175 cm"
+          "es": "Espejo de cuerpo entero con elegante arco superior y marco fino negro, una combinación actual que estiliza la silueta y aporta carácter sin recargar el espacio. El formato vertical ofrece un reflejo amplio de pies a cabeza y ayuda a crear una mayor sensación de profundidad y luminosidad. Puede colocarse como espejo de pie o apoyado en dormitorio, vestidor, recibidor, salón, boutique o showroom. Su diseño arqueado encaja en interiores modernos, industriales, minimalistas y contemporáneos, convirtiéndolo en un espejo decorativo versátil y sofisticado.",
+          "en": "A full-length mirror with an elegant arched top and slim black frame, combining a modern silhouette with a refined decorative finish. Its tall vertical format provides a spacious head-to-toe reflection while adding depth, light and character without overwhelming the room. It can be used as a freestanding floor mirror or leaned against a wall in a bedroom, dressing room, hallway, living room, boutique or showroom. The arched shape and black frame complement modern, industrial, minimalist and contemporary interiors, making this a versatile statement mirror."
         },
         "related": [],
         "perks": "quality",
         "visibility": "public",
         "showDiscountBadge": true,
         "inStock": true,
-        "updatedAt": "2026-08-06T12:03:09.430Z"
+        "updatedAt": "2026-08-26T20:16:27.758Z"
       },
       {
         "id": "Espejo-Alto-D05",
-        "name": "Espejo ",
+        "name": "Espejo | de pie dorado orientable con ruedas",
+        "nameEn": "Mirror | Gold freestanding tilting design with wheels",
         "price": 229,
         "oldPrice": 340,
         "image": "/uploads/9d966433630f7f064a9b147e4bc69580.jpg",
@@ -661,21 +672,22 @@
         },
         "size": "55 × 40 × 180 cm",
         "reference": "D-05",
-        "subtitle": "50 × 40 × 180 cm",
+        "subtitle": "55 × 40 × 180 cm",
         "description": {
-          "es": "Medidas: \n•  ancho 55cm\n•  prof. 40cm\n•  altura 180cm\n\nEspejo 50x160cm",
-          "en": "Dimensions:\n• Width: 55 cm\n• Depth: 40 cm\n• Height: 180 cm\n\nMirror: 50 × 160 cm"
+          "es": "Espejo de pie de cuerpo entero con estructura metálica dorada, soporte orientable y base con ruedas para moverlo cómodamente. Su espejo basculante permite ajustar el ángulo de visión, mientras el formato alto refleja la figura completa y facilita vestirse, combinar prendas y revisar cada detalle. El acabado dorado aporta un toque elegante y sofisticado a dormitorios, vestidores, recibidores, boutiques, showrooms y tiendas de moda. Su estilo combina con decoración moderna, clásica, glam y art déco. Un espejo vestidor práctico, decorativo y fácil de recolocar.",
+          "en": "A full-length freestanding mirror with a gold metal frame, adjustable tilting mechanism and wheeled base for easy repositioning. The angle of the mirror can be adjusted for a more comfortable view, while its tall format reflects the complete figure and makes dressing, styling outfits and checking details easier. The gold finish adds an elegant and sophisticated touch to bedrooms, dressing rooms, hallways, boutiques, showrooms and fashion stores. This practical cheval mirror complements modern, classic, glam and Art Deco interiors and can be moved whenever required."
         },
         "related": [],
         "perks": "quality",
         "visibility": "public",
         "showDiscountBadge": true,
         "inStock": true,
-        "updatedAt": "2026-08-26T18:35:02.656Z"
+        "updatedAt": "2026-08-26T20:18:22.771Z"
       },
       {
         "id": "Espejo-Alto-D10",
-        "name": "Espejo ",
+        "name": "Espejo | de cuerpo entero blanco con iluminación LED",
+        "nameEn": "Mirror | White full-length design with LED lighting",
         "price": 379,
         "oldPrice": 500,
         "image": "/uploads/418284049907464f82bf359c7970df1d.jpg",
@@ -729,19 +741,20 @@
         "reference": "D-10",
         "subtitle": "65 × 170 cm",
         "description": {
-          "es": "Medidas: \n•  ancho 65cm\n•  altura 170cm",
-          "en": "Dimensions:\n• Width: 65 cm\n• Height: 170 cm"
+          "es": "Espejo de cuerpo entero con marco blanco e iluminación LED integrada en todo el perímetro interior. La luz continua y uniforme realza el reflejo y facilita el maquillaje, el peinado, el cuidado personal y la elección de ropa. Su formato permite verse de pies a cabeza y aporta luminosidad sin ocupar demasiado espacio. Ideal como espejo LED para dormitorio, vestidor, recibidor, tocador, camerino, boutique, peluquería, centro de estética o salón de belleza. El acabado blanco y las líneas rectas encajan en interiores modernos, minimalistas y elegantes.",
+          "en": "A full-length mirror with a white frame and integrated LED lighting around the inner perimeter. The continuous, even light enhances the reflection and makes applying makeup, styling hair, getting dressed and completing daily personal care routines easier. Its tall format provides a comfortable head-to-toe view while adding brightness without occupying too much space. Ideal as an LED mirror for a bedroom, dressing room, hallway, vanity area, backstage dressing room, boutique, hair salon or beauty centre. The white finish and clean lines complement modern, minimalist and elegant interiors."
         },
         "related": [],
         "perks": "led",
         "visibility": "public",
         "showDiscountBadge": true,
         "inStock": true,
-        "updatedAt": "2026-07-29T16:12:59.123Z"
+        "updatedAt": "2026-08-26T20:16:27.758Z"
       },
       {
         "id": "Espejo-Alto-D06",
-        "name": "Espejo ",
+        "name": "Espejo | de pie blanco con iluminación LED",
+        "nameEn": "Mirror | White freestanding design with LED lighting",
         "price": 259,
         "oldPrice": 390,
         "image": "/uploads/2bdbe4a9ee6b085d9acd001698b84648.jpg",
@@ -775,19 +788,20 @@
         "reference": "D-06",
         "subtitle": "70 × 175 cm",
         "description": {
-          "es": "Medidas: \n•  ancho 70cm\n•  prof. 30cm\n•  altura 175cm",
-          "en": "Dimensions:\n• Width: 70 cm\n• Depth: 30 cm\n• Height: 175 cm"
+          "es": "Espejo de pie de cuerpo entero con estructura blanca, base estable e iluminación LED integrada en el contorno interior. La luz continua enmarca el reflejo y ofrece una visión clara para maquillarse, peinarse, vestirse y cuidar cada detalle. Su gran superficie proporciona una imagen amplia de pies a cabeza, mientras la base favorece una colocación segura. Perfecto para dormitorio, vestidor, recibidor, boutique, camerino, peluquería, centro de estética o salón de belleza. Diseño moderno, luminoso y profesional.",
+          "en": "A full-length freestanding mirror with a white structure, stable base and integrated LED lighting around the inner edge. The continuous light frames the reflection and provides a clear view for applying makeup, styling hair, getting dressed and checking every detail. Its large reflective surface offers a comfortable head-to-toe view, while the supporting base ensures stable placement. Perfect for a bedroom, dressing room, hallway, boutique, backstage dressing room, hair salon, beauty studio or beauty centre. A modern and functional LED floor mirror with a clean professional appearance."
         },
         "related": [],
         "perks": "led",
         "visibility": "public",
         "showDiscountBadge": true,
         "inStock": true,
-        "updatedAt": "2026-07-29T16:13:24.874Z"
+        "updatedAt": "2026-08-26T20:16:27.758Z"
       },
       {
         "id": "Espejo-Alto-D09",
-        "name": "Espejo ",
+        "name": "Espejo | de pie negro con iluminación LED",
+        "nameEn": "Mirror | Black freestanding design with LED lighting",
         "price": 299,
         "oldPrice": 420,
         "image": "/uploads/851ece18aff29006726fbcd048c52845.jpg",
@@ -821,19 +835,20 @@
         "reference": "D-09",
         "subtitle": "60 × 175 cm",
         "description": {
-          "es": "Medidas: \n•  ancho 60cm\n•  prof. 30cm\n•  altura 175cm",
-          "en": "Dimensions:\n• Width: 60 cm\n• Depth: 30 cm\n• Height: 175 cm"
+          "es": "Espejo de pie de cuerpo entero con marco negro, base estable e iluminación LED integrada alrededor del cristal. El contraste entre el perfil oscuro y la luz continua crea una imagen moderna y profesional, ideal para maquillaje, peluquería, cuidado personal y pruebas de vestuario. Su formato vertical ofrece una visión completa y aporta estabilidad. Encaja en dormitorio, vestidor, recibidor, boutique, barbería, camerino, peluquería, centro de estética o salón de belleza. Un espejo LED elegante para espacios contemporáneos e industriales.",
+          "en": "A full-length freestanding mirror with a black frame, stable base and integrated LED lighting around the glass. The contrast between the dark profile and continuous light creates a modern, professional appearance, ideal for makeup, hairstyling, personal care and outfit checks. Its tall vertical format provides a complete reflection and a stable freestanding design. Suitable for a bedroom, dressing room, hallway, boutique, barbershop, backstage dressing room, hair salon or beauty centre. An elegant LED floor mirror for contemporary and industrial interiors."
         },
         "related": [],
         "perks": "led",
         "visibility": "public",
         "showDiscountBadge": true,
         "inStock": true,
-        "updatedAt": "2026-07-29T16:12:59.123Z"
+        "updatedAt": "2026-08-26T20:16:27.758Z"
       },
       {
         "id": "Espejo-Alto-F-10",
-        "name": "Espejo ",
+        "name": "Espejo | de cuerpo entero efecto cristal con iluminación LED",
+        "nameEn": "Mirror | Full-length crystal-effect design with LED lighting",
         "price": 459,
         "oldPrice": 640,
         "image": "/uploads/b6d9b9b4042567b8b059b230fdf2d6a0.jpg",
@@ -877,15 +892,15 @@
         "reference": "F-10",
         "subtitle": "60 × 170 cm",
         "description": {
-          "es": "Medidas:\n• ancho 60cm\n• altura 170cm",
-          "en": "Dimensions:\n• Width: 60 cm\n• Height: 170 cm"
+          "es": "Espejo de cuerpo entero con marco brillante efecto cristal e iluminación LED integrada, pensado para convertirse en el punto focal de la estancia. La luz perimetral realza el relieve decorativo y proporciona un reflejo claro para maquillaje, peinado, cuidado personal y elección de vestuario. Su formato permite verse de pies a cabeza con comodidad. Ideal como espejo LED decorativo para dormitorio, vestidor, recibidor, tocador o zona glam, y también para boutique, camerino, estudio de maquillaje, peluquería o salón de belleza. Una pieza luminosa, sofisticada y original.",
+          "en": "A full-length mirror with a sparkling crystal-effect frame and integrated LED lighting, designed to become a striking focal point in the room. The perimeter light highlights the decorative texture and provides a clear reflection for makeup, hairstyling, personal care and outfit selection. Its tall format offers a comfortable head-to-toe view. Ideal as a decorative LED mirror for a bedroom, dressing room, hallway, vanity area or glam interior, as well as for a boutique, backstage dressing room, makeup studio, hair salon or beauty centre. A bright, sophisticated and original statement piece."
         },
         "related": [],
         "perks": "led",
         "visibility": "public",
         "showDiscountBadge": true,
         "inStock": true,
-        "updatedAt": "2026-07-29T16:12:59.123Z"
+        "updatedAt": "2026-08-26T20:16:27.758Z"
       }
     ]
   },
@@ -912,6 +927,7 @@
       {
         "id": "Tocador-L-01",
         "name": "Tocador",
+        "nameEn": "",
         "price": 439,
         "oldPrice": 590,
         "image": "/uploads/610e34128c48c5782743f5e24acfae22.jpg",
@@ -967,6 +983,7 @@
       {
         "id": "Tocador-L-08",
         "name": "Tocador",
+        "nameEn": "",
         "price": 639,
         "oldPrice": 800,
         "image": "/uploads/0f6a9d65f0833e4f64c04982e32007fe.jpg",
@@ -1028,6 +1045,7 @@
       {
         "id": "Tocador-L-06",
         "name": "Tocador",
+        "nameEn": "",
         "price": 559,
         "oldPrice": 750,
         "image": "/uploads/0a1128c2018c997ff3dd871a210b1fe7.jpg",
@@ -1089,6 +1107,7 @@
       {
         "id": "Tocador-T-04-2",
         "name": "Tocador",
+        "nameEn": "",
         "price": 699,
         "oldPrice": 910,
         "image": "/uploads/3880b7877440246f485fce6434b0a446.jpg",
@@ -1140,6 +1159,7 @@
       {
         "id": "Tocador-L-07",
         "name": "Tocador",
+        "nameEn": "",
         "price": 599,
         "oldPrice": 770,
         "image": "/uploads/b9d5084f27248439f6416003c9dbe954.jpg",
@@ -1186,6 +1206,7 @@
       {
         "id": "Tocador-L-02",
         "name": "Tocador",
+        "nameEn": "",
         "price": 459,
         "oldPrice": 620,
         "image": "/uploads/9afe0cb269d80f1661f77bbc2b58ba56.jpg",
@@ -1227,6 +1248,7 @@
       {
         "id": "Tocador-L-11",
         "name": "Tocador",
+        "nameEn": "",
         "price": 789,
         "oldPrice": 990,
         "image": "/uploads/5d62ce9c4b521050eea08da62fe173b7.jpg",
@@ -1283,6 +1305,7 @@
       {
         "id": "Tocador-L-10",
         "name": "Tocador",
+        "nameEn": "",
         "price": 699,
         "oldPrice": 878,
         "image": "/uploads/cd737dc85696bc1a997250a2fc851991.jpg",
@@ -1339,6 +1362,7 @@
       {
         "id": "Tocador-L-05",
         "name": "Tocador",
+        "nameEn": "",
         "price": 549,
         "oldPrice": 710,
         "image": "/uploads/9e0731b2c36d5ade397d3dabdff10b85.jpg",
@@ -1395,6 +1419,7 @@
       {
         "id": "Tocador-T-04",
         "name": "Tocador",
+        "nameEn": "",
         "price": 759,
         "oldPrice": 950,
         "image": "/uploads/178863f09e500b897ac832bf4bf8e289.jpg",
@@ -1451,6 +1476,7 @@
       {
         "id": "Tocador-L-04",
         "name": "Tocador",
+        "nameEn": "",
         "price": 519,
         "oldPrice": 680,
         "image": "/uploads/579dd96462de4e0faa0e7598e7076db3.jpg",
@@ -1492,6 +1518,7 @@
       {
         "id": "Tocador-L-09",
         "name": "Tocador",
+        "nameEn": "",
         "price": 659,
         "oldPrice": 850,
         "image": "/uploads/971d2424b776b8f5605162b52e6bbca7.jpg",
@@ -1543,6 +1570,7 @@
       {
         "id": "Tocador-L-03",
         "name": "Tocador",
+        "nameEn": "",
         "price": 489,
         "oldPrice": 650,
         "image": "/uploads/9daa4d23729a59d67c2b07eac6745f9f.jpg",
@@ -1589,6 +1617,7 @@
       {
         "id": "Tocador-T-01-2",
         "name": "Tocador",
+        "nameEn": "",
         "price": 299,
         "oldPrice": 470,
         "image": "/uploads/cc7e87f07eb3e4eadc393f5c79924f18.jpg",
@@ -1659,6 +1688,7 @@
       {
         "id": "Tocador-T-02-2",
         "name": "Tocador",
+        "nameEn": "",
         "price": 339,
         "oldPrice": 490,
         "image": "/uploads/c087ee159cd89a85fec7030b08b0acab.jpg",
@@ -1720,6 +1750,7 @@
       {
         "id": "Tocador-T-03-2",
         "name": "Tocador",
+        "nameEn": "",
         "price": 379,
         "oldPrice": 520,
         "image": "/uploads/e86ae6968350e27eb24c92303c03eb20.jpg",
@@ -1781,6 +1812,7 @@
       {
         "id": "Tocador-T-09",
         "name": "Tocador",
+        "nameEn": "",
         "price": 259,
         "oldPrice": 430,
         "image": "/uploads/cfe9b3489a985b6d5036bc8856caae05.jpg",
@@ -1858,6 +1890,7 @@
       {
         "id": "Tocador-M-05-3",
         "name": "Tocador",
+        "nameEn": "",
         "price": 499,
         "oldPrice": 600,
         "image": "/uploads/d29e04e4fdb3901cd31b050922d2692b.jpg",
@@ -1903,6 +1936,7 @@
       {
         "id": "Tocador-M-05",
         "name": "Tocador",
+        "nameEn": "",
         "price": 489,
         "oldPrice": 590,
         "image": "/uploads/25076fa903e9891b55d0c515854a2ad8.jpg",
@@ -1953,6 +1987,7 @@
       {
         "id": "Tocador-M-02-3",
         "name": "Tocador",
+        "nameEn": "",
         "price": 399,
         "oldPrice": 550,
         "image": "/uploads/845578ae92ec61b012ddbc1e57416c0a.jpg",
@@ -2014,6 +2049,7 @@
       {
         "id": "Tocador-M-01",
         "name": "Tocador",
+        "nameEn": "",
         "price": 359,
         "oldPrice": 510,
         "image": "/uploads/3008e04ff3a1bb8e3234559be7061b3f.jpg",
@@ -2060,6 +2096,7 @@
       {
         "id": "Tocador-M-02",
         "name": "Tocador",
+        "nameEn": "",
         "price": 399,
         "oldPrice": 540,
         "image": "/uploads/618594913f925884ed5ecf4b85bcac04.jpg",
@@ -2125,6 +2162,7 @@
       {
         "id": "Tocador-M-01-2",
         "name": "Tocador",
+        "nameEn": "",
         "price": 379,
         "oldPrice": 530,
         "image": "/uploads/f206eec158c7f30fd96334523906ab23.jpg",
@@ -2186,6 +2224,7 @@
       {
         "id": "Tocador-M-06",
         "name": "Tocador",
+        "nameEn": "",
         "price": 549,
         "oldPrice": 660,
         "image": "/uploads/771c0092caedde9b643cd77b72be35bf.jpg",
@@ -2227,6 +2266,7 @@
       {
         "id": "Tocador-M-04",
         "name": "Tocador",
+        "nameEn": "",
         "price": 439,
         "oldPrice": 580,
         "image": "/uploads/95a57f1bc404f3b29fdb3d38f225feee.jpg",
@@ -2282,6 +2322,7 @@
       {
         "id": "Tocador-M-05-4",
         "name": "Tocador",
+        "nameEn": "",
         "price": 519,
         "oldPrice": 620,
         "image": "/uploads/d9ff98b097c0c20ff0dda9946e3f9f89.jpg",
@@ -2338,6 +2379,7 @@
       {
         "id": "Tocador-M-08",
         "name": "Tocador",
+        "nameEn": "",
         "price": 799,
         "oldPrice": 980,
         "image": "/uploads/1b7e0b3553b37f44f001bb06894a728b.jpg",
@@ -2389,6 +2431,7 @@
       {
         "id": "Tocador-M-07",
         "name": "Tocador",
+        "nameEn": "",
         "price": 599,
         "oldPrice": 750,
         "image": "/uploads/5c4a491791888b4ee6bd2f8b0386a4b1.jpg",
@@ -2449,6 +2492,7 @@
       {
         "id": "Tocador-M-04-2",
         "name": "Tocador",
+        "nameEn": "",
         "price": 439,
         "oldPrice": 580,
         "image": "/uploads/d464fee6601f991ad76f4bf674cbc80b.jpg",
@@ -2505,6 +2549,7 @@
       {
         "id": "Tocador-M-02-2",
         "name": "Tocador",
+        "nameEn": "",
         "price": 399,
         "oldPrice": 550,
         "image": "/uploads/8a120f849d5d094ea636de110f5da616.jpg",
@@ -2561,6 +2606,7 @@
       {
         "id": "Tocador-M-09",
         "name": "Tocador",
+        "nameEn": "",
         "price": 899,
         "oldPrice": 1150,
         "image": "/uploads/6b9f3f461853b147eaae7334acf3b38a.jpg",
@@ -2629,6 +2675,7 @@
       {
         "id": "Estanteria-E-04",
         "name": "Estantería",
+        "nameEn": "",
         "price": 389,
         "oldPrice": 500,
         "image": "/uploads/ba4ef2211a28e2c7f7c719f2f0adf7a7.jpg",
@@ -2689,6 +2736,7 @@
       {
         "id": "Estanteria-E-10",
         "name": "Estantería",
+        "nameEn": "",
         "price": 499,
         "oldPrice": 600,
         "image": "/uploads/1a861d6895b693d6801509375477534e.jpg",
@@ -2763,6 +2811,7 @@
       {
         "id": "Estanteria-E-01",
         "name": "Estantería",
+        "nameEn": "",
         "price": 199,
         "oldPrice": 320,
         "image": "/uploads/d28c174bb94ff71d2d46dc07648a8d28.jpg",
@@ -2804,6 +2853,7 @@
       {
         "id": "Estanteria-E-02",
         "name": "Estantería",
+        "nameEn": "",
         "price": 259,
         "oldPrice": 340,
         "image": "/uploads/6a8baf8b0f5c4a4ebf057a3d4dbdcd11.jpg",
@@ -2849,6 +2899,7 @@
       {
         "id": "Estanteria-E-08",
         "name": "Estantería",
+        "nameEn": "",
         "price": 459,
         "oldPrice": 570,
         "image": "/uploads/d49166c624a67325c8b4c553086acf16.jpg",
@@ -2909,6 +2960,7 @@
       {
         "id": "Estanteria-E-03",
         "name": "Estantería",
+        "nameEn": "",
         "price": 359,
         "oldPrice": 470,
         "image": "/uploads/89144ffbf7054d00ca68184620c44cf5.jpg",
@@ -2965,6 +3017,7 @@
       {
         "id": "Estanteria-E-11",
         "name": "Estantería",
+        "nameEn": "",
         "price": 599,
         "oldPrice": 700,
         "image": "/uploads/af14c88c751cf65803a8a04cec483bd5.jpg",
@@ -3020,6 +3073,7 @@
       {
         "id": "Estanteria-E-07",
         "name": "Estantería",
+        "nameEn": "",
         "price": 399,
         "oldPrice": 520,
         "image": "/uploads/1e4634edcadb5498252c80f4974bcfb3.jpg",
@@ -3080,6 +3134,7 @@
       {
         "id": "Estanteria-E-09",
         "name": "Estantería",
+        "nameEn": "",
         "price": 469,
         "oldPrice": 580,
         "image": "/uploads/99ac31e368589a89f4a5f3aeaa5927e8.jpg",
@@ -3121,6 +3176,7 @@
       {
         "id": "Estanteria-E-06",
         "name": "Estantería",
+        "nameEn": "",
         "price": 369,
         "oldPrice": 480,
         "image": "/uploads/f1760e451f3f1d23ddb20f29fce84ec6.jpg",
@@ -3188,6 +3244,7 @@
       {
         "id": "Tocador-M-03",
         "name": "Tocador",
+        "nameEn": "",
         "price": 449,
         "oldPrice": 630,
         "image": "/uploads/c58f2d4e90565ec8413875e47a2d2220.jpg",
@@ -3249,6 +3306,7 @@
       {
         "id": "Tocador-M-02-4",
         "name": "Tocador",
+        "nameEn": "",
         "price": 429,
         "oldPrice": 570,
         "image": "/uploads/0f49bbdc75e5567ff69cad422524a7ce.jpg",
@@ -3305,6 +3363,7 @@
       {
         "id": "Tocador-M-04-3",
         "name": "Tocador",
+        "nameEn": "",
         "price": 499,
         "oldPrice": 600,
         "image": "/uploads/b385fb86ddd35a697fa03c73d5cee6cd.jpg",
@@ -3361,6 +3420,7 @@
       {
         "id": "Tocador-M-05-2",
         "name": "Tocador",
+        "nameEn": "",
         "price": 499,
         "oldPrice": 600,
         "image": "/uploads/db1a355f8f6622ca82b7ab13e0a4c157.jpg",
@@ -3397,6 +3457,7 @@
       {
         "id": "Tocador-M-05-5",
         "name": "Tocador",
+        "nameEn": "",
         "price": 539,
         "oldPrice": 650,
         "image": "/uploads/721a7c3239b317f0780baff3a956d823.jpg",
@@ -3443,6 +3504,7 @@
       {
         "id": "Tocador-T-25",
         "name": "Tocador",
+        "nameEn": "",
         "price": 499,
         "oldPrice": 700,
         "image": "/uploads/28d19308d09ec8d998279309b4a01628.jpg",
@@ -3523,6 +3585,7 @@
       {
         "id": "Tocador-T-26",
         "name": "Tocador",
+        "nameEn": "",
         "price": 569,
         "oldPrice": 700,
         "image": "/uploads/48dd83b1afd242bf95826a29d3502611.jpg",
@@ -3598,6 +3661,7 @@
       {
         "id": "Tocador-T-28",
         "name": "Tocador",
+        "nameEn": "",
         "price": 619,
         "oldPrice": 800,
         "image": "/uploads/db1841fc027062f555aa3d18b262a7ef.jpg",
@@ -3653,6 +3717,7 @@
       {
         "id": "Tocador-T-30",
         "name": "Tocador",
+        "nameEn": "",
         "price": 659,
         "oldPrice": 1000,
         "image": "/uploads/4e21b8144006717eeac8acce70fcb67b.jpg",
@@ -3694,6 +3759,7 @@
       {
         "id": "Tocador-T-31",
         "name": "Tocador",
+        "nameEn": "",
         "price": 699,
         "oldPrice": 1100,
         "image": "/uploads/34f4fc21dd41507b1b4008cc9b310dde.jpg",
@@ -3744,6 +3810,7 @@
       {
         "id": "Tocador-T-32",
         "name": "Tocador",
+        "nameEn": "",
         "price": 699,
         "oldPrice": 1100,
         "image": "/uploads/eccc6f7688cad6f013e8b769cf662175.jpg",
@@ -3790,6 +3857,7 @@
       {
         "id": "Tocador-T-33",
         "name": "Tocador",
+        "nameEn": "",
         "price": 799,
         "oldPrice": 1150,
         "image": "/uploads/ad3a1a093a387b80941e2c8f5c799e91.jpg",
@@ -3845,6 +3913,7 @@
       {
         "id": "Tocador-T-35",
         "name": "Tocador",
+        "nameEn": "",
         "price": 839,
         "oldPrice": 1200,
         "image": "/uploads/cda90ee8c19fdc286f06925ced564ec2.jpg",
@@ -3881,6 +3950,7 @@
       {
         "id": "Tocador-T-36",
         "name": "Tocador",
+        "nameEn": "",
         "price": 879,
         "oldPrice": 1250,
         "image": "/uploads/512bf87915c071625b73627d8901ee77.jpg",
@@ -3942,6 +4012,7 @@
       {
         "id": "Tocador-T-38",
         "name": "Tocador",
+        "nameEn": "",
         "price": 939,
         "oldPrice": 1350,
         "image": "/uploads/72c175e5e9c12d294eb32c03ea566100.jpg",
@@ -3998,6 +4069,7 @@
       {
         "id": "Tocador-T-39",
         "name": "Tocador",
+        "nameEn": "",
         "price": 999,
         "oldPrice": 1400,
         "image": "/uploads/1cdd810047059739b43b90a24a2d6036.jpg",
@@ -4054,6 +4126,7 @@
       {
         "id": "Tocador-T-01",
         "name": "Tocador",
+        "nameEn": "",
         "price": 299,
         "oldPrice": 470,
         "image": "/uploads/23892ed3a413a251335d8380ad32cbac.jpg",
@@ -4115,6 +4188,7 @@
       {
         "id": "Tocador-T-02",
         "name": "Tocador",
+        "nameEn": "",
         "price": 339,
         "oldPrice": 490,
         "image": "/uploads/d54586e9cbfcb8a6ddac354a8c2a0571.jpg",
@@ -4181,6 +4255,7 @@
       {
         "id": "Tocador-T-03",
         "name": "Tocador",
+        "nameEn": "",
         "price": 379,
         "oldPrice": 520,
         "image": "/uploads/40cf889d7a55a4afc01c59454a51d742.jpg",
@@ -4247,6 +4322,7 @@
       {
         "id": "Espejo-Alto-D01",
         "name": "Espejo",
+        "nameEn": "",
         "price": 139,
         "oldPrice": 250,
         "image": "/uploads/aa1e8abedcfb5204a012e220167772ee.jpg",
@@ -4293,6 +4369,7 @@
       {
         "id": "Espejo-Alto-D02",
         "name": "Espejo ",
+        "nameEn": "",
         "price": 159,
         "oldPrice": 300,
         "image": "/uploads/c6ef164a041593228741dd2a7536771a.jpg",
@@ -4449,6 +4526,7 @@
       {
         "id": "Espejo-Alto-D03",
         "name": "Espejo ",
+        "nameEn": "",
         "price": 169,
         "oldPrice": 310,
         "image": "/uploads/c43ae200269a2178bbc21d155d262d62.jpg",
@@ -4500,6 +4578,7 @@
       {
         "id": "Espejo-Alto-D04",
         "name": "Espejo ",
+        "nameEn": "",
         "price": 199,
         "oldPrice": 350,
         "image": "/uploads/473c9181a2046b2411986610af45eccf.jpg",
@@ -4536,6 +4615,7 @@
       {
         "id": "Espejo-Alto-D07",
         "name": "Espejo ",
+        "nameEn": "",
         "price": 269,
         "oldPrice": 450,
         "image": "/uploads/93d76369b73d27c30f1f5855b889a233.jpg",
@@ -4572,6 +4652,7 @@
       {
         "id": "Espejo-Alto-D08",
         "name": "Espejo ",
+        "nameEn": "",
         "price": 299,
         "oldPrice": 470,
         "image": "/uploads/a274e039cbe387a07c336fe504abd60f.jpg",
@@ -4613,6 +4694,7 @@
       {
         "id": "Estanteria-E-02-2",
         "name": "Estantería",
+        "nameEn": "",
         "price": 289,
         "oldPrice": 370,
         "image": "/uploads/9f41af0ee82bfb816dbf2371e2613b4e.jpg",
@@ -4682,6 +4764,7 @@
       {
         "id": "Estanteria-E-03-2",
         "name": "Estantería",
+        "nameEn": "",
         "price": 379,
         "oldPrice": 490,
         "image": "/uploads/2233f524cc4506ff80f44a1b8d44eee4.jpg",
@@ -4747,6 +4830,7 @@
       {
         "id": "Estanteria-E-04-2",
         "name": "Estantería",
+        "nameEn": "",
         "price": 399,
         "oldPrice": 520,
         "image": "/uploads/7bd218a764fa9eb6ace48128ccd2a33a.jpg",
@@ -4792,6 +4876,7 @@
       {
         "id": "Estanteria-E-04-3",
         "name": "Estantería",
+        "nameEn": "",
         "price": 419,
         "oldPrice": 540,
         "image": "/uploads/5b4267b13e4742819d1f56cacfd3ae0c.jpg",
@@ -4847,6 +4932,7 @@
       {
         "id": "Estanteria-E-04-4",
         "name": "Estantería",
+        "nameEn": "",
         "price": 439,
         "oldPrice": 550,
         "image": "/uploads/2ae7e0d8535037d975982aeb58df61c4.jpg",
@@ -4908,6 +4994,7 @@
       {
         "id": "Estanteria-E-05",
         "name": "Estantería",
+        "nameEn": "",
         "price": 469,
         "oldPrice": 580,
         "image": "/uploads/b64d0c4e3a26dbd3b02daeb44ca4e149.jpg",
@@ -4954,6 +5041,7 @@
       {
         "id": "Estanteria-E-05-2",
         "name": "Estantería",
+        "nameEn": "",
         "price": 499,
         "oldPrice": 600,
         "image": "/uploads/273816b8d650953ba09d8adc3e177d13.jpg",
@@ -4990,6 +5078,7 @@
       {
         "id": "Espejo-K12",
         "name": "Espejo",
+        "nameEn": "",
         "price": 219,
         "oldPrice": 350,
         "image": "/uploads/1e68f7d1e65161f76f6bb563a2af9022.jpg",
@@ -5036,6 +5125,7 @@
       {
         "id": "Espejo-K09",
         "name": "Espejo",
+        "nameEn": "",
         "price": 199,
         "oldPrice": 340,
         "image": "/uploads/0eb2e83fe288beb457416da7105c41c3.jpg",
@@ -5087,6 +5177,7 @@
       {
         "id": "Espejo-K05",
         "name": "Espejo",
+        "nameEn": "",
         "price": 159,
         "oldPrice": 260,
         "image": "/uploads/0f37072097b41ef0942de7f71ac255fd.jpg",
@@ -5173,6 +5264,7 @@
       {
         "id": "Espejo-K13",
         "name": "Espejo",
+        "nameEn": "",
         "price": 229,
         "oldPrice": 360,
         "image": "/uploads/b4bdfa3c000fd74f8ed3338cf455d007.jpg",
@@ -5239,6 +5331,7 @@
       {
         "id": "Espejo-K14",
         "name": "Espejo",
+        "nameEn": "",
         "price": 239,
         "oldPrice": 370,
         "image": "/uploads/083ac4739da74fb6601daa0ff0f37600.jpg",
@@ -5295,6 +5388,7 @@
       {
         "id": "Espejo-K10",
         "name": "Espejo",
+        "nameEn": "",
         "price": 199,
         "oldPrice": 340,
         "image": "/uploads/bf1fe7c17b3927f0466afa6a480b99df.jpg",
@@ -5381,6 +5475,7 @@
       {
         "id": "Espejo-K15",
         "name": "Espejo",
+        "nameEn": "",
         "price": 259,
         "oldPrice": 390,
         "image": "/uploads/e3e0f6aad4735a88523bc148c75cb45f.jpg",
@@ -5442,6 +5537,7 @@
       {
         "id": "Espejo-K07",
         "name": "Espejo",
+        "nameEn": "",
         "price": 179,
         "oldPrice": 290,
         "image": "/uploads/2d62889e8f15abd762e6133462f3fdb1.jpg",
@@ -5503,6 +5599,7 @@
       {
         "id": "Espejo-K11",
         "name": "Espejo",
+        "nameEn": "",
         "price": 219,
         "oldPrice": 350,
         "image": "/uploads/0aedb45905bd0fe025e19976225bfdc1.jpg",
@@ -5594,6 +5691,7 @@
       {
         "id": "Espejo-K01",
         "name": "Espejo",
+        "nameEn": "",
         "price": 129,
         "oldPrice": 240,
         "image": "/uploads/392a100defd7e08ba2b3f5e3bf6728b2.jpg",
@@ -5675,6 +5773,7 @@
       {
         "id": "Espejo-K06",
         "name": "Espejo",
+        "nameEn": "",
         "price": 169,
         "oldPrice": 270,
         "image": "/uploads/84fb56b3a6f01b281439695109aac716.jpg",
@@ -5741,6 +5840,7 @@
       {
         "id": "Espejo-K04",
         "name": "Espejo",
+        "nameEn": "",
         "price": 139,
         "oldPrice": 250,
         "image": "/uploads/981a9896804a36c218d97798187357b3.jpg",
@@ -5827,6 +5927,7 @@
       {
         "id": "Espejo-K08",
         "name": "Espejo",
+        "nameEn": "",
         "price": 189,
         "oldPrice": 320,
         "image": "/uploads/5cdbfd6624ff9ef1db5c0816f91084c4.jpg",
@@ -5893,6 +5994,7 @@
       {
         "id": "Espejo-K02",
         "name": "Espejo",
+        "nameEn": "",
         "price": 129,
         "oldPrice": 240,
         "image": "/uploads/0b11ba399f2cae2d81843c5a809a4d46.jpg",
@@ -5969,6 +6071,7 @@
       {
         "id": "Espejo-K03",
         "name": "Espejo",
+        "nameEn": "",
         "price": 139,
         "oldPrice": 250,
         "image": "/uploads/1f7913e8d1b3aae8d9197b1d56670bfd.jpg",
@@ -6060,6 +6163,7 @@
       {
         "id": "Comoda-B01",
         "name": "Comoda",
+        "nameEn": "",
         "price": 199,
         "oldPrice": 300,
         "image": "/uploads/4e7bd785b23f06e67e63f368c87a27d0.jpg",
@@ -6110,6 +6214,7 @@
       {
         "id": "Comoda-B02",
         "name": "Comoda",
+        "nameEn": "",
         "price": 249,
         "oldPrice": 340,
         "image": "/uploads/624ce1f194a1aa5f92230fd6bd7c73b2.jpg",
@@ -6161,6 +6266,7 @@
       {
         "id": "Comoda-B03",
         "name": "Comoda",
+        "nameEn": "",
         "price": 279,
         "oldPrice": 370,
         "image": "/uploads/21ec0c792c66a908370bca863bbc60b7.jpg",
@@ -6212,6 +6318,7 @@
       {
         "id": "Comoda-B04",
         "name": "Comoda",
+        "nameEn": "",
         "price": 299,
         "oldPrice": 390,
         "image": "/uploads/babc2366a5bb92ae18207a0b8be52f03.jpg",
@@ -6267,6 +6374,7 @@
       {
         "id": "Comoda-B05",
         "name": "Comoda",
+        "nameEn": "",
         "price": 339,
         "oldPrice": 430,
         "image": "/uploads/388bda67530152e6dee05e8334d06392.jpg",
@@ -6327,6 +6435,7 @@
       {
         "id": "Consola-Con-Espejo-A01",
         "name": "Consola Con Espejo",
+        "nameEn": "",
         "price": 499,
         "oldPrice": 700,
         "image": "/uploads/7576e1660f352f2509c84b32bb713000.jpg",
@@ -6412,6 +6521,7 @@
       {
         "id": "Consola-Con-Espejo-A02",
         "name": "Consola Con Espejo",
+        "nameEn": "",
         "price": 499,
         "oldPrice": 700,
         "image": "/uploads/af040768b5edb0959d51bfcdc9a2857d.jpg",
@@ -6508,6 +6618,7 @@
       {
         "id": "Consola-Con-Espejo-A03",
         "name": "Consola Con Espejo",
+        "nameEn": "",
         "price": 499,
         "oldPrice": 700,
         "image": "/uploads/3a7b6d3d5eb8bef30843748d9a1da92a.jpg",
@@ -6629,6 +6740,7 @@
       {
         "id": "Consola-Con-Espejo-A04",
         "name": "Consola Con Espejo",
+        "nameEn": "",
         "price": 499,
         "oldPrice": 700,
         "image": "/uploads/a4034de8e5ccf1ee87446b627cbe2032.jpg",
@@ -6725,6 +6837,7 @@
       {
         "id": "Consola-S06",
         "name": "Consola",
+        "nameEn": "",
         "price": 559,
         "oldPrice": 720,
         "image": "/uploads/688b442d5ad448b3f99d8ba718853de4.jpg",
@@ -6790,6 +6903,7 @@
       {
         "id": "Consola-S05",
         "name": "Consola",
+        "nameEn": "",
         "price": 499,
         "oldPrice": 68,
         "image": "/uploads/f9f3a7d25c9c7157a55489eeeed63ccd.jpg",
@@ -6846,6 +6960,7 @@
       {
         "id": "Consola-S07",
         "name": "Consola",
+        "nameEn": "",
         "price": 599,
         "oldPrice": 760,
         "image": "/uploads/46ac703f200f28563fec9aaf85f2dfe4.jpg",
@@ -6906,6 +7021,7 @@
       {
         "id": "Consola-S01",
         "name": "Consola",
+        "nameEn": "",
         "price": 299,
         "oldPrice": 410,
         "image": "/uploads/fadbcfb288c6d1f3c6de016c2074df24.jpg",
@@ -6957,6 +7073,7 @@
       {
         "id": "Consola-S03",
         "name": "Consola",
+        "nameEn": "",
         "price": 399,
         "oldPrice": 600,
         "image": "/uploads/8ab3aa5851a87504cc1a67c094695206.jpg",
@@ -7013,6 +7130,7 @@
       {
         "id": "Consola-S02",
         "name": "Consola",
+        "nameEn": "",
         "price": 359,
         "oldPrice": 570,
         "image": "/uploads/06ea9910a256fd4f8ef805f384ae9c4b.jpg",
@@ -7058,6 +7176,7 @@
       {
         "id": "Consola-S04",
         "name": "Consola",
+        "nameEn": "",
         "price": 449,
         "oldPrice": 650,
         "image": "/uploads/fe02a22121007338d8ba68af9c68f230.jpg",
@@ -7109,6 +7228,7 @@
       {
         "id": "Mesa-De-Manicura-M01",
         "name": "Mesa De Manicura",
+        "nameEn": "",
         "price": 299,
         "oldPrice": 430,
         "image": "/uploads/267b093b59c306ada5f02c4f2c56ffbc.jpg",
@@ -7179,6 +7299,7 @@
       {
         "id": "Mesa-De-Manicura-M02",
         "name": "Mesa De Manicura",
+        "nameEn": "",
         "price": 359,
         "oldPrice": 480,
         "image": "/uploads/f0bf3cdb821290b769196e5ac2e08bb8.jpg",
@@ -7225,6 +7346,7 @@
       {
         "id": "Mesa-De-Manicura-M03",
         "name": "Mesa De Manicura",
+        "nameEn": "",
         "price": 379,
         "oldPrice": 500,
         "image": "/uploads/dbbabd0ce8914311ea8d2eb3a5e3ce3a.jpg",
@@ -7266,6 +7388,7 @@
       {
         "id": "Mesa-De-Manicura-M04",
         "name": "Mesa De Manicura",
+        "nameEn": "",
         "price": 389,
         "oldPrice": 500,
         "image": "/uploads/61830933c42b20a3e45e68a281840c4b.jpg",
@@ -7312,6 +7435,7 @@
       {
         "id": "Mesa-De-Manicura-M05",
         "name": "Mesa De Manicura",
+        "nameEn": "",
         "price": 399,
         "oldPrice": 500,
         "image": "/uploads/06fb3fd09ad6a923e92b524c454665e7.jpg",
