@@ -323,7 +323,7 @@ export default function Product() {
             { name: t('nav.home'), url: `${SITE}${localize('/')}` },
             { name: t('nav.catalog'), url: catalogUrl },
             { name: category.name[lang], url: categoryUrl },
-            { name: product.name, url: canonicalUrl },
+            { name: fullName, url: canonicalUrl },
           ]),
         ]}
       />
@@ -405,7 +405,7 @@ export default function Product() {
               ) : (
                 <button
                   type="button"
-                  aria-label={`${t('product.zoom')}: ${product.name}`}
+                  aria-label={`${t('product.zoom')}: ${fullName}`}
                   onClick={() => {
                     if (suppressZoom.current) {
                       suppressZoom.current = false;
@@ -418,7 +418,7 @@ export default function Product() {
                   <Media
                     id={activeItem?.src}
                     idMobile={activeIdx === firstPhotoIdx ? product.imageMobile : ''}
-                    alt={`${product.name} — ${category.name[lang]}`}
+                    alt={`${fullName} — ${category.name[lang]}`}
                     w={1400}
                   />
                 </button>
@@ -505,7 +505,7 @@ export default function Product() {
                         ) : (
                           <Media
                             id={item.src}
-                            alt={`${product.name} ${t('product.gallery')} ${i + 1}`}
+                            alt={`${fullName} ${t('product.gallery')} ${i + 1}`}
                             w={300}
                           />
                         )}
@@ -594,7 +594,7 @@ export default function Product() {
         <Lightbox
           items={gallery}
           index={activeIdx}
-          alt={`${product.name} — ${category.name[lang]}`}
+          alt={`${fullName} — ${category.name[lang]}`}
           onClose={() => setZoom(false)}
           onIndex={setActive}
         />
