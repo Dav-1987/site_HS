@@ -21,6 +21,7 @@ CREATE TABLE IF NOT EXISTS products (
   id             TEXT PRIMARY KEY,
   category_slug  TEXT NOT NULL REFERENCES categories(slug) ON DELETE CASCADE,
   name           TEXT NOT NULL,
+  name_en        TEXT NOT NULL DEFAULT '',
   price          INTEGER NOT NULL DEFAULT 0,
   old_price      INTEGER NOT NULL DEFAULT 0,
   image          TEXT NOT NULL DEFAULT '',
@@ -41,6 +42,11 @@ CREATE TABLE IF NOT EXISTS products (
 -- Idempotent for existing installs: CREATE TABLE IF NOT EXISTS above won't add
 -- columns to a table that already exists, so add them explicitly here too.
 ALTER TABLE products ADD COLUMN IF NOT EXISTS reference TEXT NOT NULL DEFAULT '';
+-- English product name. Separate from `name` (which stays Spanish) rather than
+-- a name_es/name_en pair like categories have: the feeds, the order mail and
+-- analytics all report the Spanish name and have no language to pass, so an
+-- empty value here has to keep meaning "use the Spanish one".
+ALTER TABLE products ADD COLUMN IF NOT EXISTS name_en TEXT NOT NULL DEFAULT '';
 ALTER TABLE products ADD COLUMN IF NOT EXISTS subtitle TEXT NOT NULL DEFAULT '';
 ALTER TABLE products ADD COLUMN IF NOT EXISTS video_first BOOLEAN NOT NULL DEFAULT false;
 -- Unified ordered media list (photos + videos): [{ "type": "image"|"video", "src": "..." }]

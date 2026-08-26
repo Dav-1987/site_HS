@@ -138,7 +138,12 @@ export default function ProductEditor({
           <StockNote product={product} />
           <SectionLabel>Основная информация</SectionLabel>
           <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-            <Field label="Название" value={product.name} onChange={(v) => set({ name: v })} />
+            <Field label="Название (исп.)" value={product.name} onChange={(v) => set({ name: v })} />
+            <Field
+              label="Название (англ.) — для страниц /en; пусто = испанское"
+              value={product.nameEn}
+              onChange={(v) => set({ nameEn: v })}
+            />
             <Field
               label="Подзаголовок (мелким шрифтом рядом с названием, необязательно)"
               value={product.subtitle}

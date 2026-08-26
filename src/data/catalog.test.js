@@ -2,6 +2,8 @@ import { describe, it, expect } from 'vitest';
 import {
   isInStock,
   productDiscount,
+  productDisplayName,
+  productFullName,
   productLabel,
   showsDiscountBadge,
   computeFeatured,
@@ -46,6 +48,39 @@ describe('productLabel', () => {
     expect(productLabel({ name: 'Consola' })).toBe('Consola');
     expect(productLabel({})).toBe('');
     expect(productLabel(undefined)).toBe('');
+  });
+});
+
+describe('product names in two languages', () => {
+  const mirror = {
+    name: 'Espejo | de pie blanco con iluminación LED',
+    nameEn: 'Mirror | White freestanding design with LED lighting',
+    subtitle: '70 × 175 cm',
+  };
+
+  it('shows the head of the name on a tile and the whole of it elsewhere', () => {
+    expect(productDisplayName(mirror)).toBe('Espejo');
+    expect(productFullName(mirror)).toBe('Espejo de pie blanco con iluminación LED');
+  });
+
+  it('answers in English when the page is English', () => {
+    expect(productDisplayName(mirror, 'en')).toBe('Mirror');
+    expect(productFullName(mirror, 'en')).toBe('Mirror White freestanding design with LED lighting');
+    expect(productLabel(mirror, 'en')).toBe(
+      'Mirror White freestanding design with LED lighting 70 × 175 cm',
+    );
+  });
+
+  // The feeds, the order mail and analytics have one language and pass none.
+  it('answers in Spanish when no language is asked for', () => {
+    expect(productLabel(mirror)).toBe('Espejo de pie blanco con iluminación LED 70 × 175 cm');
+  });
+
+  it('falls back to Spanish for a product with no English name yet', () => {
+    const untranslated = { name: 'Tocador ', subtitle: 'T-20' };
+    expect(productFullName(untranslated, 'en')).toBe('Tocador');
+    expect(productDisplayName(untranslated, 'en')).toBe('Tocador');
+    expect(productFullName({ name: 'Consola', nameEn: '   ' }, 'en')).toBe('Consola');
   });
 });
 

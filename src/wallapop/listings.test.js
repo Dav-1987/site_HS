@@ -164,12 +164,22 @@ describe('Wallapop listing preparation', () => {
     );
   });
 
-  it('uses the detailed site measurements when the product title differs', () => {
-    const category = defaultCatalog.find((item) => item.slug === 'espejos');
-    const product = category.products.find((item) => item.reference === 'D-05');
+  it('reads mirror measurements from the description, and from the title without one', () => {
+    // Measurements written into the prose win: they were the only place a
+    // corrected width lived while a title still carried the old one. Fixed in
+    // the catalog since, and being written out of the descriptions entirely, so
+    // this states the rule with its own data rather than borrowing a product
+    // that no longer demonstrates it.
+    const described = {
+      size: '55 × 40 × 180 cm',
+      description: { es: 'Medidas: \n•  ancho 50cm\n•  prof. 40cm\n•  altura 160cm' },
+    };
+    expect(mirrorWallapopSize(described)).toBe('50 × 160 cm');
 
-    expect(product.size).toBe('50 × 40 × 180 cm');
-    expect(mirrorWallapopSize(product)).toBe('55 × 180 cm');
+    // A description that only sells the mirror leaves the title to give the
+    // size, and the depth is dropped: Wallapop shows two numbers for a mirror.
+    const sold = { size: '55 × 40 × 180 cm', description: { es: 'Espejo de pie con marco dorado.' } };
+    expect(mirrorWallapopSize(sold)).toBe('55 × 180 cm');
   });
 
   it('creates the approved shelf description with width, depth and height', () => {

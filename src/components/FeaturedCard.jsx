@@ -4,7 +4,7 @@ import Media from './Media.jsx';
 import Price from './Price.jsx';
 import ProductBadge, { SOLD_OUT_MEDIA } from './ProductBadge.jsx';
 import { useLanguage } from '../i18n/LanguageContext.jsx';
-import { isInStock } from '../data/catalog.js';
+import { isInStock, productDisplayName, productFullName } from '../data/catalog.js';
 
 /** True on devices that have a real hover-capable pointer (desktop mouse). */
 function hoverCapable() {
@@ -31,7 +31,12 @@ export default function FeaturedCard({ item, aspectClassName = 'aspect-[4/5]' })
   const soldOut = !isInStock(item);
   const slug = item.categorySlug;
   const to = slug ? `/${slug}/${item.id}` : `/producto/${item.id}`;
-  const label = item.category ? `${item.name} — ${item.category[lang]}` : item.name;
+  // Same split a product tile makes: the card shows the short name, the
+  // accessible label the full one. Rendering `item.name` raw would print the
+  // bar that separates the two. See productDisplayName.
+  const shortName = productDisplayName(item, lang);
+  const fullName = productFullName(item, lang);
+  const label = item.category ? `${fullName} — ${item.category[lang]}` : fullName;
   const video = item.featuredVideo;
   const cover = item.featuredCover;
 
@@ -115,7 +120,7 @@ export default function FeaturedCard({ item, aspectClassName = 'aspect-[4/5]' })
         className="block border-t border-primary/10 pt-4"
       >
         <h3 className="font-serif text-xl text-primary transition-colors duration-300 group-hover:text-accent-text">
-          {item.name}
+          {shortName}
           {item.subtitle && (
             <span className="block whitespace-nowrap text-xs text-primary/45 sm:text-sm">
               {item.subtitle}

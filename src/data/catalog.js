@@ -163,18 +163,28 @@ export function productDiscount(product) {
 // before it can be edited one product at a time.
 const NAME_CUT = '|';
 
+// A name is written in Spanish and, since the English pages carry their own
+// URLs and hreflang, optionally again in English. `nameEn` is the second name
+// rather than a `{ es, en }` pair because the Spanish one is what the feeds,
+// the order notification and analytics report — those have a single language
+// and asking them to pass one would be inviting the wrong one. So: no language,
+// or a language the product has no name in, means Spanish.
+function nameIn(product, lang) {
+  if (lang === 'en') {
+    const en = String(product?.nameEn ?? '').trim();
+    if (en) return en;
+  }
+  return String(product?.name ?? '');
+}
+
 /** The whole name, bar removed — product page, <title>, feeds, schema. */
-export function productFullName(product) {
-  return String(product?.name ?? '')
-    .split(NAME_CUT)
-    .join(' ')
-    .replace(/\s+/g, ' ')
-    .trim();
+export function productFullName(product, lang) {
+  return nameIn(product, lang).split(NAME_CUT).join(' ').replace(/\s+/g, ' ').trim();
 }
 
 /** The short name a listing shows: everything before the bar. */
-export function productDisplayName(product) {
-  const [head] = String(product?.name ?? '').split(NAME_CUT);
+export function productDisplayName(product, lang) {
+  const [head] = nameIn(product, lang).split(NAME_CUT);
   return head.replace(/\s+/g, ' ').trim();
 }
 
@@ -186,8 +196,8 @@ export function productDisplayName(product) {
  * item under one indistinguishable title. Collapses the stray whitespace that
  * admin-entered names carry.
  */
-export function productLabel(product) {
-  return [productFullName(product), product?.subtitle]
+export function productLabel(product, lang) {
+  return [productFullName(product, lang), product?.subtitle]
     .filter(Boolean)
     .join(' ')
     .replace(/\s+/g, ' ')

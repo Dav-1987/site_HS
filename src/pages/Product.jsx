@@ -269,7 +269,7 @@ export default function Product() {
   const ref = (product.reference || productReference(product.name) || '').trim();
   // Collapsed: 19 names carry a trailing space in the catalog ("Espejo "), and
   // a doubled space is visible in a search result.
-  const fullName = productFullName(product);
+  const fullName = productFullName(product, lang);
   const pageTitle = [fullName, product.subtitle, ref && `(${ref})`]
     .filter(Boolean)
     .join(' ')

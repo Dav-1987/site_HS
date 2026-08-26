@@ -84,6 +84,7 @@ function shapeCategory(cat, products) {
     products: products.map((p) => ({
       id: p.id,
       name: p.name,
+      nameEn: p.name_en ?? '',
       price: p.price,
       oldPrice: p.old_price ?? 0,
       image: p.image,
@@ -146,6 +147,7 @@ export function productContentEqual(a, b) {
   if (!a || !b) return false;
   return (
     a.name === b.name &&
+    (a.nameEn ?? '') === (b.nameEn ?? '') &&
     a.price === b.price &&
     a.oldPrice === b.oldPrice &&
     a.image === b.image &&
@@ -244,12 +246,13 @@ export async function writeCatalog(categories) {
 
         await client.query(
           `INSERT INTO products
-             (id, category_slug, name, price, old_price, image, image_mobile, images, material_es, material_en, size, reference, subtitle, video, video_first, media, description_es, description_en, related, perks, visibility, show_discount_badge, in_stock, position, updated_at)
-           VALUES ($1,$2,$3,$4,$5,$6,$7,$8::jsonb,$9,$10,$11,$12,$13,$14,$15,$16::jsonb,$17,$18,$19::jsonb,$20,$21,$22,$23,$24,$25)`,
+             (id, category_slug, name, name_en, price, old_price, image, image_mobile, images, material_es, material_en, size, reference, subtitle, video, video_first, media, description_es, description_en, related, perks, visibility, show_discount_badge, in_stock, position, updated_at)
+           VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9::jsonb,$10,$11,$12,$13,$14,$15,$16,$17::jsonb,$18,$19,$20::jsonb,$21,$22,$23,$24,$25,$26)`,
           [
             p.id,
             c.slug,
             p.name ?? '',
+            p.nameEn ?? '',
             Number.isFinite(p.price) ? p.price : 0,
             Number.isFinite(p.oldPrice) ? p.oldPrice : 0,
             cover,

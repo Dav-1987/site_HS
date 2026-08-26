@@ -23,8 +23,8 @@ export default function ProductCard({
   // <title> carry, would wrap a card to four lines. The accessible label keeps
   // the full name — a screen reader gains from the detail a tile has no room
   // for. See productDisplayName.
-  const shortName = productDisplayName(product);
-  const fullName = productFullName(product);
+  const shortName = productDisplayName(product, lang);
+  const fullName = productFullName(product, lang);
   const label = categoryName ? `${fullName} — ${categoryName[lang]}` : fullName;
 
   // Unified, ordered media (photos + videos), exactly as the product page shows

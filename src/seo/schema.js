@@ -119,7 +119,7 @@ export function productSchema(product, category, lang = 'es') {
   return clean({
     '@context': 'https://schema.org',
     '@type': 'Product',
-    name: productLabel(product),
+    name: productLabel(product, lang),
     description: productDescription(product, category, lang),
     image: images,
     sku,
