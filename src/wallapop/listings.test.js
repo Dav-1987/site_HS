@@ -284,28 +284,23 @@ describe('Wallapop listing preparation', () => {
     }
   });
 
-  it('adds shelf measurements only when they exist in the vanity description', () => {
-    const categories = defaultCatalog.filter((item) =>
-      ['tocadores', 'tocadores-loft'].includes(item.slug),
-    );
-    const productsWithShelves = categories.flatMap((category) =>
-      category.products
-        .filter((product) => vanityShelvesWallapopSize(product))
-        .map((product) => ({ category, product })),
-    );
+  // Shelves are the one measurement still read out of the description — L-11
+  // was the only product that ever carried it, and its rewritten description
+  // no longer does. Stated with its own data so the rule survives the rewrite;
+  // if the shelves are to come back, they need a field, the way the mirror got.
+  it('adds shelf measurements only when the description gives them', () => {
+    const category = defaultCatalog.find((item) => item.slug === 'tocadores');
+    const withShelves = {
+      ...category.products[0],
+      description: { es: 'Medidas: \n• ancho 150cm\n\nEstanterías: 20×80cm' },
+    };
 
-    expect(productsWithShelves).toHaveLength(1);
-    expect(productsWithShelves[0].product.reference).toBe('L-11');
-    expect(vanityShelvesWallapopSize(productsWithShelves[0].product)).toBe('20 × 80 cm');
-    expect(buildWallapopDescription(productsWithShelves[0].product, productsWithShelves[0].category))
-      .toContain('• Espejo: 100 × 80 cm\n• Estanterías: 20 × 80 cm');
+    expect(vanityShelvesWallapopSize(withShelves)).toBe('20 × 80 cm');
+    expect(buildWallapopDescription(withShelves, category)).toContain('• Estanterías: 20 × 80 cm');
 
-    for (const category of categories) {
-      for (const product of category.products.filter(
-        (item) => !vanityShelvesWallapopSize(item),
-      )) {
-        expect(buildWallapopDescription(product, category)).not.toContain('• Estanterías:');
-      }
+    for (const product of category.products) {
+      expect(vanityShelvesWallapopSize(product)).toBe('');
+      expect(buildWallapopDescription(product, category)).not.toContain('• Estanterías:');
     }
   });
 

@@ -175,6 +175,15 @@ function pairedMeasurementFromDescription(description, labelPattern) {
 }
 
 export function vanityMirrorWallapopSize(product) {
+  // The field first: the mirror used to live in the description, and the
+  // descriptions are being rewritten to sell the piece rather than list it.
+  // Reading the prose is kept for a product typed the old way.
+  const stored = String(product.mirrorSize ?? '').trim();
+  if (stored) {
+    const numbers = stored.match(/\d+(?:[.,]\d+)?/g) ?? [];
+    if (/^\s*Ø/i.test(stored)) return numbers.length ? `Ø ${numbers[0]} cm` : '';
+    if (numbers.length >= 2) return `${numbers[0]} × ${numbers.at(-1)} cm`;
+  }
   return pairedMeasurementFromDescription(product.description?.es, 'espejo');
 }
 
