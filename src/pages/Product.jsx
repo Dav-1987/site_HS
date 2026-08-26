@@ -365,7 +365,7 @@ export default function Product() {
                 {fullName}
               </span>
               {product.subtitle && (
-                <span className="ml-2 text-base font-light text-primary/50">
+                <span className="ml-2 whitespace-nowrap text-base font-light text-primary/50">
                   {product.subtitle}
                 </span>
               )}
@@ -546,7 +546,9 @@ export default function Product() {
                 {fullName}
               </span>
               {product.subtitle && (
-                <span className="ml-3 text-lg font-light text-primary/50">{product.subtitle}</span>
+                <span className="ml-3 whitespace-nowrap text-lg font-light text-primary/50">
+                  {product.subtitle}
+                </span>
               )}
             </h1>
             <div className="mt-4 lg:mt-4">
@@ -554,7 +556,7 @@ export default function Product() {
             </div>
 
             <ExpandableText
-              className="mt-8 max-w-md"
+              className="mt-8 max-w-2xl"
               text={productDescription(product, category, lang)}
             />
 
