@@ -257,8 +257,16 @@ export default function Product() {
   // Many products share the same generic `name` (e.g. "Tocador") and even the
   // same `subtitle` (dimensions) within a category — fold in the reference
   // (always present, always unique) so every page gets a distinct <title>.
+  // Without it 50 of the 124 pages would collide, which reads to Google as one
+  // page duplicated rather than as separate products.
   const ref = (product.reference || productReference(product.name) || '').trim();
-  const pageTitle = [product.name, product.subtitle, ref && `(${ref})`].filter(Boolean).join(' ');
+  // Collapsed: 19 names carry a trailing space in the catalog ("Espejo "), and
+  // a doubled space is visible in a search result.
+  const pageTitle = [product.name, product.subtitle, ref && `(${ref})`]
+    .filter(Boolean)
+    .join(' ')
+    .replace(/\s+/g, ' ')
+    .trim();
   const ogImage = resolveImage(images[0], 1600);
   const specs = [
     { label: t('product.collectionLabel'), value: category.name[lang] },
@@ -270,7 +278,12 @@ export default function Product() {
 
   return (
     <>
-      <title>{`${pageTitle} — ${category.name[lang]} | Mirage Muebles`}</title>
+      {/* The category name is deliberately absent. Google shows about 60
+          characters and "Otros Modelos" — the bucket 68 of 124 products sit in
+          — spent 15 of them on a word that means nothing to a searcher and
+          distinguishes nothing. The breadcrumb schema still tells Google where
+          the product sits. */}
+      <title>{`${pageTitle} | Mirage Muebles`}</title>
       <meta name="description" content={metaDesc} />
       <link rel="canonical" href={canonicalUrl} />
       <HreflangLinks esPath={esPath} />
