@@ -5,6 +5,7 @@ import { SettingsProvider } from '../settings/SettingsContext.jsx';
 import { LanguageProvider } from '../i18n/LanguageContext.jsx';
 import { CatalogProvider } from '../catalog/CatalogContext.jsx';
 import defaultCatalog from '../data/catalog.default.json';
+import { productLabel } from '../data/catalog.js';
 import Product from '../pages/Product.jsx';
 
 const category = defaultCatalog[0];
@@ -40,7 +41,10 @@ describe('product page order flow', () => {
     fireEvent.click(screen.getByText(/¡PEDIR AHORA!/i));
     expect(screen.getByRole('dialog')).toBeTruthy();
     expect(screen.getByText(/Realizar pedido/i)).toBeTruthy();
-    expect(screen.getByRole('dialog').textContent).toContain(product.name);
+    // The label the order carries, not the raw `name`: a name may hold the bar
+    // that separates the tile name from the full one, and the modal — like the
+    // notification the order turns into — shows the name without it.
+    expect(screen.getByRole('dialog').textContent).toContain(productLabel(product));
   });
 
   it('closes the modal via the close button', () => {
