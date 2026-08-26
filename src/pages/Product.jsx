@@ -6,6 +6,7 @@ import { useCatalog } from '../catalog/CatalogContext.jsx';
 import {
   isInStock,
   productDescription,
+  productDimensions,
   productFullName,
   productMetaDescription,
   productDiscount,
@@ -275,8 +276,21 @@ export default function Product() {
     .replace(/\s+/g, ' ')
     .trim();
   const ogImage = resolveImage(images[0], 1600);
+  // Dimensions belong in the spec list rather than inside the description: they
+  // are the same question for every product, they were being retyped by hand
+  // into prose that then had to agree with the `size` field, and a description
+  // long enough to collapse would have hidden them behind "read more".
+  const dimensions = productDimensions(product);
   const specs = [
     { label: t('product.collectionLabel'), value: category.name[lang] },
+    ...(dimensions
+      ? [
+          {
+            label: t('product.sizeLabel'),
+            value: dimensions.map((d) => `• ${t(`product.dim.${d.key}`)} ${d.value}`).join(' '),
+          },
+        ]
+      : []),
     {
       label: t('product.skuLabel'),
       value: product.reference?.trim() || productReference(product.name),
@@ -549,7 +563,7 @@ export default function Product() {
               {specs.map((s) => (
                 <div
                   key={s.label}
-                  className="flex items-center justify-between border-b border-primary/10 py-4"
+                  className="flex flex-wrap items-center justify-between gap-x-6 gap-y-1 border-b border-primary/10 py-4"
                 >
                   <dt className="text-xs uppercase tracking-[0.2em] text-secondary">{s.label}</dt>
                   <dd className="text-sm text-primary">{s.value}</dd>

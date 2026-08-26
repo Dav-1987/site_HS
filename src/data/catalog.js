@@ -194,6 +194,44 @@ export function productLabel(product) {
     .trim();
 }
 
+// `size` is one string typed by hand in /admin, in five shapes the catalog
+// actually uses: "50 × 40 × 180 cm", "80 × 180 cm", "110 x 50 x 80cm",
+// "80 x 65cm" and "Ø d-70cm" — the separator is a multiplication sign or a
+// latin x depending on who typed it. Two numbers are width and height; three
+// put depth in the middle; a leading Ø is a round mirror and has only one.
+//
+// Read rather than stored as separate fields: the string is what the admin
+// edits and what the subtitle shows, so a second source would be one more
+// place to disagree with it.
+const DIAMETER = /^\s*Ø/i;
+
+/**
+ * The dimensions of a product as labelled parts, or null when `size` holds
+ * nothing recognisable — better no row than a row inventing a depth.
+ * Values keep the unit: [{ key: 'width', value: '80cm' }, …].
+ */
+export function productDimensions(product) {
+  const raw = String(product?.size ?? '').trim();
+  const numbers = raw.match(/\d+(?:[.,]\d+)?/g) ?? [];
+  if (numbers.length === 0) return null;
+  const value = (n) => `${n}cm`;
+  if (DIAMETER.test(raw)) return [{ key: 'diameter', value: value(numbers[0]) }];
+  if (numbers.length === 2) {
+    return [
+      { key: 'width', value: value(numbers[0]) },
+      { key: 'height', value: value(numbers[1]) },
+    ];
+  }
+  if (numbers.length === 3) {
+    return [
+      { key: 'width', value: value(numbers[0]) },
+      { key: 'depth', value: value(numbers[1]) },
+      { key: 'height', value: value(numbers[2]) },
+    ];
+  }
+  return null;
+}
+
 // Google shows roughly 155 characters of a description; anything past that is
 // cut mid-word and wasted. The first paragraph is written to stand alone for
 // exactly this reason, which also keeps the gift line — always the last line of
