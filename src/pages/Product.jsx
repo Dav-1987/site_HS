@@ -418,7 +418,7 @@ export default function Product() {
                   <Media
                     id={activeItem?.src}
                     idMobile={activeIdx === firstPhotoIdx ? product.imageMobile : ''}
-                    alt={`${fullName} — ${category.name[lang]}`}
+                    alt={fullName}
                     w={1400}
                   />
                 </button>
@@ -594,7 +594,7 @@ export default function Product() {
         <Lightbox
           items={gallery}
           index={activeIdx}
-          alt={`${fullName} — ${category.name[lang]}`}
+          alt={fullName}
           onClose={() => setZoom(false)}
           onIndex={setActive}
         />

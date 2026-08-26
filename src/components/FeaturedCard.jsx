@@ -90,7 +90,7 @@ export default function FeaturedCard({ item, aspectClassName = 'aspect-[4/5]' })
       >
         <Media
           id={cover}
-          alt={label}
+          alt={fullName}
           w={700}
           className={`transition-transform duration-700 ease-out group-hover:scale-[1.04] ${
             soldOut ? SOLD_OUT_MEDIA : ''

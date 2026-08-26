@@ -137,7 +137,7 @@ export default function ProductCard({
             <Media
               id={item?.src}
               idMobile={idx === 0 ? product.imageMobile : ''}
-              alt={label}
+              alt={fullName}
               w={700}
               className={`transition-transform duration-700 ease-out group-hover:scale-[1.04] ${dim}`}
             />

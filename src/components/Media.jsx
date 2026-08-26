@@ -67,6 +67,11 @@ export default function Media({ id, idMobile = '', alt = '', w = 900, className 
       srcSet={eagerSrcSet || undefined}
       sizes={eagerSrcSet ? '100vw' : undefined}
       alt={alt}
+      // Same words as the alt text, shown as the tooltip on hover. Every image
+      // on the site goes through this component, so a product only has to be
+      // named once — in the catalog — for its photos to be captioned, whether
+      // the photo was uploaded before the name was written or after.
+      title={alt || undefined}
       loading={eager ? 'eager' : 'lazy'}
       fetchPriority={eager ? 'high' : undefined}
       decoding="async"

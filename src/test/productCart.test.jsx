@@ -5,7 +5,7 @@ import { SettingsProvider } from '../settings/SettingsContext.jsx';
 import { LanguageProvider } from '../i18n/LanguageContext.jsx';
 import { CatalogProvider } from '../catalog/CatalogContext.jsx';
 import defaultCatalog from '../data/catalog.default.json';
-import { productLabel } from '../data/catalog.js';
+import { productFullName, productLabel } from '../data/catalog.js';
 import Product from '../pages/Product.jsx';
 
 const category = defaultCatalog[0];
@@ -158,5 +158,27 @@ describe('product page without photos', () => {
     expect(screen.getByText(/¡PEDIR AHORA!/i)).toBeTruthy();
     // The gallery slot shows the branded placeholder, not a broken image.
     expect(container.querySelector('img')).toBeNull();
+  });
+});
+
+// The caption is not stored anywhere: it is the product's name, read at render
+// time. So a photo uploaded before the name was written is captioned too, and
+// renaming the product recaptions every photo of it at the next build.
+describe('product photo captions', () => {
+  it('captions every photo with the product name, in alt and in the tooltip', () => {
+    const { container } = renderProduct();
+    const photos = [...container.querySelectorAll('img')];
+    const name = productFullName(product);
+
+    expect(photos.length).toBeGreaterThan(0);
+    // Every photo on the page, the related products at the foot included —
+    // those carry their own names, which is the same rule applied to them.
+    for (const photo of photos) {
+      expect(photo.getAttribute('alt')).toBeTruthy();
+      expect(photo.getAttribute('title')).toBe(photo.getAttribute('alt'));
+    }
+    expect(photos.filter((photo) => photo.getAttribute('alt').includes(name)).length).toBeGreaterThan(
+      0,
+    );
   });
 });

@@ -126,6 +126,7 @@ export default function Lightbox({ items, index, alt = '', onClose, onIndex }) {
         <img
           src={resolveImage(current.src, 2000)}
           alt={alt}
+          title={alt || undefined}
           className="max-h-[88vh] w-auto max-w-[92vw] object-contain"
           onClick={(e) => e.stopPropagation()}
         />
