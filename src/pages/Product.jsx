@@ -579,7 +579,10 @@ export default function Product() {
                   className="flex flex-wrap items-center justify-between gap-x-6 gap-y-1 border-b border-primary/10 py-4"
                 >
                   <dt className="text-xs uppercase tracking-[0.2em] text-secondary">{s.label}</dt>
-                  <dd className="whitespace-pre-line text-right text-sm text-primary">{s.value}</dd>
+                  {/* Left-aligned inside a block the row already pushes right,
+                      so the mirror line starts under "• ancho" rather than
+                      hanging off the right edge on a line of its own. */}
+                  <dd className="whitespace-pre-line text-sm text-primary">{s.value}</dd>
                 </div>
               ))}
             </dl>
