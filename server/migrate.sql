@@ -52,6 +52,10 @@ ALTER TABLE products ADD COLUMN IF NOT EXISTS name_en TEXT NOT NULL DEFAULT '';
 -- there). Was written into the descriptions; kept as a field so rewriting a
 -- description does not take it away. See productMirrorSize.
 ALTER TABLE products ADD COLUMN IF NOT EXISTS mirror_size TEXT NOT NULL DEFAULT '';
+-- Same again for the shelves a dressing table comes with: one product (L-11)
+-- had them written into its description, and the audit that found it found
+-- nothing else measured separately.
+ALTER TABLE products ADD COLUMN IF NOT EXISTS shelves_size TEXT NOT NULL DEFAULT '';
 ALTER TABLE products ADD COLUMN IF NOT EXISTS subtitle TEXT NOT NULL DEFAULT '';
 ALTER TABLE products ADD COLUMN IF NOT EXISTS video_first BOOLEAN NOT NULL DEFAULT false;
 -- Unified ordered media list (photos + videos): [{ "type": "image"|"video", "src": "..." }]

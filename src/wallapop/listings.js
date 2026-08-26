@@ -188,6 +188,11 @@ export function vanityMirrorWallapopSize(product) {
 }
 
 export function vanityShelvesWallapopSize(product) {
+  const stored = String(product.shelvesSize ?? '').trim();
+  if (stored) {
+    const numbers = stored.match(/\d+(?:[.,]\d+)?/g) ?? [];
+    if (numbers.length >= 2) return `${numbers[0]} × ${numbers.at(-1)} cm`;
+  }
   return pairedMeasurementFromDescription(product.description?.es, 'estanter[ií]as?');
 }
 

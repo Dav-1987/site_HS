@@ -10,6 +10,7 @@ import {
   productFullName,
   productMetaDescription,
   productMirrorSize,
+  productShelvesSize,
   productDiscount,
   productImages,
   productLabel,
@@ -283,6 +284,7 @@ export default function Product() {
   // long enough to collapse would have hidden them behind "read more".
   const dimensions = productDimensions(product);
   const mirrorSize = productMirrorSize(product);
+  const shelvesSize = productShelvesSize(product);
   const specs = [
     { label: t('product.collectionLabel'), value: category.name[lang] },
     ...(dimensions
@@ -296,6 +298,7 @@ export default function Product() {
             value: [
               dimensions.map((d) => `• ${t(`product.dim.${d.key}`)} ${d.value}`).join(' '),
               mirrorSize && `• ${t('product.dim.mirror')} ${mirrorSize}`,
+              shelvesSize && `• ${t('product.dim.shelves')} ${shelvesSize}`,
             ]
               .filter(Boolean)
               .join('\n'),

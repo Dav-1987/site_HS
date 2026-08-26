@@ -96,6 +96,7 @@ function shapeCategory(cat, products) {
       material: { es: p.material_es, en: p.material_en },
       size: p.size,
       mirrorSize: p.mirror_size ?? '',
+      shelvesSize: p.shelves_size ?? '',
       reference: p.reference ?? '',
       subtitle: p.subtitle ?? '',
       description: { es: p.description_es ?? '', en: p.description_en ?? '' },
@@ -159,6 +160,7 @@ export function productContentEqual(a, b) {
     a.material?.en === b.material?.en &&
     a.size === b.size &&
     (a.mirrorSize ?? '') === (b.mirrorSize ?? '') &&
+    (a.shelvesSize ?? '') === (b.shelvesSize ?? '') &&
     a.reference === b.reference &&
     a.subtitle === b.subtitle &&
     a.description?.es === b.description?.es &&
@@ -248,8 +250,8 @@ export async function writeCatalog(categories) {
 
         await client.query(
           `INSERT INTO products
-             (id, category_slug, name, name_en, price, old_price, image, image_mobile, images, material_es, material_en, size, mirror_size, reference, subtitle, video, video_first, media, description_es, description_en, related, perks, visibility, show_discount_badge, in_stock, position, updated_at)
-           VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9::jsonb,$10,$11,$12,$13,$14,$15,$16,$17,$18::jsonb,$19,$20,$21::jsonb,$22,$23,$24,$25,$26,$27)`,
+             (id, category_slug, name, name_en, price, old_price, image, image_mobile, images, material_es, material_en, size, mirror_size, shelves_size, reference, subtitle, video, video_first, media, description_es, description_en, related, perks, visibility, show_discount_badge, in_stock, position, updated_at)
+           VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9::jsonb,$10,$11,$12,$13,$14,$15,$16,$17,$18,$19::jsonb,$20,$21,$22::jsonb,$23,$24,$25,$26,$27,$28)`,
           [
             p.id,
             c.slug,
@@ -264,6 +266,7 @@ export async function writeCatalog(categories) {
             p.material?.en ?? '',
             p.size ?? '',
             p.mirrorSize ?? '',
+            p.shelvesSize ?? '',
             p.reference ?? '',
             p.subtitle ?? '',
             // Legacy single-video fields kept empty once media is the source of truth.

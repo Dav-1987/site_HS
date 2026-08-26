@@ -288,20 +288,34 @@ describe('Wallapop listing preparation', () => {
   // was the only product that ever carried it, and its rewritten description
   // no longer does. Stated with its own data so the rule survives the rewrite;
   // if the shelves are to come back, they need a field, the way the mirror got.
-  it('adds shelf measurements only when the description gives them', () => {
+  it('adds shelf measurements for the one vanity that has them, and no other', () => {
     const category = defaultCatalog.find((item) => item.slug === 'tocadores');
-    const withShelves = {
-      ...category.products[0],
-      description: { es: 'Medidas: \n• ancho 150cm\n\nEstanterías: 20×80cm' },
-    };
+    const withShelves = category.products.filter((product) => vanityShelvesWallapopSize(product));
 
-    expect(vanityShelvesWallapopSize(withShelves)).toBe('20 × 80 cm');
-    expect(buildWallapopDescription(withShelves, category)).toContain('• Estanterías: 20 × 80 cm');
+    expect(withShelves.map((product) => product.reference)).toEqual(['L-11']);
+    expect(vanityShelvesWallapopSize(withShelves[0])).toBe('20 × 80 cm');
+    expect(buildWallapopDescription(withShelves[0], category)).toContain(
+      '• Espejo: 100 × 80 cm\n• Estanterías: 20 × 80 cm',
+    );
 
-    for (const product of category.products) {
-      expect(vanityShelvesWallapopSize(product)).toBe('');
+    for (const product of category.products.filter((item) => item.reference !== 'L-11')) {
       expect(buildWallapopDescription(product, category)).not.toContain('• Estanterías:');
     }
+  });
+
+  // Both measurements moved out of the descriptions into fields, and the
+  // listing follows them there — but a product typed the old way still works.
+  it('still reads either measurement out of a description that carries it', () => {
+    const category = defaultCatalog.find((item) => item.slug === 'tocadores');
+    const oldStyle = {
+      ...category.products[0],
+      mirrorSize: '',
+      shelvesSize: '',
+      description: { es: 'Medidas: \n• ancho 150cm\n\nEspejo: 100x80cm\nEstanterías: 20×80cm' },
+    };
+
+    expect(vanityMirrorWallapopSize(oldStyle)).toBe('100 × 80 cm');
+    expect(vanityShelvesWallapopSize(oldStyle)).toBe('20 × 80 cm');
   });
 
   it('adds current site prices before details and the promotion footer to every listing', () => {

@@ -6,6 +6,7 @@ import {
   productFullName,
   productLabel,
   productMirrorSize,
+  productShelvesSize,
   showsDiscountBadge,
   computeFeatured,
   computeRelated,
@@ -579,6 +580,11 @@ describe('productMirrorSize', () => {
 
   it('reads a round one as a diameter', () => {
     expect(productMirrorSize({ mirrorSize: 'Ø d-70cm' })).toBe('Ø 70cm');
+  });
+
+  it('reads the shelves the same way', () => {
+    expect(productShelvesSize({ shelvesSize: '20 × 80 cm' })).toBe('20 × 80cm');
+    expect(productShelvesSize({ mirrorSize: '100 × 80 cm' })).toBeNull();
   });
 
   it('says nothing for a product that has no separate mirror', () => {

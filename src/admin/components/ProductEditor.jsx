@@ -169,6 +169,11 @@ export default function ProductEditor({
               value={product.mirrorSize}
               onChange={(v) => set({ mirrorSize: v })}
             />
+            <Field
+              label="Размер полок (строкой под зеркалом; пусто — строки нет)"
+              value={product.shelvesSize}
+              onChange={(v) => set({ shelvesSize: v })}
+            />
           </div>
 
           <SectionLabel>Цена</SectionLabel>

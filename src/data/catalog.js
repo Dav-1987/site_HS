@@ -243,22 +243,32 @@ export function productDimensions(product) {
 }
 
 /**
- * The mirror of a dressing table, as one line: "100 × 80cm", or "Ø 70cm" for a
- * round one. Null for a product that has no separate mirror.
+ * One part of a product measured on its own — "100 × 80cm", or "Ø 70cm" for a
+ * round one. Null when the field is empty or holds no number.
  *
- * A field rather than a line parsed out of the description, where these
- * measurements were typed. `size` is the piece assembled — a table 80cm high
- * under an 80cm mirror is listed as 160cm — so the mirror on its own is a real
- * second measurement, and 57 products carry one. Read from the description it
- * would vanish the moment a description is rewritten to sell the piece rather
- * than to list it, which is what is happening to them.
+ * These are fields rather than lines parsed out of the description, where they
+ * were typed. `size` is the piece assembled — a table 80cm high under an 80cm
+ * mirror is listed as 160cm — so a part measured separately is a real second
+ * measurement. Read from the description it would vanish the moment that
+ * description is rewritten to sell the piece rather than to list it, which is
+ * what is happening to all of them.
  */
-export function productMirrorSize(product) {
-  const raw = String(product?.mirrorSize ?? '').trim();
-  const numbers = raw.match(/\d+(?:[.,]\d+)?/g) ?? [];
+function partSize(raw) {
+  const text = String(raw ?? '').trim();
+  const numbers = text.match(/\d+(?:[.,]\d+)?/g) ?? [];
   if (numbers.length === 0) return null;
-  if (DIAMETER.test(raw)) return `Ø ${numbers[0]}cm`;
+  if (DIAMETER.test(text)) return `Ø ${numbers[0]}cm`;
   return `${numbers[0]} × ${numbers.at(-1)}cm`;
+}
+
+/** The mirror of a dressing table, measured on its own. 58 products have one. */
+export function productMirrorSize(product) {
+  return partSize(product?.mirrorSize);
+}
+
+/** The shelves a dressing table comes with, measured on their own. */
+export function productShelvesSize(product) {
+  return partSize(product?.shelvesSize);
 }
 
 // Google shows roughly 155 characters of a description; anything past that is
