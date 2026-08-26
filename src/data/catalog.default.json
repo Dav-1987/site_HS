@@ -74,6 +74,7 @@
         },
         "size": "80 × 180 cm",
         "mirrorSize": "",
+        "shelvesSize": "",
         "reference": "F-05",
         "subtitle": "80 × 180 cm",
         "description": {
@@ -132,6 +133,7 @@
         },
         "size": "70 × 170 cm",
         "mirrorSize": "",
+        "shelvesSize": "",
         "reference": "F-03",
         "subtitle": "70 × 170 cm",
         "description": {
@@ -180,6 +182,7 @@
         },
         "size": "80 × 180 cm",
         "mirrorSize": "",
+        "shelvesSize": "",
         "reference": "F-07",
         "subtitle": "80 × 180 cm",
         "description": {
@@ -253,6 +256,7 @@
         },
         "size": "80 × 185 cm",
         "mirrorSize": "",
+        "shelvesSize": "",
         "reference": "F-06",
         "subtitle": "80 × 185 cm",
         "description": {
@@ -311,6 +315,7 @@
         },
         "size": "70 × 170 cm",
         "mirrorSize": "",
+        "shelvesSize": "",
         "reference": "F-01",
         "subtitle": "70 × 170 cm",
         "description": {
@@ -374,6 +379,7 @@
         },
         "size": "70 × 175 cm",
         "mirrorSize": "",
+        "shelvesSize": "",
         "reference": "F-04",
         "subtitle": "70 × 175 cm",
         "description": {
@@ -417,6 +423,7 @@
         },
         "size": "80 × 185 cm",
         "mirrorSize": "",
+        "shelvesSize": "",
         "reference": "F-08",
         "subtitle": "80 × 185 cm",
         "description": {
@@ -480,6 +487,7 @@
         },
         "size": "70 × 175 cm",
         "mirrorSize": "",
+        "shelvesSize": "",
         "reference": "F-02",
         "subtitle": "70 × 175 cm",
         "description": {
@@ -528,6 +536,7 @@
         },
         "size": "80 × 180 cm",
         "mirrorSize": "",
+        "shelvesSize": "",
         "reference": "F-09",
         "subtitle": "80 × 180 cm",
         "description": {
@@ -631,6 +640,7 @@
         },
         "size": "70 × 175 cm",
         "mirrorSize": "",
+        "shelvesSize": "",
         "reference": "D-11",
         "subtitle": "70 × 175 cm",
         "description": {
@@ -682,6 +692,7 @@
         },
         "size": "55 × 40 × 180 cm",
         "mirrorSize": "50 × 160 cm",
+        "shelvesSize": "",
         "reference": "D-05",
         "subtitle": "55 × 40 × 180 cm",
         "description": {
@@ -750,6 +761,7 @@
         },
         "size": "65 × 170 cm",
         "mirrorSize": "",
+        "shelvesSize": "",
         "reference": "D-10",
         "subtitle": "65 × 170 cm",
         "description": {
@@ -798,6 +810,7 @@
         },
         "size": "70 × 175 cm",
         "mirrorSize": "",
+        "shelvesSize": "",
         "reference": "D-06",
         "subtitle": "70 × 175 cm",
         "description": {
@@ -846,6 +859,7 @@
         },
         "size": "60 × 175 cm",
         "mirrorSize": "",
+        "shelvesSize": "",
         "reference": "D-09",
         "subtitle": "60 × 175 cm",
         "description": {
@@ -904,6 +918,7 @@
         },
         "size": "60 × 170 cm",
         "mirrorSize": "",
+        "shelvesSize": "",
         "reference": "F-10",
         "subtitle": "60 × 170 cm",
         "description": {
@@ -978,6 +993,7 @@
         },
         "size": "100 × 40 × 160 cm",
         "mirrorSize": "100 × 80 cm",
+        "shelvesSize": "",
         "reference": "L-01",
         "subtitle": "100 × 40 × 160 cm",
         "description": {
@@ -1041,6 +1057,7 @@
         },
         "size": "130 × 40 × 160 cm",
         "mirrorSize": "120 × 80 cm",
+        "shelvesSize": "",
         "reference": "L-08",
         "subtitle": "130 × 40 × 160 cm",
         "description": {
@@ -1104,6 +1121,7 @@
         },
         "size": "120 × 40 × 160 cm",
         "mirrorSize": "120 × 80 cm",
+        "shelvesSize": "",
         "reference": "L-06",
         "subtitle": "120 × 40 × 160 cm",
         "description": {
@@ -1157,6 +1175,7 @@
         },
         "size": "140 × 60 × 76 cm",
         "mirrorSize": "70 × 80 cm",
+        "shelvesSize": "",
         "reference": "T-04-2",
         "subtitle": "140 × 60 × 76 cm",
         "description": {
@@ -1205,6 +1224,7 @@
         },
         "size": "130 × 40 × 160 cm",
         "mirrorSize": "120 × 80 cm",
+        "shelvesSize": "",
         "reference": "L-07",
         "subtitle": "130 × 40 × 160 cm",
         "description": {
@@ -1248,6 +1268,7 @@
         },
         "size": "100 × 40 × 160 cm",
         "mirrorSize": "100 × 80 cm",
+        "shelvesSize": "",
         "reference": "L-02",
         "subtitle": "100 × 40 × 160 cm",
         "description": {
@@ -1306,6 +1327,7 @@
         },
         "size": "150 × 40 × 160 cm",
         "mirrorSize": "100 × 80 cm",
+        "shelvesSize": "20 × 80 cm",
         "reference": "L-11",
         "subtitle": "150 × 40 × 160 cm",
         "description": {
@@ -1322,7 +1344,7 @@
         "visibility": "public",
         "showDiscountBadge": true,
         "inStock": true,
-        "updatedAt": "2026-08-26T22:35:52.775Z"
+        "updatedAt": "2026-08-26T22:54:02.000Z"
       },
       {
         "id": "Tocador-L-10",
@@ -1364,6 +1386,7 @@
         },
         "size": "130 × 40 × 160 cm",
         "mirrorSize": "130 × 80 cm",
+        "shelvesSize": "",
         "reference": "L-10",
         "subtitle": "130 × 40 × 160 cm",
         "description": {
@@ -1422,6 +1445,7 @@
         },
         "size": "120 × 40 × 160 cm",
         "mirrorSize": "120 × 80 cm",
+        "shelvesSize": "",
         "reference": "L-05",
         "subtitle": "120 × 40 × 160 cm",
         "description": {
@@ -1480,6 +1504,7 @@
         },
         "size": "140 × 60 × 76 cm",
         "mirrorSize": "70 × 80 cm",
+        "shelvesSize": "",
         "reference": "T-04",
         "subtitle": "140 × 60 × 76 cm",
         "description": {
@@ -1523,6 +1548,7 @@
         },
         "size": "120 × 40 × 160 cm",
         "mirrorSize": "120 × 80 cm",
+        "shelvesSize": "",
         "reference": "L-04",
         "subtitle": "120 × 40 × 160 cm",
         "description": {
@@ -1576,6 +1602,7 @@
         },
         "size": "130 × 40 × 160 cm",
         "mirrorSize": "130 × 80 cm",
+        "shelvesSize": "",
         "reference": "L-09",
         "subtitle": "130 × 40 × 160 cm",
         "description": {
@@ -1624,6 +1651,7 @@
         },
         "size": "100 × 40 × 160 cm",
         "mirrorSize": "100 × 80 cm",
+        "shelvesSize": "",
         "reference": "L-03",
         "subtitle": "100 × 40 × 160 cm",
         "description": {
@@ -1697,6 +1725,7 @@
         },
         "size": "60 × 40 × 160 cm",
         "mirrorSize": "60 × 80 cm",
+        "shelvesSize": "",
         "reference": "T-01-2",
         "subtitle": "60 × 40 × 160 cm",
         "description": {
@@ -1759,6 +1788,7 @@
         },
         "size": "80 × 40 × 160 cm",
         "mirrorSize": "60 × 80 cm",
+        "shelvesSize": "",
         "reference": "T-02-2",
         "subtitle": "80 × 40 × 160 cm",
         "description": {
@@ -1822,6 +1852,7 @@
         },
         "size": "80 × 40 × 160 cm",
         "mirrorSize": "80 × 80 cm",
+        "shelvesSize": "",
         "reference": "T-03-2",
         "subtitle": "80 × 40 × 160 cm",
         "description": {
@@ -1880,6 +1911,7 @@
         },
         "size": "60 × 40 × 160 cm",
         "mirrorSize": "60 × 80 cm",
+        "shelvesSize": "",
         "reference": "T-09",
         "subtitle": "60 × 40 × 160 cm",
         "description": {
@@ -1953,6 +1985,7 @@
         },
         "size": "90 × 40 × 170 cm",
         "mirrorSize": "90 × 80 cm",
+        "shelvesSize": "",
         "reference": "M-05-3",
         "subtitle": "90 × 40 × 170 cm",
         "description": {
@@ -2005,6 +2038,7 @@
         },
         "size": "90 × 40 × 170 cm",
         "mirrorSize": "90 × 80 cm",
+        "shelvesSize": "",
         "reference": "M-05",
         "subtitle": "90 × 40 × 170 cm",
         "description": {
@@ -2068,6 +2102,7 @@
         },
         "size": "70 × 40 × 170 cm",
         "mirrorSize": "70 × 80 cm",
+        "shelvesSize": "",
         "reference": "M-02-3",
         "subtitle": "70 × 40 × 170 cm",
         "description": {
@@ -2116,6 +2151,7 @@
         },
         "size": "70 × 40 × 170 cm",
         "mirrorSize": "70 × 80 cm",
+        "shelvesSize": "",
         "reference": "M-01",
         "subtitle": "70 × 40 × 170 cm",
         "description": {
@@ -2183,6 +2219,7 @@
         },
         "size": "70 × 40 × 170 cm",
         "mirrorSize": "70 × 80 cm",
+        "shelvesSize": "",
         "reference": "M-02",
         "subtitle": "70 × 40 × 170 cm",
         "description": {
@@ -2246,6 +2283,7 @@
         },
         "size": "70 × 40 × 170 cm",
         "mirrorSize": "70 × 80 cm",
+        "shelvesSize": "",
         "reference": "M-01-2",
         "subtitle": "70 × 40 × 170 cm",
         "description": {
@@ -2289,6 +2327,7 @@
         },
         "size": "100 × 40 × 180 cm",
         "mirrorSize": "100 × 80 cm",
+        "shelvesSize": "",
         "reference": "M-06",
         "subtitle": "100 × 40 × 180 cm",
         "description": {
@@ -2346,6 +2385,7 @@
         },
         "size": "90 × 40 × 170 cm",
         "mirrorSize": "90 × 80 cm",
+        "shelvesSize": "",
         "reference": "M-04",
         "subtitle": "90 × 40 × 170 cm",
         "description": {
@@ -2404,6 +2444,7 @@
         },
         "size": "90 × 40 × 170 cm",
         "mirrorSize": "90 × 80 cm",
+        "shelvesSize": "",
         "reference": "M-05-4",
         "subtitle": "90 × 40 × 170 cm",
         "description": {
@@ -2457,6 +2498,7 @@
         },
         "size": "180 × 45 × 180 cm",
         "mirrorSize": "180 × 80 cm",
+        "shelvesSize": "",
         "reference": "M-08",
         "subtitle": "180 × 45 × 180 cm",
         "description": {
@@ -2519,6 +2561,7 @@
         },
         "size": "100 × 40 × 170 cm",
         "mirrorSize": "100 × 80 cm",
+        "shelvesSize": "",
         "reference": "M-07",
         "subtitle": "100 × 40 × 170 cm",
         "description": {
@@ -2577,6 +2620,7 @@
         },
         "size": "90 × 40 × 170 cm",
         "mirrorSize": "90 × 80 cm",
+        "shelvesSize": "",
         "reference": "M-04-2",
         "subtitle": "90 × 40 × 170 cm",
         "description": {
@@ -2635,6 +2679,7 @@
         },
         "size": "70 × 40 × 170 cm",
         "mirrorSize": "70 × 80 cm",
+        "shelvesSize": "",
         "reference": "M-02-2",
         "subtitle": "70 × 40 × 170 cm",
         "description": {
@@ -2683,6 +2728,7 @@
         },
         "size": "180 × 45 × 180 cm",
         "mirrorSize": "180 × 80 cm",
+        "shelvesSize": "",
         "reference": "M-09",
         "subtitle": "180 × 45 × 180 cm",
         "description": {
@@ -2767,6 +2813,7 @@
         },
         "size": "50 × 40 × 190 cm",
         "mirrorSize": "",
+        "shelvesSize": "",
         "reference": "E-04",
         "subtitle": "50 × 40 × 190 cm",
         "description": {
@@ -2843,6 +2890,7 @@
         },
         "size": "80 × 40 × 190 cm",
         "mirrorSize": "",
+        "shelvesSize": "",
         "reference": "E-10",
         "subtitle": "80 × 40 × 190 cm",
         "description": {
@@ -2886,6 +2934,7 @@
         },
         "size": "40 × 40 × 170 cm",
         "mirrorSize": "",
+        "shelvesSize": "",
         "reference": "E-01",
         "subtitle": "40 × 40 × 170 cm",
         "description": {
@@ -2933,6 +2982,7 @@
         },
         "size": "40 × 40 × 190 cm",
         "mirrorSize": "",
+        "shelvesSize": "",
         "reference": "E-02",
         "subtitle": "40 × 40 × 190 cm",
         "description": {
@@ -2995,6 +3045,7 @@
         },
         "size": "86 × 40 × 190 cm",
         "mirrorSize": "",
+        "shelvesSize": "",
         "reference": "E-08",
         "subtitle": "86 × 40 × 190 cm",
         "description": {
@@ -3053,6 +3104,7 @@
         },
         "size": "45 × 35 × 180 cm",
         "mirrorSize": "",
+        "shelvesSize": "",
         "reference": "E-03",
         "subtitle": "45 × 35 × 180 cm",
         "description": {
@@ -3110,6 +3162,7 @@
         },
         "size": "80 × 40 × 200 cm",
         "mirrorSize": "",
+        "shelvesSize": "",
         "reference": "E-11",
         "subtitle": "80 × 40 × 200 cm",
         "description": {
@@ -3172,6 +3225,7 @@
         },
         "size": "80 × 40 × 150 cm",
         "mirrorSize": "",
+        "shelvesSize": "",
         "reference": "E-07",
         "subtitle": "80 × 40 × 150 cm",
         "description": {
@@ -3215,6 +3269,7 @@
         },
         "size": "80 × 40 × 190 cm",
         "mirrorSize": "",
+        "shelvesSize": "",
         "reference": "E-09",
         "subtitle": "80 × 40 × 190 cm",
         "description": {
@@ -3262,6 +3317,7 @@
         },
         "size": "80 × 40 × 190 cm",
         "mirrorSize": "",
+        "shelvesSize": "",
         "reference": "E-06",
         "subtitle": "80 × 40 × 190 cm",
         "description": {
@@ -3347,6 +3403,7 @@
         },
         "size": "90 × 40 × 170 cm",
         "mirrorSize": "90 × 80 cm",
+        "shelvesSize": "",
         "reference": "M-03",
         "subtitle": "90 × 40 × 170 cm",
         "description": {
@@ -3405,6 +3462,7 @@
         },
         "size": "70 × 40 × 170 cm",
         "mirrorSize": "70 × 80 cm",
+        "shelvesSize": "",
         "reference": "M-02-4",
         "subtitle": "70 × 40 × 170 cm",
         "description": {
@@ -3463,6 +3521,7 @@
         },
         "size": "90 × 40 × 170 cm",
         "mirrorSize": "90 × 80 cm",
+        "shelvesSize": "",
         "reference": "M-04-3",
         "subtitle": "90 × 40 × 170 cm",
         "description": {
@@ -3501,6 +3560,7 @@
         },
         "size": "90 × 40 × 170 cm",
         "mirrorSize": "90 × 80 cm",
+        "shelvesSize": "",
         "reference": "M-05-2",
         "subtitle": "90 × 40 × 170 cm",
         "description": {
@@ -3549,6 +3609,7 @@
         },
         "size": "90 × 40 × 170 cm",
         "mirrorSize": "90 × 80 cm",
+        "shelvesSize": "",
         "reference": "M-05-5",
         "subtitle": "90 × 40 × 170 cm",
         "description": {
@@ -3631,6 +3692,7 @@
         },
         "size": "100 × 40 × 150 cm",
         "mirrorSize": "85 × 70 cm",
+        "shelvesSize": "",
         "reference": "T-25",
         "subtitle": "100 × 40 × 150 cm",
         "description": {
@@ -3708,6 +3770,7 @@
         },
         "size": "90 × 45 × 180 cm",
         "mirrorSize": "90 × 90 cm",
+        "shelvesSize": "",
         "reference": "T-26",
         "subtitle": "90 × 45 × 180 cm",
         "description": {
@@ -3765,6 +3828,7 @@
         },
         "size": "90 × 40 × 170 cm",
         "mirrorSize": "90 × 80 cm",
+        "shelvesSize": "",
         "reference": "T-28",
         "subtitle": "90 × 40 × 170 cm",
         "description": {
@@ -3808,6 +3872,7 @@
         },
         "size": "90 × 40 × 185 cm",
         "mirrorSize": "Ø d-70cm",
+        "shelvesSize": "",
         "reference": "T-30",
         "subtitle": "90 × 40 × 185 cm",
         "description": {
@@ -3860,6 +3925,7 @@
         },
         "size": "90 × 40 × 180 cm",
         "mirrorSize": "Ø d-80cm",
+        "shelvesSize": "",
         "reference": "T-31",
         "subtitle": "90 × 40 × 180 cm",
         "description": {
@@ -3908,6 +3974,7 @@
         },
         "size": "130 × 40 × 140 cm",
         "mirrorSize": "90 × 80 cm",
+        "shelvesSize": "",
         "reference": "T-32",
         "subtitle": "130 × 40 × 140 cm",
         "description": {
@@ -3965,6 +4032,7 @@
         },
         "size": "120 × 40 × 160 cm",
         "mirrorSize": "Ø d-80cm",
+        "shelvesSize": "",
         "reference": "T-33",
         "subtitle": "120 × 40 × 160 cm",
         "description": {
@@ -4003,6 +4071,7 @@
         },
         "size": "180 × 45 × 170 cm",
         "mirrorSize": "180 × 80 cm",
+        "shelvesSize": "",
         "reference": "T-35",
         "subtitle": "180 × 45 × 170 cm",
         "description": {
@@ -4066,6 +4135,7 @@
         },
         "size": "180 × 45 × 170 cm",
         "mirrorSize": "180 × 80 cm",
+        "shelvesSize": "",
         "reference": "T-36",
         "subtitle": "180 × 45 × 170 cm",
         "description": {
@@ -4124,6 +4194,7 @@
         },
         "size": "180 × 45 × 180 cm",
         "mirrorSize": "180 × 80 cm",
+        "shelvesSize": "",
         "reference": "T-38",
         "subtitle": "180 × 45 × 180 cm",
         "description": {
@@ -4182,6 +4253,7 @@
         },
         "size": "180 × 45 × 180 cm",
         "mirrorSize": "180 × 80 cm",
+        "shelvesSize": "",
         "reference": "T-39",
         "subtitle": "180 × 45 × 180 cm",
         "description": {
@@ -4240,6 +4312,7 @@
         },
         "size": "60 × 40 × 160 cm",
         "mirrorSize": "60 × 80 cm",
+        "shelvesSize": "",
         "reference": "T-01",
         "subtitle": "60 × 40 × 160 cm",
         "description": {
@@ -4308,6 +4381,7 @@
         },
         "size": "80 × 40 × 160 cm",
         "mirrorSize": "60 × 80 cm",
+        "shelvesSize": "",
         "reference": "T-02",
         "subtitle": "80 × 40 × 160 cm",
         "description": {
@@ -4376,6 +4450,7 @@
         },
         "size": "80 × 40 × 160 cm",
         "mirrorSize": "80 × 80 cm",
+        "shelvesSize": "",
         "reference": "T-03",
         "subtitle": "80 × 40 × 160 cm",
         "description": {
@@ -4429,6 +4504,7 @@
         },
         "size": "60 × 170 cm",
         "mirrorSize": "",
+        "shelvesSize": "",
         "reference": "D-01",
         "subtitle": "60 × 170 cm",
         "description": {
@@ -4587,6 +4663,7 @@
         },
         "size": "60 × 170 cm",
         "mirrorSize": "",
+        "shelvesSize": "",
         "reference": "D-02",
         "subtitle": "60 × 170 cm",
         "description": {
@@ -4640,6 +4717,7 @@
         },
         "size": "60 × 170 cm",
         "mirrorSize": "",
+        "shelvesSize": "",
         "reference": "D-03",
         "subtitle": "60 × 170 cm",
         "description": {
@@ -4678,6 +4756,7 @@
         },
         "size": "50 × 35 × 160 cm",
         "mirrorSize": "50 × 140 cm",
+        "shelvesSize": "",
         "reference": "D-04",
         "subtitle": "50 × 35 × 160 cm",
         "description": {
@@ -4716,6 +4795,7 @@
         },
         "size": "45 × 175 cm",
         "mirrorSize": "40 × 160 cm",
+        "shelvesSize": "",
         "reference": "D-07",
         "subtitle": "45 × 175 cm",
         "description": {
@@ -4759,6 +4839,7 @@
         },
         "size": "45 × 175 cm",
         "mirrorSize": "40 × 160 cm",
+        "shelvesSize": "",
         "reference": "D-08",
         "subtitle": "45 × 175 cm",
         "description": {
@@ -4830,6 +4911,7 @@
         },
         "size": "40 × 40 × 190 cm",
         "mirrorSize": "",
+        "shelvesSize": "",
         "reference": "E-02-2",
         "subtitle": "40 × 40 × 190 cm",
         "description": {
@@ -4897,6 +4979,7 @@
         },
         "size": "45 × 35 × 180 cm",
         "mirrorSize": "",
+        "shelvesSize": "",
         "reference": "E-03-2",
         "subtitle": "45 × 35 × 180 cm",
         "description": {
@@ -4944,6 +5027,7 @@
         },
         "size": "50 × 40 × 190 cm",
         "mirrorSize": "",
+        "shelvesSize": "",
         "reference": "E-04-2",
         "subtitle": "50 × 40 × 190 cm",
         "description": {
@@ -5001,6 +5085,7 @@
         },
         "size": "50 × 40 × 190 cm",
         "mirrorSize": "",
+        "shelvesSize": "",
         "reference": "E-04-3",
         "subtitle": "50 × 40 × 190 cm",
         "description": {
@@ -5064,6 +5149,7 @@
         },
         "size": "50 × 40 × 190 cm",
         "mirrorSize": "",
+        "shelvesSize": "",
         "reference": "E-04-4",
         "subtitle": "50 × 40 × 190 cm",
         "description": {
@@ -5112,6 +5198,7 @@
         },
         "size": "40 × 30 × 200 cm",
         "mirrorSize": "",
+        "shelvesSize": "",
         "reference": "E-05",
         "subtitle": "40 × 30 × 200 cm",
         "description": {
@@ -5150,6 +5237,7 @@
         },
         "size": "40 × 30 × 200 cm",
         "mirrorSize": "",
+        "shelvesSize": "",
         "reference": "E-05-2",
         "subtitle": "40 × 30 × 200 cm",
         "description": {
@@ -5198,6 +5286,7 @@
         },
         "size": "Ø d-70cm",
         "mirrorSize": "",
+        "shelvesSize": "",
         "reference": "K-12",
         "subtitle": "Ø d-70cm",
         "description": {
@@ -5251,6 +5340,7 @@
         },
         "size": "80 x 65cm",
         "mirrorSize": "",
+        "shelvesSize": "",
         "reference": "K-09",
         "subtitle": "80 x 65cm",
         "description": {
@@ -5339,6 +5429,7 @@
         },
         "size": "86 x 85cm",
         "mirrorSize": "",
+        "shelvesSize": "",
         "reference": "K-05",
         "subtitle": "86 x 85cm",
         "description": {
@@ -5407,6 +5498,7 @@
         },
         "size": "Ø d-80cm",
         "mirrorSize": "",
+        "shelvesSize": "",
         "reference": "K-13",
         "subtitle": "Ø d-80cm",
         "description": {
@@ -5465,6 +5557,7 @@
         },
         "size": "Ø d-90cm",
         "mirrorSize": "",
+        "shelvesSize": "",
         "reference": "K-14",
         "subtitle": "Ø d-90cm",
         "description": {
@@ -5553,6 +5646,7 @@
         },
         "size": "80 x 60cm",
         "mirrorSize": "",
+        "shelvesSize": "",
         "reference": "K-10",
         "subtitle": "80 x 60cm",
         "description": {
@@ -5616,6 +5710,7 @@
         },
         "size": "Ø d-90cm",
         "mirrorSize": "",
+        "shelvesSize": "",
         "reference": "K-15",
         "subtitle": "Ø d-90cm",
         "description": {
@@ -5679,6 +5774,7 @@
         },
         "size": "70 x 63cm",
         "mirrorSize": "",
+        "shelvesSize": "",
         "reference": "K-07",
         "subtitle": "70 x 63cm",
         "description": {
@@ -5772,6 +5868,7 @@
         },
         "size": "65 x 80cm",
         "mirrorSize": "",
+        "shelvesSize": "",
         "reference": "K-11",
         "subtitle": "65 x 80cm",
         "description": {
@@ -5855,6 +5952,7 @@
         },
         "size": "Ø d-80cm",
         "mirrorSize": "",
+        "shelvesSize": "",
         "reference": "K-01",
         "subtitle": "Ø d-80cm",
         "description": {
@@ -5923,6 +6021,7 @@
         },
         "size": "Ø d-70cm",
         "mirrorSize": "",
+        "shelvesSize": "",
         "reference": "K-06",
         "subtitle": "Ø d-70cm",
         "description": {
@@ -6011,6 +6110,7 @@
         },
         "size": "90 x 70cm",
         "mirrorSize": "",
+        "shelvesSize": "",
         "reference": "K-04",
         "subtitle": "90 x 70cm",
         "description": {
@@ -6079,6 +6179,7 @@
         },
         "size": "Ø d-80cm",
         "mirrorSize": "",
+        "shelvesSize": "",
         "reference": "K-08",
         "subtitle": "Ø d-80cm",
         "description": {
@@ -6157,6 +6258,7 @@
         },
         "size": "Ø d-70cm",
         "mirrorSize": "",
+        "shelvesSize": "",
         "reference": "K-02",
         "subtitle": "Ø d-70cm",
         "description": {
@@ -6250,6 +6352,7 @@
         },
         "size": "80 x 80cm",
         "mirrorSize": "",
+        "shelvesSize": "",
         "reference": "K-03",
         "subtitle": "80 x 80cm",
         "description": {
@@ -6302,6 +6405,7 @@
         },
         "size": "40 × 40 × 70cm",
         "mirrorSize": "",
+        "shelvesSize": "",
         "reference": "B-01",
         "subtitle": "40 × 40 × 70cm",
         "description": {
@@ -6355,6 +6459,7 @@
         },
         "size": "70 × 40 × 70cm",
         "mirrorSize": "",
+        "shelvesSize": "",
         "reference": "B-02",
         "subtitle": "70 × 40 × 70cm",
         "description": {
@@ -6408,6 +6513,7 @@
         },
         "size": "40 × 40 × 120cm",
         "mirrorSize": "",
+        "shelvesSize": "",
         "reference": "B-03",
         "subtitle": "40 × 40 × 120cm",
         "description": {
@@ -6465,6 +6571,7 @@
         },
         "size": "40 × 40 × 120cm",
         "mirrorSize": "",
+        "shelvesSize": "",
         "reference": "B-04",
         "subtitle": "40 × 40 × 120cm",
         "description": {
@@ -6527,6 +6634,7 @@
         },
         "size": "60 × 40 × 150cm",
         "mirrorSize": "",
+        "shelvesSize": "",
         "reference": "B-05",
         "subtitle": "60 × 40 × 150cm",
         "description": {
@@ -6614,6 +6722,7 @@
         },
         "size": "120 × 40 × 80cm",
         "mirrorSize": "80 × 80 cm",
+        "shelvesSize": "",
         "reference": "A-01",
         "subtitle": "120 × 40 × 80cm",
         "description": {
@@ -6712,6 +6821,7 @@
         },
         "size": "120 × 40 × 80cm",
         "mirrorSize": "Ø d-80cm",
+        "shelvesSize": "",
         "reference": "A-02",
         "subtitle": "120 × 40 × 80cm",
         "description": {
@@ -6835,6 +6945,7 @@
         },
         "size": "120 × 33 × 80cm",
         "mirrorSize": "Ø d-70cm",
+        "shelvesSize": "",
         "reference": "A-03",
         "subtitle": "120 × 33 × 80cm",
         "description": {
@@ -6933,6 +7044,7 @@
         },
         "size": "120 × 33 × 80cm",
         "mirrorSize": "90 × 70 cm",
+        "shelvesSize": "",
         "reference": "A-04",
         "subtitle": "120 × 33 × 80cm",
         "description": {
@@ -7000,6 +7112,7 @@
         },
         "size": "130 × 40 × 80cm",
         "mirrorSize": "",
+        "shelvesSize": "",
         "reference": "S-06",
         "subtitle": "130 × 40 × 80cm",
         "description": {
@@ -7058,6 +7171,7 @@
         },
         "size": "110 × 40 × 80cm",
         "mirrorSize": "",
+        "shelvesSize": "",
         "reference": "S-05",
         "subtitle": "110 × 40 × 80cm",
         "description": {
@@ -7120,6 +7234,7 @@
         },
         "size": "150 × 40 × 80cm",
         "mirrorSize": "",
+        "shelvesSize": "",
         "reference": "S-07",
         "subtitle": "150 × 40 × 80cm",
         "description": {
@@ -7173,6 +7288,7 @@
         },
         "size": "80 × 40 × 80cm",
         "mirrorSize": "",
+        "shelvesSize": "",
         "reference": "S-01",
         "subtitle": "80 × 40 × 80cm",
         "description": {
@@ -7231,6 +7347,7 @@
         },
         "size": "120 × 40 × 80cm",
         "mirrorSize": "",
+        "shelvesSize": "",
         "reference": "S-03",
         "subtitle": "120 × 40 × 80cm",
         "description": {
@@ -7278,6 +7395,7 @@
         },
         "size": "100 × 40 × 80cm",
         "mirrorSize": "",
+        "shelvesSize": "",
         "reference": "S-02",
         "subtitle": "100 × 40 × 80cm",
         "description": {
@@ -7331,6 +7449,7 @@
         },
         "size": "150 × 40 × 80cm",
         "mirrorSize": "",
+        "shelvesSize": "",
         "reference": "S-04",
         "subtitle": "150 × 40 × 80cm",
         "description": {
@@ -7403,6 +7522,7 @@
         },
         "size": "110 x 50 x 80cm",
         "mirrorSize": "",
+        "shelvesSize": "",
         "reference": "M-01",
         "subtitle": "110 x 50 x 80cm",
         "description": {
@@ -7451,6 +7571,7 @@
         },
         "size": "100 x 50 x 80cm",
         "mirrorSize": "",
+        "shelvesSize": "",
         "reference": "M-02",
         "subtitle": "100 x 50 x 80cm",
         "description": {
@@ -7494,6 +7615,7 @@
         },
         "size": "110 x 50 x 80cm",
         "mirrorSize": "",
+        "shelvesSize": "",
         "reference": "M-03",
         "subtitle": "110 x 50 x 80cm",
         "description": {
@@ -7542,6 +7664,7 @@
         },
         "size": "120 x 50 x 80cm",
         "mirrorSize": "",
+        "shelvesSize": "",
         "reference": "M-04",
         "subtitle": "120 x 50 x 80cm",
         "description": {
@@ -7605,6 +7728,7 @@
         },
         "size": "120 x 50 x 80cm",
         "mirrorSize": "",
+        "shelvesSize": "",
         "reference": "M-05",
         "subtitle": "120 x 50 x 80cm",
         "description": {
