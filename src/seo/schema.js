@@ -9,6 +9,7 @@ import {
   productImages,
   productDescription,
   productDiscount,
+  productFullName,
   productLabel,
   resolveImage,
 } from '../data/catalog.js';
@@ -140,7 +141,7 @@ export function productListSchema(products, categorySlug, lang = 'es') {
     itemListElement: products.map((p, i) => ({
       '@type': 'ListItem',
       position: i + 1,
-      name: p.name,
+      name: productFullName(p, lang),
       url: `${SITE}${withLang(`/${categorySlug}/${p.id}`, lang)}`,
     })),
   };

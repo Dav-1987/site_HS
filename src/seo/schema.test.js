@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { productSchema } from './schema.js';
+import { productListSchema, productSchema } from './schema.js';
 
 const category = {
   slug: 'tocadores',
@@ -54,5 +54,34 @@ describe('productSchema — availability', () => {
 
   it('has no offer at all for a product with no price', () => {
     expect(productSchema({ ...product, price: 0 }, category).offers).toBeUndefined();
+  });
+});
+
+// A name may carry the bar that cuts the tile name from the full one. It is a
+// display device and belongs in no output: markup carrying it hands Google a
+// product called "Espejo | Hollywood…". Every schema builder that names a
+// product goes through the helpers, and this is what says so.
+describe('structured data never carries the display bar', () => {
+  const named = {
+    ...product,
+    name: 'Tocador | de maquillaje con espejo y bombillas LED',
+    nameEn: 'Dressing table | Makeup unit with mirror and LED bulbs',
+  };
+
+  it('keeps it out of a Product node, in either language', () => {
+    expect(productSchema(named, category).name).toBe(
+      'Tocador de maquillaje con espejo y bombillas LED 90 × 40 × 170 cm',
+    );
+    expect(productSchema(named, category, 'en').name).toBe(
+      'Dressing table Makeup unit with mirror and LED bulbs 90 × 40 × 170 cm',
+    );
+  });
+
+  it('keeps it out of a category ItemList', () => {
+    const list = productListSchema([named], 'tocadores');
+    expect(list.itemListElement[0].name).toBe('Tocador de maquillaje con espejo y bombillas LED');
+    expect(productListSchema([named], 'tocadores', 'en').itemListElement[0].name).toBe(
+      'Dressing table Makeup unit with mirror and LED bulbs',
+    );
   });
 });
