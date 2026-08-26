@@ -45,11 +45,11 @@ export const translations = {
       '{count} colecciones de mobiliario minimalista: tocadores, espejos, cómodas y más.',
     'category.meta.title': '{name} | Mirage Muebles',
     'category.meta.description':
-      'Colección {name} de Mirage Muebles — {count} piezas de mobiliario minimalista. Montaje e instalación gratuitos.',
+      'Colección {name} de Mirage Muebles: {count} piezas de diseño minimalista. Envío a toda España, montaje incluido en la entrega.',
     'contact.meta.description':
-      'Contacta con Mirage Muebles: tienda de muebles minimalistas en España. Teléfono, email, Instagram y TikTok. Montaje e instalación gratis.',
+      'Contacta con Mirage Muebles, tienda de muebles de diseño en España. Teléfono, email, Instagram y TikTok. Envío a toda España.',
     'contact.og.description':
-      'Contacta con Mirage Muebles. Mobiliario minimalista con montaje e instalación gratis.',
+      'Contacta con Mirage Muebles. Muebles de diseño minimalista con envío a toda España.',
 
     // --- Category / product ---
     'category.products': 'piezas',
@@ -108,7 +108,7 @@ export const translations = {
     'contact.title': 'Contacto',
     'contact.subtitle': 'Escríbenos y te responderemos en menos de 24 horas laborables.',
     'contact.custom':
-      'Vendemos modelos acabados, listos para enviar. De forma puntual también fabricamos una pieza a medida: escríbenos y lo vemos.',
+      'Vendemos modelos de catálogo, listos para enviar. En algún caso puntual podemos adaptar las medidas de un modelo: escríbenos y lo vemos.',
     'contact.prefill': 'Me interesa esta pieza:',
     'contact.form.name': 'Nombre',
     'contact.form.email': 'Correo electrónico',
@@ -246,11 +246,11 @@ export const translations = {
       '{count} collections of minimalist furniture: vanities, mirrors, dressers and more.',
     'category.meta.title': '{name} | Mirage Muebles',
     'category.meta.description':
-      '{name} collection by Mirage Muebles — {count} pieces of minimalist furniture. Free assembly and installation.',
+      '{name} collection by Mirage Muebles: {count} pieces of minimalist design. Delivery across Spain, assembly included.',
     'contact.meta.description':
-      'Contact Mirage Muebles: minimalist furniture store in Spain. Phone, email, Instagram and TikTok. Free assembly and installation.',
+      'Contact Mirage Muebles, a design furniture store in Spain. Phone, email, Instagram and TikTok. Delivery across Spain.',
     'contact.og.description':
-      'Contact Mirage Muebles. Minimalist furniture with free assembly and installation.',
+      'Contact Mirage Muebles. Minimalist design furniture with delivery across Spain.',
 
     // --- Category / product ---
     'category.products': 'pieces',
@@ -309,7 +309,7 @@ export const translations = {
     'contact.title': 'Contacts',
     'contact.subtitle': 'Write to us and we will reply within 24 working hours.',
     'contact.custom':
-      'We sell finished models, ready to ship. Occasionally we also build a piece to your measurements — write to us and we will look into it.',
+      'We sell catalogue models, ready to ship. In the occasional case we can adapt a model to your measurements — write to us and we will look into it.',
     'contact.prefill': "I'm interested in this piece:",
     'contact.form.name': 'Name',
     'contact.form.email': 'Email',
