@@ -57,6 +57,13 @@ function keyForTag(full) {
   if (/charset/i.test(attrs)) return 'meta:charset';
   const name = (attrs.match(/name="([^"]+)"/i) || [])[1];
   const prop = (attrs.match(/property="([^"]+)"/i) || [])[1];
+  // og:image is the one Open Graph property a page legitimately repeats —
+  // SocialMeta emits one per gallery photo, Pinterest reads up to six. Every
+  // other og:/name property is emitted at most once per page, where keying on
+  // the property alone is what makes a more specific override win; keying
+  // og:image on its content too is what keeps this rule from swallowing five
+  // of those six photos down to whichever rendered last.
+  if (prop === 'og:image') return `meta:${full}`;
   if (name) return `meta:name:${name.toLowerCase()}`;
   if (prop) return `meta:prop:${prop.toLowerCase()}`;
   return `meta:${full}`;
