@@ -33,6 +33,50 @@ function fields(xml, name) {
   return [...xml.matchAll(new RegExp(`<g:${name}>([\\s\\S]*?)</g:${name}>`, 'g'))].map((m) => m[1]);
 }
 
+/** Small independent CSV parser used to verify quoting, commas and newlines. */
+function parseCsv(text) {
+  const rows = [];
+  let row = [];
+  let field = '';
+  let quoted = false;
+
+  for (let index = 0; index < text.length; index += 1) {
+    const char = text[index];
+    if (quoted) {
+      if (char === '"' && text[index + 1] === '"') {
+        field += '"';
+        index += 1;
+      } else if (char === '"') {
+        quoted = false;
+      } else {
+        field += char;
+      }
+    } else if (char === '"' && field === '') {
+      quoted = true;
+    } else if (char === ',') {
+      row.push(field);
+      field = '';
+    } else if (char === '\n') {
+      row.push(field);
+      rows.push(row);
+      row = [];
+      field = '';
+    } else if (char !== '\r') {
+      field += char;
+    }
+  }
+
+  if (field || row.length) rows.push([...row, field]);
+  return rows;
+}
+
+function csvRecords(text) {
+  const [headers, ...rows] = parseCsv(text);
+  return rows
+    .filter((row) => row.some(Boolean))
+    .map((row) => Object.fromEntries(headers.map((header, index) => [header, row[index] ?? ''])));
+}
+
 describe('feedProducts — what goes in', () => {
   it('takes a public product in a public category', () => {
     expect(feedProducts(catalog([product()]))).toHaveLength(1);
@@ -275,47 +319,115 @@ describe('buildGoogleFeed — the XML', () => {
 
 // ── the Meta feed ───────────────────────────────────────────────────────────
 //
-// It intentionally starts as the old shared Google/Meta feed: the same ids and
-// product facts, with only Meta's sellable quantity added. That lets Commerce
-// Manager switch URLs without replacing its items or breaking event matching.
+// CSV gives Meta's nested video fields unambiguous column names while the
+// common product record keeps identity, price and copy aligned with Google.
 
 describe('buildMetaFeed', () => {
-  it('is well-formed XML', () => {
-    const xml = buildMetaFeed(catalog([product(), product({ id: 'Tocador-M-02' })]));
-    const doc = new DOMParser().parseFromString(xml, 'application/xml');
-    expect(doc.querySelector('parsererror')).toBeNull();
-    expect(doc.querySelectorAll('item')).toHaveLength(2);
+  it('produces one complete CSV row per product', () => {
+    const rows = parseCsv(buildMetaFeed(catalog([product(), product({ id: 'Tocador-M-02' })])));
+    const [headers, ...items] = rows;
+    expect(items).toHaveLength(2);
+    expect(items.every((row) => row.length === headers.length)).toBe(true);
+    expect(headers).toContain('video[0].url');
+    expect(headers).toContain('video[19].url');
   });
 
-  // Meta's Shop hides any item whose quantity is 0 or missing, so the same
-  // switch has to drive the count as well as the availability string.
-  it('carries a sellable quantity that follows availability', () => {
-    expect(fields(buildMetaFeed(catalog([product()])), 'quantity_to_sell_on_facebook')).toEqual([
-      '100',
-    ]);
-    expect(
-      fields(buildMetaFeed(catalog([product({ inStock: false })])), 'quantity_to_sell_on_facebook'),
-    ).toEqual(['0']);
-  });
-
-  it('keeps the event-matching id and every product fact identical to Google', () => {
+  it('keeps the event-matching id and every product fact aligned with Google', () => {
     const cat = catalog([product({ price: 399, oldPrice: 499 })]);
+    const meta = csvRecords(buildMetaFeed(cat))[0];
+    const google = buildGoogleFeed(cat);
+
     for (const name of [
       'id',
       'title',
       'description',
       'link',
-      'image_link',
       'price',
       'sale_price',
-      'availability',
       'brand',
       'condition',
       'mpn',
       'product_type',
     ]) {
-      expect(fields(buildMetaFeed(cat), name)).toEqual(fields(buildGoogleFeed(cat), name));
+      expect(meta[name]).toBe(fields(google, name)[0]);
     }
+    expect(meta.availability).toBe('in stock');
+    expect(fields(google, 'availability')[0]).toBe('in_stock');
+  });
+
+  it('uses honest Meta availability without inventing a checkout quantity', () => {
+    const meta = csvRecords(buildMetaFeed(catalog([product({ inStock: false })])))[0];
+    expect(meta.availability).toBe('out of stock');
+    expect(meta).not.toHaveProperty('quantity_to_sell_on_facebook');
+  });
+
+  it('uses original JPGs and accepts twenty additional images', () => {
+    const media = Array.from({ length: 25 }, (_, index) => ({
+      type: 'image',
+      src: `/uploads/p${index}.jpg`,
+    }));
+    const meta = csvRecords(buildMetaFeed(catalog([product({ media })])))[0];
+    const extra = meta.additional_image_link.split(',');
+    expect(meta.image_link).toBe('https://hsmuebles.es/uploads/p0.jpg');
+    expect(extra).toHaveLength(20);
+    expect(extra.at(-1)).toBe('https://hsmuebles.es/uploads/p20.jpg');
+  });
+
+  it('adds up to twenty direct product videos in gallery order', () => {
+    const media = [
+      { type: 'image', src: '/uploads/cover.jpg' },
+      ...Array.from({ length: 22 }, (_, index) => ({
+        type: 'video',
+        src: `/uploads/v${index}.mp4`,
+      })),
+    ];
+    const meta = csvRecords(buildMetaFeed(catalog([product({ media })])))[0];
+    expect(meta['video[0].url']).toBe('https://hsmuebles.es/uploads/v0.mp4');
+    expect(meta['video[19].url']).toBe('https://hsmuebles.es/uploads/v19.mp4');
+    expect(meta).not.toHaveProperty('video[20].url');
+  });
+
+  it('adds material, size, taxonomy and useful product-set labels', () => {
+    const meta = csvRecords(
+      buildMetaFeed(
+        catalog([
+          product({
+            price: 399,
+            oldPrice: 499,
+            media: [
+              { type: 'image', src: '/uploads/a.jpg' },
+              { type: 'video', src: '/uploads/a.mp4' },
+            ],
+          }),
+        ]),
+      ),
+    )[0];
+    expect(meta.material).toBe('Melamina');
+    expect(meta.size).toBe('90 × 40 × 170 cm');
+    expect(meta.google_product_category).toBe('4148');
+    expect(meta.internal_label).toBe("['category:tocadores','has_video','on_sale']");
+  });
+
+  it('quotes commas, double quotes and line breaks without changing the copy', () => {
+    const meta = csvRecords(
+      buildMetaFeed(
+        catalog([
+          product({
+            name: 'Tocador "Loft", edición',
+            description: { es: 'Línea uno,\n"Línea dos"' },
+          }),
+        ]),
+      ),
+    )[0];
+    expect(meta.title).toBe('Tocador "Loft", edición 90 × 40 × 170 cm');
+    expect(meta.description).toBe('Línea uno,\n"Línea dos"');
+  });
+
+  it('returns the stable header and no rows for an empty catalog', () => {
+    const csv = buildMetaFeed([]);
+    expect(csvRecords(csv)).toEqual([]);
+    expect(parseCsv(csv)[0]).toContain('id');
+    expect(parseCsv(csv)[0]).toContain('video[19].url');
   });
 });
 
@@ -370,17 +482,16 @@ describe('buildPinterestFeed', () => {
     ).toEqual([]);
   });
 
-  it('keeps Meta quantity out of the other platform feeds', () => {
+  it('never invents a Facebook checkout quantity in the XML feeds', () => {
     expect(fields(buildPinterestFeed(label({})), 'quantity_to_sell_on_facebook')).toEqual([]);
     expect(fields(buildGoogleFeed(label({})), 'quantity_to_sell_on_facebook')).toEqual([]);
-    expect(fields(buildMetaFeed(label({})), 'quantity_to_sell_on_facebook')).toEqual(['100']);
   });
 
   it('never carries google_product_category into the Google feed', () => {
     expect(fields(buildGoogleFeed(label({})), 'google_product_category')).toEqual([]);
   });
 
-  // The point of one commonItemLines: the two feeds cannot drift about price,
+  // The point of one commonItemData: the two feeds cannot drift about price,
   // availability, images or identity.
   it('describes the product identically to the Google feed', () => {
     const cat = label({ price: 399, oldPrice: 499 });

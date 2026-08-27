@@ -274,7 +274,7 @@ ORDER_EMAIL_FROM=...     # отправитель (по умолчанию SMTP_
    и Merchant Center отклоняет товары. Файла нет на VPS → API **не стартует**:
    `scp src/data/catalog.js root@185.202.172.59:/var/www/hs-muebles/src/data/`
 
-9. **Роуты фидов требуют правила в nginx.** `/feed/google.xml`, `/feed/meta.xml` и
+9. **Роуты фидов требуют правила в nginx.** `/feed/google.xml`, `/feed/meta.csv` и
    `/feed/pinterest.xml` отдаёт Express, но `location /` сначала ищет файл на диске,
    поэтому нужен отдельный `location /feed/` с `proxy_pass http://127.0.0.1:4000`
    (уже добавлен). Без него — молчаливый 404, и платформы не заберут фиды.

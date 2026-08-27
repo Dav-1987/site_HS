@@ -1,10 +1,9 @@
 // ============================================================
 // Mirage Muebles — product feeds
-// RSS 2.0 + the `g:` namespace, Spanish / Spain. Three feeds over one set of
-// products: /feed/google.xml serves Shopping, /feed/meta.xml serves Meta's
-// catalog and dynamic remarketing, and /feed/pinterest.xml serves Pinterest.
-// They share every line that describes the product — see commonItemLines — and
-// add only the fields that belong to their own platform.
+// Three feeds over one Spanish / Spain product set: RSS XML for Google Shopping
+// and Pinterest, plus CSV for Meta's catalog and dynamic ads. They share one
+// normalized product record — see commonItemData — and serialize only the
+// fields and media each platform understands.
 // ============================================================
 //
 // Built from the same Postgres rows the site itself renders, on request, rather
@@ -28,6 +27,7 @@ import {
   productDiscount,
   productImages,
   productLabel,
+  productMedia,
   resolveImage,
 } from '../src/data/catalog.js';
 
@@ -38,13 +38,9 @@ const LANG = 'es';
 
 // Google accepts one main image plus ten more.
 const MAX_EXTRA_IMAGES = 10;
-// Meta's Shop refuses to sell an item whose quantity is 0 or absent, and every
-// item in the feed is made to order rather than picked off a shelf — there is no
-// stock count to report and none is kept anywhere. A flat number stands in for
-// "as many as you want", which is the documented way to say that; the honest
-// part of the signal, whether the product can be had at all, stays with
-// isInStock. Only the Meta feed emits the field.
-const MADE_TO_ORDER_QUANTITY = 100;
+// Meta accepts up to twenty additional images and twenty product-level videos.
+const MAX_META_EXTRA_IMAGES = 20;
+const MAX_META_VIDEOS = 20;
 // Merchant Center truncates past these; nothing in the catalog comes close
 // (longest title 34 chars, longest description 119), but a future paste of a
 // long description should be cut here rather than rejected on Google's side.
@@ -114,7 +110,8 @@ function tag(name, value) {
 /** Absolute URL for a site-relative path; leaves an already-absolute one alone. */
 function absUrl(path) {
   if (!path) return '';
-  return /^https?:\/\//.test(path) ? path : `${SITE}${path}`;
+  if (/^https?:\/\//.test(path)) return path;
+  return `${SITE}${path.startsWith('/') ? path : `/${path}`}`;
 }
 
 /** Google wants a decimal amount and a currency code: "639.00 EUR". */
@@ -145,18 +142,33 @@ export function feedProducts(categories) {
       if (!isListed(product)) continue;
       const { price } = productDiscount(product);
       if (price <= 0) continue;
-      const images = productImages(product)
-        .map((img) => absUrl(resolveImage(img, 1600)))
-        .filter(Boolean);
+      const sourceImages = productImages(product);
+      const images = sourceImages.map((img) => absUrl(resolveImage(img, 1600))).filter(Boolean);
       if (!images.length) continue;
-      out.push({ product, category, images });
+      // Meta documents JPEG/PNG for catalog images. The original uploads are
+      // JPG, while resolveImage intentionally turns the site and Google URLs
+      // into WebP; keep a Meta-only list so neither platform compromises the
+      // other's media format.
+      const metaImages = sourceImages
+        .map((img) =>
+          img.startsWith('/') || /^https?:\/\//.test(img)
+            ? absUrl(img)
+            : absUrl(resolveImage(img, 1600)),
+        )
+        .filter(Boolean);
+      const videos = productMedia(product)
+        .filter((media) => media.type === 'video')
+        .map((media) => absUrl(media.src))
+        .filter(Boolean);
+      out.push({ product, category, images, metaImages, videos });
     }
   }
   return out;
 }
 
-// Pinterest asks for a Google Product Category and rejects nothing without one,
-// but limits how widely an uncategorised item is shown.
+// Pinterest and Meta both use Google's Product Category taxonomy as a strong
+// classification hint. Pinterest limits how widely an uncategorised item is
+// shown; Meta uses it to understand and deliver the product more accurately.
 //
 // The catalog has no field to read it from: `category` is the site's own menu,
 // where 68 of 124 products sit in a single "Otros Modelos" bucket holding
@@ -177,7 +189,7 @@ export function feedProducts(categories) {
 // piece in the catalog is 150–200 cm tall and 35–40 cm deep, so it is the
 // second — under 6372 Pinterest would show a two-metre unit to someone looking
 // for a board to put above a desk.
-const PINTEREST_CATEGORIES = [
+const GOOGLE_PRODUCT_CATEGORIES = [
   [/^tocador/, '4148'], // Mobiliario > Armarios y almacenamiento > Tocadores
   [/^espejo/, '595'], // Casa y jardín > Decoración > Espejos
   [/^estanteria/, '465'], // Mobiliario > Estanterías > Librerías y estanterías
@@ -191,52 +203,62 @@ const PINTEREST_CATEGORIES = [
  * word we do not recognise. Accents are stripped before matching so that
  * "Estantería" and "Estanteria", "Cómoda" and "Comoda" are the same word.
  */
-function pinterestCategory(product) {
+function googleProductCategory(product) {
   const first = String(productLabel(product) ?? '')
     .trim()
     .split(/\s+/)[0]
     .toLowerCase()
     .normalize('NFD')
     .replace(/[\u0300-\u036f]/g, '');
-  return PINTEREST_CATEGORIES.find(([re]) => re.test(first))?.[1] ?? '';
+  return GOOGLE_PRODUCT_CATEGORIES.find(([re]) => re.test(first))?.[1] ?? '';
 }
 
 /**
- * The lines both feeds agree on. Everything here describes the product itself,
- * so a divergence would mean the two feeds disagree about what is being sold —
- * which is the one thing a second feed must never introduce.
+ * The product facts every platform must agree on. Serializers below only change
+ * syntax and platform-specific spelling (in_stock in Google XML, in stock in
+ * Meta CSV); identity, price, copy and URLs always come from this record.
  */
-function commonItemLines({ product, category, images }, { facebookQuantity }) {
+function commonItemData({ product, category, images }) {
   const { price, oldPrice, onSale } = productDiscount(product);
+  const title = productLabel(product).slice(0, MAX_TITLE);
+  return {
+    id: product.id,
+    title,
+    description: cleanDescription(
+      productDescription(product, category, LANG),
+      productLabel(product),
+    ).slice(0, MAX_DESCRIPTION),
+    link: `${SITE}/${category.slug}/${product.id}`,
+    images,
+    inStock: isInStock(product),
+    price: onSale ? oldPrice : price,
+    salePrice: onSale ? price : null,
+    brand: BRAND,
+    condition: 'new',
+    mpn: product.id,
+    productType: category.name?.[LANG] ?? category.slug,
+  };
+}
+
+function commonItemLines(entry) {
+  const item = commonItemData(entry);
   return [
     // product.id, not product.reference: five references are duplicated across
     // the catalog (M-01…M-05 appear twice) and Google needs this unique.
-    tag('g:id', product.id),
-    tag('g:title', productLabel(product).slice(0, MAX_TITLE)),
-    tag(
-      'g:description',
-      cleanDescription(productDescription(product, category, LANG), productLabel(product)).slice(
-        0,
-        MAX_DESCRIPTION,
-      ),
-    ),
-    tag('g:link', `${SITE}/${category.slug}/${product.id}`),
-    tag('g:image_link', images[0]),
-    ...images.slice(1, 1 + MAX_EXTRA_IMAGES).map((src) => tag('g:additional_image_link', src)),
-    tag('g:availability', isInStock(product) ? 'in_stock' : 'out_of_stock'),
-    // Meta's Shop refuses to sell an item whose quantity is absent; the other
-    // platforms have no use for a field named after Facebook. It stays beside
-    // availability so both values are guaranteed to follow the same switch.
-    ...(facebookQuantity
-      ? [tag('g:quantity_to_sell_on_facebook', isInStock(product) ? MADE_TO_ORDER_QUANTITY : 0)]
-      : []),
+    tag('g:id', item.id),
+    tag('g:title', item.title),
+    tag('g:description', item.description),
+    tag('g:link', item.link),
+    tag('g:image_link', item.images[0]),
+    ...item.images.slice(1, 1 + MAX_EXTRA_IMAGES).map((src) => tag('g:additional_image_link', src)),
+    tag('g:availability', item.inStock ? 'in_stock' : 'out_of_stock'),
     // A discounted product ships its pre-discount price as `price` and the
     // current one as `sale_price`, which is how Shopping draws the same
     // struck-through pair the product page shows.
-    tag('g:price', money(onSale ? oldPrice : price)),
-    ...(onSale ? [tag('g:sale_price', money(price))] : []),
-    tag('g:brand', BRAND),
-    tag('g:condition', 'new'),
+    tag('g:price', money(item.price)),
+    ...(item.salePrice !== null ? [tag('g:sale_price', money(item.salePrice))] : []),
+    tag('g:brand', item.brand),
+    tag('g:condition', item.condition),
     // Made to order under our own brand, so there is no GTIN — but there is a
     // manufacturer part number, because we are the manufacturer. It is
     // product.id rather than product.reference: the latter is what the spec
@@ -244,10 +266,10 @@ function commonItemLines({ product, category, images }, { facebookQuantity }) {
     // a dressing table and a manicure table. The same value is published as
     // sku/mpn in the page's Product schema, so the feed and the landing page
     // Google compares it against agree.
-    tag('g:mpn', product.id),
+    tag('g:mpn', item.mpn),
     // Our own taxonomy, which both platforms take as a classification hint and
     // which Shopping campaigns can be split by.
-    tag('g:product_type', category.name?.[LANG] ?? category.slug),
+    tag('g:product_type', item.productType),
   ];
 }
 
@@ -257,7 +279,7 @@ function wrapItem(lines) {
 
 function googleItemXml(entry) {
   return wrapItem([
-    ...commonItemLines(entry, { facebookQuantity: false }),
+    ...commonItemLines(entry),
     // `g:google_product_category` is deliberately absent here. Google assigns a
     // category itself and documents the override as being for three cases only
     // — a category whose extra attributes we are missing, a Shopping campaign
@@ -268,20 +290,89 @@ function googleItemXml(entry) {
   ]);
 }
 
-function metaItemXml(entry) {
-  return wrapItem(commonItemLines(entry, { facebookQuantity: true }));
-}
-
 function pinterestItemXml(entry) {
-  const gpc = pinterestCategory(entry.product);
+  const gpc = googleProductCategory(entry.product);
   return wrapItem([
-    ...commonItemLines(entry, { facebookQuantity: false }),
+    ...commonItemLines(entry),
     // Pinterest reads this to place a product in its browsable sections; without
     // it the item still loads but its reach is limited, which is the whole
     // reason for being on Pinterest. Omitted rather than guessed when the title
     // says nothing recognisable — no category beats a wrong one.
     ...(gpc ? [tag('g:google_product_category', gpc)] : []),
   ]);
+}
+
+const META_VIDEO_HEADERS = Array.from(
+  { length: MAX_META_VIDEOS },
+  (_, index) => `video[${index}].url`,
+);
+const META_HEADERS = [
+  'id',
+  'title',
+  'description',
+  'availability',
+  'condition',
+  'price',
+  'link',
+  'image_link',
+  'brand',
+  'additional_image_link',
+  'sale_price',
+  'mpn',
+  'google_product_category',
+  'product_type',
+  'material',
+  'size',
+  'internal_label',
+  ...META_VIDEO_HEADERS,
+];
+
+/** RFC 4180-compatible cell escaping, including embedded quotes and newlines. */
+function csvCell(value) {
+  const text = String(value ?? '');
+  return /[",\r\n]/.test(text) ? `"${text.replace(/"/g, '""')}"` : text;
+}
+
+function csvRow(values) {
+  return values.map(csvCell).join(',');
+}
+
+function localizedValue(value) {
+  if (value && typeof value === 'object') return value[LANG] ?? value.en ?? '';
+  return value ?? '';
+}
+
+function metaInternalLabels(entry, item) {
+  const labels = [`category:${entry.category.slug}`];
+  if (entry.videos.length) labels.push('has_video');
+  if (item.salePrice !== null) labels.push('on_sale');
+  return `[${labels.map((label) => `'${label}'`).join(',')}]`;
+}
+
+function metaItemCsv(entry) {
+  const item = commonItemData(entry);
+  const videos = entry.videos.slice(0, MAX_META_VIDEOS);
+  const values = {
+    id: item.id,
+    title: item.title,
+    description: item.description,
+    availability: item.inStock ? 'in stock' : 'out of stock',
+    condition: item.condition,
+    price: money(item.price),
+    link: item.link,
+    image_link: entry.metaImages[0],
+    brand: item.brand,
+    additional_image_link: entry.metaImages.slice(1, 1 + MAX_META_EXTRA_IMAGES).join(','),
+    sale_price: item.salePrice === null ? '' : money(item.salePrice),
+    mpn: item.mpn,
+    google_product_category: googleProductCategory(entry.product),
+    product_type: item.productType,
+    material: localizedValue(entry.product.material),
+    size: localizedValue(entry.product.size),
+    internal_label: metaInternalLabels(entry, item),
+    ...Object.fromEntries(META_VIDEO_HEADERS.map((header, index) => [header, videos[index] ?? ''])),
+  };
+  return csvRow(META_HEADERS.map((header) => values[header]));
 }
 
 /**
@@ -307,12 +398,13 @@ export function buildGoogleFeed(categories) {
   return buildFeed(categories, googleItemXml);
 }
 
-/** The feed Meta Commerce Manager fetches. */
+/** The enriched CSV feed Meta Commerce Manager fetches. */
 export function buildMetaFeed(categories) {
-  return buildFeed(categories, metaItemXml);
+  const items = feedProducts(categories).map(metaItemCsv);
+  return `${[META_HEADERS.join(','), ...items].join('\r\n')}\r\n`;
 }
 
-/** The same products, categorised for Pinterest. See PINTEREST_CATEGORIES. */
+/** The same products, categorised for Pinterest. */
 export function buildPinterestFeed(categories) {
   return buildFeed(categories, pinterestItemXml);
 }

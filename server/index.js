@@ -623,7 +623,7 @@ app.get('/api/health', async (req, res) => {
 // without it the request is answered from disk and 404s silently.
 const FEED_TTL_MS = 60 * 1000;
 
-function serveFeed(build) {
+function serveFeed(build, contentType = 'application/xml; charset=utf-8') {
   let cache = null;
   let cachedAt = 0;
   return async (req, res) => {
@@ -635,7 +635,7 @@ function serveFeed(build) {
       // noindex: a feed is for its platform to fetch, not for Search to index.
       // It does not affect the platform's own fetch.
       res.set('X-Robots-Tag', 'noindex');
-      res.type('application/xml; charset=utf-8').send(cache);
+      res.type(contentType).send(cache);
     } catch (err) {
       console.error('feed build failed', err);
       // A 5xx makes the platform retry and report a fetch error. Serving a
@@ -646,7 +646,7 @@ function serveFeed(build) {
 }
 
 app.get('/feed/google.xml', serveFeed(buildGoogleFeed));
-app.get('/feed/meta.xml', serveFeed(buildMetaFeed));
+app.get('/feed/meta.csv', serveFeed(buildMetaFeed, 'text/csv; charset=utf-8'));
 app.get('/feed/pinterest.xml', serveFeed(buildPinterestFeed));
 
 // ─── /api/image/:key — legacy redirect to /uploads/:key ──────────────────────
