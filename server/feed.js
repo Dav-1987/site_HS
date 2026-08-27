@@ -36,8 +36,9 @@ const BRAND = 'Mirage Muebles';
 const CURRENCY = 'EUR';
 const LANG = 'es';
 
-// Google accepts one main image plus ten more.
+// Google accepts one main image plus ten more, and up to ten product videos.
 const MAX_EXTRA_IMAGES = 10;
+const MAX_GOOGLE_VIDEOS = 10;
 // Meta accepts up to twenty additional images and twenty product-level videos.
 const MAX_META_EXTRA_IMAGES = 20;
 const MAX_META_VIDEOS = 20;
@@ -280,6 +281,10 @@ function wrapItem(lines) {
 function googleItemXml(entry) {
   return wrapItem([
     ...commonItemLines(entry),
+    // Merchant Center accepts this repeated attribute for up to ten stable,
+    // directly hosted product videos. Preserve the catalog's media order so
+    // the first video remains the primary one on every platform.
+    ...entry.videos.slice(0, MAX_GOOGLE_VIDEOS).map((src) => tag('g:video_link', src)),
     // `g:google_product_category` is deliberately absent here. Google assigns a
     // category itself and documents the override as being for three cases only
     // — a category whose extra attributes we are missing, a Shopping campaign

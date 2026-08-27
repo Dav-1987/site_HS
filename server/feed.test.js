@@ -200,6 +200,26 @@ describe('buildGoogleFeed — the XML', () => {
     expect(fields(xml, 'additional_image_link')).toHaveLength(10);
   });
 
+  it('publishes product videos in media order and caps them at ten', () => {
+    const media = [
+      { type: 'image', src: '/uploads/a.jpg' },
+      ...Array.from({ length: 12 }, (_, index) => ({
+        type: 'video',
+        src: `/uploads/v${index}.mp4`,
+      })),
+    ];
+    const xml = buildGoogleFeed(catalog([product({ media })]));
+
+    expect(fields(xml, 'video_link')).toHaveLength(10);
+    expect(fields(xml, 'video_link')[0]).toBe('https://hsmuebles.es/uploads/v0.mp4');
+    expect(fields(xml, 'video_link')[9]).toBe('https://hsmuebles.es/uploads/v9.mp4');
+    expect(xml).not.toContain('v10.mp4');
+  });
+
+  it('omits video_link when the product has no video', () => {
+    expect(fields(buildGoogleFeed(catalog([product()])), 'video_link')).toEqual([]);
+  });
+
   describe('price', () => {
     it('sends a single price when the product is not discounted', () => {
       const xml = buildGoogleFeed(catalog([product({ price: 499, oldPrice: 0 })]));
