@@ -6,6 +6,7 @@ import {
   productFullName,
   productLabel,
   productDimensions,
+  duplicateProductLabels,
   productMirrorSize,
   productShelvesSize,
   showsDiscountBadge,
@@ -633,5 +634,44 @@ describe('productDimensions', () => {
     expect(productDimensions({ size: 'a medida' })).toBeNull();
     expect(productDimensions({ size: '' })).toBeNull();
     expect(productDimensions(undefined)).toBeNull();
+  });
+});
+
+// Drives whether a product page spends characters of its <title> on the article
+// number — see the comment on duplicateProductLabels.
+describe('duplicateProductLabels', () => {
+  const catalog = [
+    {
+      products: [
+        { id: 'a', name: 'Espejo | redondo', nameEn: 'Mirror | round', subtitle: '70 × 70 cm' },
+        { id: 'b', name: 'Espejo | ovalado', nameEn: 'Mirror | round', subtitle: '70 × 70 cm' },
+      ],
+    },
+    { products: [{ id: 'c', name: 'Tocador | blanco', subtitle: '90 × 40 × 170 cm' }] },
+  ];
+
+  it('is empty when every product is told apart by its own words', () => {
+    expect(duplicateProductLabels(catalog, 'es')).toEqual(new Set());
+  });
+
+  it('names the label two products share, in the language they share it in', () => {
+    expect(duplicateProductLabels(catalog, 'en')).toEqual(new Set(['Mirror round 70 × 70 cm']));
+  });
+
+  it('counts the dimensions as part of the label', () => {
+    const sameName = [
+      {
+        products: [
+          { id: 'a', name: 'Espejo', subtitle: '70 × 70 cm' },
+          { id: 'b', name: 'Espejo', subtitle: '80 × 80 cm' },
+        ],
+      },
+    ];
+    expect(duplicateProductLabels(sameName, 'es')).toEqual(new Set());
+  });
+
+  it('survives an empty or missing catalog', () => {
+    expect(duplicateProductLabels([], 'es')).toEqual(new Set());
+    expect(duplicateProductLabels(undefined, 'es')).toEqual(new Set());
   });
 });

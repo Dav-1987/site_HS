@@ -204,6 +204,36 @@ export function productLabel(product, lang) {
     .trim();
 }
 
+/**
+ * The labels that more than one product in the catalog answers to, in the given
+ * language. Empty when every product is told apart by its own words.
+ *
+ * Exists so the product page can stop padding its <title> with the article
+ * number. That was added when 50 of 124 names were the bare word "Tocador" and
+ * only the reference kept the pages from reading to Google as one page
+ * duplicated; now that every product has been named, the padding costs visible
+ * characters in a search result and buys nothing — except for the handful of
+ * pages where two products really do share a label, which today is only the two
+ * English names shared between pairs the Spanish ones tell apart.
+ *
+ * Derived from the catalog rather than kept as a list of ids, so a duplicate
+ * pasted in tomorrow gets its reference back without anyone remembering that
+ * this rule exists.
+ */
+export function duplicateProductLabels(categories, lang) {
+  const seen = new Set();
+  const duplicates = new Set();
+  for (const category of categories ?? []) {
+    for (const product of category.products ?? []) {
+      const label = productLabel(product, lang);
+      if (!label) continue;
+      if (seen.has(label)) duplicates.add(label);
+      else seen.add(label);
+    }
+  }
+  return duplicates;
+}
+
 // `size` is one string typed by hand in /admin, written in three shapes:
 // "50 × 40 × 180 cm", "80 × 180 cm" and "Ø 70 cm". Two numbers are width and
 // height; three put depth in the middle; a leading Ø is a round mirror and has

@@ -8,6 +8,7 @@ import {
   productDescription,
   productDimensions,
   productFullName,
+  duplicateProductLabels,
   productMetaDescription,
   productMirrorSize,
   productShelvesSize,
@@ -263,20 +264,21 @@ export default function Product() {
   const canonicalUrl = `${SITE}${localize(esPath)}`;
   const categoryUrl = `${SITE}${localize(`/${category.slug}`)}`;
   const catalogUrl = `${SITE}${localize('/catalogo')}`;
-  // Many products share the same generic `name` (e.g. "Tocador") and even the
-  // same `subtitle` (dimensions) within a category — fold in the reference
-  // (always present, always unique) so every page gets a distinct <title>.
-  // Without it 50 of the 124 pages would collide, which reads to Google as one
-  // page duplicated rather than as separate products.
-  const ref = (product.reference || productReference(product.name) || '').trim();
   // Collapsed: 19 names carry a trailing space in the catalog ("Espejo "), and
   // a doubled space is visible in a search result.
   const fullName = productFullName(product, lang);
-  const pageTitle = [fullName, product.subtitle, ref && `(${ref})`]
-    .filter(Boolean)
-    .join(' ')
-    .replace(/\s+/g, ' ')
-    .trim();
+  // Name plus dimensions, which is what the feeds and analytics call this
+  // product too — one label, not two spellings of it.
+  const label = productLabel(product, lang);
+  // The article number is folded in only when it has work to do. Google shows
+  // about 60 characters of a title and "(F-05)" means nothing to a searcher, so
+  // it is worth those characters only where two products would otherwise share
+  // a title and the pair would read as one page duplicated. See
+  // duplicateProductLabels — the check is over the whole catalog, so a name
+  // pasted twice tomorrow brings the reference back on its own.
+  const ambiguous = duplicateProductLabels(categories, lang);
+  const ref = (product.reference || productReference(product.name) || '').trim();
+  const pageTitle = ambiguous.has(label) && ref ? `${label} (${ref})` : label;
   const ogImage = resolveImage(images[0], 1600);
   // Dimensions belong in the spec list rather than inside the description: they
   // are the same question for every product, they were being retyped by hand
