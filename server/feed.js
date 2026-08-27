@@ -1,9 +1,10 @@
 // ============================================================
 // Mirage Muebles — product feeds
-// RSS 2.0 + the `g:` namespace, Spanish / Spain. Two feeds over one set of
-// products: /feed/google.xml serves Shopping and Meta's dynamic remarketing,
-// /feed/pinterest.xml serves Pinterest's catalog. They differ by two tags and
-// share every line that describes the product — see commonItemLines.
+// RSS 2.0 + the `g:` namespace, Spanish / Spain. Three feeds over one set of
+// products: /feed/google.xml serves Shopping, /feed/meta.xml serves Meta's
+// catalog and dynamic remarketing, and /feed/pinterest.xml serves Pinterest.
+// They share every line that describes the product — see commonItemLines — and
+// add only the fields that belong to their own platform.
 // ============================================================
 //
 // Built from the same Postgres rows the site itself renders, on request, rather
@@ -42,7 +43,7 @@ const MAX_EXTRA_IMAGES = 10;
 // stock count to report and none is kept anywhere. A flat number stands in for
 // "as many as you want", which is the documented way to say that; the honest
 // part of the signal, whether the product can be had at all, stays with
-// isInStock. Google ignores the field.
+// isInStock. Only the Meta feed emits the field.
 const MADE_TO_ORDER_QUANTITY = 100;
 // Merchant Center truncates past these; nothing in the catalog comes close
 // (longest title 34 chars, longest description 119), but a future paste of a
@@ -223,10 +224,9 @@ function commonItemLines({ product, category, images }, { facebookQuantity }) {
     tag('g:image_link', images[0]),
     ...images.slice(1, 1 + MAX_EXTRA_IMAGES).map((src) => tag('g:additional_image_link', src)),
     tag('g:availability', isInStock(product) ? 'in_stock' : 'out_of_stock'),
-    // Meta's Shop refuses to sell an item whose quantity is absent; Pinterest
-    // has no use for a field named after another platform. Emitted here rather
-    // than appended by the caller so that the Google feed's field order — and
-    // so its bytes — are exactly what Merchant Center and Meta already ingest.
+    // Meta's Shop refuses to sell an item whose quantity is absent; the other
+    // platforms have no use for a field named after Facebook. It stays beside
+    // availability so both values are guaranteed to follow the same switch.
     ...(facebookQuantity
       ? [tag('g:quantity_to_sell_on_facebook', isInStock(product) ? MADE_TO_ORDER_QUANTITY : 0)]
       : []),
@@ -257,7 +257,7 @@ function wrapItem(lines) {
 
 function googleItemXml(entry) {
   return wrapItem([
-    ...commonItemLines(entry, { facebookQuantity: true }),
+    ...commonItemLines(entry, { facebookQuantity: false }),
     // `g:google_product_category` is deliberately absent here. Google assigns a
     // category itself and documents the override as being for three cases only
     // — a category whose extra attributes we are missing, a Shopping campaign
@@ -266,6 +266,10 @@ function googleItemXml(entry) {
     // field, and it gets its own feed below rather than pushing an override
     // into Google's.
   ]);
+}
+
+function metaItemXml(entry) {
+  return wrapItem(commonItemLines(entry, { facebookQuantity: true }));
 }
 
 function pinterestItemXml(entry) {
@@ -298,9 +302,14 @@ ${items}
 `;
 }
 
-/** The feed Merchant Center and Meta's catalog both fetch. */
+/** The feed Google Merchant Center fetches. */
 export function buildGoogleFeed(categories) {
   return buildFeed(categories, googleItemXml);
+}
+
+/** The feed Meta Commerce Manager fetches. */
+export function buildMetaFeed(categories) {
+  return buildFeed(categories, metaItemXml);
 }
 
 /** The same products, categorised for Pinterest. See PINTEREST_CATEGORIES. */

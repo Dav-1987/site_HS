@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { buildGoogleFeed, buildPinterestFeed, feedProducts } from './feed.js';
+import { buildGoogleFeed, buildMetaFeed, buildPinterestFeed, feedProducts } from './feed.js';
 
 function product(over = {}) {
   return {
@@ -106,6 +106,7 @@ describe('buildGoogleFeed — the XML', () => {
   // the contradiction this replaced: Google reads both and compares them.
   it('no longer claims the product has no identifier', () => {
     expect(buildGoogleFeed(catalog([product()]))).not.toContain('identifier_exists');
+    expect(buildMetaFeed(catalog([product()]))).not.toContain('identifier_exists');
     expect(buildPinterestFeed(catalog([product()]))).not.toContain('identifier_exists');
   });
 
@@ -191,20 +192,6 @@ describe('buildGoogleFeed — the XML', () => {
       // Still a priced, complete item — it just cannot be bought right now.
       expect(fields(xml, 'price')[0]).toBe('499.00 EUR');
     });
-
-    // Meta's Shop hides any item whose quantity is 0 or missing, so the same
-    // switch has to drive the count as well as the availability string.
-    it('carries a sellable quantity that follows the same switch', () => {
-      expect(fields(buildGoogleFeed(catalog([product()])), 'quantity_to_sell_on_facebook')[0]).toBe(
-        '100',
-      );
-      expect(
-        fields(
-          buildGoogleFeed(catalog([product({ inStock: false })])),
-          'quantity_to_sell_on_facebook',
-        )[0],
-      ).toBe('0');
-    });
   });
 
   it('carries the fixed fields Google needs for own-brand goods', () => {
@@ -286,6 +273,52 @@ describe('buildGoogleFeed — the XML', () => {
   });
 });
 
+// ── the Meta feed ───────────────────────────────────────────────────────────
+//
+// It intentionally starts as the old shared Google/Meta feed: the same ids and
+// product facts, with only Meta's sellable quantity added. That lets Commerce
+// Manager switch URLs without replacing its items or breaking event matching.
+
+describe('buildMetaFeed', () => {
+  it('is well-formed XML', () => {
+    const xml = buildMetaFeed(catalog([product(), product({ id: 'Tocador-M-02' })]));
+    const doc = new DOMParser().parseFromString(xml, 'application/xml');
+    expect(doc.querySelector('parsererror')).toBeNull();
+    expect(doc.querySelectorAll('item')).toHaveLength(2);
+  });
+
+  // Meta's Shop hides any item whose quantity is 0 or missing, so the same
+  // switch has to drive the count as well as the availability string.
+  it('carries a sellable quantity that follows availability', () => {
+    expect(fields(buildMetaFeed(catalog([product()])), 'quantity_to_sell_on_facebook')).toEqual([
+      '100',
+    ]);
+    expect(
+      fields(buildMetaFeed(catalog([product({ inStock: false })])), 'quantity_to_sell_on_facebook'),
+    ).toEqual(['0']);
+  });
+
+  it('keeps the event-matching id and every product fact identical to Google', () => {
+    const cat = catalog([product({ price: 399, oldPrice: 499 })]);
+    for (const name of [
+      'id',
+      'title',
+      'description',
+      'link',
+      'image_link',
+      'price',
+      'sale_price',
+      'availability',
+      'brand',
+      'condition',
+      'mpn',
+      'product_type',
+    ]) {
+      expect(fields(buildMetaFeed(cat), name)).toEqual(fields(buildGoogleFeed(cat), name));
+    }
+  });
+});
+
 // ── the Pinterest feed ──────────────────────────────────────────────────────
 //
 // It exists for one tag. These guard the two things a second feed can get
@@ -337,9 +370,10 @@ describe('buildPinterestFeed', () => {
     ).toEqual([]);
   });
 
-  it('leaves out the tag Meta named after itself', () => {
+  it('keeps Meta quantity out of the other platform feeds', () => {
     expect(fields(buildPinterestFeed(label({})), 'quantity_to_sell_on_facebook')).toEqual([]);
-    expect(fields(buildGoogleFeed(label({})), 'quantity_to_sell_on_facebook')).toEqual(['100']);
+    expect(fields(buildGoogleFeed(label({})), 'quantity_to_sell_on_facebook')).toEqual([]);
+    expect(fields(buildMetaFeed(label({})), 'quantity_to_sell_on_facebook')).toEqual(['100']);
   });
 
   it('never carries google_product_category into the Google feed', () => {

@@ -38,7 +38,7 @@ import {
   deleteOrder,
 } from './orders.js';
 import { metaCapiConfigured, sendLeadEvent } from './meta-capi.js';
-import { buildGoogleFeed, buildPinterestFeed } from './feed.js';
+import { buildGoogleFeed, buildMetaFeed, buildPinterestFeed } from './feed.js';
 import { buildProductIndex, resolveRedirect } from './redirects.js';
 import { rebuildConfigured, triggerRebuild, getLatestRun } from './rebuild.js';
 
@@ -646,6 +646,7 @@ function serveFeed(build) {
 }
 
 app.get('/feed/google.xml', serveFeed(buildGoogleFeed));
+app.get('/feed/meta.xml', serveFeed(buildMetaFeed));
 app.get('/feed/pinterest.xml', serveFeed(buildPinterestFeed));
 
 // ─── /api/image/:key — legacy redirect to /uploads/:key ──────────────────────
