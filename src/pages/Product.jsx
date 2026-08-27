@@ -21,7 +21,7 @@ import {
   computeRelated,
   resolveImage,
 } from '../data/catalog.js';
-import { trackPixel } from '../lib/track.js';
+import { trackPixel, pushDataLayer } from '../lib/track.js';
 import JsonLd from '../components/JsonLd.jsx';
 import SocialMeta from '../components/SocialMeta.jsx';
 import HreflangLinks from '../components/HreflangLinks.jsx';
@@ -204,6 +204,13 @@ export default function Product() {
         content_type: 'product',
         content_ids: [match.product.id],
         content_name: productLabel(match.product),
+        ...(price > 0 ? { value: price, currency: 'EUR' } : null),
+      });
+      // GTM Custom Event trigger — feeds the Pinterest Tag's ViewContent tag,
+      // configured entirely in Tag Manager's own UI. See pushDataLayer.
+      pushDataLayer('view_item', {
+        product_id: match.product.id,
+        product_name: productLabel(match.product),
         ...(price > 0 ? { value: price, currency: 'EUR' } : null),
       });
     }

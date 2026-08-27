@@ -2,6 +2,23 @@
 // no-op when the tag failed to load or was blocked (ad blocker, in-app browser,
 // CSP), so callers never have to guard `window.fbq` themselves.
 
+/**
+ * Push a custom event onto the dataLayer GTM's base script (see index.html)
+ * already reads. Every gtag() call writes here too, but under its own
+ * arguments-array shape; this is the plain `{ event, ...data }` object GTM's
+ * "Custom Event" trigger type matches on, for tags configured entirely inside
+ * Tag Manager's UI rather than in this file — Pinterest's own Tag template is
+ * the first of those. `product_id` is deliberately the key name: it is what
+ * Pinterest's tag calls the field its AddToCart/Checkout/PageVisit events read
+ * for retargeting and audience building.
+ * No-op outside a browser (SSR/prerender).
+ */
+export function pushDataLayer(event, data) {
+  if (typeof window === 'undefined') return;
+  window.dataLayer = window.dataLayer || [];
+  window.dataLayer.push({ event, ...data });
+}
+
 // Must match the id in index.html's pixel bootstrap.
 export const META_PIXEL_ID = '2527019284431321';
 

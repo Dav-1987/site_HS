@@ -7,6 +7,7 @@ import {
   trackGa4Lead,
   buildGoogleUserData,
   setGoogleAdsUserData,
+  pushDataLayer,
   GOOGLE_ADS_ID,
   GA4_ID,
   META_PIXEL_ID,
@@ -15,6 +16,7 @@ import {
 afterEach(() => {
   delete window.fbq;
   delete window.gtag;
+  delete window.dataLayer;
 });
 
 describe('trackPixel', () => {
@@ -175,5 +177,29 @@ describe('setPixelUserData', () => {
   it('is a no-op (does not throw) when fbq is absent', () => {
     delete window.fbq;
     expect(() => setPixelUserData({ ph: '34612345678' })).not.toThrow();
+  });
+});
+
+describe('pushDataLayer', () => {
+  it('pushes an { event, ...data } object GTM Custom Event triggers match on', () => {
+    window.dataLayer = [];
+    pushDataLayer('add_to_cart', { product_id: 'Espejo-Alto-F-05', value: 239 });
+    expect(window.dataLayer.at(-1)).toEqual({
+      event: 'add_to_cart',
+      product_id: 'Espejo-Alto-F-05',
+      value: 239,
+    });
+  });
+
+  it('creates dataLayer if GTM has not initialized it yet', () => {
+    delete window.dataLayer;
+    pushDataLayer('view_item', { product_id: 'x' });
+    expect(window.dataLayer).toEqual([{ event: 'view_item', product_id: 'x' }]);
+  });
+
+  it('appends without touching earlier entries — gtag() writes to the same array', () => {
+    window.dataLayer = [{ 0: 'js' }];
+    pushDataLayer('generate_lead', { product_id: 'x' });
+    expect(window.dataLayer).toHaveLength(2);
   });
 });

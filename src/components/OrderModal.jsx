@@ -9,6 +9,7 @@ import {
   trackGa4Lead,
   buildGoogleUserData,
   setGoogleAdsUserData,
+  pushDataLayer,
 } from '../lib/track.js';
 import { getAttribution } from '../lib/attribution.js';
 import { productDiscount, productLabel } from '../data/catalog.js';
@@ -139,6 +140,15 @@ export default function OrderModal({ product, isOpen, onClose }) {
           ? { value: productDiscount(product).price, currency: 'EUR' }
           : null),
       });
+      // GTM Custom Event trigger — feeds the Pinterest Tag's AddToCart tag. See
+      // pushDataLayer in track.js.
+      pushDataLayer('add_to_cart', {
+        product_id: product.id,
+        product_name: productLabel(product),
+        ...(productDiscount(product).price > 0
+          ? { value: productDiscount(product).price, currency: 'EUR' }
+          : null),
+      });
     }
     // `product` is read only to describe the dialog that just opened; it cannot
     // change while the dialog is open, so re-running on it would only re-fire
@@ -222,6 +232,13 @@ export default function OrderModal({ product, isOpen, onClose }) {
       // price goes to GA4 and Meta only.
       trackGoogleAdsLead();
       trackGa4Lead({ value: price });
+      // GTM Custom Event trigger — feeds the Pinterest Tag's Lead tag. See
+      // pushDataLayer in track.js.
+      pushDataLayer('generate_lead', {
+        product_id: product.id,
+        product_name: label,
+        ...(price > 0 ? { value: price, currency: 'EUR' } : null),
+      });
     } catch {
       setServerError(t('order.form.error.generic'));
     } finally {
