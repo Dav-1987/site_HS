@@ -58,8 +58,14 @@ export function CatalogProvider({ children, initialCatalog }) {
       .catch(() => {
         // API unreachable/empty and nothing to show yet (first-ever visit,
         // offline) — load the bundled default as a last-resort fallback.
+        // Returned, not just started: `.finally` below sits on this same chain
+        // and marks the catalog `loaded` the moment it settles, so anything
+        // gated on `loaded` (Meta/Pinterest view events, computeRelated) has to
+        // wait for this fallback to actually land rather than firing against
+        // whatever `categories` still was — empty, on the very visit this
+        // branch exists for.
         if (alive && !hasStartingData.current) {
-          loadDefaultCatalog()
+          return loadDefaultCatalog()
             .then((data) => {
               if (alive) setCategories(data);
             })
