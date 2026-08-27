@@ -330,6 +330,7 @@ export default function Product() {
         url={canonicalUrl}
         type="product"
         image={ogImage}
+        images={images}
         product={product}
       />
       <JsonLd

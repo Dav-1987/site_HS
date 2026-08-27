@@ -8,6 +8,11 @@ import SocialMeta from './SocialMeta.jsx';
 const meta = (property) =>
   document.head.querySelector(`meta[property="${property}"]`)?.getAttribute('content');
 
+const metaAll = (property) =>
+  [...document.head.querySelectorAll(`meta[property="${property}"]`)].map((m) =>
+    m.getAttribute('content'),
+  );
+
 function renderMeta(props) {
   return render(
     <SettingsProvider>
@@ -48,6 +53,12 @@ describe('SocialMeta — the tags every page gets', () => {
     renderMeta({});
     expect(meta('product:price:amount')).toBeUndefined();
     expect(meta('product:availability')).toBeUndefined();
+    expect(meta('og:availability')).toBeUndefined();
+  });
+
+  it('falls back to a single og:image when no gallery is passed', () => {
+    renderMeta({ image: '/uploads/a_1600.webp' });
+    expect(metaAll('og:image')).toEqual(['https://hsmuebles.es/uploads/a_1600.webp']);
   });
 });
 
@@ -67,6 +78,30 @@ describe('SocialMeta — product tags', () => {
     expect(meta('product:retailer_item_id')).toBe('Espejo-Alto-F-07');
   });
 
+  // Pinterest reads availability under its own property name rather than
+  // Meta's `product:availability` — both are emitted so neither platform is
+  // left reading nothing.
+  it("also carries availability under Pinterest's own property", () => {
+    renderMeta({ type: 'product', product });
+    expect(meta('og:availability')).toBe('instock');
+  });
+
+  it('follows the stock switch under both property names', () => {
+    renderMeta({ type: 'product', product: { ...product, inStock: false } });
+    expect(meta('product:availability')).toBe('out of stock');
+    expect(meta('og:availability')).toBe('out of stock');
+  });
+
+  // Up to six og:image tags for the gallery Pinterest picks the best pin
+  // image from; Twitter still gets only the one image passed as `image`.
+  it('emits every gallery photo as its own og:image, capped at six', () => {
+    const images = Array.from({ length: 8 }, (_, i) => `/uploads/p${i}.jpg`);
+    renderMeta({ type: 'product', product, images });
+    expect(metaAll('og:image')).toEqual(
+      images.slice(0, 6).map((src) => `https://hsmuebles.es${src.replace('.jpg', '_1600.webp')}`),
+    );
+  });
+
   // The feed sends the pre-discount price as `price` so Shopping can draw a
   // struck-through pair. A link preview has no room for that, so here the
   // number must be what the customer actually pays.
@@ -75,10 +110,8 @@ describe('SocialMeta — product tags', () => {
     expect(meta('product:price:amount')).toBe('299.00');
   });
 
-  it('follows the stock switch', () => {
+  it('stays priced when out of stock — unavailable is not the same as unlisted', () => {
     renderMeta({ type: 'product', product: { ...product, inStock: false } });
-    expect(meta('product:availability')).toBe('out of stock');
-    // Still priced — unavailable is not the same as unlisted.
     expect(meta('product:price:amount')).toBe('299.00');
   });
 
@@ -88,5 +121,6 @@ describe('SocialMeta — product tags', () => {
     renderMeta({ type: 'product', product: { ...product, price: 0, oldPrice: 0 } });
     expect(meta('product:price:amount')).toBeUndefined();
     expect(meta('product:brand')).toBeUndefined();
+    expect(meta('og:availability')).toBeUndefined();
   });
 });
