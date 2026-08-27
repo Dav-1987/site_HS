@@ -204,11 +204,16 @@ export function productLabel(product, lang) {
     .trim();
 }
 
-// `size` is one string typed by hand in /admin, in five shapes the catalog
-// actually uses: "50 × 40 × 180 cm", "80 × 180 cm", "110 x 50 x 80cm",
-// "80 x 65cm" and "Ø d-70cm" — the separator is a multiplication sign or a
-// latin x depending on who typed it. Two numbers are width and height; three
-// put depth in the middle; a leading Ø is a round mirror and has only one.
+// `size` is one string typed by hand in /admin, written in three shapes:
+// "50 × 40 × 180 cm", "80 × 180 cm" and "Ø 70 cm". Two numbers are width and
+// height; three put depth in the middle; a leading Ø is a round mirror and has
+// only one.
+//
+// Parsed on the numbers alone rather than on the exact shape, because the field
+// is typed by hand and has already been through "110 x 50 x 80cm" (latin x, no
+// space before the unit) and "Ø d-70cm" — normalized away in the database, but
+// the next hand-typed row is one keystroke from bringing them back, and a
+// forgiving reader costs nothing.
 //
 // Read rather than stored as separate fields: the string is what the admin
 // edits and what the subtitle shows, so a second source would be one more
@@ -218,13 +223,13 @@ const DIAMETER = /^\s*Ø/i;
 /**
  * The dimensions of a product as labelled parts, or null when `size` holds
  * nothing recognisable — better no row than a row inventing a depth.
- * Values keep the unit: [{ key: 'width', value: '80cm' }, …].
+ * Values keep the unit: [{ key: 'width', value: '80 cm' }, …].
  */
 export function productDimensions(product) {
   const raw = String(product?.size ?? '').trim();
   const numbers = raw.match(/\d+(?:[.,]\d+)?/g) ?? [];
   if (numbers.length === 0) return null;
-  const value = (n) => `${n}cm`;
+  const value = (n) => `${n} cm`;
   if (DIAMETER.test(raw)) return [{ key: 'diameter', value: value(numbers[0]) }];
   if (numbers.length === 2) {
     return [
@@ -243,7 +248,7 @@ export function productDimensions(product) {
 }
 
 /**
- * One part of a product measured on its own — "100 × 80cm", or "Ø 70cm" for a
+ * One part of a product measured on its own — "100 × 80 cm", or "Ø 70 cm" for a
  * round one. Null when the field is empty or holds no number.
  *
  * These are fields rather than lines parsed out of the description, where they
@@ -257,8 +262,8 @@ function partSize(raw) {
   const text = String(raw ?? '').trim();
   const numbers = text.match(/\d+(?:[.,]\d+)?/g) ?? [];
   if (numbers.length === 0) return null;
-  if (DIAMETER.test(text)) return `Ø ${numbers[0]}cm`;
-  return `${numbers[0]} × ${numbers.at(-1)}cm`;
+  if (DIAMETER.test(text)) return `Ø ${numbers[0]} cm`;
+  return `${numbers[0]} × ${numbers.at(-1)} cm`;
 }
 
 /** The mirror of a dressing table, measured on its own. 58 products have one. */

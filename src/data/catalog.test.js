@@ -5,6 +5,7 @@ import {
   productDisplayName,
   productFullName,
   productLabel,
+  productDimensions,
   productMirrorSize,
   productShelvesSize,
   showsDiscountBadge,
@@ -67,7 +68,9 @@ describe('product names in two languages', () => {
 
   it('answers in English when the page is English', () => {
     expect(productDisplayName(mirror, 'en')).toBe('Mirror');
-    expect(productFullName(mirror, 'en')).toBe('Mirror White freestanding design with LED lighting');
+    expect(productFullName(mirror, 'en')).toBe(
+      'Mirror White freestanding design with LED lighting',
+    );
     expect(productLabel(mirror, 'en')).toBe(
       'Mirror White freestanding design with LED lighting 70 × 175 cm',
     );
@@ -575,15 +578,15 @@ describe('moveProductsToCategory', () => {
 // have one — written into their descriptions until it became a field.
 describe('productMirrorSize', () => {
   it('reads a rectangular mirror as one line', () => {
-    expect(productMirrorSize({ mirrorSize: '100 × 80 cm' })).toBe('100 × 80cm');
+    expect(productMirrorSize({ mirrorSize: '100 × 80 cm' })).toBe('100 × 80 cm');
   });
 
   it('reads a round one as a diameter', () => {
-    expect(productMirrorSize({ mirrorSize: 'Ø d-70cm' })).toBe('Ø 70cm');
+    expect(productMirrorSize({ mirrorSize: 'Ø d-70cm' })).toBe('Ø 70 cm');
   });
 
   it('reads the shelves the same way', () => {
-    expect(productShelvesSize({ shelvesSize: '20 × 80 cm' })).toBe('20 × 80cm');
+    expect(productShelvesSize({ shelvesSize: '20 × 80 cm' })).toBe('20 × 80 cm');
     expect(productShelvesSize({ mirrorSize: '100 × 80 cm' })).toBeNull();
   });
 
@@ -591,5 +594,44 @@ describe('productMirrorSize', () => {
     expect(productMirrorSize({ size: '60 × 40 × 160 cm' })).toBeNull();
     expect(productMirrorSize({ mirrorSize: '   ' })).toBeNull();
     expect(productMirrorSize(undefined)).toBeNull();
+  });
+});
+
+// The dimension string is typed by hand in /admin and is read on its numbers
+// alone, so it survives whatever separator and spacing the typist reached for.
+describe('productDimensions', () => {
+  it('reads three numbers as width, depth and height', () => {
+    expect(productDimensions({ size: '50 × 40 × 180 cm' })).toEqual([
+      { key: 'width', value: '50 cm' },
+      { key: 'depth', value: '40 cm' },
+      { key: 'height', value: '180 cm' },
+    ]);
+  });
+
+  it('reads two as width and height, with no depth invented', () => {
+    expect(productDimensions({ size: '80 × 180 cm' })).toEqual([
+      { key: 'width', value: '80 cm' },
+      { key: 'height', value: '180 cm' },
+    ]);
+  });
+
+  it('reads a leading Ø as a diameter', () => {
+    expect(productDimensions({ size: 'Ø 70 cm' })).toEqual([{ key: 'diameter', value: '70 cm' }]);
+  });
+
+  // The catalog was normalized to one shape, but the field is still a text box.
+  it('still reads the shapes the catalog was typed in before', () => {
+    expect(productDimensions({ size: '110 x 50 x 80cm' })).toEqual([
+      { key: 'width', value: '110 cm' },
+      { key: 'depth', value: '50 cm' },
+      { key: 'height', value: '80 cm' },
+    ]);
+    expect(productDimensions({ size: 'Ø d-70cm' })).toEqual([{ key: 'diameter', value: '70 cm' }]);
+  });
+
+  it('says nothing rather than inventing a row', () => {
+    expect(productDimensions({ size: 'a medida' })).toBeNull();
+    expect(productDimensions({ size: '' })).toBeNull();
+    expect(productDimensions(undefined)).toBeNull();
   });
 });
