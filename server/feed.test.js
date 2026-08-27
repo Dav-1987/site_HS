@@ -440,6 +440,26 @@ describe('buildMetaFeed', () => {
 describe('buildPinterestFeed', () => {
   const label = (over) => catalog([product(over)]);
 
+  it('publishes the first hosted product video and keeps the image fallback', () => {
+    const xml = buildPinterestFeed(
+      label({
+        media: [
+          { type: 'image', src: '/uploads/a.jpg' },
+          { type: 'video', src: '/uploads/primary.mp4' },
+          { type: 'video', src: '/uploads/secondary.mp4' },
+        ],
+      }),
+    );
+
+    expect(fields(xml, 'video_link')).toEqual(['https://hsmuebles.es/uploads/primary.mp4']);
+    expect(fields(xml, 'image_link')).toHaveLength(1);
+    expect(xml).not.toContain('secondary.mp4');
+  });
+
+  it('omits video_link when the product has no video', () => {
+    expect(fields(buildPinterestFeed(label({})), 'video_link')).toEqual([]);
+  });
+
   it('categorises from the first word of the title, not from the site category', () => {
     // "Otros Modelos" is the bucket 68 real products sit in; the title decides.
     const xml = buildPinterestFeed(

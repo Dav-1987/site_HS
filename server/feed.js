@@ -294,6 +294,10 @@ function pinterestItemXml(entry) {
   const gpc = googleProductCategory(entry.product);
   return wrapItem([
     ...commonItemLines(entry),
+    // Pinterest accepts one hosted product video through `video_link`. Keep
+    // the first video in the catalog's own media order as the primary one;
+    // image_link remains the required fallback for product Pins and listings.
+    ...(entry.videos[0] ? [tag('g:video_link', entry.videos[0])] : []),
     // Pinterest reads this to place a product in its browsable sections; without
     // it the item still loads but its reach is limited, which is the whole
     // reason for being on Pinterest. Omitted rather than guessed when the title
