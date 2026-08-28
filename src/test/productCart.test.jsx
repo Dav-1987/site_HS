@@ -19,6 +19,7 @@ function renderProduct(catalog = defaultCatalog, path = `/${category.slug}/${pro
           <CatalogProvider initialCatalog={catalog}>
             <Routes>
               <Route path="/:categorySlug/:id" element={<Product />} />
+              <Route path="/en/:categorySlug/:id" element={<Product />} />
             </Routes>
           </CatalogProvider>
         </LanguageProvider>
@@ -28,7 +29,11 @@ function renderProduct(catalog = defaultCatalog, path = `/${category.slug}/${pro
 }
 
 describe('product page order flow', () => {
-  afterEach(() => vi.unstubAllGlobals());
+  afterEach(() => {
+    vi.unstubAllGlobals();
+    delete window.fbq;
+    delete window.gtag;
+  });
 
   it('renders the order CTA', () => {
     renderProduct();
@@ -53,6 +58,25 @@ describe('product page order flow', () => {
     expect(screen.getByRole('dialog')).toBeTruthy();
     fireEvent.click(screen.getByLabelText(/Cerrar/i));
     expect(screen.queryByRole('dialog')).toBeNull();
+  });
+
+  it('defaults to Spain and localizes the approved country options', () => {
+    const spanish = renderProduct();
+    fireEvent.click(screen.getByText(/¡PEDIR AHORA!/i));
+    const country = screen.getByLabelText(/País de entrega/i);
+    expect(country.value).toBe('ES');
+    expect([...country.options].map((option) => option.textContent)).toEqual([
+      'España',
+      'Francia',
+      'Portugal',
+    ]);
+
+    spanish.unmount();
+    renderProduct(defaultCatalog, `/en/${category.slug}/${product.id}`);
+    fireEvent.click(screen.getByText(/ORDER NOW/i));
+    expect(
+      [...screen.getByLabelText(/Delivery country/i).options].map((option) => option.textContent),
+    ).toEqual(['Spain', 'France', 'Portugal']);
   });
 
   it('shows required-field errors when submitting an empty form', () => {
@@ -85,13 +109,15 @@ describe('product page order flow', () => {
     renderProduct();
     fireEvent.click(screen.getByText(/¡PEDIR AHORA!/i));
     fireEvent.change(screen.getByPlaceholderText('Tu nombre'), { target: { value: 'Ana' } });
-    fireEvent.change(screen.getByPlaceholderText('+34 600 000 000'), { target: { value: 'abc' } });
+    fireEvent.change(screen.getByLabelText(/Teléfono/i), { target: { value: 'abc' } });
     fireEvent.click(screen.getByText(/Confirmar pedido/i));
     expect(screen.getByText(/Introduce un número de teléfono válido/i)).toBeTruthy();
   });
 
   it('reuses the event id on a network retry and sends no client price', async () => {
     const payloads = [];
+    const fbq = vi.fn();
+    window.fbq = fbq;
     vi.stubGlobal(
       'fetch',
       vi.fn(async (url, options) => {
@@ -111,22 +137,89 @@ describe('product page order flow', () => {
     renderProduct();
     fireEvent.click(screen.getByText(/¡PEDIR AHORA!/i));
     fireEvent.change(screen.getByPlaceholderText('Tu nombre'), { target: { value: 'Ana' } });
-    fireEvent.change(screen.getByPlaceholderText('+34 600 000 000'), {
+    fireEvent.change(screen.getByLabelText(/Teléfono/i), {
       target: { value: '+34 600 000 000' },
     });
-    fireEvent.change(screen.getByPlaceholderText('28001'), { target: { value: '28001' } });
+    fireEvent.change(screen.getByLabelText(/Código Postal/i), { target: { value: '28001' } });
 
     const submit = screen.getByText(/Confirmar pedido/i);
     fireEvent.click(submit);
     await waitFor(() => expect(payloads).toHaveLength(1));
+    expect(fbq.mock.calls.filter((call) => call[0] === 'track' && call[1] === 'Lead')).toHaveLength(
+      0,
+    );
     await waitFor(() => expect(submit.disabled).toBe(false));
     fireEvent.click(submit);
     await waitFor(() => expect(payloads).toHaveLength(2));
 
     expect(payloads[1].eventId).toBe(payloads[0].eventId);
-    expect(payloads[0]).toMatchObject({ productId: product.id });
+    expect(payloads[0]).toMatchObject({ productId: product.id, country: 'ES' });
     expect(payloads[0]).not.toHaveProperty('productName');
     expect(payloads[0]).not.toHaveProperty('price');
+    const leadCalls = fbq.mock.calls.filter((call) => call[0] === 'track' && call[1] === 'Lead');
+    expect(leadCalls).toHaveLength(1);
+    expect(leadCalls[0][3]).toEqual({ eventID: payloads[0].eventId });
+  });
+
+  it('sends France with an Armenian phone to Meta and Google exactly once', async () => {
+    let apiPayload;
+    vi.stubGlobal(
+      'fetch',
+      vi.fn(async (url, options) => {
+        if (url === '/api/order') {
+          apiPayload = JSON.parse(options.body);
+          return { ok: true, status: 200, json: async () => ({ ok: true }) };
+        }
+        return { ok: false, status: 503, json: async () => ({}) };
+      }),
+    );
+    const fbq = vi.fn();
+    const gtag = vi.fn();
+    window.fbq = fbq;
+    window.gtag = gtag;
+
+    renderProduct();
+    fireEvent.click(screen.getByText(/¡PEDIR AHORA!/i));
+    fireEvent.change(screen.getByLabelText(/Nombre/i), { target: { value: 'Marie Dupont' } });
+    fireEvent.change(screen.getByLabelText(/País de entrega/i), { target: { value: 'FR' } });
+    fireEvent.change(screen.getByLabelText(/Teléfono/i), {
+      target: { value: '+374 99 123456' },
+    });
+    fireEvent.change(screen.getByLabelText(/Código Postal/i), { target: { value: '75001' } });
+    fireEvent.click(screen.getByText(/Confirmar pedido/i));
+
+    await waitFor(() => expect(apiPayload).toBeTruthy());
+    await waitFor(() => expect(screen.getByText(/¡Gracias, Marie Dupont!/i)).toBeTruthy());
+    expect(apiPayload).toMatchObject({
+      country: 'FR',
+      phone: '+374 99 123456',
+      postalCode: '75001',
+    });
+
+    const leadCalls = fbq.mock.calls.filter((call) => call[0] === 'track' && call[1] === 'Lead');
+    expect(leadCalls).toHaveLength(1);
+    expect(leadCalls[0][3]).toEqual({ eventID: apiPayload.eventId });
+    expect(fbq).toHaveBeenCalledWith('init', expect.any(String), {
+      ph: '37499123456',
+      country: 'fr',
+      zp: '75001',
+      fn: 'marie',
+      ln: 'dupont',
+    });
+
+    const setUserDataIndex = gtag.mock.calls.findIndex(
+      (call) => call[0] === 'set' && call[1] === 'user_data',
+    );
+    const conversionIndex = gtag.mock.calls.findIndex(
+      (call) => call[0] === 'event' && call[1] === 'conversion',
+    );
+    expect(setUserDataIndex).toBeGreaterThanOrEqual(0);
+    expect(conversionIndex).toBeGreaterThan(setUserDataIndex);
+    expect(gtag.mock.calls[setUserDataIndex][2]).toMatchObject({
+      phone_number: '+37499123456',
+      address: { country: 'FR', postal_code: '75001' },
+    });
+    expect(JSON.stringify(gtag.mock.calls)).not.toContain('email');
   });
 });
 
@@ -177,8 +270,8 @@ describe('product photo captions', () => {
       expect(photo.getAttribute('alt')).toBeTruthy();
       expect(photo.getAttribute('title')).toBe(photo.getAttribute('alt'));
     }
-    expect(photos.filter((photo) => photo.getAttribute('alt').includes(name)).length).toBeGreaterThan(
-      0,
-    );
+    expect(
+      photos.filter((photo) => photo.getAttribute('alt').includes(name)).length,
+    ).toBeGreaterThan(0);
   });
 });

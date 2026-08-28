@@ -28,16 +28,8 @@ import {
   purgePendingRecords,
 } from './store.js';
 import { readSettings, writeSettings } from './settings.js';
-import { validateOrder, formatOrderText, resolveOrderProduct } from './order.js';
-import { telegramConfigured, emailConfigured, sendTelegram, sendOrderEmail } from './notify.js';
-import {
-  saveOrder,
-  markOrderTelegramSent,
-  markOrderEmailSent,
-  listOrders,
-  deleteOrder,
-} from './orders.js';
-import { metaCapiConfigured, sendLeadEvent } from './meta-capi.js';
+import { listOrders, deleteOrder } from './orders.js';
+import { handleOrder } from './order-handler.js';
 import { buildGoogleFeed, buildMetaFeed, buildPinterestFeed } from './feed.js';
 import { buildProductIndex, resolveRedirect } from './redirects.js';
 import { rebuildConfigured, triggerRebuild, getLatestRun } from './rebuild.js';
@@ -449,92 +441,7 @@ const orderRateLimit = rateLimit({
   message: { error: 'Too many requests, try again in a minute' },
 });
 
-app.post('/api/order', orderRateLimit, async (req, res) => {
-  // Honeypot: bots fill the hidden form field — pretend success, drop silently.
-  if (req.body?._gotcha) return res.json({ ok: true });
-
-  const invalid = validateOrder(req.body);
-  if (invalid) return res.status(400).json({ error: invalid });
-
-  try {
-    const authoritativeProduct = resolveOrderProduct(await readOrSeedCatalog(), req.body.productId);
-    if (!authoritativeProduct) {
-      return res.status(404).json({ error: 'Product not found' });
-    }
-
-    const durableOrder = {
-      eventId: req.body.eventId,
-      name: req.body.name.trim(),
-      phone: req.body.phone.trim(),
-      postalCode: req.body.postalCode.trim(),
-      address: req.body.address?.trim() ?? '',
-      comment: req.body.comment?.trim() ?? '',
-      attribution: req.body.attribution ?? null,
-      ...authoritativeProduct,
-    };
-
-    // The database is the acceptance boundary: nothing external is notified
-    // until a durable, idempotent row exists. A repeated eventId returns the
-    // original success without creating or notifying a second order.
-    const { id: orderId, created } = await saveOrder(durableOrder);
-    if (!created) return res.json({ ok: true });
-
-    const text = formatOrderText(durableOrder);
-    console.log(`[order] saved id=${orderId} product=${durableOrder.productId}`);
-
-    if (!telegramConfigured() && !emailConfigured()) {
-      console.error('[order] saved but no notification channel is configured');
-    }
-
-    if (emailConfigured()) {
-      try {
-        await sendOrderEmail('Nueva solicitud de pedido — Mirage Muebles', text);
-        await markOrderEmailSent(orderId);
-      } catch (err) {
-        // The order is already durable and visible in /admin. Notification
-        // failures must not tell the customer to retry and create a duplicate.
-        console.error('[order] email notify failed:', err);
-      }
-    }
-
-    // Telegram delivery retries internally (see notify.js) to ride out a lossy
-    // network hop on the way to Telegram's datacenter — that can take several
-    // seconds, so it's fire-and-forget here rather than making the customer's
-    // cart submission wait on it.
-    if (telegramConfigured()) {
-      sendTelegram(text)
-        .then(() => {
-          markOrderTelegramSent(orderId).catch((err) =>
-            console.error('[order] DB update failed:', err),
-          );
-        })
-        .catch((err) => console.error('[order] Telegram notify failed:', err.message));
-    }
-
-    // Meta Conversions API — server-side Lead, best effort. Fire-and-forget so a
-    // slow or failing Meta call never delays or breaks the customer's order.
-    if (metaCapiConfigured()) {
-      sendLeadEvent({
-        name: req.body.name,
-        phone: req.body.phone,
-        eventId: req.body.eventId,
-        fbp: req.body.fbp,
-        fbc: req.body.fbc,
-        eventSourceUrl: req.body.eventSourceUrl,
-        clientIp: req.ip,
-        userAgent: req.get('user-agent'),
-        productName: durableOrder.productName,
-        productId: durableOrder.productId,
-        value: durableOrder.price,
-      }).catch((err) => console.error('[order] Meta CAPI failed:', err.message));
-    }
-
-    res.json({ ok: true });
-  } catch (err) {
-    console.error('order POST failed', err);
-    res.status(500).json({ error: 'Failed to send order' });
-  }
-});
+app.post('/api/order', orderRateLimit, handleOrder);
 
 app.get('/api/orders', async (req, res) => {
   if (!isAuthenticated(req)) return res.status(401).json({ error: 'Unauthorized' });

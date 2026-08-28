@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { fetchOrders, deleteOrder as apiDeleteOrder } from '../api.js';
 import { BTN_GHOST } from '../ui.js';
+import { getCountryName } from '../../../server/order-data.js';
 
 export default function OrdersPanel({ onClose }) {
   const [orders, setOrders] = useState(null);
@@ -89,6 +90,10 @@ export default function OrdersPanel({ onClose }) {
               {typeof o.price === 'number' && (
                 <p className="mt-1 text-sm text-accent-text">{o.price} €</p>
               )}
+              <p className="mt-1 text-sm text-primary/70">
+                Страна:{' '}
+                {o.country ? `${getCountryName(o.country, 'ru')} (${o.country})` : 'неизвестна'}
+              </p>
               {(o.postalCode || o.address) && (
                 <p className="mt-1 text-sm text-primary/70">
                   {[o.postalCode, o.address].filter(Boolean).join(', ')}

@@ -2,6 +2,15 @@
 // no-op when the tag failed to load or was blocked (ad blocker, in-app browser,
 // CSP), so callers never have to guard `window.fbq` themselves.
 
+import {
+  normalizeMetaCountry,
+  normalizeMetaPhone,
+  normalizeMetaPostalCode,
+  normalizePhone,
+  normalizePostalCode,
+  normalizeShippingCountry,
+} from '../../server/order-data.js';
+
 /**
  * Push a custom event onto the dataLayer GTM's base script (see index.html)
  * already reads. Every gtag() call writes here too, but under its own
@@ -38,27 +47,18 @@ export function trackPixel(event, params, options) {
 }
 
 /**
- * A Spanish phone as typed into the form → bare digits with the country code.
- * Mirrors `normalizePhone` in server/meta-capi.js, which does the same to the
- * server's copy of the same number; the two must agree or the deduplicated
- * halves of a Lead carry different identities.
+ * Build Meta advanced-matching fields from the order form. Values are
+ * normalized but NOT hashed here — fbevents.js SHA-256-hashes them in the
+ * browser before they leave. Returns only the fields we actually have.
  */
-function normalizeEsPhone(phone) {
-  const digits = (phone || '').replace(/\D/g, '').replace(/^00/, '');
-  if (!digits) return '';
-  return digits.length === 9 ? `34${digits}` : digits; // bare national number
-}
-
-/**
- * Build Meta advanced-matching fields from a name + Spanish phone. Values are
- * normalized (digits-only phone with country code, lower-cased name) but NOT
- * hashed here — fbevents.js SHA-256-hashes them in the browser before they
- * leave. Returns only the fields we actually have.
- */
-export function buildUserData({ name, phone } = {}) {
+export function buildUserData({ name, phone, country, postalCode } = {}) {
   const data = {};
-  const digits = normalizeEsPhone(phone);
+  const digits = normalizeMetaPhone(phone, country);
   if (digits) data.ph = digits;
+  const normalizedCountry = normalizeMetaCountry(country);
+  if (normalizedCountry) data.country = normalizedCountry;
+  const zip = normalizePostalCode(postalCode);
+  if (zip) data.zp = zip;
   const parts = (name || '').trim().toLowerCase().split(/\s+/).filter(Boolean);
   if (parts[0]) data.fn = parts[0];
   if (parts.length > 1) data.ln = parts.slice(1).join(' ');
@@ -116,19 +116,20 @@ export function trackGoogleAdsLead() {
  * Values go out in the clear from here; the Google tag normalizes and
  * SHA-256-hashes them in the browser before anything leaves the page.
  */
-export function buildGoogleUserData({ name, phone, postalCode } = {}) {
+export function buildGoogleUserData({ name, phone, country, postalCode } = {}) {
   const data = {};
-  const digits = normalizeEsPhone(phone);
-  if (digits) data.phone_number = `+${digits}`;
+  const e164 = normalizePhone(phone, country);
+  if (e164) data.phone_number = e164;
 
   const address = {};
   const parts = (name || '').trim().split(/\s+/).filter(Boolean);
   if (parts[0]) address.first_name = parts[0];
   if (parts.length > 1) address.last_name = parts.slice(1).join(' ');
-  const zip = (postalCode || '').trim();
+  const zip = normalizeMetaPostalCode(postalCode);
   if (zip) address.postal_code = zip;
+  const normalizedCountry = normalizeShippingCountry(country);
+  if (normalizedCountry && Object.keys(address).length > 0) address.country = normalizedCountry;
   if (Object.keys(address).length > 0) {
-    address.country = 'ES'; // the form is Spain-only; there is no field to read
     data.address = address;
   }
   return data;

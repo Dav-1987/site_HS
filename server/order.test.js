@@ -4,6 +4,7 @@ import { validateOrder, formatOrderText, isValidPhone, resolveOrderProduct } fro
 const validBody = {
   name: 'Ana',
   phone: '+34 600 000 000',
+  country: 'ES',
   postalCode: '28001',
   comment: '',
   productId: 'p1',
@@ -15,11 +16,23 @@ describe('validateOrder', () => {
     expect(validateOrder(validBody)).toBeNull();
   });
 
-  it('requires name, phone and postal code', () => {
+  it('requires name, country, phone and postal code', () => {
     expect(validateOrder({ ...validBody, name: '  ' })).toMatch(/name/);
+    expect(validateOrder({ ...validBody, country: '' })).toMatch(/country/);
     expect(validateOrder({ ...validBody, phone: '' })).toMatch(/phone/);
     expect(validateOrder({ ...validBody, postalCode: '  ' })).toMatch(/postalCode/);
     expect(validateOrder({ ...validBody, postalCode: undefined })).toMatch(/postalCode/);
+  });
+
+  it('accepts only approved ISO delivery countries', () => {
+    expect(validateOrder({ ...validBody, country: 'FR', phone: '06 12 34 56 78' })).toBeNull();
+    expect(validateOrder({ ...validBody, country: 'PT', phone: '912 345 678' })).toBeNull();
+    expect(validateOrder({ ...validBody, country: 'FRA' })).toMatch(/ISO/);
+    expect(validateOrder({ ...validBody, country: 'DE' })).toMatch(/not available/);
+  });
+
+  it('allows an explicit Armenian phone for delivery in France', () => {
+    expect(validateOrder({ ...validBody, country: 'FR', phone: '+374 99 123456' })).toBeNull();
   });
 
   it('rejects a malformed postal code', () => {
@@ -95,17 +108,19 @@ describe('resolveOrderProduct', () => {
 
 describe('isValidPhone', () => {
   it('accepts real-looking numbers in various formats', () => {
-    expect(isValidPhone('+34 600 000 000')).toBe(true);
-    expect(isValidPhone('600000000')).toBe(true);
-    expect(isValidPhone('(600) 000-000')).toBe(true);
+    expect(isValidPhone('+34 600 000 000', 'ES')).toBe(true);
+    expect(isValidPhone('600000000', 'ES')).toBe(true);
+    expect(isValidPhone('06 12 34 56 78', 'FR')).toBe(true);
+    expect(isValidPhone('+374 99 123456', 'FR')).toBe(true);
   });
 
   it('rejects garbage, too-short, and too-long input', () => {
-    expect(isValidPhone('abc')).toBe(false);
-    expect(isValidPhone('12')).toBe(false);
-    expect(isValidPhone('1'.repeat(20))).toBe(false);
-    expect(isValidPhone('')).toBe(false);
-    expect(isValidPhone(undefined)).toBe(false);
+    expect(isValidPhone('abc', 'ES')).toBe(false);
+    expect(isValidPhone('12', 'ES')).toBe(false);
+    expect(isValidPhone('1'.repeat(20), 'ES')).toBe(false);
+    expect(isValidPhone('', 'ES')).toBe(false);
+    expect(isValidPhone(undefined, 'ES')).toBe(false);
+    expect(isValidPhone('600000000', undefined)).toBe(false);
   });
 });
 
@@ -192,5 +207,15 @@ describe('formatOrderText', () => {
       productName: 'Tocador Aria',
     });
     expect(text).toContain('Código Postal: 28001');
+  });
+
+  it('includes the localized delivery country when present', () => {
+    const text = formatOrderText({
+      name: 'Ana',
+      phone: '+37499123456',
+      country: 'FR',
+      productName: 'Tocador Aria',
+    });
+    expect(text).toContain('País: Francia (FR)');
   });
 });

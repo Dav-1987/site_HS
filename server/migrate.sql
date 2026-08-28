@@ -115,6 +115,11 @@ ALTER TABLE orders ADD COLUMN IF NOT EXISTS address TEXT NOT NULL DEFAULT '';
 -- Required on the form since 2026-08; legacy rows keep the empty default.
 ALTER TABLE orders ADD COLUMN IF NOT EXISTS postal_code TEXT NOT NULL DEFAULT '';
 
+-- Delivery country for international orders. Deliberately nullable and has no
+-- default: legacy rows must remain unknown rather than being rewritten as ES.
+-- POST /api/order enforces ES/FR/PT for every new customer order.
+ALTER TABLE orders ADD COLUMN IF NOT EXISTS country VARCHAR(2);
+
 -- Where the visitor came from (click ids, utm parameters, referrer), captured
 -- on the landing page. Stored raw so the human-readable label stays derived
 -- (server/attribution.js) and can be improved for past orders too.

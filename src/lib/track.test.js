@@ -94,26 +94,53 @@ describe('trackGa4Lead', () => {
 });
 
 describe('buildGoogleUserData', () => {
-  it('formats the phone as E.164 for Google, unlike the digits Meta wants', () => {
-    expect(buildGoogleUserData({ phone: '612 345 678' }).phone_number).toBe('+34612345678');
-    expect(buildGoogleUserData({ phone: '0034612345678' }).phone_number).toBe('+34612345678');
+  it('formats national and explicit international phones as E.164', () => {
+    expect(buildGoogleUserData({ phone: '612 345 678', country: 'ES' }).phone_number).toBe(
+      '+34612345678',
+    );
+    expect(buildGoogleUserData({ phone: '912 345 678', country: 'PT' }).phone_number).toBe(
+      '+351912345678',
+    );
+    expect(buildGoogleUserData({ phone: '+374 99 123456', country: 'FR' }).phone_number).toBe(
+      '+37499123456',
+    );
   });
 
   it('builds the address block Google matches on, with the country beside it', () => {
-    expect(buildGoogleUserData({ name: 'María García', postalCode: '28001' }).address).toEqual({
-      first_name: 'María',
-      last_name: 'García',
-      postal_code: '28001',
-      country: 'ES',
+    expect(
+      buildGoogleUserData({
+        name: 'Marie Dupont',
+        country: 'FR',
+        postalCode: '75001',
+      }).address,
+    ).toEqual({
+      first_name: 'Marie',
+      last_name: 'Dupont',
+      postal_code: '75001',
+      country: 'FR',
+    });
+  });
+
+  it('passes a Portuguese postcode without forcing a five-digit Spanish format', () => {
+    expect(
+      buildGoogleUserData({ name: 'Ana Silva', country: 'PT', postalCode: '1000-001' }).address,
+    ).toEqual({
+      first_name: 'Ana',
+      last_name: 'Silva',
+      postal_code: '1000-001',
+      country: 'PT',
     });
   });
 
   it('keeps the name as typed — the tag normalizes before hashing', () => {
-    expect(buildGoogleUserData({ name: 'María García' }).address.first_name).toBe('María');
+    expect(
+      buildGoogleUserData({ name: 'María García', country: 'ES', postalCode: '28001' }).address
+        .first_name,
+    ).toBe('María');
   });
 
   it('leaves out an address nobody filled in rather than sending a bare country', () => {
-    expect(buildGoogleUserData({ phone: '612345678' }).address).toBeUndefined();
+    expect(buildGoogleUserData({ phone: '612345678', country: 'ES' }).address).toBeUndefined();
     expect(buildGoogleUserData({})).toEqual({});
   });
 });
@@ -140,13 +167,20 @@ describe('setGoogleAdsUserData', () => {
 });
 
 describe('buildUserData', () => {
-  it('prepends the country code to a bare 9-digit Spanish number', () => {
-    expect(buildUserData({ phone: '612 345 678' }).ph).toBe('34612345678');
+  it('normalizes a national phone from the selected delivery country', () => {
+    expect(buildUserData({ phone: '612 345 678', country: 'ES' }).ph).toBe('34612345678');
+    expect(buildUserData({ phone: '912 345 678', country: 'PT' }).ph).toBe('351912345678');
   });
 
-  it('keeps an already-prefixed number and strips +/spaces and leading 00', () => {
-    expect(buildUserData({ phone: '+34 612 345 678' }).ph).toBe('34612345678');
-    expect(buildUserData({ phone: '0034612345678' }).ph).toBe('34612345678');
+  it('keeps an explicit international phone regardless of delivery country', () => {
+    expect(buildUserData({ phone: '+374 99 123456', country: 'FR' }).ph).toBe('37499123456');
+    expect(buildUserData({ phone: '0037499123456', country: 'PT' }).ph).toBe('37499123456');
+  });
+
+  it('adds the real Meta country and postal-code match keys', () => {
+    expect(
+      buildUserData({ phone: '06 12 34 56 78', country: 'FR', postalCode: ' 75001 ' }),
+    ).toMatchObject({ ph: '33612345678', country: 'fr', zp: '75001' });
   });
 
   it('splits the name into lower-cased fn / ln', () => {

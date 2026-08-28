@@ -12,33 +12,26 @@ import {
   pushDataLayer,
 } from '../lib/track.js';
 import { getAttribution } from '../lib/attribution.js';
+import {
+  DEFAULT_SHIPPING_COUNTRY,
+  getCountryCallingPrefix,
+  getPostalCodePlaceholder,
+  getShippingCountryOptions,
+  isValidPhone,
+  isValidPostalCode,
+  normalizePhone,
+} from '../../server/order-data.js';
 import { productDiscount, productLabel } from '../data/catalog.js';
 
-// Mirrors server/order.js's isValidPhone — kept in sync manually since client
-// and server are separate deploy targets. Loosely validates digits with an
-// optional leading + and spaces/dashes/parens as separators, catching typos
-// (letters, too few/many digits) without rejecting real international numbers.
-const PHONE_CHARS_RE = /^\+?[0-9\s\-().]+$/;
-function isValidPhone(phone) {
-  const trimmed = phone.trim();
-  if (!trimmed || !PHONE_CHARS_RE.test(trimmed)) return false;
-  const digits = (trimmed.match(/\d/g) || []).length;
-  return digits >= 7 && digits <= 15;
-}
-
-// Mirrors server/order.js's isValidPostalCode — same manual-sync caveat.
-const POSTAL_CODE_RE = /^[A-Za-z0-9][A-Za-z0-9\s-]{1,10}[A-Za-z0-9]$/;
-function isValidPostalCode(postalCode) {
-  return POSTAL_CODE_RE.test(postalCode.trim());
-}
-
 export default function OrderModal({ product, isOpen, onClose }) {
-  const { t } = useLanguage();
+  const { lang, t } = useLanguage();
   const idPrefix = useId();
   const fieldIds = {
     title: `${idPrefix}-title`,
     name: `${idPrefix}-name`,
     nameError: `${idPrefix}-name-error`,
+    country: `${idPrefix}-country`,
+    countryError: `${idPrefix}-country-error`,
     phone: `${idPrefix}-phone`,
     phoneError: `${idPrefix}-phone-error`,
     postalCode: `${idPrefix}-postal-code`,
@@ -47,6 +40,7 @@ export default function OrderModal({ product, isOpen, onClose }) {
     comment: `${idPrefix}-comment`,
   };
   const [name, setName] = useState('');
+  const [country, setCountry] = useState(DEFAULT_SHIPPING_COUNTRY);
   const [phone, setPhone] = useState('');
   const [postalCode, setPostalCode] = useState('');
   const [address, setAddress] = useState('');
@@ -57,6 +51,8 @@ export default function OrderModal({ product, isOpen, onClose }) {
   const [serverError, setServerError] = useState('');
   const dialogRef = useRef(null);
   const eventIdRef = useRef('');
+  const submitInFlightRef = useRef(false);
+  const leadTrackedRef = useRef(false);
 
   // onClose is a fresh arrow function on every render of the parent — keep it
   // in a ref so the focus-trap effect below only re-runs on isOpen flips, not
@@ -74,9 +70,9 @@ export default function OrderModal({ product, isOpen, onClose }) {
     const prevFocus = document.activeElement;
     const focusables = () =>
       dialog
-        ? Array.from(dialog.querySelectorAll('button, input, textarea, [href], [tabindex]')).filter(
-            (el) => el.tabIndex !== -1 && !el.disabled,
-          )
+        ? Array.from(
+            dialog.querySelectorAll('button, input, select, textarea, [href], [tabindex]'),
+          ).filter((el) => el.tabIndex !== -1 && !el.disabled)
         : [];
 
     dialog?.querySelector('input[name="name"]')?.focus();
@@ -117,6 +113,7 @@ export default function OrderModal({ product, isOpen, onClose }) {
   useEffect(() => {
     if (isOpen) {
       setName('');
+      setCountry(DEFAULT_SHIPPING_COUNTRY);
       setPhone('');
       setPostalCode('');
       setAddress('');
@@ -125,6 +122,8 @@ export default function OrderModal({ product, isOpen, onClose }) {
       setSending(false);
       setSent(false);
       setServerError('');
+      submitInFlightRef.current = false;
+      leadTrackedRef.current = false;
       // Keep one id across network retries while this order dialog is open.
       // The server uses it as the durable idempotency key.
       eventIdRef.current =
@@ -164,8 +163,9 @@ export default function OrderModal({ product, isOpen, onClose }) {
   const validate = () => {
     const e = {};
     if (!name.trim()) e.name = t('order.form.error.required');
+    if (!country) e.country = t('order.form.error.required');
     if (!phone.trim()) e.phone = t('order.form.error.required');
-    else if (!isValidPhone(phone)) e.phone = t('order.form.error.phone');
+    else if (!isValidPhone(phone, country)) e.phone = t('order.form.error.phone');
     if (!postalCode.trim()) e.postalCode = t('order.form.error.required');
     else if (!isValidPostalCode(postalCode)) e.postalCode = t('order.form.error.postalCode');
     return e;
@@ -173,6 +173,7 @@ export default function OrderModal({ product, isOpen, onClose }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (submitInFlightRef.current || leadTrackedRef.current) return;
     const errs = validate();
     if (Object.keys(errs).length) {
       setErrors(errs);
@@ -181,10 +182,12 @@ export default function OrderModal({ product, isOpen, onClose }) {
       e.currentTarget.querySelector(`[name="${Object.keys(errs)[0]}"]`)?.focus();
       return;
     }
+    submitInFlightRef.current = true;
     setSending(true);
     setServerError('');
     try {
       const eventId = eventIdRef.current;
+      const normalizedPhone = normalizePhone(phone, country);
       const { fbp, fbc } = getFbCookies();
       const res = await fetch('/api/order', {
         method: 'POST',
@@ -192,6 +195,7 @@ export default function OrderModal({ product, isOpen, onClose }) {
         body: JSON.stringify({
           name,
           phone,
+          country,
           postalCode,
           address: address.trim() || undefined,
           comment: comment.trim() || undefined,
@@ -209,9 +213,10 @@ export default function OrderModal({ product, isOpen, onClose }) {
       const data = await res.json();
       if (!res.ok) throw new Error(data.error || 'error');
       setSent(true);
+      leadTrackedRef.current = true;
       // Advanced matching: feed the (browser-hashed) name + phone before the
       // Lead so Meta can attribute the conversion to the ad click.
-      setPixelUserData(buildUserData({ name, phone }));
+      setPixelUserData(buildUserData({ name, phone: normalizedPhone, country, postalCode }));
       trackPixel(
         'Lead',
         {
@@ -226,7 +231,9 @@ export default function OrderModal({ product, isOpen, onClose }) {
       );
       // Enhanced conversions: the customer data has to be set before the
       // conversion fires, not after — gtag reads whatever is set at that moment.
-      setGoogleAdsUserData(buildGoogleUserData({ name, phone, postalCode }));
+      setGoogleAdsUserData(
+        buildGoogleUserData({ name, phone: normalizedPhone, country, postalCode }),
+      );
       // Google Ads "Lead" conversion, fired on the same successful submit. Its
       // value is fixed at 1 EUR by the conversion action itself, so the product
       // price goes to GA4 and Meta only.
@@ -242,6 +249,7 @@ export default function OrderModal({ product, isOpen, onClose }) {
     } catch {
       setServerError(t('order.form.error.generic'));
     } finally {
+      submitInFlightRef.current = false;
       setSending(false);
     }
   };
@@ -260,7 +268,7 @@ export default function OrderModal({ product, isOpen, onClose }) {
         aria-hidden="true"
       />
 
-      <div className="relative w-full max-w-md bg-background shadow-floating">
+      <div className="relative max-h-[calc(100dvh-2rem)] w-full max-w-md overflow-y-auto bg-background shadow-floating">
         <button
           type="button"
           onClick={onClose}
@@ -328,6 +336,40 @@ export default function OrderModal({ product, isOpen, onClose }) {
 
                 <div>
                   <label
+                    htmlFor={fieldIds.country}
+                    className="mb-1 block text-xs uppercase tracking-[0.2em] text-primary/70"
+                  >
+                    {t('order.form.country')} *
+                  </label>
+                  <select
+                    id={fieldIds.country}
+                    name="country"
+                    autoComplete="country"
+                    required
+                    value={country}
+                    onChange={(e) => {
+                      setCountry(e.target.value);
+                      setErrors((p) => ({ ...p, country: '', phone: '' }));
+                    }}
+                    aria-invalid={Boolean(errors.country)}
+                    aria-describedby={errors.country ? fieldIds.countryError : undefined}
+                    className="w-full border border-primary/20 bg-background px-3 py-2.5 text-sm text-primary outline-none transition-colors focus:border-accent focus-visible:ring-2 focus-visible:ring-accent/40"
+                  >
+                    {getShippingCountryOptions(lang).map(({ code, name: countryName }) => (
+                      <option key={code} value={code}>
+                        {countryName}
+                      </option>
+                    ))}
+                  </select>
+                  {errors.country && (
+                    <p id={fieldIds.countryError} role="alert" className="mt-1 text-xs text-danger">
+                      {errors.country}
+                    </p>
+                  )}
+                </div>
+
+                <div>
+                  <label
                     htmlFor={fieldIds.phone}
                     className="mb-1 block text-xs uppercase tracking-[0.2em] text-primary/70"
                   >
@@ -344,7 +386,7 @@ export default function OrderModal({ product, isOpen, onClose }) {
                       setPhone(e.target.value);
                       setErrors((p) => ({ ...p, phone: '' }));
                     }}
-                    placeholder={t('order.form.phone.placeholder')}
+                    placeholder={`${getCountryCallingPrefix(country)} …`}
                     aria-invalid={Boolean(errors.phone)}
                     aria-describedby={errors.phone ? fieldIds.phoneError : undefined}
                     className="w-full border border-primary/20 bg-transparent px-3 py-2.5 text-sm text-primary outline-none transition-colors focus:border-accent focus-visible:ring-2 focus-visible:ring-accent/40"
@@ -368,13 +410,12 @@ export default function OrderModal({ product, isOpen, onClose }) {
                     type="text"
                     name="postalCode"
                     autoComplete="postal-code"
-                    inputMode="numeric"
                     value={postalCode}
                     onChange={(e) => {
                       setPostalCode(e.target.value);
                       setErrors((p) => ({ ...p, postalCode: '' }));
                     }}
-                    placeholder={t('order.form.postalCode.placeholder')}
+                    placeholder={getPostalCodePlaceholder(country)}
                     aria-invalid={Boolean(errors.postalCode)}
                     aria-describedby={errors.postalCode ? fieldIds.postalCodeError : undefined}
                     className="w-full border border-primary/20 bg-transparent px-3 py-2.5 text-sm text-primary outline-none transition-colors focus:border-accent focus-visible:ring-2 focus-visible:ring-accent/40"

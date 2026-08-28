@@ -9,6 +9,7 @@ export async function saveOrder({
   eventId,
   name,
   phone,
+  country,
   postalCode,
   address,
   comment,
@@ -19,14 +20,15 @@ export async function saveOrder({
 }) {
   const sanitizedAttribution = sanitizeAttribution(attribution);
   const { rows } = await pool.query(
-    `INSERT INTO orders (event_id, name, phone, postal_code, address, comment, product_id, product_name, price, attribution)
-     VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10)
+    `INSERT INTO orders (event_id, name, phone, country, postal_code, address, comment, product_id, product_name, price, attribution)
+     VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11)
      ON CONFLICT (event_id) WHERE event_id IS NOT NULL DO NOTHING
      RETURNING id`,
     [
       eventId,
       name,
       phone,
+      country,
       postalCode ?? '',
       address ?? '',
       comment ?? '',
@@ -64,7 +66,7 @@ const MAX_ORDERS_LISTED = 500;
 
 export async function listOrders() {
   const { rows } = await pool.query(
-    `SELECT id, created_at, name, phone, postal_code, address, comment, product_id, product_name, price, attribution, telegram_sent, email_sent
+    `SELECT id, created_at, name, phone, country, postal_code, address, comment, product_id, product_name, price, attribution, telegram_sent, email_sent
      FROM orders ORDER BY created_at DESC LIMIT $1`,
     [MAX_ORDERS_LISTED],
   );
@@ -73,6 +75,7 @@ export async function listOrders() {
     createdAt: r.created_at,
     name: r.name,
     phone: r.phone,
+    country: r.country ?? null,
     postalCode: r.postal_code,
     address: r.address,
     comment: r.comment,
