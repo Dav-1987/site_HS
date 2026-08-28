@@ -201,7 +201,7 @@ describe('product page order flow', () => {
     expect(leadCalls[0][3]).toEqual({ eventID: apiPayload.eventId });
     expect(fbq).toHaveBeenCalledWith('init', expect.any(String), {
       ph: '37499123456',
-      country: 'fr',
+      cn: 'fr',
       zp: '75001',
       fn: 'marie',
       ln: 'dupont',

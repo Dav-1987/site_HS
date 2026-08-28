@@ -180,7 +180,7 @@ describe('buildUserData', () => {
   it('adds the real Meta country and postal-code match keys', () => {
     expect(
       buildUserData({ phone: '06 12 34 56 78', country: 'FR', postalCode: ' 75001 ' }),
-    ).toMatchObject({ ph: '33612345678', country: 'fr', zp: '75001' });
+    ).toMatchObject({ ph: '33612345678', cn: 'fr', zp: '75001' });
   });
 
   it('splits the name into lower-cased fn / ln', () => {

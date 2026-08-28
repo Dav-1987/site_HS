@@ -56,7 +56,11 @@ export function buildUserData({ name, phone, country, postalCode } = {}) {
   const digits = normalizeMetaPhone(phone, country);
   if (digits) data.ph = digits;
   const normalizedCountry = normalizeMetaCountry(country);
-  if (normalizedCountry) data.country = normalizedCountry;
+  // Browser Pixel advanced matching uses `cn`; Conversions API uses
+  // `country`. Keeping this browser-specific mapping here prevents Meta from
+  // silently dropping the delivery country while preserving the shared value
+  // normalization used by both channels.
+  if (normalizedCountry) data.cn = normalizedCountry;
   const zip = normalizePostalCode(postalCode);
   if (zip) data.zp = zip;
   const parts = (name || '').trim().toLowerCase().split(/\s+/).filter(Boolean);
