@@ -21,7 +21,7 @@ import {
   isValidPostalCode,
   normalizePhone,
 } from '../../server/order-data.js';
-import { productDiscount, productLabel } from '../data/catalog.js';
+import { productDiscount, productFullName, productLabel } from '../data/catalog.js';
 
 export default function OrderModal({ product, isOpen, onClose }) {
   const { lang, t } = useLanguage();
@@ -158,6 +158,8 @@ export default function OrderModal({ product, isOpen, onClose }) {
   if (!isOpen) return null;
 
   const label = productLabel(product);
+  const productName = productFullName(product);
+  const productSize = String(product?.subtitle ?? '').replace(/\s+/g, ' ').trim();
   const { price } = productDiscount(product);
 
   const validate = () => {
@@ -297,11 +299,12 @@ export default function OrderModal({ product, isOpen, onClose }) {
             </div>
           ) : (
             <>
-              <p className="mb-1 text-xs uppercase tracking-[0.25em] text-accent-text">
+              <p className="mb-2 text-center text-xs font-bold uppercase tracking-[0.25em] text-accent-text">
                 {t('order.modal.eyebrow')}
               </p>
-              <h2 id={fieldIds.title} className="font-serif text-xl font-light text-primary">
-                {label}
+              <h2 id={fieldIds.title} className="text-center font-serif text-xl text-primary">
+                <span className="block font-semibold">{productName}</span>
+                {productSize && <span className="mt-1 block font-normal"> {productSize}</span>}
               </h2>
 
               <form onSubmit={handleSubmit} className="mt-6 space-y-4" noValidate>

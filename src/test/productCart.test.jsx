@@ -44,12 +44,22 @@ describe('product page order flow', () => {
     renderProduct();
     expect(screen.queryByRole('dialog')).toBeNull();
     fireEvent.click(screen.getByText(/¡PEDIR AHORA!/i));
-    expect(screen.getByRole('dialog')).toBeTruthy();
-    expect(screen.getByText(/Realizar pedido/i)).toBeTruthy();
+    const dialog = screen.getByRole('dialog');
+    expect(dialog).toBeTruthy();
+    const eyebrow = screen.getByText(/Realizar pedido/i);
+    expect(eyebrow.className).toContain('text-center');
+    expect(eyebrow.className).toContain('font-bold');
     // The label the order carries, not the raw `name`: a name may hold the bar
     // that separates the tile name from the full one, and the modal — like the
     // notification the order turns into — shows the name without it.
-    expect(screen.getByRole('dialog').textContent).toContain(productLabel(product));
+    expect(dialog.textContent).toContain(productLabel(product));
+    const heading = dialog.querySelector('h2');
+    expect(heading.className).toContain('text-center');
+    expect(heading.children[0].textContent).toBe(productFullName(product));
+    expect(heading.children[0].className).toContain('font-semibold');
+    expect(heading.children[1].textContent.trim()).toBe(product.subtitle);
+    expect(heading.children[1].className).toContain('block');
+    expect(heading.children[1].className).toContain('font-normal');
   });
 
   it('closes the modal via the close button', () => {
