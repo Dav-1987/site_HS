@@ -1,7 +1,14 @@
 import express from 'express';
 import { rateLimit } from 'express-rate-limit';
 import { createHash } from 'node:crypto';
-import { createWriteStream, existsSync, mkdirSync, renameSync, unlinkSync } from 'node:fs';
+import {
+  createWriteStream,
+  existsSync,
+  mkdirSync,
+  readdirSync,
+  renameSync,
+  unlinkSync,
+} from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import sharp from 'sharp';
@@ -33,6 +40,7 @@ import { handleOrder } from './order-handler.js';
 import { buildGoogleFeed, buildMetaFeed, buildPinterestFeed } from './feed.js';
 import { buildProductIndex, resolveRedirect } from './redirects.js';
 import { rebuildConfigured, triggerRebuild, getLatestRun } from './rebuild.js';
+import { isVideoFile, sweepVideos } from './video.js';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const UPLOADS_DIR = join(__dirname, '../uploads');
@@ -484,11 +492,48 @@ app.post('/api/admin/rebuild', async (req, res) => {
   try {
     await triggerRebuild();
     res.json({ ok: true });
+    startVideoSweep();
   } catch (err) {
     console.error('[rebuild] trigger failed', err);
     res.status(502).json({ error: 'Failed to start rebuild' });
   }
 });
+
+// ─── Нормализация видео ──────────────────────────────────────────────────────
+//
+// Идёт следом за пересборкой: телефон пишет HEVC, который играет не во всех
+// браузерах, а сырой ролик приезжает в разрешении вчетверо больше нужного.
+// См. server/video.js — там подробно, почему это не столько про вес, сколько
+// про совместимость.
+//
+// Почему по кнопке, а не при загрузке: на этой машине одно ядро, и кодирование
+// в момент, когда админ грузит файл, отобрало бы его у Express и Postgres.
+// Пересборка — осознанный редкий момент, когда всплеск нагрузки допустим.
+// Проход идемпотентный: уже нормализованные файлы пропускаются по ffprobe.
+
+let videoSweepRunning = false;
+
+async function startVideoSweep() {
+  if (videoSweepRunning) {
+    console.log('[video] sweep already running, skipping');
+    return;
+  }
+  videoSweepRunning = true;
+  try {
+    const files = readdirSync(UPLOADS_DIR).filter(isVideoFile);
+    console.log(`[video] sweep started over ${files.length} file(s)`);
+    const summary = await sweepVideos(UPLOADS_DIR, files);
+    const saved = (summary.before - summary.after) / 1024 / 1024;
+    console.log(
+      `[video] sweep done: ${summary.converted} converted, ${summary.skipped} already fine, ` +
+        `${summary.failed} failed, ${saved.toFixed(1)} MB saved`,
+    );
+  } catch (err) {
+    console.error('[video] sweep failed', err);
+  } finally {
+    videoSweepRunning = false;
+  }
+}
 
 app.get('/api/admin/rebuild/status', async (req, res) => {
   if (!isAuthenticated(req)) return res.status(401).json({ error: 'Unauthorized' });
