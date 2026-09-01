@@ -14,10 +14,17 @@ const SIZE_HINT = '1080 × 1350 px (4:5), PNG';
  * Порядок задаётся стрелками и он же определяет, что попадёт в ленту на
  * главной (первые восемь).
  */
-export default function ReviewsEditor({ reviews = [], onChange }) {
+export default function ReviewsEditor({ reviews = [], onChange, blocks, onBlocksChange }) {
   const [open, setOpen] = useState(false);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState('');
+
+  // Выключатели живут здесь, а не в «Блоках главной»: искать их идут в раздел,
+  // которым они управляют. К тому же один из них выключает не блок на главной,
+  // а весь раздел вместе со страницей — в том списке он вводил бы в заблуждение.
+  const sectionOn = blocks?.reviews !== false;
+  const homeStripOn = blocks?.reviewsHome !== false;
+  const setBlock = (key, value) => onBlocksChange({ ...blocks, [key]: value });
 
   const add = async (files, kind) => {
     if (!files.length) return;
@@ -62,12 +69,46 @@ export default function ReviewsEditor({ reviews = [], onChange }) {
         <span className={`text-base transition-transform ${open ? 'rotate-45' : ''}`}>+</span>
         <span className="font-serif text-xl font-light text-primary">Отзывы</span>
         <span className="text-xs uppercase tracking-[0.18em] text-primary/40">
-          {reviews.length ? `${reviews.length} шт.` : 'пусто'}
+          {!sectionOn ? 'раздел выключен' : reviews.length ? `${reviews.length} шт.` : 'пусто'}
         </span>
       </button>
 
       {!open ? null : (
         <div className="border-t border-primary/10 px-5 py-6">
+          <div className="mb-6 space-y-4 border border-primary/10 bg-background px-4 py-4">
+            <label className="flex items-start gap-3">
+              <input
+                type="checkbox"
+                checked={sectionOn}
+                onChange={(e) => setBlock('reviews', e.target.checked)}
+                className="mt-0.5 h-4 w-4 shrink-0 accent-accent"
+              />
+              <span>
+                <span className="block text-sm text-primary">Показывать раздел «Отзывы»</span>
+                <span className="block text-xs leading-relaxed text-primary/40">
+                  Выключение убирает ленту на главной, ссылку в меню и саму страницу. После
+                  пересборки адрес отдаёт 404 и уходит из sitemap.
+                </span>
+              </span>
+            </label>
+
+            <label className={`flex items-start gap-3 ${sectionOn ? '' : 'opacity-40'}`}>
+              <input
+                type="checkbox"
+                checked={homeStripOn}
+                disabled={!sectionOn}
+                onChange={(e) => setBlock('reviewsHome', e.target.checked)}
+                className="mt-0.5 h-4 w-4 shrink-0 accent-accent"
+              />
+              <span>
+                <span className="block text-sm text-primary">Лента на главной</span>
+                <span className="block text-xs leading-relaxed text-primary/40">
+                  Первые 8 отзывов на главной странице. Сама страница «Отзывы» при этом остаётся.
+                </span>
+              </span>
+            </label>
+          </div>
+
           <div className="flex flex-wrap items-center gap-3">
             <label className={`${BTN_SOLID} cursor-pointer`}>
               {busy ? 'Загрузка…' : 'Добавить скриншоты'}

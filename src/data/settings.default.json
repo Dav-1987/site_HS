@@ -14,11 +14,6 @@
   ],
   "featuredCards": [
     {
-      "productId": "Tocador-M-05-3",
-      "cover": "/uploads/95a57f1bc404f3b29fdb3d38f225feee.jpg",
-      "video": "/uploads/015e7089509b625cd540eba2539e6a67.mp4"
-    },
-    {
       "productId": "Tocador-L-01",
       "cover": "",
       "video": "/uploads/c58f69a36cfdf8f55049f308a004c303.mp4"
@@ -32,17 +27,24 @@
       "productId": "Tocador-L-08",
       "cover": "/uploads/0f6a9d65f0833e4f64c04982e32007fe.jpg",
       "video": "/uploads/5218f38fb12e936a6b3977ae78788eb5.mp4"
+    },
+    {
+      "productId": "Tocador-M-05-3",
+      "cover": "/uploads/95a57f1bc404f3b29fdb3d38f225feee.jpg",
+      "video": "/uploads/015e7089509b625cd540eba2539e6a67.mp4"
     }
   ],
   "reviews": [],
   "texts": {
     "es": {
+      "hero.promo": "¡Grandes descuentos de otoño en toda la colección!",
       "hero.title.2": "para su hogar",
       "home.meta.title": "Mirage Muebles | Tu hogar, tu estilo. Nosotros ponemos la calidez",
       "product.sizeLabel": "Medidas (total)",
       "home.meta.description": "Espejos, tocadores, estanterías, consolas y cómodas de diseño\nminimalista. Envío a toda España, montaje incluido"
     },
     "en": {
+      "hero.promo": "Big autumn discounts across the entire collection!",
       "hero.title.2": "for your home",
       "home.meta.title": "Mirage Muebles | Your home, your style. We bring the warmth.",
       "home.meta.description": "Mirrors, dressing tables, shelving, consoles and chests of drawers\nin minimalist design. Delivery across Spain, assembly included"
