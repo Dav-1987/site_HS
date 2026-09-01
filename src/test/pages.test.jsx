@@ -2,6 +2,8 @@ import { describe, it, expect } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import { SettingsProvider } from '../settings/SettingsContext.jsx';
+import { defaultSettings } from '../data/settings.js';
+import { translations } from '../i18n/translations.js';
 import { LanguageProvider } from '../i18n/LanguageContext.jsx';
 import { CatalogProvider } from '../catalog/CatalogContext.jsx';
 import Home from '../pages/Home.jsx';
@@ -70,7 +72,19 @@ describe('page smoke render', () => {
 
 // Home sections that /admin can switch off wholesale (settings.blocks).
 describe('home page blocks', () => {
-  const promo = /Grandes descuentos en toda la colección/i;
+  // Текст промо владелец правит в /admin, и правка приезжает в бандл через
+  // `npm run data:pull` при сборке. Поэтому сверяемся не с прописанной руками
+  // формулировкой (она ломает тест в день смены акции), а с тем, что реально
+  // увидит страница при переданных ей настройках: переопределение из настроек,
+  // иначе строка из переводов.
+  const promoFor = (settings) =>
+    settings?.texts?.es?.['hero.promo'] ??
+    defaultSettings.texts?.es?.['hero.promo'] ??
+    translations.es['hero.promo'];
+  const promo = promoFor(null);
+  // Тесты ниже передают свои настройки — без переопределений текста, поэтому
+  // на странице оказывается строка из переводов.
+  const promoPlain = translations.es['hero.promo'];
   const collections = /Explora por categoría/i;
   // The grid needs something to list — with no backend the providers start
   // empty, and an empty collections section doesn't render at all.
@@ -84,14 +98,14 @@ describe('home page blocks', () => {
 
   it('drops the promo line when its switch is off', () => {
     renderPage(<Home />, '/', { catalog, settings: { blocks: { heroPromo: false } } });
-    expect(screen.queryByText(promo)).toBeNull();
+    expect(screen.queryByText(promoPlain)).toBeNull();
     expect(screen.getByText(collections)).toBeTruthy();
   });
 
   it('drops the collections grid when its switch is off', () => {
     renderPage(<Home />, '/', { catalog, settings: { blocks: { collections: false } } });
     expect(screen.queryByText(collections)).toBeNull();
-    expect(screen.getByText(promo)).toBeTruthy();
+    expect(screen.getByText(promoPlain)).toBeTruthy();
   });
 
   it('drops the collections grid when every section is hidden', () => {

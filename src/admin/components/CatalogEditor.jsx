@@ -119,6 +119,8 @@ export default function CatalogEditor({ onLogout }) {
           <ReviewsEditor
             reviews={settings.reviews || []}
             onChange={(reviews) => updateSettings({ ...settings, reviews })}
+            blocks={settings.blocks}
+            onBlocksChange={(blocks) => updateSettings({ ...settings, blocks })}
           />
         )}
         {settings && <SeoSettingsEditor settings={settings} onChange={updateSettings} />}
