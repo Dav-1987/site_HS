@@ -11,6 +11,57 @@ export const defaultSettings = defaultSettingsData;
 /** Max curated picks kept for the homepage "Featured" section. */
 const MAX_FEATURED = 12;
 
+/** Max screenshots/clips kept in the reviews wall. */
+const MAX_REVIEWS = 200;
+
+/**
+ * The reviews wall: an ordered list of `{ image }` or `{ video }` items —
+ * screenshots of real WhatsApp/Instagram messages and customer clips, nothing
+ * more. There is deliberately no rating, no product link and no caption: the
+ * screenshot *is* the review, and inventing structured fields around it would
+ * only be structure nobody fills in.
+ *
+ * A video's poster frame isn't stored — it's derived from the video's own path
+ * (see posterFor), so the two can never drift apart.
+ */
+function sanitizeReviews(input) {
+  if (!Array.isArray(input)) return [];
+  const out = [];
+  const seen = new Set();
+  for (const item of input) {
+    if (!item || typeof item !== 'object') continue;
+    const image = typeof item.image === 'string' ? item.image.trim() : '';
+    const video = typeof item.video === 'string' ? item.video.trim() : '';
+    // A row with neither is empty; one with both is ambiguous — video wins,
+    // since that's the richer medium and the image would just be its poster.
+    if (!image && !video) continue;
+    const key = video || image;
+    if (seen.has(key)) continue;
+    seen.add(key);
+    out.push(video ? { video } : { image });
+    if (out.length >= MAX_REVIEWS) break;
+  }
+  return out;
+}
+
+/** Настройки хранят `{ image }` / `{ video }`; лайтбокс ждёт `{ type, src }`. */
+export function toLightboxItems(reviews) {
+  return (reviews ?? []).map((r) =>
+    r.video ? { type: 'video', src: r.video } : { type: 'image', src: r.image },
+  );
+}
+
+/**
+ * Poster frame for a review clip: `/uploads/abc.mp4` → `/uploads/abc_poster.jpg`.
+ * Derived rather than stored so a re-upload can never leave a stale poster
+ * pointing at the wrong clip. The server generates the file during the rebuild
+ * sweep; until then the tile simply renders without one.
+ */
+export function posterFor(videoSrc) {
+  if (typeof videoSrc !== 'string' || !videoSrc.startsWith('/uploads/')) return '';
+  return videoSrc.replace(/\.[^.]+$/, '_poster.jpg');
+}
+
 /** Keep an ordered, de-duped list of product-id strings (capped). */
 function sanitizeFeatured(input) {
   if (!Array.isArray(input)) return [];
@@ -95,7 +146,7 @@ function sanitizeSeo(seo) {
  * isn't an explicit `false` stays on, so a settings object saved before a switch
  * existed never blanks the section it controls.
  */
-export const BLOCKS = ['featured', 'collections', 'heroPromo'];
+export const BLOCKS = ['featured', 'collections', 'heroPromo', 'reviews', 'reviewsHome'];
 
 function sanitizeBlocks(blocks) {
   const out = {};
@@ -116,6 +167,7 @@ export function mergeSettings(input) {
     },
     featured: sanitizeFeatured(input?.featured),
     featuredCards: sanitizeFeaturedCards(input?.featuredCards),
+    reviews: sanitizeReviews(input?.reviews),
     texts: sanitizeTexts(input?.texts),
     contact: sanitizeContact(input?.contact),
     seo: sanitizeSeo(input?.seo),

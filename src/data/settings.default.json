@@ -34,6 +34,7 @@
       "video": "/uploads/5218f38fb12e936a6b3977ae78788eb5.mp4"
     }
   ],
+  "reviews": [],
   "texts": {
     "es": {
       "hero.title.2": "para su hogar",
@@ -62,6 +63,8 @@
   "blocks": {
     "featured": true,
     "collections": true,
-    "heroPromo": true
+    "heroPromo": true,
+    "reviews": true,
+    "reviewsHome": true
   }
 }

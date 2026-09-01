@@ -11,8 +11,12 @@ import { liveCatalog } from './data/catalog.js';
 // prerendered snapshot (so the SPA fallback answers a real 404) and no sitemap
 // entry. Unlisted ones keep both — the whole point of that state is that the
 // page stays live and indexed, it just isn't linked to from anywhere.
-export function buildRoutes(rawCatalog) {
+export function buildRoutes(rawCatalog, settings) {
   const catalog = liveCatalog(rawCatalog);
+  // Раздел отзывов выключается тумблером в /admin. Выключенный — не получает
+  // ни пререндер-снимок (значит SPA-фолбэк отдаст честный 404), ни строку в
+  // sitemap; ровно так же ведут себя выключенные категории.
+  const reviewsOn = settings?.blocks?.reviews !== false;
   return [
     { path: '/', priority: '1.0', changefreq: 'weekly', catalogAggregate: true },
     { path: '/catalogo', priority: '0.9', changefreq: 'weekly', catalogAggregate: true },
@@ -23,6 +27,7 @@ export function buildRoutes(rawCatalog) {
     // gets a real 200; deliberately not linked from anywhere on the site yet.
     { path: '/envios', priority: '0.3', changefreq: 'yearly' },
     { path: '/devoluciones', priority: '0.3', changefreq: 'yearly' },
+    ...(reviewsOn ? [{ path: '/opiniones', priority: '0.5', changefreq: 'weekly' }] : []),
     ...catalog.map((cat) => ({
       path: `/${cat.slug}`,
       priority: '0.8',

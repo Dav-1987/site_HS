@@ -13,7 +13,7 @@ const cat = (slug, visibility, ...products) => ({
   ),
 });
 
-const paths = (catalog) => buildRoutes(catalog).map((r) => r.path);
+const paths = (catalog, settings) => buildRoutes(catalog, settings).map((r) => r.path);
 
 describe('buildRoutes', () => {
   it('lists the static pages plus every category and product', () => {
@@ -25,6 +25,7 @@ describe('buildRoutes', () => {
       '/legal-notice',
       '/envios',
       '/devoluciones',
+      '/opiniones',
       '/c1',
       '/c1/p1',
       '/c1/p2',
@@ -51,5 +52,28 @@ describe('buildRoutes', () => {
     expect(out).not.toContain('/c1/p1');
     expect(out).toContain('/c2');
     expect(out).toContain('/c2/p2');
+  });
+});
+
+// Раздел отзывов выключается тумблером в /admin. Выключенный не должен
+// получать ни пререндер-снимок, ни строку в sitemap — иначе nginx продолжит
+// отдавать старый HTML вместо 404, а Google будет держать страницу в индексе.
+describe('buildRoutes — выключенный раздел отзывов', () => {
+  it('убирает /opiniones, когда блок выключен', () => {
+    const out = paths([cat('c1', undefined, 'p1')], { blocks: { reviews: false } });
+    expect(out).not.toContain('/opiniones');
+  });
+
+  it('оставляет /opiniones при включённом блоке и без настроек вовсе', () => {
+    expect(paths([cat('c1', undefined, 'p1')], { blocks: { reviews: true } })).toContain(
+      '/opiniones',
+    );
+    expect(paths([cat('c1', undefined, 'p1')])).toContain('/opiniones');
+  });
+
+  // Тумблер ленты на главной к маршруту отношения не имеет — страница живёт.
+  it('не трогает маршрут, когда выключена только лента на главной', () => {
+    const out = paths([cat('c1', undefined, 'p1')], { blocks: { reviewsHome: false } });
+    expect(out).toContain('/opiniones');
   });
 });

@@ -97,6 +97,7 @@ describe('resolveOrderProduct', () => {
     expect(resolveOrderProduct(catalog, 'p1')).toEqual({
       productId: 'p1',
       productName: 'Tocador Aria Pro',
+      productUrl: 'https://hsmuebles.es/tocadores/p1',
       price: 450,
     });
   });
@@ -217,5 +218,50 @@ describe('formatOrderText', () => {
       productName: 'Tocador Aria',
     });
     expect(text).toContain('País: Francia (FR)');
+  });
+});
+
+describe('ссылка на товар в заявке', () => {
+  const catalog = [
+    { slug: 'tocadores', products: [{ id: 'Tocador-L-01', name: 'Tocador Hollywood', price: 439 }] },
+  ];
+
+  it('строит канонический адрес товара из slug категории', () => {
+    expect(resolveOrderProduct(catalog, 'Tocador-L-01').productUrl).toBe(
+      'https://hsmuebles.es/tocadores/Tocador-L-01',
+    );
+  });
+
+  it('кладёт ссылку в текст заявки — он общий для телеграма и почты', () => {
+    const product = resolveOrderProduct(catalog, 'Tocador-L-01');
+    const text = formatOrderText({
+      name: 'Carmen',
+      phone: '+34600111222',
+      country: 'ES',
+      postalCode: '28001',
+      ...product,
+    });
+    expect(text).toContain('https://hsmuebles.es/tocadores/Tocador-L-01');
+  });
+
+  // Ссылку собирает сервер по своему каталогу: заявка с подделанным телом не
+  // должна приводить к тому, что владельцу в телеграм придёт чужой адрес.
+  it('игнорирует любой productUrl, присланный клиентом', () => {
+    const product = resolveOrderProduct(catalog, 'Tocador-L-01');
+    expect(product.productUrl.startsWith('https://hsmuebles.es/')).toBe(true);
+  });
+
+  it('обходится без ссылки, если у категории нет slug', () => {
+    const broken = [{ products: [{ id: 'X-1', name: 'X', price: 10 }] }];
+    const product = resolveOrderProduct(broken, 'X-1');
+    expect(product.productUrl).toBe('');
+    const text = formatOrderText({
+      name: 'A',
+      phone: '+34600111222',
+      country: 'ES',
+      postalCode: '28001',
+      ...product,
+    });
+    expect(text).not.toContain('https://');
   });
 });

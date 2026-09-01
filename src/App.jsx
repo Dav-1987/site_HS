@@ -15,6 +15,7 @@ const PrivacyPolicy = lazy(() => import('./pages/PrivacyPolicy.jsx'));
 const LegalNotice = lazy(() => import('./pages/LegalNotice.jsx'));
 const Shipping = lazy(() => import('./pages/Shipping.jsx'));
 const Returns = lazy(() => import('./pages/Returns.jsx'));
+const Reviews = lazy(() => import('./pages/Reviews.jsx'));
 const NotFound = lazy(() => import('./pages/NotFound.jsx'));
 const Admin = lazy(() => import('./pages/Admin.jsx'));
 const WallapopPanel = import.meta.env.DEV ? lazy(() => import('./pages/WallapopPanel.jsx')) : null;
@@ -49,6 +50,7 @@ const marketingRoutes = (
     <Route path="legal-notice" element={<LegalNotice />} />
     <Route path="envios" element={<Shipping />} />
     <Route path="devoluciones" element={<Returns />} />
+    <Route path="opiniones" element={<Reviews />} />
     <Route path=":slug" element={<Category />} />
     <Route path=":categorySlug/:id" element={<Product />} />
     <Route path="*" element={<NotFound />} />

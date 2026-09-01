@@ -7,6 +7,7 @@ export const translations = {
     'nav.home': 'Inicio',
     'nav.catalog': 'Catálogo',
     'nav.contact': 'Contacto',
+    'nav.reviews': 'Opiniones',
     'nav.menu': 'Menú',
     'nav.close': 'Cerrar',
 
@@ -168,6 +169,13 @@ export const translations = {
       'El montaje está incluido en la entrega del producto, sin coste adicional. No se vende por separado.',
     'shipping.how':
       'Tras realizar el pedido desde la ficha del producto, te llamamos para confirmar la dirección, el coste del envío y la fecha de entrega.',
+    'reviews.eyebrow': 'Opiniones',
+    'reviews.title': 'Lo que dicen nuestros clientes',
+    'reviews.intro':
+      'Mensajes y vídeos que nos mandan nuestros clientes después de recibir el mueble. Publicados tal cual, sin retoques.',
+    'reviews.all': 'Ver todas',
+    'reviews.alt': 'Opinión de cliente',
+    'reviews.empty': 'Todavía no hay opiniones publicadas.',
     'returns.title': 'Devoluciones',
     'returns.intro':
       'Dispones de 14 días desde la recepción del pedido para solicitar la devolución.',
@@ -216,6 +224,7 @@ export const translations = {
     'nav.home': 'Home',
     'nav.catalog': 'Catalog',
     'nav.contact': 'Contact',
+    'nav.reviews': 'Reviews',
     'nav.menu': 'Menu',
     'nav.close': 'Close',
 
@@ -376,6 +385,13 @@ export const translations = {
       'Assembly is included with the delivery of the product, at no extra cost. It is not sold separately.',
     'shipping.how':
       'Once you place your order from the product page, we call you to confirm the address, the shipping cost and the delivery date.',
+    'reviews.eyebrow': 'Reviews',
+    'reviews.title': 'What our customers say',
+    'reviews.intro':
+      'Messages and videos our customers send us after their furniture arrives. Published exactly as received, untouched.',
+    'reviews.all': 'See all',
+    'reviews.alt': 'Customer review',
+    'reviews.empty': 'No reviews published yet.',
     'returns.title': 'Returns',
     'returns.intro': 'You have 14 days from receiving your order to request a return.',
     'returns.condition':

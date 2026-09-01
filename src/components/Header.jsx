@@ -4,6 +4,7 @@ import { Link, NavLink } from './LocalizedLink.jsx';
 import { useLanguage } from '../i18n/LanguageContext.jsx';
 import { LANGUAGES } from '../i18n/translations.js';
 import { useCatalog } from '../catalog/CatalogContext.jsx';
+import { useSettings } from '../settings/SettingsContext.jsx';
 import { stripLangPrefix, withLang } from '../i18n/routing.js';
 
 function LangToggle({ className = '' }) {
@@ -45,6 +46,10 @@ function LangToggle({ className = '' }) {
 export default function Header() {
   const { lang, t } = useLanguage();
   const { categories } = useCatalog();
+  // Выключенный в /admin раздел отзывов пропадает и из меню — иначе ссылка
+  // вела бы на 404, который сама же страница и отдаёт.
+  const { settings } = useSettings();
+  const reviewsOn = settings.blocks?.reviews !== false;
   const [mobileOpen, setMobileOpen] = useState(false);
   const [catOpen, setCatOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -137,6 +142,12 @@ export default function Header() {
             </div>
           </div>
 
+          {reviewsOn && (
+            <NavLink to="/opiniones" className={navLinkClass}>
+              {t('nav.reviews')}
+            </NavLink>
+          )}
+
           <NavLink to="/contacto" className={navLinkClass}>
             {t('nav.contact')}
           </NavLink>
@@ -223,6 +234,15 @@ export default function Header() {
               </div>
             </div>
           </div>
+
+          {reviewsOn && (
+            <NavLink
+              to="/opiniones"
+              className="border-b border-primary/10 py-4 font-serif text-2xl font-light"
+            >
+              {t('nav.reviews')}
+            </NavLink>
+          )}
 
           <NavLink
             to="/contacto"

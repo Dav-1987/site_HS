@@ -40,7 +40,7 @@ import { handleOrder } from './order-handler.js';
 import { buildGoogleFeed, buildMetaFeed, buildPinterestFeed } from './feed.js';
 import { buildProductIndex, resolveRedirect } from './redirects.js';
 import { rebuildConfigured, triggerRebuild, getLatestRun } from './rebuild.js';
-import { isVideoFile, sweepVideos } from './video.js';
+import { extractPoster, isVideoFile, posterFor, sweepVideos } from './video.js';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const UPLOADS_DIR = join(__dirname, '../uploads');
@@ -123,6 +123,16 @@ function extractSettingsKeys(settings) {
   add(settings?.hero?.image);
   add(settings?.hero?.imageMobile);
   add(settings?.hero?.video);
+  for (const card of settings?.featuredCards ?? []) {
+    add(card?.cover);
+    add(card?.video);
+  }
+  // Reviews live only in settings — miss them here and the cleanup would count
+  // every screenshot as an orphan.
+  for (const review of settings?.reviews ?? []) {
+    add(review?.image);
+    add(review?.video);
+  }
   return keys;
 }
 
@@ -147,6 +157,17 @@ async function runCleanup() {
         for (const w of WEBP_SIZES) {
           try {
             unlinkSync(join(UPLOADS_DIR, `${base}_${w}.webp`));
+          } catch {}
+        }
+        // Постер видеоотзыва и его версии: он выводится из имени видео, а не
+        // хранится в настройках, поэтому сам под чистку никогда не попадёт —
+        // убираем его здесь, иначе он останется висеть навсегда.
+        try {
+          unlinkSync(join(UPLOADS_DIR, `${base}_poster.jpg`));
+        } catch {}
+        for (const w of WEBP_SIZES) {
+          try {
+            unlinkSync(join(UPLOADS_DIR, `${base}_poster_${w}.webp`));
           } catch {}
         }
         console.log(`[cleanup] deleted: ${filename}`);
@@ -379,6 +400,8 @@ app.post('/api/upload', (req, res) => {
 
   const isVideo = contentType.startsWith('video/');
   const maxBytes = isVideo ? MAX_VIDEO : MAX_IMAGE;
+  // ?original=discard — keep only the generated WebP variants (reviews).
+  const discardOriginal = req.query?.original === 'discard' && !isVideo;
   const tmpPath = join(UPLOADS_DIR, `tmp-${Date.now()}-${Math.random().toString(36).slice(2)}`);
   const ws = createWriteStream(tmpPath);
   const hash = createHash('sha256');
@@ -430,6 +453,19 @@ app.post('/api/upload', (req, res) => {
       }
       if (!isVideo && ext !== 'gif') {
         await generateWebpVariants(finalPath, base);
+        // Review screenshots are the one upload nothing ever serves in its
+        // original form: the site and the lightbox both read the WebP
+        // variants, and unlike product photos these never go into the Meta
+        // feed, which is the reason originals are kept at all (see
+        // server/feed.js). A 1080×1350 PNG is ~0.5–1 MB of dead weight each,
+        // so the admin asks us to drop it once the variants exist.
+        if (discardOriginal) {
+          try {
+            unlinkSync(finalPath);
+          } catch (err) {
+            if (err.code !== 'ENOENT') console.error('upload original cleanup failed', err);
+          }
+        }
       }
       res.json({ url: `/uploads/${key}` });
     });
@@ -528,11 +564,45 @@ async function startVideoSweep() {
       `[video] sweep done: ${summary.converted} converted, ${summary.skipped} already fine, ` +
         `${summary.failed} failed, ${saved.toFixed(1)} MB saved`,
     );
+    await generateReviewPosters();
   } catch (err) {
     console.error('[video] sweep failed', err);
   } finally {
     videoSweepRunning = false;
   }
+}
+
+/**
+ * Постеры для видеоотзывов. Только для них: у товарных роликов постер нигде не
+ * используется, и плодить рядом с ними неиспользуемые файлы незачем.
+ *
+ * Путь постера выводится из пути видео (posterFor), а не хранится, поэтому
+ * пересъёмка отзыва не может оставить постер от прежнего ролика. Уже
+ * существующие не перегенерируем — проход должен оставаться дешёвым.
+ */
+async function generateReviewPosters() {
+  const settings = await readSettings();
+  const videos = (settings?.reviews ?? []).map((r) => r?.video).filter(Boolean);
+  if (!videos.length) return;
+
+  let made = 0;
+  for (const src of videos) {
+    const posterUrl = posterFor(src);
+    if (!posterUrl) continue;
+    const posterPath = join(UPLOADS_DIR, posterUrl.slice(9));
+    if (existsSync(posterPath)) continue;
+    const videoPath = join(UPLOADS_DIR, src.slice(9));
+    if (!existsSync(videoPath)) continue;
+    try {
+      await extractPoster(videoPath, posterPath);
+      // generateWebpVariants ждёт basename без каталога и расширения.
+      await generateWebpVariants(posterPath, posterUrl.slice(9).replace(/\.[^.]+$/, ''));
+      made += 1;
+    } catch (err) {
+      console.error(`[video] poster for ${src} failed:`, err.message);
+    }
+  }
+  if (made) console.log(`[video] ${made} review poster(s) generated`);
 }
 
 app.get('/api/admin/rebuild/status', async (req, res) => {

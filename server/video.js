@@ -233,6 +233,57 @@ export async function normalizeVideo(path, { ffmpeg = 'ffmpeg', ffprobe = 'ffpro
 }
 
 /**
+ * Момент, с которого берём постер. Не нулевой кадр: телефон в первые доли
+ * секунды ещё доводит экспозицию и ловит фокус, а рука дёргается — нулевой
+ * кадр у записи с рук регулярно выходит тёмным или смазанным. Полсекунды
+ * визуально всё ещё «начало ролика», но картинка уже чистая.
+ */
+export const POSTER_OFFSET_SEC = 0.5;
+
+/**
+ * `/uploads/abc.mp4` → `/uploads/abc_poster.jpg`.
+ *
+ * Зеркалит posterFor в src/data/settings.js. Дублируется намеренно: тот модуль
+ * подтягивает settings.default.json через `import`, а на сервере такой импорт
+ * не проходит — по той же причине server/settings.js читает этот JSON через
+ * readFileSync. Правило простое: меняется одна — правится и вторая.
+ */
+export function posterFor(videoSrc) {
+  if (typeof videoSrc !== 'string' || !videoSrc.startsWith('/uploads/')) return '';
+  return videoSrc.replace(/\.[^.]+$/, '_poster.jpg');
+}
+
+/** Аргументы для извлечения одного кадра в JPEG. */
+export function posterArgs(src, dst, { offset = POSTER_OFFSET_SEC } = {}) {
+  return [
+    '-hide_banner',
+    '-loglevel', 'error',
+    '-y',
+    // -ss до -i: ffmpeg перематывает по ключевым кадрам, не декодируя всё.
+    '-ss', String(offset),
+    '-i', src,
+    '-frames:v', '1',
+    '-q:v', '4',
+    dst,
+  ];
+}
+
+/**
+ * Постер для видео. Короткий ролик может оказаться короче смещения — тогда
+ * ffmpeg не отдаст ни одного кадра, и мы повторяем с нуля.
+ */
+export async function extractPoster(src, dst, { ffmpeg = 'ffmpeg' } = {}) {
+  try {
+    await run(ffmpeg, posterArgs(src, dst));
+    if ((await stat(dst)).size > 0) return true;
+  } catch {
+    // падаем в повтор ниже
+  }
+  await run(ffmpeg, posterArgs(src, dst, { offset: 0 }));
+  return (await stat(dst)).size > 0;
+}
+
+/**
  * Пройти по всем видео в каталоге и нормализовать те, которым это нужно.
  * Последовательно и по одному — параллелить на одном ядре бессмысленно и
  * опасно. Ошибка на одном файле не останавливает проход.
