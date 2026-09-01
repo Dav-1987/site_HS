@@ -10,6 +10,7 @@ import TextsEditor from './TextsEditor.jsx';
 import ContactEditor from './ContactEditor.jsx';
 import SeoSettingsEditor from './SeoSettingsEditor.jsx';
 import BlocksEditor from './BlocksEditor.jsx';
+import ReviewsEditor from './ReviewsEditor.jsx';
 import CategoryEditor from './CategoryEditor.jsx';
 
 export default function CatalogEditor({ onLogout }) {
@@ -112,6 +113,12 @@ export default function CatalogEditor({ onLogout }) {
           <ContactEditor
             contact={settings.contact}
             onChange={(contact) => updateSettings({ ...settings, contact })}
+          />
+        )}
+        {settings && (
+          <ReviewsEditor
+            reviews={settings.reviews || []}
+            onChange={(reviews) => updateSettings({ ...settings, reviews })}
           />
         )}
         {settings && <SeoSettingsEditor settings={settings} onChange={updateSettings} />}

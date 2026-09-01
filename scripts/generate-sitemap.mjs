@@ -12,6 +12,10 @@ const SITE = 'https://hsmuebles.es';
 const catalog = JSON.parse(
   readFileSync(join(__dirname, '../src/data/catalog.default.json'), 'utf8'),
 );
+// Только ради выключателей разделов — см. src/routes.js.
+const settings = JSON.parse(
+  readFileSync(join(__dirname, '../src/data/settings.default.json'), 'utf8'),
+);
 
 // Real per-row modification time (see server/store.js writeCatalog), pulled
 // down into catalog.default.json by scripts/pull-catalog.mjs. Older pulls
@@ -20,7 +24,7 @@ const catalog = JSON.parse(
 // over an inaccurate one).
 const isoDate = (d) => (d ? new Date(d).toISOString().split('T')[0] : undefined);
 
-const routes = buildRoutes(catalog);
+const routes = buildRoutes(catalog, settings);
 
 const allTimestamps = routes.map((r) => r.updatedAt).filter(Boolean);
 // / and /catalogo surface the whole catalog, so they're "modified" whenever

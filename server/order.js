@@ -10,6 +10,9 @@ import {
   normalizeIsoCountryCode,
 } from './order-data.js';
 
+/** Канонический хост сайта — тот же, что в server/feed.js. */
+const SITE = 'https://hsmuebles.es';
+
 const EVENT_ID_RE = /^[A-Za-z0-9._:-]+$/;
 
 export function isValidPhone(phone, country) {
@@ -66,9 +69,15 @@ export function resolveOrderProduct(categories, productId) {
     if (!product) continue;
     const subtitle = typeof product.subtitle === 'string' ? product.subtitle.trim() : '';
     const name = typeof product.name === 'string' ? product.name.trim() : '';
+    // Канонический адрес товара — тот же, что строит товарный фид и что отдаёт
+    // роутер: /<slug категории>/<id>. Собираем здесь, а не на клиенте: каталог
+    // всё равно уже прочитан, а заявка от подделанного тела запроса не должна
+    // приносить произвольную ссылку в телеграм владельцу.
+    const slug = typeof category.slug === 'string' ? category.slug.trim() : '';
     return {
       productId: product.id,
       productName: `${name}${subtitle ? ` ${subtitle}` : ''}`.trim(),
+      productUrl: slug ? `${SITE}/${slug}/${product.id}` : '',
       price: Number.isFinite(product.price) && product.price >= 0 ? product.price : 0,
     };
   }
@@ -85,11 +94,13 @@ export function formatOrderText({
   comment,
   productName,
   productId,
+  productUrl,
   price,
   attribution,
 }) {
   const out = ['🛒 Nueva solicitud — Mirage Muebles', ''];
   out.push(`Producto: ${productName}${productId ? ` [${productId}]` : ''}`);
+  if (productUrl) out.push(productUrl);
   if (typeof price === 'number' && Number.isFinite(price)) out.push(`Precio: ${price} €`);
   out.push('');
   out.push(`Cliente: ${name.trim()}`);

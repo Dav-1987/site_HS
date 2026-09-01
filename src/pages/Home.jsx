@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
 import { useLanguage } from '../i18n/LanguageContext.jsx';
 import { useCatalog } from '../catalog/CatalogContext.jsx';
 import { useSettings } from '../settings/SettingsContext.jsx';
@@ -12,6 +12,9 @@ import Button from '../components/Button.jsx';
 import SectionHeader from '../components/SectionHeader.jsx';
 import CategoryCard from '../components/CategoryCard.jsx';
 import FeaturedCard from '../components/FeaturedCard.jsx';
+import ReviewTile from '../components/ReviewTile.jsx';
+import Lightbox from '../components/Lightbox.jsx';
+import { toLightboxItems } from '../data/settings.js';
 import { CarouselArrows, CarouselTrack, useCarousel } from '../components/ProductCarousel.jsx';
 
 const FEATURED_CARD_CLASSNAME =
@@ -136,6 +139,77 @@ function FeaturedSection() {
   );
 }
 
+/** Сколько последних отзывов показываем на главной; остальное — на /opiniones. */
+const REVIEWS_ON_HOME = 8;
+
+const REVIEW_CARD_CLASSNAME =
+  'w-[calc(100%-120px)] flex-none snap-start sm:w-[calc(50%-24px)] md:w-[calc(33.333%-32px)] lg:w-[calc(25%-30px)]';
+
+/**
+ * Лента последних отзывов на главной. Два независимых тумблера: `reviews`
+ * выключает раздел целиком (тогда и ленты быть не может), `reviewsHome` —
+ * только эту ленту, оставляя страницу /opiniones живой.
+ */
+function ReviewsSection() {
+  const { t } = useLanguage();
+  const { settings } = useSettings();
+  const [lightbox, setLightbox] = useState(-1);
+  // Хуки — до любого раннего выхода, иначе их порядок между рендерами поедет.
+  const carousel = useCarousel();
+
+  const reviews = useMemo(
+    () => (settings.reviews ?? []).slice(0, REVIEWS_ON_HOME),
+    [settings.reviews],
+  );
+  // Индекс кладём в сам элемент: CarouselTrack отдаёт в renderItem только его,
+  // а лайтбоксу нужно знать, с какой позиции открываться. `id` там же служит
+  // ключом списка.
+  const items = useMemo(
+    () => reviews.map((r, i) => ({ ...r, id: r.video || r.image, index: i })),
+    [reviews],
+  );
+
+  if (
+    !reviews.length ||
+    settings.blocks?.reviews === false ||
+    settings.blocks?.reviewsHome === false
+  ) {
+    return null;
+  }
+
+  return (
+    <section className="py-14 md:py-20">
+      <div className="px-6 md:px-12 lg:px-20">
+        <SectionHeader
+          eyebrow={t('reviews.eyebrow')}
+          title={t('reviews.title')}
+          gapClassName="mb-8 md:mb-12"
+          action={<Button to="/opiniones">{t('reviews.all')}</Button>}
+        />
+      </div>
+
+      <CarouselTrack
+        products={items}
+        carousel={carousel}
+        cardClassName={REVIEW_CARD_CLASSNAME}
+        renderItem={(item) => (
+          <ReviewTile review={item} index={item.index} onOpen={setLightbox} />
+        )}
+      />
+
+      {lightbox >= 0 && (
+        <Lightbox
+          items={toLightboxItems(reviews)}
+          index={lightbox}
+          alt={t('reviews.alt')}
+          onClose={() => setLightbox(-1)}
+          onIndex={setLightbox}
+        />
+      )}
+    </section>
+  );
+}
+
 function CategoriesSection() {
   const { t } = useLanguage();
   const { categories } = useCatalog();
@@ -183,6 +257,7 @@ export default function Home() {
       <Hero />
       <FeaturedSection />
       <CategoriesSection />
+      <ReviewsSection />
     </>
   );
 }

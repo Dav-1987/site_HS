@@ -4,6 +4,9 @@ import {
   needsTranscode,
   parseMeanVolume,
   parseProbe,
+  posterArgs,
+  posterFor,
+  POSTER_OFFSET_SEC,
   scaleFilter,
   transcodeArgs,
   TARGET_PORTRAIT_WIDTH,
@@ -168,5 +171,37 @@ describe('parseMeanVolume', () => {
   it('returns null when volumedetect printed nothing usable', () => {
     expect(parseMeanVolume('')).toBe(null);
     expect(parseMeanVolume('max_volume: -0.1 dB')).toBe(null);
+  });
+});
+
+describe('постер видеоотзыва', () => {
+  it('выводит путь постера из пути ролика', () => {
+    expect(posterFor('/uploads/abc.mp4')).toBe('/uploads/abc_poster.jpg');
+    expect(posterFor('/uploads/abc.mov')).toBe('/uploads/abc_poster.jpg');
+  });
+
+  it('ничего не выдумывает для внешних адресов', () => {
+    expect(posterFor('https://example.com/a.mp4')).toBe('');
+    expect(posterFor(undefined)).toBe('');
+  });
+
+  // Совпадает с posterFor в src/data/settings.js — если разойдутся, плитка
+  // будет просить постер по одному адресу, а сервер класть его по другому.
+  it('совпадает с клиентской версией', async () => {
+    const client = await import('../src/data/settings.js');
+    expect(client.posterFor('/uploads/abc.mp4')).toBe(posterFor('/uploads/abc.mp4'));
+  });
+
+  it('берёт кадр не с нуля — начало записи с рук обычно смазано', () => {
+    expect(POSTER_OFFSET_SEC).toBeGreaterThan(0);
+    expect(posterArgs('in.mp4', 'out.jpg').join(' ')).toContain(`-ss ${POSTER_OFFSET_SEC}`);
+  });
+
+  it('просит ровно один кадр', () => {
+    expect(posterArgs('in.mp4', 'out.jpg').join(' ')).toContain('-frames:v 1');
+  });
+
+  it('умеет взять нулевой кадр — ролик может быть короче смещения', () => {
+    expect(posterArgs('in.mp4', 'out.jpg', { offset: 0 }).join(' ')).toContain('-ss 0');
   });
 });

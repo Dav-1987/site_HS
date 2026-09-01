@@ -13,6 +13,7 @@ const defaultSettings = JSON.parse(
 
 const MAX_TEXT_LEN = 4000;
 const MAX_FEATURED = 12;
+const MAX_REVIEWS = 200;
 
 function sanitizeFeatured(input) {
   if (!Array.isArray(input)) return [];
@@ -84,11 +85,32 @@ function sanitizeSeo(seo) {
 // On/off switches for whole sections of the site. Mirrors BLOCKS in
 // src/data/settings.js — anything that isn't an explicit `false` stays on, so a
 // settings row written before a switch existed never blanks its section.
-const BLOCKS = ['featured', 'collections', 'heroPromo'];
+const BLOCKS = ['featured', 'collections', 'heroPromo', 'reviews', 'reviewsHome'];
 
 function sanitizeBlocks(blocks) {
   const out = {};
   for (const key of BLOCKS) out[key] = blocks?.[key] !== false;
+  return out;
+}
+
+// The reviews wall: ordered `{ image }` / `{ video }` items and nothing else.
+// Mirrors sanitizeReviews in src/data/settings.js — the two must agree, or a
+// field the client sends is silently dropped on save.
+function sanitizeReviews(input) {
+  if (!Array.isArray(input)) return [];
+  const out = [];
+  const seen = new Set();
+  for (const item of input) {
+    if (!item || typeof item !== 'object') continue;
+    const image = typeof item.image === 'string' ? item.image.trim().slice(0, MAX_TEXT_LEN) : '';
+    const video = typeof item.video === 'string' ? item.video.trim().slice(0, MAX_TEXT_LEN) : '';
+    if (!image && !video) continue;
+    const key = video || image;
+    if (seen.has(key)) continue;
+    seen.add(key);
+    out.push(video ? { video } : { image });
+    if (out.length >= MAX_REVIEWS) break;
+  }
   return out;
 }
 
@@ -107,6 +129,7 @@ export function mergeSettings(input) {
     },
     featured: sanitizeFeatured(input?.featured),
     featuredCards: sanitizeFeaturedCards(input?.featuredCards),
+    reviews: sanitizeReviews(input?.reviews),
     texts: sanitizeTexts(input?.texts),
     contact: sanitizeContact(input?.contact),
     seo: sanitizeSeo(input?.seo),

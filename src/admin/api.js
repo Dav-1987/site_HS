@@ -71,6 +71,20 @@ export function uploadImage(file) {
   }).then(asJson);
 }
 
+/**
+ * Загрузка скриншота отзыва. Отличается от uploadImage одним: сервер выбросит
+ * оригинал, оставив только WebP-версии. Оригиналы товарных фото хранятся ради
+ * фида Meta, который требует JPEG/PNG, — отзывы ни в один фид не попадают, и
+ * держать рядом с каждым ещё по мегабайту незачем.
+ */
+export function uploadReviewImage(file) {
+  return fetch('/api/upload?original=discard', {
+    method: 'POST',
+    headers: { 'content-type': file.type },
+    body: file,
+  }).then(asJson);
+}
+
 /** Upload a video file (mp4/webm/mov, max 200 MB); resolves to { url }. */
 export function uploadVideo(file) {
   return fetch('/api/upload', {
