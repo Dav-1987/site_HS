@@ -27,6 +27,7 @@ import {
   OTHER_MODELS_SLUG,
   moveProductsToCategory,
   productPerkVariant,
+  productGift,
   PERK_VARIANTS,
   DEFAULT_PERK_VARIANT,
 } from './catalog.js';
@@ -673,5 +674,115 @@ describe('duplicateProductLabels', () => {
   it('survives an empty or missing catalog', () => {
     expect(duplicateProductLabels([], 'es')).toEqual(new Set());
     expect(duplicateProductLabels(undefined, 'es')).toEqual(new Set());
+  });
+});
+
+describe('productGift', () => {
+  // A shelf worth 89 €, a table that gives it away, and a mirror that does not.
+  const shelf = {
+    id: 'Estanteria-E-03',
+    name: 'Estantería | de pared con tres baldas',
+    nameEn: 'Shelf | wall-mounted with three boards',
+    subtitle: '60 × 180 cm',
+    price: 89,
+    images: ['/uploads/shelf.jpg'],
+  };
+  const table = { id: 'Tocador-T-01', name: 'Tocador | blanco', price: 239 };
+  const mirror = { id: 'Espejo-F-05', name: 'Espejo | alto', price: 199 };
+  const rule = { source: 'catalog', productId: shelf.id };
+  const build = (tocadorGift, productGiftField) => [
+    {
+      slug: 'tocadores',
+      name: { es: 'Tocadores', en: 'Dressing tables' },
+      gift: tocadorGift,
+      products: [{ ...table, gift: productGiftField }, mirror],
+    },
+    { slug: 'estanterias', name: { es: 'Estanterías', en: 'Shelves' }, products: [shelf] },
+  ];
+
+  it('is null when neither the category nor the product offers anything', () => {
+    const cats = build(undefined, undefined);
+    expect(productGift(cats, cats[0].products[0], cats[0], 'es')).toBeNull();
+  });
+
+  it('names the gift the way its own catalog tile does, and prices it', () => {
+    const cats = build(rule, undefined);
+    expect(productGift(cats, cats[0].products[0], cats[0], 'es')).toEqual({
+      name: 'Estantería 60 × 180 cm',
+      shortName: 'Estantería',
+      image: '/uploads/shelf.jpg',
+      href: '/estanterias/Estanteria-E-03',
+      price: 89,
+    });
+  });
+
+  it('reads the English name on the English pages', () => {
+    const cats = build(rule, undefined);
+    expect(productGift(cats, cats[0].products[0], cats[0], 'en').name).toBe('Shelf 60 × 180 cm');
+  });
+
+  it('applies the category rule to every product in it', () => {
+    const cats = build(rule, undefined);
+    expect(productGift(cats, cats[0].products[1], cats[0], 'es').name).toBe(
+      'Estantería 60 × 180 cm',
+    );
+  });
+
+  it('hides the price when the offer says not to show it', () => {
+    const cats = build({ ...rule, showPrice: false }, undefined);
+    expect(productGift(cats, cats[0].products[0], cats[0], 'es').price).toBeNull();
+  });
+
+  it('lets a product opt out of its category rule', () => {
+    const cats = build(rule, { mode: 'off' });
+    expect(productGift(cats, cats[0].products[0], cats[0], 'es')).toBeNull();
+  });
+
+  it('lets a product name a gift of its own instead', () => {
+    const cats = build(rule, { mode: 'own', source: 'catalog', productId: mirror.id });
+    expect(productGift(cats, cats[0].products[0], cats[0], 'es').name).toBe('Espejo');
+  });
+
+  it('takes a hand-written gift in the reader language, with no link', () => {
+    const custom = {
+      mode: 'own',
+      source: 'custom',
+      name: { es: 'Funda protectora', en: 'Protective cover' },
+      size: '120 cm',
+      image: '/uploads/cover.jpg',
+    };
+    const cats = build(undefined, custom);
+    expect(productGift(cats, cats[0].products[0], cats[0], 'en')).toEqual({
+      name: 'Protective cover 120 cm',
+      shortName: 'Protective cover',
+      image: '/uploads/cover.jpg',
+      href: null,
+      price: null,
+    });
+  });
+
+  it('falls back to the Spanish name when a hand-written gift has no English', () => {
+    const cats = build(undefined, {
+      mode: 'own',
+      source: 'custom',
+      name: { es: 'Funda protectora' },
+    });
+    expect(productGift(cats, cats[0].products[0], cats[0], 'en').name).toBe('Funda protectora');
+  });
+
+  it('promises nothing when the gift is sold out', () => {
+    const cats = build(rule, undefined);
+    cats[1].products[0] = { ...shelf, inStock: false };
+    expect(productGift(cats, cats[0].products[0], cats[0], 'es')).toBeNull();
+  });
+
+  it('promises nothing when the gift has been deleted', () => {
+    const cats = build({ source: 'catalog', productId: 'gone' }, undefined);
+    expect(productGift(cats, cats[0].products[0], cats[0], 'es')).toBeNull();
+  });
+
+  it('never gives a product away with itself', () => {
+    const cats = build({ source: 'catalog', productId: table.id }, undefined);
+    expect(productGift(cats, cats[0].products[0], cats[0], 'es')).toBeNull();
   });
 });

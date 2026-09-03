@@ -79,6 +79,17 @@ export const translations = {
     'product.video': 'Vídeo',
     'product.zoom': 'Ampliar',
     'product.soldOut': 'Agotado',
+    // --- Gift with purchase ---
+    // The line reads "Incluye <Estantería 60 × 180 cm> de regalo", with the
+    // gift's name in the middle, so it is built from a prefix and a suffix
+    // rather than one string with a placeholder — t() does no interpolation,
+    // and the two languages do not put the name in the same place.
+    'product.giftBefore': 'Incluye',
+    'product.giftAfter': 'de regalo',
+    'product.giftValue': 'valor',
+    'product.giftBadge': 'Regalo',
+    'product.giftLabel': 'De regalo',
+    'product.giftWith': 'De regalo con',
     'product.customOrderTitle': 'Fabricación a medida',
     'product.customOrderText':
       'Este artículo puede fabricarse en las dimensiones que necesites. Contáctanos para recibir presupuesto personalizado.',
@@ -297,6 +308,13 @@ export const translations = {
     'product.video': 'Video',
     'product.zoom': 'Zoom',
     'product.soldOut': 'Sold out',
+    // --- Gift with purchase --- (see the Spanish block)
+    'product.giftBefore': 'Includes',
+    'product.giftAfter': 'as a gift',
+    'product.giftValue': 'worth',
+    'product.giftBadge': 'Gift',
+    'product.giftLabel': 'Free gift',
+    'product.giftWith': 'A free gift with',
     'product.customOrderTitle': 'Made to your measurements',
     'product.customOrderText':
       'This item can be made in any dimensions you need. Contact us for a personalised quote.',

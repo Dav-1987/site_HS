@@ -134,3 +134,44 @@ describe('productContentEqual — stock', () => {
     expect(productContentEqual(soldOut, { ...soldOut })).toBe(true);
   });
 });
+
+describe('productContentEqual — gift', () => {
+  const gift = { mode: 'own', source: 'catalog', productId: 'Estanteria-E-03' };
+
+  it('treats a product with no gift as unchanged', () => {
+    expect(productContentEqual(base, { ...base, gift: {} })).toBe(true);
+  });
+
+  it('sees a gift being added', () => {
+    expect(productContentEqual(base, { ...base, gift })).toBe(false);
+  });
+
+  it('sees the gift being pointed at another product', () => {
+    const moved = { ...gift, productId: 'Espejo-F-05' };
+    expect(productContentEqual({ ...base, gift }, { ...base, gift: moved })).toBe(false);
+  });
+
+  it('sees the price switch being turned off', () => {
+    const quiet = { ...gift, showPrice: false };
+    expect(productContentEqual({ ...base, gift }, { ...base, gift: quiet })).toBe(false);
+  });
+
+  // Same reason as the media regression above: `gift` is jsonb, so the object
+  // read back from Postgres carries its keys shortest-first, not in the order
+  // it was written. Compared by stringify, every product with a gift would look
+  // changed on every save.
+  it('ignores the key order Postgres hands the object back in', () => {
+    const reordered = { source: 'catalog', mode: 'own', productId: 'Estanteria-E-03' };
+    expect(productContentEqual({ ...base, gift }, { ...base, gift: reordered })).toBe(true);
+  });
+
+  it('ignores fields that are not part of a gift', () => {
+    const noisy = { ...gift, injected: 'drop me' };
+    expect(productContentEqual({ ...base, gift }, { ...base, gift: noisy })).toBe(true);
+  });
+
+  it('ignores an unknown mode, which reads as the default', () => {
+    const bogus = { ...gift, mode: 'sometimes' };
+    expect(productContentEqual({ ...base, gift: { source: 'catalog', productId: 'Estanteria-E-03' } }, { ...base, gift: bogus })).toBe(true);
+  });
+});

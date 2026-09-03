@@ -15,6 +15,7 @@ import { translations } from '../../i18n/translations.js';
 import ImageField from './ImageField.jsx';
 import ProductImagesEditor from './ProductImagesEditor.jsx';
 import ProductPicker from './ProductPicker.jsx';
+import GiftEditor from './GiftEditor.jsx';
 import VisibilitySelect, { VisibilityBadge, VisibilityNote } from './VisibilitySelect.jsx';
 import StockToggle, { StockBadge, StockNote } from './StockToggle.jsx';
 
@@ -212,6 +213,15 @@ export default function ProductEditor({
               </span>
             </span>
           </label>
+
+          <SectionLabel>Подарок</SectionLabel>
+          <GiftEditor
+            value={product.gift}
+            onChange={(gift) => set({ gift })}
+            allProducts={allProducts}
+            excludeId={product.id}
+            forProduct
+          />
 
           <SectionLabel>Материал</SectionLabel>
           <div className="grid gap-3 sm:grid-cols-2">

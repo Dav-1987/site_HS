@@ -22,8 +22,9 @@ import {
   normalizePhone,
 } from '../../server/order-data.js';
 import { productDiscount, productFullName, productLabel } from '../data/catalog.js';
+import { GiftLine } from './Gift.jsx';
 
-export default function OrderModal({ product, isOpen, onClose }) {
+export default function OrderModal({ product, gift, isOpen, onClose }) {
   const { lang, t } = useLanguage();
   const idPrefix = useId();
   const fieldIds = {
@@ -306,6 +307,11 @@ export default function OrderModal({ product, isOpen, onClose }) {
                 <span className="block font-semibold">{productName}</span>
                 {productSize && <span className="mt-1 block font-normal"> {productSize}</span>}
               </h2>
+
+              {/* Repeated here on purpose: this is the moment the visitor
+                  commits, and the offer they are committing to has to be on the
+                  same screen as the button that sends the request. */}
+              <GiftLine gift={gift} className="mt-3 justify-center text-center" />
 
               <form onSubmit={handleSubmit} className="mt-6 space-y-4" noValidate>
                 <div>

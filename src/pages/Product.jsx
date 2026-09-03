@@ -16,8 +16,10 @@ import {
   productImages,
   productLabel,
   productMedia,
+  productGift,
   productPerkVariant,
   productReference,
+  giftedWith,
   computeRelated,
   resolveImage,
 } from '../data/catalog.js';
@@ -36,6 +38,7 @@ import Price from '../components/Price.jsx';
 import Lightbox from '../components/Lightbox.jsx';
 import ProductCarousel from '../components/ProductCarousel.jsx';
 import OrderModal from '../components/OrderModal.jsx';
+import { GiftInset, GiftLine, GiftWithNote } from '../components/Gift.jsx';
 import ExpandableText from '../components/ExpandableText.jsx';
 import NotFound from './NotFound.jsx';
 
@@ -176,7 +179,7 @@ function RelatedCarousel({ related, title }) {
 export default function Product() {
   const { categorySlug, id } = useParams();
   const { lang, t, localize } = useLanguage();
-  const { getProduct, categories, loaded } = useCatalog();
+  const { getProduct, categories, allCategories, loaded } = useCatalog();
   const [active, setActive] = useState(0);
   const [thumbStart, setThumbStart] = useState(0);
   const [zoom, setZoom] = useState(false);
@@ -261,6 +264,13 @@ export default function Product() {
   const goImage = (dir) => activateImage((activeIdx + dir + gallery.length) % gallery.length);
   const shiftStrip = (dir) =>
     setThumbStart((s) => Math.max(0, Math.min(s + dir, gallery.length - THUMB_VISIBLE)));
+
+  // Both directions of the gift offer: what this piece comes with, and what it
+  // is itself given away with. Resolved against `allCategories` rather than the
+  // listed ones, so a gift kept out of the catalog (the usual state for a piece
+  // that is not sold separately) still resolves.
+  const gift = productGift(allCategories, product, category, lang);
+  const giftedFor = giftedWith(allCategories, product, lang);
 
   const related = computeRelated(categories, product, category, product.related);
   // The snippet, not the whole text: Google shows about 155 characters and the
@@ -448,6 +458,9 @@ export default function Product() {
                 </button>
               )}
               <ProductBadge product={product} />
+              {/* Only on the cover photo: on every frame it would sit between
+                  the reader and the piece they opened the gallery to look at. */}
+              {activeIdx === firstPhotoIdx && <GiftInset gift={gift} />}
               {!isVideoActive && (
                 <span className="pointer-events-none absolute bottom-3 right-3 bg-background/85 px-3 py-1.5 text-xs uppercase tracking-[0.18em] text-primary opacity-0 transition-opacity duration-300 group-hover:opacity-100">
                   {t('product.zoom')}
@@ -578,6 +591,8 @@ export default function Product() {
             <div className="mt-4 lg:mt-4">
               <Price product={product} className="font-serif text-3xl text-primary" />
             </div>
+            <GiftLine gift={gift} className="mt-3" />
+            <GiftWithNote offer={giftedFor} className="mt-3" />
 
             <ExpandableText
               className="mt-8 max-w-2xl"
@@ -617,7 +632,12 @@ export default function Product() {
         </div>
       </article>
 
-      <OrderModal product={product} isOpen={orderOpen} onClose={() => setOrderOpen(false)} />
+      <OrderModal
+        product={product}
+        gift={gift}
+        isOpen={orderOpen}
+        onClose={() => setOrderOpen(false)}
+      />
 
       {zoom && (
         <Lightbox

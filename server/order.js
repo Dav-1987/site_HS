@@ -2,6 +2,7 @@
 // formatting. Side-effect free so they can be unit-tested without Express.
 
 import { describeAttribution } from './attribution.js';
+import { productGift } from '../src/data/catalog.js';
 import {
   getCountryName,
   isShippingCountry,
@@ -74,11 +75,16 @@ export function resolveOrderProduct(categories, productId) {
     // всё равно уже прочитан, а заявка от подделанного тела запроса не должна
     // приносить произвольную ссылку в телеграм владельцу.
     const slug = typeof category.slug === 'string' ? category.slug.trim() : '';
+    // Подарок тоже резолвим здесь, а не берём из тела запроса: то, что поедет
+    // вместе со столом, решает каталог, а не клиент. Испанский — на нём
+    // написано всё уведомление.
+    const gift = productGift(categories, product, category, 'es');
     return {
       productId: product.id,
       productName: `${name}${subtitle ? ` ${subtitle}` : ''}`.trim(),
       productUrl: slug ? `${SITE}/${slug}/${product.id}` : '',
       price: Number.isFinite(product.price) && product.price >= 0 ? product.price : 0,
+      giftName: gift?.name ?? '',
     };
   }
   return null;
@@ -96,12 +102,16 @@ export function formatOrderText({
   productId,
   productUrl,
   price,
+  giftName,
   attribution,
 }) {
   const out = ['🛒 Nueva solicitud — Mirage Muebles', ''];
   out.push(`Producto: ${productName}${productId ? ` [${productId}]` : ''}`);
   if (productUrl) out.push(productUrl);
   if (typeof price === 'number' && Number.isFinite(price)) out.push(`Precio: ${price} €`);
+  // Без этой строки подарок просто не уедет: заявка выглядит как обычный заказ
+  // одного товара.
+  if (giftName) out.push(`🎁 Regalo: ${giftName}`);
   out.push('');
   out.push(`Cliente: ${name.trim()}`);
   out.push(`Teléfono: ${phone.trim()}`);
