@@ -111,3 +111,13 @@ export function useCatalog() {
   if (!ctx) throw new Error('useCatalog must be used within a CatalogProvider');
   return ctx;
 }
+
+/**
+ * The catalog if a provider is above, and null if there isn't — for decorative
+ * reads that must never be the reason a tree fails to render. `useCatalog`
+ * stays strict: anything that cannot do its job without the catalog should say
+ * so loudly rather than render half of itself.
+ */
+export function useOptionalCatalog() {
+  return useContext(CatalogContext);
+}

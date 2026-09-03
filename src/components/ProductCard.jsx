@@ -3,6 +3,7 @@ import { Link } from './LocalizedLink.jsx';
 import Media from './Media.jsx';
 import Price from './Price.jsx';
 import ProductBadge, { SOLD_OUT_MEDIA } from './ProductBadge.jsx';
+import { GiftBadge } from './Gift.jsx';
 import { useLanguage } from '../i18n/LanguageContext.jsx';
 import { isInStock, productDisplayName, productFullName, productMedia } from '../data/catalog.js';
 
@@ -145,6 +146,7 @@ export default function ProductCard({
         </Link>
 
         <ProductBadge product={product} />
+        <GiftBadge product={product} />
 
         {multi && (
           <>

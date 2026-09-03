@@ -99,11 +99,60 @@ describe('resolveOrderProduct', () => {
       productName: 'Tocador Aria Pro',
       productUrl: 'https://hsmuebles.es/tocadores/p1',
       price: 450,
+      giftName: '',
     });
   });
 
   it('returns null for an unknown product id', () => {
     expect(resolveOrderProduct(catalog, 'missing')).toBeNull();
+  });
+
+  // The gift is read from the catalog for the same reason the price is: the
+  // request body says which product was ordered and nothing else that is
+  // believed. Without it the shelf never gets packed with the table.
+  it('names the gift the catalog attaches to the product', () => {
+    const withGift = [
+      { ...catalog[0], gift: { source: 'catalog', productId: 'p2' } },
+      {
+        slug: 'estanterias',
+        products: [{ id: 'p2', name: 'Estantería | de pared', subtitle: '60 × 180 cm', price: 89 }],
+      },
+    ];
+    expect(resolveOrderProduct(withGift, 'p1').giftName).toBe('Estantería 60 × 180 cm');
+  });
+
+  it('names nothing when the product a rule points at is sold out', () => {
+    const soldOut = [
+      { ...catalog[0], gift: { source: 'catalog', productId: 'p2' } },
+      { slug: 'estanterias', products: [{ id: 'p2', name: 'Estantería', inStock: false }] },
+    ];
+    expect(resolveOrderProduct(soldOut, 'p1').giftName).toBe('');
+  });
+});
+
+describe('formatOrderText — gift', () => {
+  const order = {
+    name: 'Ana',
+    phone: '+34600000000',
+    country: 'ES',
+    postalCode: '28001',
+    address: 'Calle Mayor 1',
+    comment: '',
+    productName: 'Tocador Aria Pro',
+    productId: 'p1',
+    productUrl: 'https://hsmuebles.es/tocadores/p1',
+    price: 450,
+    attribution: null,
+  };
+
+  it('spells the gift out for whoever packs the order', () => {
+    expect(formatOrderText({ ...order, giftName: 'Estantería 60 × 180 cm' })).toContain(
+      'Regalo: Estantería 60 × 180 cm',
+    );
+  });
+
+  it('says nothing about a gift when there is none', () => {
+    expect(formatOrderText(order)).not.toContain('Regalo');
   });
 });
 

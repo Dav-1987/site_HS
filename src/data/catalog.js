@@ -581,6 +581,145 @@ export function computeRelated(categories, product, category, relatedIds, limit 
     .map((p) => withCategory(p, category));
 }
 
+// ─── Gift with purchase ───────────────────────────────────────────────────────
+//
+// A product can come with something free — most often another piece from the
+// catalog: buy the dressing table, the shelf comes with it. The offer is
+// written once on the category and inherited by every product in it, because
+// that is how a campaign is actually run; a single product can override it with
+// a gift of its own, or opt out entirely.
+//
+// Two sources. `catalog` points at another product by id and takes everything
+// from it — name, dimensions, photo, price — so the offer keeps agreeing with
+// the catalog when that product is renamed or re-shot. `custom` is for a gift
+// the shop does not sell as a product (a cover, a set of bulbs): its name is
+// typed by hand in both languages, its dimensions in one field, since the
+// numbers are the same in either.
+//
+// Deliberately a field rather than a line in `description`: Merchant Center
+// forbids promotional text there, which is why server/feed.js already has to
+// strip a free-bulbs line out of 56 descriptions on the way into the feed. A
+// field of its own is text the feed never sees in the first place.
+export const GIFT_MODES = ['inherit', 'own', 'off'];
+export const DEFAULT_GIFT_MODE = 'inherit';
+export const GIFT_SOURCES = ['catalog', 'custom'];
+export const DEFAULT_GIFT_SOURCE = 'catalog';
+
+/** The offer that applies to a product: its own, its category's, or none. */
+function giftSpec(product, category) {
+  const own = product?.gift;
+  const mode = GIFT_MODES.includes(own?.mode) ? own.mode : DEFAULT_GIFT_MODE;
+  if (mode === 'off') return null;
+  if (mode === 'own') return own ?? null;
+  return category?.gift ?? null;
+}
+
+/**
+ * The gift a product ships with, resolved for display — or null when there is
+ * nothing to show.
+ *
+ * `categories` must be the whole live catalog: the gift product is found in it
+ * by id. A gift that is not sold on its own belongs at `unlisted` rather than
+ * `off` — unlisted keeps it out of every listing but leaves the record and its
+ * page in place, which is what this lookup and the "valor" price both need. An
+ * `off` product is stripped from the catalog before it reaches here, so its
+ * gift quietly stops being advertised; that is the safe direction to fail in.
+ *
+ * Returns `{ name, shortName, image, href, price }`. `name` carries the
+ * dimensions, `shortName` does not: the line under the price has room to say
+ * which shelf, the inset in the corner of a photo does not, and at that size
+ * "40 × 40 × 170 cm" is unreadable anyway. `href` is the Spanish path, for
+ * LocalizedLink to localize, and is null for a custom gift — it has no page.
+ * `price` is null unless the offer is set to show it.
+ */
+export function productGift(categories, product, category, lang) {
+  const spec = giftSpec(product, category);
+  if (!spec) return null;
+  const source = GIFT_SOURCES.includes(spec.source) ? spec.source : DEFAULT_GIFT_SOURCE;
+
+  if (source === 'custom') {
+    const shortName = (spec.name?.[lang] || spec.name?.es || '').trim();
+    const name = [shortName, spec.size].filter(Boolean).join(' ').replace(/\s+/g, ' ').trim();
+    return name ? { name, shortName, image: spec.image || '', href: null, price: null } : null;
+  }
+
+  const found = findProduct(categories ?? [], spec.productId);
+  if (!found) return null;
+  const { product: gift, category: giftCategory } = found;
+  // Reachable by naming the product in its own category's rule, and it would
+  // read as a piece given away with itself.
+  if (gift.id === product?.id) return null;
+  // Nothing is promised that cannot be delivered.
+  if (!isInStock(gift)) return null;
+
+  // The short name plus dimensions — the same pair that titles the gift's own
+  // tile in the catalog, so the offer names it in the words the rest of the
+  // site already uses for it.
+  const shortName = productDisplayName(gift, lang);
+  const name = [shortName, gift.subtitle].filter(Boolean).join(' ').replace(/\s+/g, ' ').trim();
+  if (!name) return null;
+
+  const price = Number(gift.price) || 0;
+  return {
+    name,
+    shortName,
+    image: productImages(gift)[0] || '',
+    href: `/${giftCategory.slug}/${gift.id}`,
+    // On unless switched off, like every other per-item flag in this file.
+    price: spec.showPrice !== false && price > 0 ? price : null,
+  };
+}
+
+/**
+ * The other side of the offer: what this product is given away with, for its
+ * own page to say so.
+ *
+ * Without it a visitor can land on the shelf, pay 89 € for it, and only later
+ * find it was free with the table they were also going to buy. It doubles as
+ * the way up from the gift to the piece it belongs with.
+ *
+ * Phrasing follows how wide the offer is. One product gives it away → name that
+ * product. A whole category does (which is what a category rule means) → name
+ * the category, because listing forty tables is not a sentence. Several
+ * categories do → null: there is no short true way to say it, and no sentence
+ * is better than a misleading one.
+ *
+ * Only offers a visitor could actually take are counted — a sold-out or
+ * unlisted piece cannot be bought to get this one.
+ */
+export function giftedWith(categories, product, lang) {
+  const id = product?.id;
+  if (!id) return null;
+  const byCategory = new Map();
+  let total = 0;
+  let single = null;
+
+  for (const category of categories ?? []) {
+    if (isHiddenCategory(category)) continue;
+    for (const candidate of category.products ?? []) {
+      if (candidate.id === id) continue;
+      if (!isListed(candidate) || !isInStock(candidate)) continue;
+      const spec = giftSpec(candidate, category);
+      if (!spec || spec.productId !== id) continue;
+      if (GIFT_SOURCES.includes(spec.source) && spec.source !== 'catalog') continue;
+      total += 1;
+      single = { product: candidate, category };
+      byCategory.set(category.slug, category);
+    }
+  }
+
+  if (total === 0) return null;
+  if (total === 1) {
+    return {
+      name: productLabel(single.product, lang),
+      href: `/${single.category.slug}/${single.product.id}`,
+    };
+  }
+  if (byCategory.size !== 1) return null;
+  const [category] = byCategory.values();
+  return { name: category.name?.[lang] || category.name?.es || category.slug, href: `/${category.slug}` };
+}
+
 // Deterministic templated descriptions so every product reads consistently
 // and stays easy to replace with real marketing copy later.
 const DESC_INTROS = {

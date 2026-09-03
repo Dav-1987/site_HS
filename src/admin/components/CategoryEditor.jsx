@@ -5,6 +5,7 @@ import { urlSafe, RESERVED_SLUGS } from '../urlSafe.js';
 import { DEFAULT_VISIBILITY, isTileEntryCategory } from '../../data/catalog.js';
 import ImageField from './ImageField.jsx';
 import VideoField from './VideoField.jsx';
+import GiftEditor from './GiftEditor.jsx';
 import ProductEditor from './ProductEditor.jsx';
 import VisibilitySelect, { VisibilityBadge, VisibilityNote } from './VisibilitySelect.jsx';
 
@@ -176,6 +177,18 @@ export default function CategoryEditor({
             value={category.description?.en}
             onChange={(v) => setI18n('description', 'en', v)}
           />
+
+          <div className="border-t border-primary/10 pt-4">
+            <GiftEditor
+              value={category.gift}
+              onChange={(gift) => set({ gift })}
+              allProducts={allProducts}
+            />
+            <p className="mt-2 text-xs leading-relaxed text-primary/40">
+              Правило для всей категории: подарок получит каждый товар в ней. У любого товара его
+              можно заменить своим или отключить — в карточке товара, раздел «Подарок».
+            </p>
+          </div>
 
           {/* Products */}
           <div>

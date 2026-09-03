@@ -15,6 +15,10 @@
   --color-surface: 239 234 226; /* #EFEAE2 warm card/section surface */
   --color-danger: 176 58 46; /* #B03A2E warm brick — form/validation errors only */
   --color-sale: 79 138 40; /* #4F8A28 salad green — discount badge only */
+  /* #C62828 bright red — the gift line under the price, and nothing else. Its
+     own token rather than --color-danger because the two are only nearly the
+     same red: danger is the form-error brick, and a gift is not an error. */
+  --color-promo: 198 40 40;
 }
 
 @layer base {

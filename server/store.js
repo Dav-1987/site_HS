@@ -70,6 +70,54 @@ function normalizeInStock(p) {
   return p?.inStock !== false;
 }
 
+// The gift offer: written once on a category (the rule every product in it
+// inherits) and optionally overridden on a product. Mirrors GIFT_MODES /
+// GIFT_SOURCES / productGift() in src/data/catalog.js.
+//
+// Passed through a whitelist rather than stored as posted. The admin sends the
+// whole catalog as one JSON body, and this is the only free-form nested object
+// in it — without a whitelist it is the one field where anything at all could
+// reach the database.
+const GIFT_MODES = ['inherit', 'own', 'off'];
+const GIFT_SOURCES = ['catalog', 'custom'];
+
+function normalizeGift(entity) {
+  const g = entity?.gift;
+  if (!g || typeof g !== 'object') return {};
+  const str = (v) => (typeof v === 'string' ? v.trim() : '');
+  const out = {};
+  if (GIFT_MODES.includes(g.mode)) out.mode = g.mode;
+  if (GIFT_SOURCES.includes(g.source)) out.source = g.source;
+  if (str(g.productId)) out.productId = str(g.productId);
+  const es = str(g.name?.es);
+  const en = str(g.name?.en);
+  if (es || en) out.name = { es, en };
+  if (str(g.size)) out.size = str(g.size);
+  if (str(g.image)) out.image = str(g.image);
+  // Stored only when off, so the common case leaves no key behind — same shape
+  // read back as written, which is what keeps the comparison below honest.
+  if (g.showPrice === false) out.showPrice = false;
+  return out;
+}
+
+// Compared field by field for the reason mediaEqual is below: `gift` is a jsonb
+// column, and Postgres does not preserve object key order, so stringifying the
+// value read back never matches the value written.
+function giftEqual(a, b) {
+  const x = normalizeGift(a);
+  const y = normalizeGift(b);
+  return (
+    (x.mode ?? '') === (y.mode ?? '') &&
+    (x.source ?? '') === (y.source ?? '') &&
+    (x.productId ?? '') === (y.productId ?? '') &&
+    (x.name?.es ?? '') === (y.name?.es ?? '') &&
+    (x.name?.en ?? '') === (y.name?.en ?? '') &&
+    (x.size ?? '') === (y.size ?? '') &&
+    (x.image ?? '') === (y.image ?? '') &&
+    x.showPrice === y.showPrice
+  );
+}
+
 function shapeCategory(cat, products) {
   return {
     slug: cat.slug,
@@ -79,6 +127,7 @@ function shapeCategory(cat, products) {
     image: cat.image,
     imageMobile: cat.image_mobile ?? '',
     video: cat.video ?? '',
+    gift: normalizeGift(cat),
     visibility: normalizeVisibility(cat),
     updatedAt: cat.updated_at instanceof Date ? cat.updated_at.toISOString() : cat.updated_at,
     products: products.map((p) => ({
@@ -101,6 +150,7 @@ function shapeCategory(cat, products) {
       subtitle: p.subtitle ?? '',
       description: { es: p.description_es ?? '', en: p.description_en ?? '' },
       related: Array.isArray(p.related) ? p.related : [],
+      gift: normalizeGift(p),
       perks: normalizePerks(p),
       visibility: normalizeVisibility(p),
       showDiscountBadge: p.show_discount_badge !== false,
@@ -125,6 +175,7 @@ function categoryContentEqual(a, b) {
     a.image === b.image &&
     a.imageMobile === b.imageMobile &&
     a.video === b.video &&
+    giftEqual(a, b) &&
     normalizeVisibility(a) === normalizeVisibility(b)
   );
 }
@@ -166,6 +217,7 @@ export function productContentEqual(a, b) {
     a.description?.es === b.description?.es &&
     a.description?.en === b.description?.en &&
     JSON.stringify(a.related ?? []) === JSON.stringify(b.related ?? []) &&
+    giftEqual(a, b) &&
     normalizePerks(a) === normalizePerks(b) &&
     normalizeVisibility(a) === normalizeVisibility(b) &&
     normalizeShowDiscountBadge(a) === normalizeShowDiscountBadge(b) &&
@@ -213,8 +265,8 @@ export async function writeCatalog(categories) {
 
       await client.query(
         `INSERT INTO categories
-           (slug, name_es, name_en, tagline_es, tagline_en, description_es, description_en, image, image_mobile, video, visibility, position, updated_at)
-         VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13)`,
+           (slug, name_es, name_en, tagline_es, tagline_en, description_es, description_en, image, image_mobile, video, gift, visibility, position, updated_at)
+         VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11::jsonb,$12,$13,$14)`,
         [
           c.slug,
           c.name?.es ?? '',
@@ -226,6 +278,7 @@ export async function writeCatalog(categories) {
           c.image ?? '',
           c.imageMobile ?? '',
           c.video ?? '',
+          JSON.stringify(normalizeGift(c)),
           normalizeVisibility(c),
           ci,
           categoryUpdatedAt,
@@ -250,8 +303,8 @@ export async function writeCatalog(categories) {
 
         await client.query(
           `INSERT INTO products
-             (id, category_slug, name, name_en, price, old_price, image, image_mobile, images, material_es, material_en, size, mirror_size, shelves_size, reference, subtitle, video, video_first, media, description_es, description_en, related, perks, visibility, show_discount_badge, in_stock, position, updated_at)
-           VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9::jsonb,$10,$11,$12,$13,$14,$15,$16,$17,$18,$19::jsonb,$20,$21,$22::jsonb,$23,$24,$25,$26,$27,$28)`,
+             (id, category_slug, name, name_en, price, old_price, image, image_mobile, images, material_es, material_en, size, mirror_size, shelves_size, reference, subtitle, video, video_first, media, description_es, description_en, related, gift, perks, visibility, show_discount_badge, in_stock, position, updated_at)
+           VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9::jsonb,$10,$11,$12,$13,$14,$15,$16,$17,$18,$19::jsonb,$20,$21,$22::jsonb,$23::jsonb,$24,$25,$26,$27,$28,$29)`,
           [
             p.id,
             c.slug,
@@ -276,6 +329,7 @@ export async function writeCatalog(categories) {
             p.description?.es ?? '',
             p.description?.en ?? '',
             JSON.stringify(Array.isArray(p.related) ? p.related : []),
+            JSON.stringify(normalizeGift(p)),
             normalizePerks(p),
             normalizeVisibility(p),
             normalizeShowDiscountBadge(p),

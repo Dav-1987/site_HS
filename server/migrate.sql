@@ -166,3 +166,20 @@ ALTER TABLE products ADD COLUMN IF NOT EXISTS show_discount_badge BOOLEAN NOT NU
 -- availability change. On by default, so every existing row (and any row
 -- written before the column) stays orderable.
 ALTER TABLE products ADD COLUMN IF NOT EXISTS in_stock BOOLEAN NOT NULL DEFAULT true;
+
+-- Gift with purchase: what comes free with the piece. Written once on a
+-- category — the rule every product in it inherits — and optionally overridden
+-- on a single product, which may also opt out of the rule entirely. Shape (see
+-- productGift in src/data/catalog.js and normalizeGift in store.js):
+--   { mode?: 'inherit'|'own'|'off',   -- products only; categories carry the rule
+--     source: 'catalog'|'custom',
+--     productId?: string,             -- source 'catalog': the gift's own product
+--     name?: { es, en }, size?, image?,  -- source 'custom': typed by hand
+--     showPrice?: false }             -- absent means the value is shown
+--
+-- One jsonb column rather than seven scalar ones because the two sources share
+-- almost no fields, and because the whole object is written and read as a unit.
+-- Empty '{}' means no offer, which is what every existing row gets — nothing on
+-- the site changes until a rule is set in /admin.
+ALTER TABLE categories ADD COLUMN IF NOT EXISTS gift JSONB NOT NULL DEFAULT '{}'::jsonb;
+ALTER TABLE products   ADD COLUMN IF NOT EXISTS gift JSONB NOT NULL DEFAULT '{}'::jsonb;
