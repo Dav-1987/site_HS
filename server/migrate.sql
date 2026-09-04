@@ -91,6 +91,18 @@ CREATE TABLE IF NOT EXISTS site_settings (
   value JSONB NOT NULL
 );
 
+-- Файлы из uploads/, на которые больше никто не ссылается. Удаление в две
+-- ступени: сюда файл попадает при сохранении каталога/настроек, где он исчез,
+-- либо часовым проходом, который находит загрузки, вообще не дошедшие ни до
+-- одного сохранения (server/uploads-cleanup.js). Физически файл стирается
+-- только после delete_after — сутки на случай, если правку откатят или файл
+-- вернут в каталог.
+CREATE TABLE IF NOT EXISTS pending_deletions (
+  filename     TEXT PRIMARY KEY,
+  delete_after TIMESTAMPTZ NOT NULL DEFAULT NOW() + INTERVAL '1 day',
+  scheduled_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);
+
 -- Заявки из корзины (POST /api/order). Telegram/email — лучшая попытка
 -- уведомления, эта таблица — единственная надёжная история заявок.
 CREATE TABLE IF NOT EXISTS orders (

@@ -94,7 +94,7 @@ ssh root@185.202.172.59
 npm run deploy:seo
 
 # 2. Скопировать изменённые файлы сервера
-scp server/index.js server/redirects.js server/store.js server/settings.js server/auth.js server/order.js server/notify.js server/feed.js root@185.202.172.59:/var/www/hs-muebles/server/
+scp server/index.js server/redirects.js server/store.js server/settings.js server/auth.js server/order.js server/notify.js server/feed.js server/uploads-cleanup.js root@185.202.172.59:/var/www/hs-muebles/server/
 scp src/data/catalog.js root@185.202.172.59:/var/www/hs-muebles/src/data/
 
 # 3. Перезапустить API
