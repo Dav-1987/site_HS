@@ -1,6 +1,7 @@
 import { Field, Select } from './Field.jsx';
 import ImageField from './ImageField.jsx';
 import { productOptionLabel } from '../productLabel.js';
+import { giftChoice } from '../gift.js';
 
 // The gift offer, edited the same way on a category (where it is the rule every
 // product inherits) and on a single product (where it overrides that rule).
@@ -8,16 +9,8 @@ import { productOptionLabel } from '../productLabel.js';
 // One dropdown rather than a mode and a source next to each other: "как у
 // категории" and "без подарка" are answers to the same question as "стеллаж из
 // каталога", and asking it twice made the common case — leave it alone — the
-// one that needed two controls. The four answers map onto the stored shape
-// (see normalizeGift in server/store.js, productGift in src/data/catalog.js):
-//
-//   inherit → {}                                            products only
-//   catalog → { mode:'own', source:'catalog', productId }    mode omitted on a category
-//   custom  → { mode:'own', source:'custom', name, size, image }
-//   off     → { mode:'off' }                                 products only
-//
-// A category has no mode: it carries the rule itself, so its "нет подарка" is
-// simply an empty object.
+// one that needed two controls. How the four answers map onto the stored shape
+// is in src/admin/gift.js, next to giftChoice().
 const CATEGORY_CHOICES = [
   { value: 'none', label: 'Нет подарка' },
   { value: 'catalog', label: 'Товар из каталога' },
@@ -30,18 +23,6 @@ const PRODUCT_CHOICES = [
   { value: 'custom', label: 'Свой — не из каталога' },
   { value: 'off', label: 'Без подарка' },
 ];
-
-/** Which of the choices above the stored object represents. */
-function giftChoice(gift, forProduct) {
-  const g = gift ?? {};
-  if (forProduct) {
-    if (g.mode === 'off') return 'off';
-    if (g.mode !== 'own') return 'inherit';
-  } else if (!g.source) {
-    return 'none';
-  }
-  return g.source === 'custom' ? 'custom' : 'catalog';
-}
 
 export default function GiftEditor({ value, onChange, allProducts, excludeId, forProduct }) {
   const gift = value ?? {};

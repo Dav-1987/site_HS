@@ -38,6 +38,10 @@ function renderEditor(p = product, onChange = noop) {
 }
 
 const expand = () => fireEvent.click(screen.getByRole('button', { name: /Tocador/ }));
+// Внутри открытой карточки каждая группа полей — свой спойлер, поэтому до поля
+// теперь два клика: раскрыть товар, раскрыть группу.
+const openSection = (title) =>
+  fireEvent.click(screen.getByRole('button', { name: new RegExp(title) }));
 
 describe('ProductEditor — collapsed row thumbnail', () => {
   it('shows the cover photo, skipping a leading video', () => {
@@ -64,15 +68,20 @@ describe('ProductEditor — collapsed row thumbnail', () => {
 });
 
 describe('ProductEditor — order perks variant', () => {
+  const openPerks = () => {
+    expand();
+    openSection('Блок с иконками');
+  };
+
   it('defaults to the original variant for a product that never set one', () => {
     renderEditor();
-    expand();
+    openPerks();
     expect(screen.getByLabelText('Третий пункт').value).toBe(DEFAULT_PERK_VARIANT);
   });
 
   it('offers every variant', () => {
     renderEditor();
-    expand();
+    openPerks();
     const values = [...screen.getByLabelText('Третий пункт').options].map((o) => o.value);
     expect(values).toEqual(PERK_VARIANTS);
   });
@@ -80,7 +89,7 @@ describe('ProductEditor — order perks variant', () => {
   it('reports the chosen variant on the product', () => {
     const onChange = vi.fn();
     renderEditor(product, onChange);
-    expand();
+    openPerks();
     fireEvent.change(screen.getByLabelText('Третий пункт'), { target: { value: 'quality' } });
     expect(onChange).toHaveBeenCalledWith(expect.objectContaining({ perks: 'quality' }));
   });
@@ -113,25 +122,61 @@ describe('ProductEditor — visibility', () => {
 
 describe('ProductEditor — sale badge switch', () => {
   const checkbox = () => screen.getByLabelText(/Показывать плашку со скидкой/);
+  const openPrice = () => {
+    expand();
+    openSection('Цена');
+  };
 
   it('is checked for a product with no switch set', () => {
     renderEditor();
-    expand();
+    openPrice();
     expect(checkbox().checked).toBe(true);
   });
 
   it('writes the switch back through onChange', () => {
     const onChange = vi.fn();
     renderEditor(product, onChange);
-    expand();
+    openPrice();
     fireEvent.click(checkbox());
     expect(onChange).toHaveBeenCalledWith(expect.objectContaining({ showDiscountBadge: false }));
   });
 
   it('reflects a product that already has it off', () => {
     renderEditor({ ...product, showDiscountBadge: false });
-    expand();
+    openPrice();
     expect(checkbox().checked).toBe(false);
+  });
+});
+
+// Раскрытая карточка — это список заголовков групп, а не простыня полей:
+// открывается только та группа, которую правят.
+describe('ProductEditor — группы полей под спойлерами', () => {
+  it('после открытия товара показывает заголовки, но не сами поля', () => {
+    renderEditor();
+    expand();
+    expect(screen.getByRole('button', { name: /Цена/ })).toBeTruthy();
+    expect(screen.getByRole('button', { name: /Фото и видео/ })).toBeTruthy();
+    expect(screen.queryByLabelText('Цена (€)')).toBeNull();
+    expect(screen.queryByLabelText('Название (исп.)')).toBeNull();
+  });
+
+  it('раскрывает и сворачивает одну группу, не трогая остальные', () => {
+    renderEditor();
+    expand();
+    openSection('Цена');
+    expect(screen.getByLabelText('Цена (€)')).toBeTruthy();
+    expect(screen.queryByLabelText('Название (исп.)')).toBeNull();
+    openSection('Цена');
+    expect(screen.queryByLabelText('Цена (€)')).toBeNull();
+  });
+
+  it('выносит в заголовок то, ради чего группу открывали', () => {
+    renderEditor();
+    expand();
+    // Цена со скидкой, состав галереи и артикул — видны, пока группы закрыты.
+    expect(screen.getByRole('button', { name: /Цена.*€489/ })).toBeTruthy();
+    expect(screen.getByRole('button', { name: /Фото и видео.*2 фото · 1 видео/ })).toBeTruthy();
+    expect(screen.getByRole('button', { name: /Артикул и размер.*M-05/ })).toBeTruthy();
   });
 });
 
