@@ -24,7 +24,7 @@
         "id": "Espejo-Alto-F-05",
         "name": "Espejo | Hollywood de cuerpo entero blanco con bombillas LED",
         "nameEn": "Mirror | White full-length Hollywood design with LED bulbs",
-        "price": 239,
+        "price": 249,
         "oldPrice": 340,
         "image": "/uploads/3611a23d86e72c7bf209810bfdd9a592.jpg",
         "imageMobile": "",
@@ -88,13 +88,13 @@
         "visibility": "public",
         "showDiscountBadge": true,
         "inStock": true,
-        "updatedAt": "2026-09-04T19:56:16.138Z"
+        "updatedAt": "2026-09-04T21:09:59.223Z"
       },
       {
         "id": "Espejo-Alto-F-03",
         "name": "Espejo | Hollywood sin marco con bombillas LED",
         "nameEn": "Mirror | Frameless Hollywood design with LED bulbs",
-        "price": 199,
+        "price": 219,
         "oldPrice": 300,
         "image": "/uploads/c4ed1648ac2194b2c57ef23dfa6ddf05.jpg",
         "imageMobile": "",
@@ -148,7 +148,7 @@
         "visibility": "public",
         "showDiscountBadge": true,
         "inStock": true,
-        "updatedAt": "2026-09-04T19:56:16.138Z"
+        "updatedAt": "2026-09-04T20:35:02.275Z"
       },
       {
         "id": "Espejo-Alto-F-07",
@@ -204,7 +204,7 @@
         "id": "Espejo-Alto-F-06",
         "name": "Espejo | Hollywood blanco con base y bombillas LED",
         "nameEn": "Mirror | White Hollywood design with base and LED bulbs",
-        "price": 259,
+        "price": 269,
         "oldPrice": 380,
         "image": "/uploads/16c45b90baae50744af08e3aa9c749bc.jpg",
         "imageMobile": "",
@@ -273,7 +273,7 @@
         "visibility": "public",
         "showDiscountBadge": true,
         "inStock": true,
-        "updatedAt": "2026-08-26T20:16:27.758Z"
+        "updatedAt": "2026-09-04T20:35:02.275Z"
       },
       {
         "id": "Espejo-Alto-F-01",
@@ -339,7 +339,7 @@
         "id": "Espejo-Alto-F-04",
         "name": "Espejo | Hollywood sin marco con base blanca y bombillas LED",
         "nameEn": "Mirror | Frameless Hollywood design with white base and LED bulbs",
-        "price": 229,
+        "price": 239,
         "oldPrice": 330,
         "image": "/uploads/f1a4522de8cd487bcd30a904aa6f692e.jpg",
         "imageMobile": "",
@@ -398,7 +398,7 @@
         "visibility": "public",
         "showDiscountBadge": true,
         "inStock": true,
-        "updatedAt": "2026-08-26T20:16:27.758Z"
+        "updatedAt": "2026-09-04T20:35:02.275Z"
       },
       {
         "id": "Espejo-Alto-F-08",
@@ -515,7 +515,7 @@
         "name": "Espejo | Hollywood extragrande con bombillas LED",
         "nameEn": "Mirror | Extra-large Hollywood design with LED bulbs",
         "price": 399,
-        "oldPrice": 450,
+        "oldPrice": 500,
         "image": "/uploads/50395d6b1c82cbde618ebf5a32628a64.jpg",
         "imageMobile": "",
         "images": [
@@ -558,14 +558,14 @@
         "visibility": "public",
         "showDiscountBadge": true,
         "inStock": true,
-        "updatedAt": "2026-08-31T19:37:01.101Z"
+        "updatedAt": "2026-09-04T20:35:02.275Z"
       },
       {
         "id": "Espejo-Alto-D11",
         "name": "Espejo | de cuerpo entero arqueado negro",
         "nameEn": "Mirror | Black arched full-length design",
-        "price": 399,
-        "oldPrice": 530,
+        "price": 499,
+        "oldPrice": 670,
         "image": "/uploads/cb29167c19772103aaca90768ce2a9bb.jpg",
         "imageMobile": "",
         "images": [
@@ -663,7 +663,7 @@
         "visibility": "public",
         "showDiscountBadge": true,
         "inStock": true,
-        "updatedAt": "2026-08-26T20:16:27.758Z"
+        "updatedAt": "2026-09-04T20:35:02.275Z"
       },
       {
         "id": "Espejo-Alto-D05",
@@ -722,8 +722,8 @@
         "id": "Espejo-Alto-D10",
         "name": "Espejo | de cuerpo entero blanco con iluminación LED",
         "nameEn": "Mirror | White full-length design with LED lighting",
-        "price": 379,
-        "oldPrice": 500,
+        "price": 439,
+        "oldPrice": 620,
         "image": "/uploads/418284049907464f82bf359c7970df1d.jpg",
         "imageMobile": "",
         "images": [
@@ -786,7 +786,7 @@
         "visibility": "public",
         "showDiscountBadge": true,
         "inStock": true,
-        "updatedAt": "2026-08-26T20:16:27.758Z"
+        "updatedAt": "2026-09-04T20:35:02.275Z"
       },
       {
         "id": "Espejo-Alto-D06",
@@ -975,8 +975,8 @@
         "id": "Tocador-L-01",
         "name": "Tocador | Hollywood Blanco con Cajonera Lateral",
         "nameEn": "Dressing Table | White Hollywood Vanity with Side Drawers",
-        "price": 439,
-        "oldPrice": 590,
+        "price": 479,
+        "oldPrice": 600,
         "image": "/uploads/610e34128c48c5782743f5e24acfae22.jpg",
         "imageMobile": "",
         "images": [
@@ -1028,13 +1028,13 @@
         "visibility": "public",
         "showDiscountBadge": true,
         "inStock": true,
-        "updatedAt": "2026-09-04T12:31:21.298Z"
+        "updatedAt": "2026-09-04T20:37:02.479Z"
       },
       {
         "id": "Tocador-L-08",
         "name": "Tocador | Hollywood Blanco con Gran Almacenaje",
         "nameEn": "Dressing Table | White Hollywood Vanity with Ample Storage",
-        "price": 639,
+        "price": 659,
         "oldPrice": 800,
         "image": "/uploads/0f6a9d65f0833e4f64c04982e32007fe.jpg",
         "imageMobile": "",
@@ -1093,13 +1093,13 @@
         "visibility": "public",
         "showDiscountBadge": true,
         "inStock": true,
-        "updatedAt": "2026-09-04T09:10:27.306Z"
+        "updatedAt": "2026-09-04T20:37:02.479Z"
       },
       {
         "id": "Tocador-L-06",
         "name": "Tocador | Hollywood Blanco con Doble Cajonera",
         "nameEn": "Dressing Table | White Hollywood Vanity with Twin Drawer Units",
-        "price": 559,
+        "price": 599,
         "oldPrice": 750,
         "image": "/uploads/0a1128c2018c997ff3dd871a210b1fe7.jpg",
         "imageMobile": "",
@@ -1158,14 +1158,14 @@
         "visibility": "public",
         "showDiscountBadge": true,
         "inStock": true,
-        "updatedAt": "2026-08-26T22:35:52.775Z"
+        "updatedAt": "2026-09-04T20:37:02.479Z"
       },
       {
         "id": "Tocador-T-04-2",
         "name": "Tocador | Blanco Plegable con Espejo LED",
         "nameEn": "Dressing Table | White Folding Vanity with LED Mirror",
-        "price": 699,
-        "oldPrice": 910,
+        "price": 729,
+        "oldPrice": 920,
         "image": "/uploads/3880b7877440246f485fce6434b0a446.jpg",
         "imageMobile": "",
         "images": [
@@ -1213,14 +1213,14 @@
         "visibility": "public",
         "showDiscountBadge": true,
         "inStock": true,
-        "updatedAt": "2026-08-26T22:35:52.775Z"
+        "updatedAt": "2026-09-04T20:37:02.479Z"
       },
       {
         "id": "Tocador-L-07",
         "name": "Tocador | Hollywood Blanco con Espejo Enmarcado",
         "nameEn": "Dressing Table | White Hollywood Vanity with Framed Mirror",
-        "price": 599,
-        "oldPrice": 770,
+        "price": 639,
+        "oldPrice": 780,
         "image": "/uploads/b9d5084f27248439f6416003c9dbe954.jpg",
         "imageMobile": "",
         "images": [
@@ -1263,14 +1263,14 @@
         "visibility": "public",
         "showDiscountBadge": true,
         "inStock": true,
-        "updatedAt": "2026-08-26T22:35:52.775Z"
+        "updatedAt": "2026-09-04T20:37:02.479Z"
       },
       {
         "id": "Tocador-L-02",
         "name": "Tocador | Hollywood Blanco con Cajonera Izquierda",
         "nameEn": "Dressing Table | White Hollywood Vanity with Left Drawer Unit",
-        "price": 459,
-        "oldPrice": 620,
+        "price": 499,
+        "oldPrice": 660,
         "image": "/uploads/9afe0cb269d80f1661f77bbc2b58ba56.jpg",
         "imageMobile": "",
         "images": [
@@ -1308,7 +1308,7 @@
         "visibility": "public",
         "showDiscountBadge": true,
         "inStock": true,
-        "updatedAt": "2026-08-26T22:35:52.775Z"
+        "updatedAt": "2026-09-04T20:37:02.479Z"
       },
       {
         "id": "Tocador-L-11",
@@ -1375,7 +1375,7 @@
         "name": "Tocador | Hollywood Blanco con Cristal y Cajones",
         "nameEn": "Dressing Table | White Hollywood Vanity with Glass Top and Drawers",
         "price": 699,
-        "oldPrice": 878,
+        "oldPrice": 880,
         "image": "/uploads/cd737dc85696bc1a997250a2fc851991.jpg",
         "imageMobile": "",
         "images": [
@@ -1428,14 +1428,14 @@
         "visibility": "public",
         "showDiscountBadge": true,
         "inStock": true,
-        "updatedAt": "2026-08-26T22:35:52.775Z"
+        "updatedAt": "2026-09-04T20:37:02.479Z"
       },
       {
         "id": "Tocador-L-05",
         "name": "Tocador | Hollywood Blanco con Superficie de Cristal",
         "nameEn": "Dressing Table | White Hollywood Vanity with Glass Top",
-        "price": 549,
-        "oldPrice": 710,
+        "price": 569,
+        "oldPrice": 730,
         "image": "/uploads/9e0731b2c36d5ade397d3dabdff10b85.jpg",
         "imageMobile": "",
         "images": [
@@ -1488,7 +1488,7 @@
         "visibility": "public",
         "showDiscountBadge": true,
         "inStock": true,
-        "updatedAt": "2026-08-26T22:35:52.775Z"
+        "updatedAt": "2026-09-04T20:40:22.029Z"
       },
       {
         "id": "Tocador-T-04",
@@ -1554,8 +1554,8 @@
         "id": "Tocador-L-04",
         "name": "Tocador | Hollywood Blanco con Marco Iluminado",
         "nameEn": "Dressing Table | White Hollywood Vanity with Illuminated Frame",
-        "price": 519,
-        "oldPrice": 680,
+        "price": 549,
+        "oldPrice": 710,
         "image": "/uploads/579dd96462de4e0faa0e7598e7076db3.jpg",
         "imageMobile": "",
         "images": [
@@ -1593,14 +1593,14 @@
         "visibility": "public",
         "showDiscountBadge": true,
         "inStock": true,
-        "updatedAt": "2026-08-26T22:35:52.775Z"
+        "updatedAt": "2026-09-04T20:42:50.805Z"
       },
       {
         "id": "Tocador-L-09",
         "name": "Tocador | Hollywood Blanco con Doble Módulo",
         "nameEn": "Dressing Table | White Hollywood Vanity with Twin Storage Units",
-        "price": 659,
-        "oldPrice": 850,
+        "price": 679,
+        "oldPrice": 860,
         "image": "/uploads/971d2424b776b8f5605162b52e6bbca7.jpg",
         "imageMobile": "",
         "images": [
@@ -1648,14 +1648,14 @@
         "visibility": "public",
         "showDiscountBadge": true,
         "inStock": true,
-        "updatedAt": "2026-08-26T22:35:52.775Z"
+        "updatedAt": "2026-09-04T20:42:50.805Z"
       },
       {
         "id": "Tocador-L-03",
         "name": "Tocador | Hollywood Blanco Compacto con Cajones",
         "nameEn": "Dressing Table | Compact White Hollywood Vanity with Drawers",
-        "price": 489,
-        "oldPrice": 650,
+        "price": 519,
+        "oldPrice": 680,
         "image": "/uploads/9daa4d23729a59d67c2b07eac6745f9f.jpg",
         "imageMobile": "",
         "images": [
@@ -1698,7 +1698,7 @@
         "visibility": "public",
         "showDiscountBadge": true,
         "inStock": true,
-        "updatedAt": "2026-08-26T22:35:52.775Z"
+        "updatedAt": "2026-09-04T20:42:50.805Z"
       },
       {
         "id": "Tocador-T-01-2",
@@ -1778,7 +1778,7 @@
         "id": "Tocador-T-02-2",
         "name": "Tocador | Hollywood Blanco Compacto con Dos Cajones",
         "nameEn": "Dressing Table | Compact White Hollywood Vanity with Two Drawers",
-        "price": 339,
+        "price": 359,
         "oldPrice": 490,
         "image": "/uploads/c087ee159cd89a85fec7030b08b0acab.jpg",
         "imageMobile": "",
@@ -1837,13 +1837,13 @@
         "visibility": "public",
         "showDiscountBadge": true,
         "inStock": true,
-        "updatedAt": "2026-08-26T22:35:52.775Z"
+        "updatedAt": "2026-09-04T20:42:50.805Z"
       },
       {
         "id": "Tocador-T-03-2",
         "name": "Tocador | Hollywood Blanco con Tapa de Cristal",
         "nameEn": "Dressing Table | White Hollywood Vanity with Glass Top",
-        "price": 379,
+        "price": 399,
         "oldPrice": 520,
         "image": "/uploads/e86ae6968350e27eb24c92303c03eb20.jpg",
         "imageMobile": "",
@@ -1902,7 +1902,7 @@
         "visibility": "public",
         "showDiscountBadge": true,
         "inStock": true,
-        "updatedAt": "2026-08-26T22:35:52.775Z"
+        "updatedAt": "2026-09-04T20:42:50.805Z"
       },
       {
         "id": "Tocador-T-09",
@@ -1958,10 +1958,10 @@
         ],
         "gift": {},
         "perks": "bulbs",
-        "visibility": "public",
+        "visibility": "unlisted",
         "showDiscountBadge": true,
         "inStock": true,
-        "updatedAt": "2026-08-26T22:35:52.775Z"
+        "updatedAt": "2026-09-04T20:42:50.805Z"
       }
     ]
   },
@@ -1990,8 +1990,8 @@
         "id": "Tocador-M-05-3",
         "name": "Tocador | Hollywood en roble y negro con estante",
         "nameEn": "Dressing Table | Hollywood Oak and Black with Storage Shelf",
-        "price": 499,
-        "oldPrice": 600,
+        "price": 599,
+        "oldPrice": 750,
         "image": "/uploads/d29e04e4fdb3901cd31b050922d2692b.jpg",
         "imageMobile": "",
         "images": [
@@ -2033,7 +2033,7 @@
         "visibility": "public",
         "showDiscountBadge": true,
         "inStock": true,
-        "updatedAt": "2026-08-26T23:12:28.951Z"
+        "updatedAt": "2026-09-04T20:45:32.948Z"
       },
       {
         "id": "Tocador-M-05",
@@ -2084,17 +2084,17 @@
         "related": [],
         "gift": {},
         "perks": "bulbs",
-        "visibility": "public",
+        "visibility": "unlisted",
         "showDiscountBadge": true,
         "inStock": true,
-        "updatedAt": "2026-08-26T23:12:28.951Z"
+        "updatedAt": "2026-09-04T20:45:32.948Z"
       },
       {
         "id": "Tocador-M-02-3",
         "name": "Tocador | Hollywood en roble y negro con espejo sin marco",
         "nameEn": "Dressing Table | Hollywood Oak and Black with Frameless Mirror",
-        "price": 399,
-        "oldPrice": 550,
+        "price": 499,
+        "oldPrice": 660,
         "image": "/uploads/845578ae92ec61b012ddbc1e57416c0a.jpg",
         "imageMobile": "",
         "images": [
@@ -2152,7 +2152,7 @@
         "visibility": "public",
         "showDiscountBadge": true,
         "inStock": true,
-        "updatedAt": "2026-08-26T23:12:28.951Z"
+        "updatedAt": "2026-09-04T20:45:32.948Z"
       },
       {
         "id": "Tocador-M-01",
@@ -2199,10 +2199,10 @@
         "related": [],
         "gift": {},
         "perks": "bulbs",
-        "visibility": "public",
+        "visibility": "unlisted",
         "showDiscountBadge": true,
         "inStock": true,
-        "updatedAt": "2026-08-26T23:12:28.951Z"
+        "updatedAt": "2026-09-04T20:45:32.948Z"
       },
       {
         "id": "Tocador-M-02",
@@ -2268,10 +2268,10 @@
         "related": [],
         "gift": {},
         "perks": "bulbs",
-        "visibility": "public",
+        "visibility": "unlisted",
         "showDiscountBadge": true,
         "inStock": true,
-        "updatedAt": "2026-08-26T23:12:28.951Z"
+        "updatedAt": "2026-09-04T20:45:32.948Z"
       },
       {
         "id": "Tocador-M-01-2",
@@ -2333,17 +2333,17 @@
         "related": [],
         "gift": {},
         "perks": "bulbs",
-        "visibility": "public",
+        "visibility": "unlisted",
         "showDiscountBadge": true,
         "inStock": true,
-        "updatedAt": "2026-08-26T23:12:28.951Z"
+        "updatedAt": "2026-09-04T20:45:32.948Z"
       },
       {
         "id": "Tocador-M-06",
         "name": "Tocador | Hollywood blanco y negro con estante metálico",
         "nameEn": "Dressing Table | White and Black Hollywood Vanity with Metal Shelf",
-        "price": 549,
-        "oldPrice": 660,
+        "price": 649,
+        "oldPrice": 790,
         "image": "/uploads/771c0092caedde9b643cd77b72be35bf.jpg",
         "imageMobile": "",
         "images": [
@@ -2381,7 +2381,7 @@
         "visibility": "public",
         "showDiscountBadge": true,
         "inStock": true,
-        "updatedAt": "2026-08-26T23:12:28.951Z"
+        "updatedAt": "2026-09-04T20:45:32.948Z"
       },
       {
         "id": "Tocador-M-04",
@@ -2437,10 +2437,10 @@
         "related": [],
         "gift": {},
         "perks": "bulbs",
-        "visibility": "public",
+        "visibility": "unlisted",
         "showDiscountBadge": true,
         "inStock": true,
-        "updatedAt": "2026-08-26T23:12:28.951Z"
+        "updatedAt": "2026-09-04T20:45:32.948Z"
       },
       {
         "id": "Tocador-M-05-4",
@@ -2497,17 +2497,17 @@
         "related": [],
         "gift": {},
         "perks": "bulbs",
-        "visibility": "public",
+        "visibility": "unlisted",
         "showDiscountBadge": true,
         "inStock": true,
-        "updatedAt": "2026-08-26T23:12:28.951Z"
+        "updatedAt": "2026-09-04T20:45:32.948Z"
       },
       {
         "id": "Tocador-M-08",
         "name": "Tocador | Hollywood blanco y dorado con cuatro cajones",
         "nameEn": "Dressing Table | White and Gold Hollywood Vanity with Four Drawers",
-        "price": 799,
-        "oldPrice": 980,
+        "price": 879,
+        "oldPrice": 990,
         "image": "/uploads/1b7e0b3553b37f44f001bb06894a728b.jpg",
         "imageMobile": "",
         "images": [
@@ -2555,14 +2555,14 @@
         "visibility": "public",
         "showDiscountBadge": true,
         "inStock": true,
-        "updatedAt": "2026-08-26T23:12:28.951Z"
+        "updatedAt": "2026-09-04T20:45:32.948Z"
       },
       {
         "id": "Tocador-M-07",
         "name": "Tocador | En roble y negro con espejo LED integrado",
         "nameEn": "Dressing Table | Oak and Black Vanity with Integrated LED Mirror",
-        "price": 599,
-        "oldPrice": 750,
+        "price": 689,
+        "oldPrice": 850,
         "image": "/uploads/5c4a491791888b4ee6bd2f8b0386a4b1.jpg",
         "imageMobile": "",
         "images": [
@@ -2619,7 +2619,7 @@
         "visibility": "public",
         "showDiscountBadge": true,
         "inStock": true,
-        "updatedAt": "2026-08-26T23:12:28.951Z"
+        "updatedAt": "2026-09-04T20:45:32.948Z"
       },
       {
         "id": "Tocador-M-04-2",
@@ -2676,10 +2676,10 @@
         "related": [],
         "gift": {},
         "perks": "bulbs",
-        "visibility": "public",
+        "visibility": "unlisted",
         "showDiscountBadge": true,
         "inStock": true,
-        "updatedAt": "2026-08-26T23:12:28.951Z"
+        "updatedAt": "2026-09-04T20:45:32.948Z"
       },
       {
         "id": "Tocador-M-02-2",
@@ -2736,10 +2736,10 @@
         "related": [],
         "gift": {},
         "perks": "bulbs",
-        "visibility": "public",
+        "visibility": "unlisted",
         "showDiscountBadge": true,
         "inStock": true,
-        "updatedAt": "2026-08-26T23:12:28.951Z"
+        "updatedAt": "2026-09-04T20:45:32.948Z"
       },
       {
         "id": "Tocador-M-09",
@@ -2786,10 +2786,10 @@
         "related": [],
         "gift": {},
         "perks": "bulbs",
-        "visibility": "public",
+        "visibility": "unlisted",
         "showDiscountBadge": true,
         "inStock": true,
-        "updatedAt": "2026-08-26T23:12:28.951Z"
+        "updatedAt": "2026-09-04T20:45:32.948Z"
       }
     ]
   },
@@ -2818,8 +2818,8 @@
         "id": "Estanteria-E-04",
         "name": "Estantería | dorada y blanca con cajones",
         "nameEn": "Shelving Unit | Gold and White with Drawers",
-        "price": 389,
-        "oldPrice": 500,
+        "price": 439,
+        "oldPrice": 550,
         "image": "/uploads/ba4ef2211a28e2c7f7c719f2f0adf7a7.jpg",
         "imageMobile": "",
         "images": [
@@ -2876,14 +2876,14 @@
         "visibility": "public",
         "showDiscountBadge": true,
         "inStock": true,
-        "updatedAt": "2026-08-27T07:41:39.230Z"
+        "updatedAt": "2026-09-04T20:47:37.687Z"
       },
       {
         "id": "Estanteria-E-10",
         "name": "Estantería | geométrica en negro o dorado",
         "nameEn": "Shelving Unit | Geometric Design in Black or Gold",
-        "price": 499,
-        "oldPrice": 600,
+        "price": 579,
+        "oldPrice": 680,
         "image": "/uploads/1a861d6895b693d6801509375477534e.jpg",
         "imageMobile": "",
         "images": [
@@ -2954,14 +2954,14 @@
         "visibility": "public",
         "showDiscountBadge": true,
         "inStock": true,
-        "updatedAt": "2026-08-27T07:41:39.230Z"
+        "updatedAt": "2026-09-04T20:47:37.687Z"
       },
       {
         "id": "Estanteria-E-01",
         "name": "Estantería | dorada y blanca con baldas",
         "nameEn": "Shelving Unit | Gold and White with Open Shelves",
-        "price": 199,
-        "oldPrice": 320,
+        "price": 259,
+        "oldPrice": 350,
         "image": "/uploads/d28c174bb94ff71d2d46dc07648a8d28.jpg",
         "imageMobile": "",
         "images": [
@@ -2999,14 +2999,14 @@
         "visibility": "public",
         "showDiscountBadge": true,
         "inStock": true,
-        "updatedAt": "2026-08-27T07:41:39.230Z"
+        "updatedAt": "2026-09-04T20:47:37.687Z"
       },
       {
         "id": "Estanteria-E-02",
         "name": "Estantería | negra con baldas de cristal",
         "nameEn": "Shelving Unit | Black with Glass Shelves",
-        "price": 259,
-        "oldPrice": 340,
+        "price": 299,
+        "oldPrice": 390,
         "image": "/uploads/6a8baf8b0f5c4a4ebf057a3d4dbdcd11.jpg",
         "imageMobile": "",
         "images": [
@@ -3048,14 +3048,14 @@
         "visibility": "public",
         "showDiscountBadge": true,
         "inStock": true,
-        "updatedAt": "2026-08-27T07:41:39.230Z"
+        "updatedAt": "2026-09-04T20:47:37.687Z"
       },
       {
         "id": "Estanteria-E-08",
         "name": "Estantería | con armario blanco en negro o dorado",
         "nameEn": "Shelving Unit | White Cabinet in Black or Gold",
-        "price": 459,
-        "oldPrice": 570,
+        "price": 529,
+        "oldPrice": 650,
         "image": "/uploads/d49166c624a67325c8b4c553086acf16.jpg",
         "imageMobile": "",
         "images": [
@@ -3112,14 +3112,14 @@
         "visibility": "public",
         "showDiscountBadge": true,
         "inStock": true,
-        "updatedAt": "2026-08-27T07:41:39.230Z"
+        "updatedAt": "2026-09-04T20:47:37.687Z"
       },
       {
         "id": "Estanteria-E-03",
         "name": "Estantería | dorada y blanca con cajonera",
         "nameEn": "Shelving Unit | Gold and White with Drawer Storage",
-        "price": 359,
-        "oldPrice": 470,
+        "price": 399,
+        "oldPrice": 490,
         "image": "/uploads/89144ffbf7054d00ca68184620c44cf5.jpg",
         "imageMobile": "",
         "images": [
@@ -3172,14 +3172,14 @@
         "visibility": "public",
         "showDiscountBadge": true,
         "inStock": true,
-        "updatedAt": "2026-08-27T07:41:39.230Z"
+        "updatedAt": "2026-09-04T20:47:37.687Z"
       },
       {
         "id": "Estanteria-E-11",
         "name": "Estantería | dorada con cristal y cajón blanco",
         "nameEn": "Shelving Unit | Gold with Glass Shelves and White Drawer",
-        "price": 599,
-        "oldPrice": 700,
+        "price": 699,
+        "oldPrice": 800,
         "image": "/uploads/af14c88c751cf65803a8a04cec483bd5.jpg",
         "imageMobile": "",
         "images": [
@@ -3231,14 +3231,14 @@
         "visibility": "public",
         "showDiscountBadge": true,
         "inStock": true,
-        "updatedAt": "2026-08-27T07:41:39.230Z"
+        "updatedAt": "2026-09-04T20:47:37.687Z"
       },
       {
         "id": "Estanteria-E-07",
         "name": "Estantería | con cristal y cajón en plata o dorado",
         "nameEn": "Shelving Unit | Glass and White Drawer in Silver or Gold",
-        "price": 399,
-        "oldPrice": 520,
+        "price": 499,
+        "oldPrice": 600,
         "image": "/uploads/1e4634edcadb5498252c80f4974bcfb3.jpg",
         "imageMobile": "",
         "images": [
@@ -3295,7 +3295,7 @@
         "visibility": "public",
         "showDiscountBadge": true,
         "inStock": true,
-        "updatedAt": "2026-08-27T07:41:39.230Z"
+        "updatedAt": "2026-09-04T20:47:37.687Z"
       },
       {
         "id": "Estanteria-E-09",
@@ -3337,17 +3337,17 @@
         "related": [],
         "gift": {},
         "perks": "quality",
-        "visibility": "public",
+        "visibility": "unlisted",
         "showDiscountBadge": true,
         "inStock": true,
-        "updatedAt": "2026-08-27T07:41:39.230Z"
+        "updatedAt": "2026-09-04T20:47:37.687Z"
       },
       {
         "id": "Estanteria-E-06",
         "name": "Estantería | dorada con baldas de cristal",
         "nameEn": "Shelving Unit | Gold with Glass Shelves",
-        "price": 369,
-        "oldPrice": 480,
+        "price": 459,
+        "oldPrice": 580,
         "image": "/uploads/f1760e451f3f1d23ddb20f29fce84ec6.jpg",
         "imageMobile": "",
         "images": [
@@ -3389,7 +3389,7 @@
         "visibility": "public",
         "showDiscountBadge": true,
         "inStock": true,
-        "updatedAt": "2026-08-27T07:41:39.230Z"
+        "updatedAt": "2026-09-04T20:47:37.687Z"
       }
     ]
   },
