@@ -45,8 +45,12 @@ function IconGift({ className = '' }) {
  * sentence: Spanish and English do not put the gift's name in the same place,
  * and only the name is a link. Nothing is a link for a gift the shop does not
  * sell as a product — it has no page to open.
+ *
+ * `linked={false}` drops the link where following it would be the wrong move:
+ * inside the order form it would carry someone out of a half-filled form, and
+ * it would join the dialog's focus trap on the way.
  */
-export function GiftLine({ gift, className = '' }) {
+export function GiftLine({ gift, linked = true, className = '' }) {
   const { t } = useLanguage();
   if (!gift) return null;
   const after = t('product.giftAfter');
@@ -56,7 +60,7 @@ export function GiftLine({ gift, className = '' }) {
       <IconGift className="mt-0.5 h-4 w-4 shrink-0" />
       <span>
         {t('product.giftBefore')}{' '}
-        {gift.href ? (
+        {linked && gift.href ? (
           <Link
             to={gift.href}
             className="underline underline-offset-[3px] transition-opacity duration-300 hover:opacity-70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-promo"
