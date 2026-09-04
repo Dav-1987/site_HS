@@ -458,9 +458,10 @@ export default function Product() {
                 </button>
               )}
               <ProductBadge product={product} />
-              {/* Only on the cover photo: on every frame it would sit between
-                  the reader and the piece they opened the gallery to look at. */}
-              {activeIdx === firstPhotoIdx && <GiftInset gift={gift} />}
+              {/* On every frame of the gallery, video included: someone who
+                  swipes past the first photo is looking closely, and that is
+                  the worst moment for the offer to disappear. */}
+              <GiftInset gift={gift} atTop={isVideoActive} />
               {!isVideoActive && (
                 <span className="pointer-events-none absolute bottom-3 right-3 bg-background/85 px-3 py-1.5 text-xs uppercase tracking-[0.18em] text-primary opacity-0 transition-opacity duration-300 group-hover:opacity-100">
                   {t('product.zoom')}

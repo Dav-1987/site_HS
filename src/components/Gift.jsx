@@ -89,16 +89,22 @@ export function GiftLine({ gift, className = '' }) {
  * proportions on a thumbnail and on the full-width product photo; the photo's
  * wrapper must carry `[container-type:inline-size]` for that to resolve.
  *
+ * `atTop` moves it to the opposite corner for a video, where the bottom edge
+ * belongs to the browser's own control bar — the inset does not take clicks,
+ * but sitting over the play button it would still read as covering it.
+ *
  * Skipped when the gift has no photo of its own — an empty frame promises
  * nothing, and the line under the price still says what is included.
  */
-export function GiftInset({ gift, className = '' }) {
+export function GiftInset({ gift, atTop = false, className = '' }) {
   const { t } = useLanguage();
   if (!gift?.image) return null;
 
   return (
     <div
-      className={`pointer-events-none absolute bottom-[0.5em] left-[0.5em] z-10 flex items-center gap-[0.5em] border border-accent/60 bg-background/95 p-[0.3em] pr-[0.7em] text-[clamp(0.7rem,4.6cqw,1.25rem)] ${className}`}
+      className={`pointer-events-none absolute ${
+        atTop ? 'top-[0.5em]' : 'bottom-[0.5em]'
+      } left-[0.5em] z-10 flex items-center gap-[0.5em] border border-accent/60 bg-background/95 p-[0.3em] pr-[0.7em] text-[clamp(0.7rem,4.6cqw,1.25rem)] ${className}`}
     >
       <span className="flex h-[1.5em] w-[1.5em] shrink-0 items-center justify-center rounded-full bg-accent-text text-[0.9em] leading-none text-background">
         +
