@@ -311,7 +311,7 @@ export default function OrderModal({ product, gift, isOpen, onClose }) {
               {/* Repeated here on purpose: this is the moment the visitor
                   commits, and the offer they are committing to has to be on the
                   same screen as the button that sends the request. */}
-              <GiftLine gift={gift} className="mt-3 justify-center text-center" />
+              <GiftLine gift={gift} linked={false} className="mt-3 justify-center text-center" />
 
               <form onSubmit={handleSubmit} className="mt-6 space-y-4" noValidate>
                 <div>
