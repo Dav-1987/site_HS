@@ -1,9 +1,10 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Link, NavLink } from './LocalizedLink.jsx';
 import { useLanguage } from '../i18n/LanguageContext.jsx';
 import { LANGUAGES } from '../i18n/translations.js';
 import { useCatalog } from '../catalog/CatalogContext.jsx';
+import { categoryHasGift } from '../data/catalog.js';
 import { useSettings } from '../settings/SettingsContext.jsx';
 import { stripLangPrefix, withLang } from '../i18n/routing.js';
 
@@ -45,7 +46,17 @@ function LangToggle({ className = '' }) {
 
 export default function Header() {
   const { lang, t } = useLanguage();
-  const { categories } = useCatalog();
+  const { categories, allCategories } = useCatalog();
+  // Worked out once per catalog rather than per menu row: both menus ask the
+  // same question about the same five collections, and the answer walks the
+  // products of any collection without a rule of its own.
+  const giftedSlugs = useMemo(() => {
+    const out = new Set();
+    for (const c of categories) {
+      if (categoryHasGift(allCategories, c)) out.add(c.slug);
+    }
+    return out;
+  }, [categories, allCategories]);
   // Выключенный в /admin раздел отзывов пропадает и из меню — иначе ссылка
   // вела бы на 404, который сама же страница и отдаёт.
   const { settings } = useSettings();
@@ -129,7 +140,14 @@ export default function Header() {
                     to={`/${c.slug}`}
                     className="group/item flex items-center justify-between border-b border-primary/5 py-2.5 text-sm text-primary/70 transition-colors duration-300 hover:text-accent-text focus-visible:outline-none focus-visible:text-accent-text"
                   >
-                    <span>{c.name[lang]}</span>
+                    <span>
+                      {c.name[lang]}
+                      {giftedSlugs.has(c.slug) && (
+                        <span className="ml-2 text-xs font-medium text-promo">
+                          {t('nav.giftBadge')}
+                        </span>
+                      )}
+                    </span>
                     <span
                       aria-hidden="true"
                       className="text-[10px] opacity-0 transition-opacity duration-300 group-hover/item:opacity-60"
@@ -229,6 +247,11 @@ export default function Header() {
                 {categories.map((c) => (
                   <Link key={c.slug} to={`/${c.slug}`} className="py-2 text-base text-primary/70">
                     {c.name[lang]}
+                    {giftedSlugs.has(c.slug) && (
+                      <span className="ml-2 text-sm font-medium text-promo">
+                        {t('nav.giftBadge')}
+                      </span>
+                    )}
                   </Link>
                 ))}
               </div>
