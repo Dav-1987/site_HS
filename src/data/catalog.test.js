@@ -28,6 +28,7 @@ import {
   moveProductsToCategory,
   productPerkVariant,
   productGift,
+  categoryHasGift,
   PERK_VARIANTS,
   DEFAULT_PERK_VARIANT,
 } from './catalog.js';
@@ -784,5 +785,63 @@ describe('productGift', () => {
   it('never gives a product away with itself', () => {
     const cats = build({ source: 'catalog', productId: table.id }, undefined);
     expect(productGift(cats, cats[0].products[0], cats[0], 'es')).toBeNull();
+  });
+});
+
+describe('categoryHasGift', () => {
+  const shelf = {
+    id: 'shelf',
+    name: 'Estantería | de pared',
+    subtitle: '60 × 180 cm',
+    price: 89,
+    images: ['/uploads/shelf.jpg'],
+  };
+  const build = (categoryGift, productGiftField) => [
+    {
+      slug: 'tocadores',
+      name: { es: 'Tocadores', en: 'Dressing tables' },
+      gift: categoryGift,
+      products: [
+        { id: 'table', name: 'Tocador', price: 239, gift: productGiftField },
+        { id: 'table-2', name: 'Tocador', price: 300 },
+      ],
+    },
+    { slug: 'estanterias', name: { es: 'Estanterías', en: 'Shelves' }, products: [shelf] },
+  ];
+
+  it('marks a collection whose rule gives something away', () => {
+    const cats = build({ source: 'catalog', productId: 'shelf' }, undefined);
+    expect(categoryHasGift(cats, cats[0])).toBe(true);
+  });
+
+  // A gift is as often set on one piece as on a whole collection, and the menu
+  // has to say so either way.
+  it('marks a collection where a single product carries its own gift', () => {
+    const cats = build(undefined, { mode: 'own', source: 'catalog', productId: 'shelf' });
+    expect(categoryHasGift(cats, cats[0])).toBe(true);
+  });
+
+  it('leaves a collection with nothing on offer unmarked', () => {
+    const cats = build(undefined, undefined);
+    expect(categoryHasGift(cats, cats[0])).toBe(false);
+    expect(categoryHasGift(cats, cats[1])).toBe(false);
+  });
+
+  // Everything that silences the offer has to silence the marker with it,
+  // which is why this asks productGift rather than reading the field.
+  it('stops marking a collection once its gift is sold out', () => {
+    const cats = build({ source: 'catalog', productId: 'shelf' }, undefined);
+    cats[1].products[0] = { ...shelf, inStock: false };
+    expect(categoryHasGift(cats, cats[0])).toBe(false);
+  });
+
+  it('stops marking a collection whose only offer was switched off', () => {
+    const cats = build(undefined, { mode: 'off' });
+    expect(categoryHasGift(cats, cats[0])).toBe(false);
+  });
+
+  it('survives a category with no products', () => {
+    expect(categoryHasGift([], { slug: 'empty' })).toBe(false);
+    expect(categoryHasGift([], undefined)).toBe(false);
   });
 });

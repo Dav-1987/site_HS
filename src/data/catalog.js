@@ -670,6 +670,28 @@ export function productGift(categories, product, category, lang) {
   };
 }
 
+
+/**
+ * Whether anything in this category comes with a gift — what the navigation
+ * menu marks a collection by.
+ *
+ * Derived rather than stored: the shop writes the marker's wording in /admin,
+ * but which collections carry it follows from the offers themselves, so a
+ * marker cannot outlive the offer it advertises. The rule on the category is
+ * the quick answer; without one, the products are asked one at a time, because
+ * a gift is just as often set on a single piece as on a whole collection.
+ *
+ * Goes through productGift() rather than reading the field, so everything that
+ * silences an offer silences the marker too: a gift sold out, deleted, or
+ * switched off on the one product that had it.
+ */
+export function categoryHasGift(categories, category) {
+  for (const product of category?.products ?? []) {
+    if (productGift(categories, product, category, 'es')) return true;
+  }
+  return false;
+}
+
 /**
  * The other side of the offer: what this product is given away with, for its
  * own page to say so.

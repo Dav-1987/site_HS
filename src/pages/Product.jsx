@@ -462,11 +462,6 @@ export default function Product() {
                   swipes past the first photo is looking closely, and that is
                   the worst moment for the offer to disappear. */}
               <GiftInset gift={gift} atTop={isVideoActive} />
-              {!isVideoActive && (
-                <span className="pointer-events-none absolute bottom-3 right-3 bg-background/85 px-3 py-1.5 text-xs uppercase tracking-[0.18em] text-primary opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-                  {t('product.zoom')}
-                </span>
-              )}
               {multi && (
                 <>
                   <button

@@ -55,6 +55,14 @@ function IconGift({ className = '' }) {
  * off the bottom of the screen. The value is an argument for buying, and by the
  * time the form is open it has already been made on the product page — what is
  * left to say here is only that the gift comes with this order.
+ *
+ * On the product page it is set larger and bold and pulses twice as it arrives:
+ * it is the one line on the page carrying something the price alone does not
+ * say. The compact one does neither — it sits above a form the visitor is about
+ * to fill in, and movement next to a text field is a distraction rather than an
+ * announcement. The pulse scales from the left edge so the sentence grows away
+ * from the price it sits under instead of drifting across it, and it stops
+ * altogether for anyone who has asked for less motion (see index.css).
  */
 export function GiftLine({ gift, linked = true, compact = false, className = '' }) {
   const { t } = useLanguage();
@@ -63,9 +71,11 @@ export function GiftLine({ gift, linked = true, compact = false, className = '' 
 
   return (
     <p
-      className={`flex items-start gap-2 text-promo ${compact ? 'text-xs' : 'text-sm'} ${className}`}
+      className={`flex items-start gap-2 text-promo ${
+        compact ? 'text-xs' : 'origin-left animate-gift-pulse text-base font-bold'
+      } ${className}`}
     >
-      <IconGift className={`mt-0.5 shrink-0 ${compact ? 'h-3.5 w-3.5' : 'h-4 w-4'}`} />
+      <IconGift className={`mt-0.5 shrink-0 ${compact ? 'h-3.5 w-3.5' : 'h-5 w-5'}`} />
       <span>
         {t('product.giftBefore')}{' '}
         {linked && gift.href ? (
@@ -116,9 +126,12 @@ export function GiftInset({ gift, atTop = false, className = '' }) {
     <div
       className={`pointer-events-none absolute ${
         atTop ? 'top-[0.5em]' : 'bottom-[0.5em]'
-      } left-[0.5em] z-10 flex items-center gap-[0.5em] border border-accent/60 bg-background/95 p-[0.3em] pr-[0.7em] text-[clamp(0.7rem,4.6cqw,1.25rem)] ${className}`}
+      } left-[0.5em] z-10 flex origin-left animate-gift-pulse items-center gap-[0.5em] border border-accent/60 bg-background/95 p-[0.3em] pr-[0.7em] text-[clamp(0.85rem,5.8cqw,1.6rem)] ${className}`}
     >
-      <span className="flex h-[1.5em] w-[1.5em] shrink-0 items-center justify-center rounded-full bg-accent-text text-[0.9em] leading-none text-background">
+      {/* The sale green, the same one the "-N%" corner carries: on a photo the
+          two are the only marks that mean "this costs you less", and giving
+          them one colour keeps that reading. */}
+      <span className="flex h-[1.5em] w-[1.5em] shrink-0 items-center justify-center rounded-full bg-sale text-[0.9em] leading-none text-white">
         +
       </span>
       <span className="h-[3em] w-[2.4em] shrink-0 overflow-hidden bg-surface">
@@ -183,12 +196,33 @@ export function GiftBadge({ product, className = '' }) {
   const gift = productGift(allCategories, found.product, found.category, lang);
   if (!gift) return null;
 
+  // The label is written in /admin and normally opens with a "+". Split that
+  // off into its own element so the text beside it wraps as a block of its own:
+  // left in the string, the second line starts under the plus instead of under
+  // the first letter, and the label reads as two ragged fragments rather than
+  // one phrase. A label written without a leading plus is untouched.
+  const label = t('product.giftBadge');
+  const [, lead = '', rest = label] = label.match(/^\s*(\+)\s+(.+)$/s) ?? [];
+
   return (
     <span
-      className={`pointer-events-none absolute left-[0.5em] top-[0.5em] z-10 flex items-center gap-[0.35em] rounded-[0.4em] bg-background/95 px-[0.5em] py-[0.3em] text-[clamp(0.65rem,4cqw,1.1rem)] font-medium uppercase leading-none tracking-wide text-promo ${className}`}
+      className={`pointer-events-none absolute left-[0.5em] top-[0.5em] z-10 flex max-w-[54%] items-start gap-[0.35em] rounded-[0.4em] bg-background/95 px-[0.5em] py-[0.3em] text-[clamp(0.62rem,3.7cqw,1rem)] font-medium leading-tight text-promo ${className}`}
     >
-      <IconGift className="h-[1.1em] w-[1.1em]" />
-      {t('product.giftBadge')}
+      {/* Aligned to the top rather than centred: the label runs to two lines on
+          a narrow tile, and the icon belongs beside the first of them. */}
+      <IconGift className="mt-[0.1em] h-[1.1em] w-[1.1em] shrink-0" />
+      {lead && <span className="shrink-0">{lead}</span>}
+      {/* Wraps rather than runs on: the text is written in /admin and can be as
+          long as the shop wants it, while the opposite corner belongs to the
+          "-N%" badge. The cap is a share of the photo's width, not of this
+          badge's own font size: the discount is set larger, so an em-based cap
+          measured against this text let the two overlap on a phone.
+
+          Sentence case, not the uppercase-with-tracking the other badges use:
+          those carry one short word, this carries a sentence the shop writes
+          itself, and set the same way it broke to three lines on a two-column
+          phone grid with the leading "+" stranded on a line of its own. */}
+      <span>{rest}</span>
     </span>
   );
 }

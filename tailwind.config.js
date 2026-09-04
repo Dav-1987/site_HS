@@ -39,10 +39,18 @@ export default {
           '0%': { backgroundPosition: '200% 0' },
           '100%': { backgroundPosition: '-200% 0' },
         },
+        // Attention on arrival, not a heartbeat: the gift announces itself twice
+        // and then holds still. Transform only, so it costs no layout and the
+        // element's box never moves the text around it.
+        'gift-pulse': {
+          '0%, 100%': { transform: 'scale(1)' },
+          '50%': { transform: 'scale(1.07)' },
+        },
       },
       animation: {
         'fade-in': 'fade-in 0.6s ease-out forwards',
         shimmer: 'shimmer 1.6s linear infinite',
+        'gift-pulse': 'gift-pulse 0.85s ease-in-out 2',
       },
     },
   },

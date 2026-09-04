@@ -1,9 +1,10 @@
 import { describe, it, expect } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
-import { GiftLine } from './Gift.jsx';
+import { GiftBadge, GiftLine } from './Gift.jsx';
 import { LanguageProvider } from '../i18n/LanguageContext.jsx';
 import { SettingsProvider } from '../settings/SettingsContext.jsx';
+import { CatalogProvider } from '../catalog/CatalogContext.jsx';
 
 const gift = {
   name: 'Estantería 60 × 180 cm',
@@ -59,6 +60,17 @@ describe('GiftLine', () => {
     expect(screen.getByText(/Estantería 60 × 180 cm/)).toBeTruthy();
   });
 
+  // The line under the price is the one thing on the page saying something the
+  // price does not, so it announces itself twice on arrival. In the order form
+  // it must not: that line sits above fields the visitor is about to fill in,
+  // and movement beside a text input is a distraction, not an announcement.
+  it('pulses on arrival under the price, and never in the order form', () => {
+    const { container: page } = renderLine();
+    expect(page.querySelector('p').className).toContain('animate-gift-pulse');
+    const { container: form } = renderLine({ compact: true });
+    expect(form.querySelector('p').className).not.toContain('animate-gift-pulse');
+  });
+
   it('has no link for a gift the shop does not sell', () => {
     const { container } = renderLine({ offer: { ...gift, href: null, price: null } });
     expect(container.querySelector('a')).toBeNull();
@@ -67,5 +79,62 @@ describe('GiftLine', () => {
   it('renders nothing when there is no gift', () => {
     const { container } = renderLine({ offer: null });
     expect(container.textContent).toBe('');
+  });
+});
+
+describe('GiftBadge', () => {
+  const catalog = [
+    {
+      slug: 'tocadores',
+      name: { es: 'Tocadores', en: 'Dressing tables' },
+      gift: { source: 'catalog', productId: 'shelf' },
+      products: [{ id: 'table', name: 'Tocador', price: 100 }],
+    },
+    {
+      slug: 'estanterias',
+      name: { es: 'Estanterías', en: 'Shelves' },
+      products: [
+        {
+          id: 'shelf',
+          name: 'Estantería | de pared',
+          subtitle: '60 × 180 cm',
+          price: 89,
+          images: ['/uploads/shelf.jpg'],
+        },
+      ],
+    },
+  ];
+
+  const renderBadge = (id = 'table') =>
+    render(
+      <MemoryRouter>
+        <SettingsProvider>
+          <LanguageProvider>
+            <CatalogProvider initialCatalog={catalog}>
+              <GiftBadge product={{ id }} />
+            </CatalogProvider>
+          </LanguageProvider>
+        </SettingsProvider>
+      </MemoryRouter>,
+    );
+
+  it('marks a product its category gives something away with', () => {
+    const { container } = renderBadge();
+    expect(container.textContent).toContain('Estantería de regalo');
+  });
+
+  it('says nothing on a product with no gift', () => {
+    const { container } = renderBadge('shelf');
+    expect(container.textContent).toBe('');
+  });
+
+  // The label is written in /admin and opens with a "+". It has to be its own
+  // element: left inside the sentence, the second line of a label that wraps on
+  // a narrow tile starts under the plus instead of under the first letter.
+  it('sets the leading plus apart so a wrapped line aligns with the text', () => {
+    const { container } = renderBadge();
+    const parts = [...container.querySelectorAll('span > span')].map((el) => el.textContent);
+    expect(parts).toContain('+');
+    expect(parts).toContain('Estantería de regalo');
   });
 });

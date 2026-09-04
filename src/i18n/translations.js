@@ -10,6 +10,10 @@ export const translations = {
     'nav.reviews': 'Opiniones',
     'nav.menu': 'Menú',
     'nav.close': 'Cerrar',
+    // Marks the collections that carry a gift, in both menus. Which collections
+    // get it follows from the offers themselves (see categoryHasGift); the
+    // wording is the shop's, editable under «Тексты сайта» → «Меню».
+    'nav.giftBadge': '+Regalo',
 
     // --- Hero ---
     'hero.eyebrow': 'Muebles de diseño · Hecho en España',
@@ -87,7 +91,7 @@ export const translations = {
     'product.giftBefore': 'Incluye',
     'product.giftAfter': 'de regalo',
     'product.giftValue': 'valor',
-    'product.giftBadge': 'Regalo',
+    'product.giftBadge': '+ Estantería de regalo',
     'product.giftLabel': 'De regalo',
     'product.giftWith': 'De regalo con',
     'product.customOrderTitle': 'Fabricación a medida',
@@ -238,6 +242,7 @@ export const translations = {
     'nav.reviews': 'Reviews',
     'nav.menu': 'Menu',
     'nav.close': 'Close',
+    'nav.giftBadge': '+Gift',
 
     // --- Hero ---
     'hero.eyebrow': 'Designer furniture · Made in Spain',
@@ -312,7 +317,7 @@ export const translations = {
     'product.giftBefore': 'Includes',
     'product.giftAfter': 'as a gift',
     'product.giftValue': 'worth',
-    'product.giftBadge': 'Gift',
+    'product.giftBadge': '+ Free shelf',
     'product.giftLabel': 'Free gift',
     'product.giftWith': 'A free gift with',
     'product.customOrderTitle': 'Made to your measurements',

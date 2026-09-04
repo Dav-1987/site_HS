@@ -2,6 +2,15 @@
 @tailwind components;
 @tailwind utilities;
 
+/* The gift's arrival pulse is the one thing on the site that moves without
+   being asked to, so it is also the one that has to stop when the visitor has
+   said they don't want motion. */
+@media (prefers-reduced-motion: reduce) {
+  .animate-gift-pulse {
+    animation: none;
+  }
+}
+
 /* ============================================================
    Mirage Muebles — Design tokens (RAW RGB for Tailwind opacity)
    Warm minimalist palette: beige + soft charcoal + gold
