@@ -1,4 +1,4 @@
-import { describe, it, expect, vi } from 'vitest';
+import { describe, it, expect, vi, afterEach } from 'vitest';
 import { render, screen, fireEvent } from '@testing-library/react';
 import ProductEditor from './ProductEditor.jsx';
 import { DEFAULT_PERK_VARIANT, PERK_VARIANTS } from '../../data/catalog.js';
@@ -54,7 +54,10 @@ describe('ProductEditor — collapsed row thumbnail', () => {
   });
 
   it('falls back to the placeholder when the product has no photo', () => {
-    const { container } = renderEditor({ ...product, media: [{ type: 'video', src: '/uploads/clip.mp4' }] });
+    const { container } = renderEditor({
+      ...product,
+      media: [{ type: 'video', src: '/uploads/clip.mp4' }],
+    });
     expect(container.querySelector('img')).toBeNull();
     expect(screen.getByText('M')).toBeTruthy();
   });
@@ -129,5 +132,51 @@ describe('ProductEditor — sale badge switch', () => {
     renderEditor({ ...product, showDiscountBadge: false });
     expand();
     expect(checkbox().checked).toBe(false);
+  });
+});
+
+// On a phone the row has no space for the visibility select and the stock
+// switch, so they move into the row's "⋯" menu — the state itself must stay
+// changeable without opening the product.
+describe('ProductEditor — phone row', () => {
+  const PHONE = 390;
+  const openRowMenu = () =>
+    fireEvent.click(screen.getByRole('button', { name: 'Действия с товаром' }));
+
+  afterEach(() => {
+    window.innerWidth = 1024;
+  });
+
+  it('still shows which product the row is', () => {
+    window.innerWidth = PHONE;
+    renderEditor();
+    expect(screen.getByText('Tocador')).toBeTruthy();
+    expect(screen.getByText('M-05')).toBeTruthy();
+  });
+
+  it('drops the inline visibility select in favour of the menu', () => {
+    window.innerWidth = PHONE;
+    renderEditor();
+    expect(screen.queryByLabelText('Видимость товара')).toBeNull();
+    openRowMenu();
+    expect(screen.getByRole('menuitem', { name: /Показывать/ })).toBeTruthy();
+  });
+
+  it('changes visibility from the menu', () => {
+    window.innerWidth = PHONE;
+    const onChange = vi.fn();
+    renderEditor(product, onChange);
+    openRowMenu();
+    fireEvent.click(screen.getByRole('menuitem', { name: /Снять с сайта/ }));
+    expect(onChange).toHaveBeenCalledWith(expect.objectContaining({ visibility: 'off' }));
+  });
+
+  it('flips availability from the menu', () => {
+    window.innerWidth = PHONE;
+    const onChange = vi.fn();
+    renderEditor(product, onChange);
+    openRowMenu();
+    fireEvent.click(screen.getByRole('menuitem', { name: /Нет в наличии/ }));
+    expect(onChange).toHaveBeenCalledWith(expect.objectContaining({ inStock: false }));
   });
 });

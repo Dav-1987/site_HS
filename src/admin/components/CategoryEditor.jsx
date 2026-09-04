@@ -7,7 +7,21 @@ import ImageField from './ImageField.jsx';
 import VideoField from './VideoField.jsx';
 import GiftEditor from './GiftEditor.jsx';
 import ProductEditor from './ProductEditor.jsx';
-import VisibilitySelect, { VisibilityBadge, VisibilityNote } from './VisibilitySelect.jsx';
+import VisibilitySelect, {
+  VisibilityBadge,
+  VisibilityMenuItems,
+  VisibilityNote,
+} from './VisibilitySelect.jsx';
+import RowActions from './RowActions.jsx';
+import { useIsCompact } from '../useIsCompact.js';
+
+const CATEGORY_ACTIONS = {
+  more: 'Действия с категорией',
+  duplicate: 'Дублировать категорию',
+  up: 'Переместить выше',
+  down: 'Переместить ниже',
+  remove: 'Удалить категорию',
+};
 
 export default function CategoryEditor({
   category,
@@ -23,6 +37,7 @@ export default function CategoryEditor({
   categoryOptions,
   onMoveProducts,
 }) {
+  const compact = useIsCompact();
   // Bulk "move to another category" — selection is local (not persisted):
   // it's a transient action, and product ids stay valid across a move since
   // they're unique catalog-wide, so nothing here needs to survive a re-open.
@@ -47,8 +62,7 @@ export default function CategoryEditor({
   };
 
   const set = (patch) => onChange({ ...category, ...patch });
-  const setI18n = (key, lang, val) =>
-    set({ [key]: { ...category[key], [lang]: val } });
+  const setI18n = (key, lang, val) => set({ [key]: { ...category[key], [lang]: val } });
 
   const updateProduct = (pi, next) =>
     set({ products: category.products.map((p, i) => (i === pi ? next : p)) });
@@ -95,34 +109,50 @@ export default function CategoryEditor({
   return (
     <div className="border border-primary/15 bg-surface">
       {/* Header bar */}
-      <div className="flex items-center gap-3 px-5 py-4">
+      <div className="flex items-center gap-2 px-3 py-3 sm:gap-3 sm:px-5 sm:py-4">
         <button
           type="button"
           onClick={onToggle}
-          className="flex flex-1 items-center gap-3 text-left"
+          // min-w-0 lets the long category name shrink instead of pushing the
+          // controls off a phone screen.
+          className="flex min-h-11 min-w-0 flex-1 items-center gap-2 text-left sm:min-h-0 sm:gap-3"
         >
-          <span className={`text-base transition-transform ${open ? 'rotate-45' : ''}`}>+</span>
-          <span className="font-serif text-xl font-light text-primary">
+          <span className={`shrink-0 text-base transition-transform ${open ? 'rotate-45' : ''}`}>
+            +
+          </span>
+          <span className="truncate font-serif text-xl font-light text-primary">
             {category.name?.es || category.slug || 'Новая категория'}
           </span>
-          <span className="text-xs uppercase tracking-[0.18em] text-primary/40">
+          <span className="shrink-0 text-xs uppercase tracking-[0.18em] text-primary/40">
             {category.products.length} тов.
           </span>
           <VisibilityBadge entity={category} />
         </button>
-        <VisibilitySelect
-          value={category.visibility}
-          onChange={(visibility) => set({ visibility })}
-          title="Видимость категории"
+        {!compact && (
+          <VisibilitySelect
+            value={category.visibility}
+            onChange={(visibility) => set({ visibility })}
+            title="Видимость категории"
+          />
+        )}
+        <RowActions
+          labels={CATEGORY_ACTIONS}
+          isFirst={isFirst}
+          isLast={isLast}
+          onDuplicate={onDuplicate}
+          onMove={onMove}
+          onRemove={onRemove}
+          extras={
+            <VisibilityMenuItems
+              value={category.visibility}
+              onChange={(visibility) => set({ visibility })}
+            />
+          }
         />
-        <button type="button" onClick={onDuplicate} title="Дублировать категорию" className={BTN_GHOST}>⧉</button>
-        <button type="button" onClick={() => onMove(-1)} disabled={isFirst} className={BTN_GHOST}>↑</button>
-        <button type="button" onClick={() => onMove(1)} disabled={isLast} className={BTN_GHOST}>↓</button>
-        <button type="button" onClick={onRemove} title="Удалить категорию" className="text-xs uppercase tracking-[0.18em] text-red-600 hover:underline px-2">×</button>
       </div>
 
       {open && (
-        <div className="space-y-6 border-t border-primary/10 px-5 py-6">
+        <div className="space-y-6 border-t border-primary/10 px-3 py-6 sm:px-5">
           {isTileEntryCategory(category) && (
             <p className="border-l-2 border-primary/20 bg-background px-3 py-2 text-xs leading-relaxed text-primary/60">
               Этот раздел не показывается в списке коллекций — ни в меню, ни на главной, ни в
@@ -141,14 +171,31 @@ export default function CategoryEditor({
               />
               {RESERVED_SLUGS.includes(category.slug) && (
                 <p className="mt-1 text-xs text-red-600">
-                  Этот slug занят системной страницей сайта — категория будет недоступна по своему адресу.
+                  Этот slug занят системной страницей сайта — категория будет недоступна по своему
+                  адресу.
                 </p>
               )}
             </div>
-            <Field label="Название (исп.)" value={category.name?.es} onChange={(v) => setI18n('name', 'es', v)} />
-            <Field label="Название (англ.)" value={category.name?.en} onChange={(v) => setI18n('name', 'en', v)} />
-            <Field label="Слоган (исп.)" value={category.tagline?.es} onChange={(v) => setI18n('tagline', 'es', v)} />
-            <Field label="Слоган (англ.)" value={category.tagline?.en} onChange={(v) => setI18n('tagline', 'en', v)} />
+            <Field
+              label="Название (исп.)"
+              value={category.name?.es}
+              onChange={(v) => setI18n('name', 'es', v)}
+            />
+            <Field
+              label="Название (англ.)"
+              value={category.name?.en}
+              onChange={(v) => setI18n('name', 'en', v)}
+            />
+            <Field
+              label="Слоган (исп.)"
+              value={category.tagline?.es}
+              onChange={(v) => setI18n('tagline', 'es', v)}
+            />
+            <Field
+              label="Слоган (англ.)"
+              value={category.tagline?.en}
+              onChange={(v) => setI18n('tagline', 'en', v)}
+            />
           </div>
           <ImageField
             label="Изображение категории (ПК)"
@@ -192,16 +239,16 @@ export default function CategoryEditor({
 
           {/* Products */}
           <div>
-            <div className="mb-3 flex items-center justify-between">
+            <div className="mb-3 flex flex-wrap items-center justify-between gap-3">
               <div className="flex items-center gap-3">
                 <h3 className="text-xs uppercase tracking-[0.2em] text-primary/50">Товары</h3>
                 {category.products.length > 0 && (
-                  <label className="flex items-center gap-1.5 text-xs text-primary/50">
+                  <label className="flex min-h-11 items-center gap-1.5 text-xs text-primary/50 sm:min-h-0">
                     <input
                       type="checkbox"
                       checked={allSelected}
                       onChange={toggleSelectAll}
-                      className="h-4 w-4 accent-accent"
+                      className="h-5 w-5 accent-accent sm:h-4 sm:w-4"
                     />
                     Выбрать все
                   </label>
@@ -251,7 +298,7 @@ export default function CategoryEditor({
                     checked={selected.has(p.id)}
                     onChange={() => toggleSelected(p.id)}
                     aria-label={`Выбрать ${p.name || p.id}`}
-                    className="mt-4 h-4 w-4 shrink-0 accent-accent"
+                    className="mt-4 h-5 w-5 shrink-0 accent-accent sm:h-4 sm:w-4"
                   />
                   <div className="min-w-0 flex-1">
                     <ProductEditor
@@ -271,7 +318,11 @@ export default function CategoryEditor({
                 <p className="text-sm text-primary/40">Пока нет товаров.</p>
               )}
             </div>
-            <button type="button" onClick={addProduct} className={`${BTN_GHOST} mt-4 w-full justify-center`}>
+            <button
+              type="button"
+              onClick={addProduct}
+              className={`${BTN_GHOST} mt-4 w-full justify-center`}
+            >
               + Добавить товар
             </button>
           </div>
@@ -280,7 +331,7 @@ export default function CategoryEditor({
             <button
               type="button"
               onClick={onRemove}
-              className="text-xs uppercase tracking-[0.18em] text-red-600 hover:underline"
+              className="inline-flex min-h-11 items-center text-xs uppercase tracking-[0.18em] text-red-600 hover:underline sm:min-h-0"
             >
               Удалить категорию
             </button>

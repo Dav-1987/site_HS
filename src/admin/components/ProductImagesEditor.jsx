@@ -2,6 +2,8 @@ import { useState } from 'react';
 import { resolveImage } from '../../data/catalog.js';
 import { uploadImage, uploadVideo } from '../api.js';
 import { LABEL } from '../ui.js';
+import { useIsCompact } from '../useIsCompact.js';
+import OverflowMenu, { MENU_ITEM, MenuItem, MenuSeparator } from './OverflowMenu.jsx';
 
 // Unified media editor for a product: photos AND videos in one drag-to-reorder
 // grid. Any item can be moved to any position; the first photo is the catalog
@@ -10,6 +12,7 @@ import { LABEL } from '../ui.js';
 // `media` is an ordered array of { type: 'image'|'video', src }.
 export default function ProductImagesEditor({ media, onChange }) {
   const items = Array.isArray(media) ? media : [];
+  const compact = useIsCompact();
   const [photoUploading, setPhotoUploading] = useState(false);
   const [photoProgress, setPhotoProgress] = useState('');
   const [videoUploading, setVideoUploading] = useState(false);
@@ -26,6 +29,26 @@ export default function ProductImagesEditor({ media, onChange }) {
     const isVid = items[i]?.type === 'video';
     if (!window.confirm(isVid ? 'Удалить это видео?' : 'Удалить это фото?')) return;
     onChange(items.filter((_, j) => j !== i));
+  };
+
+  // Reordering by one step — the touch-friendly equivalent of a drag, and the
+  // only way to reorder on a phone (HTML5 drag events never fire there).
+  const moveItem = (i, dir) => {
+    const target = i + dir;
+    if (target < 0 || target >= items.length) return;
+    const next = [...items];
+    [next[i], next[target]] = [next[target], next[i]];
+    onChange(next);
+  };
+
+  // Promote a photo to the catalog cover: the cover is "the first photo", so
+  // the tapped one moves into that slot — a leading video keeps its place.
+  const makeCover = (i) => {
+    if (i === coverIdx || items[i]?.type === 'video') return;
+    const next = [...items];
+    const [picked] = next.splice(i, 1);
+    next.splice(coverIdx < 0 ? 0 : coverIdx, 0, picked);
+    onChange(next);
   };
 
   // Drag-and-drop reordering (works across photos and videos alike).
@@ -116,17 +139,108 @@ export default function ProductImagesEditor({ media, onChange }) {
   return (
     <div>
       <span className={LABEL}>
-        Фото и видео — перетаскивайте в любом порядке (первое фото — обложка каталога)
+        {compact
+          ? 'Фото и видео — нажмите на плитку, чтобы заменить, переставить или сделать обложкой'
+          : 'Фото и видео — перетаскивайте в любом порядке (первое фото — обложка каталога)'}
       </span>
 
-      {/* Drag-to-reorder media grid */}
-      <div className="mt-2 grid grid-cols-4 gap-2 sm:grid-cols-5 lg:grid-cols-6">
+      {/* Media grid — drag-to-reorder on desktop, tap-for-menu on a phone */}
+      <div
+        className={`mt-2 grid gap-2 ${compact ? 'grid-cols-3' : 'grid-cols-4'} sm:grid-cols-5 lg:grid-cols-6`}
+      >
         {items.map((item, i) => {
           const isVid = item.type === 'video';
           const isReplacing = replacingIdx === i;
           const isDragging = dragIdx === i;
           const isOver = overIdx === i && dragIdx !== null && dragIdx !== i;
           const src = isVid ? item.src : resolveImage(item.src, 200);
+          const kind = isVid ? 'видео' : 'фото';
+
+          const badges = (
+            <>
+              {/* Position / role badge */}
+              {i === coverIdx ? (
+                <span className="pointer-events-none absolute left-1 top-1 z-10 bg-background/80 px-1.5 py-0.5 text-[9px] uppercase tracking-[0.12em] text-primary/60">
+                  Обложка
+                </span>
+              ) : (
+                <span className="pointer-events-none absolute left-1 top-1 z-10 bg-background/80 px-1.5 py-0.5 text-[9px] uppercase tracking-[0.12em] text-primary/50">
+                  {i + 1}
+                </span>
+              )}
+              {isVid && (
+                <span className="pointer-events-none absolute right-1 top-1 z-10 bg-primary/70 px-1 py-0.5 text-[9px] text-background">
+                  ▶
+                </span>
+              )}
+            </>
+          );
+
+          const thumb = isVid ? (
+            <video
+              src={src}
+              muted
+              playsInline
+              className="h-full w-full object-cover pointer-events-none"
+            />
+          ) : src ? (
+            <img src={src} alt="" className="h-full w-full object-cover pointer-events-none" />
+          ) : (
+            <div className="flex h-full w-full items-center justify-center">
+              <span className="font-serif text-xl font-light text-primary/20">M</span>
+            </div>
+          );
+
+          // Phone: neither of the desktop affordances exists on touch — HTML5
+          // drag never fires, and a hover overlay never appears — so the tile
+          // itself opens a menu holding every action, reordering included.
+          if (compact) {
+            return (
+              <OverflowMenu
+                key={i}
+                title={`Действия: ${kind} ${i + 1}`}
+                // The clipping lives on the trigger, not the wrapper: an
+                // `overflow-hidden` wrapper would cut off the popover itself.
+                wrapperClassName="relative aspect-square border border-primary/10 bg-surface"
+                triggerClassName="relative block h-full w-full overflow-hidden"
+                trigger={
+                  <>
+                    {badges}
+                    {thumb}
+                  </>
+                }
+                // Keep the popover on screen: only the first column has room
+                // to open rightwards.
+                align={i % 3 === 0 ? 'left' : 'right'}
+              >
+                {!isVid && (
+                  <MenuItem onClick={() => makeCover(i)} disabled={i === coverIdx}>
+                    ★ Сделать обложкой
+                  </MenuItem>
+                )}
+                <label className={`${MENU_ITEM} text-primary hover:bg-surface`}>
+                  ↺ {isReplacing ? 'Загрузка…' : 'Заменить'}
+                  <input
+                    type="file"
+                    accept={isVid ? 'video/*' : 'image/*'}
+                    className="hidden"
+                    disabled={isReplacing}
+                    onChange={(e) => onReplace(e, i)}
+                  />
+                </label>
+                <MenuItem onClick={() => moveItem(i, -1)} disabled={i === 0}>
+                  ← Левее
+                </MenuItem>
+                <MenuItem onClick={() => moveItem(i, 1)} disabled={i === items.length - 1}>
+                  → Правее
+                </MenuItem>
+                <MenuSeparator />
+                <MenuItem onClick={() => remove(i)} danger>
+                  × Удалить {kind}
+                </MenuItem>
+              </OverflowMenu>
+            );
+          }
 
           return (
             <div
@@ -142,39 +256,8 @@ export default function ProductImagesEditor({ media, onChange }) {
                 isOver ? 'ring-2 ring-accent ring-offset-1' : '',
               ].join(' ')}
             >
-              {/* Position / role badge */}
-              {i === coverIdx ? (
-                <span className="pointer-events-none absolute left-1 top-1 z-10 bg-background/80 px-1.5 py-0.5 text-[9px] uppercase tracking-[0.12em] text-primary/60">
-                  Обложка
-                </span>
-              ) : (
-                <span className="pointer-events-none absolute left-1 top-1 z-10 bg-background/80 px-1.5 py-0.5 text-[9px] uppercase tracking-[0.12em] text-primary/50">
-                  {i + 1}
-                </span>
-              )}
-
-              {/* Video marker */}
-              {isVid && (
-                <span className="pointer-events-none absolute right-1 top-1 z-10 bg-primary/70 px-1 py-0.5 text-[9px] text-background">
-                  ▶
-                </span>
-              )}
-
-              {/* Thumbnail */}
-              {isVid ? (
-                <video
-                  src={src}
-                  muted
-                  playsInline
-                  className="h-full w-full object-cover pointer-events-none"
-                />
-              ) : src ? (
-                <img src={src} alt="" className="h-full w-full object-cover pointer-events-none" />
-              ) : (
-                <div className="flex h-full w-full items-center justify-center">
-                  <span className="font-serif text-xl font-light text-primary/20">M</span>
-                </div>
-              )}
+              {badges}
+              {thumb}
 
               {/* Hover overlay — replace + delete */}
               <div className="absolute inset-0 flex flex-col items-center justify-center gap-2 bg-primary/65 opacity-0 transition-opacity duration-200 group-hover:opacity-100">
