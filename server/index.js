@@ -679,7 +679,10 @@ app.get('/api/image/:key', (req, res) => {
 
 // ─── /api/* catch-all — неизвестные API-маршруты → JSON 404 ─────────────────
 
-app.all('/api/*', (req, res) => {
+// Express 5 / path-to-regexp v8 dropped the bare `*`: a wildcard needs a name,
+// and `{...}` makes it optional. `/api/{*splat}` matches exactly what `/api/*`
+// used to — `/api/`, `/api/x`, `/api/x/y` — and leaves `/api` to the SPA.
+app.all('/api/{*splat}', (req, res) => {
   res.status(404).json({ error: `Unknown API route: ${req.method} ${req.path}` });
 });
 
@@ -717,7 +720,7 @@ async function currentProductIndex() {
   return productIndex;
 }
 
-app.get('*', async (req, res, next) => {
+app.get('/{*splat}', async (req, res, next) => {
   try {
     const target = resolveRedirect(req.path, await currentProductIndex());
     if (target) return res.redirect(301, target);
@@ -728,15 +731,21 @@ app.get('*', async (req, res, next) => {
   return next();
 });
 
-app.get('*', (req, res) => {
+app.get('/{*splat}', (req, res) => {
   const isClientOnlyRoute = CLIENT_ONLY_ROUTES.some((re) => re.test(req.path));
   res.status(isClientOnlyRoute ? 200 : 404).sendFile(join(DIST_DIR, 'index.html'));
 });
 
 // ─── Start ────────────────────────────────────────────────────────────────────
 
-app.listen(PORT, '0.0.0.0', () => {
-  console.log(`Mirage API → http://0.0.0.0:${PORT}`);
-  runCleanup();
-  setInterval(runCleanup, 60 * 60 * 1000); // hourly
-});
+// Exported (and not started) under test, so the routing can be exercised
+// without a database or a port of its own — see index.routes.test.js.
+if (process.env.NODE_ENV !== 'test') {
+  app.listen(PORT, '0.0.0.0', () => {
+    console.log(`Mirage API → http://0.0.0.0:${PORT}`);
+    runCleanup();
+    setInterval(runCleanup, 60 * 60 * 1000); // hourly
+  });
+}
+
+export default app;
