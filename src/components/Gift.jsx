@@ -49,15 +49,23 @@ function IconGift({ className = '' }) {
  * `linked={false}` drops the link where following it would be the wrong move:
  * inside the order form it would carry someone out of a half-filled form, and
  * it would join the dialog's focus trap on the way.
+ *
+ * `compact` is for the order dialog, where every line costs: the value in
+ * brackets wrapped the sentence onto a second line and pushed the submit button
+ * off the bottom of the screen. The value is an argument for buying, and by the
+ * time the form is open it has already been made on the product page — what is
+ * left to say here is only that the gift comes with this order.
  */
-export function GiftLine({ gift, linked = true, className = '' }) {
+export function GiftLine({ gift, linked = true, compact = false, className = '' }) {
   const { t } = useLanguage();
   if (!gift) return null;
   const after = t('product.giftAfter');
 
   return (
-    <p className={`flex items-start gap-2 text-sm text-promo ${className}`}>
-      <IconGift className="mt-0.5 h-4 w-4 shrink-0" />
+    <p
+      className={`flex items-start gap-2 text-promo ${compact ? 'text-xs' : 'text-sm'} ${className}`}
+    >
+      <IconGift className={`mt-0.5 shrink-0 ${compact ? 'h-3.5 w-3.5' : 'h-4 w-4'}`} />
       <span>
         {t('product.giftBefore')}{' '}
         {linked && gift.href ? (
@@ -71,7 +79,7 @@ export function GiftLine({ gift, linked = true, className = '' }) {
           gift.name
         )}
         {after ? ` ${after}` : ''}
-        {gift.price ? (
+        {!compact && gift.price ? (
           <span className="text-secondary">
             {' '}
             ({t('product.giftValue')} {gift.price} {t('common.currency')})
