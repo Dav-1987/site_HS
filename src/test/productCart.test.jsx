@@ -57,8 +57,14 @@ describe('product page order flow', () => {
     expect(heading.className).toContain('text-center');
     expect(heading.children[0].textContent).toBe(productFullName(product));
     expect(heading.children[0].className).toContain('font-semibold');
+    // The dimensions run inline after the name instead of claiming a line of
+    // their own. The dialog is a long form, and on a phone every line it gives
+    // back is a line the submit button climbs above the fold — the assertion on
+    // dialog.textContent above is what guards the space between the two, which
+    // the margin alone would not put into the dialog's accessible name.
     expect(heading.children[1].textContent.trim()).toBe(product.subtitle);
-    expect(heading.children[1].className).toContain('block');
+    expect(heading.children[1].className).not.toContain('block');
+    expect(heading.children[1].className).toContain('whitespace-nowrap');
     expect(heading.children[1].className).toContain('font-normal');
   });
 

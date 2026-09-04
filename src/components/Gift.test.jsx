@@ -44,6 +44,21 @@ describe('GiftLine', () => {
     expect(screen.getByText(/Estantería 60 × 180 cm/)).toBeTruthy();
   });
 
+  it('states the value of the gift', () => {
+    renderLine();
+    expect(screen.getByText(/valor 89/)).toBeTruthy();
+  });
+
+  // The order dialog is already tall enough to push its submit button off the
+  // bottom of a phone screen. The value is an argument for buying and it has
+  // already been made on the product page; what is left to say in the form is
+  // only that the gift comes with this order.
+  it('drops the value in the order form, keeping the gift on one line', () => {
+    renderLine({ compact: true });
+    expect(screen.queryByText(/valor/)).toBeNull();
+    expect(screen.getByText(/Estantería 60 × 180 cm/)).toBeTruthy();
+  });
+
   it('has no link for a gift the shop does not sell', () => {
     const { container } = renderLine({ offer: { ...gift, href: null, price: null } });
     expect(container.querySelector('a')).toBeNull();

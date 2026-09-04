@@ -160,7 +160,9 @@ export default function OrderModal({ product, gift, isOpen, onClose }) {
 
   const label = productLabel(product);
   const productName = productFullName(product);
-  const productSize = String(product?.subtitle ?? '').replace(/\s+/g, ' ').trim();
+  const productSize = String(product?.subtitle ?? '')
+    .replace(/\s+/g, ' ')
+    .trim();
   const { price } = productDiscount(product);
 
   const validate = () => {
@@ -281,7 +283,10 @@ export default function OrderModal({ product, gift, isOpen, onClose }) {
           ×
         </button>
 
-        <div className="p-8 pt-10">
+        {/* Tighter than the rest of the site's panels on purpose: this one is
+            a long form, and on a phone every row of padding is a row the
+            submit button falls below. */}
+        <div className="px-8 py-7">
           {sent ? (
             <div className="py-4 text-center">
               <p id={fieldIds.title} className="font-serif text-2xl font-light text-primary">
@@ -303,17 +308,41 @@ export default function OrderModal({ product, gift, isOpen, onClose }) {
               <p className="mb-2 text-center text-xs font-bold uppercase tracking-[0.25em] text-accent-text">
                 {t('order.modal.eyebrow')}
               </p>
-              <h2 id={fieldIds.title} className="text-center font-serif text-xl text-primary">
-                <span className="block font-semibold">{productName}</span>
-                {productSize && <span className="mt-1 block font-normal"> {productSize}</span>}
+              {/* Sized and laid out to keep the submit button on screen. The
+                  dimensions run inline after the name, as they do on the product
+                  page, instead of claiming a line of their own; and a long name
+                  is set smaller rather than wrapping to three lines at full
+                  size. Both cost nothing to read and together buy back most of
+                  a phone screen's worth of height. */}
+              <h2 id={fieldIds.title} className="text-center font-serif text-primary">
+                <span
+                  className={`font-semibold ${productName.length > 34 ? 'text-base' : 'text-xl'}`}
+                >
+                  {productName}
+                </span>
+                {productSize && (
+                  <>
+                    {/* A real space, not just the margin: this heading is the
+                        dialog's accessible name, and without it a screen reader
+                        reads "Lateral100 × 40 × 160 cm" as one word. */}{' '}
+                    <span className="whitespace-nowrap text-sm font-normal text-primary/60">
+                      {productSize}
+                    </span>
+                  </>
+                )}
               </h2>
 
               {/* Repeated here on purpose: this is the moment the visitor
                   commits, and the offer they are committing to has to be on the
                   same screen as the button that sends the request. */}
-              <GiftLine gift={gift} linked={false} className="mt-3 justify-center text-center" />
+              <GiftLine
+                gift={gift}
+                linked={false}
+                compact
+                className="mt-2 justify-center text-center"
+              />
 
-              <form onSubmit={handleSubmit} className="mt-6 space-y-4" noValidate>
+              <form onSubmit={handleSubmit} className="mt-5 space-y-3" noValidate>
                 <div>
                   <label
                     htmlFor={fieldIds.name}
@@ -471,7 +500,7 @@ export default function OrderModal({ product, gift, isOpen, onClose }) {
                     name="comment"
                     value={comment}
                     onChange={(e) => setComment(e.target.value)}
-                    rows={3}
+                    rows={2}
                     placeholder={t('order.form.comment.placeholder')}
                     className="w-full resize-none border border-primary/20 bg-transparent px-3 py-2.5 text-sm text-primary outline-none transition-colors focus:border-accent focus-visible:ring-2 focus-visible:ring-accent/40"
                   />
