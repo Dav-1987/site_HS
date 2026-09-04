@@ -1,4 +1,5 @@
 import { isInStock } from '../../data/catalog.js';
+import { MenuItem } from './OverflowMenu.jsx';
 
 // Availability is deliberately a separate axis from visibility: a product that
 // ran out keeps its listing, its page and its place in Google's index — only
@@ -45,7 +46,11 @@ export default function StockToggle({ product, onChange }) {
     <button
       type="button"
       onClick={() => onChange(!inStock)}
-      title={inStock ? 'Товар в наличии — нажмите, чтобы отметить «нет в наличии»' : 'Нет в наличии — нажмите, чтобы вернуть в наличие'}
+      title={
+        inStock
+          ? 'Товар в наличии — нажмите, чтобы отметить «нет в наличии»'
+          : 'Нет в наличии — нажмите, чтобы вернуть в наличие'
+      }
       aria-pressed={!inStock}
       className={`shrink-0 border px-2 py-1.5 text-xs transition-colors focus:outline-none focus:ring-1 focus:ring-accent ${
         inStock
@@ -55,5 +60,15 @@ export default function StockToggle({ product, onChange }) {
     >
       {inStock ? 'В наличии' : 'Нет в наличии'}
     </button>
+  );
+}
+
+/** The same switch as a menu row, for the compact (phone) row menu. */
+export function StockMenuItem({ product, onChange }) {
+  const inStock = isInStock(product);
+  return (
+    <MenuItem checked={!inStock} onClick={() => onChange(!inStock)}>
+      Нет в наличии
+    </MenuItem>
   );
 }

@@ -1,4 +1,5 @@
 import { VISIBILITY, visibilityOf } from '../../data/catalog.js';
+import { MenuItem } from './OverflowMenu.jsx';
 
 // One control for both levels — a section and a single product hide the same
 // way, so they get the same three options and the same wording (see VISIBILITY
@@ -79,4 +80,17 @@ export default function VisibilitySelect({ value, onChange, title }) {
       ))}
     </select>
   );
+}
+
+/**
+ * The same three states as menu rows, for the compact (phone) row menu where
+ * there is no space for the select. Checkmark marks the current one.
+ */
+export function VisibilityMenuItems({ value, onChange }) {
+  const current = visibilityOf({ visibility: value });
+  return VISIBILITY.map((v) => (
+    <MenuItem key={v} checked={current === v} onClick={() => onChange(v)}>
+      {LABELS[v]}
+    </MenuItem>
+  ));
 }

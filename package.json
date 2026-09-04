@@ -14,6 +14,7 @@
     "build:seo": "vite build --config vite.config.vps.js && node scripts/prerender.mjs && node scripts/generate-sitemap.mjs && npm run test:hydration",
     "preview": "vite preview --port 3000",
     "shot": "node screenshot.mjs",
+    "shot:admin": "node scripts/shot-admin.mjs",
     "catalog:pull": "node scripts/pull-catalog.mjs",
     "settings:pull": "node scripts/pull-settings.mjs",
     "data:pull": "npm run catalog:pull && npm run settings:pull",

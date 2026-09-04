@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { BTN_GHOST } from '../ui.js';
 import { Field, Select, TextArea } from './Field.jsx';
 import { urlSafe } from '../urlSafe.js';
 import {
@@ -16,8 +15,22 @@ import ImageField from './ImageField.jsx';
 import ProductImagesEditor from './ProductImagesEditor.jsx';
 import ProductPicker from './ProductPicker.jsx';
 import GiftEditor from './GiftEditor.jsx';
-import VisibilitySelect, { VisibilityBadge, VisibilityNote } from './VisibilitySelect.jsx';
-import StockToggle, { StockBadge, StockNote } from './StockToggle.jsx';
+import VisibilitySelect, {
+  VisibilityBadge,
+  VisibilityMenuItems,
+  VisibilityNote,
+} from './VisibilitySelect.jsx';
+import StockToggle, { StockBadge, StockMenuItem, StockNote } from './StockToggle.jsx';
+import RowActions from './RowActions.jsx';
+import { useIsCompact } from '../useIsCompact.js';
+
+const PRODUCT_ACTIONS = {
+  more: 'Действия с товаром',
+  duplicate: 'Дублировать товар',
+  up: 'Переместить выше',
+  down: 'Переместить ниже',
+  remove: 'Удалить товар',
+};
 
 // Only the third perk of the strip differs between variants, so the dropdown is
 // labelled with that perk's Spanish text — read straight from the translations
@@ -48,6 +61,7 @@ export default function ProductEditor({
   allProducts,
 }) {
   const [open, setOpen] = useState(false);
+  const compact = useIsCompact();
   const set = (patch) => onChange({ ...product, ...patch });
   const setMat = (lang, val) => set({ material: { ...product.material, [lang]: val } });
   const setDesc = (lang, val) => set({ description: { ...product.description, [lang]: val } });
@@ -65,81 +79,123 @@ export default function ProductEditor({
     set({ media: next, image: photos[0] || '', images: photos, video: '', videoFirst: false });
   };
 
+  // Collapsed-row pieces, shared by the two arrangements below.
+  const TOGGLE_GLYPH = `shrink-0 text-base transition-transform ${open ? 'rotate-45' : ''}`;
+  const name = (
+    <span className="truncate font-serif text-lg font-light text-primary">
+      {product.name || <span className="text-primary/30">Новый товар</span>}
+      {product.subtitle && <span className="ml-2 text-sm text-primary/40">{product.subtitle}</span>}
+    </span>
+  );
+  const meta = (
+    <>
+      {product.reference && (
+        <span className="shrink-0 text-sm font-bold text-primary">{product.reference}</span>
+      )}
+      {product.price > 0 && (
+        <span className="shrink-0 text-xs text-primary/40">€{product.price}</span>
+      )}
+    </>
+  );
+  // Cover thumbnail — lets you identify a product in the collapsed list without
+  // opening it. Always rendered (placeholder when there's no photo yet) so the
+  // rows stay aligned.
+  const thumbnail = (
+    <span className="flex h-10 w-10 shrink-0 items-center justify-center overflow-hidden border border-primary/10 bg-surface">
+      {cover ? (
+        <img
+          src={resolveImage(cover, 200)}
+          alt=""
+          loading="lazy"
+          className="h-full w-full object-cover"
+        />
+      ) : (
+        <span className="font-serif text-sm font-light text-primary/20">M</span>
+      )}
+    </span>
+  );
+  const badges = (
+    <>
+      <VisibilityBadge entity={product} />
+      <StockBadge product={product} />
+    </>
+  );
+
   return (
     <div className="border border-primary/10 bg-background">
       {/* Header */}
-      <div className="flex items-center gap-2 px-4 py-3">
+      <div className="flex items-center gap-2 px-3 py-2 sm:px-4 sm:py-3">
         <button
           type="button"
           onClick={() => setOpen((o) => !o)}
-          className="flex flex-1 items-center gap-3 text-left min-w-0"
+          className="flex min-w-0 flex-1 items-center gap-2 text-left sm:gap-3"
         >
-          <span className={`shrink-0 text-base transition-transform ${open ? 'rotate-45' : ''}`}>
-            +
-          </span>
-          <span className="truncate font-serif text-lg font-light text-primary">
-            {product.name || <span className="text-primary/30">Новый товар</span>}
-            {product.subtitle && (
-              <span className="ml-2 text-sm text-primary/40">{product.subtitle}</span>
-            )}
-          </span>
-          {product.reference && (
-            <span className="shrink-0 text-sm font-bold text-primary">{product.reference}</span>
+          {/* Phone: photo first, name truncated next to it, the small print
+              wrapped onto a second line — a row this narrow can't hold them
+              side by side. Desktop keeps the single line it always had. */}
+          {compact ? (
+            <>
+              {thumbnail}
+              <span className={TOGGLE_GLYPH}>+</span>
+              <span className="flex min-w-0 flex-1 flex-col gap-0.5">
+                {name}
+                <span className="flex flex-wrap items-center gap-2">
+                  {meta}
+                  {badges}
+                </span>
+              </span>
+            </>
+          ) : (
+            <>
+              <span className={TOGGLE_GLYPH}>+</span>
+              {name}
+              {meta}
+              {thumbnail}
+              {badges}
+            </>
           )}
-          {product.price > 0 && (
-            <span className="shrink-0 text-xs text-primary/40">€{product.price}</span>
-          )}
-          {/* Cover thumbnail — lets you identify a product in the collapsed list
-              without opening it. Always rendered (placeholder when there's no
-              photo yet) so the rows stay aligned. */}
-          <span className="flex h-10 w-10 shrink-0 items-center justify-center overflow-hidden border border-primary/10 bg-surface">
-            {cover ? (
-              <img
-                src={resolveImage(cover, 200)}
-                alt=""
-                loading="lazy"
-                className="h-full w-full object-cover"
+        </button>
+        {!compact && (
+          <>
+            <VisibilitySelect
+              value={product.visibility}
+              onChange={(visibility) => set({ visibility })}
+              title="Видимость товара"
+            />
+            <StockToggle product={product} onChange={(inStock) => set({ inStock })} />
+          </>
+        )}
+        <RowActions
+          labels={PRODUCT_ACTIONS}
+          isFirst={isFirst}
+          isLast={isLast}
+          onDuplicate={onDuplicate}
+          onMove={onMove}
+          onRemove={onRemove}
+          extras={
+            <>
+              <StockMenuItem product={product} onChange={(inStock) => set({ inStock })} />
+              <VisibilityMenuItems
+                value={product.visibility}
+                onChange={(visibility) => set({ visibility })}
               />
-            ) : (
-              <span className="font-serif text-sm font-light text-primary/20">M</span>
-            )}
-          </span>
-          <VisibilityBadge entity={product} />
-          <StockBadge product={product} />
-        </button>
-        <VisibilitySelect
-          value={product.visibility}
-          onChange={(visibility) => set({ visibility })}
-          title="Видимость товара"
+            </>
+          }
         />
-        <StockToggle product={product} onChange={(inStock) => set({ inStock })} />
-        <button type="button" onClick={onDuplicate} title="Дублировать товар" className={BTN_GHOST}>
-          ⧉
-        </button>
-        <button type="button" onClick={() => onMove(-1)} disabled={isFirst} className={BTN_GHOST}>
-          ↑
-        </button>
-        <button type="button" onClick={() => onMove(1)} disabled={isLast} className={BTN_GHOST}>
-          ↓
-        </button>
-        <button
-          type="button"
-          onClick={onRemove}
-          title="Удалить товар"
-          className="text-xs uppercase tracking-[0.18em] text-red-600 hover:underline px-2"
-        >
-          ×
-        </button>
       </div>
 
       {/* Body */}
       {open && (
-        <div className="border-t border-primary/10 p-4">
+        <div className="border-t border-primary/10 p-3 sm:p-4">
           <VisibilityNote entity={product} kind="product" />
           <StockNote product={product} />
           <SectionLabel>Основная информация</SectionLabel>
           <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-            <Field label="Название (исп.)" value={product.name} onChange={(v) => set({ name: v })} />
+            <Field
+              label="Название (исп.)"
+              value={product.name}
+              onChange={(v) => set({ name: v })}
+            />
             <Field
               label="Название (англ.) — для страниц /en; пусто = испанское"
               value={product.nameEn}

@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { triggerRebuild, fetchRebuildStatus } from '../api.js';
 import { BTN_GHOST } from '../ui.js';
+import { MenuItem } from './OverflowMenu.jsx';
 
 const POLL_MS = 4000;
 
@@ -22,7 +23,7 @@ function label(run, clickedAt) {
  * prerendered HTML crawlers see only updates after a rebuild; this is how an
  * admin pushes one on demand instead of asking a developer to run it.
  */
-export default function RebuildButton() {
+function useRebuild() {
   const [configured, setConfigured] = useState(null); // null = not checked yet
   const [run, setRun] = useState(null);
   const [clickedAt, setClickedAt] = useState(null);
@@ -73,33 +74,61 @@ export default function RebuildButton() {
     }
   };
 
-  if (configured === false) return null; // token not set up yet — nothing to show
+  return {
+    // false = token not set up on the server yet; nothing to show at all.
+    configured,
+    error,
+    runUrl: run?.url,
+    statusText: label(run, clickedAt),
+    busy: configured === null || (run?.status !== 'completed' && (clickedAt || run)),
+    start: handleClick,
+  };
+}
 
-  const busy = run?.status !== 'completed' && (clickedAt || run);
-  const text = label(run, clickedAt);
+const TITLE = 'Пересобрать статические страницы сайта (для поисковиков) из текущих данных каталога';
+
+/** Desktop: a button in the toolbar, with the run's state next to it. */
+export default function RebuildButton() {
+  const { configured, error, runUrl, statusText, busy, start } = useRebuild();
+  if (configured === false) return null;
 
   return (
     <div className="flex items-center gap-2">
-      {text && (
+      {statusText && (
         <a
-          href={run?.url}
+          href={runUrl}
           target="_blank"
           rel="noreferrer"
           className="text-xs text-primary/60 underline-offset-2 hover:underline"
         >
-          {text}
+          {statusText}
         </a>
       )}
       {error && <span className="text-xs text-red-600">{error}</span>}
-      <button
-        type="button"
-        onClick={handleClick}
-        disabled={configured === null || busy}
-        className={BTN_GHOST}
-        title="Пересобрать статические страницы сайта (для поисковиков) из текущих данных каталога"
-      >
+      <button type="button" onClick={start} disabled={busy} className={BTN_GHOST} title={TITLE}>
         Пересобрать сайт
       </button>
     </div>
+  );
+}
+
+/**
+ * Phone: the same action as a row of the toolbar's "⋯" menu. The menu is kept
+ * open on click (`keepOpen`) because this item's own label is where the run
+ * reports back — a rebuild takes minutes, and closing the menu would hide it.
+ */
+export function RebuildMenuItem() {
+  const { configured, error, statusText, busy, start } = useRebuild();
+  if (configured === false) return null;
+
+  return (
+    <MenuItem keepOpen onClick={start} disabled={busy}>
+      Пересобрать сайт
+      {(statusText || error) && (
+        <span className={`ml-auto normal-case ${error ? 'text-red-600' : 'text-primary/50'}`}>
+          {error || statusText}
+        </span>
+      )}
+    </MenuItem>
   );
 }
