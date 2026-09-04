@@ -319,7 +319,17 @@ console.log(await sweepVideos(dir, readdirSync(dir).filter(isVideoFile)));
    поэтому нужен отдельный `location /feed/` с `proxy_pass http://127.0.0.1:4000`
    (уже добавлен). Без него — молчаливый 404, и платформы не заберут фиды.
 
-10. **`src/data/settings.default.json` тоже деплоится.** `server/settings.js` читает
+10. **Порог security-аудита у клиента и сервера разный.** `npm run audit:security`
+   (первый шаг `deploy:seo` и третий шаг workflow «Пересобрать сайт») требует от
+   клиента чистоты начиная с `low`, а от сервера — только с `high`. Причина: в
+   `express@4` открыты moderate-уязвимости `qs`/`body-parser`, и закрываются они
+   лишь переходом на `express@5` — breaking change для `server/`. С прежним порогом
+   `low` для сервера падал **любой** деплой, включая чисто фронтенд-овый, который
+   этих пакетов не касается. Находки не спрятаны: `npm audit` по-прежнему печатает
+   их в лог каждого прогона. Порог вернуть на `low` сразу после переезда на
+   Express 5.
+
+11. **`src/data/settings.default.json` тоже деплоится.** `server/settings.js` читает
    этот файл с диска (`../src/data/settings.default.json`), поэтому при добавлении
    новых настроек его нужно копировать вместе с серверными файлами:
    `scp src/data/settings.default.json root@185.202.172.59:/var/www/hs-muebles/src/data/`
