@@ -7,6 +7,7 @@ import {
   mkdirSync,
   readdirSync,
   renameSync,
+  statSync,
   unlinkSync,
 } from 'node:fs';
 import { join, dirname } from 'node:path';
@@ -41,6 +42,7 @@ import { buildGoogleFeed, buildMetaFeed, buildPinterestFeed } from './feed.js';
 import { buildProductIndex, resolveRedirect } from './redirects.js';
 import { rebuildConfigured, triggerRebuild, getLatestRun } from './rebuild.js';
 import { extractPoster, isVideoFile, posterFor, sweepVideos } from './video.js';
+import { findStrayUploads } from './uploads-cleanup.js';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const UPLOADS_DIR = join(__dirname, '../uploads');
@@ -143,11 +145,40 @@ async function collectAllActiveKeys() {
   return keys;
 }
 
+// Uploads that never reached a catalog or settings save: see uploads-cleanup.js
+// for why the queue alone never catches them.
+async function scheduleStrayUploads(active) {
+  const entries = readdirSync(UPLOADS_DIR).flatMap((name) => {
+    try {
+      return [{ name, mtimeMs: statSync(join(UPLOADS_DIR, name)).mtimeMs }];
+    } catch {
+      return []; // vanished between listing and stat — nothing to schedule
+    }
+  });
+  const stray = findStrayUploads(entries, active);
+  if (!stray.length) return;
+  await scheduleForDeletion(stray);
+  console.log(`[cleanup] scheduled ${stray.length} unreferenced upload(s) for deletion`);
+}
+
 async function runCleanup() {
   try {
+    const active = await collectAllActiveKeys();
+    // A catalog that reads as empty means something went wrong upstream — a
+    // half-answered query, a seed that didn't land — never that the site
+    // genuinely uses no images. Sweeping on that reading would take every
+    // upload with it, so the pass simply doesn't run.
+    if (!active.size) {
+      console.error('[cleanup] skipped: no active uploads reported, refusing to sweep');
+      return;
+    }
+
+    // Files nothing ever referenced are invisible to the save-driven queue —
+    // put them in it, which still leaves them a day before deletion.
+    await scheduleStrayUploads(active);
+
     const due = await getFilesReadyToDelete();
     if (!due.length) return;
-    const active = await collectAllActiveKeys();
     const toDelete = due.filter((f) => !active.has(f));
     const done = [];
     for (const filename of toDelete) {
