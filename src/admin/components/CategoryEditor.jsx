@@ -13,7 +13,9 @@ import VisibilitySelect, {
   VisibilityNote,
 } from './VisibilitySelect.jsx';
 import RowActions from './RowActions.jsx';
+import Section from './Section.jsx';
 import { useIsCompact } from '../useIsCompact.js';
+import { giftHint, langHint, listHint } from '../hints.js';
 
 const CATEGORY_ACTIONS = {
   more: 'Действия с категорией',
@@ -63,6 +65,14 @@ export default function CategoryEditor({
 
   const set = (patch) => onChange({ ...category, ...patch });
   const setI18n = (key, lang, val) => set({ [key]: { ...category[key], [lang]: val } });
+
+  // Что показать справа от заголовка свёрнутой группы — чтобы не открывать её
+  // ради одного взгляда.
+  const mediaHint = listHint(
+    category.image && 'ПК',
+    category.imageMobile && 'моб.',
+    category.video && 'видео',
+  );
 
   const updateProduct = (pi, next) =>
     set({ products: category.products.map((p, i) => (i === pi ? next : p)) });
@@ -152,182 +162,204 @@ export default function CategoryEditor({
       </div>
 
       {open && (
-        <div className="space-y-6 border-t border-primary/10 px-3 py-6 sm:px-5">
-          {isTileEntryCategory(category) && (
-            <p className="border-l-2 border-primary/20 bg-background px-3 py-2 text-xs leading-relaxed text-primary/60">
-              Этот раздел не показывается в списке коллекций — ни в меню, ни на главной, ни в
-              каталоге. Вход в него один: плитка с его названием в конце сетки товаров каждой
-              категории. Поэтому «Показывать» здесь означает «плитка есть», а «Скрыть из списков» —
-              «плитки нет, раздел открывается только по прямой ссылке».
-            </p>
-          )}
-          <VisibilityNote entity={category} kind="category" />
-          <div className="grid gap-3 sm:grid-cols-2">
-            <div>
-              <Field
-                label="Slug (адрес в URL)"
-                value={category.slug}
-                onChange={(v) => set({ slug: urlSafe(v, { lower: true }) })}
+        <div className="border-t border-primary/10 px-3 py-4 sm:px-5">
+          <div className="space-y-3 empty:hidden">
+            {isTileEntryCategory(category) && (
+              <p className="border-l-2 border-primary/20 bg-background px-3 py-2 text-xs leading-relaxed text-primary/60">
+                Этот раздел не показывается в списке коллекций — ни в меню, ни на главной, ни в
+                каталоге. Вход в него один: плитка с его названием в конце сетки товаров каждой
+                категории. Поэтому «Показывать» здесь означает «плитка есть», а «Скрыть из списков»
+                — «плитки нет, раздел открывается только по прямой ссылке».
+              </p>
+            )}
+            <VisibilityNote entity={category} kind="category" />
+          </div>
+
+          {/* Настройки самой категории — по спойлерам, чтобы они не отодвигали
+              список товаров, ради которого категорию обычно и открывают. */}
+          <div className="divide-y divide-primary/10">
+            <Section title="Название и адрес" hint={category.slug || '—'}>
+              <div className="grid gap-3 sm:grid-cols-2">
+                <div>
+                  <Field
+                    label="Slug (адрес в URL)"
+                    value={category.slug}
+                    onChange={(v) => set({ slug: urlSafe(v, { lower: true }) })}
+                  />
+                  {RESERVED_SLUGS.includes(category.slug) && (
+                    <p className="mt-1 text-xs text-red-600">
+                      Этот slug занят системной страницей сайта — категория будет недоступна по
+                      своему адресу.
+                    </p>
+                  )}
+                </div>
+                <Field
+                  label="Название (исп.)"
+                  value={category.name?.es}
+                  onChange={(v) => setI18n('name', 'es', v)}
+                />
+                <Field
+                  label="Название (англ.)"
+                  value={category.name?.en}
+                  onChange={(v) => setI18n('name', 'en', v)}
+                />
+                <Field
+                  label="Слоган (исп.)"
+                  value={category.tagline?.es}
+                  onChange={(v) => setI18n('tagline', 'es', v)}
+                />
+                <Field
+                  label="Слоган (англ.)"
+                  value={category.tagline?.en}
+                  onChange={(v) => setI18n('tagline', 'en', v)}
+                />
+              </div>
+            </Section>
+
+            <Section title="Изображения и видео" hint={mediaHint}>
+              <div className="space-y-4">
+                <ImageField
+                  label="Изображение категории (ПК)"
+                  value={category.image}
+                  onChange={(v) => set({ image: v })}
+                  frames={[['4 / 5', 'Карточка 4:5']]}
+                />
+                <ImageField
+                  label="Изображение категории (мобильные)"
+                  value={category.imageMobile}
+                  onChange={(v) => set({ imageMobile: v })}
+                  frames={[['4 / 5', 'Карточка 4:5']]}
+                />
+                <VideoField
+                  label="Видео категории (проигрывается при наведении)"
+                  value={category.video}
+                  onChange={(v) => set({ video: v })}
+                />
+              </div>
+            </Section>
+
+            <Section title="Описание" hint={langHint(category.description)}>
+              <div className="space-y-3">
+                <TextArea
+                  label="Описание (исп.)"
+                  value={category.description?.es}
+                  onChange={(v) => setI18n('description', 'es', v)}
+                />
+                <TextArea
+                  label="Описание (англ.)"
+                  value={category.description?.en}
+                  onChange={(v) => setI18n('description', 'en', v)}
+                />
+              </div>
+            </Section>
+
+            <Section title="Подарок" hint={giftHint(category.gift, false)}>
+              <GiftEditor
+                value={category.gift}
+                onChange={(gift) => set({ gift })}
+                allProducts={allProducts}
               />
-              {RESERVED_SLUGS.includes(category.slug) && (
-                <p className="mt-1 text-xs text-red-600">
-                  Этот slug занят системной страницей сайта — категория будет недоступна по своему
-                  адресу.
-                </p>
+              <p className="mt-2 text-xs leading-relaxed text-primary/40">
+                Правило для всей категории: подарок получит каждый товар в ней. У любого товара его
+                можно заменить своим или отключить — в карточке товара, раздел «Подарок».
+              </p>
+            </Section>
+
+            {/* Товары развёрнуты сразу: это то, за чем в категорию и заходят. */}
+            <Section title="Товары" hint={`${category.products.length} шт.`} defaultOpen>
+              <div className="mb-3 flex flex-wrap items-center justify-between gap-3">
+                <div className="flex items-center gap-3">
+                  {category.products.length > 0 && (
+                    <label className="flex min-h-11 items-center gap-1.5 text-xs text-primary/50 sm:min-h-0">
+                      <input
+                        type="checkbox"
+                        checked={allSelected}
+                        onChange={toggleSelectAll}
+                        className="h-5 w-5 accent-accent sm:h-4 sm:w-4"
+                      />
+                      Выбрать все
+                    </label>
+                  )}
+                </div>
+                <button type="button" onClick={addProduct} className={BTN_GHOST}>
+                  + Добавить товар
+                </button>
+              </div>
+
+              {selected.size > 0 && (
+                <div className="mb-4 flex flex-wrap items-center gap-3 border border-accent/40 bg-accent/5 px-4 py-3">
+                  <span className="text-xs uppercase tracking-[0.18em] text-primary/70">
+                    Выбрано: {selected.size}
+                  </span>
+                  <select
+                    className={`${INPUT} w-auto flex-1 sm:flex-none sm:w-64`}
+                    value={moveTarget}
+                    onChange={(e) => setMoveTarget(e.target.value)}
+                  >
+                    <option value="">Переместить в…</option>
+                    {moveTargets.map((c) => (
+                      <option key={c.slug} value={c.slug}>
+                        {c.name}
+                      </option>
+                    ))}
+                  </select>
+                  <button
+                    type="button"
+                    onClick={handleMoveSelected}
+                    disabled={!moveTarget}
+                    className={BTN_SOLID}
+                  >
+                    Переместить выбранные
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setSelected(new Set())}
+                    className={BTN_GHOST}
+                  >
+                    Снять выбор
+                  </button>
+                </div>
               )}
-            </div>
-            <Field
-              label="Название (исп.)"
-              value={category.name?.es}
-              onChange={(v) => setI18n('name', 'es', v)}
-            />
-            <Field
-              label="Название (англ.)"
-              value={category.name?.en}
-              onChange={(v) => setI18n('name', 'en', v)}
-            />
-            <Field
-              label="Слоган (исп.)"
-              value={category.tagline?.es}
-              onChange={(v) => setI18n('tagline', 'es', v)}
-            />
-            <Field
-              label="Слоган (англ.)"
-              value={category.tagline?.en}
-              onChange={(v) => setI18n('tagline', 'en', v)}
-            />
-          </div>
-          <ImageField
-            label="Изображение категории (ПК)"
-            value={category.image}
-            onChange={(v) => set({ image: v })}
-            frames={[['4 / 5', 'Карточка 4:5']]}
-          />
-          <ImageField
-            label="Изображение категории (мобильные)"
-            value={category.imageMobile}
-            onChange={(v) => set({ imageMobile: v })}
-            frames={[['4 / 5', 'Карточка 4:5']]}
-          />
-          <VideoField
-            label="Видео категории (проигрывается при наведении)"
-            value={category.video}
-            onChange={(v) => set({ video: v })}
-          />
-          <TextArea
-            label="Описание (исп.)"
-            value={category.description?.es}
-            onChange={(v) => setI18n('description', 'es', v)}
-          />
-          <TextArea
-            label="Описание (англ.)"
-            value={category.description?.en}
-            onChange={(v) => setI18n('description', 'en', v)}
-          />
 
-          <div className="border-t border-primary/10 pt-4">
-            <GiftEditor
-              value={category.gift}
-              onChange={(gift) => set({ gift })}
-              allProducts={allProducts}
-            />
-            <p className="mt-2 text-xs leading-relaxed text-primary/40">
-              Правило для всей категории: подарок получит каждый товар в ней. У любого товара его
-              можно заменить своим или отключить — в карточке товара, раздел «Подарок».
-            </p>
-          </div>
-
-          {/* Products */}
-          <div>
-            <div className="mb-3 flex flex-wrap items-center justify-between gap-3">
-              <div className="flex items-center gap-3">
-                <h3 className="text-xs uppercase tracking-[0.2em] text-primary/50">Товары</h3>
-                {category.products.length > 0 && (
-                  <label className="flex min-h-11 items-center gap-1.5 text-xs text-primary/50 sm:min-h-0">
+              <div className="space-y-4">
+                {category.products.map((p, pi) => (
+                  <div key={pi} className="flex items-start gap-3">
                     <input
                       type="checkbox"
-                      checked={allSelected}
-                      onChange={toggleSelectAll}
-                      className="h-5 w-5 accent-accent sm:h-4 sm:w-4"
+                      checked={selected.has(p.id)}
+                      onChange={() => toggleSelected(p.id)}
+                      aria-label={`Выбрать ${p.name || p.id}`}
+                      className="mt-4 h-5 w-5 shrink-0 accent-accent sm:h-4 sm:w-4"
                     />
-                    Выбрать все
-                  </label>
+                    <div className="min-w-0 flex-1">
+                      <ProductEditor
+                        product={p}
+                        onChange={(next) => updateProduct(pi, next)}
+                        onRemove={() => removeProduct(pi)}
+                        onMove={(dir) => moveProduct(pi, dir)}
+                        onDuplicate={() => duplicateProduct(pi)}
+                        isFirst={pi === 0}
+                        isLast={pi === category.products.length - 1}
+                        allProducts={allProducts}
+                      />
+                    </div>
+                  </div>
+                ))}
+                {category.products.length === 0 && (
+                  <p className="text-sm text-primary/40">Пока нет товаров.</p>
                 )}
               </div>
-              <button type="button" onClick={addProduct} className={BTN_GHOST}>
+              <button
+                type="button"
+                onClick={addProduct}
+                className={`${BTN_GHOST} mt-4 w-full justify-center`}
+              >
                 + Добавить товар
               </button>
-            </div>
-
-            {selected.size > 0 && (
-              <div className="mb-4 flex flex-wrap items-center gap-3 border border-accent/40 bg-accent/5 px-4 py-3">
-                <span className="text-xs uppercase tracking-[0.18em] text-primary/70">
-                  Выбрано: {selected.size}
-                </span>
-                <select
-                  className={`${INPUT} w-auto flex-1 sm:flex-none sm:w-64`}
-                  value={moveTarget}
-                  onChange={(e) => setMoveTarget(e.target.value)}
-                >
-                  <option value="">Переместить в…</option>
-                  {moveTargets.map((c) => (
-                    <option key={c.slug} value={c.slug}>
-                      {c.name}
-                    </option>
-                  ))}
-                </select>
-                <button
-                  type="button"
-                  onClick={handleMoveSelected}
-                  disabled={!moveTarget}
-                  className={BTN_SOLID}
-                >
-                  Переместить выбранные
-                </button>
-                <button type="button" onClick={() => setSelected(new Set())} className={BTN_GHOST}>
-                  Снять выбор
-                </button>
-              </div>
-            )}
-
-            <div className="space-y-4">
-              {category.products.map((p, pi) => (
-                <div key={pi} className="flex items-start gap-3">
-                  <input
-                    type="checkbox"
-                    checked={selected.has(p.id)}
-                    onChange={() => toggleSelected(p.id)}
-                    aria-label={`Выбрать ${p.name || p.id}`}
-                    className="mt-4 h-5 w-5 shrink-0 accent-accent sm:h-4 sm:w-4"
-                  />
-                  <div className="min-w-0 flex-1">
-                    <ProductEditor
-                      product={p}
-                      onChange={(next) => updateProduct(pi, next)}
-                      onRemove={() => removeProduct(pi)}
-                      onMove={(dir) => moveProduct(pi, dir)}
-                      onDuplicate={() => duplicateProduct(pi)}
-                      isFirst={pi === 0}
-                      isLast={pi === category.products.length - 1}
-                      allProducts={allProducts}
-                    />
-                  </div>
-                </div>
-              ))}
-              {category.products.length === 0 && (
-                <p className="text-sm text-primary/40">Пока нет товаров.</p>
-              )}
-            </div>
-            <button
-              type="button"
-              onClick={addProduct}
-              className={`${BTN_GHOST} mt-4 w-full justify-center`}
-            >
-              + Добавить товар
-            </button>
+            </Section>
           </div>
 
-          <div className="border-t border-primary/10 pt-4">
+          <div className="mt-4 border-t border-primary/10 pt-4">
             <button
               type="button"
               onClick={onRemove}

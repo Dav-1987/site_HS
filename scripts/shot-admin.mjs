@@ -225,6 +225,10 @@ async function main() {
   await page.keyboard.press('Escape');
   await settle(300);
 
+  // Группы полей внутри карточки — спойлеры, так что галерею сперва надо
+  // раскрыть: иначе снимок (и меню тайла ниже) достанется закрытому заголовку.
+  await clickByText('Фото и видео');
+  await settle(500);
   await page.evaluate(() => {
     const el = [...document.querySelectorAll('span')].find((s) =>
       s.innerText.toLowerCase().startsWith('фото и видео'),

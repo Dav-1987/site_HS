@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Field, Select, TextArea } from './Field.jsx';
+import Section from './Section.jsx';
 import { urlSafe } from '../urlSafe.js';
 import {
   DEFAULT_PERK_VARIANT,
@@ -23,6 +24,7 @@ import VisibilitySelect, {
 import StockToggle, { StockBadge, StockMenuItem, StockNote } from './StockToggle.jsx';
 import RowActions from './RowActions.jsx';
 import { useIsCompact } from '../useIsCompact.js';
+import { giftHint, langHint, listHint } from '../hints.js';
 
 const PRODUCT_ACTIONS = {
   more: 'Действия с товаром',
@@ -41,14 +43,6 @@ const PERK_OPTIONS = PERK_VARIANTS.map((value) => ({
     translations.es[`order.perk.${value}`] +
     (value === DEFAULT_PERK_VARIANT ? ' — по умолчанию' : ''),
 }));
-
-function SectionLabel({ children }) {
-  return (
-    <div className="mt-5 mb-2 border-t border-primary/10 pt-4 text-xs font-medium uppercase tracking-[0.22em] text-accent-text first:mt-0 first:border-t-0 first:pt-0">
-      {children}
-    </div>
-  );
-}
 
 export default function ProductEditor({
   product,
@@ -78,6 +72,18 @@ export default function ProductEditor({
     const photos = next.filter((m) => m.type === 'image').map((m) => m.src);
     set({ media: next, image: photos[0] || '', images: photos, video: '', videoFirst: false });
   };
+
+  // Подписи справа от заголовков свёрнутых групп — то, ради чего группу обычно
+  // и открывали: цена, число фото, артикул. Считаются из того же товара, что и
+  // поля внутри, так что разойтись с ними не могут.
+  const photoCount = media.filter((m) => m.type === 'image').length;
+  const videoCount = media.length - photoCount;
+  const mediaHint = listHint(
+    photoCount && `${photoCount} фото`,
+    videoCount && `${videoCount} видео`,
+  );
+  const priceHint =
+    product.price > 0 ? `€${product.price}${percent ? ` · −${percent}%` : ''}` : '—';
 
   // Collapsed-row pieces, shared by the two arrangements below.
   const TOGGLE_GLYPH = `shrink-0 text-base transition-transform ${open ? 'rotate-45' : ''}`;
@@ -189,163 +195,185 @@ export default function ProductEditor({
         <div className="border-t border-primary/10 p-3 sm:p-4">
           <VisibilityNote entity={product} kind="product" />
           <StockNote product={product} />
-          <SectionLabel>Основная информация</SectionLabel>
-          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-            <Field
-              label="Название (исп.)"
-              value={product.name}
-              onChange={(v) => set({ name: v })}
-            />
-            <Field
-              label="Название (англ.) — для страниц /en; пусто = испанское"
-              value={product.nameEn}
-              onChange={(v) => set({ nameEn: v })}
-            />
-            <Field
-              label="Подзаголовок (мелким шрифтом рядом с названием, необязательно)"
-              value={product.subtitle}
-              onChange={(v) => set({ subtitle: v })}
-            />
-            <Field
-              label="ID (уникальный, часть адреса страницы)"
-              value={product.id}
-              onChange={(v) => set({ id: urlSafe(v) })}
-            />
+          {/* Каждая группа — спойлер: карточка открывается коротким списком
+              заголовков, разворачивается только то, что правишь. */}
+          <div className="divide-y divide-primary/10">
+            <Section title="Основная информация" hint={product.id || '—'}>
+              <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+                <Field
+                  label="Название (исп.)"
+                  value={product.name}
+                  onChange={(v) => set({ name: v })}
+                />
+                <Field
+                  label="Название (англ.) — для страниц /en; пусто = испанское"
+                  value={product.nameEn}
+                  onChange={(v) => set({ nameEn: v })}
+                />
+                <Field
+                  label="Подзаголовок (мелким шрифтом рядом с названием, необязательно)"
+                  value={product.subtitle}
+                  onChange={(v) => set({ subtitle: v })}
+                />
+                <Field
+                  label="ID (уникальный, часть адреса страницы)"
+                  value={product.id}
+                  onChange={(v) => set({ id: urlSafe(v) })}
+                />
+              </div>
+            </Section>
+
+            <Section title="Артикул и размер" hint={listHint(product.reference, product.size)}>
+              <div className="grid gap-3 sm:grid-cols-2">
+                <Field
+                  label="Referencia (артикул, необязательно)"
+                  value={product.reference}
+                  onChange={(v) => set({ reference: v })}
+                />
+                <Field label="Размер" value={product.size} onChange={(v) => set({ size: v })} />
+                <Field
+                  label="Размер зеркала (отдельной строкой в характеристиках; пусто — строки нет)"
+                  value={product.mirrorSize}
+                  onChange={(v) => set({ mirrorSize: v })}
+                />
+                <Field
+                  label="Размер полок (строкой под зеркалом; пусто — строки нет)"
+                  value={product.shelvesSize}
+                  onChange={(v) => set({ shelvesSize: v })}
+                />
+              </div>
+            </Section>
+
+            <Section title="Цена" hint={priceHint}>
+              <div className="grid gap-3 sm:grid-cols-2">
+                <Field
+                  label="Цена (€)"
+                  type="number"
+                  value={product.price}
+                  onChange={(v) => set({ price: v === '' ? 0 : Number(v) })}
+                />
+                <Field
+                  label="Старая цена (€, для скидки)"
+                  type="number"
+                  value={product.oldPrice}
+                  onChange={(v) => set({ oldPrice: v === '' ? 0 : Number(v) })}
+                />
+              </div>
+              <p className="mt-2 text-xs text-primary/40">
+                «Старая цена» больше текущей → показывается зачёркнутой рядом с актуальной. 0 — без
+                скидки.
+              </p>
+              <label className="mt-3 flex items-start gap-2">
+                <input
+                  type="checkbox"
+                  checked={showsDiscountBadge(product)}
+                  onChange={(e) => set({ showDiscountBadge: e.target.checked })}
+                  className="mt-0.5 h-4 w-4 shrink-0 accent-accent"
+                />
+                <span>
+                  <span className="block text-sm text-primary">
+                    Показывать плашку со скидкой на фото
+                  </span>
+                  <span className="block text-xs leading-relaxed text-primary/40">
+                    Уголок «−{percent || 'N'}%» на фотографиях товара — в каталоге, на главной и на
+                    странице товара. Если снять галку, зачёркнутая старая цена останется.
+                  </span>
+                </span>
+              </label>
+            </Section>
+
+            <Section title="Подарок" hint={giftHint(product.gift, true)}>
+              <GiftEditor
+                value={product.gift}
+                onChange={(gift) => set({ gift })}
+                allProducts={allProducts}
+                excludeId={product.id}
+                forProduct
+              />
+            </Section>
+
+            <Section title="Материал" hint={langHint(product.material)}>
+              <div className="grid gap-3 sm:grid-cols-2">
+                <Field
+                  label="Материал (исп.)"
+                  value={product.material?.es}
+                  onChange={(v) => setMat('es', v)}
+                />
+                <Field
+                  label="Материал (англ.)"
+                  value={product.material?.en}
+                  onChange={(v) => setMat('en', v)}
+                />
+              </div>
+            </Section>
+
+            <Section title="Описание" hint={langHint(product.description)}>
+              <div className="grid gap-3 sm:grid-cols-2">
+                <TextArea
+                  label="Описание (исп.)"
+                  value={product.description?.es}
+                  onChange={(v) => setDesc('es', v)}
+                />
+                <TextArea
+                  label="Описание (англ.)"
+                  value={product.description?.en}
+                  onChange={(v) => setDesc('en', v)}
+                />
+              </div>
+            </Section>
+
+            <Section title="Блок с иконками под кнопкой заказа">
+              <div className="grid gap-3 sm:grid-cols-2">
+                <Select
+                  label="Третий пункт"
+                  value={productPerkVariant(product)}
+                  onChange={(v) => set({ perks: v })}
+                  options={PERK_OPTIONS}
+                />
+              </div>
+              <p className="mt-2 text-xs leading-relaxed text-primary/40">
+                Первые два пункта — «Entrega confiable» и «Instalación gratuita» — одинаковы у всех
+                товаров. Здесь выбирается только третий, вместе со своей иконкой.
+              </p>
+            </Section>
+
+            <Section title="Фото и видео" hint={mediaHint}>
+              <ProductImagesEditor media={media} onChange={setMedia} />
+            </Section>
+
+            <Section
+              title="Обложка для мобильных"
+              hint={product.imageMobile ? 'своя' : 'из галереи'}
+            >
+              <ImageField
+                label="Обложка (мобильные)"
+                value={product.imageMobile}
+                onChange={(v) => set({ imageMobile: v })}
+                frames={[['4 / 5', 'Карточка 4:5']]}
+              />
+              <p className="mt-2 text-xs leading-relaxed text-primary/40">
+                Пусто — на мобильных используется первое фото из галереи.
+              </p>
+            </Section>
+
+            <Section
+              title="Похожие товары («You may also like»)"
+              hint={product.related?.length ? `${product.related.length} шт.` : 'авто'}
+            >
+              <p className="mb-2 text-xs leading-relaxed text-primary/40">
+                Что показывать в блоке на странице этого товара. Пусто — берутся товары из этой же
+                категории.
+              </p>
+              <ProductPicker
+                value={product.related || []}
+                onChange={(related) => set({ related })}
+                allProducts={allProducts}
+                excludeId={product.id}
+                emptyHint="Пусто — автоматически из этой категории."
+              />
+            </Section>
           </div>
 
-          <SectionLabel>Артикул и размер</SectionLabel>
-          <div className="grid gap-3 sm:grid-cols-2">
-            <Field
-              label="Referencia (артикул, необязательно)"
-              value={product.reference}
-              onChange={(v) => set({ reference: v })}
-            />
-            <Field label="Размер" value={product.size} onChange={(v) => set({ size: v })} />
-            <Field
-              label="Размер зеркала (отдельной строкой в характеристиках; пусто — строки нет)"
-              value={product.mirrorSize}
-              onChange={(v) => set({ mirrorSize: v })}
-            />
-            <Field
-              label="Размер полок (строкой под зеркалом; пусто — строки нет)"
-              value={product.shelvesSize}
-              onChange={(v) => set({ shelvesSize: v })}
-            />
-          </div>
-
-          <SectionLabel>Цена</SectionLabel>
-          <div className="grid gap-3 sm:grid-cols-2">
-            <Field
-              label="Цена (€)"
-              type="number"
-              value={product.price}
-              onChange={(v) => set({ price: v === '' ? 0 : Number(v) })}
-            />
-            <Field
-              label="Старая цена (€, для скидки)"
-              type="number"
-              value={product.oldPrice}
-              onChange={(v) => set({ oldPrice: v === '' ? 0 : Number(v) })}
-            />
-          </div>
-          <p className="mt-2 text-xs text-primary/40">
-            «Старая цена» больше текущей → показывается зачёркнутой рядом с актуальной. 0 — без
-            скидки.
-          </p>
-          <label className="mt-3 flex items-start gap-2">
-            <input
-              type="checkbox"
-              checked={showsDiscountBadge(product)}
-              onChange={(e) => set({ showDiscountBadge: e.target.checked })}
-              className="mt-0.5 h-4 w-4 shrink-0 accent-accent"
-            />
-            <span>
-              <span className="block text-sm text-primary">
-                Показывать плашку со скидкой на фото
-              </span>
-              <span className="block text-xs leading-relaxed text-primary/40">
-                Уголок «−{percent || 'N'}%» на фотографиях товара — в каталоге, на главной и на
-                странице товара. Если снять галку, зачёркнутая старая цена останется.
-              </span>
-            </span>
-          </label>
-
-          <SectionLabel>Подарок</SectionLabel>
-          <GiftEditor
-            value={product.gift}
-            onChange={(gift) => set({ gift })}
-            allProducts={allProducts}
-            excludeId={product.id}
-            forProduct
-          />
-
-          <SectionLabel>Материал</SectionLabel>
-          <div className="grid gap-3 sm:grid-cols-2">
-            <Field
-              label="Материал (исп.)"
-              value={product.material?.es}
-              onChange={(v) => setMat('es', v)}
-            />
-            <Field
-              label="Материал (англ.)"
-              value={product.material?.en}
-              onChange={(v) => setMat('en', v)}
-            />
-          </div>
-
-          <SectionLabel>Описание</SectionLabel>
-          <div className="grid gap-3 sm:grid-cols-2">
-            <TextArea
-              label="Описание (исп.)"
-              value={product.description?.es}
-              onChange={(v) => setDesc('es', v)}
-            />
-            <TextArea
-              label="Описание (англ.)"
-              value={product.description?.en}
-              onChange={(v) => setDesc('en', v)}
-            />
-          </div>
-          <SectionLabel>Блок с иконками под кнопкой заказа</SectionLabel>
-          <div className="grid gap-3 sm:grid-cols-2">
-            <Select
-              label="Третий пункт"
-              value={productPerkVariant(product)}
-              onChange={(v) => set({ perks: v })}
-              options={PERK_OPTIONS}
-            />
-          </div>
-          <p className="mt-2 text-xs leading-relaxed text-primary/40">
-            Первые два пункта — «Entrega confiable» и «Instalación gratuita» — одинаковы у всех
-            товаров. Здесь выбирается только третий, вместе со своей иконкой.
-          </p>
-
-          <SectionLabel>Фото и видео</SectionLabel>
-          <ProductImagesEditor media={media} onChange={setMedia} />
-
-          <SectionLabel>Обложка для мобильных</SectionLabel>
-          <ImageField
-            label="Обложка (мобильные)"
-            value={product.imageMobile}
-            onChange={(v) => set({ imageMobile: v })}
-            frames={[['4 / 5', 'Карточка 4:5']]}
-          />
-          <p className="mt-2 text-xs leading-relaxed text-primary/40">
-            Пусто — на мобильных используется первое фото из галереи.
-          </p>
-
-          <SectionLabel>Похожие товары («You may also like»)</SectionLabel>
-          <p className="mb-2 text-xs leading-relaxed text-primary/40">
-            Что показывать в блоке на странице этого товара. Пусто — берутся товары из этой же
-            категории.
-          </p>
-          <ProductPicker
-            value={product.related || []}
-            onChange={(related) => set({ related })}
-            allProducts={allProducts}
-            excludeId={product.id}
-            emptyHint="Пусто — автоматически из этой категории."
-          />
           <div className="mt-4 flex items-center justify-end border-t border-primary/10 pt-4">
             <button
               type="button"

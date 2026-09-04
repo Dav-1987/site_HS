@@ -9,6 +9,10 @@ export function Field({ label, value, onChange, type = 'text', ...rest }) {
         className={INPUT}
         value={value ?? ''}
         onChange={(e) => onChange(e.target.value)}
+        // Браузер считает колесо мыши над сфокусированным number-полем командой
+        // «прибавь/убавь»: прокрутка страницы мимо цены молча меняла цену.
+        // Снимаем фокус — страница листается дальше, число остаётся своим.
+        onWheel={type === 'number' ? (e) => e.currentTarget.blur() : undefined}
         {...rest}
       />
     </label>
