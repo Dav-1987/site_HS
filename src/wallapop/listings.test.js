@@ -116,6 +116,11 @@ describe('Wallapop listing preparation', () => {
     }
   });
 
+  // The three "approved description" tests below pin the wording and the order
+  // of the blocks — the emoji, the strikethrough, where the size line sits.
+  // The numbers inside the price block come from the product itself: they are
+  // catalog data the owner changes from the admin panel, and spelling them out
+  // here turned every price edit into a red build (it did, on 2026-09-04).
   it('creates the approved mirror description with width before height', () => {
     const category = defaultCatalog.find((item) => item.slug === 'espejos');
     const product = category.products.find((item) => item.reference === 'F-05');
@@ -125,7 +130,7 @@ describe('Wallapop listing preparation', () => {
     expect(description).toBe(
       [
         'Este espejo de diseño elegante aporta luminosidad y una mayor sensación de amplitud a cualquier estancia. Su estilo versátil combina perfectamente con muebles modernos, minimalistas o clásicos.',
-        `Precio👇\n☑️ antes: ${strikethroughText('340€')}\n✅ ahora: 239€ 🔥🔥🔥`,
+        `Precio👇\n☑️ antes: ${strikethroughText(`${product.oldPrice}€`)}\n✅ ahora: ${product.price}€ 🔥🔥🔥`,
         '• Tipo: espejo de pie / de cuerpo entero\n• Medidas: 80 × 180 cm',
         '🎁 Bombillas LED de regalo',
         EXPECTED_COMPACT_PROMOTION_FOOTER,
@@ -178,7 +183,10 @@ describe('Wallapop listing preparation', () => {
 
     // A description that only sells the mirror leaves the title to give the
     // size, and the depth is dropped: Wallapop shows two numbers for a mirror.
-    const sold = { size: '55 × 40 × 180 cm', description: { es: 'Espejo de pie con marco dorado.' } };
+    const sold = {
+      size: '55 × 40 × 180 cm',
+      description: { es: 'Espejo de pie con marco dorado.' },
+    };
     expect(mirrorWallapopSize(sold)).toBe('55 × 180 cm');
   });
 
@@ -191,7 +199,7 @@ describe('Wallapop listing preparation', () => {
     expect(description).toBe(
       [
         'Estantería práctica y decorativa, perfecta para organizar libros, plantas, fotografías, accesorios y objetos de decoración.',
-        `Precio👇\n☑️ antes: ${strikethroughText('500€')}\n✅ ahora: 389€ 🔥🔥🔥`,
+        `Precio👇\n☑️ antes: ${strikethroughText(`${product.oldPrice}€`)}\n✅ ahora: ${product.price}€ 🔥🔥🔥`,
         '• Tipo: estantería de pie\n• Medidas: 50 × 40 × 190 cm',
         '⭐ Calidad premium',
         EXPECTED_COMPACT_PROMOTION_FOOTER,
@@ -219,7 +227,7 @@ describe('Wallapop listing preparation', () => {
     expect(description).toBe(
       [
         'Este elegante tocador con espejo aporta luminosidad y una mayor sensación de amplitud a cualquier estancia. Su diseño versátil combina perfectamente con interiores modernos, minimalistas o clásicos.',
-        `Precio👇\n☑️ antes: ${strikethroughText('590€')}\n✅ ahora: 439€ 🔥🔥🔥`,
+        `Precio👇\n☑️ antes: ${strikethroughText(`${product.oldPrice}€`)}\n✅ ahora: ${product.price}€ 🔥🔥🔥`,
         '• Tipo: tocador de maquillaje con espejo\n• Medidas: 100 × 40 × 160 cm\n• Espejo: 100 × 80 cm',
         '🎁 Bombillas LED de regalo',
         EXPECTED_COMPACT_PROMOTION_FOOTER,
