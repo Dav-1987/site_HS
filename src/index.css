@@ -68,6 +68,33 @@
   }
 }
 
+/* A product given away with something bigger carries a second chip, in the
+   opposite corner of the same photo (see GiftBadge). Both run past half the
+   width of a narrow photo — the gift's is capped at 54%, the bulbs' stops
+   shrinking at its minimum type size and holds ~84px — so below about 220px
+   they meet in the middle. That is one layout only: a phone's two-column
+   catalog grid, where a card is ~155px. Everywhere else — a desktop tile, the
+   carousel on the home page, the product page at any width — they sit in their
+   own corners with room to spare.
+
+   So the corner yields there, and only there: the bulbs go, the discount stays
+   put (no cycle to fade it, no hover to fade it — a photo that narrow is a
+   phone), and the gift keeps its corner. Measured against the photo, not the
+   viewport: the same grid is two columns on a phone and four on a desktop, and
+   it is the card's own width that decides. ProductBadge marks the corner;
+   how much room there is, only CSS can see.
+
+   Last of the three blocks on purpose — it has to outrank the cycle above. */
+@container (max-width: 219px) {
+  .badge-yields .badge-bulbs {
+    display: none;
+  }
+  .badge-yields .badge-cycle-out {
+    animation: none;
+    opacity: 1;
+  }
+}
+
 /* ============================================================
    Mirage Muebles — Design tokens (RAW RGB for Tailwind opacity)
    Warm minimalist palette: beige + soft charcoal + gold

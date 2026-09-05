@@ -8,8 +8,15 @@ import { useProductGift } from './useProductGift.js';
  * stock, otherwise the "-N%" sale badge and — sharing the same corner — the
  * "+ bulbs de regalo" one (see BULBS below). Sold out wins because it is the
  * fact that changes what the visitor can do: a discount, or a gift, on
- * something unbuyable is noise. The bulbs also step aside for a product that
- * comes with a gift of its own, which the opposite corner is already saying.
+ * something unbuyable is noise.
+ *
+ * A product that comes with a gift of its own carries a second chip, in the
+ * opposite corner of the same photo (see GiftBadge). The two fit side by side
+ * everywhere the photo is wider than ~220px — a desktop tile, the carousel on
+ * the home page, the product page at any width — and only meet on a phone's
+ * two-column grid, where the card is around 155px and each chip runs past half
+ * of it. There the bulbs yield: the corner is marked and CSS drops them by the
+ * photo's own width, not the viewport's (see index.css).
  *
  * Size is proportional to the image, not the viewport: the font scales with the
  * container's width (`cqw`), so a small catalog thumbnail and the large product
@@ -36,7 +43,7 @@ const DISCOUNT = `${CHIP} text-[clamp(0.7rem,4.6cqw,1.25rem)] font-bold uppercas
  * sentence case: it carries three words where the discount carries three
  * characters, and at the discount's weight it ran the width of a mobile card.
  */
-const BULBS = `${CHIP} flex items-center gap-[0.35em] bg-background/95 pl-[0.5em] text-[clamp(0.62rem,3.7cqw,1rem)] font-medium text-promo`;
+const BULBS = `${CHIP} badge-bulbs flex items-center gap-[0.35em] bg-background/95 pl-[0.5em] text-[clamp(0.62rem,3.7cqw,1rem)] font-medium text-promo`;
 
 /**
  * How a sold-out product's photo is rendered wherever it appears. Applied to the
@@ -84,11 +91,9 @@ function BulbsChip({ className = '' }) {
 export default function ProductBadge({ product, className = '' }) {
   const { t } = useLanguage();
   const { badge, percent } = productDiscount(product);
-  // A product given away with something bigger already says so, in the chip in
-  // the opposite corner of the same photo (see GiftBadge). One gift per tile:
-  // two of them is noise, and on a two-column phone grid the two chips are wide
-  // enough — a little over half the photo each — to meet in the middle.
-  const givesAGift = useProductGift(product) !== null;
+  // Whether the opposite corner of this photo carries a gift chip too — the
+  // one case where the two can collide, and only while the photo is narrow.
+  const sharesWithGift = useProductGift(product) !== null;
 
   // Muted dark instead of the sale green: this is a state, not an offer.
   if (!isInStock(product)) {
@@ -103,8 +108,11 @@ export default function ProductBadge({ product, className = '' }) {
   // switched off for it in /admin (see showsDiscountBadge) — in which case the
   // discount is still visible as the struck-through old price next to the
   // current one. The bulbs follow their own switch (see showsBulbsBadge).
-  const bulbs = showsBulbsBadge(product) && !givesAGift;
+  const bulbs = showsBulbsBadge(product);
   if (!badge && !bulbs) return null;
+  // Marked, not resolved here: how much room there is belongs to the photo, and
+  // only CSS can measure it. Harmless everywhere the chips fit.
+  const corner = `${CORNER}${bulbs && sharesWithGift ? ' badge-yields' : ''}`;
 
   // One of the two, alone in the corner: nothing to swap with, so it simply
   // sits there. The discount keeps the behaviour it has always had — salad
@@ -123,7 +131,7 @@ export default function ProductBadge({ product, className = '' }) {
   }
   if (!badge) {
     return (
-      <span className={`${CORNER} ${className}`}>
+      <span className={`${corner} ${className}`}>
         <BulbsChip />
       </span>
     );
@@ -137,7 +145,7 @@ export default function ProductBadge({ product, className = '' }) {
   // `(hover: none)` and dropped entirely for anyone who has asked for less
   // motion, in which case the corner stays on the discount. See index.css.
   return (
-    <span className={`${CORNER} ${className}`}>
+    <span className={`${corner} ${className}`}>
       <span
         className={`${DISCOUNT} badge-cycle-out bg-sale text-white transition-opacity duration-300 group-hover:opacity-0`}
       >

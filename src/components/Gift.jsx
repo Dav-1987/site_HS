@@ -181,10 +181,10 @@ export function GiftWithNote({ offer, className = '' }) {
  * phone its photo would be unreadable — so it says only that there is one.
  *
  * Resolves the offer itself from the catalog (see useProductGift), so a card
- * only has to render it. The opposite corner reads the same answer: where this
- * chip is shown, ProductBadge leaves the free bulbs unsaid — two gifts on one
- * tile are noise, and on a two-column phone grid the two chips would meet in
- * the middle of the photo.
+ * only has to render it. The opposite corner reads the same answer, because the
+ * two chips share the top of one photo: where this one is shown, ProductBadge
+ * marks its corner to give the free bulbs up on a photo too narrow for both —
+ * a phone's two-column grid, and nothing wider (see index.css).
  */
 export function GiftBadge({ product, className = '' }) {
   const { t } = useLanguage();
