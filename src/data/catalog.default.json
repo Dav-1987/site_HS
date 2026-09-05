@@ -1045,14 +1045,15 @@
             "es": "Estantería",
             "en": "Shelving Unit"
           },
-          "size": "20 x 40 cm"
+          "size": "20 x 40 cm",
+          "image": "/uploads/89b5ec81d8ca55a404d30b0ab1d03e8d.png"
         },
         "perks": "bulbs",
         "visibility": "public",
         "showDiscountBadge": true,
         "showBulbsBadge": null,
         "inStock": true,
-        "updatedAt": "2026-09-05T09:52:07.359Z"
+        "updatedAt": "2026-09-05T10:15:02.555Z"
       },
       {
         "id": "Tocador-L-08",
@@ -1112,13 +1113,22 @@
           "toc-mara",
           "toc-lina"
         ],
-        "gift": {},
+        "gift": {
+          "mode": "own",
+          "source": "custom",
+          "name": {
+            "es": "Estantería",
+            "en": "Shelving Unit"
+          },
+          "size": "20 x 40 cm",
+          "image": "/uploads/89b5ec81d8ca55a404d30b0ab1d03e8d.png"
+        },
         "perks": "bulbs",
         "visibility": "public",
         "showDiscountBadge": true,
         "showBulbsBadge": null,
         "inStock": true,
-        "updatedAt": "2026-09-04T20:37:02.479Z"
+        "updatedAt": "2026-09-05T10:16:44.686Z"
       },
       {
         "id": "Tocador-L-06",
