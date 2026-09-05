@@ -249,6 +249,42 @@ describe('formatOrderText', () => {
     expect(unknown).toContain('Fuente: Directo / desconocido');
   });
 
+  // The source line names the campaign; these two say which ad inside it, and
+  // which page the visitor came in on.
+  it('names the ad and the entry page under the source', () => {
+    const text = formatOrderText({
+      name: 'Ana',
+      phone: '600',
+      productName: 'Tocador Aria',
+      attribution: {
+        network: 'meta_ads',
+        utm_source: 'ig',
+        utm_medium: 'Instagram_Reels',
+        utm_campaign: 'Tocadores Septiembre',
+        utm_content: 'ADS_Tocadores_25-45',
+        utm_term: 'video_tocador_01',
+        landing: '/tocadores',
+      },
+    });
+    expect(text).toContain('Fuente: Meta Ads · Instagram — «Tocadores Septiembre»');
+    expect(text).toContain('Anuncio: ADS_Tocadores_25-45 · video_tocador_01 (Instagram_Reels)');
+    expect(text).toContain('Entrada: /tocadores');
+  });
+
+  // A visitor with no campaign still entered somewhere, and that is worth a
+  // line; an ad line with nothing to name is not.
+  it('keeps the entry page for a direct visit and writes no ad line', () => {
+    const text = formatOrderText({
+      name: 'Ana',
+      phone: '600',
+      productName: 'Tocador Aria',
+      attribution: { landing: '/otros-modelos/Tocador-T-31' },
+    });
+    expect(text).toContain('Fuente: Directo / desconocido');
+    expect(text).toContain('Entrada: /otros-modelos/Tocador-T-31');
+    expect(text).not.toContain('Anuncio:');
+  });
+
   it('includes the postal code when present', () => {
     const text = formatOrderText({
       name: 'Ana',

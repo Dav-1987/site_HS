@@ -47,3 +47,32 @@ describe('OrdersPanel delivery country', () => {
     await waitFor(() => expect(screen.getByText('Страна: неизвестна')).toBeTruthy());
   });
 });
+
+// Заявка из рекламы: те же три строки, что уходят в телеграм, — источник,
+// объявление внутри кампании и страница входа.
+describe('OrdersPanel traffic source', () => {
+  it('shows the ad and the entry page under the source', async () => {
+    mockOrders([
+      order({
+        attributionLabel: 'Meta Ads · Instagram — «Tocadores Septiembre»',
+        adDetail: 'ADS_Tocadores_25-45 · video_tocador_01 (Instagram_Reels)',
+        entry: '/tocadores',
+      }),
+    ]);
+    render(<OrdersPanel onClose={() => {}} />);
+
+    await waitFor(() =>
+      expect(screen.getByText(/Meta Ads · Instagram — «Tocadores Septiembre»/)).toBeTruthy(),
+    );
+    expect(screen.getByText(/Anuncio: ADS_Tocadores_25-45/)).toBeTruthy();
+    expect(screen.getByText(/Entrada: \/tocadores/)).toBeTruthy();
+  });
+
+  it('says nothing extra for an order with no campaign behind it', async () => {
+    mockOrders([order()]);
+    render(<OrdersPanel onClose={() => {}} />);
+
+    await waitFor(() => expect(screen.getByText(/Directo \/ desconocido/)).toBeTruthy());
+    expect(screen.queryByText(/Anuncio:/)).toBeNull();
+  });
+});

@@ -105,6 +105,15 @@ export default function OrdersPanel({ onClose }) {
                   Fuente: {o.attributionLabel}
                 </p>
               )}
+              {/* Объявление и точка входа — как есть, без uppercase: это имена
+                  из рекламного кабинета и путь страницы, их регистр значащий. */}
+              {(o.adDetail || o.entry) && (
+                <p className="mt-0.5 break-words text-xs text-primary/40">
+                  {[o.adDetail && `Anuncio: ${o.adDetail}`, o.entry && `Entrada: ${o.entry}`]
+                    .filter(Boolean)
+                    .join(' · ')}
+                </p>
+              )}
             </li>
           ))}
         </ul>

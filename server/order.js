@@ -1,7 +1,7 @@
 // Pure helpers for the public order endpoint: payload validation and message
 // formatting. Side-effect free so they can be unit-tested without Express.
 
-import { describeAttribution } from './attribution.js';
+import { describeAdDetail, describeAttribution, entryPath } from './attribution.js';
 import { productGift } from '../src/data/catalog.js';
 import {
   getCountryName,
@@ -121,5 +121,11 @@ export function formatOrderText({
   if (comment?.trim()) out.push(`Comentarios: ${comment.trim()}`);
   out.push('');
   out.push(`Fuente: ${describeAttribution(attribution)}`);
+  // Кампанию называет строка выше; эти две — объявление внутри неё и страница,
+  // с которой человек вошёл на сайт. Пишутся, только когда есть что написать.
+  const adDetail = describeAdDetail(attribution);
+  if (adDetail) out.push(`Anuncio: ${adDetail}`);
+  const entry = entryPath(attribution);
+  if (entry) out.push(`Entrada: ${entry}`);
   return out.join('\n');
 }
