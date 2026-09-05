@@ -53,11 +53,15 @@ const REFERRER_LABELS = [
 ];
 
 // utm_source values advertisers commonly use, mapped to how a human reads them.
+// `ig`/`fb`/`an`/`msg` are what Meta's {{site_source_name}} macro fills in, so
+// all four arrive verbatim from the ad account's URL parameters.
 const SOURCE_LABELS = {
   ig: 'Instagram',
   instagram: 'Instagram',
   fb: 'Facebook',
   facebook: 'Facebook',
+  an: 'Audience Network',
+  msg: 'Messenger',
   google: 'Google',
   bing: 'Bing',
   tiktok: 'TikTok',
@@ -141,4 +145,28 @@ export function describeAttribution(attribution) {
   if (data.utm_campaign) label += ` — «${data.utm_campaign}»`;
   else if (data.clickIdParam) label += ` (${data.clickIdParam})`;
   return label;
+}
+
+/**
+ * The line under it: which ad inside the campaign. Meta's URL macros put the
+ * ad set in utm_content, the ad in utm_term and the placement in utm_medium;
+ * Google Ads puts the keyword in utm_term. Empty unless the markup actually
+ * names the ad set or the ad — a line reading only "(organic)" says nothing
+ * that the source above hasn't said already.
+ */
+export function describeAdDetail(attribution) {
+  const data = sanitizeAttribution(attribution);
+  if (!data) return '';
+  const named = [data.utm_content, data.utm_term].filter(Boolean).join(' · ');
+  if (!named) return '';
+  return data.utm_medium ? `${named} (${data.utm_medium})` : named;
+}
+
+/**
+ * The page the visit started on. Worth a line of its own even for a visitor
+ * with no campaign at all: for a direct visit it is the only thing known about
+ * where the order came from.
+ */
+export function entryPath(attribution) {
+  return sanitizeAttribution(attribution)?.landing ?? '';
 }

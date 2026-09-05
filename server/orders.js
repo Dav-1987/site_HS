@@ -3,7 +3,12 @@
 // delivery or a log rotation never means the order itself is lost.
 
 import pool from './db.js';
-import { describeAttribution, sanitizeAttribution } from './attribution.js';
+import {
+  describeAdDetail,
+  describeAttribution,
+  entryPath,
+  sanitizeAttribution,
+} from './attribution.js';
 
 export async function saveOrder({
   eventId,
@@ -82,8 +87,11 @@ export async function listOrders() {
     productId: r.product_id,
     productName: r.product_name,
     price: r.price === null ? null : Number(r.price),
-    // The label is derived, never stored — see server/attribution.js.
+    // Derived, never stored — see server/attribution.js. /admin shows the same
+    // three lines the order notification carries, from the same code.
     attributionLabel: describeAttribution(r.attribution),
+    adDetail: describeAdDetail(r.attribution),
+    entry: entryPath(r.attribution),
     telegramSent: r.telegram_sent,
     emailSent: r.email_sent,
   }));

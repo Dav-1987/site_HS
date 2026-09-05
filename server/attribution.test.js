@@ -1,5 +1,10 @@
 import { describe, it, expect } from 'vitest';
-import { describeAttribution, sanitizeAttribution } from './attribution.js';
+import {
+  describeAdDetail,
+  describeAttribution,
+  entryPath,
+  sanitizeAttribution,
+} from './attribution.js';
 
 describe('sanitizeAttribution', () => {
   it('keeps only recognized fields', () => {
@@ -75,5 +80,60 @@ describe('describeAttribution', () => {
     expect(describeAttribution(null)).toBe('Directo / desconocido');
     expect(describeAttribution({})).toBe('Directo / desconocido');
     expect(describeAttribution({ landing: '/tocadores' })).toBe('Directo / desconocido');
+  });
+});
+
+// What Meta's URL macros actually put in the parameters, as the account is set
+// up: utm_source={{site_source_name}}, utm_medium={{placement}},
+// utm_campaign={{campaign.name}}, utm_content={{adset.name}},
+// utm_term={{ad.name}}.
+describe('a Meta ad, parameter by parameter', () => {
+  const fromAd = {
+    network: 'meta_ads',
+    clickIdParam: 'fbclid',
+    utm_source: 'ig',
+    utm_medium: 'Instagram_Reels',
+    utm_campaign: 'Tocadores Septiembre',
+    utm_content: 'ADS_Tocadores_25-45',
+    utm_term: 'video_tocador_01',
+    landing: '/tocadores',
+  };
+
+  it('names the network, the placement it was seen in and the campaign', () => {
+    expect(describeAttribution(fromAd)).toBe('Meta Ads · Instagram — «Tocadores Septiembre»');
+  });
+
+  it('names the ad set, the ad and the placement underneath', () => {
+    expect(describeAdDetail(fromAd)).toBe(
+      'ADS_Tocadores_25-45 · video_tocador_01 (Instagram_Reels)',
+    );
+  });
+
+  it('reads the two placements Meta serves besides the apps themselves', () => {
+    expect(describeAttribution({ ...fromAd, utm_source: 'an' })).toContain('Audience Network');
+    expect(describeAttribution({ ...fromAd, utm_source: 'msg' })).toContain('Messenger');
+  });
+});
+
+describe('describeAdDetail', () => {
+  it('drops the placement when it is all there is', () => {
+    // Pinterest, organic: naming "(organic)" alone would add nothing to the
+    // source line above it.
+    expect(describeAdDetail({ utm_source: 'Pinterest', utm_medium: 'organic' })).toBe('');
+    expect(describeAdDetail(null)).toBe('');
+  });
+
+  it('names whichever of the two the markup carries', () => {
+    expect(describeAdDetail({ utm_content: 'grupo' })).toBe('grupo');
+    expect(describeAdDetail({ utm_term: 'anuncio' })).toBe('anuncio');
+  });
+});
+
+describe('entryPath', () => {
+  it('is the page the visit started on — the only clue a direct visit leaves', () => {
+    expect(entryPath({ landing: '/otros-modelos/Tocador-T-31' })).toBe(
+      '/otros-modelos/Tocador-T-31',
+    );
+    expect(entryPath(null)).toBe('');
   });
 });
