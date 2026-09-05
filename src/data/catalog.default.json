@@ -87,6 +87,7 @@
         "perks": "bulbs",
         "visibility": "public",
         "showDiscountBadge": true,
+        "showBulbsBadge": null,
         "inStock": true,
         "updatedAt": "2026-09-04T21:09:59.223Z"
       },
@@ -147,6 +148,7 @@
         "perks": "bulbs",
         "visibility": "public",
         "showDiscountBadge": true,
+        "showBulbsBadge": null,
         "inStock": true,
         "updatedAt": "2026-09-04T20:35:02.275Z"
       },
@@ -197,6 +199,7 @@
         "perks": "bulbs",
         "visibility": "public",
         "showDiscountBadge": true,
+        "showBulbsBadge": null,
         "inStock": true,
         "updatedAt": "2026-08-26T20:16:27.758Z"
       },
@@ -272,6 +275,7 @@
         "perks": "bulbs",
         "visibility": "public",
         "showDiscountBadge": true,
+        "showBulbsBadge": null,
         "inStock": true,
         "updatedAt": "2026-09-04T20:35:02.275Z"
       },
@@ -332,6 +336,7 @@
         "perks": "bulbs",
         "visibility": "public",
         "showDiscountBadge": true,
+        "showBulbsBadge": null,
         "inStock": true,
         "updatedAt": "2026-08-31T19:40:57.474Z"
       },
@@ -397,6 +402,7 @@
         "perks": "bulbs",
         "visibility": "public",
         "showDiscountBadge": true,
+        "showBulbsBadge": null,
         "inStock": true,
         "updatedAt": "2026-09-04T20:35:02.275Z"
       },
@@ -442,6 +448,7 @@
         "perks": "bulbs",
         "visibility": "public",
         "showDiscountBadge": true,
+        "showBulbsBadge": null,
         "inStock": true,
         "updatedAt": "2026-08-26T20:16:27.758Z"
       },
@@ -507,6 +514,7 @@
         "perks": "bulbs",
         "visibility": "public",
         "showDiscountBadge": true,
+        "showBulbsBadge": null,
         "inStock": true,
         "updatedAt": "2026-08-31T19:41:24.748Z"
       },
@@ -557,6 +565,7 @@
         "perks": "bulbs",
         "visibility": "public",
         "showDiscountBadge": true,
+        "showBulbsBadge": null,
         "inStock": true,
         "updatedAt": "2026-09-04T20:35:02.275Z"
       },
@@ -662,6 +671,7 @@
         "perks": "quality",
         "visibility": "public",
         "showDiscountBadge": true,
+        "showBulbsBadge": null,
         "inStock": true,
         "updatedAt": "2026-09-04T20:35:02.275Z"
       },
@@ -715,6 +725,7 @@
         "perks": "quality",
         "visibility": "unlisted",
         "showDiscountBadge": true,
+        "showBulbsBadge": null,
         "inStock": true,
         "updatedAt": "2026-08-31T19:38:09.666Z"
       },
@@ -785,6 +796,7 @@
         "perks": "led",
         "visibility": "public",
         "showDiscountBadge": true,
+        "showBulbsBadge": null,
         "inStock": true,
         "updatedAt": "2026-09-04T20:35:02.275Z"
       },
@@ -835,6 +847,7 @@
         "perks": "led",
         "visibility": "unlisted",
         "showDiscountBadge": true,
+        "showBulbsBadge": null,
         "inStock": true,
         "updatedAt": "2026-08-31T19:38:58.611Z"
       },
@@ -885,6 +898,7 @@
         "perks": "led",
         "visibility": "unlisted",
         "showDiscountBadge": true,
+        "showBulbsBadge": null,
         "inStock": true,
         "updatedAt": "2026-08-31T19:38:58.611Z"
       },
@@ -945,6 +959,7 @@
         "perks": "led",
         "visibility": "unlisted",
         "showDiscountBadge": true,
+        "showBulbsBadge": null,
         "inStock": true,
         "updatedAt": "2026-08-31T19:39:15.705Z"
       }
@@ -1027,6 +1042,7 @@
         "perks": "bulbs",
         "visibility": "public",
         "showDiscountBadge": true,
+        "showBulbsBadge": null,
         "inStock": true,
         "updatedAt": "2026-09-04T20:37:02.479Z"
       },
@@ -1092,6 +1108,7 @@
         "perks": "bulbs",
         "visibility": "public",
         "showDiscountBadge": true,
+        "showBulbsBadge": null,
         "inStock": true,
         "updatedAt": "2026-09-04T20:37:02.479Z"
       },
@@ -1157,6 +1174,7 @@
         "perks": "bulbs",
         "visibility": "public",
         "showDiscountBadge": true,
+        "showBulbsBadge": null,
         "inStock": true,
         "updatedAt": "2026-09-04T20:37:02.479Z"
       },
@@ -1212,6 +1230,7 @@
         "perks": "led",
         "visibility": "public",
         "showDiscountBadge": true,
+        "showBulbsBadge": null,
         "inStock": true,
         "updatedAt": "2026-09-04T20:37:02.479Z"
       },
@@ -1262,6 +1281,7 @@
         "perks": "bulbs",
         "visibility": "public",
         "showDiscountBadge": true,
+        "showBulbsBadge": null,
         "inStock": true,
         "updatedAt": "2026-09-04T20:37:02.479Z"
       },
@@ -1307,6 +1327,7 @@
         "perks": "bulbs",
         "visibility": "public",
         "showDiscountBadge": true,
+        "showBulbsBadge": null,
         "inStock": true,
         "updatedAt": "2026-09-04T20:37:02.479Z"
       },
@@ -1367,6 +1388,7 @@
         "perks": "led",
         "visibility": "public",
         "showDiscountBadge": true,
+        "showBulbsBadge": null,
         "inStock": true,
         "updatedAt": "2026-08-26T22:54:02.000Z"
       },
@@ -1427,6 +1449,7 @@
         "perks": "bulbs",
         "visibility": "public",
         "showDiscountBadge": true,
+        "showBulbsBadge": null,
         "inStock": true,
         "updatedAt": "2026-09-04T20:37:02.479Z"
       },
@@ -1487,6 +1510,7 @@
         "perks": "bulbs",
         "visibility": "public",
         "showDiscountBadge": true,
+        "showBulbsBadge": null,
         "inStock": true,
         "updatedAt": "2026-09-04T20:40:22.029Z"
       },
@@ -1547,6 +1571,7 @@
         "perks": "led",
         "visibility": "public",
         "showDiscountBadge": true,
+        "showBulbsBadge": null,
         "inStock": true,
         "updatedAt": "2026-08-26T22:35:52.775Z"
       },
@@ -1592,6 +1617,7 @@
         "perks": "bulbs",
         "visibility": "public",
         "showDiscountBadge": true,
+        "showBulbsBadge": null,
         "inStock": true,
         "updatedAt": "2026-09-04T20:42:50.805Z"
       },
@@ -1647,6 +1673,7 @@
         "perks": "bulbs",
         "visibility": "public",
         "showDiscountBadge": true,
+        "showBulbsBadge": null,
         "inStock": true,
         "updatedAt": "2026-09-04T20:42:50.805Z"
       },
@@ -1697,6 +1724,7 @@
         "perks": "bulbs",
         "visibility": "public",
         "showDiscountBadge": true,
+        "showBulbsBadge": null,
         "inStock": true,
         "updatedAt": "2026-09-04T20:42:50.805Z"
       },
@@ -1771,6 +1799,7 @@
         "perks": "bulbs",
         "visibility": "public",
         "showDiscountBadge": true,
+        "showBulbsBadge": null,
         "inStock": true,
         "updatedAt": "2026-08-26T22:35:52.775Z"
       },
@@ -1836,6 +1865,7 @@
         "perks": "bulbs",
         "visibility": "public",
         "showDiscountBadge": true,
+        "showBulbsBadge": null,
         "inStock": true,
         "updatedAt": "2026-09-04T20:42:50.805Z"
       },
@@ -1901,6 +1931,7 @@
         "perks": "bulbs",
         "visibility": "public",
         "showDiscountBadge": true,
+        "showBulbsBadge": null,
         "inStock": true,
         "updatedAt": "2026-09-04T20:42:50.805Z"
       },
@@ -1960,6 +1991,7 @@
         "perks": "bulbs",
         "visibility": "unlisted",
         "showDiscountBadge": true,
+        "showBulbsBadge": null,
         "inStock": true,
         "updatedAt": "2026-09-04T20:42:50.805Z"
       }
@@ -2032,6 +2064,7 @@
         "perks": "bulbs",
         "visibility": "public",
         "showDiscountBadge": true,
+        "showBulbsBadge": null,
         "inStock": true,
         "updatedAt": "2026-09-04T20:45:32.948Z"
       },
@@ -2086,6 +2119,7 @@
         "perks": "bulbs",
         "visibility": "unlisted",
         "showDiscountBadge": true,
+        "showBulbsBadge": null,
         "inStock": true,
         "updatedAt": "2026-09-04T20:45:32.948Z"
       },
@@ -2151,6 +2185,7 @@
         "perks": "bulbs",
         "visibility": "public",
         "showDiscountBadge": true,
+        "showBulbsBadge": null,
         "inStock": true,
         "updatedAt": "2026-09-04T20:45:32.948Z"
       },
@@ -2201,6 +2236,7 @@
         "perks": "bulbs",
         "visibility": "unlisted",
         "showDiscountBadge": true,
+        "showBulbsBadge": null,
         "inStock": true,
         "updatedAt": "2026-09-04T20:45:32.948Z"
       },
@@ -2270,6 +2306,7 @@
         "perks": "bulbs",
         "visibility": "unlisted",
         "showDiscountBadge": true,
+        "showBulbsBadge": null,
         "inStock": true,
         "updatedAt": "2026-09-04T20:45:32.948Z"
       },
@@ -2335,6 +2372,7 @@
         "perks": "bulbs",
         "visibility": "unlisted",
         "showDiscountBadge": true,
+        "showBulbsBadge": null,
         "inStock": true,
         "updatedAt": "2026-09-04T20:45:32.948Z"
       },
@@ -2380,6 +2418,7 @@
         "perks": "bulbs",
         "visibility": "public",
         "showDiscountBadge": true,
+        "showBulbsBadge": null,
         "inStock": true,
         "updatedAt": "2026-09-04T20:45:32.948Z"
       },
@@ -2439,6 +2478,7 @@
         "perks": "bulbs",
         "visibility": "unlisted",
         "showDiscountBadge": true,
+        "showBulbsBadge": null,
         "inStock": true,
         "updatedAt": "2026-09-04T20:45:32.948Z"
       },
@@ -2499,6 +2539,7 @@
         "perks": "bulbs",
         "visibility": "unlisted",
         "showDiscountBadge": true,
+        "showBulbsBadge": null,
         "inStock": true,
         "updatedAt": "2026-09-04T20:45:32.948Z"
       },
@@ -2554,6 +2595,7 @@
         "perks": "bulbs",
         "visibility": "public",
         "showDiscountBadge": true,
+        "showBulbsBadge": null,
         "inStock": true,
         "updatedAt": "2026-09-04T20:45:32.948Z"
       },
@@ -2618,6 +2660,7 @@
         "perks": "bulbs",
         "visibility": "public",
         "showDiscountBadge": true,
+        "showBulbsBadge": null,
         "inStock": true,
         "updatedAt": "2026-09-04T20:45:32.948Z"
       },
@@ -2678,6 +2721,7 @@
         "perks": "bulbs",
         "visibility": "unlisted",
         "showDiscountBadge": true,
+        "showBulbsBadge": null,
         "inStock": true,
         "updatedAt": "2026-09-04T20:45:32.948Z"
       },
@@ -2738,6 +2782,7 @@
         "perks": "bulbs",
         "visibility": "unlisted",
         "showDiscountBadge": true,
+        "showBulbsBadge": null,
         "inStock": true,
         "updatedAt": "2026-09-04T20:45:32.948Z"
       },
@@ -2788,6 +2833,7 @@
         "perks": "bulbs",
         "visibility": "unlisted",
         "showDiscountBadge": true,
+        "showBulbsBadge": null,
         "inStock": true,
         "updatedAt": "2026-09-04T20:45:32.948Z"
       }
@@ -2875,6 +2921,7 @@
         "perks": "quality",
         "visibility": "public",
         "showDiscountBadge": true,
+        "showBulbsBadge": null,
         "inStock": true,
         "updatedAt": "2026-09-04T20:47:37.687Z"
       },
@@ -2953,6 +3000,7 @@
         "perks": "quality",
         "visibility": "public",
         "showDiscountBadge": true,
+        "showBulbsBadge": null,
         "inStock": true,
         "updatedAt": "2026-09-04T20:47:37.687Z"
       },
@@ -2998,6 +3046,7 @@
         "perks": "quality",
         "visibility": "public",
         "showDiscountBadge": true,
+        "showBulbsBadge": null,
         "inStock": true,
         "updatedAt": "2026-09-04T20:47:37.687Z"
       },
@@ -3047,6 +3096,7 @@
         "perks": "quality",
         "visibility": "public",
         "showDiscountBadge": true,
+        "showBulbsBadge": null,
         "inStock": true,
         "updatedAt": "2026-09-04T20:47:37.687Z"
       },
@@ -3111,6 +3161,7 @@
         "perks": "quality",
         "visibility": "public",
         "showDiscountBadge": true,
+        "showBulbsBadge": null,
         "inStock": true,
         "updatedAt": "2026-09-04T20:47:37.687Z"
       },
@@ -3171,6 +3222,7 @@
         "perks": "quality",
         "visibility": "public",
         "showDiscountBadge": true,
+        "showBulbsBadge": null,
         "inStock": true,
         "updatedAt": "2026-09-04T20:47:37.687Z"
       },
@@ -3230,6 +3282,7 @@
         "perks": "quality",
         "visibility": "public",
         "showDiscountBadge": true,
+        "showBulbsBadge": null,
         "inStock": true,
         "updatedAt": "2026-09-04T20:47:37.687Z"
       },
@@ -3294,6 +3347,7 @@
         "perks": "quality",
         "visibility": "public",
         "showDiscountBadge": true,
+        "showBulbsBadge": null,
         "inStock": true,
         "updatedAt": "2026-09-04T20:47:37.687Z"
       },
@@ -3339,6 +3393,7 @@
         "perks": "quality",
         "visibility": "unlisted",
         "showDiscountBadge": true,
+        "showBulbsBadge": null,
         "inStock": true,
         "updatedAt": "2026-09-04T20:47:37.687Z"
       },
@@ -3388,6 +3443,7 @@
         "perks": "quality",
         "visibility": "public",
         "showDiscountBadge": true,
+        "showBulbsBadge": null,
         "inStock": true,
         "updatedAt": "2026-09-04T20:47:37.687Z"
       }
@@ -3476,6 +3532,7 @@
         "perks": "bulbs",
         "visibility": "public",
         "showDiscountBadge": true,
+        "showBulbsBadge": null,
         "inStock": true,
         "updatedAt": "2026-08-27T08:04:37.051Z"
       },
@@ -3536,6 +3593,7 @@
         "perks": "bulbs",
         "visibility": "public",
         "showDiscountBadge": true,
+        "showBulbsBadge": null,
         "inStock": true,
         "updatedAt": "2026-08-27T08:04:37.051Z"
       },
@@ -3596,6 +3654,7 @@
         "perks": "bulbs",
         "visibility": "public",
         "showDiscountBadge": true,
+        "showBulbsBadge": null,
         "inStock": true,
         "updatedAt": "2026-08-27T08:04:37.051Z"
       },
@@ -3636,6 +3695,7 @@
         "perks": "bulbs",
         "visibility": "public",
         "showDiscountBadge": true,
+        "showBulbsBadge": null,
         "inStock": true,
         "updatedAt": "2026-08-27T08:04:37.051Z"
       },
@@ -3686,6 +3746,7 @@
         "perks": "bulbs",
         "visibility": "public",
         "showDiscountBadge": true,
+        "showBulbsBadge": null,
         "inStock": true,
         "updatedAt": "2026-08-27T08:04:37.051Z"
       },
@@ -3770,6 +3831,7 @@
         "perks": "bulbs",
         "visibility": "public",
         "showDiscountBadge": true,
+        "showBulbsBadge": null,
         "inStock": true,
         "updatedAt": "2026-08-27T08:04:37.051Z"
       },
@@ -3849,6 +3911,7 @@
         "perks": "bulbs",
         "visibility": "public",
         "showDiscountBadge": true,
+        "showBulbsBadge": null,
         "inStock": true,
         "updatedAt": "2026-08-27T08:04:37.051Z"
       },
@@ -3908,6 +3971,7 @@
         "perks": "bulbs",
         "visibility": "public",
         "showDiscountBadge": true,
+        "showBulbsBadge": null,
         "inStock": true,
         "updatedAt": "2026-08-27T08:04:37.051Z"
       },
@@ -3953,6 +4017,7 @@
         "perks": "led",
         "visibility": "public",
         "showDiscountBadge": true,
+        "showBulbsBadge": null,
         "inStock": true,
         "updatedAt": "2026-08-27T08:04:37.051Z"
       },
@@ -4007,6 +4072,7 @@
         "perks": "led",
         "visibility": "public",
         "showDiscountBadge": true,
+        "showBulbsBadge": null,
         "inStock": true,
         "updatedAt": "2026-08-27T08:04:37.051Z"
       },
@@ -4057,6 +4123,7 @@
         "perks": "led",
         "visibility": "public",
         "showDiscountBadge": true,
+        "showBulbsBadge": null,
         "inStock": true,
         "updatedAt": "2026-08-27T08:04:37.051Z"
       },
@@ -4116,6 +4183,7 @@
         "perks": "led",
         "visibility": "public",
         "showDiscountBadge": true,
+        "showBulbsBadge": null,
         "inStock": true,
         "updatedAt": "2026-08-27T08:04:37.051Z"
       },
@@ -4156,6 +4224,7 @@
         "perks": "bulbs",
         "visibility": "public",
         "showDiscountBadge": true,
+        "showBulbsBadge": null,
         "inStock": true,
         "updatedAt": "2026-08-27T08:04:37.051Z"
       },
@@ -4221,6 +4290,7 @@
         "perks": "bulbs",
         "visibility": "public",
         "showDiscountBadge": true,
+        "showBulbsBadge": null,
         "inStock": true,
         "updatedAt": "2026-08-27T08:04:37.051Z"
       },
@@ -4281,6 +4351,7 @@
         "perks": "bulbs",
         "visibility": "public",
         "showDiscountBadge": true,
+        "showBulbsBadge": null,
         "inStock": true,
         "updatedAt": "2026-08-27T08:04:37.051Z"
       },
@@ -4341,6 +4412,7 @@
         "perks": "bulbs",
         "visibility": "public",
         "showDiscountBadge": true,
+        "showBulbsBadge": null,
         "inStock": true,
         "updatedAt": "2026-08-27T08:04:37.051Z"
       },
@@ -4406,6 +4478,7 @@
         "perks": "bulbs",
         "visibility": "public",
         "showDiscountBadge": true,
+        "showBulbsBadge": null,
         "inStock": true,
         "updatedAt": "2026-08-27T08:04:37.051Z"
       },
@@ -4476,6 +4549,7 @@
         "perks": "bulbs",
         "visibility": "public",
         "showDiscountBadge": true,
+        "showBulbsBadge": null,
         "inStock": true,
         "updatedAt": "2026-08-27T08:04:37.051Z"
       },
@@ -4546,6 +4620,7 @@
         "perks": "bulbs",
         "visibility": "public",
         "showDiscountBadge": true,
+        "showBulbsBadge": null,
         "inStock": true,
         "updatedAt": "2026-08-27T08:04:37.051Z"
       },
@@ -4596,6 +4671,7 @@
         "perks": "quality",
         "visibility": "public",
         "showDiscountBadge": true,
+        "showBulbsBadge": null,
         "inStock": true,
         "updatedAt": "2026-08-27T08:04:37.069Z"
       },
@@ -4756,6 +4832,7 @@
         "perks": "quality",
         "visibility": "public",
         "showDiscountBadge": true,
+        "showBulbsBadge": null,
         "inStock": true,
         "updatedAt": "2026-08-27T08:04:37.069Z"
       },
@@ -4811,6 +4888,7 @@
         "perks": "quality",
         "visibility": "public",
         "showDiscountBadge": true,
+        "showBulbsBadge": null,
         "inStock": true,
         "updatedAt": "2026-08-27T08:04:37.069Z"
       },
@@ -4851,6 +4929,7 @@
         "perks": "quality",
         "visibility": "public",
         "showDiscountBadge": true,
+        "showBulbsBadge": null,
         "inStock": true,
         "updatedAt": "2026-08-27T08:04:37.069Z"
       },
@@ -4891,6 +4970,7 @@
         "perks": "quality",
         "visibility": "public",
         "showDiscountBadge": true,
+        "showBulbsBadge": null,
         "inStock": true,
         "updatedAt": "2026-08-27T08:04:37.069Z"
       },
@@ -4936,6 +5016,7 @@
         "perks": "quality",
         "visibility": "public",
         "showDiscountBadge": true,
+        "showBulbsBadge": null,
         "inStock": true,
         "updatedAt": "2026-08-27T08:04:37.069Z"
       },
@@ -5009,6 +5090,7 @@
         "perks": "quality",
         "visibility": "public",
         "showDiscountBadge": true,
+        "showBulbsBadge": null,
         "inStock": true,
         "updatedAt": "2026-08-27T08:07:43.389Z"
       },
@@ -5078,6 +5160,7 @@
         "perks": "quality",
         "visibility": "public",
         "showDiscountBadge": true,
+        "showBulbsBadge": null,
         "inStock": true,
         "updatedAt": "2026-08-27T08:07:43.389Z"
       },
@@ -5127,6 +5210,7 @@
         "perks": "quality",
         "visibility": "public",
         "showDiscountBadge": true,
+        "showBulbsBadge": null,
         "inStock": true,
         "updatedAt": "2026-08-27T08:07:43.389Z"
       },
@@ -5186,6 +5270,7 @@
         "perks": "quality",
         "visibility": "public",
         "showDiscountBadge": true,
+        "showBulbsBadge": null,
         "inStock": true,
         "updatedAt": "2026-08-27T08:07:43.389Z"
       },
@@ -5251,6 +5336,7 @@
         "perks": "quality",
         "visibility": "public",
         "showDiscountBadge": true,
+        "showBulbsBadge": null,
         "inStock": true,
         "updatedAt": "2026-08-27T08:07:43.389Z"
       },
@@ -5301,6 +5387,7 @@
         "perks": "quality",
         "visibility": "public",
         "showDiscountBadge": true,
+        "showBulbsBadge": null,
         "inStock": true,
         "updatedAt": "2026-08-27T08:07:43.389Z"
       },
@@ -5341,6 +5428,7 @@
         "perks": "quality",
         "visibility": "public",
         "showDiscountBadge": true,
+        "showBulbsBadge": null,
         "inStock": true,
         "updatedAt": "2026-08-27T08:07:43.389Z"
       },
@@ -5391,6 +5479,7 @@
         "perks": "led",
         "visibility": "public",
         "showDiscountBadge": true,
+        "showBulbsBadge": null,
         "inStock": true,
         "updatedAt": "2026-08-27T08:07:43.389Z"
       },
@@ -5446,6 +5535,7 @@
         "perks": "bulbs",
         "visibility": "public",
         "showDiscountBadge": true,
+        "showBulbsBadge": null,
         "inStock": true,
         "updatedAt": "2026-08-27T08:07:43.389Z"
       },
@@ -5536,6 +5626,7 @@
         "perks": "quality",
         "visibility": "public",
         "showDiscountBadge": true,
+        "showBulbsBadge": null,
         "inStock": true,
         "updatedAt": "2026-08-27T08:07:43.389Z"
       },
@@ -5606,6 +5697,7 @@
         "perks": "led",
         "visibility": "public",
         "showDiscountBadge": true,
+        "showBulbsBadge": null,
         "inStock": true,
         "updatedAt": "2026-08-27T08:07:43.389Z"
       },
@@ -5666,6 +5758,7 @@
         "perks": "bulbs",
         "visibility": "public",
         "showDiscountBadge": true,
+        "showBulbsBadge": null,
         "inStock": true,
         "updatedAt": "2026-08-27T08:07:43.389Z"
       },
@@ -5756,6 +5849,7 @@
         "perks": "led",
         "visibility": "public",
         "showDiscountBadge": true,
+        "showBulbsBadge": null,
         "inStock": true,
         "updatedAt": "2026-08-27T08:07:43.389Z"
       },
@@ -5821,6 +5915,7 @@
         "perks": "led",
         "visibility": "public",
         "showDiscountBadge": true,
+        "showBulbsBadge": null,
         "inStock": true,
         "updatedAt": "2026-08-27T08:07:43.389Z"
       },
@@ -5886,6 +5981,7 @@
         "perks": "bulbs",
         "visibility": "public",
         "showDiscountBadge": true,
+        "showBulbsBadge": null,
         "inStock": true,
         "updatedAt": "2026-08-27T08:07:43.389Z"
       },
@@ -5981,6 +6077,7 @@
         "perks": "led",
         "visibility": "public",
         "showDiscountBadge": true,
+        "showBulbsBadge": null,
         "inStock": true,
         "updatedAt": "2026-08-27T08:07:43.389Z"
       },
@@ -6066,6 +6163,7 @@
         "perks": "quality",
         "visibility": "public",
         "showDiscountBadge": true,
+        "showBulbsBadge": null,
         "inStock": true,
         "updatedAt": "2026-08-27T08:07:43.389Z"
       },
@@ -6136,6 +6234,7 @@
         "perks": "bulbs",
         "visibility": "public",
         "showDiscountBadge": true,
+        "showBulbsBadge": null,
         "inStock": true,
         "updatedAt": "2026-08-27T08:07:43.389Z"
       },
@@ -6226,6 +6325,7 @@
         "perks": "quality",
         "visibility": "public",
         "showDiscountBadge": true,
+        "showBulbsBadge": null,
         "inStock": true,
         "updatedAt": "2026-08-27T08:07:43.389Z"
       },
@@ -6296,6 +6396,7 @@
         "perks": "bulbs",
         "visibility": "public",
         "showDiscountBadge": true,
+        "showBulbsBadge": null,
         "inStock": true,
         "updatedAt": "2026-08-27T08:07:43.389Z"
       },
@@ -6376,6 +6477,7 @@
         "perks": "quality",
         "visibility": "public",
         "showDiscountBadge": true,
+        "showBulbsBadge": null,
         "inStock": true,
         "updatedAt": "2026-08-27T08:07:43.389Z"
       },
@@ -6471,6 +6573,7 @@
         "perks": "quality",
         "visibility": "public",
         "showDiscountBadge": true,
+        "showBulbsBadge": null,
         "inStock": true,
         "updatedAt": "2026-08-27T08:07:43.389Z"
       },
@@ -6525,6 +6628,7 @@
         "perks": "quality",
         "visibility": "public",
         "showDiscountBadge": true,
+        "showBulbsBadge": null,
         "inStock": true,
         "updatedAt": "2026-08-27T08:09:24.976Z"
       },
@@ -6580,6 +6684,7 @@
         "perks": "quality",
         "visibility": "public",
         "showDiscountBadge": true,
+        "showBulbsBadge": null,
         "inStock": true,
         "updatedAt": "2026-08-27T08:09:24.976Z"
       },
@@ -6635,6 +6740,7 @@
         "perks": "quality",
         "visibility": "public",
         "showDiscountBadge": true,
+        "showBulbsBadge": null,
         "inStock": true,
         "updatedAt": "2026-08-27T08:09:24.976Z"
       },
@@ -6694,6 +6800,7 @@
         "perks": "quality",
         "visibility": "public",
         "showDiscountBadge": true,
+        "showBulbsBadge": null,
         "inStock": true,
         "updatedAt": "2026-08-27T08:09:24.976Z"
       },
@@ -6758,6 +6865,7 @@
         "perks": "quality",
         "visibility": "public",
         "showDiscountBadge": true,
+        "showBulbsBadge": null,
         "inStock": true,
         "updatedAt": "2026-08-27T08:09:24.976Z"
       },
@@ -6847,6 +6955,7 @@
         "perks": "quality",
         "visibility": "public",
         "showDiscountBadge": true,
+        "showBulbsBadge": null,
         "inStock": true,
         "updatedAt": "2026-08-27T08:09:24.976Z"
       },
@@ -6947,6 +7056,7 @@
         "perks": "quality",
         "visibility": "public",
         "showDiscountBadge": true,
+        "showBulbsBadge": null,
         "inStock": true,
         "updatedAt": "2026-08-27T08:09:24.976Z"
       },
@@ -7072,6 +7182,7 @@
         "perks": "quality",
         "visibility": "public",
         "showDiscountBadge": true,
+        "showBulbsBadge": null,
         "inStock": true,
         "updatedAt": "2026-08-27T08:09:24.976Z"
       },
@@ -7172,6 +7283,7 @@
         "perks": "quality",
         "visibility": "public",
         "showDiscountBadge": true,
+        "showBulbsBadge": null,
         "inStock": true,
         "updatedAt": "2026-08-27T08:09:24.976Z"
       },
@@ -7241,6 +7353,7 @@
         "perks": "quality",
         "visibility": "public",
         "showDiscountBadge": true,
+        "showBulbsBadge": null,
         "inStock": true,
         "updatedAt": "2026-08-27T08:09:24.976Z"
       },
@@ -7301,6 +7414,7 @@
         "perks": "quality",
         "visibility": "public",
         "showDiscountBadge": true,
+        "showBulbsBadge": null,
         "inStock": true,
         "updatedAt": "2026-08-27T08:09:24.976Z"
       },
@@ -7365,6 +7479,7 @@
         "perks": "quality",
         "visibility": "public",
         "showDiscountBadge": true,
+        "showBulbsBadge": null,
         "inStock": true,
         "updatedAt": "2026-08-27T08:09:24.976Z"
       },
@@ -7420,6 +7535,7 @@
         "perks": "quality",
         "visibility": "public",
         "showDiscountBadge": true,
+        "showBulbsBadge": null,
         "inStock": true,
         "updatedAt": "2026-08-27T08:09:24.976Z"
       },
@@ -7480,6 +7596,7 @@
         "perks": "quality",
         "visibility": "public",
         "showDiscountBadge": true,
+        "showBulbsBadge": null,
         "inStock": true,
         "updatedAt": "2026-08-27T08:09:24.976Z"
       },
@@ -7529,6 +7646,7 @@
         "perks": "quality",
         "visibility": "public",
         "showDiscountBadge": true,
+        "showBulbsBadge": null,
         "inStock": true,
         "updatedAt": "2026-08-27T08:09:24.976Z"
       },
@@ -7584,6 +7702,7 @@
         "perks": "quality",
         "visibility": "public",
         "showDiscountBadge": true,
+        "showBulbsBadge": null,
         "inStock": true,
         "updatedAt": "2026-08-27T08:09:24.976Z"
       },
@@ -7658,6 +7777,7 @@
         "perks": "quality",
         "visibility": "public",
         "showDiscountBadge": true,
+        "showBulbsBadge": null,
         "inStock": true,
         "updatedAt": "2026-08-27T08:09:24.976Z"
       },
@@ -7708,6 +7828,7 @@
         "perks": "quality",
         "visibility": "public",
         "showDiscountBadge": true,
+        "showBulbsBadge": null,
         "inStock": true,
         "updatedAt": "2026-08-27T08:09:24.976Z"
       },
@@ -7753,6 +7874,7 @@
         "perks": "quality",
         "visibility": "public",
         "showDiscountBadge": true,
+        "showBulbsBadge": null,
         "inStock": true,
         "updatedAt": "2026-08-27T08:09:24.976Z"
       },
@@ -7803,6 +7925,7 @@
         "perks": "quality",
         "visibility": "public",
         "showDiscountBadge": true,
+        "showBulbsBadge": null,
         "inStock": true,
         "updatedAt": "2026-08-27T08:09:24.976Z"
       },
@@ -7868,6 +7991,7 @@
         "perks": "quality",
         "visibility": "public",
         "showDiscountBadge": true,
+        "showBulbsBadge": null,
         "inStock": true,
         "updatedAt": "2026-08-27T08:09:24.976Z"
       }
