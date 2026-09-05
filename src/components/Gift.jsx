@@ -1,8 +1,7 @@
 import { Link } from './LocalizedLink.jsx';
 import Media from './Media.jsx';
 import { useLanguage } from '../i18n/LanguageContext.jsx';
-import { useOptionalCatalog } from '../catalog/CatalogContext.jsx';
-import { findProduct, isInStock, productGift } from '../data/catalog.js';
+import { useProductGift } from './useProductGift.js';
 
 /**
  * The three faces of a gift with purchase, in one file because they are three
@@ -181,20 +180,15 @@ export function GiftWithNote({ offer, className = '' }) {
  * sale badge. The tile has no room for the inset above — at two columns on a
  * phone its photo would be unreadable — so it says only that there is one.
  *
- * Resolves the offer itself from the catalog, so a card only has to render it:
- * every grid on the site builds its tiles from a bare product, and threading
- * the gift down through each of them would be the same lookup written five
- * times. Sold out wins over it for the same reason it wins over the discount —
- * a gift with something unbuyable is noise.
+ * Resolves the offer itself from the catalog (see useProductGift), so a card
+ * only has to render it. The opposite corner reads the same answer: where this
+ * chip is shown, ProductBadge leaves the free bulbs unsaid — two gifts on one
+ * tile are noise, and on a two-column phone grid the two chips would meet in
+ * the middle of the photo.
  */
 export function GiftBadge({ product, className = '' }) {
-  const { lang, t } = useLanguage();
-  // Optional on purpose: a tile is rendered in a dozen places, and a chip in
-  // its corner is not worth taking one of them down over.
-  const allCategories = useOptionalCatalog()?.allCategories ?? [];
-  const found = findProduct(allCategories, product?.id);
-  if (!found || !isInStock(found.product)) return null;
-  const gift = productGift(allCategories, found.product, found.category, lang);
+  const { t } = useLanguage();
+  const gift = useProductGift(product);
   if (!gift) return null;
 
   // The label is written in /admin and normally opens with a "+". Split that

@@ -4,15 +4,34 @@ import { MemoryRouter } from 'react-router-dom';
 import ProductBadge from './ProductBadge.jsx';
 import { LanguageProvider } from '../i18n/LanguageContext.jsx';
 import { SettingsProvider } from '../settings/SettingsContext.jsx';
+import { CatalogProvider } from '../catalog/CatalogContext.jsx';
 
 const onSale = { id: 'Espejo-E-01', price: 690, oldPrice: 790 };
 
-function renderBadge(product) {
+// A catalog whose mirrors come with a shelf, so the tile's opposite corner has
+// a gift chip of its own to show.
+const withShelfGift = (product) => [
+  {
+    slug: 'espejos',
+    name: { es: 'Espejos', en: 'Mirrors' },
+    gift: { source: 'catalog', productId: 'shelf' },
+    products: [product],
+  },
+  {
+    slug: 'estanterias',
+    name: { es: 'Estanterías', en: 'Shelves' },
+    products: [{ id: 'shelf', name: 'Estantería | de pared', price: 89 }],
+  },
+];
+
+function renderBadge(product, catalog) {
   return render(
     <MemoryRouter>
       <SettingsProvider>
         <LanguageProvider>
-          <ProductBadge product={product} />
+          <CatalogProvider initialCatalog={catalog ?? []}>
+            <ProductBadge product={product} />
+          </CatalogProvider>
         </LanguageProvider>
       </SettingsProvider>
     </MemoryRouter>,
@@ -66,6 +85,33 @@ describe('ProductBadge — the bulbs chip', () => {
     expect(chips(container)).toHaveLength(1);
     expect(chips(container)[0].className).not.toContain('badge-cycle');
     expect(chips(container)[0].className).not.toContain('opacity-0');
+  });
+});
+
+// One gift per tile. The chip in the opposite corner (GiftBadge) is the wider
+// of the two on a phone, and both run past half the photo — left to render,
+// they would meet in the middle of a two-column card.
+describe('ProductBadge — a product that comes with a gift of its own', () => {
+  const product = { ...onSale, perks: 'bulbs' };
+  const renderWithGift = () => renderBadge(product, withShelfGift(product));
+
+  it('leaves the bulbs unsaid, the opposite corner having said enough', () => {
+    renderWithGift();
+    expect(screen.queryByText('de regalo')).toBeNull();
+  });
+
+  it('gives the discount its red hover back, with nothing to swap in', () => {
+    const { container } = renderWithGift();
+    expect(chips(container)).toHaveLength(1);
+    expect(chips(container)[0].textContent).toBe('-13%');
+    expect(chips(container)[0].className).toContain('group-hover:bg-danger');
+  });
+
+  // Same catalog, a product the gift rule does not reach: the chip is back.
+  it('keeps the bulbs on a product with no gift', () => {
+    const shelf = { id: 'shelf', price: 690, oldPrice: 790, perks: 'bulbs' };
+    renderBadge(shelf, withShelfGift(product));
+    expect(screen.getByText('de regalo')).toBeTruthy();
   });
 });
 

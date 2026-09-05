@@ -1,5 +1,6 @@
 import { isInStock, productDiscount, showsBulbsBadge } from '../data/catalog.js';
 import { useLanguage } from '../i18n/LanguageContext.jsx';
+import { useProductGift } from './useProductGift.js';
 
 /**
  * The single badge slot in the top-right corner of a product photo. It shows at
@@ -7,7 +8,8 @@ import { useLanguage } from '../i18n/LanguageContext.jsx';
  * stock, otherwise the "-N%" sale badge and — sharing the same corner — the
  * "+ bulbs de regalo" one (see BULBS below). Sold out wins because it is the
  * fact that changes what the visitor can do: a discount, or a gift, on
- * something unbuyable is noise.
+ * something unbuyable is noise. The bulbs also step aside for a product that
+ * comes with a gift of its own, which the opposite corner is already saying.
  *
  * Size is proportional to the image, not the viewport: the font scales with the
  * container's width (`cqw`), so a small catalog thumbnail and the large product
@@ -82,6 +84,11 @@ function BulbsChip({ className = '' }) {
 export default function ProductBadge({ product, className = '' }) {
   const { t } = useLanguage();
   const { badge, percent } = productDiscount(product);
+  // A product given away with something bigger already says so, in the chip in
+  // the opposite corner of the same photo (see GiftBadge). One gift per tile:
+  // two of them is noise, and on a two-column phone grid the two chips are wide
+  // enough — a little over half the photo each — to meet in the middle.
+  const givesAGift = useProductGift(product) !== null;
 
   // Muted dark instead of the sale green: this is a state, not an offer.
   if (!isInStock(product)) {
@@ -96,7 +103,7 @@ export default function ProductBadge({ product, className = '' }) {
   // switched off for it in /admin (see showsDiscountBadge) — in which case the
   // discount is still visible as the struck-through old price next to the
   // current one. The bulbs follow their own switch (see showsBulbsBadge).
-  const bulbs = showsBulbsBadge(product);
+  const bulbs = showsBulbsBadge(product) && !givesAGift;
   if (!badge && !bulbs) return null;
 
   // One of the two, alone in the corner: nothing to swap with, so it simply
