@@ -17,7 +17,8 @@ import { findProduct, isInStock, productGift } from '../data/catalog.js';
  * nothing when there isn't, so callers never have to ask first.
  */
 
-function IconGift({ className = '' }) {
+/** The gift mark itself. Exported because the navigation menu carries it too. */
+export function IconGift({ className = '' }) {
   return (
     <svg
       viewBox="0 0 24 24"

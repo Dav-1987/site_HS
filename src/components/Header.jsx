@@ -5,6 +5,7 @@ import { useLanguage } from '../i18n/LanguageContext.jsx';
 import { LANGUAGES } from '../i18n/translations.js';
 import { useCatalog } from '../catalog/CatalogContext.jsx';
 import { categoryHasGift } from '../data/catalog.js';
+import { IconGift } from './Gift.jsx';
 import { useSettings } from '../settings/SettingsContext.jsx';
 import { stripLangPrefix, withLang } from '../i18n/routing.js';
 
@@ -143,8 +144,9 @@ export default function Header() {
                     <span>
                       {c.name[lang]}
                       {giftedSlugs.has(c.slug) && (
-                        <span className="ml-2 text-xs font-medium text-promo">
+                        <span className="ml-2 inline-flex items-center gap-1 align-middle text-xs font-medium text-promo">
                           {t('nav.giftBadge')}
+                          <IconGift className="h-3.5 w-3.5" />
                         </span>
                       )}
                     </span>
@@ -248,8 +250,9 @@ export default function Header() {
                   <Link key={c.slug} to={`/${c.slug}`} className="py-2 text-base text-primary/70">
                     {c.name[lang]}
                     {giftedSlugs.has(c.slug) && (
-                      <span className="ml-2 text-sm font-medium text-promo">
+                      <span className="ml-2 inline-flex items-center gap-1 align-middle text-sm font-medium text-promo">
                         {t('nav.giftBadge')}
+                        <IconGift className="h-4 w-4" />
                       </span>
                     )}
                   </Link>
