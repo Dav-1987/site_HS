@@ -86,32 +86,51 @@ describe('ProductBadge — the bulbs chip', () => {
     expect(chips(container)[0].className).not.toContain('badge-cycle');
     expect(chips(container)[0].className).not.toContain('opacity-0');
   });
+
+  // Standing alone it is still the chip that yields on a narrow photo, so the
+  // corner is marked and the chip stays findable from CSS.
+  it('is marked to yield when it stands alone beside a gift chip', () => {
+    const alone = { id: 'Espejo-E-01', price: 690, perks: 'bulbs' };
+    const { container } = renderBadge(alone, withShelfGift(alone));
+    expect(container.querySelector(':scope > span').className).toContain('badge-yields');
+    expect(container.querySelector('.badge-bulbs')).toBeTruthy();
+  });
 });
 
-// One gift per tile. The chip in the opposite corner (GiftBadge) is the wider
-// of the two on a phone, and both run past half the photo — left to render,
-// they would meet in the middle of a two-column card.
+// A second gift chip sits in the opposite corner of the same photo. The two fit
+// side by side wherever the photo is wider than ~220px and only collide on a
+// phone's two-column grid, so the corner is only *marked* here — which of the
+// two layouts this is, only CSS can measure (see index.css).
 describe('ProductBadge — a product that comes with a gift of its own', () => {
   const product = { ...onSale, perks: 'bulbs' };
+  const corner = (container) => container.querySelector(':scope > span');
   const renderWithGift = () => renderBadge(product, withShelfGift(product));
 
-  it('leaves the bulbs unsaid, the opposite corner having said enough', () => {
-    renderWithGift();
-    expect(screen.queryByText('de regalo')).toBeNull();
-  });
-
-  it('gives the discount its red hover back, with nothing to swap in', () => {
+  it('still renders both chips — there is room for them nearly everywhere', () => {
     const { container } = renderWithGift();
-    expect(chips(container)).toHaveLength(1);
-    expect(chips(container)[0].textContent).toBe('-13%');
-    expect(chips(container)[0].className).toContain('group-hover:bg-danger');
+    expect(screen.getByText('de regalo')).toBeTruthy();
+    expect(chips(container)).toHaveLength(2);
   });
 
-  // Same catalog, a product the gift rule does not reach: the chip is back.
-  it('keeps the bulbs on a product with no gift', () => {
+  it('marks the corner to give the bulbs up where the photo is too narrow', () => {
+    const { container } = renderWithGift();
+    expect(corner(container).className).toContain('badge-yields');
+    // The chip the rule drops has to be findable from CSS in both arrangements,
+    // the swap and the bulbs standing alone.
+    expect(container.querySelector('.badge-bulbs')).toBeTruthy();
+  });
+
+  it('leaves the corner unmarked for a product with no gift', () => {
+    const { container } = renderBadge(product);
+    expect(corner(container).className).not.toContain('badge-yields');
+  });
+
+  // Same catalog, a product the gift rule does not reach.
+  it('leaves it unmarked for a product the gift rule does not cover', () => {
     const shelf = { id: 'shelf', price: 690, oldPrice: 790, perks: 'bulbs' };
-    renderBadge(shelf, withShelfGift(product));
+    const { container } = renderBadge(shelf, withShelfGift(product));
     expect(screen.getByText('de regalo')).toBeTruthy();
+    expect(corner(container).className).not.toContain('badge-yields');
   });
 });
 
