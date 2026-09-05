@@ -118,6 +118,20 @@ export function showsDiscountBadge(product) {
 }
 
 /**
+ * Whether the "+ bulbs de regalo" badge shares the photo's corner with the
+ * discount (see ProductBadge). Three states rather than two: an explicit yes or
+ * no set in /admin, and — while the switch has never been touched — the answer
+ * the product already gives elsewhere, its perk variant. A product whose third
+ * perk is "Bombillas LED de regalo" is exactly a product the bulbs come free
+ * with, so it gets the badge without anyone having to say so a second time.
+ */
+export function showsBulbsBadge(product) {
+  const own = product?.showBulbsBadge;
+  if (typeof own === 'boolean') return own;
+  return productPerkVariant(product) === 'bulbs';
+}
+
+/**
  * Whether the product can be ordered right now. An admin switch, on unless
  * explicitly turned off — the catalog predates the field, so anything saved
  * without it stays orderable.

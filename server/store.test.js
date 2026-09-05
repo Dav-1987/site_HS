@@ -116,6 +116,23 @@ describe('productContentEqual — sale badge switch', () => {
   });
 });
 
+describe('productContentEqual — bulbs badge switch', () => {
+  // Three-state, so "never touched" has to compare equal to the null a row
+  // written before the column reads back as — otherwise every save would bump
+  // every product's updated_at and defeat the comparison.
+  it('treats an untouched switch as equal to an explicit null', () => {
+    expect(productContentEqual(base, { ...base, showBulbsBadge: null })).toBe(true);
+  });
+
+  it('detects an answer being given either way', () => {
+    expect(productContentEqual(base, { ...base, showBulbsBadge: true })).toBe(false);
+    expect(productContentEqual(base, { ...base, showBulbsBadge: false })).toBe(false);
+    expect(
+      productContentEqual({ ...base, showBulbsBadge: true }, { ...base, showBulbsBadge: false }),
+    ).toBe(false);
+  });
+});
+
 // Availability has to bump updated_at like any other content change: the flag
 // changes the page's Offer, so the prerendered HTML and the sitemap's <lastmod>
 // both go stale until the next rebuild.

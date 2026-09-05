@@ -195,3 +195,11 @@ ALTER TABLE products ADD COLUMN IF NOT EXISTS in_stock BOOLEAN NOT NULL DEFAULT 
 -- the site changes until a rule is set in /admin.
 ALTER TABLE categories ADD COLUMN IF NOT EXISTS gift JSONB NOT NULL DEFAULT '{}'::jsonb;
 ALTER TABLE products   ADD COLUMN IF NOT EXISTS gift JSONB NOT NULL DEFAULT '{}'::jsonb;
+
+-- Per-product switch for the "+ bulbs de regalo" chip that shares the photo's
+-- corner with the discount (see showsBulbsBadge in src/data/catalog.js).
+-- Nullable on purpose, unlike show_discount_badge above: three states, not two.
+-- NULL means nobody has decided here, and the chip follows the claim the
+-- product already makes elsewhere — its perk variant, where 'bulbs' is exactly
+-- "Bombillas LED de regalo". A row saved with true/false overrides that.
+ALTER TABLE products ADD COLUMN IF NOT EXISTS show_bulbs_badge BOOLEAN;

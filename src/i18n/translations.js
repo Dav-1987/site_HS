@@ -92,6 +92,8 @@ export const translations = {
     'product.giftAfter': 'de regalo',
     'product.giftValue': 'valor',
     'product.giftBadge': '+ Estantería de regalo',
+    // Only the words: the "+" and the bulb itself are drawn by ProductBadge.
+    'product.bulbsBadge': 'de regalo',
     'product.giftLabel': 'De regalo',
     'product.giftWith': 'De regalo con',
     'product.customOrderTitle': 'Fabricación a medida',
@@ -318,6 +320,7 @@ export const translations = {
     'product.giftAfter': 'as a gift',
     'product.giftValue': 'worth',
     'product.giftBadge': '+ Free shelf',
+    'product.bulbsBadge': 'free bulbs',
     'product.giftLabel': 'Free gift',
     'product.giftWith': 'A free gift with',
     'product.customOrderTitle': 'Made to your measurements',

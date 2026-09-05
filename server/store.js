@@ -63,6 +63,15 @@ function normalizeShowDiscountBadge(p) {
   return p?.showDiscountBadge !== false;
 }
 
+// Per-product switch for the "+ bulbs de regalo" chip in the same corner.
+// Mirrors showsBulbsBadge() in src/data/catalog.js, and is three-state where
+// the discount's is two: null means "not decided here", and the site then reads
+// the answer off the product's perk variant. Normalized on both read and write
+// so a row that has never been touched doesn't look "changed" on the next save.
+function normalizeShowBulbsBadge(p) {
+  return typeof p?.showBulbsBadge === 'boolean' ? p.showBulbsBadge : null;
+}
+
 // Whether the product can be ordered right now. Mirrors isInStock() in
 // src/data/catalog.js: on unless explicitly false, so a row written before the
 // column existed stays orderable and doesn't look "changed" on the next save.
@@ -154,6 +163,7 @@ function shapeCategory(cat, products) {
       perks: normalizePerks(p),
       visibility: normalizeVisibility(p),
       showDiscountBadge: p.show_discount_badge !== false,
+      showBulbsBadge: typeof p.show_bulbs_badge === 'boolean' ? p.show_bulbs_badge : null,
       inStock: p.in_stock !== false,
       updatedAt: p.updated_at instanceof Date ? p.updated_at.toISOString() : p.updated_at,
     })),
@@ -221,6 +231,7 @@ export function productContentEqual(a, b) {
     normalizePerks(a) === normalizePerks(b) &&
     normalizeVisibility(a) === normalizeVisibility(b) &&
     normalizeShowDiscountBadge(a) === normalizeShowDiscountBadge(b) &&
+    normalizeShowBulbsBadge(a) === normalizeShowBulbsBadge(b) &&
     normalizeInStock(a) === normalizeInStock(b)
   );
 }
@@ -303,8 +314,8 @@ export async function writeCatalog(categories) {
 
         await client.query(
           `INSERT INTO products
-             (id, category_slug, name, name_en, price, old_price, image, image_mobile, images, material_es, material_en, size, mirror_size, shelves_size, reference, subtitle, video, video_first, media, description_es, description_en, related, gift, perks, visibility, show_discount_badge, in_stock, position, updated_at)
-           VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9::jsonb,$10,$11,$12,$13,$14,$15,$16,$17,$18,$19::jsonb,$20,$21,$22::jsonb,$23::jsonb,$24,$25,$26,$27,$28,$29)`,
+             (id, category_slug, name, name_en, price, old_price, image, image_mobile, images, material_es, material_en, size, mirror_size, shelves_size, reference, subtitle, video, video_first, media, description_es, description_en, related, gift, perks, visibility, show_discount_badge, show_bulbs_badge, in_stock, position, updated_at)
+           VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9::jsonb,$10,$11,$12,$13,$14,$15,$16,$17,$18,$19::jsonb,$20,$21,$22::jsonb,$23::jsonb,$24,$25,$26,$27,$28,$29,$30)`,
           [
             p.id,
             c.slug,
@@ -333,6 +344,7 @@ export async function writeCatalog(categories) {
             normalizePerks(p),
             normalizeVisibility(p),
             normalizeShowDiscountBadge(p),
+            normalizeShowBulbsBadge(p),
             normalizeInStock(p),
             pi,
             productUpdatedAt,

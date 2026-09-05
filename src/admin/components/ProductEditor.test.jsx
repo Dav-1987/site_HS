@@ -148,6 +148,35 @@ describe('ProductEditor — sale badge switch', () => {
   });
 });
 
+describe('ProductEditor — bulbs badge switch', () => {
+  const checkbox = () => screen.getByLabelText(/лампочки в подарок/);
+  const openPrice = () => {
+    expand();
+    openSection('Цена');
+  };
+
+  // Ничего не выбрано — плашки нет: третий пункт по умолчанию не «Bombillas».
+  it('is off for a product with neither switch nor perk set', () => {
+    renderEditor();
+    openPrice();
+    expect(checkbox().checked).toBe(false);
+  });
+
+  it('is on by itself where the product already promises free bulbs', () => {
+    renderEditor({ ...product, perks: 'bulbs' });
+    openPrice();
+    expect(checkbox().checked).toBe(true);
+  });
+
+  it('writes an explicit answer back through onChange', () => {
+    const onChange = vi.fn();
+    renderEditor({ ...product, perks: 'bulbs' }, onChange);
+    openPrice();
+    fireEvent.click(checkbox());
+    expect(onChange).toHaveBeenCalledWith(expect.objectContaining({ showBulbsBadge: false }));
+  });
+});
+
 // Раскрытая карточка — это список заголовков групп, а не простыня полей:
 // открывается только та группа, которую правят.
 describe('ProductEditor — группы полей под спойлерами', () => {
