@@ -1038,13 +1038,21 @@
           "toc-mara",
           "toc-lina"
         ],
-        "gift": {},
+        "gift": {
+          "mode": "own",
+          "source": "custom",
+          "name": {
+            "es": "Estantería",
+            "en": "Shelving Unit"
+          },
+          "size": "20 x 40 cm"
+        },
         "perks": "bulbs",
         "visibility": "public",
         "showDiscountBadge": true,
         "showBulbsBadge": null,
         "inStock": true,
-        "updatedAt": "2026-09-04T20:37:02.479Z"
+        "updatedAt": "2026-09-05T09:52:07.359Z"
       },
       {
         "id": "Tocador-L-08",
