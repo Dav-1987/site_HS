@@ -39,6 +39,7 @@
     "es": {
       "hero.promo": "¡Grandes descuentos de otoño en toda la colección!",
       "hero.title.2": "para su hogar",
+      "nav.giftBadge": "+ Regalo",
       "home.meta.title": "Mirage Muebles | Tu hogar, tu estilo. Nosotros ponemos la calidez",
       "product.sizeLabel": "Medidas (total)",
       "home.meta.description": "Espejos, tocadores, estanterías, consolas y cómodas de diseño\nminimalista. Envío a toda España, montaje incluido"
@@ -46,6 +47,7 @@
     "en": {
       "hero.promo": "Big autumn discounts across the entire collection!",
       "hero.title.2": "for your home",
+      "nav.giftBadge": "+ Gift",
       "home.meta.title": "Mirage Muebles | Your home, your style. We bring the warmth.",
       "home.meta.description": "Mirrors, dressing tables, shelving, consoles and chests of drawers\nin minimalist design. Delivery across Spain, assembly included"
     }
