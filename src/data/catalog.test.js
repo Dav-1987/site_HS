@@ -9,6 +9,7 @@ import {
   duplicateProductLabels,
   productMirrorSize,
   productShelvesSize,
+  showsBulbsBadge,
   showsDiscountBadge,
   computeFeatured,
   computeRelated,
@@ -139,6 +140,34 @@ describe('showsDiscountBadge', () => {
 
   it('never shows a badge on a product that is not on sale', () => {
     expect(productDiscount({ price: 700, showDiscountBadge: true }).badge).toBe(false);
+  });
+});
+
+describe('showsBulbsBadge', () => {
+  // The switch is three-state: until someone answers it in /admin, the product
+  // answers for itself through the perk it already advertises.
+  it('follows the perk variant while the switch is untouched', () => {
+    expect(showsBulbsBadge({ perks: 'bulbs' })).toBe(true);
+    expect(showsBulbsBadge({ perks: 'led' })).toBe(false);
+    expect(showsBulbsBadge({ perks: 'quality' })).toBe(false);
+  });
+
+  // Nothing in the legacy catalog carries the field, and the default perk is
+  // not the bulbs one — so no product gains a chip nobody asked for.
+  it('is off for a product with neither the switch nor a perk set', () => {
+    expect(showsBulbsBadge({})).toBe(false);
+    expect(showsBulbsBadge(null)).toBe(false);
+    expect(showsBulbsBadge({ showBulbsBadge: null })).toBe(false);
+  });
+
+  it('lets an explicit answer override the perk in both directions', () => {
+    expect(showsBulbsBadge({ perks: 'bulbs', showBulbsBadge: false })).toBe(false);
+    expect(showsBulbsBadge({ perks: 'quality', showBulbsBadge: true })).toBe(true);
+  });
+
+  it('has a label in both languages', () => {
+    expect(translations.es['product.bulbsBadge']).toBeTruthy();
+    expect(translations.en['product.bulbsBadge']).toBeTruthy();
   });
 });
 

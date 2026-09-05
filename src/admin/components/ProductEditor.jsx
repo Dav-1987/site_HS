@@ -9,6 +9,7 @@ import {
   productMedia,
   productPerkVariant,
   resolveImage,
+  showsBulbsBadge,
   showsDiscountBadge,
 } from '../../data/catalog.js';
 import { translations } from '../../i18n/translations.js';
@@ -277,6 +278,25 @@ export default function ProductEditor({
                   <span className="block text-xs leading-relaxed text-primary/40">
                     Уголок «−{percent || 'N'}%» на фотографиях товара — в каталоге, на главной и на
                     странице товара. Если снять галку, зачёркнутая старая цена останется.
+                  </span>
+                </span>
+              </label>
+              <label className="mt-3 flex items-start gap-2">
+                <input
+                  type="checkbox"
+                  checked={showsBulbsBadge(product)}
+                  onChange={(e) => set({ showBulbsBadge: e.target.checked })}
+                  className="mt-0.5 h-4 w-4 shrink-0 accent-accent"
+                />
+                <span>
+                  <span className="block text-sm text-primary">
+                    Показывать плашку «лампочки в подарок»
+                  </span>
+                  <span className="block text-xs leading-relaxed text-primary/40">
+                    Белый уголок «+ 💡 de regalo» встаёт на то же место, что и скидка: на компьютере
+                    скидка сменяется им при наведении курсора, на телефонах они чередуются каждые 3
+                    секунды. По умолчанию включена там, где ниже выбран третий пункт «Bombillas LED
+                    de regalo».
                   </span>
                 </span>
               </label>

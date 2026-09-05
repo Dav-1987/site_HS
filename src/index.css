@@ -11,6 +11,63 @@
   }
 }
 
+/* The corner of a product photo carries the discount and the free-bulbs chip in
+   the same place, one at a time (see ProductBadge). On a pointer device the
+   hover swaps them; where there is no hover to swap on, they take turns by
+   themselves — three seconds each, with a short cross-fade between. Written
+   here rather than as a Tailwind animation because it is the *absence* of hover
+   that turns it on, and there is no variant for that.
+
+   Opacity only: both chips sit in one grid cell, so nothing moves or reflows.
+   Animations outrank the `group-hover:` opacity utilities on the same elements,
+   which is what keeps a tap-sticky :hover on a phone from fighting the cycle. */
+@media (hover: none) {
+  .badge-cycle-out {
+    animation: badge-cycle-out 6s ease-in-out infinite;
+  }
+  .badge-cycle-in {
+    animation: badge-cycle-in 6s ease-in-out infinite;
+  }
+}
+
+@keyframes badge-cycle-out {
+  0%,
+  45% {
+    opacity: 1;
+  }
+  55%,
+  95% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes badge-cycle-in {
+  0%,
+  45% {
+    opacity: 0;
+  }
+  55%,
+  95% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+/* Asked for less motion: the corner stops taking turns and stays on the
+   discount — the chip it rests on anyway. Must come after the rule above; two
+   media queries of equal specificity are settled by document order. */
+@media (prefers-reduced-motion: reduce) {
+  .badge-cycle-out,
+  .badge-cycle-in {
+    animation: none;
+  }
+}
+
 /* ============================================================
    Mirage Muebles — Design tokens (RAW RGB for Tailwind opacity)
    Warm minimalist palette: beige + soft charcoal + gold
