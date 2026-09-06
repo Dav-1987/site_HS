@@ -73,8 +73,11 @@
       fbq('track', 'PageView');
     </script>
     <!-- /Meta Pixel -->
-    <link rel="icon" type="image/png" sizes="512x512" href="/favicon-mirage.png" />
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon-mirage.png" />
+    <!-- ?v=2 forces the swap: browsers cache favicons far past the usual
+         static-asset rules, so a same-name replacement never reaches anyone
+         who has already visited. Bump the number whenever the icon changes. -->
+    <link rel="icon" type="image/png" sizes="512x512" href="/favicon-mirage.png?v=2" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon-mirage.png?v=2" />
     <meta name="theme-color" content="#F7F5F2" />
     <!-- Domain verification for the Mirage Muebles portfolio, the one whose
          pixel fires here. The old HS Muebles tag sat alongside it until that
