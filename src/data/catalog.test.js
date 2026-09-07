@@ -741,9 +741,71 @@ describe('productGift', () => {
       name: 'Estantería 60 × 180 cm',
       shortName: 'Estantería',
       image: '/uploads/shelf.jpg',
+      images: ['/uploads/shelf.jpg'],
+      size: '60 × 180 cm',
       href: '/estanterias/Estanteria-E-03',
       price: 89,
     });
+  });
+
+  // The dialog behind the inset shows the piece the way its own page would, so
+  // the offer has to carry every photo — not just the one the corner shows.
+  it('carries every photo of a gift the shop sells', () => {
+    const shelves = { ...shelf, images: ['/uploads/shelf.jpg', '/uploads/shelf-2.jpg'] };
+    const cats = [
+      {
+        slug: 'tocadores',
+        name: { es: 'Tocadores', en: 'Dressing tables' },
+        gift: rule,
+        products: [table],
+      },
+      { slug: 'estanterias', name: { es: 'Estanterías', en: 'Shelves' }, products: [shelves] },
+    ];
+    const offer = productGift(cats, table, cats[0], 'es');
+    expect(offer.images).toEqual(['/uploads/shelf.jpg', '/uploads/shelf-2.jpg']);
+    expect(offer.image).toBe('/uploads/shelf.jpg');
+  });
+
+  it('gives a hand-written gift its own gallery and price', () => {
+    const custom = {
+      mode: 'own',
+      source: 'custom',
+      name: { es: 'Funda protectora', en: 'Protective cover' },
+      images: ['/uploads/cover.jpg', '/uploads/cover-2.jpg'],
+      price: 35,
+    };
+    const cats = build(undefined, custom);
+    const offer = productGift(cats, cats[0].products[0], cats[0], 'es');
+    expect(offer.images).toEqual(['/uploads/cover.jpg', '/uploads/cover-2.jpg']);
+    expect(offer.price).toBe(35);
+  });
+
+  // An offer written before the gallery existed carries one `image` and no
+  // array. It has to keep working untouched, or every old gift silently loses
+  // its photo the day this ships.
+  it('still finds the photo of an offer saved before there was a gallery', () => {
+    const legacy = {
+      mode: 'own',
+      source: 'custom',
+      name: { es: 'Funda', en: 'Cover' },
+      image: '/uploads/old.jpg',
+    };
+    const cats = build(undefined, legacy);
+    const offer = productGift(cats, cats[0].products[0], cats[0], 'es');
+    expect(offer.images).toEqual(['/uploads/old.jpg']);
+    expect(offer.image).toBe('/uploads/old.jpg');
+  });
+
+  it('keeps a hand-written price to itself when told to', () => {
+    const quiet = {
+      mode: 'own',
+      source: 'custom',
+      name: { es: 'Funda', en: 'Cover' },
+      price: 35,
+      showPrice: false,
+    };
+    const cats = build(undefined, quiet);
+    expect(productGift(cats, cats[0].products[0], cats[0], 'es').price).toBeNull();
   });
 
   it('reads the English name on the English pages', () => {
@@ -786,6 +848,8 @@ describe('productGift', () => {
       name: 'Protective cover 120 cm',
       shortName: 'Protective cover',
       image: '/uploads/cover.jpg',
+      images: ['/uploads/cover.jpg'],
+      size: '120 cm',
       href: null,
       price: null,
     });

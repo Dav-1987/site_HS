@@ -1,7 +1,8 @@
 import { Field, Select } from './Field.jsx';
-import ImageField from './ImageField.jsx';
+import GiftImagesEditor from './GiftImagesEditor.jsx';
 import { productOptionLabel } from '../productLabel.js';
 import { giftChoice } from '../gift.js';
+import { giftImages } from '../../data/catalog.js';
 
 // The gift offer, edited the same way on a category (where it is the rule every
 // product inherits) and on a single product (where it overrides that rule).
@@ -23,6 +24,26 @@ const PRODUCT_CHOICES = [
   { value: 'custom', label: 'Свой — не из каталога' },
   { value: 'off', label: 'Без подарка' },
 ];
+
+// Both sources can be told to keep the value to themselves, so the control is
+// written once. What differs is only where the number comes from, which is what
+// the hint says.
+function ShowPriceToggle({ checked, onChange, hint }) {
+  return (
+    <label className="mt-3 flex items-start gap-2">
+      <input
+        type="checkbox"
+        checked={checked}
+        onChange={(e) => onChange(e.target.checked)}
+        className="mt-0.5 h-4 w-4 shrink-0 accent-accent"
+      />
+      <span>
+        <span className="block text-sm text-primary">Показывать цену подарка</span>
+        <span className="block text-xs leading-relaxed text-primary/40">{hint}</span>
+      </span>
+    </label>
+  );
+}
 
 export default function GiftEditor({ value, onChange, allProducts, excludeId, forProduct }) {
   const gift = value ?? {};
@@ -66,21 +87,11 @@ export default function GiftEditor({ value, onChange, allProducts, excludeId, fo
             нужно. Если подарок не продаётся отдельно, поставьте ему видимость «не в каталоге»:
             страница останется на месте, а из списков он пропадёт.
           </p>
-          <label className="mt-3 flex items-start gap-2">
-            <input
-              type="checkbox"
-              checked={gift.showPrice !== false}
-              onChange={(e) => set({ showPrice: e.target.checked })}
-              className="mt-0.5 h-4 w-4 shrink-0 accent-accent"
-            />
-            <span>
-              <span className="block text-sm text-primary">Показывать цену подарка</span>
-              <span className="block text-xs leading-relaxed text-primary/40">
-                Приписка «(valor 89 €)» в строке под ценой товара — сколько стоит то, что человек
-                получает бесплатно.
-              </span>
-            </span>
-          </label>
+          <ShowPriceToggle
+            checked={gift.showPrice !== false}
+            onChange={(showPrice) => set({ showPrice })}
+            hint="Приписка «(valor 89 €)» в строке под ценой товара — сколько стоит то, что человек получает бесплатно. Цена берётся у самого товара."
+          />
         </div>
       )}
 
@@ -107,16 +118,26 @@ export default function GiftEditor({ value, onChange, allProducts, excludeId, fo
           <p className="text-xs leading-relaxed text-primary/40">
             Одно поле на оба языка — цифры одинаковы. Пусто, если размеры подарку не нужны.
           </p>
-          <ImageField
-            label="Фото подарка"
-            value={gift.image}
-            onChange={(image) => set({ image })}
-            frames={[['4 / 5', 'Уголок на фото 4:5']]}
+          {/* `image` is kept alongside `images` for the reason a product keeps
+              one: the inset, and anything else that needs a single photo, reads
+              that field without having to know an array exists. Written here
+              rather than derived on read so the two can never disagree. */}
+          <GiftImagesEditor
+            value={giftImages(gift)}
+            onChange={(images) => set({ images, image: images[0] || '' })}
           />
-          <p className="text-xs leading-relaxed text-primary/40">
-            Показывается маленькой врезкой в углу фотографии товара. Без фото врезки не будет —
-            останется только строчка под ценой.
-          </p>
+          <Field
+            label="Цена подарка, €"
+            type="number"
+            value={gift.price ?? ''}
+            onChange={(price) => set({ price: price === '' ? '' : Number(price) })}
+            placeholder="89"
+          />
+          <ShowPriceToggle
+            checked={gift.showPrice !== false}
+            onChange={(showPrice) => set({ showPrice })}
+            hint="Приписка «(valor 89 €)» в строке под ценой товара — сколько стоит то, что человек получает бесплатно. Пустая цена ничего не показывает и без галочки."
+          />
         </div>
       )}
     </div>

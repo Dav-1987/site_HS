@@ -39,6 +39,7 @@ import Lightbox from '../components/Lightbox.jsx';
 import ProductCarousel from '../components/ProductCarousel.jsx';
 import OrderModal from '../components/OrderModal.jsx';
 import { GiftInset, GiftLine, GiftWithNote } from '../components/Gift.jsx';
+import GiftModal from '../components/GiftModal.jsx';
 import ExpandableText from '../components/ExpandableText.jsx';
 import NotFound from './NotFound.jsx';
 
@@ -184,6 +185,7 @@ export default function Product() {
   const [thumbStart, setThumbStart] = useState(0);
   const [zoom, setZoom] = useState(false);
   const [orderOpen, setOrderOpen] = useState(false);
+  const [giftOpen, setGiftOpen] = useState(false);
   const startX = useRef(null);
   const suppressZoom = useRef(false);
 
@@ -461,7 +463,21 @@ export default function Product() {
               {/* On every frame of the gallery, video included: someone who
                   swipes past the first photo is looking closely, and that is
                   the worst moment for the offer to disappear. */}
-              <GiftInset gift={gift} atTop={isVideoActive} />
+              <GiftInset
+                gift={gift}
+                atTop={isVideoActive}
+                onOpen={() => {
+                  // The same guard the zoom uses: a swipe that ends over the
+                  // inset still fires a click on it, and opening a dialog
+                  // because someone flicked to the next photo is the worst of
+                  // the two ways to get this wrong.
+                  if (suppressZoom.current) {
+                    suppressZoom.current = false;
+                    return;
+                  }
+                  setGiftOpen(true);
+                }}
+              />
               {multi && (
                 <>
                   <button
@@ -634,6 +650,8 @@ export default function Product() {
         isOpen={orderOpen}
         onClose={() => setOrderOpen(false)}
       />
+
+      <GiftModal gift={gift} isOpen={giftOpen} onClose={() => setGiftOpen(false)} />
 
       {zoom && (
         <Lightbox

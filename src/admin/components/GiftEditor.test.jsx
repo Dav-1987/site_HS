@@ -112,4 +112,28 @@ describe('GiftEditor — a gift the shop does not sell', () => {
     fireEvent.change(categorySelect(), { target: { value: 'catalog' } });
     expect(onChange).toHaveBeenCalledWith({ ...typed, source: 'catalog' });
   });
+
+  it('takes a price of its own — nothing supplies one for it', () => {
+    const onChange = vi.fn();
+    renderEditor({ value: { source: 'custom', name: { es: 'Funda' } }, onChange });
+    fireEvent.change(screen.getByLabelText('Цена подарка, €'), { target: { value: '35' } });
+    expect(onChange).toHaveBeenCalledWith(expect.objectContaining({ price: 35 }));
+  });
+
+  it('can be told to keep that price to itself', () => {
+    const onChange = vi.fn();
+    renderEditor({ value: { source: 'custom', name: { es: 'Funda' }, price: 35 }, onChange });
+    const toggle = screen.getByLabelText(/Показывать цену подарка/);
+    expect(toggle.checked).toBe(true);
+    fireEvent.click(toggle);
+    expect(onChange).toHaveBeenCalledWith(expect.objectContaining({ showPrice: false }));
+  });
+
+  // The gallery is edited as an array, but `image` has to keep naming the first
+  // of them: that is the field the inset on the photo reads, and the two
+  // drifting apart shows one photo in the corner and a different one behind it.
+  it('shows the photos it has, old single-photo offers included', () => {
+    renderEditor({ value: { source: 'custom', name: { es: 'Funda' }, image: '/uploads/old.jpg' } });
+    expect(screen.getByText('В уголке')).toBeTruthy();
+  });
 });
