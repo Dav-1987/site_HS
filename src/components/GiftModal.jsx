@@ -167,7 +167,25 @@ export default function GiftModal({ gift, isOpen, onClose }) {
         aria-hidden="true"
       />
 
-      <div className="relative max-h-[calc(100dvh-2rem)] w-full max-w-md overflow-y-auto bg-background shadow-floating">
+      {/* The width follows from the height available, so a 4:5 photo and the
+          caption under it both fit without the ratio being touched. Capping
+          the photo's height instead — which is what this did first — keeps
+          the caption on screen but squashes the picture: at the panel's full
+          448px a 46vh cap made it 448×331, landscape, on a site where every
+          photo of a piece is 4:5.
+
+          14rem is the caption plus the dialog's own padding (measured at
+          186px + 32px); ×0.8 turns the leftover height into the width a 4:5
+          box of that height needs. On a tall screen the 28rem cap wins and
+          nothing changes; on a short one the whole dialog scales down rather
+          than the photo deforming.
+
+          The 17rem floor is for a phone held sideways, where the arithmetic
+          alone would hand back a 111px-wide dialog. Below that the panel stops
+          shrinking and scrolls instead — a scroll in landscape is a fair price
+          for a photo that stays legible, and it is what the panel already does
+          when a long gift name outgrows the reserve. */}
+      <div className="relative max-h-[calc(100dvh-2rem)] w-full max-w-[max(17rem,min(28rem,calc((100dvh-14rem)*0.8)))] overflow-y-auto bg-background shadow-floating">
         <button
           type="button"
           onClick={onClose}
@@ -211,18 +229,15 @@ export default function GiftModal({ gift, isOpen, onClose }) {
             >
               {/* 4:5, the ratio every other photo of a piece is cropped to on
                   this site — a gift shown in a shape of its own would read as
-                  coming from somewhere else — but capped in height, which is
-                  the ratio losing an argument it should lose. At 4:5 the photo
-                  alone is 560px inside a 448px panel, and on a laptop that put
-                  the gift's name, its dimensions and its price below the fold
-                  of the dialog: it opened onto a picture and nothing else, and
-                  the one thing it exists to say needed a scroll. */}
-              {/* `w-full` is load-bearing next to the cap: with only a height
-                  limit the ratio runs the other way and derives the width from
-                  it, leaving the photo 44px narrower than the panel with a bare
-                  strip of background beside it. Width first, then the cap
-                  clips the height and object-cover takes care of the rest. */}
-              <span className="block w-full max-h-[46vh] overflow-hidden bg-surface [aspect-ratio:4/5]">
+                  coming from somewhere else. Nothing caps the height any more;
+                  the panel's width is what gives way on a short screen (see
+                  above), so the ratio holds everywhere.
+
+                  `w-full` still matters: without it the ratio runs the other
+                  way and derives the width from the height, leaving the photo
+                  narrower than the panel with a bare strip of background beside
+                  it. */}
+              <span className="block w-full overflow-hidden bg-surface [aspect-ratio:4/5]">
                 <Media id={images[active]} alt={gift.name} w={900} />
               </span>
             </button>

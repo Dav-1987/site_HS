@@ -181,6 +181,19 @@ describe('GiftModal', () => {
     expect(current()).toBe(0);
   });
 
+  // jsdom has no layout, so this asserts the intent rather than the pixels: the
+  // box declares 4:5 and nothing caps its height. Worth pinning because that is
+  // exactly how the ratio was lost once — a max-height added to keep the
+  // caption above the fold quietly turned a 4:5 photo into a 448×331 landscape
+  // one. The height is bought by narrowing the panel instead.
+  it('keeps the photo at 4:5, with nothing capping its height', () => {
+    const { container } = renderModal();
+    const box = container.querySelector('button.cursor-zoom-in > span');
+    expect(box.className).toContain('[aspect-ratio:4/5]');
+    expect(box.className).toContain('w-full');
+    expect(box.className).not.toMatch(/max-h-/);
+  });
+
   it('closes on Escape', () => {
     const onClose = vi.fn();
     renderModal({ onClose });
