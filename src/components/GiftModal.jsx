@@ -31,9 +31,10 @@ import { useLanguage } from '../i18n/LanguageContext.jsx';
  * Zoom is the site's own Lightbox stacked on top. The layers here are z-95:
  * above the cookie banner at z-90, which otherwise paints over this one's
  * backdrop, and below the Lightbox and the order form at z-100, which are meant
- * to cover it. Two modal dialogs at once needs care in exactly three places,
- * and each is handled below: the Escape key, the focus trap, and the scroll
- * lock.
+ * to cover it. Two modal dialogs at once needs care in exactly four places, and
+ * each is handled below: the Escape key, the focus trap, the scroll lock, and
+ * the Back button — every one of them a thing both layers listen for, where the
+ * upper one has to answer and the lower one has to keep quiet.
  */
 export default function GiftModal({ gift, isOpen, onClose }) {
   const { t } = useLanguage();
@@ -55,6 +56,43 @@ export default function GiftModal({ gift, isOpen, onClose }) {
       setActive(0);
       setZoom(false);
     }
+  }, [isOpen]);
+
+  // Kept in a ref so the history effect below can stay keyed on `isOpen` alone:
+  // it pushes an entry when it runs, and re-running it on every close handler
+  // React hands us would push one per render.
+  const closeRef = useRef(onClose);
+  closeRef.current = onClose;
+
+  // Back closes the dialog instead of leaving the page. On a phone that is the
+  // gesture people actually use to dismiss something covering the screen, and
+  // without this it walked them off the product they were looking at.
+  //
+  // The care here is that the Lightbox pushes an entry of its own on top of
+  // this one, so while the zoom is up there are two popstate listeners and one
+  // Back press reaches both. They are told apart by what the pop lands on: our
+  // own marker still being the current state means the entry that just went was
+  // the zoom's, not ours, and this dialog stays open. That covers the press
+  // itself and, just as importantly, the `history.back()` the Lightbox fires
+  // when it is dismissed by its own X — which would otherwise close this dialog
+  // as a side effect of closing the photo.
+  useEffect(() => {
+    if (!isOpen) return undefined;
+    let closedByBack = false;
+    history.pushState({ giftModal: true }, '');
+    const onPop = () => {
+      if (history.state?.giftModal) return;
+      closedByBack = true;
+      closeRef.current();
+    };
+    window.addEventListener('popstate', onPop);
+    return () => {
+      window.removeEventListener('popstate', onPop);
+      // Closed by the X, the backdrop or Escape: our entry is still on the
+      // stack and has to come off, or the next Back would be swallowed doing
+      // nothing visible.
+      if (!closedByBack) history.back();
+    };
   }, [isOpen]);
 
   useEffect(() => {
