@@ -52,6 +52,50 @@ export function getRemotePaths(base, releaseId) {
   };
 }
 
+// How long a superseded asset stays reachable after the release that built it
+// was replaced.
+//
+// Vite fingerprints every chunk, so each build renames whatever changed. The
+// release swap moves the whole directory aside, and with it every old
+// filename — which breaks two things that outlive a deploy. A visitor already
+// on the site requests a lazily-loaded route chunk (there are two dozen) that
+// no longer exists and the page fails to open. And a Clarity replay, which
+// does not store CSS but re-fetches it at playback time by the URL recorded
+// during the session, renders the page with no stylesheet at all: that is what
+// a session from before a deploy looks like, and how this was noticed.
+//
+// So each release inherits the previous one's assets. Filenames carry a
+// content hash, so nothing can collide and the new release always wins on the
+// names it shares. They accumulate, which is why they are also aged out: the
+// VPS disk runs at 87%, and this is not the place to start filling it.
+//
+// Timestamps are preserved on the way across, or a carried file would look
+// freshly built at every deploy and never age out at all. A chunk that has not
+// changed keeps its hash, gets uploaded again with the new release, and so
+// stays young for as long as it is really in use — only genuinely orphaned
+// files grow old.
+export const ASSET_GRACE_DAYS = 14;
+
+export function buildAssetCarryOverCommand(paths, graceDays = ASSET_GRACE_DAYS) {
+  if (!Number.isInteger(graceDays) || graceDays < 1) {
+    throw new Error('graceDays must be a positive whole number of days');
+  }
+  return (
+    `if test -d ${paths.rollback}/assets && test -d ${paths.live}/assets; then ` +
+    // `--update=none` rather than `-n`: coreutils warns that the behaviour of
+    // -n "is non-portable and may change in future", and the change it is
+    // warning about would mean the carried-over files overwriting the release
+    // being deployed — stale JavaScript served silently. The fallback keeps
+    // this working on coreutils older than 9.3, which has no --update.
+    `{ cp -r --preserve=timestamps --update=none ${paths.rollback}/assets/. ${paths.live}/assets/ 2>/dev/null ` +
+    `|| cp -rn --preserve=timestamps ${paths.rollback}/assets/. ${paths.live}/assets/; } || true; ` +
+    'fi; ' +
+    `if test -d ${paths.live}/assets; then ` +
+    `find ${paths.live}/assets -type f -mtime +${graceDays} -delete || true; ` +
+    'fi'
+  );
+}
+
 function run(command, args) {
   execFileSync(command, args, { stdio: 'inherit' });
 }
@@ -159,6 +203,10 @@ export async function deploy() {
         `(mv ${paths.staging} ${paths.live} || (mv ${paths.rollback} ${paths.live}; exit 1)); ` +
         `else mv ${paths.staging} ${paths.live}; fi`,
     ]);
+
+    // Before the smoke check, so a release that somehow breaks while inheriting
+    // the old files is rolled back like any other.
+    run('ssh', [host, buildAssetCarryOverCommand(paths)]);
 
     try {
       await smokeCheck(siteUrl, releaseId);
