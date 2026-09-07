@@ -1040,20 +1040,15 @@
         ],
         "gift": {
           "mode": "own",
-          "source": "custom",
-          "name": {
-            "es": "Estantería",
-            "en": "Shelving Unit"
-          },
-          "size": "20 x 40 cm",
-          "image": "/uploads/89b5ec81d8ca55a404d30b0ab1d03e8d.png"
+          "source": "catalog",
+          "productId": "Estanteria-E-002"
         },
         "perks": "bulbs",
         "visibility": "public",
         "showDiscountBadge": true,
         "showBulbsBadge": null,
         "inStock": true,
-        "updatedAt": "2026-09-05T10:15:02.555Z"
+        "updatedAt": "2026-09-07T03:22:23.307Z"
       },
       {
         "id": "Tocador-L-08",
@@ -1115,20 +1110,21 @@
         ],
         "gift": {
           "mode": "own",
-          "source": "custom",
+          "source": "catalog",
+          "productId": "Estanteria-E-002",
           "name": {
             "es": "Estantería",
             "en": "Shelving Unit"
           },
           "size": "20 x 40 cm",
-          "image": "/uploads/89b5ec81d8ca55a404d30b0ab1d03e8d.png"
+          "image": "/uploads/5ac1d28526209a8057a999af8def7bef.png"
         },
         "perks": "bulbs",
         "visibility": "public",
         "showDiscountBadge": true,
         "showBulbsBadge": null,
         "inStock": true,
-        "updatedAt": "2026-09-05T10:16:44.686Z"
+        "updatedAt": "2026-09-07T03:22:23.307Z"
       },
       {
         "id": "Tocador-L-06",
@@ -3464,6 +3460,113 @@
         "showBulbsBadge": null,
         "inStock": true,
         "updatedAt": "2026-09-04T20:47:37.687Z"
+      },
+      {
+        "id": "Estanteria-E-002",
+        "name": "Estantería | blanca",
+        "nameEn": "Shelving Unit | White",
+        "price": 59,
+        "oldPrice": 110,
+        "image": "/uploads/a78640fcb57cb6eab45ba598c3ff3d7d.jpg",
+        "imageMobile": "",
+        "images": [
+          "/uploads/a78640fcb57cb6eab45ba598c3ff3d7d.jpg",
+          "/uploads/0a172706169c4ae52280f5910d8a0226.jpg",
+          "/uploads/b75d78194fbe71ba047278bbbc2c7e1b.jpg"
+        ],
+        "video": "",
+        "videoFirst": false,
+        "media": [
+          {
+            "src": "/uploads/a78640fcb57cb6eab45ba598c3ff3d7d.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/0a172706169c4ae52280f5910d8a0226.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/b75d78194fbe71ba047278bbbc2c7e1b.jpg",
+            "type": "image"
+          }
+        ],
+        "material": {
+          "es": "Lacado mate",
+          "en": "Matte lacquer"
+        },
+        "size": "20 × 40 cm",
+        "mirrorSize": "",
+        "shelvesSize": "",
+        "reference": "E-002",
+        "subtitle": "20× 40 cm",
+        "description": {
+          "es": "",
+          "en": ""
+        },
+        "related": [],
+        "gift": {},
+        "perks": "quality",
+        "visibility": "public",
+        "showDiscountBadge": true,
+        "showBulbsBadge": null,
+        "inStock": true,
+        "updatedAt": "2026-09-07T03:17:23.782Z"
+      },
+      {
+        "id": "Estanteria-E-001",
+        "name": "Estantería | blanca",
+        "nameEn": "Shelving Unit | White",
+        "price": 179,
+        "oldPrice": 280,
+        "image": "/uploads/0abff5362fded05c73bb8c19e4cc897f.jpg",
+        "imageMobile": "",
+        "images": [
+          "/uploads/0abff5362fded05c73bb8c19e4cc897f.jpg",
+          "/uploads/f02ac7a8ff1d2601ac306df3788c97b8.jpg",
+          "/uploads/725bf145a7062e78b0fdc197c2597907.jpg",
+          "/uploads/f76f9b585c236730967d43043fac7a35.jpg"
+        ],
+        "video": "",
+        "videoFirst": false,
+        "media": [
+          {
+            "src": "/uploads/0abff5362fded05c73bb8c19e4cc897f.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/f02ac7a8ff1d2601ac306df3788c97b8.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/725bf145a7062e78b0fdc197c2597907.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/f76f9b585c236730967d43043fac7a35.jpg",
+            "type": "image"
+          }
+        ],
+        "material": {
+          "es": "Lacado mate",
+          "en": "Matte lacquer"
+        },
+        "size": "30 × 23× 180 cm",
+        "mirrorSize": "",
+        "shelvesSize": "",
+        "reference": "E-001",
+        "subtitle": "30 × 23× 180 cm",
+        "description": {
+          "es": "",
+          "en": ""
+        },
+        "related": [],
+        "gift": {},
+        "perks": "quality",
+        "visibility": "public",
+        "showDiscountBadge": true,
+        "showBulbsBadge": null,
+        "inStock": true,
+        "updatedAt": "2026-09-07T03:18:11.233Z"
       }
     ]
   },
