@@ -120,27 +120,61 @@ describe('GiftModal', () => {
     expect(screen.queryByText('Gratis')).toBeNull();
   });
 
-  it('offers the way to the gift’s own page', () => {
+  // Nothing here leads away. The dialog is opened from a product page to look
+  // at what comes free with the piece being bought, and a link out of it is a
+  // link away from that piece. The sentence under the price still names the
+  // gift and still links it, for anyone who does want the page.
+  it('never leads away, not even for a gift that is a product', () => {
     const { container } = renderModal();
-    const links = [...container.querySelectorAll('a')].map((a) => a.getAttribute('href'));
-    expect(links).toContain('/estanterias/Estanteria-E-03');
-  });
-
-  // A gift the shop does not sell has no page, and a link to nowhere is worse
-  // than no link.
-  it('offers no link for a gift that is not a product', () => {
-    const { container } = renderModal({ gift: customGift });
     expect(container.querySelector('a')).toBeNull();
+
+    const { container: custom } = renderModal({ gift: customGift });
+    expect(custom.querySelector('a')).toBeNull();
     expect(screen.getByText('Funda protectora')).toBeTruthy();
   });
 
-  it('shows a thumbnail per photo, and only when there is more than one', () => {
-    const { container: many } = renderModal();
-    // The close button, the main photo, and one thumbnail per image.
-    expect(many.querySelectorAll('button').length).toBe(2 + catalogGift.images.length);
+  it('carries arrows and one dot per photo', () => {
+    const { container } = renderModal();
+    expect(container.querySelector('[aria-label="Anterior"]')).toBeTruthy();
+    expect(container.querySelector('[aria-label="Siguiente"]')).toBeTruthy();
+    expect(container.querySelectorAll('[aria-label^="Ir a la pieza"]').length).toBe(
+      catalogGift.images.length,
+    );
+  });
 
-    const { container: one } = renderModal({ gift: customGift });
-    expect(one.querySelectorAll('button').length).toBe(2);
+  it('leaves a single photo alone — nothing to page through', () => {
+    const { container } = renderModal({ gift: customGift });
+    expect(container.querySelector('[aria-label="Anterior"]')).toBeNull();
+    expect(container.querySelectorAll('[aria-label^="Ir a la pieza"]').length).toBe(0);
+    // The close button and the photo itself, and that is all.
+    expect(container.querySelectorAll('button').length).toBe(2);
+  });
+
+  it('pages through the photos with the arrows, and wraps around', () => {
+    const { container } = renderModal();
+    const dots = () => [...container.querySelectorAll('[aria-label^="Ir a la pieza"]')];
+    const current = () => dots().findIndex((d) => d.getAttribute('aria-current') === 'true');
+    expect(current()).toBe(0);
+
+    fireEvent.click(container.querySelector('[aria-label="Siguiente"]'));
+    expect(current()).toBe(1);
+
+    // Backwards off the first photo lands on the last, not on nothing.
+    fireEvent.click(container.querySelector('[aria-label="Anterior"]'));
+    fireEvent.click(container.querySelector('[aria-label="Anterior"]'));
+    expect(current()).toBe(catalogGift.images.length - 1);
+  });
+
+  it('answers the arrow keys the way the zoom does', () => {
+    const { container } = renderModal();
+    const current = () =>
+      [...container.querySelectorAll('[aria-label^="Ir a la pieza"]')].findIndex(
+        (d) => d.getAttribute('aria-current') === 'true',
+      );
+    fireEvent.keyDown(document, { key: 'ArrowRight' });
+    expect(current()).toBe(1);
+    fireEvent.keyDown(document, { key: 'ArrowLeft' });
+    expect(current()).toBe(0);
   });
 
   it('closes on Escape', () => {
