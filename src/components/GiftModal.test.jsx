@@ -1,4 +1,4 @@
-import { describe, it, expect, vi } from 'vitest';
+import { beforeEach, describe, it, expect, vi } from 'vitest';
 import { render, screen, fireEvent } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import GiftModal from './GiftModal.jsx';
@@ -94,6 +94,10 @@ describe('GiftInset', () => {
 });
 
 describe('GiftModal', () => {
+  // One jsdom document means one history stack shared by every test in the
+  // file, so a dialog that pushed an entry leaves it behind for the next one.
+  beforeEach(() => history.replaceState(null, ''));
+
   it('renders nothing until it is opened', () => {
     const { container } = renderModal({ isOpen: false });
     expect(container.firstChild).toBeNull();
@@ -182,6 +186,69 @@ describe('GiftModal', () => {
     renderModal({ onClose });
     fireEvent.keyDown(document, { key: 'Escape' });
     expect(onClose).toHaveBeenCalled();
+  });
+
+  // On a phone Back is the gesture people use to dismiss something covering
+  // the screen. Without an entry of its own the dialog let it walk them off the
+  // product page they were reading.
+  //
+  // These drive `popstate` directly rather than calling history.back(): jsdom
+  // shares one history stack across a file and pops it asynchronously, so the
+  // real thing tests jsdom's emulation more than it tests this dialog. What
+  // matters here is the handler's rule — what it does with the state a pop
+  // lands on.
+  it('closes when the browser Back button is pressed', () => {
+    const onClose = vi.fn();
+    renderModal({ onClose });
+    // The dialog pushed an entry of its own; Back is what takes it off.
+    expect(history.state?.giftModal).toBe(true);
+
+    // Landing anywhere that is not our own marker means our entry is the one
+    // that just went — the page underneath is back, so the dialog is done.
+    history.replaceState({}, '');
+    window.dispatchEvent(new PopStateEvent('popstate'));
+    expect(onClose).toHaveBeenCalled();
+  });
+
+  // The zoom stacks its own entry on top of this one, so one Back press
+  // reaches both listeners. The lower one has to recognise that what went was
+  // the zoom's entry and stay put — and the same guard covers the
+  // `history.back()` the Lightbox fires when it is dismissed by its own X,
+  // which would otherwise close this dialog as a side effect.
+  it('stays open when the pop belonged to the zoom above it', () => {
+    const onClose = vi.fn();
+    renderModal({ onClose });
+    // A pop that lands back on our own marker means what went was the entry
+    // above ours — the zoom's. This dialog is not the one being dismissed.
+    window.dispatchEvent(new PopStateEvent('popstate'));
+    expect(history.state?.giftModal).toBe(true);
+    expect(onClose).not.toHaveBeenCalled();
+  });
+
+  it('takes its history entry back off when closed any other way', () => {
+    const back = vi.spyOn(history, 'back').mockImplementation(() => {});
+    const { unmount } = renderModal();
+    expect(history.state?.giftModal).toBe(true);
+
+    // Closing by the X, the backdrop or Escape unmounts it; the entry has to
+    // come off too, or the next Back would be swallowed doing nothing visible.
+    unmount();
+    expect(back).toHaveBeenCalledTimes(1);
+    back.mockRestore();
+  });
+
+  it('leaves the stack alone when Back is what closed it', () => {
+    const back = vi.spyOn(history, 'back').mockImplementation(() => {});
+    const { unmount } = renderModal();
+
+    history.replaceState({}, '');
+    window.dispatchEvent(new PopStateEvent('popstate'));
+    unmount();
+
+    // The entry is already gone — popping a second time would step back past
+    // the page the visitor came from.
+    expect(back).not.toHaveBeenCalled();
+    back.mockRestore();
   });
 
   it('closes when the backdrop is clicked', () => {
