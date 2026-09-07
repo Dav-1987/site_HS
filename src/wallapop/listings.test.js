@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import defaultCatalog from '../data/catalog.default.json';
 import { INCLUDED_CATEGORY_SLUGS, WALLAPOP_CATEGORY_MAP } from './categories.js';
+import { expectedPanelTotal } from '../test/wallapopCounts.js';
 import {
   buildPanelState,
   buildWallapopDescription,
@@ -57,11 +58,17 @@ describe('the slugs this module is pinned to', () => {
 });
 
 describe('Wallapop listing preparation', () => {
+  // What the assertions below mean is "every in-stock product of the approved
+  // categories, and nothing from the others". The total is counted from the
+  // catalog rather than written down — see src/test/wallapopCounts.js for why
+  // a literal here goes stale.
+
   it('imports only the four approved site categories', () => {
     const state = buildPanelState(defaultCatalog, null, '2026-08-06T12:00:00.000Z');
     const records = panelRecords(state);
 
-    expect(records).toHaveLength(56);
+    expect(expectedPanelTotal).toBeGreaterThan(0);
+    expect(records).toHaveLength(expectedPanelTotal);
     expect(new Set(records.map((record) => record.siteCategorySlug))).toEqual(
       new Set(Object.keys(WALLAPOP_CATEGORY_MAP)),
     );
@@ -81,7 +88,7 @@ describe('Wallapop listing preparation', () => {
       .map((c) => c.products[0].id);
 
     expect(dropped.length).toBeGreaterThan(0);
-    expect(records).toHaveLength(56 - dropped.length);
+    expect(records).toHaveLength(expectedPanelTotal - dropped.length);
     for (const id of dropped) {
       expect(records.some((record) => record.productId === id)).toBe(false);
     }
