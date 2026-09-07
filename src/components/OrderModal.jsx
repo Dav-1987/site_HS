@@ -111,6 +111,31 @@ export default function OrderModal({ product, gift, isOpen, onClose }) {
     };
   }, [isOpen]);
 
+  // Back closes the form instead of leaving the page. On a phone that is the
+  // gesture people use to dismiss anything covering the screen, and here it
+  // was carrying them off the product page mid-order — the most expensive
+  // moment on the site to be sent somewhere unasked.
+  //
+  // Nothing stacks on top of this dialog, so unlike GiftModal it has no second
+  // popstate listener to tell itself apart from; the marker only exists so the
+  // entry can be recognised as ours. Dismissing by the X, the backdrop or
+  // Escape pops it back off, or the next Back would be swallowed doing nothing
+  // visible. Same shape as Lightbox, which has done this since it was written.
+  useEffect(() => {
+    if (!isOpen) return undefined;
+    let closedByBack = false;
+    history.pushState({ orderModal: true }, '');
+    const onPop = () => {
+      closedByBack = true;
+      onCloseRef.current();
+    };
+    window.addEventListener('popstate', onPop);
+    return () => {
+      window.removeEventListener('popstate', onPop);
+      if (!closedByBack) history.back();
+    };
+  }, [isOpen]);
+
   useEffect(() => {
     if (isOpen) {
       setName('');
