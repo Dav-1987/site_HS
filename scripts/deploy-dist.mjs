@@ -69,12 +69,19 @@ export function getRemotePaths(base, releaseId) {
 // names it shares. They accumulate, which is why they are also aged out: the
 // VPS disk runs at 87%, and this is not the place to start filling it.
 //
+// Thirty days is chosen to outlast a Clarity recording, which is what has to
+// still be replayable — a shorter window would leave the newest sessions fine
+// and the ones worth going back to broken, which is the failure this was
+// written to fix. The cost is bounded: assets are 2 MB per release and only
+// the files a build actually orphans are new bytes, so the ceiling is tens of
+// megabytes against 2.4 GB free.
+//
 // Timestamps are preserved on the way across, or a carried file would look
 // freshly built at every deploy and never age out at all. A chunk that has not
 // changed keeps its hash, gets uploaded again with the new release, and so
 // stays young for as long as it is really in use — only genuinely orphaned
 // files grow old.
-export const ASSET_GRACE_DAYS = 14;
+export const ASSET_GRACE_DAYS = 30;
 
 export function buildAssetCarryOverCommand(paths, graceDays = ASSET_GRACE_DAYS) {
   if (!Number.isInteger(graceDays) || graceDays < 1) {
