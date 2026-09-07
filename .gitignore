@@ -10,6 +10,13 @@ dist/
 
 # Local tooling state
 .netlify
+.codex/
+
+# Source images dropped in for an agent to work from — originals of logos,
+# favicons and photos, not the site's own /uploads/ (those live on the VPS and
+# are served from there). Working material, and heavy: it is easy to commit
+# most of a megabyte of PNGs here by accident.
+uploads/
 
 # Local Wallapop preparation records (device-only working data)
 local-data/
