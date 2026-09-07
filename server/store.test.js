@@ -191,4 +191,43 @@ describe('productContentEqual — gift', () => {
     const bogus = { ...gift, mode: 'sometimes' };
     expect(productContentEqual({ ...base, gift: { source: 'catalog', productId: 'Estanteria-E-03' } }, { ...base, gift: bogus })).toBe(true);
   });
+
+  // The gallery and the price a gift outside the catalog carries. Both are new
+  // keys in a whitelist, and a whitelist that has not been told about a field
+  // drops it on save without saying so — these are the tests that would have
+  // caught that, and the ones below say the comparison learned them too.
+  const custom = {
+    mode: 'own',
+    source: 'custom',
+    name: { es: 'Funda', en: 'Cover' },
+    images: ['/uploads/a.jpg', '/uploads/b.jpg'],
+    price: 35,
+  };
+
+  it('sees a photo added to the gift', () => {
+    const more = { ...custom, images: [...custom.images, '/uploads/c.jpg'] };
+    expect(productContentEqual({ ...base, gift: custom }, { ...base, gift: more })).toBe(false);
+  });
+
+  it('sees the photos reordered — the first one is the inset', () => {
+    const swapped = { ...custom, images: ['/uploads/b.jpg', '/uploads/a.jpg'] };
+    expect(productContentEqual({ ...base, gift: custom }, { ...base, gift: swapped })).toBe(false);
+  });
+
+  it('sees the price being changed', () => {
+    expect(
+      productContentEqual({ ...base, gift: custom }, { ...base, gift: { ...custom, price: 40 } }),
+    ).toBe(false);
+  });
+
+  it('reads a blank price as no price at all', () => {
+    const blank = { ...custom, price: '' };
+    const absent = { ...custom, price: undefined };
+    expect(productContentEqual({ ...base, gift: blank }, { ...base, gift: absent })).toBe(true);
+  });
+
+  it('drops empty and duplicate photos rather than storing them', () => {
+    const messy = { ...custom, images: ['/uploads/a.jpg', '', '/uploads/a.jpg', '/uploads/b.jpg'] };
+    expect(productContentEqual({ ...base, gift: custom }, { ...base, gift: messy })).toBe(true);
+  });
 });

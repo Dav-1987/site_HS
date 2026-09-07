@@ -96,6 +96,16 @@ export const translations = {
     'product.bulbsBadge': 'de regalo',
     'product.giftLabel': 'De regalo',
     'product.giftWith': 'De regalo con',
+    // The dialog the inset on the photo opens. "Abrir" is the inset's own
+    // label — it is a button showing a thumbnail, so it has to say in words
+    // what tapping it does.
+    'product.giftOpen': 'Ver el regalo',
+    'product.giftDialog': 'El regalo incluido',
+    'product.giftSize': 'Medidas',
+    // The value is struck through wherever it appears: the point of the number
+    // is that it is what the gift would have cost, and nobody pays it.
+    'product.giftFree': 'Gratis',
+    'product.giftSeeProduct': 'Ver la ficha completa',
     'product.customOrderTitle': 'Fabricación a medida',
     'product.customOrderText':
       'Este artículo puede fabricarse en las dimensiones que necesites. Contáctanos para recibir presupuesto personalizado.',
@@ -323,6 +333,11 @@ export const translations = {
     'product.bulbsBadge': 'free bulbs',
     'product.giftLabel': 'Free gift',
     'product.giftWith': 'A free gift with',
+    'product.giftOpen': 'See the gift',
+    'product.giftDialog': 'The gift included',
+    'product.giftSize': 'Dimensions',
+    'product.giftFree': 'Free',
+    'product.giftSeeProduct': 'View full details',
     'product.customOrderTitle': 'Made to your measurements',
     'product.customOrderText':
       'This item can be made in any dimensions you need. Contact us for a personalised quote.',

@@ -186,8 +186,15 @@ ALTER TABLE products ADD COLUMN IF NOT EXISTS in_stock BOOLEAN NOT NULL DEFAULT 
 --   { mode?: 'inherit'|'own'|'off',   -- products only; categories carry the rule
 --     source: 'catalog'|'custom',
 --     productId?: string,             -- source 'catalog': the gift's own product
---     name?: { es, en }, size?, image?,  -- source 'custom': typed by hand
+--     name?: { es, en }, size?,       -- source 'custom': typed by hand
+--     image?, images?: string[],      -- source 'custom': cover, then the rest
+--     price?: number,                 -- source 'custom': taken from the product otherwise
 --     showPrice?: false }             -- absent means the value is shown
+--
+-- Adding to the shape needs no migration — that is the point of the column —
+-- but normalizeGift in store.js is a whitelist, so a field missing from it is
+-- dropped on save without a word. giftEqual has to learn it too, or the admin
+-- saves the change and the history panel reports nothing happened.
 --
 -- One jsonb column rather than seven scalar ones because the two sources share
 -- almost no fields, and because the whole object is written and read as a unit.

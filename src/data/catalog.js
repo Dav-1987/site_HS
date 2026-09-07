@@ -639,12 +639,15 @@ function giftSpec(product, category) {
  * `off` product is stripped from the catalog before it reaches here, so its
  * gift quietly stops being advertised; that is the safe direction to fail in.
  *
- * Returns `{ name, shortName, image, href, price }`. `name` carries the
- * dimensions, `shortName` does not: the line under the price has room to say
- * which shelf, the inset in the corner of a photo does not, and at that size
- * "40 × 40 × 170 cm" is unreadable anyway. `href` is the Spanish path, for
- * LocalizedLink to localize, and is null for a custom gift — it has no page.
- * `price` is null unless the offer is set to show it.
+ * Returns `{ name, shortName, image, images, size, href, price }`. `name`
+ * carries the dimensions, `shortName` does not: the line under the price has
+ * room to say which shelf, the inset in the corner of a photo does not, and at
+ * that size "40 × 40 × 170 cm" is unreadable anyway. `image` is the cover and
+ * `images` every photo — the inset needs one, the dialog it opens needs all of
+ * them. `size` is the dimensions on their own, for the dialog to label them.
+ * `href` is the Spanish path, for LocalizedLink to localize, and is null for a
+ * custom gift — it has no page. `price` is null unless the offer is set to show
+ * it, which is the one rule both sources share.
  */
 export function productGift(categories, product, category, lang) {
   const spec = giftSpec(product, category);
@@ -654,7 +657,21 @@ export function productGift(categories, product, category, lang) {
   if (source === 'custom') {
     const shortName = (spec.name?.[lang] || spec.name?.es || '').trim();
     const name = [shortName, spec.size].filter(Boolean).join(' ').replace(/\s+/g, ' ').trim();
-    return name ? { name, shortName, image: spec.image || '', href: null, price: null } : null;
+    if (!name) return null;
+    // The cover stays `image` for the same reason a product keeps one beside
+    // its `images`: everything that only needs one photo — the inset, an OG
+    // tag — reads that field and does not have to know an array exists.
+    const images = giftImages(spec);
+    const price = Number(spec.price) || 0;
+    return {
+      name,
+      shortName,
+      image: images[0] || '',
+      images,
+      size: spec.size || '',
+      href: null,
+      price: spec.showPrice !== false && price > 0 ? price : null,
+    };
   }
 
   const found = findProduct(categories ?? [], spec.productId);
@@ -674,14 +691,38 @@ export function productGift(categories, product, category, lang) {
   if (!name) return null;
 
   const price = Number(gift.price) || 0;
+  const images = productImages(gift);
   return {
     name,
     shortName,
-    image: productImages(gift)[0] || '',
+    image: images[0] || '',
+    // Every photo of the piece, so the dialog behind the inset can show it the
+    // way its own page would. Taken from the product rather than copied into
+    // the offer, so re-shooting it reaches the offer with nothing to re-save.
+    images,
+    size: gift.size || gift.subtitle || '',
     href: `/${giftCategory.slug}/${gift.id}`,
     // On unless switched off, like every other per-item flag in this file.
     price: spec.showPrice !== false && price > 0 ? price : null,
   };
+}
+
+/**
+ * The photos of a gift the shop does not sell as a product.
+ *
+ * Reads `images` and falls back to the single `image` that offers were written
+ * with before there was an array, so an offer saved a year ago still shows its
+ * photo without being opened and re-saved. Deduplicated because the admin keeps
+ * the cover in both fields, the way a product does.
+ *
+ * Exported for /admin, which has to show the shop the same list the site will
+ * render — a second copy of this fallback there is exactly how the editor and
+ * the page start disagreeing about an old offer.
+ */
+export function giftImages(spec) {
+  const list = Array.isArray(spec?.images) ? spec.images : [];
+  const all = [...list, spec?.image].map((s) => (typeof s === 'string' ? s.trim() : ''));
+  return [...new Set(all.filter(Boolean))];
 }
 
 

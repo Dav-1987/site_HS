@@ -45,9 +45,15 @@ describe('GiftLine', () => {
     expect(screen.getByText(/Estantería 60 × 180 cm/)).toBeTruthy();
   });
 
-  it('states the value of the gift', () => {
-    renderLine();
-    expect(screen.getByText(/valor 89/)).toBeTruthy();
+  // The figure is struck through and the word before it is not: the number is
+  // what the piece would have cost, while a line through "valor" would read as
+  // the offer itself being withdrawn.
+  it('states the value of the gift, with the figure struck through', () => {
+    const { container } = renderLine();
+    expect(screen.getByText(/valor/)).toBeTruthy();
+    const struck = container.querySelector('.line-through');
+    expect(struck).toBeTruthy();
+    expect(struck.textContent.replace(/\s+/g, ' ').trim()).toBe('89 €');
   });
 
   // The order dialog is already tall enough to push its submit button off the

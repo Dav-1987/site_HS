@@ -89,10 +89,19 @@ export function GiftLine({ gift, linked = true, compact = false, className = '' 
           gift.name
         )}
         {after ? ` ${after}` : ''}
+        {/* The value is struck through: the number is what the piece would have
+            cost, and leaving it plain next to the product's own price is the
+            one reading of this sentence that costs the shop a sale. Only the
+            figure is struck, not the "valor" before it — a line through the
+            word would read as the offer itself being withdrawn. */}
         {!compact && gift.price ? (
           <span className="text-secondary">
             {' '}
-            ({t('product.giftValue')} {gift.price} {t('common.currency')})
+            ({t('product.giftValue')}{' '}
+            <span className="line-through">
+              {gift.price} {t('common.currency')}
+            </span>
+            )
           </span>
         ) : null}
       </span>
@@ -112,21 +121,43 @@ export function GiftLine({ gift, linked = true, compact = false, className = '' 
  * wrapper must carry `[container-type:inline-size]` for that to resolve.
  *
  * `atTop` moves it to the opposite corner for a video, where the bottom edge
- * belongs to the browser's own control bar — the inset does not take clicks,
- * but sitting over the play button it would still read as covering it.
+ * belongs to the browser's own control bar: sitting over the play button it
+ * would read as covering it, and now that it takes clicks it would also be
+ * catching presses meant for the video.
+ *
+ * `onOpen` makes it a button — see GiftModal, which is what it opens. The four
+ * words and one thumbnail that fit here are an advertisement, not an answer,
+ * and the dialog is where the rest of the answer lives.
  *
  * Skipped when the gift has no photo of its own — an empty frame promises
  * nothing, and the line under the price still says what is included.
  */
-export function GiftInset({ gift, atTop = false, className = '' }) {
+export function GiftInset({ gift, atTop = false, onOpen, className = '' }) {
   const { t } = useLanguage();
   if (!gift?.image) return null;
 
+  // A button only where something opens it. The inset is rendered in one place
+  // today, but it is the kind of thing that gets reused into a tile tomorrow,
+  // and a control that looks pressable and answers nothing is worse than a
+  // label. Without a handler it stays what it was: a mark on the photo that
+  // does not take clicks, so the zoom underneath keeps the whole frame.
+  const Tag = onOpen ? 'button' : 'div';
+  const interactive = onOpen
+    ? 'cursor-pointer text-left transition-colors duration-300 hover:border-accent hover:bg-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent'
+    : 'pointer-events-none';
+
   return (
-    <div
-      className={`pointer-events-none absolute ${
+    <Tag
+      {...(onOpen
+        ? {
+            type: 'button',
+            onClick: onOpen,
+            'aria-label': `${t('product.giftOpen')}: ${gift.name}`,
+          }
+        : {})}
+      className={`absolute ${
         atTop ? 'top-[0.5em]' : 'bottom-[0.5em]'
-      } left-[0.5em] z-10 flex origin-left animate-gift-pulse items-center gap-[0.5em] border border-accent/60 bg-background/95 p-[0.3em] pr-[0.7em] text-[clamp(0.85rem,5.8cqw,1.6rem)] ${className}`}
+      } left-[0.5em] z-10 flex origin-left animate-gift-pulse items-center gap-[0.5em] border border-accent/60 bg-background/95 p-[0.3em] pr-[0.7em] text-[clamp(0.85rem,5.8cqw,1.6rem)] ${interactive} ${className}`}
     >
       {/* The sale green, the same one the "-N%" corner carries: on a photo the
           two are the only marks that mean "this costs you less", and giving
@@ -145,7 +176,7 @@ export function GiftInset({ gift, atTop = false, className = '' }) {
           {gift.shortName || gift.name}
         </span>
       </span>
-    </div>
+    </Tag>
   );
 }
 
