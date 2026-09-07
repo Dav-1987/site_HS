@@ -1,5 +1,4 @@
 import { useEffect, useId, useRef, useState } from 'react';
-import { Link } from './LocalizedLink.jsx';
 import Lightbox from './Lightbox.jsx';
 import Media from './Media.jsx';
 import { IconGift } from './Gift.jsx';
@@ -17,8 +16,17 @@ import { useLanguage } from '../i18n/LanguageContext.jsx';
  * again, so a gift the shop sells and one it does not arrive here in the same
  * shape and this file never has to know which it is holding: the catalog side
  * fills `images`/`size`/`price` from the product, the custom side from what was
- * typed in /admin, and only `href` distinguishes them — there is a page to
- * offer a link to, or there isn't.
+ * typed in /admin. `href` is ignored here on purpose — nothing in this dialog
+ * leads away. It is opened from a product page to look at what comes free with
+ * the piece being bought, and a way out of it is a way off that piece; the
+ * sentence under the price still names the gift and still links it, for anyone
+ * who wants the page itself.
+ *
+ * The photos are a carousel rather than a strip of thumbnails: arrows, swipe,
+ * arrow keys and a dot per photo, the same idiom as a catalog tile and the
+ * product gallery. The dots stay visible where a tile's arrows wait for a
+ * hover — with no thumbnails they are the only thing saying there is a second
+ * photo at all.
  *
  * Zoom is the site's own Lightbox stacked on top. The layers here are z-95:
  * above the cookie banner at z-90, which otherwise paints over this one's
@@ -34,8 +42,12 @@ export default function GiftModal({ gift, isOpen, onClose }) {
   const [active, setActive] = useState(0);
   const [zoom, setZoom] = useState(false);
 
+  const startX = useRef(null);
+  const swiped = useRef(false);
+
   const images = gift?.images?.length ? gift.images : gift?.image ? [gift.image] : [];
   const multi = images.length > 1;
+  const go = (dir) => setActive((i) => (i + dir + images.length) % images.length);
 
   // A fresh open starts at the first photo — the one the inset was showing.
   useEffect(() => {
@@ -63,6 +75,10 @@ export default function GiftModal({ gift, isOpen, onClose }) {
       if (zoom) return;
       if (e.key === 'Escape') {
         onClose();
+      } else if (multi && (e.key === 'ArrowRight' || e.key === 'ArrowLeft')) {
+        // The zoom answers the same two keys, so the carousel behaves the same
+        // whether or not it has been opened full-screen.
+        setActive((i) => (i + (e.key === 'ArrowRight' ? 1 : -1) + images.length) % images.length);
       } else if (e.key === 'Tab') {
         const f = focusables();
         if (f.length === 0) return;
@@ -83,7 +99,7 @@ export default function GiftModal({ gift, isOpen, onClose }) {
       document.removeEventListener('keydown', onKey);
       if (prevFocus instanceof HTMLElement) prevFocus.focus();
     };
-  }, [isOpen, zoom, onClose]);
+  }, [isOpen, zoom, onClose, multi, images.length]);
 
   // Re-applied when the zoom closes: the Lightbox unlocks the body on its way
   // out, and without this the page behind would start scrolling again while
@@ -124,10 +140,34 @@ export default function GiftModal({ gift, isOpen, onClose }) {
         </button>
 
         {images.length > 0 && (
-          <>
+          <div
+            className="group relative"
+            onTouchStart={(e) => {
+              startX.current = e.touches[0].clientX;
+              swiped.current = false;
+            }}
+            onTouchEnd={(e) => {
+              if (startX.current == null) return;
+              const dx = e.changedTouches[0].clientX - startX.current;
+              if (multi && Math.abs(dx) > 40) {
+                // Remembered so the tap that ends the swipe does not also open
+                // the zoom — the same guard the product page's own gallery
+                // uses, for the same gesture.
+                swiped.current = true;
+                go(dx < 0 ? 1 : -1);
+              }
+              startX.current = null;
+            }}
+          >
             <button
               type="button"
-              onClick={() => setZoom(true)}
+              onClick={() => {
+                if (swiped.current) {
+                  swiped.current = false;
+                  return;
+                }
+                setZoom(true);
+              }}
               aria-label={`${t('product.zoom')}: ${gift.name}`}
               className="block w-full cursor-zoom-in focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-accent"
             >
@@ -150,24 +190,52 @@ export default function GiftModal({ gift, isOpen, onClose }) {
             </button>
 
             {multi && (
-              <div className="flex gap-2 overflow-x-auto px-6 pt-3">
-                {images.map((src, i) => (
-                  <button
-                    key={`${src}-${i}`}
-                    type="button"
-                    onClick={() => setActive(i)}
-                    aria-label={`${t('product.zoom')} ${i + 1}`}
-                    aria-current={i === active}
-                    className={`h-16 w-[3.2rem] shrink-0 overflow-hidden border transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent ${
-                      i === active ? 'border-accent' : 'border-transparent hover:border-primary/20'
-                    }`}
-                  >
-                    <Media id={src} alt="" w={400} />
-                  </button>
-                ))}
-              </div>
+              <>
+                {/* Siblings of the zoom button, never nested inside it: a
+                    button within a button is invalid, and the browser picks
+                    which one a click means. */}
+                <button
+                  type="button"
+                  aria-label={t('carousel.prev')}
+                  onClick={() => go(-1)}
+                  className="touch-target absolute left-1 top-1/2 z-10 flex -translate-y-1/2 items-center justify-center bg-background/80 text-xl text-primary transition-colors hover:bg-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+                >
+                  ‹
+                </button>
+                <button
+                  type="button"
+                  aria-label={t('carousel.next')}
+                  onClick={() => go(1)}
+                  className="touch-target absolute right-1 top-1/2 z-10 flex -translate-y-1/2 items-center justify-center bg-background/80 text-xl text-primary transition-colors hover:bg-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+                >
+                  ›
+                </button>
+                {/* Always shown, unlike the arrows on a catalog tile that wait
+                    for a hover: with the thumbnails gone these dots are the
+                    only thing saying there is more than one photo, and a
+                    dialog opened on purpose should not hide that. */}
+                <div className="no-scrollbar absolute bottom-0 left-1/2 z-10 flex max-w-full -translate-x-1/2 overflow-x-auto">
+                  {images.map((src, i) => (
+                    <button
+                      key={`${src}-${i}`}
+                      type="button"
+                      aria-label={`${t('carousel.goTo')} ${i + 1}`}
+                      aria-current={i === active}
+                      onClick={() => setActive(i)}
+                      className="flex min-h-[44px] flex-none items-center justify-center px-1.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-accent"
+                    >
+                      <span
+                        aria-hidden="true"
+                        className={`h-1.5 w-1.5 rounded-full transition-colors ${
+                          i === active ? 'bg-primary' : 'bg-primary/40'
+                        }`}
+                      />
+                    </button>
+                  ))}
+                </div>
+              </>
             )}
-          </>
+          </div>
         )}
 
         <div className="px-6 py-6">
@@ -201,16 +269,6 @@ export default function GiftModal({ gift, isOpen, onClose }) {
               <span className="font-serif text-2xl text-promo">{t('product.giftFree')}</span>
             </p>
           ) : null}
-
-          {gift.href && (
-            <Link
-              to={gift.href}
-              onClick={onClose}
-              className="mt-5 inline-flex items-center text-xs uppercase tracking-[0.2em] text-accent-text underline underline-offset-[3px] transition-opacity duration-300 hover:opacity-70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
-            >
-              {t('product.giftSeeProduct')}
-            </Link>
-          )}
         </div>
       </div>
 
