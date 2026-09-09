@@ -22,10 +22,11 @@ const product = {
   description: { es: '', en: '' },
 };
 
-function renderEditor(p = product, onChange = noop) {
+function renderEditor(p = product, onChange = noop, gift = null) {
   return render(
     <ProductEditor
       product={p}
+      gift={gift}
       onChange={onChange}
       onRemove={noop}
       onMove={noop}
@@ -252,5 +253,30 @@ describe('ProductEditor — phone row', () => {
     openRowMenu();
     fireEvent.click(screen.getByRole('menuitem', { name: /Нет в наличии/ }));
     expect(onChange).toHaveBeenCalledWith(expect.objectContaining({ inStock: false }));
+  });
+});
+
+// Подарок чаще всего приходит правилом категории, поэтому по полям самого
+// товара его не видно; строка обязана сказать об этом до того, как её откроют.
+// Разрешает предложение CategoryEditor — сюда оно приходит готовым, и значок
+// показывает ровно то, что пришло.
+describe('ProductEditor — знак подарка в свёрнутой строке', () => {
+  const GIFT = { name: 'Estantería 60 × 180 cm' };
+
+  it('ставит значок и называет подарок', () => {
+    renderEditor(product, noop, GIFT);
+    expect(screen.getByRole('img', { name: 'подарок: Estantería 60 × 180 cm' })).toBeTruthy();
+  });
+
+  it('не ставит его товару без подарка', () => {
+    renderEditor();
+    expect(screen.queryByRole('img', { name: /подарок/ })).toBeNull();
+  });
+
+  it('остаётся и в узкой строке телефона', () => {
+    window.innerWidth = 390;
+    renderEditor(product, noop, GIFT);
+    window.innerWidth = 1024;
+    expect(screen.getByRole('img', { name: /подарок/ })).toBeTruthy();
   });
 });

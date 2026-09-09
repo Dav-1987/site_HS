@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { BTN_GHOST, BTN_SOLID, INPUT } from '../ui.js';
 import { Field, TextArea } from './Field.jsx';
 import { urlSafe, RESERVED_SLUGS } from '../urlSafe.js';
-import { DEFAULT_VISIBILITY, isTileEntryCategory } from '../../data/catalog.js';
+import { DEFAULT_VISIBILITY, isTileEntryCategory, productGift } from '../../data/catalog.js';
 import ImageField from './ImageField.jsx';
 import VideoField from './VideoField.jsx';
 import GiftEditor from './GiftEditor.jsx';
@@ -36,6 +36,7 @@ export default function CategoryEditor({
   isFirst,
   isLast,
   allProducts,
+  allCategories,
   categoryOptions,
   onMoveProducts,
 }) {
@@ -334,6 +335,12 @@ export default function CategoryEditor({
                     <div className="min-w-0 flex-1">
                       <ProductEditor
                         product={p}
+                        // Подарок разрешается здесь, а не в самой карточке: это
+                        // единственное место, где рядом есть и правило
+                        // категории, и весь каталог, по которому ищется товар-
+                        // подарок. Тот же productGift(), что и на витрине, —
+                        // значок в строке и предложение на сайте не разойдутся.
+                        gift={productGift(allCategories, p, category, 'es')}
                         onChange={(next) => updateProduct(pi, next)}
                         onRemove={() => removeProduct(pi)}
                         onMove={(dir) => moveProduct(pi, dir)}

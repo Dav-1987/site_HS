@@ -168,6 +168,7 @@ export default function CatalogEditor({ onLogout }) {
             isFirst={ci === 0}
             isLast={ci === categories.length - 1}
             allProducts={allProducts}
+            allCategories={categories}
             categoryOptions={categoryOptions}
             onMoveProducts={(ids, toSlug) => moveProducts(c.slug, ids, toSlug)}
           />

@@ -13,6 +13,7 @@ import {
   showsDiscountBadge,
 } from '../../data/catalog.js';
 import { translations } from '../../i18n/translations.js';
+import { IconGift } from '../../components/Gift.jsx';
 import ImageField from './ImageField.jsx';
 import ProductImagesEditor from './ProductImagesEditor.jsx';
 import ProductPicker from './ProductPicker.jsx';
@@ -47,6 +48,7 @@ const PERK_OPTIONS = PERK_VARIANTS.map((value) => ({
 
 export default function ProductEditor({
   product,
+  gift,
   onChange,
   onRemove,
   onMove,
@@ -121,8 +123,27 @@ export default function ProductEditor({
       )}
     </span>
   );
+  // Знак подарка в свёрнутой строке. Подарок чаще всего задан не у товара, а
+  // правилом категории, так что по самой строке его не видно, а открывать сотню
+  // карточек по очереди, чтобы понять, кто идёт с подарком, — не работа.
+  // Готовое предложение приходит сверху (CategoryEditor разрешает его тем же
+  // productGift(), что и витрина), поэтому значок гаснет ровно тогда же, когда
+  // предложение пропадает с сайта: подарок отключили, удалили, он кончился.
+  // Наличие самого товара значок не учитывает — рядом за это отвечает StockBadge,
+  // а предложение никуда не девается и вернётся вместе с товаром.
+  const giftMark = gift ? (
+    <span
+      role="img"
+      aria-label={`подарок: ${gift.name}`}
+      title={`Подарок: ${gift.name}`}
+      className="shrink-0 text-promo"
+    >
+      <IconGift className="h-4 w-4" />
+    </span>
+  ) : null;
   const badges = (
     <>
+      {giftMark}
       <VisibilityBadge entity={product} />
       <StockBadge product={product} />
     </>
