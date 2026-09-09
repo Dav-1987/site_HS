@@ -3471,8 +3471,7 @@
         "imageMobile": "",
         "images": [
           "/uploads/a78640fcb57cb6eab45ba598c3ff3d7d.jpg",
-          "/uploads/0a172706169c4ae52280f5910d8a0226.jpg",
-          "/uploads/b75d78194fbe71ba047278bbbc2c7e1b.jpg"
+          "/uploads/0a172706169c4ae52280f5910d8a0226.jpg"
         ],
         "video": "",
         "videoFirst": false,
@@ -3483,10 +3482,6 @@
           },
           {
             "src": "/uploads/0a172706169c4ae52280f5910d8a0226.jpg",
-            "type": "image"
-          },
-          {
-            "src": "/uploads/b75d78194fbe71ba047278bbbc2c7e1b.jpg",
             "type": "image"
           }
         ],
@@ -3510,7 +3505,7 @@
         "showDiscountBadge": true,
         "showBulbsBadge": null,
         "inStock": true,
-        "updatedAt": "2026-09-07T03:17:23.782Z"
+        "updatedAt": "2026-09-08T12:22:34.986Z"
       },
       {
         "id": "Estanteria-E-001",
