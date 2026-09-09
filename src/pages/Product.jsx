@@ -603,7 +603,9 @@ export default function Product() {
             <div className="mt-4 lg:mt-4">
               <Price product={product} className="font-serif text-3xl text-primary" />
             </div>
-            <GiftLine gift={gift} className="mt-3" />
+            {/* Opens the same dialog as the inset on the photo: the two are
+                one offer, and the name of the gift is what people reach for. */}
+            <GiftLine gift={gift} onOpen={() => setGiftOpen(true)} className="mt-3" />
             <GiftWithNote offer={giftedFor} className="mt-3" />
 
             <ExpandableText

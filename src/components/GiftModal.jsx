@@ -18,9 +18,11 @@ import { useLanguage } from '../i18n/LanguageContext.jsx';
  * fills `images`/`size`/`price` from the product, the custom side from what was
  * typed in /admin. `href` is ignored here on purpose — nothing in this dialog
  * leads away. It is opened from a product page to look at what comes free with
- * the piece being bought, and a way out of it is a way off that piece; the
- * sentence under the price still names the gift and still links it, for anyone
- * who wants the page itself.
+ * the piece being bought, and a way out of it is a way off that piece. The
+ * sentence under the price opens this same dialog (see GiftLine); it used to
+ * link the gift's own page, which answered "what am I getting" by leaving the
+ * page that asked — and answered nothing at all for a gift the shop does not
+ * sell as a product, since that one has no page.
  *
  * The photos are a carousel rather than a strip of thumbnails: arrows, swipe,
  * arrow keys and a dot per photo, the same idiom as a catalog tile and the

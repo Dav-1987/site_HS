@@ -1,5 +1,5 @@
-import { describe, it, expect } from 'vitest';
-import { render, screen } from '@testing-library/react';
+import { describe, it, expect, vi } from 'vitest';
+import { render, screen, fireEvent } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import { GiftBadge, GiftLine } from './Gift.jsx';
 import { LanguageProvider } from '../i18n/LanguageContext.jsx';
@@ -29,18 +29,27 @@ function renderLine({ offer = gift, ...props } = {}) {
 describe('GiftLine', () => {
   it('names the gift with its dimensions', () => {
     renderLine();
-    expect(screen.getByText('Estantería 60 × 180 cm')).toBeTruthy();
+    expect(screen.getByText(/Estantería 60 × 180 cm/)).toBeTruthy();
   });
 
-  it('links the name to the gift’s own page', () => {
+  // The name opens the same dialog as the inset on the photo, instead of the
+  // gift's own page: it answers "what am I getting" without taking anyone off
+  // the piece they were about to buy.
+  it('opens the gift dialog from the name, and links nowhere', () => {
+    const onOpen = vi.fn();
+    const { container } = renderLine({ onOpen });
+    expect(container.querySelector('a')).toBeNull();
+    const button = container.querySelector('button');
+    expect(button.getAttribute('aria-haspopup')).toBe('dialog');
+    fireEvent.click(button);
+    expect(onOpen).toHaveBeenCalledTimes(1);
+  });
+
+  // Inside the order dialog there is nothing to open: a second dialog over the
+  // one being filled in would stack two focus traps.
+  it('leaves the name as plain text where nothing opens', () => {
     const { container } = renderLine();
-    expect(container.querySelector('a').getAttribute('href')).toBe('/estanterias/Estanteria-E-03');
-  });
-
-  // Inside the order dialog: following the link would carry someone out of a
-  // half-filled form, and the anchor would join the dialog's focus trap.
-  it('drops the link where following it would be the wrong move', () => {
-    const { container } = renderLine({ linked: false });
+    expect(container.querySelector('button')).toBeNull();
     expect(container.querySelector('a')).toBeNull();
     expect(screen.getByText(/Estantería 60 × 180 cm/)).toBeTruthy();
   });
@@ -77,9 +86,14 @@ describe('GiftLine', () => {
     expect(form.querySelector('p').className).not.toContain('animate-gift-pulse');
   });
 
-  it('has no link for a gift the shop does not sell', () => {
-    const { container } = renderLine({ offer: { ...gift, href: null, price: null } });
+  // The kind of gift the old link could never serve: no page to point at. The
+  // dialog is the one answer that works for both kinds, so it opens here too.
+  it('still opens the dialog for a gift the shop does not sell', () => {
+    const onOpen = vi.fn();
+    const { container } = renderLine({ offer: { ...gift, href: null, price: null }, onOpen });
     expect(container.querySelector('a')).toBeNull();
+    fireEvent.click(container.querySelector('button'));
+    expect(onOpen).toHaveBeenCalledTimes(1);
   });
 
   it('renders nothing when there is no gift', () => {

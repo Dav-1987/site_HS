@@ -43,12 +43,19 @@ export function IconGift({ className = '' }) {
  *
  * Built from a prefix and a suffix around the name rather than one translated
  * sentence: Spanish and English do not put the gift's name in the same place,
- * and only the name is a link. Nothing is a link for a gift the shop does not
- * sell as a product — it has no page to open.
+ * and only the name is the control.
  *
- * `linked={false}` drops the link where following it would be the wrong move:
- * inside the order form it would carry someone out of a half-filled form, and
- * it would join the dialog's focus trap on the way.
+ * `onOpen` makes that name open GiftModal — the same dialog the inset on the
+ * photo opens, and for the same reason: someone who reaches for the name of the
+ * gift wants to see it, and the dialog answers that without taking them off the
+ * piece they were about to buy. It used to be a link to the gift's own page,
+ * which answered the same question by leaving the page that asked it. A gift
+ * the shop does not sell has no page at all, so the line was dead text for it;
+ * the dialog is the one answer that works for both kinds.
+ *
+ * Without `onOpen` the name is plain text. That is the order form, where there
+ * is nothing to open: a second dialog over the one being filled in would stack
+ * two focus traps, and the offer there only has to be visible, not explorable.
  *
  * `compact` is for the order dialog, where every line costs: the value in
  * brackets wrapped the sentence onto a second line and pushed the submit button
@@ -64,7 +71,7 @@ export function IconGift({ className = '' }) {
  * from the price it sits under instead of drifting across it, and it stops
  * altogether for anyone who has asked for less motion (see index.css).
  */
-export function GiftLine({ gift, linked = true, compact = false, className = '' }) {
+export function GiftLine({ gift, onOpen, compact = false, className = '' }) {
   const { t } = useLanguage();
   if (!gift) return null;
   const after = t('product.giftAfter');
@@ -78,13 +85,20 @@ export function GiftLine({ gift, linked = true, compact = false, className = '' 
       <IconGift className={`mt-0.5 shrink-0 ${compact ? 'h-3.5 w-3.5' : 'h-5 w-5'}`} />
       <span>
         {t('product.giftBefore')}{' '}
-        {linked && gift.href ? (
-          <Link
-            to={gift.href}
-            className="underline underline-offset-[3px] transition-opacity duration-300 hover:opacity-70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-promo"
+        {onOpen ? (
+          // `inline`, not a button's own inline-block: the name sits inside a
+          // sentence and has to break across lines with it, underline and all.
+          // The accessible name stays the gift's own — the sentence is read as
+          // written — and `aria-haspopup` is what says a dialog opens.
+          <button
+            type="button"
+            onClick={onOpen}
+            aria-haspopup="dialog"
+            title={t('product.giftOpen')}
+            className="inline cursor-pointer underline underline-offset-[3px] transition-opacity duration-300 hover:opacity-70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-promo"
           >
             {gift.name}
-          </Link>
+          </button>
         ) : (
           gift.name
         )}
