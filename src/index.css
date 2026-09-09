@@ -107,7 +107,15 @@
   --color-accent-text: 138 106 47; /* #8A6A2F, 4.61:1 on background */
   --color-surface: 239 234 226; /* #EFEAE2 warm card/section surface */
   --color-danger: 176 58 46; /* #B03A2E warm brick — form/validation errors only */
-  --color-sale: 79 138 40; /* #4F8A28 salad green — discount badge only */
+  /* #487F25 salad green — discount badge only. Two hundredths of lightness
+     below the green it started as (#4F8A28), hue and saturation untouched: the
+     chip is white on this colour at 11px on a two-column phone card, and the
+     lighter green read 4.2:1 there — under the 4.5:1 that small text needs. It
+     cleared the bar only on the product page, where the badge scales up to
+     large-text size. The discount is what sells the piece, and the catalog grid
+     is where it is chosen, so the corner it is smallest in is the one that has
+     to be legible. Now 4.87:1 at every size. */
+  --color-sale: 72 127 37;
   /* #C62828 bright red — the gift line under the price, and nothing else. Its
      own token rather than --color-danger because the two are only nearly the
      same red: danger is the form-error brick, and a gift is not an error. */

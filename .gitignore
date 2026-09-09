@@ -33,3 +33,6 @@ products_backup_*.sql
 
 # Google Ads OAuth client + refresh token — never commit (private credentials)
 secrets/
+
+# сырые выгрузки Search Console
+gsc-inspection*.json
