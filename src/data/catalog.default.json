@@ -1051,6 +1051,77 @@
         "updatedAt": "2026-09-07T03:22:23.307Z"
       },
       {
+        "id": "Tocador-L-22",
+        "name": "Tocador | Hollywood Blanco",
+        "nameEn": "Dressing Table | White Hollywood",
+        "price": 649,
+        "oldPrice": 790,
+        "image": "/uploads/0a76bec7e753c9ac40000fa3ab903c00.png",
+        "imageMobile": "",
+        "images": [
+          "/uploads/0a76bec7e753c9ac40000fa3ab903c00.png",
+          "/uploads/75e1702e7665658e3c131c0a773b4b36.png",
+          "/uploads/ab5fb910ffa5d4487e31fb1d7d98ee42.png",
+          "/uploads/cec867b068e3d12cf59768b12a24a86e.png"
+        ],
+        "video": "",
+        "videoFirst": false,
+        "media": [
+          {
+            "src": "/uploads/0a76bec7e753c9ac40000fa3ab903c00.png",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/75e1702e7665658e3c131c0a773b4b36.png",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/ab5fb910ffa5d4487e31fb1d7d98ee42.png",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/cec867b068e3d12cf59768b12a24a86e.png",
+            "type": "image"
+          }
+        ],
+        "material": {
+          "es": "Lacado mate",
+          "en": "Matte lacquer"
+        },
+        "size": "130 × 40 × 160 cm",
+        "mirrorSize": "80 × 80 cm",
+        "shelvesSize": "",
+        "reference": "L-22",
+        "subtitle": "130 × 40 × 160 cm",
+        "description": {
+          "es": "Tocador de maquillaje blanco con espejo Hollywood, bombillas alrededor del cristal y una amplia zona de trabajo protegida con superficie de vidrio. Su distribución con cajones superiores y dos módulos laterales ofrece gran capacidad para organizar maquillaje, cosméticos, joyas, brochas, secadores y productos de belleza. Los tiradores transparentes realzan su estilo elegante y contemporáneo. Ideal como tocador con espejo y luces para dormitorio, vestidor, peluquería, centro de estética o estudio profesional, combina orden, comodidad y una presencia sofisticada.\n\n🎁 Bombillas LED de regalo",
+          "en": "White makeup vanity with a Hollywood mirror, bulbs surrounding the glass and a spacious glass-covered worktop. Upper drawers and two side storage units provide plenty of room for makeup, cosmetics, jewellery, brushes, hair tools and beauty products. Crystal-style handles enhance its elegant contemporary look. Ideal as a dressing table with mirror and lights for a bedroom, dressing room, hair salon, beauty centre or professional makeup studio, this vanity combines generous storage, everyday comfort and sophisticated design.\n\n🎁 Free LED bulbs"
+        },
+        "related": [
+          "toc-alba",
+          "toc-vera",
+          "toc-mara",
+          "toc-lina"
+        ],
+        "gift": {
+          "mode": "own",
+          "source": "catalog",
+          "productId": "Estanteria-E-002",
+          "name": {
+            "es": "Estantería",
+            "en": "Shelving Unit"
+          },
+          "size": "20 x 40 cm",
+          "image": "/uploads/5ac1d28526209a8057a999af8def7bef.png"
+        },
+        "perks": "bulbs",
+        "visibility": "public",
+        "showDiscountBadge": true,
+        "showBulbsBadge": null,
+        "inStock": true,
+        "updatedAt": "2026-09-09T19:49:54.595Z"
+      },
+      {
         "id": "Tocador-L-08",
         "name": "Tocador | Hollywood Blanco con Gran Almacenaje",
         "nameEn": "Dressing Table | White Hollywood Vanity with Ample Storage",

@@ -253,7 +253,11 @@ describe('Wallapop listing preparation', () => {
     };
     const products = categories.flatMap((category) => category.products);
 
-    expect(products).toHaveLength(31);
+    // Пол, а не точное число: каталог здесь — снимок боевой базы, который
+    // обновляется `data:pull` перед каждым деплоем, и точное количество делало
+    // из любого нового товара в /admin красный тест. Проверка ниже всё равно
+    // идёт по каждому товару; это лишь страховка от пустой выборки.
+    expect(products.length).toBeGreaterThanOrEqual(31);
     for (const category of categories) {
       for (const product of category.products) {
         const description = buildWallapopDescription(product, category);
