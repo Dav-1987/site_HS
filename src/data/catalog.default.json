@@ -1112,14 +1112,16 @@
             "en": "Shelving Unit"
           },
           "size": "20 x 40 cm",
-          "image": "/uploads/5ac1d28526209a8057a999af8def7bef.png"
+          "image": "/uploads/5ac1d28526209a8057a999af8def7bef.png",
+          "badgeImage": "/uploads/7620482aefabd461217e93ac77aea6ed.png",
+          "qty": 2
         },
         "perks": "bulbs",
         "visibility": "public",
         "showDiscountBadge": true,
         "showBulbsBadge": null,
         "inStock": true,
-        "updatedAt": "2026-09-09T19:49:54.595Z"
+        "updatedAt": "2026-09-10T09:44:52.316Z"
       },
       {
         "id": "Tocador-L-08",
