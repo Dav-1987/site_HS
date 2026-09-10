@@ -21,6 +21,13 @@ const order = {
   price: 450,
 };
 
+// Positions in the INSERT parameter list ($11 and $12).
+const ATTRIBUTION_PARAM = 10;
+const USER_AGENT_PARAM = 11;
+
+const IPHONE_UA =
+  'Mozilla/5.0 (iPhone; CPU iPhone OS 17_5 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.5 Mobile/15E148 Safari/604.1';
+
 describe('saveOrder idempotency', () => {
   beforeEach(() => query.mockReset());
 
@@ -53,7 +60,7 @@ describe('saveOrder idempotency', () => {
     });
 
     const params = query.mock.calls[0][1];
-    expect(JSON.parse(params[params.length - 1])).toEqual({
+    expect(JSON.parse(params[ATTRIBUTION_PARAM])).toEqual({
       utm_source: 'ig',
       utm_campaign: 'agosto',
     });
@@ -65,7 +72,27 @@ describe('saveOrder idempotency', () => {
     await saveOrder(order);
 
     const params = query.mock.calls[0][1];
-    expect(params[params.length - 1]).toBeNull();
+    expect(params[ATTRIBUTION_PARAM]).toBeNull();
+  });
+
+  it('stores the raw user agent, trimmed and capped', async () => {
+    query.mockResolvedValueOnce({ rows: [{ id: 44 }] });
+
+    await saveOrder({ ...order, userAgent: `  ${IPHONE_UA}  ` });
+    expect(query.mock.calls[0][0]).toContain('user_agent');
+    expect(query.mock.calls[0][1][USER_AGENT_PARAM]).toBe(IPHONE_UA);
+
+    query.mockResolvedValueOnce({ rows: [{ id: 45 }] });
+    await saveOrder({ ...order, userAgent: 'x'.repeat(5000) });
+    expect(query.mock.calls[1][1][USER_AGENT_PARAM]).toHaveLength(1000);
+  });
+
+  it('stores NULL when the request carried no user agent', async () => {
+    query.mockResolvedValueOnce({ rows: [{ id: 46 }] });
+
+    await saveOrder(order);
+
+    expect(query.mock.calls[0][1][USER_AGENT_PARAM]).toBeNull();
   });
 
   it('rejects when the durable INSERT fails', async () => {
@@ -129,5 +156,40 @@ describe('listOrders country compatibility', () => {
     });
 
     await expect(listOrders()).resolves.toMatchObject([{ id: 7, country: null }]);
+  });
+});
+
+describe('listOrders device', () => {
+  beforeEach(() => query.mockReset());
+
+  const row = (userAgent) => ({
+    id: '50',
+    created_at: '2026-09-10T10:00:00.000Z',
+    name: 'Ana',
+    phone: '+34600000000',
+    country: 'ES',
+    postal_code: '28001',
+    address: '',
+    comment: '',
+    product_id: 'p1',
+    product_name: 'Tocador Aria',
+    price: 450,
+    attribution: null,
+    user_agent: userAgent,
+    telegram_sent: true,
+    email_sent: true,
+  });
+
+  it('derives the same device label the notification carries', async () => {
+    query.mockResolvedValueOnce({ rows: [row(IPHONE_UA)] });
+
+    await expect(listOrders()).resolves.toMatchObject([{ device: '📱 iPhone · Safari' }]);
+    expect(query.mock.calls[0][0]).toContain('user_agent');
+  });
+
+  it('has no device for orders saved before the user agent was stored', async () => {
+    query.mockResolvedValueOnce({ rows: [row(null)] });
+
+    await expect(listOrders()).resolves.toMatchObject([{ device: '' }]);
   });
 });

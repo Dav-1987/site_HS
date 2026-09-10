@@ -76,3 +76,24 @@ describe('OrdersPanel traffic source', () => {
     expect(screen.queryByText(/Anuncio:/)).toBeNull();
   });
 });
+
+// Та же строка «Dispositivo», что уходит в телеграм и в письмо.
+describe('OrdersPanel device', () => {
+  it('shows the device on its own line', async () => {
+    mockOrders([order({ entry: '/tocadores', device: '📱 iPhone · Instagram (app)' })]);
+    render(<OrdersPanel onClose={() => {}} />);
+
+    await waitFor(() =>
+      expect(screen.getByText('Dispositivo: 📱 iPhone · Instagram (app)')).toBeTruthy(),
+    );
+    expect(screen.getByText('Entrada: /tocadores')).toBeTruthy();
+  });
+
+  it('shows no device line for an order saved before devices were stored', async () => {
+    mockOrders([order({ device: '' })]);
+    render(<OrdersPanel onClose={() => {}} />);
+
+    await waitFor(() => expect(screen.getByText(/Directo \/ desconocido/)).toBeTruthy());
+    expect(screen.queryByText(/Dispositivo:/)).toBeNull();
+  });
+});

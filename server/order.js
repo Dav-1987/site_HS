@@ -2,6 +2,7 @@
 // formatting. Side-effect free so they can be unit-tested without Express.
 
 import { describeAdDetail, describeAttribution, entryPath } from './attribution.js';
+import { describeDevice } from './device.js';
 import { productGift } from '../src/data/catalog.js';
 import {
   getCountryName,
@@ -104,6 +105,7 @@ export function formatOrderText({
   price,
   giftName,
   attribution,
+  userAgent,
 }) {
   const out = ['🛒 Nueva solicitud — Mirage Muebles', ''];
   out.push(`Producto: ${productName}${productId ? ` [${productId}]` : ''}`);
@@ -127,5 +129,8 @@ export function formatOrderText({
   if (adDetail) out.push(`Anuncio: ${adDetail}`);
   const entry = entryPath(attribution);
   if (entry) out.push(`Entrada: ${entry}`);
+  // Пусто только у заявки без заголовка User-Agent — тогда строки нет.
+  const device = describeDevice(userAgent);
+  if (device) out.push(`Dispositivo: ${device}`);
   return out.join('\n');
 }

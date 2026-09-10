@@ -21,7 +21,7 @@ const DEFAULT_DEPENDENCIES = {
   sendLeadEvent,
 };
 
-export function buildDurableOrder(body, authoritativeProduct) {
+export function buildDurableOrder(body, authoritativeProduct, userAgent) {
   const country = normalizeShippingCountry(body.country);
   return {
     eventId: body.eventId,
@@ -32,6 +32,8 @@ export function buildDurableOrder(body, authoritativeProduct) {
     address: body.address?.trim() ?? '',
     comment: body.comment?.trim() ?? '',
     attribution: body.attribution ?? null,
+    // Берём из заголовка запроса, а не из тела: клиенту нечего тут присылать.
+    userAgent: userAgent ?? null,
     ...authoritativeProduct,
   };
 }
@@ -92,7 +94,7 @@ export function createOrderHandler(overrides = {}) {
       );
       if (!authoritativeProduct) return res.status(404).json({ error: 'Product not found' });
 
-      const durableOrder = buildDurableOrder(req.body, authoritativeProduct);
+      const durableOrder = buildDurableOrder(req.body, authoritativeProduct, req.get('user-agent'));
       const { id: orderId, created } = await dependencies.saveOrder(durableOrder);
       if (!created) return res.json({ ok: true });
 

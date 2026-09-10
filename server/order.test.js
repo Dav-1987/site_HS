@@ -299,6 +299,27 @@ describe('formatOrderText', () => {
     expect(text).not.toContain('Anuncio:');
   });
 
+  it('names the device last, under the source lines', () => {
+    const text = formatOrderText({
+      name: 'Ana',
+      phone: '600',
+      productName: 'Tocador Aria',
+      attribution: { landing: '/tocadores' },
+      userAgent:
+        'Mozilla/5.0 (iPhone; CPU iPhone OS 17_5 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148 Instagram 347.0.0.21.95 (iPhone15,3; iOS 17_5; es_ES; es; scale=3.00; 1290x2796; 634617431)',
+    });
+    expect(text.split('\n').slice(-2)).toEqual([
+      'Entrada: /tocadores',
+      'Dispositivo: 📱 iPhone · Instagram (app)',
+    ]);
+  });
+
+  // Заявки до этой правки хранились без User-Agent.
+  it('writes no device line when the order has no user agent', () => {
+    const text = formatOrderText({ name: 'Ana', phone: '600', productName: 'Tocador Aria' });
+    expect(text).not.toContain('Dispositivo');
+  });
+
   it('includes the postal code when present', () => {
     const text = formatOrderText({
       name: 'Ana',

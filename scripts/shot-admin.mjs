@@ -56,6 +56,8 @@ const ORDERS = [
     telegramSent: true,
     emailSent: false,
     attributionLabel: 'instagram / cpc',
+    entry: '/tocadores',
+    device: '📱 iPhone · Instagram (app)',
   },
 ];
 const VERSIONS = [

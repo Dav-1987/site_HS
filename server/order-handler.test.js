@@ -99,6 +99,26 @@ describe('public order handler', () => {
     expect(deps.sendTelegram).toHaveBeenCalledWith(expect.stringContaining('País: Francia (FR)'));
   });
 
+  it('takes the device from the request header into the saved order and the notification', async () => {
+    const deps = dependencies();
+    const handler = createOrderHandler(deps);
+    const androidInstagram =
+      'Mozilla/5.0 (Linux; Android 14; SM-A546B Build/UP1A.231005.007; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/128.0.6613.146 Mobile Safari/537.36 Instagram 347.0.0.36.89 Android (34/14; 450dpi; 1080x2340; samsung; SM-A546B; a54x; s5e8835; es_ES; 634015853)';
+    const req = {
+      ...request({ ...validBody, userAgent: 'forged in the body' }),
+      get: vi.fn((header) => (header === 'user-agent' ? androidInstagram : undefined)),
+    };
+
+    await handler(req, response());
+
+    expect(deps.saveOrder).toHaveBeenCalledWith(
+      expect.objectContaining({ userAgent: androidInstagram }),
+    );
+    expect(deps.sendTelegram).toHaveBeenCalledWith(
+      expect.stringContaining('Dispositivo: 📱 Android · Instagram (app)'),
+    );
+  });
+
   it('does not send a second Lead or notification for a repeated event id', async () => {
     const deps = dependencies({ saveOrder: vi.fn(async () => ({ id: 41, created: false })) });
     const handler = createOrderHandler(deps);

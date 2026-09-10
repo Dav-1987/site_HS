@@ -114,6 +114,11 @@ export default function OrdersPanel({ onClose }) {
                     .join(' · ')}
                 </p>
               )}
+              {/* Отдельной строкой: подпись устройства сама разделена « · »,
+                  и в строке выше она слиплась бы со страницей входа. */}
+              {o.device && (
+                <p className="mt-0.5 text-xs text-primary/40">Dispositivo: {o.device}</p>
+              )}
             </li>
           ))}
         </ul>

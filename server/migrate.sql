@@ -137,6 +137,11 @@ ALTER TABLE orders ADD COLUMN IF NOT EXISTS country VARCHAR(2);
 -- (server/attribution.js) and can be improved for past orders too.
 ALTER TABLE orders ADD COLUMN IF NOT EXISTS attribution JSONB;
 
+-- Заголовок User-Agent браузера, из которого пришла заявка. Хранится сырым, как
+-- и attribution: строку «Dispositivo» выводит server/device.js. Старые заявки
+-- остаются с NULL — у них строки устройства просто нет.
+ALTER TABLE orders ADD COLUMN IF NOT EXISTS user_agent TEXT;
+
 -- Stable browser-generated request id. The partial unique index keeps legacy
 -- rows (which have NULL here) valid while making every new order idempotent.
 ALTER TABLE orders ADD COLUMN IF NOT EXISTS event_id TEXT;
