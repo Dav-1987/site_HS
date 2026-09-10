@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { resolveImage } from '../../data/catalog.js';
+import { IMAGE_SPECS, imageSpecText } from '../imageSpecs.js';
 import { uploadImage, uploadVideo } from '../api.js';
 import { LABEL } from '../ui.js';
 import { useIsCompact } from '../useIsCompact.js';
@@ -329,8 +330,9 @@ export default function ProductImagesEditor({ media, onChange }) {
       </div>
 
       <p className="mt-2 text-xs leading-relaxed text-primary/40">
-        Видео: MP4, WebM, MOV, макс. 200 МБ. Порядок плиток = порядок в галерее товара. Держите хотя
-        бы одно фото — первое фото используется как обложка в каталоге.
+        {imageSpecText(IMAGE_SPECS.card)} Витрина режет фото по центру — держите товар в центре
+        кадра. Видео: MP4, WebM, MOV, макс. 200 МБ. Порядок плиток = порядок в галерее товара.
+        Держите хотя бы одно фото — первое фото используется как обложка в каталоге.
       </p>
 
       {errors.length > 0 && (

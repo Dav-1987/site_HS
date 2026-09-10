@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import ImageField from './ImageField.jsx';
+import { IMAGE_SPECS } from '../imageSpecs.js';
 
 const FIELD_CLASS =
   'w-full border border-primary/20 bg-background px-3 py-2 text-sm text-primary outline-none transition-colors focus:border-accent';
@@ -34,7 +35,8 @@ export default function SeoSettingsEditor({ settings, onChange }) {
             value={seo.image}
             onChange={(v) => set({ image: v })}
             frames={[['1.91 / 1', 'Превью 1.91:1']]}
-            hint="Рекомендуемый размер: 1200×630 px (соотношение 1.91:1). JPG/WebP/PNG, до 5 МБ. Пусто — используется фото главного экрана."
+            spec={IMAGE_SPECS.social}
+            hint="JPG/WebP/PNG, до 5 МБ. Пусто — используется фото главного экрана."
           />
           <div>
             <label className={LABEL_CLASS}>Заголовок превью</label>

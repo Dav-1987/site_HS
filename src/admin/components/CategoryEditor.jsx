@@ -16,6 +16,7 @@ import RowActions from './RowActions.jsx';
 import Section from './Section.jsx';
 import { useIsCompact } from '../useIsCompact.js';
 import { giftHint, langHint, listHint } from '../hints.js';
+import { IMAGE_SPECS } from '../imageSpecs.js';
 
 const CATEGORY_ACTIONS = {
   more: 'Действия с категорией',
@@ -224,12 +225,14 @@ export default function CategoryEditor({
                   value={category.image}
                   onChange={(v) => set({ image: v })}
                   frames={[['4 / 5', 'Карточка 4:5']]}
+                  spec={IMAGE_SPECS.card}
                 />
                 <ImageField
                   label="Изображение категории (мобильные)"
                   value={category.imageMobile}
                   onChange={(v) => set({ imageMobile: v })}
                   frames={[['4 / 5', 'Карточка 4:5']]}
+                  spec={IMAGE_SPECS.card}
                 />
                 <VideoField
                   label="Видео категории (проигрывается при наведении)"

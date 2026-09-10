@@ -27,6 +27,7 @@ import StockToggle, { StockBadge, StockMenuItem, StockNote } from './StockToggle
 import RowActions from './RowActions.jsx';
 import { useIsCompact } from '../useIsCompact.js';
 import { giftHint, langHint, listHint } from '../hints.js';
+import { IMAGE_SPECS } from '../imageSpecs.js';
 
 const PRODUCT_ACTIONS = {
   more: 'Действия с товаром',
@@ -391,6 +392,7 @@ export default function ProductEditor({
                 value={product.imageMobile}
                 onChange={(v) => set({ imageMobile: v })}
                 frames={[['4 / 5', 'Карточка 4:5']]}
+                spec={IMAGE_SPECS.card}
               />
               <p className="mt-2 text-xs leading-relaxed text-primary/40">
                 Пусто — на мобильных используется первое фото из галереи.

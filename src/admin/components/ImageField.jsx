@@ -2,6 +2,7 @@ import { useId, useState } from 'react';
 import { resolveImage } from '../../data/catalog.js';
 import { uploadImage } from '../api.js';
 import { INPUT, LABEL, BTN_GHOST } from '../ui.js';
+import { imageSpecText } from '../imageSpecs.js';
 
 // One crop frame: shows exactly how the image is cropped (object-cover) for a
 // given aspect ratio used somewhere on the site.
@@ -32,6 +33,7 @@ export default function ImageField({
   value,
   onChange,
   frames = [['4 / 5', 'Карточка 4:5']],
+  spec,
   hint = '',
 }) {
   const [busy, setBusy] = useState(false);
@@ -98,9 +100,12 @@ export default function ImageField({
           {hint && (
             <p className="mt-2 text-xs leading-relaxed text-primary/60">{hint}</p>
           )}
+          {/* Соотношение и размер — первым, ещё до объяснения про обрезку:
+              это то, что нужно знать до того, как открыл файл, а не после. */}
           <p className="mt-2 text-xs leading-relaxed text-primary/40">
-            На витрине фото обрезается по этим рамкам (по центру). Держите главный
-            объект в центре кадра.
+            {imageSpecText(spec)} На витрине фото обрезается по{' '}
+            {frames.length > 1 ? 'этим рамкам' : 'этой рамке'} (по центру). Держите главный объект в
+            центре кадра.
           </p>
         </div>
       </div>

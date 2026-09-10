@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { resolveImage } from '../../data/catalog.js';
 import { uploadImage } from '../api.js';
 import { LABEL, BTN_GHOST, BTN_ICON } from '../ui.js';
+import { IMAGE_SPECS, imageSpecText } from '../imageSpecs.js';
 
 /**
  * The photos of a gift the shop does not sell as a product.
@@ -137,9 +138,9 @@ export default function GiftImagesEditor({ value, onChange }) {
       )}
 
       <p className="mt-2 text-xs leading-relaxed text-primary/40">
-        Первое фото показывается маленькой врезкой в углу фотографии товара, остальные — во
-        всплывающем окне, когда по врезке кликнут. Без единого фото врезки не будет: останется
-        только строчка под ценой, и открывать будет нечего.
+        {imageSpecText(IMAGE_SPECS.card)} Первое фото показывается маленькой врезкой в углу
+        фотографии товара, остальные — во всплывающем окне, когда по врезке кликнут. Без единого
+        фото врезки не будет: останется только строчка под ценой, и открывать будет нечего.
       </p>
     </div>
   );

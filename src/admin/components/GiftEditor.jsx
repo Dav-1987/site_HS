@@ -4,6 +4,7 @@ import ImageField from './ImageField.jsx';
 import { productOptionLabel } from '../productLabel.js';
 import { giftChoice } from '../gift.js';
 import { giftImages } from '../../data/catalog.js';
+import { IMAGE_SPECS } from '../imageSpecs.js';
 
 // The gift offer, edited the same way on a category (where it is the rule every
 // product inherits) and on a single product (where it overrides that rule).
@@ -62,6 +63,7 @@ function BadgeImageField({ value, onChange }) {
         value={value}
         onChange={onChange}
         frames={[['4 / 5', 'Плашка 4:5']]}
+        spec={IMAGE_SPECS.giftBadge}
         hint="Пусто — плашка возьмёт первое фото подарка. В окне подарка, которое она открывает, в любом случае остаются настоящие фото товара."
       />
     </div>

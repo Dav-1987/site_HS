@@ -3,10 +3,11 @@ import { resolveImage } from '../../data/catalog.js';
 import { uploadImage, uploadVideo } from '../api.js';
 import { INPUT, LABEL, BTN_GHOST } from '../ui.js';
 import { productOptionLabel } from '../productLabel.js';
+import { IMAGE_SPECS, imageSpecText } from '../imageSpecs.js';
 
 // A single image/video upload slot with thumbnail preview, used for a card's
 // cover (image) and its video.
-function UploadSlot({ kind, src, onUploaded, label }) {
+function UploadSlot({ kind, src, onUploaded, label, spec }) {
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState('');
   const upload = kind === 'video' ? uploadVideo : uploadImage;
@@ -64,6 +65,9 @@ function UploadSlot({ kind, src, onUploaded, label }) {
           </button>
         )}
       </div>
+      {spec && (
+        <p className="mt-1 text-xs leading-relaxed text-primary/40">{imageSpecText(spec)}</p>
+      )}
       {error && <p className="mt-1 text-xs text-red-600">{error}</p>}
     </div>
   );
@@ -181,6 +185,7 @@ export default function FeaturedCardsEditor({ value, onChange, allProducts }) {
                     src={card.cover}
                     onUploaded={(url) => update(i, { cover: url })}
                     label="Обложка (пусто — первое фото товара)"
+                    spec={IMAGE_SPECS.card}
                   />
                   <UploadSlot
                     kind="video"
