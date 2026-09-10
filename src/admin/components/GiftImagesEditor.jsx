@@ -1,8 +1,17 @@
 import { useState } from 'react';
 import { resolveImage } from '../../data/catalog.js';
 import { uploadImage } from '../api.js';
-import { LABEL, BTN_GHOST, BTN_ICON } from '../ui.js';
+import { LABEL, BTN_GHOST } from '../ui.js';
 import { IMAGE_SPECS, imageSpecText } from '../imageSpecs.js';
+
+// The three controls under a photo. Not BTN_ICON: that one is 44px square on a
+// phone and padded to about the same on a desktop, so three of them came to
+// ~146px under a 112px tile and ran into the next photo's — the ✕ of one sat
+// under the ← of the other, which is exactly when there are two photos to tell
+// apart. Here they fill a three-column grid instead, and the tile is sized so
+// each cell still clears the 44px tap target (144 − 2×4 gap) / 3 ≈ 45px.
+const CTRL =
+  'inline-flex h-11 w-full items-center justify-center border border-primary/20 text-base text-primary transition-colors hover:border-accent hover:text-accent disabled:opacity-40 sm:h-8 sm:text-xs';
 
 /**
  * The photos of a gift the shop does not sell as a product.
@@ -67,7 +76,7 @@ export default function GiftImagesEditor({ value, onChange }) {
       <span className={LABEL}>Фото подарка</span>
       <div className="mt-2 flex flex-wrap gap-3">
         {items.map((src, i) => (
-          <div key={`${src}-${i}`} className="w-28">
+          <div key={`${src}-${i}`} className="w-36">
             <div className="relative aspect-[4/5] overflow-hidden border border-primary/15 bg-surface">
               <img src={resolveImage(src, 320)} alt="" className="h-full w-full object-cover" />
               {i === 0 && (
@@ -76,10 +85,10 @@ export default function GiftImagesEditor({ value, onChange }) {
                 </span>
               )}
             </div>
-            <div className="mt-1 flex gap-1">
+            <div className="mt-1 grid grid-cols-3 gap-1">
               <button
                 type="button"
-                className={BTN_ICON}
+                className={CTRL}
                 onClick={() => move(i, -1)}
                 disabled={i === 0}
                 aria-label="Сдвинуть фото левее"
@@ -88,7 +97,7 @@ export default function GiftImagesEditor({ value, onChange }) {
               </button>
               <button
                 type="button"
-                className={BTN_ICON}
+                className={CTRL}
                 onClick={() => move(i, 1)}
                 disabled={i === items.length - 1}
                 aria-label="Сдвинуть фото правее"
@@ -97,7 +106,7 @@ export default function GiftImagesEditor({ value, onChange }) {
               </button>
               <button
                 type="button"
-                className={BTN_ICON}
+                className={CTRL}
                 onClick={() => remove(i)}
                 aria-label="Удалить фото"
               >
@@ -108,13 +117,16 @@ export default function GiftImagesEditor({ value, onChange }) {
         ))}
 
         <label
-          className={`${BTN_GHOST} h-auto w-28 cursor-pointer flex-col gap-1 self-start py-6 text-center`}
+          className={`${BTN_GHOST} h-auto w-36 cursor-pointer flex-col gap-1 self-start py-6 text-center`}
         >
           <span aria-hidden="true" className="text-lg">
             +
           </span>
+          {/* «Ещё фото» once there is one: a lone «Добавить» next to a filled
+              tile read as a slot for one photo, and the shop took the gallery
+              for the single field it replaced. */}
           <span className="normal-case tracking-normal">
-            {busy ? progress || 'Загрузка…' : 'Добавить'}
+            {busy ? progress || 'Загрузка…' : items.length ? 'Ещё фото' : 'Добавить фото'}
           </span>
           <input
             type="file"
@@ -138,9 +150,10 @@ export default function GiftImagesEditor({ value, onChange }) {
       )}
 
       <p className="mt-2 text-xs leading-relaxed text-primary/40">
-        {imageSpecText(IMAGE_SPECS.card)} Первое фото показывается маленькой врезкой в углу
-        фотографии товара, остальные — во всплывающем окне, когда по врезке кликнут. Без единого
-        фото врезки не будет: останется только строчка под ценой, и открывать будет нечего.
+        {imageSpecText(IMAGE_SPECS.card)} Фото можно несколько: выберите сразу несколько файлов или
+        добавляйте по одному, стрелками меняйте порядок. Первое фото показывается маленькой врезкой
+        в углу фотографии товара, остальные — во всплывающем окне, когда по врезке кликнут. Без
+        единого фото врезки не будет: останется только строчка под ценой, и открывать будет нечего.
       </p>
     </div>
   );
