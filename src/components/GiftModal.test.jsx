@@ -12,6 +12,9 @@ const catalogGift = {
   shortName: 'Estantería',
   image: '/uploads/shelf.jpg',
   images: ['/uploads/shelf.jpg', '/uploads/shelf-2.jpg'],
+  // Что показывает сама плашка: своей картинки у этого подарка нет, поэтому
+  // productGift кладёт сюда обложку (см. badgeImageOf).
+  badgeImage: '/uploads/shelf.jpg',
   size: '60 × 180 cm',
   href: '/estanterias/Estanteria-E-03',
   price: 89,
@@ -23,6 +26,7 @@ const customGift = {
   shortName: 'Funda protectora',
   image: '/uploads/cover.jpg',
   images: ['/uploads/cover.jpg'],
+  badgeImage: '/uploads/cover.jpg',
   size: '120 cm',
   href: null,
   price: 35,
@@ -40,12 +44,12 @@ function renderModal({ gift = catalogGift, isOpen = true, onClose = () => {} } =
   );
 }
 
-function renderInset(props = {}) {
+function renderInset({ gift = catalogGift, ...props } = {}) {
   return render(
     <MemoryRouter>
       <SettingsProvider>
         <LanguageProvider>
-          <GiftInset gift={catalogGift} {...props} />
+          <GiftInset gift={gift} {...props} />
         </LanguageProvider>
       </SettingsProvider>
     </MemoryRouter>,
@@ -79,12 +83,23 @@ describe('GiftInset', () => {
     expect(container.querySelector('.pointer-events-none')).toBeTruthy();
   });
 
+  // Своя картинка для плашки: в углу фото читается крупный план, а не снимок
+  // полки в интерьере, который туда обычно и попадает обложкой.
+  it('shows the crop the offer made for this corner', () => {
+    const { container } = renderInset({
+      gift: { ...catalogGift, badgeImage: '/uploads/shelf-closeup.jpg' },
+      onOpen: () => {},
+    });
+    const src = container.querySelector('img')?.getAttribute('src') ?? '';
+    expect(src).toContain('shelf-closeup');
+  });
+
   it('shows nothing at all for a gift with no photo', () => {
     const { container } = render(
       <MemoryRouter>
         <SettingsProvider>
           <LanguageProvider>
-            <GiftInset gift={{ ...catalogGift, image: '' }} onOpen={() => {}} />
+            <GiftInset gift={{ ...catalogGift, image: '', badgeImage: '' }} onOpen={() => {}} />
           </LanguageProvider>
         </SettingsProvider>
       </MemoryRouter>,

@@ -137,3 +137,56 @@ describe('GiftEditor — a gift the shop does not sell', () => {
     expect(screen.getByText('В уголке')).toBeTruthy();
   });
 });
+
+describe('GiftEditor — сколько штук', () => {
+  const rule = { source: 'catalog', productId: 'Estanteria-E-03' };
+
+  it('спрашивает количество и у товара из каталога, и у своего подарка', () => {
+    const { unmount } = renderEditor({ value: rule });
+    expect(screen.getByLabelText('Сколько штук')).toBeTruthy();
+    unmount();
+    renderEditor({ value: { source: 'custom', name: { es: 'Funda' } } });
+    expect(screen.getByLabelText('Сколько штук')).toBeTruthy();
+  });
+
+  it('не спрашивает его там, где подарка нет', () => {
+    renderEditor({ forProduct: true });
+    expect(screen.queryByLabelText('Сколько штук')).toBeNull();
+  });
+
+  it('пустое поле — это «одна штука», а не ноль', () => {
+    renderEditor({ value: rule });
+    expect(screen.getByLabelText('Сколько штук').value).toBe('');
+  });
+
+  it('записывает количество числом', () => {
+    const onChange = vi.fn();
+    renderEditor({ value: rule, onChange });
+    fireEvent.change(screen.getByLabelText('Сколько штук'), { target: { value: '2' } });
+    expect(onChange).toHaveBeenCalledWith(expect.objectContaining({ qty: 2 }));
+  });
+
+  it('спрашивает картинку для плашки и подсказывает, что будет без неё', () => {
+    renderEditor({ value: rule });
+    expect(screen.getByLabelText('Картинка для плашки на фото')).toBeTruthy();
+    expect(screen.getByText(/Пусто — плашка возьмёт первое фото подарка/)).toBeTruthy();
+  });
+
+  it('записывает картинку плашки отдельно от галереи подарка', () => {
+    const onChange = vi.fn();
+    renderEditor({ value: rule, onChange });
+    fireEvent.change(screen.getByLabelText('Картинка для плашки на фото'), {
+      target: { value: '/uploads/closeup.jpg' },
+    });
+    expect(onChange).toHaveBeenCalledWith(
+      expect.objectContaining({ badgeImage: '/uploads/closeup.jpg' }),
+    );
+  });
+
+  it('очищенное поле возвращает подарок к одной штуке', () => {
+    const onChange = vi.fn();
+    renderEditor({ value: { ...rule, qty: 3 }, onChange });
+    fireEvent.change(screen.getByLabelText('Сколько штук'), { target: { value: '' } });
+    expect(onChange).toHaveBeenCalledWith(expect.objectContaining({ qty: '' }));
+  });
+});

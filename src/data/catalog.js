@@ -610,6 +610,10 @@ export function computeRelated(categories, product, category, relatedIds, limit 
 // typed by hand in both languages, its dimensions in one field, since the
 // numbers are the same in either.
 //
+// More than one of the same thing can be given — two shelves with a dressing
+// table — and that is a count on the offer rather than a second offer: it is
+// the same piece, the same photo and the same page either way.
+//
 // Deliberately a field rather than a line in `description`: Merchant Center
 // forbids promotional text there, which is why server/feed.js already has to
 // strip a free-bulbs line out of 56 descriptions on the way into the feed. A
@@ -618,6 +622,39 @@ export const GIFT_MODES = ['inherit', 'own', 'off'];
 export const DEFAULT_GIFT_MODE = 'inherit';
 export const GIFT_SOURCES = ['catalog', 'custom'];
 export const DEFAULT_GIFT_SOURCE = 'catalog';
+
+/**
+ * How many of the gift come with the piece.
+ *
+ * Anything that is not a whole number above one reads as one: the field is
+ * optional in /admin, and an offer with nothing written in it has always meant
+ * a single piece. One is also the count the site never says out loud — writing
+ * "1 ×" in front of every gift would be noise on the ninety-nine offers that
+ * are one of something.
+ */
+export function giftQty(spec) {
+  const n = Math.floor(Number(spec?.qty));
+  return Number.isFinite(n) && n > 1 ? n : 1;
+}
+
+/**
+ * The photo the mark in the corner of the product's own photo shows.
+ *
+ * Falls back to the gift's cover, which is what it has always been. The
+ * override exists because that mark is the size of a thumbnail: a shelf shot
+ * for its own page — the whole piece, in a room — is unreadable that small, and
+ * a close-up that reads there is not the photo its own page wants. So the shop
+ * can give the mark its own crop without touching the gallery behind it.
+ */
+function badgeImageOf(spec, cover) {
+  const own = typeof spec?.badgeImage === 'string' ? spec.badgeImage.trim() : '';
+  return own || cover;
+}
+
+// "2 × Estantería". The separator is the same × the site writes dimensions
+// with, which is why the count needs neither a translation nor a plural of the
+// noun behind it — "2 uds." and "2 pcs" would need both.
+const withCount = (qty, text) => (qty > 1 ? `${qty} × ${text}` : text);
 
 /** The offer that applies to a product: its own, its category's, or none. */
 function giftSpec(product, category) {
@@ -639,25 +676,37 @@ function giftSpec(product, category) {
  * `off` product is stripped from the catalog before it reaches here, so its
  * gift quietly stops being advertised; that is the safe direction to fail in.
  *
- * Returns `{ name, shortName, image, images, size, href, price }`. `name`
+ * Returns `{ name, shortName, image, images, badgeImage, size, href, qty,
+ * price }`. `name`
  * carries the dimensions, `shortName` does not: the line under the price has
  * room to say which shelf, the inset in the corner of a photo does not, and at
  * that size "40 × 40 × 170 cm" is unreadable anyway. `image` is the cover and
- * `images` every photo — the inset needs one, the dialog it opens needs all of
- * them. `size` is the dimensions on their own, for the dialog to label them.
+ * `images` every photo — the dialog opened from the mark needs all of them.
+ * `badgeImage` is what that mark itself shows: the offer's own crop where it
+ * has one, the cover where it does not. `size` is the dimensions on their own, for the dialog to label them.
  * `href` is the Spanish path, for LocalizedLink to localize, and is null for a
  * custom gift — it has no page. `price` is null unless the offer is set to show
  * it, which is the one rule both sources share.
+ *
+ * `qty` is how many come with the piece, and both names already carry it —
+ * "2 × Estantería 60 × 180 cm" — so every surface showing the offer says how
+ * many without being asked, the order notification staff pack from included.
+ * The count is left out at one, which is what an offer with nothing written in
+ * it means; `price` is multiplied by it, since that is what is given away.
  */
 export function productGift(categories, product, category, lang) {
   const spec = giftSpec(product, category);
   if (!spec) return null;
   const source = GIFT_SOURCES.includes(spec.source) ? spec.source : DEFAULT_GIFT_SOURCE;
 
+  const qty = giftQty(spec);
+
   if (source === 'custom') {
-    const shortName = (spec.name?.[lang] || spec.name?.es || '').trim();
-    const name = [shortName, spec.size].filter(Boolean).join(' ').replace(/\s+/g, ' ').trim();
-    if (!name) return null;
+    const typed = (spec.name?.[lang] || spec.name?.es || '').trim();
+    const full = [typed, spec.size].filter(Boolean).join(' ').replace(/\s+/g, ' ').trim();
+    if (!full) return null;
+    const shortName = withCount(qty, typed);
+    const name = withCount(qty, full);
     // The cover stays `image` for the same reason a product keeps one beside
     // its `images`: everything that only needs one photo — the inset, an OG
     // tag — reads that field and does not have to know an array exists.
@@ -668,9 +717,11 @@ export function productGift(categories, product, category, lang) {
       shortName,
       image: images[0] || '',
       images,
+      badgeImage: badgeImageOf(spec, images[0] || ''),
       size: spec.size || '',
       href: null,
-      price: spec.showPrice !== false && price > 0 ? price : null,
+      qty,
+      price: giftValue(price, qty, spec.showPrice),
     };
   }
 
@@ -686,25 +737,40 @@ export function productGift(categories, product, category, lang) {
   // The short name plus dimensions — the same pair that titles the gift's own
   // tile in the catalog, so the offer names it in the words the rest of the
   // site already uses for it.
-  const shortName = productDisplayName(gift, lang);
-  const name = [shortName, gift.subtitle].filter(Boolean).join(' ').replace(/\s+/g, ' ').trim();
-  if (!name) return null;
+  const displayName = productDisplayName(gift, lang);
+  const full = [displayName, gift.subtitle].filter(Boolean).join(' ').replace(/\s+/g, ' ').trim();
+  if (!full) return null;
 
   const price = Number(gift.price) || 0;
   const images = productImages(gift);
   return {
-    name,
-    shortName,
+    name: withCount(qty, full),
+    shortName: withCount(qty, displayName),
     image: images[0] || '',
     // Every photo of the piece, so the dialog behind the inset can show it the
     // way its own page would. Taken from the product rather than copied into
     // the offer, so re-shooting it reaches the offer with nothing to re-save.
     images,
+    badgeImage: badgeImageOf(spec, images[0] || ''),
     size: gift.size || gift.subtitle || '',
     href: `/${giftCategory.slug}/${gift.id}`,
-    // On unless switched off, like every other per-item flag in this file.
-    price: spec.showPrice !== false && price > 0 ? price : null,
+    qty,
+    price: giftValue(price, qty, spec.showPrice),
   };
+}
+
+/**
+ * What the gift would have cost, for the "(valor 118 €)" beside the offer.
+ *
+ * Multiplied by the count, because that is what the customer is being given:
+ * beside "2 ×" the price of one reads as an arithmetic mistake. On unless
+ * switched off, like every other per-item flag in this file, and null when
+ * there is no price to show — the two sources disagree on where the number
+ * comes from but not on when it is shown.
+ */
+function giftValue(unitPrice, qty, showPrice) {
+  if (showPrice === false || !(unitPrice > 0)) return null;
+  return Math.round(unitPrice * qty * 100) / 100;
 }
 
 /**
@@ -724,7 +790,6 @@ export function giftImages(spec) {
   const all = [...list, spec?.image].map((s) => (typeof s === 'string' ? s.trim() : ''));
   return [...new Set(all.filter(Boolean))];
 }
-
 
 /**
  * Whether anything in this category comes with a gift — what the navigation

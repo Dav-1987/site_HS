@@ -173,6 +173,30 @@ describe('productContentEqual — gift', () => {
     expect(productContentEqual({ ...base, gift }, { ...base, gift: quiet })).toBe(false);
   });
 
+  // Сколько штук дарим — такое же поле подарка, как остальные: изменилось —
+  // товар изменился.
+  it('sees the mark on the photo being given its own crop', () => {
+    const cropped = { ...gift, badgeImage: '/uploads/closeup.jpg' };
+    expect(productContentEqual({ ...base, gift }, { ...base, gift: cropped })).toBe(false);
+  });
+
+  it('sees the count of the gift being raised', () => {
+    const two = { ...gift, qty: 2 };
+    expect(productContentEqual({ ...base, gift }, { ...base, gift: two })).toBe(false);
+  });
+
+  // Единица и пусто — одно и то же, и ключа за собой не оставляют: иначе
+  // каждый уже сохранённый подарок выглядел бы отредактированным.
+  it('reads an explicit one as no count at all', () => {
+    const one = { ...gift, qty: 1 };
+    expect(productContentEqual({ ...base, gift }, { ...base, gift: one })).toBe(true);
+  });
+
+  it('ignores a count that is not a whole number above one', () => {
+    const nonsense = { ...gift, qty: 'dos' };
+    expect(productContentEqual({ ...base, gift }, { ...base, gift: nonsense })).toBe(true);
+  });
+
   // Same reason as the media regression above: `gift` is jsonb, so the object
   // read back from Postgres carries its keys shortest-first, not in the order
   // it was written. Compared by stringify, every product with a gift would look

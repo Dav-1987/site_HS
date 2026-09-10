@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useId, useState } from 'react';
 import { resolveImage } from '../../data/catalog.js';
 import { uploadImage } from '../api.js';
 import { INPUT, LABEL, BTN_GHOST } from '../ui.js';
@@ -37,6 +37,11 @@ export default function ImageField({
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState('');
   const preview = resolveImage(value, 320);
+  // Подпись — настоящий <label>, а не просто строчка сверху: поле ввода адреса
+  // лежит в другой колонке, обернуть его вместе с подписью нельзя (внутри уже
+  // есть свой <label> у кнопки загрузки, а label в label — невалидная разметка),
+  // поэтому связываем их по id.
+  const inputId = useId();
 
   const onFile = async (e) => {
     const file = e.target.files?.[0];
@@ -56,7 +61,11 @@ export default function ImageField({
 
   return (
     <div>
-      {label && <span className={LABEL}>{label}</span>}
+      {label && (
+        <label htmlFor={inputId} className={LABEL}>
+          {label}
+        </label>
+      )}
       <div className="mt-1 flex flex-wrap items-start gap-4">
         {/* Crop previews — same object-cover the site uses, one per aspect ratio */}
         <div className="flex gap-3">
@@ -67,6 +76,7 @@ export default function ImageField({
 
         <div className="min-w-0 flex-1">
           <input
+            id={inputId}
             className={INPUT}
             value={value ?? ''}
             onChange={(e) => onChange(e.target.value)}

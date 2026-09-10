@@ -1,5 +1,6 @@
 import { Field, Select } from './Field.jsx';
 import GiftImagesEditor from './GiftImagesEditor.jsx';
+import ImageField from './ImageField.jsx';
 import { productOptionLabel } from '../productLabel.js';
 import { giftChoice } from '../gift.js';
 import { giftImages } from '../../data/catalog.js';
@@ -24,6 +25,48 @@ const PRODUCT_CHOICES = [
   { value: 'custom', label: 'Свой — не из каталога' },
   { value: 'off', label: 'Без подарка' },
 ];
+
+// Сколько штук идёт в подарок — вопрос одинаковый для обоих источников, и
+// одинаково необязательный: пусто и «1» означают одно и то же, потому что
+// подарок «одна штука» — это девяносто девять предложений из ста, и писать в них
+// «1 ×» было бы шумом.
+function CountField({ value, onChange }) {
+  return (
+    <div className="mt-3">
+      <Field
+        label="Сколько штук"
+        type="number"
+        value={value ?? ''}
+        onChange={(qty) => onChange(qty === '' ? '' : Number(qty))}
+        placeholder="1"
+      />
+      <p className="mt-2 text-xs leading-relaxed text-primary/40">
+        Пусто или 1 — на сайте количество не показывается, как было раньше. Больше одного — сайт
+        пишет «2 × Estantería» всюду, где назван подарок (строка под ценой, плашка на фото, окно
+        подарка, заявка в Telegram), а цену «valor» считает за все штуки.
+      </p>
+    </div>
+  );
+}
+
+// Картинка для плашки в углу фото товара. Она там размером с ноготь: снимок
+// полки в интерьере на ней не читается, а крупный план, который читается, — не
+// то фото, которое хочется видеть на странице самой полки. Поэтому отдельное
+// поле, а не подмена галереи: пусто — плашка берёт, как и раньше, первое фото
+// подарка.
+function BadgeImageField({ value, onChange }) {
+  return (
+    <div className="mt-3">
+      <ImageField
+        label="Картинка для плашки на фото"
+        value={value}
+        onChange={onChange}
+        frames={[['4 / 5', 'Плашка 4:5']]}
+        hint="Пусто — плашка возьмёт первое фото подарка. В окне подарка, которое она открывает, в любом случае остаются настоящие фото товара."
+      />
+    </div>
+  );
+}
 
 // Both sources can be told to keep the value to themselves, so the control is
 // written once. What differs is only where the number comes from, which is what
@@ -87,10 +130,12 @@ export default function GiftEditor({ value, onChange, allProducts, excludeId, fo
             нужно. Если подарок не продаётся отдельно, поставьте ему видимость «не в каталоге»:
             страница останется на месте, а из списков он пропадёт.
           </p>
+          <CountField value={gift.qty} onChange={(qty) => set({ qty })} />
+          <BadgeImageField value={gift.badgeImage} onChange={(badgeImage) => set({ badgeImage })} />
           <ShowPriceToggle
             checked={gift.showPrice !== false}
             onChange={(showPrice) => set({ showPrice })}
-            hint="Приписка «(valor 89 €)» в строке под ценой товара — сколько стоит то, что человек получает бесплатно. Цена берётся у самого товара."
+            hint="Приписка «(valor 89 €)» в строке под ценой товара — сколько стоит то, что человек получает бесплатно. Цена берётся у самого товара и умножается на количество."
           />
         </div>
       )}
@@ -133,10 +178,12 @@ export default function GiftEditor({ value, onChange, allProducts, excludeId, fo
             onChange={(price) => set({ price: price === '' ? '' : Number(price) })}
             placeholder="89"
           />
+          <CountField value={gift.qty} onChange={(qty) => set({ qty })} />
+          <BadgeImageField value={gift.badgeImage} onChange={(badgeImage) => set({ badgeImage })} />
           <ShowPriceToggle
             checked={gift.showPrice !== false}
             onChange={(showPrice) => set({ showPrice })}
-            hint="Приписка «(valor 89 €)» в строке под ценой товара — сколько стоит то, что человек получает бесплатно. Пустая цена ничего не показывает и без галочки."
+            hint="Приписка «(valor 89 €)» в строке под ценой товара — сколько стоит то, что человек получает бесплатно. Цена за штуку, на сайте умножается на количество. Пустая цена ничего не показывает и без галочки."
           />
         </div>
       )}

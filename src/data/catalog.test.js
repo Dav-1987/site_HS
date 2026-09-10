@@ -742,8 +742,10 @@ describe('productGift', () => {
       shortName: 'Estantería',
       image: '/uploads/shelf.jpg',
       images: ['/uploads/shelf.jpg'],
+      badgeImage: '/uploads/shelf.jpg',
       size: '60 × 180 cm',
       href: '/estanterias/Estanteria-E-03',
+      qty: 1,
       price: 89,
     });
   });
@@ -849,8 +851,10 @@ describe('productGift', () => {
       shortName: 'Protective cover',
       image: '/uploads/cover.jpg',
       images: ['/uploads/cover.jpg'],
+      badgeImage: '/uploads/cover.jpg',
       size: '120 cm',
       href: null,
+      qty: 1,
       price: null,
     });
   });
@@ -878,6 +882,100 @@ describe('productGift', () => {
   it('never gives a product away with itself', () => {
     const cats = build({ source: 'catalog', productId: table.id }, undefined);
     expect(productGift(cats, cats[0].products[0], cats[0], 'es')).toBeNull();
+  });
+
+  // Two shelves with one table is a count on the offer, not a second offer: the
+  // same piece, the same photo, the same page. Both names carry it so no
+  // surface has to remember to add it, and the value follows — beside "2 ×" the
+  // price of one reads as an arithmetic mistake.
+  it('counts a gift given more than once, and prices all of it', () => {
+    const cats = build({ ...rule, qty: 2 }, undefined);
+    const offer = productGift(cats, cats[0].products[0], cats[0], 'es');
+    expect(offer.name).toBe('2 × Estantería 60 × 180 cm');
+    expect(offer.shortName).toBe('2 × Estantería');
+    expect(offer.qty).toBe(2);
+    expect(offer.price).toBe(178);
+  });
+
+  it('counts a hand-written gift the same way', () => {
+    const cats = build(undefined, {
+      mode: 'own',
+      source: 'custom',
+      name: { es: 'Bombilla LED', en: 'LED bulb' },
+      size: 'E27',
+      price: 4.5,
+      qty: 12,
+    });
+    const offer = productGift(cats, cats[0].products[0], cats[0], 'es');
+    expect(offer.name).toBe('12 × Bombilla LED E27');
+    expect(offer.shortName).toBe('12 × Bombilla LED');
+    expect(offer.price).toBe(54);
+  });
+
+  // One is what an offer with nothing written in it means, and it is the count
+  // the site never says: "1 ×" in front of every gift would be noise.
+  it.each([
+    ['nothing at all', undefined],
+    ['an explicit one', 1],
+    ['a zero', 0],
+    ['a negative', -3],
+    ['a word', 'dos'],
+  ])('says nothing about the count for %s', (_, qty) => {
+    const cats = build({ ...rule, qty }, undefined);
+    const offer = productGift(cats, cats[0].products[0], cats[0], 'es');
+    expect(offer.name).toBe('Estantería 60 × 180 cm');
+    expect(offer.qty).toBe(1);
+    expect(offer.price).toBe(89);
+  });
+
+  // The count travels with the rule, so a campaign written once on the category
+  // gives every product in it the same two shelves.
+  it('inherits the count from the category rule', () => {
+    const cats = build({ ...rule, qty: 3 }, undefined);
+    expect(productGift(cats, cats[0].products[1], cats[0], 'es').name).toBe(
+      '3 × Estantería 60 × 180 cm',
+    );
+  });
+
+  // Плашка в углу фото — размером с ноготь, и снимок в интерьере на ней не
+  // читается. Своя картинка меняет только её; галерея, которую она открывает,
+  // остаётся галереей товара.
+  it('gives the mark on the photo its own crop when the offer has one', () => {
+    const cats = build({ ...rule, badgeImage: '/uploads/shelf-closeup.jpg' }, undefined);
+    const offer = productGift(cats, cats[0].products[0], cats[0], 'es');
+    expect(offer.badgeImage).toBe('/uploads/shelf-closeup.jpg');
+    expect(offer.image).toBe('/uploads/shelf.jpg');
+    expect(offer.images).toEqual(['/uploads/shelf.jpg']);
+  });
+
+  it('falls the mark back to the gift’s own first photo', () => {
+    const cats = build(rule, undefined);
+    expect(productGift(cats, cats[0].products[0], cats[0], 'es').badgeImage).toBe(
+      '/uploads/shelf.jpg',
+    );
+  });
+
+  it('gives a hand-written gift the same override', () => {
+    const cats = build(undefined, {
+      mode: 'own',
+      source: 'custom',
+      name: { es: 'Funda' },
+      images: ['/uploads/cover.jpg'],
+      badgeImage: '/uploads/cover-closeup.jpg',
+    });
+    const offer = productGift(cats, cats[0].products[0], cats[0], 'es');
+    expect(offer.badgeImage).toBe('/uploads/cover-closeup.jpg');
+    expect(offer.images).toEqual(['/uploads/cover.jpg']);
+  });
+
+  it('leaves the mark empty for a gift with no photo anywhere', () => {
+    const cats = build(undefined, { mode: 'own', source: 'custom', name: { es: 'Funda' } });
+    expect(productGift(cats, cats[0].products[0], cats[0], 'es').badgeImage).toBe('');
+  });
+
+  it('still keeps the value to itself when the offer says so', () => {
+    const cats = build({ ...rule, qty: 2, showPrice: false }, undefined);
+    expect(productGift(cats, cats[0].products[0], cats[0], 'es').price).toBeNull();
   });
 });
 

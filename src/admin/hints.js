@@ -1,4 +1,5 @@
 import { giftChoice } from './gift.js';
+import { giftQty } from '../data/catalog.js';
 
 // Подписи справа от заголовков свёрнутых групп (см. Section.jsx): короткая
 // сводка того, ради чего группу обычно и открывают. Живут отдельно от самих
@@ -19,8 +20,18 @@ const GIFT_HINTS = {
   off: 'без подарка',
 };
 
-/** Что стоит в подарке, теми же словами, что и в самом редакторе подарка. */
-export const giftHint = (gift, forProduct) => GIFT_HINTS[giftChoice(gift, forProduct)];
+/**
+ * Что стоит в подарке, теми же словами, что и в самом редакторе подарка, плюс
+ * количество — но только там, где подарок вообще задан: у «как у категории» и
+ * «без подарка» своего количества нет, и оставшееся от прошлой правки число в
+ * заголовке читалось бы как обещание.
+ */
+export const giftHint = (gift, forProduct) => {
+  const choice = giftChoice(gift, forProduct);
+  const qty = giftQty(gift);
+  const own = choice === 'catalog' || choice === 'custom';
+  return own && qty > 1 ? `${GIFT_HINTS[choice]} × ${qty}` : GIFT_HINTS[choice];
+};
 
 /** Список непустых значений через « · », или «—» когда пусто. */
 export const listHint = (...values) => values.filter(Boolean).join(' · ') || '—';

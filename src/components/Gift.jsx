@@ -143,12 +143,17 @@ export function GiftLine({ gift, onOpen, compact = false, className = '' }) {
  * words and one thumbnail that fit here are an advertisement, not an answer,
  * and the dialog is where the rest of the answer lives.
  *
- * Skipped when the gift has no photo of its own — an empty frame promises
- * nothing, and the line under the price still says what is included.
+ * The photo is `badgeImage` rather than the cover: at this size a piece shot in
+ * a room is unreadable, so the offer can carry a crop made for this corner (set
+ * in /admin, see badgeImageOf in src/data/catalog.js). Where it has none the
+ * cover arrives here instead, which is what this corner always showed.
+ *
+ * Skipped when the gift has no photo at all — an empty frame promises nothing,
+ * and the line under the price still says what is included.
  */
 export function GiftInset({ gift, atTop = false, onOpen, className = '' }) {
   const { t } = useLanguage();
-  if (!gift?.image) return null;
+  if (!gift?.badgeImage) return null;
 
   // A button only where something opens it. The inset is rendered in one place
   // today, but it is the kind of thing that gets reused into a tile tomorrow,
@@ -180,7 +185,7 @@ export function GiftInset({ gift, atTop = false, onOpen, className = '' }) {
         +
       </span>
       <span className="h-[3em] w-[2.4em] shrink-0 overflow-hidden bg-surface">
-        <Media id={gift.image} alt="" w={300} />
+        <Media id={gift.badgeImage} alt="" w={300} />
       </span>
       <span className="min-w-0">
         <span className="block text-[0.55em] uppercase leading-none tracking-[0.2em] text-accent-text">

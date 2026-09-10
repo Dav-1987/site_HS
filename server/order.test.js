@@ -121,6 +121,20 @@ describe('resolveOrderProduct', () => {
     expect(resolveOrderProduct(withGift, 'p1').giftName).toBe('Estantería 60 × 180 cm');
   });
 
+  // Количество едет в заявку вместе с названием, иначе владелец соберёт заказ
+  // с одной полкой вместо двух — а сверить ему не с чем: в заявке нет ничего,
+  // кроме этой строки.
+  it('says how many of the gift go with the order', () => {
+    const two = [
+      { ...catalog[0], gift: { source: 'catalog', productId: 'p2', qty: 2 } },
+      {
+        slug: 'estanterias',
+        products: [{ id: 'p2', name: 'Estantería | de pared', subtitle: '60 × 180 cm', price: 89 }],
+      },
+    ];
+    expect(resolveOrderProduct(two, 'p1').giftName).toBe('2 × Estantería 60 × 180 cm');
+  });
+
   it('names nothing when the product a rule points at is sold out', () => {
     const soldOut = [
       { ...catalog[0], gift: { source: 'catalog', productId: 'p2' } },
