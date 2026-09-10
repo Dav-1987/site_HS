@@ -80,7 +80,12 @@ export default function FeaturedCardsEditor({ value, onChange, allProducts }) {
   const [open, setOpen] = useState(false);
   const cards = Array.isArray(value) ? value : [];
 
-  const update = (i, patch) => onChange(cards.map((c, j) => (j === i ? { ...c, ...patch } : c)));
+  // Into the cards as they are when the change lands — a cover or a video
+  // uploads for seconds (see ../update.js).
+  const update = (i, patch) =>
+    onChange((current) =>
+      (Array.isArray(current) ? current : []).map((c, j) => (j === i ? { ...c, ...patch } : c)),
+    );
   const remove = (i) => {
     if (window.confirm('Удалить карточку?')) onChange(cards.filter((_, j) => j !== i));
   };

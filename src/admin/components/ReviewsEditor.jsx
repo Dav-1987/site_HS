@@ -31,16 +31,20 @@ export default function ReviewsEditor({ reviews = [], onChange, blocks, onBlocks
     setBusy(true);
     setError('');
     const added = [];
+    // Дописываем к списку, каким он стал к концу загрузки, а не каким был при
+    // выборе файлов: иначе правки, сделанные за эти секунды, откатятся
+    // (см. ../update.js).
+    const append = () => onChange((current) => [...(current ?? []), ...added]);
     try {
       for (const file of files) {
         const { url } = kind === 'video' ? await uploadVideo(file) : await uploadReviewImage(file);
         added.push(kind === 'video' ? { video: url } : { image: url });
       }
-      onChange([...reviews, ...added]);
+      append();
     } catch (err) {
       // Часть пачки могла загрузиться до сбоя — сохраняем то, что успели,
       // иначе владелец потеряет уже залитые файлы и зальёт их повторно.
-      if (added.length) onChange([...reviews, ...added]);
+      if (added.length) append();
       setError(err.message || 'Ошибка загрузки');
     } finally {
       setBusy(false);

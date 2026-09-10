@@ -5,6 +5,7 @@ import { IMAGE_SPECS } from '../imageSpecs.js';
 const FIELD_CLASS =
   'w-full border border-primary/20 bg-background px-3 py-2 text-sm text-primary outline-none transition-colors focus:border-accent';
 const LABEL_CLASS = 'mb-1 block text-[11px] uppercase tracking-[0.18em] text-primary/40';
+const EMPTY_SEO = { image: '', title: '', description: '' };
 
 /**
  * Social/SEO preview editor — controls the image, title and description that
@@ -13,8 +14,10 @@ const LABEL_CLASS = 'mb-1 block text-[11px] uppercase tracking-[0.18em] text-pri
  */
 export default function SeoSettingsEditor({ settings, onChange }) {
   const [open, setOpen] = useState(false);
-  const seo = settings.seo || { image: '', title: '', description: '' };
-  const set = (patch) => onChange({ ...settings, seo: { ...seo, ...patch } });
+  const seo = settings.seo || EMPTY_SEO;
+  // Into the settings as they are when the change lands — the preview image
+  // uploads for seconds (see ../update.js).
+  const set = (patch) => onChange((s) => ({ ...s, seo: { ...(s.seo || EMPTY_SEO), ...patch } }));
 
   return (
     <div className="border border-primary/15 bg-surface">

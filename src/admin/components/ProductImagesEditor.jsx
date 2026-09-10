@@ -105,7 +105,10 @@ export default function ProductImagesEditor({ media, onChange }) {
     setBusy(false);
     setProgress('');
     setErrors(errs);
-    if (added.length) onChange([...items, ...added]);
+    // Appended to the gallery as it is now: photos and videos upload side by
+    // side, and whichever lands second must not bring back the list the first
+    // one was missing from (see ../update.js).
+    if (added.length) onChange((current) => [...(current ?? []), ...added]);
   };
 
   const onAddPhotos = (e) => {
@@ -129,7 +132,13 @@ export default function ProductImagesEditor({ media, onChange }) {
     setErrors([]);
     try {
       const { url } = await upload(file);
-      onChange(items.map((x, j) => (j === idx ? { ...x, src: url } : x)));
+      // Found by what it was rather than where: the tile may have been moved
+      // while the new file uploaded.
+      onChange((current) =>
+        (current ?? []).map((x) =>
+          x.type === item.type && x.src === item.src ? { ...x, src: url } : x,
+        ),
+      );
     } catch (err) {
       setErrors([`${file.name}: ${err.message || 'Ошибка загрузки'}`]);
     } finally {

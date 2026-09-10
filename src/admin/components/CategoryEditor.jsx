@@ -17,6 +17,7 @@ import Section from './Section.jsx';
 import { useIsCompact } from '../useIsCompact.js';
 import { giftHint, langHint, listHint } from '../hints.js';
 import { IMAGE_SPECS } from '../imageSpecs.js';
+import { applyUpdate } from '../update.js';
 
 const CATEGORY_ACTIONS = {
   more: 'Действия с категорией',
@@ -65,7 +66,9 @@ export default function CategoryEditor({
     setMoveTarget('');
   };
 
-  const set = (patch) => onChange({ ...category, ...patch });
+  // Merges into the category as it is when the change lands, not as this
+  // render saw it — an upload lands seconds later (see ../update.js).
+  const set = (patch) => onChange((c) => ({ ...c, ...applyUpdate(patch, c) }));
   const setI18n = (key, lang, val) => set({ [key]: { ...category[key], [lang]: val } });
 
   // Что показать справа от заголовка свёрнутой группы — чтобы не открывать её
@@ -77,7 +80,7 @@ export default function CategoryEditor({
   );
 
   const updateProduct = (pi, next) =>
-    set({ products: category.products.map((p, i) => (i === pi ? next : p)) });
+    set((c) => ({ products: c.products.map((p, i) => (i === pi ? applyUpdate(next, p) : p)) }));
   const removeProduct = (pi) => {
     if (!window.confirm('Удалить этот товар?')) return;
     set({ products: category.products.filter((_, i) => i !== pi) });
@@ -260,7 +263,7 @@ export default function CategoryEditor({
             <Section title="Подарок" hint={giftHint(category.gift, false)}>
               <GiftEditor
                 value={category.gift}
-                onChange={(gift) => set({ gift })}
+                onChange={(gift) => set((c) => ({ gift: applyUpdate(gift, c.gift) }))}
                 allProducts={allProducts}
               />
               <p className="mt-2 text-xs leading-relaxed text-primary/40">

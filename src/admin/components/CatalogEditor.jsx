@@ -14,6 +14,7 @@ import SeoSettingsEditor from './SeoSettingsEditor.jsx';
 import BlocksEditor from './BlocksEditor.jsx';
 import ReviewsEditor from './ReviewsEditor.jsx';
 import CategoryEditor from './CategoryEditor.jsx';
+import { applyUpdate } from '../update.js';
 
 export default function CatalogEditor({ onLogout }) {
   const {
@@ -42,6 +43,11 @@ export default function CatalogEditor({ onLogout }) {
   } = useCatalogEditor();
 
   const [showOrders, setShowOrders] = useState(false);
+  // One settings field, merged into the settings as they are when the change
+  // lands: an upload in one panel must not undo an edit made in another while
+  // it ran (see ../update.js).
+  const settingsField = (key) => (next) =>
+    updateSettings((s) => ({ ...s, [key]: applyUpdate(next, s[key]) }));
   const compact = useIsCompact();
   // One source for the toolbar note, rendered in the row on desktop and on its
   // own line on a phone.
@@ -129,37 +135,24 @@ export default function CatalogEditor({ onLogout }) {
         {settings && (
           <FeaturedCardsEditor
             value={settings.featuredCards || []}
-            onChange={(featuredCards) => updateSettings({ ...settings, featuredCards })}
+            onChange={settingsField('featuredCards')}
             allProducts={allProducts}
           />
         )}
+        {settings && <TextsEditor texts={settings.texts} onChange={settingsField('texts')} />}
         {settings && (
-          <TextsEditor
-            texts={settings.texts}
-            onChange={(texts) => updateSettings({ ...settings, texts })}
-          />
-        )}
-        {settings && (
-          <ContactEditor
-            contact={settings.contact}
-            onChange={(contact) => updateSettings({ ...settings, contact })}
-          />
+          <ContactEditor contact={settings.contact} onChange={settingsField('contact')} />
         )}
         {settings && (
           <ReviewsEditor
             reviews={settings.reviews || []}
-            onChange={(reviews) => updateSettings({ ...settings, reviews })}
+            onChange={settingsField('reviews')}
             blocks={settings.blocks}
-            onBlocksChange={(blocks) => updateSettings({ ...settings, blocks })}
+            onBlocksChange={settingsField('blocks')}
           />
         )}
         {settings && <SeoSettingsEditor settings={settings} onChange={updateSettings} />}
-        {settings && (
-          <BlocksEditor
-            blocks={settings.blocks}
-            onChange={(blocks) => updateSettings({ ...settings, blocks })}
-          />
-        )}
+        {settings && <BlocksEditor blocks={settings.blocks} onChange={settingsField('blocks')} />}
 
         {categories.map((c, ci) => (
           <CategoryEditor

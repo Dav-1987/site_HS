@@ -3,12 +3,14 @@ import { useState } from 'react';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import { uploadImage } from '../api.js';
 import GiftEditor from './GiftEditor.jsx';
+import { applyUpdate } from '../update.js';
 
 vi.mock('../api.js', () => ({ uploadImage: vi.fn() }));
 
 // The editor the way /admin holds it: the product in state, the gift one field
-// of it. A photo is only "added" once it survives that round trip — which is
-// the step a single-photo field used to lose the first one in.
+// of it, updated through a functional setState the way ProductEditor does. A
+// photo is only "added" once it survives that round trip — which is the step a
+// single-photo field used to lose the first one in.
 function Harness({ onState }) {
   const [product, setProduct] = useState({
     id: 'Tocador-L-22',
@@ -18,7 +20,7 @@ function Harness({ onState }) {
   return (
     <GiftEditor
       value={product.gift}
-      onChange={(gift) => setProduct({ ...product, gift })}
+      onChange={(next) => setProduct((p) => ({ ...p, gift: applyUpdate(next, p.gift) }))}
       allProducts={[]}
       excludeId={product.id}
       forProduct

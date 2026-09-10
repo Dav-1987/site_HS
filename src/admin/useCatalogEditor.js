@@ -7,6 +7,7 @@ import {
 } from './api.js';
 import { defaultSettings, mergeSettings } from '../data/settings.js';
 import { DEFAULT_VISIBILITY, isListed, isOff, moveProductsToCategory } from '../data/catalog.js';
+import { applyUpdate } from './update.js';
 
 // Unsaved-edits draft, kept in localStorage so a reload/closed-tab accident
 // doesn't wipe out in-progress work. Cleared once the user saves or
@@ -143,8 +144,10 @@ export function useCatalogEditor() {
     setStatus('');
   };
 
+  // Functional, so an upload finishing late lands on the catalog as it is now
+  // rather than as it was when the file was picked (see ./update.js).
   const updateCategory = (ci, next) =>
-    mutate(categories.map((c, i) => (i === ci ? next : c)));
+    mutate((cats) => cats.map((c, i) => (i === ci ? applyUpdate(next, c) : c)));
   const removeCategory = (ci) => {
     if (!window.confirm('Удалить эту категорию и все её товары?')) return;
     mutate(categories.filter((_, i) => i !== ci));

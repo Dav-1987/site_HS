@@ -5,8 +5,9 @@ import VideoField from './VideoField.jsx';
 
 export default function HeroSettingsEditor({ settings, onChange }) {
   const [open, setOpen] = useState(false);
-  const setHero = (patch) =>
-    onChange({ ...settings, hero: { ...settings.hero, ...patch } });
+  // Into the settings as they are when the change lands — the photo and video
+  // here upload for seconds (see ../update.js).
+  const setHero = (patch) => onChange((s) => ({ ...s, hero: { ...s.hero, ...patch } }));
 
   return (
     <div className="border border-primary/15 bg-surface">

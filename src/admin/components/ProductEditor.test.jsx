@@ -2,6 +2,7 @@ import { describe, it, expect, vi, afterEach } from 'vitest';
 import { render, screen, fireEvent } from '@testing-library/react';
 import ProductEditor from './ProductEditor.jsx';
 import { DEFAULT_PERK_VARIANT, PERK_VARIANTS } from '../../data/catalog.js';
+import { applyUpdate } from '../update.js';
 
 const noop = () => {};
 
@@ -22,12 +23,15 @@ const product = {
   description: { es: '', en: '' },
 };
 
+// The editor hands up a change to apply to the current product (see
+// ../update.js); resolved here against `p`, the way CategoryEditor does, so the
+// assertions read the product that would be written.
 function renderEditor(p = product, onChange = noop, gift = null) {
   return render(
     <ProductEditor
       product={p}
       gift={gift}
-      onChange={onChange}
+      onChange={(next) => onChange(applyUpdate(next, p))}
       onRemove={noop}
       onMove={noop}
       onDuplicate={noop}

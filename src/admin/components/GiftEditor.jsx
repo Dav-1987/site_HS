@@ -5,6 +5,7 @@ import { productOptionLabel } from '../productLabel.js';
 import { giftChoice } from '../gift.js';
 import { giftImages } from '../../data/catalog.js';
 import { IMAGE_SPECS } from '../imageSpecs.js';
+import { applyUpdate } from '../update.js';
 
 // The gift offer, edited the same way on a category (where it is the rule every
 // product inherits) and on a single product (where it overrides that rule).
@@ -93,7 +94,9 @@ function ShowPriceToggle({ checked, onChange, hint }) {
 export default function GiftEditor({ value, onChange, allProducts, excludeId, forProduct }) {
   const gift = value ?? {};
   const choice = giftChoice(gift, forProduct);
-  const set = (patch) => onChange({ ...gift, ...patch });
+  // Merges into the offer as it is when the change lands: a photo uploads for
+  // seconds, and the name typed meanwhile must survive it (see ../update.js).
+  const set = (patch) => onChange((g) => ({ ...(g ?? {}), ...applyUpdate(patch, g ?? {}) }));
 
   const setChoice = (next) => {
     if (next === 'inherit' || next === 'none') return onChange({});
@@ -171,7 +174,12 @@ export default function GiftEditor({ value, onChange, allProducts, excludeId, fo
               rather than derived on read so the two can never disagree. */}
           <GiftImagesEditor
             value={giftImages(gift)}
-            onChange={(images) => set({ images, image: images[0] || '' })}
+            onChange={(next) =>
+              set((g) => {
+                const images = applyUpdate(next, giftImages(g));
+                return { images, image: images[0] || '' };
+              })
+            }
           />
           <Field
             label="Цена подарка, €"

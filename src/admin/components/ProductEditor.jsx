@@ -28,6 +28,7 @@ import RowActions from './RowActions.jsx';
 import { useIsCompact } from '../useIsCompact.js';
 import { giftHint, langHint, listHint } from '../hints.js';
 import { IMAGE_SPECS } from '../imageSpecs.js';
+import { applyUpdate } from '../update.js';
 
 const PRODUCT_ACTIONS = {
   more: 'Действия с товаром',
@@ -60,7 +61,9 @@ export default function ProductEditor({
 }) {
   const [open, setOpen] = useState(false);
   const compact = useIsCompact();
-  const set = (patch) => onChange({ ...product, ...patch });
+  // Merges into the product as it is when the change lands, not as this render
+  // saw it — an upload lands seconds later (see ../update.js).
+  const set = (patch) => onChange((p) => ({ ...p, ...applyUpdate(patch, p) }));
   const setMat = (lang, val) => set({ material: { ...product.material, [lang]: val } });
   const setDesc = (lang, val) => set({ description: { ...product.description, [lang]: val } });
   // Unified ordered media (photos + videos). Keep the legacy cover fields
@@ -72,10 +75,12 @@ export default function ProductEditor({
   // Live discount percent, so the badge checkbox names the exact figure the
   // photo would carry ("−13%") instead of an abstract one.
   const { percent } = productDiscount(product);
-  const setMedia = (next) => {
-    const photos = next.filter((m) => m.type === 'image').map((m) => m.src);
-    set({ media: next, image: photos[0] || '', images: photos, video: '', videoFirst: false });
-  };
+  const setMedia = (next) =>
+    set((p) => {
+      const media = applyUpdate(next, productMedia(p));
+      const photos = media.filter((m) => m.type === 'image').map((m) => m.src);
+      return { media, image: photos[0] || '', images: photos, video: '', videoFirst: false };
+    });
 
   // Подписи справа от заголовков свёрнутых групп — то, ради чего группу обычно
   // и открывали: цена, число фото, артикул. Считаются из того же товара, что и
@@ -327,7 +332,7 @@ export default function ProductEditor({
             <Section title="Подарок" hint={giftHint(product.gift, true)}>
               <GiftEditor
                 value={product.gift}
-                onChange={(gift) => set({ gift })}
+                onChange={(gift) => set((p) => ({ gift: applyUpdate(gift, p.gift) }))}
                 allProducts={allProducts}
                 excludeId={product.id}
                 forProduct

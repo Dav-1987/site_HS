@@ -1,17 +1,21 @@
 import { describe, it, expect, vi } from 'vitest';
 import { render, screen, fireEvent } from '@testing-library/react';
 import GiftEditor from './GiftEditor.jsx';
+import { applyUpdate } from '../update.js';
 
 const allProducts = [
   { id: 'Estanteria-E-03', name: 'Estantería', reference: 'E-03', categoryName: 'Estanterías' },
   { id: 'Tocador-T-01', name: 'Tocador', reference: 'T-01', categoryName: 'Tocadores' },
 ];
 
+// The editor hands up a change to apply to the current offer (see
+// ../update.js); resolved here against `value`, the way its parent does, so the
+// assertions read the offer that would be written.
 function renderEditor({ value, forProduct = false, excludeId, onChange = () => {} } = {}) {
   return render(
     <GiftEditor
       value={value}
-      onChange={onChange}
+      onChange={(next) => onChange(applyUpdate(next, value))}
       allProducts={allProducts}
       excludeId={excludeId}
       forProduct={forProduct}

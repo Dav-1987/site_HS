@@ -68,7 +68,9 @@ export default function GiftImagesEditor({ value, onChange }) {
     setErrors(errs);
     // Whatever did upload is kept even when the rest failed: re-picking two
     // files because the third was too big is a poor trade for the shop.
-    if (added.length) onChange([...items, ...added]);
+    // Appended to the list as it is now, not as it was when the files were
+    // picked — see ../update.js.
+    if (added.length) onChange((current) => [...(current ?? []), ...added]);
   };
 
   return (
