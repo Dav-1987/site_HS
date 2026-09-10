@@ -77,6 +77,9 @@ export default function CatalogEditor({ onLogout }) {
               <OverflowMenu title="Меню админки">
                 <MenuItem onClick={() => setShowOrders(true)}>Заявки</MenuItem>
                 <MenuItem onClick={() => setShowHistory(true)}>История</MenuItem>
+                <MenuItem onClick={() => window.open('/utm', '_blank', 'noopener')}>
+                  Ссылки UTM
+                </MenuItem>
                 <RebuildMenuItem />
                 <MenuSeparator />
                 <MenuItem onClick={onLogout}>Выйти</MenuItem>
@@ -89,6 +92,9 @@ export default function CatalogEditor({ onLogout }) {
                 <button type="button" onClick={() => setShowHistory(true)} className={BTN_GHOST}>
                   История
                 </button>
+                <a href="/utm" target="_blank" rel="noopener noreferrer" className={BTN_GHOST}>
+                  Ссылки UTM
+                </a>
                 <RebuildButton />
                 <button type="button" onClick={onLogout} className={BTN_GHOST}>
                   Выйти

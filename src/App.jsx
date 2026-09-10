@@ -18,6 +18,7 @@ const Returns = lazy(() => import('./pages/Returns.jsx'));
 const Reviews = lazy(() => import('./pages/Reviews.jsx'));
 const NotFound = lazy(() => import('./pages/NotFound.jsx'));
 const Admin = lazy(() => import('./pages/Admin.jsx'));
+const UtmBuilder = lazy(() => import('./pages/UtmBuilder.jsx'));
 const WallapopPanel = import.meta.env.DEV ? lazy(() => import('./pages/WallapopPanel.jsx')) : null;
 
 /** Old /categoria/:slug URLs → canonical /:slug (kept so saved links survive).
@@ -104,6 +105,16 @@ export default function App() {
           element={
             <Suspense fallback={<RouteFallback fullPage />}>
               <Admin />
+            </Suspense>
+          }
+        />
+        {/* Внутренний инструмент: закрыт от индексации (robots.txt + noindex в
+            самой странице) и не входит ни в prerender, ни в карту сайта. */}
+        <Route
+          path="/utm"
+          element={
+            <Suspense fallback={<RouteFallback fullPage />}>
+              <UtmBuilder />
             </Suspense>
           }
         />

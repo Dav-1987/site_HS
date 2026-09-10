@@ -1,5 +1,6 @@
 User-agent: *
 Allow: /
 Disallow: /admin
+Disallow: /utm
 
 Sitemap: https://hsmuebles.es/sitemap.xml
