@@ -23,6 +23,7 @@ import {
 } from '../../server/order-data.js';
 import { productDiscount, productFullName, productLabel } from '../data/catalog.js';
 import { GiftLine } from './Gift.jsx';
+import IconWhatsApp from './IconWhatsApp.jsx';
 
 export default function OrderModal({ product, gift, isOpen, onClose }) {
   const { lang, t } = useLanguage();
@@ -431,7 +432,16 @@ export default function OrderModal({ product, gift, isOpen, onClose }) {
                     htmlFor={fieldIds.phone}
                     className="mb-1 block text-xs uppercase tracking-[0.2em] text-primary/70"
                   >
-                    {t('order.form.phone')} *
+                    {/* Named for WhatsApp so people leave the number they use
+                        there. The gaps around the icon are margins, not spaces,
+                        or the accessible name would read "( WhatsApp)". The mark
+                        is a solid shape, so a stroke is what makes it bold. */}
+                    {t('order.form.phone')} (
+                    <span className="font-bold">
+                      <IconWhatsApp className="ml-0.5 mr-1 inline-block h-3.5 w-3.5 stroke-current stroke-1 align-[-0.2em]" />
+                      WhatsApp
+                    </span>
+                    ) *
                   </label>
                   <input
                     id={fieldIds.phone}

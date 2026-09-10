@@ -1,5 +1,5 @@
 import { afterEach, describe, it, expect, vi } from 'vitest';
-import { render, screen, fireEvent, waitFor } from '@testing-library/react';
+import { render, screen, fireEvent, waitFor, within } from '@testing-library/react';
 import { MemoryRouter, Routes, Route } from 'react-router-dom';
 import { SettingsProvider } from '../settings/SettingsContext.jsx';
 import { LanguageProvider } from '../i18n/LanguageContext.jsx';
@@ -93,6 +93,23 @@ describe('product page order flow', () => {
     expect(
       [...screen.getByLabelText(/Delivery country/i).options].map((option) => option.textContent),
     ).toEqual(['Spain', 'France', 'Portugal']);
+  });
+
+  it('asks for the WhatsApp number in both languages', () => {
+    const spanish = renderProduct();
+    fireEvent.click(screen.getByText(/¡PEDIR AHORA!/i));
+    // Exact strings: the icon sits between "(" and "WhatsApp", and a stray
+    // space next to it would reach the field's accessible name.
+    const phone = screen.getByLabelText('Teléfono (WhatsApp) *');
+    expect(phone.type).toBe('tel');
+    const whatsapp = within(phone.labels[0]).getByText('WhatsApp');
+    expect(whatsapp.className).toContain('font-bold');
+    expect(whatsapp.querySelector('svg')).toBeTruthy();
+
+    spanish.unmount();
+    renderProduct(defaultCatalog, `/en/${category.slug}/${product.id}`);
+    fireEvent.click(screen.getByText(/ORDER NOW/i));
+    expect(screen.getByLabelText('Phone (WhatsApp) *').type).toBe('tel');
   });
 
   it('shows required-field errors when submitting an empty form', () => {
