@@ -160,7 +160,7 @@ export default function CatalogEditor({ onLogout }) {
             category={c}
             open={openIdx === ci}
             onToggle={() => setOpenIdx(openIdx === ci ? null : ci)}
-            onChange={(next) => updateCategory(ci, next)}
+            onChange={(next) => updateCategory(ci, c.slug, next)}
             onRemove={() => removeCategory(ci)}
             onMove={(dir) => moveCategory(ci, dir)}
             onDuplicate={() => duplicateCategory(ci)}

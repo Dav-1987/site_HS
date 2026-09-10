@@ -1,5 +1,5 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
-import { render, screen, fireEvent, act, waitFor } from '@testing-library/react';
+import { render, screen, fireEvent, act, waitFor, within } from '@testing-library/react';
 import * as api from '../api.js';
 import CatalogEditor from './CatalogEditor.jsx';
 
@@ -52,6 +52,16 @@ const CATALOG = [
     visibility: 'public',
     products: [product('Tocador-A', 'Tocador A'), product('Tocador-B', 'Tocador B')],
   },
+  {
+    slug: 'espejos',
+    name: { es: 'Espejos', en: 'Mirrors' },
+    tagline: { es: '', en: '' },
+    description: { es: '', en: '' },
+    image: '',
+    imageMobile: '',
+    visibility: 'public',
+    products: [product('Espejo-C', 'Espejo C')],
+  },
 ];
 
 // Every upload waits until the test lets it finish.
@@ -90,9 +100,19 @@ async function saved() {
   click('Сохранить');
   await waitFor(() => expect(api.saveCatalog).toHaveBeenCalled());
   const [categories] = api.saveCatalog.mock.calls.at(-1);
-  const [a, b] = categories[0].products;
-  return { a, b };
+  const all = categories.flatMap((c) => c.products);
+  const byId = (id) => all.find((p) => p.id === id);
+  return { a: byId('Tocador-A'), b: byId('Tocador-B'), c: byId('Espejo-C'), categories };
 }
+
+// The ↑ ↓ × of a row: the header its name is in, then the button by its title.
+const rowAction = (rowName, title) =>
+  within(screen.getByRole('button', { name: rowName }).parentElement).getByTitle(title);
+const pickMobileCover = (productName) => {
+  click(productName);
+  click(/Обложка для мобильных/);
+  pickFile(fileInputIn('Загрузить изображение'));
+};
 
 describe('CatalogEditor — edits made while an upload runs', () => {
   it('keeps them, in the same product and in another one', async () => {
@@ -173,5 +193,70 @@ describe('CatalogEditor — edits made while an upload runs', () => {
     const [settings] = api.saveSettings.mock.calls.at(-1);
     expect(settings.hero.image).toBe('/uploads/hero.jpg');
     expect(settings.seo.title).toBe('Nuevo título');
+  });
+});
+
+// Where the upload lands when the list moves under it. The editors used to find
+// a product by its place in the list, and an upload keeps the place it saw when
+// the file was picked — so a product moved up, or one deleted above it, sent the
+// photo to whichever neighbour had taken that place.
+describe('CatalogEditor — an upload lands on its own product', () => {
+  it('after that product was moved up', async () => {
+    await openAdmin();
+    click(/Tocadores/);
+    pickMobileCover(/Tocador B/);
+    fireEvent.click(rowAction(/Tocador B/, 'Переместить выше'));
+
+    await finish(0, '/uploads/b-mobile.jpg');
+    const { a, b } = await saved();
+    expect(b.imageMobile).toBe('/uploads/b-mobile.jpg');
+    expect(a.imageMobile).toBeFalsy();
+  });
+
+  it('after the product above it was deleted', async () => {
+    await openAdmin();
+    click(/Tocadores/);
+    pickMobileCover(/Tocador B/);
+    window.confirm.mockReturnValueOnce(true);
+    fireEvent.click(rowAction(/Tocador A/, 'Удалить товар'));
+
+    await finish(0, '/uploads/b-mobile.jpg');
+    const { a, b } = await saved();
+    expect(a).toBeUndefined();
+    expect(b.imageMobile).toBe('/uploads/b-mobile.jpg');
+  });
+
+  it('after its whole category was moved', async () => {
+    await openAdmin();
+    click(/Tocadores/);
+    pickMobileCover(/Tocador A/);
+    fireEvent.click(rowAction(/Tocadores/, 'Переместить ниже'));
+
+    await finish(0, '/uploads/a-mobile.jpg');
+    const { a, c, categories } = await saved();
+    expect(categories.map((cat) => cat.slug)).toEqual(['espejos', 'tocadores']);
+    expect(a.imageMobile).toBe('/uploads/a-mobile.jpg');
+    expect(c.imageMobile).toBeFalsy();
+  });
+
+  it('and a featured card’s cover on its own card after the cards were reordered', async () => {
+    api.fetchSettings.mockResolvedValue({
+      settings: { featuredCards: [{ productId: 'Tocador-A' }, { productId: 'Tocador-B' }] },
+    });
+    await openAdmin();
+    click(/Избранное/);
+    // Two cards, each with a cover slot and a video slot, in that order.
+    const coverOfB = screen.getAllByText('Загрузить')[2].closest('label').querySelector('input');
+    pickFile(coverOfB);
+    fireEvent.click(within(coverOfB.closest('.space-y-3')).getByRole('button', { name: '↑' }));
+
+    await finish(0, '/uploads/b-cover.jpg');
+    click('Сохранить');
+    await waitFor(() => expect(api.saveSettings).toHaveBeenCalled());
+    const [settings] = api.saveSettings.mock.calls.at(-1);
+    expect(settings.featuredCards).toEqual([
+      { productId: 'Tocador-B', cover: '/uploads/b-cover.jpg', video: '' },
+      { productId: 'Tocador-A', cover: '', video: '' },
+    ]);
   });
 });

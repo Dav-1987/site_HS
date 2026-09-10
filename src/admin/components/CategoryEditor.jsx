@@ -17,7 +17,7 @@ import Section from './Section.jsx';
 import { useIsCompact } from '../useIsCompact.js';
 import { giftHint, langHint, listHint } from '../hints.js';
 import { IMAGE_SPECS } from '../imageSpecs.js';
-import { applyUpdate } from '../update.js';
+import { applyUpdate, updateAt } from '../update.js';
 
 const CATEGORY_ACTIONS = {
   more: 'Действия с категорией',
@@ -79,8 +79,10 @@ export default function CategoryEditor({
     category.video && 'видео',
   );
 
-  const updateProduct = (pi, next) =>
-    set((c) => ({ products: c.products.map((p, i) => (i === pi ? applyUpdate(next, p) : p)) }));
+  // By id as well as place: an upload lands after the list may have moved
+  // (see ../update.js).
+  const updateProduct = (pi, id, next) =>
+    set((c) => ({ products: updateAt(c.products, pi, (p) => p.id === id, next) }));
   const removeProduct = (pi) => {
     if (!window.confirm('Удалить этот товар?')) return;
     set({ products: category.products.filter((_, i) => i !== pi) });
@@ -347,7 +349,7 @@ export default function CategoryEditor({
                         // подарок. Тот же productGift(), что и на витрине, —
                         // значок в строке и предложение на сайте не разойдутся.
                         gift={productGift(allCategories, p, category, 'es')}
-                        onChange={(next) => updateProduct(pi, next)}
+                        onChange={(next) => updateProduct(pi, p.id, next)}
                         onRemove={() => removeProduct(pi)}
                         onMove={(dir) => moveProduct(pi, dir)}
                         onDuplicate={() => duplicateProduct(pi)}

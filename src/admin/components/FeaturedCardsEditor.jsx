@@ -4,6 +4,7 @@ import { uploadImage, uploadVideo } from '../api.js';
 import { INPUT, LABEL, BTN_GHOST } from '../ui.js';
 import { productOptionLabel } from '../productLabel.js';
 import { IMAGE_SPECS, imageSpecText } from '../imageSpecs.js';
+import { updateAt } from '../update.js';
 
 // A single image/video upload slot with thumbnail preview, used for a card's
 // cover (image) and its video.
@@ -81,11 +82,19 @@ export default function FeaturedCardsEditor({ value, onChange, allProducts }) {
   const cards = Array.isArray(value) ? value : [];
 
   // Into the cards as they are when the change lands — a cover or a video
-  // uploads for seconds (see ../update.js).
-  const update = (i, patch) =>
+  // uploads for seconds, and the card may have been moved meanwhile, so it is
+  // found by its product as well as its place (see ../update.js).
+  const update = (i, patch) => {
+    const productId = cards[i]?.productId;
     onChange((current) =>
-      (Array.isArray(current) ? current : []).map((c, j) => (j === i ? { ...c, ...patch } : c)),
+      updateAt(
+        Array.isArray(current) ? current : [],
+        i,
+        (c) => c.productId === productId,
+        (c) => ({ ...c, ...patch }),
+      ),
     );
+  };
   const remove = (i) => {
     if (window.confirm('Удалить карточку?')) onChange(cards.filter((_, j) => j !== i));
   };
