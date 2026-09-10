@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { productContentEqual, DEFAULT_PERK_VARIANT } from './store.js';
+import { productContentEqual, extractUploadKeys, DEFAULT_PERK_VARIANT } from './store.js';
 
 const base = {
   name: 'Tocador',
@@ -253,5 +253,59 @@ describe('productContentEqual — gift', () => {
   it('drops empty and duplicate photos rather than storing them', () => {
     const messy = { ...custom, images: ['/uploads/a.jpg', '', '/uploads/a.jpg', '/uploads/b.jpg'] };
     expect(productContentEqual({ ...base, gift: custom }, { ...base, gift: messy })).toBe(true);
+  });
+});
+
+// What the upload sweep keeps. A file missing from this set counts as an
+// orphan and is deleted about two days later, so every place the catalog can
+// point at an upload has to be listed — gift photos were not, and the sweep
+// took them.
+describe('extractUploadKeys — gift photos', () => {
+  const gift = {
+    mode: 'own',
+    source: 'custom',
+    image: '/uploads/cover.jpg',
+    images: ['/uploads/cover.jpg', '/uploads/side.jpg', '/uploads/detail.jpg'],
+    badgeImage: '/uploads/mark.png',
+  };
+
+  it('keeps every photo of a gift set on a product', () => {
+    const keys = extractUploadKeys([{ slug: 'tocadores', products: [{ ...base, gift }] }]);
+    for (const k of ['cover.jpg', 'side.jpg', 'detail.jpg', 'mark.png'])
+      expect(keys.has(k)).toBe(true);
+  });
+
+  it('keeps the photos of a category rule too', () => {
+    const keys = extractUploadKeys([{ slug: 'tocadores', gift, products: [] }]);
+    for (const k of ['cover.jpg', 'side.jpg', 'detail.jpg', 'mark.png'])
+      expect(keys.has(k)).toBe(true);
+  });
+
+  // A catalog gift has no gallery of its own, but the crop for the mark is
+  // still an upload of its own.
+  it('keeps the mark of a gift taken from the catalog', () => {
+    const fromCatalog = {
+      mode: 'own',
+      source: 'catalog',
+      productId: 'E-02',
+      badgeImage: '/uploads/two.png',
+    };
+    const keys = extractUploadKeys([
+      { slug: 'tocadores', products: [{ ...base, gift: fromCatalog }] },
+    ]);
+    expect(keys.has('two.png')).toBe(true);
+  });
+
+  it('ignores a product without a gift and links that are not uploads', () => {
+    const external = {
+      ...gift,
+      images: ['https://images.unsplash.com/x.jpg'],
+      image: '',
+      badgeImage: '',
+    };
+    const keys = extractUploadKeys([
+      { slug: 'a', products: [{ ...base }, { ...base, gift: external }] },
+    ]);
+    expect([...keys]).toEqual(['a.jpg']);
   });
 });
