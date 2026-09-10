@@ -347,12 +347,16 @@ export default function UtmBuilder() {
 
           <section className="border border-primary/10 bg-surface p-4 sm:p-5">
             <h2 className={LABEL}>3. Заполните метки</h2>
-            <div className="mt-4 space-y-5">
+            {/* Разделители, а не просто отступы: полей пять, у каждого своя
+                подсказка и свои примеры, и без линии между ними подсказка
+                одного читается как продолжение другого. Тот же divide-y, что
+                и у групп в админке. */}
+            <div className="mt-3 divide-y divide-primary/10">
               {FIELDS.map((field) => {
                 const issue = fieldIssue(field, values[field], scenario);
                 const examples = examplesFor(field, scenario);
                 return (
-                  <div key={field}>
+                  <div key={field} className="py-4 first:pt-1 last:pb-0">
                     <div className="flex flex-wrap items-baseline gap-2">
                       <label
                         htmlFor={`utm-${field}`}
