@@ -1,0 +1,55 @@
+name: Deploy Server
+
+# Manual only: puts the Express API (server/ plus the src/data files it reads)
+# on the VPS — the half of a release rebuild-deploy.yml leaves out. Run it
+# before rebuild-deploy.yml when a change touches both (DEPLOY.md). SQL
+# migrations are not applied here; run them by hand first.
+on:
+  workflow_dispatch:
+
+# Shares the group with rebuild-deploy.yml, so a frontend and a backend deploy
+# queue up instead of fighting over the VPS lock.
+concurrency:
+  group: rebuild-deploy
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    environment: production
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+          cache-dependency-path: |
+            package-lock.json
+            server/package-lock.json
+
+      - run: npm ci
+      - run: npm ci --prefix server
+
+      - name: Reject vulnerable dependencies
+        run: npm run audit:security
+
+      - name: Lint and test
+        run: npm run verify
+
+      - uses: webfactory/ssh-agent@v0.10.0
+        with:
+          ssh-private-key: ${{ secrets.VPS_SSH_KEY }}
+
+      - name: Trust the VPS host key
+        run: mkdir -p ~/.ssh && echo "${{ secrets.VPS_HOST_KEY }}" >> ~/.ssh/known_hosts
+
+      - name: Deploy with health check and automatic rollback
+        env:
+          RELEASE_ID: ${{ github.sha }}
+        run: node scripts/deploy-server.mjs

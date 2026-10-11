@@ -158,6 +158,29 @@ scp server/index.js server/store.js server/settings.js server/feed.js root@185.2
 ssh root@185.202.172.59 "pm2 restart hs-api"
 ```
 
+### Через GitHub Actions (без SSH-ключа на своей машине)
+
+Workflow `.github/workflows/deploy-server.yml` (`workflow_dispatch`, только `main`)
+делает то же самое из облака — тем же ключом `VPS_SSH_KEY`, что и фронтенд-деплой:
+
+```bash
+gh workflow run deploy-server.yml --repo Dav-1987/site_HS
+```
+
+- Проверки как у фронтенда: аудит зависимостей, lint и тесты.
+- Выкладывает **все** `server/*.js` (без тестов), `server/package*.json`,
+  `src/data/catalog.js` и `src/data/settings.default.json` (правила 8 и 10 ниже).
+- Перед распаковкой сохраняет текущие файлы в `server.rollback.tgz`. Если
+  `server/package-lock.json` изменился — запускает `npm ci --omit=dev`.
+- После `pm2 restart hs-api` проверяет `/api/health` и `/api/settings`; при ошибке
+  возвращает прежние файлы и перезапускает API.
+- Использует тот же `.deploy-lock` и ту же очередь, что и «Rebuild & Deploy», —
+  два деплоя одновременно не идут.
+- **SQL-миграции не применяет** — их по-прежнему запускать вручную, до деплоя.
+
+Если изменились и сервер, и фронтенд: сначала `deploy-server.yml`, потом
+`rebuild-deploy.yml` (кнопка «Пересобрать сайт»).
+
 ---
 
 ## Управление сервером
