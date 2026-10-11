@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { BLOCKS, mergeSettings, posterFor } from './settings.js';
+import { BLOCKS, BLOCKS_OFF_BY_DEFAULT, mergeSettings, posterFor } from './settings.js';
 
 describe('mergeSettings — featuredCards', () => {
   it('keeps valid cards with trimmed fields, in order', () => {
@@ -36,26 +36,37 @@ describe('mergeSettings — featuredCards', () => {
 describe('mergeSettings — blocks', () => {
   // Проверяем поведение, а не конкретный набор ключей: список BLOCKS растёт,
   // и тест, перечисляющий их вручную, ломается при добавлении каждой секции.
-  it('defaults every block to on when absent', () => {
+  const optIn = (key) => BLOCKS_OFF_BY_DEFAULT.includes(key);
+
+  it('defaults every block to on when absent, except the opt-in ones', () => {
     const blocks = mergeSettings({}).blocks;
     expect(Object.keys(blocks).sort()).toEqual([...BLOCKS].sort());
-    expect(Object.values(blocks).every((v) => v === true)).toBe(true);
+    for (const key of BLOCKS) expect(blocks[key]).toBe(!optIn(key));
   });
 
   it('turns off only the blocks explicitly set to false', () => {
     const out = mergeSettings({ blocks: { featured: false, collections: true } });
     expect(out.blocks.featured).toBe(false);
     for (const key of BLOCKS.filter((k) => k !== 'featured')) {
-      expect(out.blocks[key]).toBe(true);
+      expect(out.blocks[key]).toBe(!optIn(key));
     }
   });
 
   // A settings object saved before a switch existed (or with junk in it) must
-  // never blank a section — only an explicit `false` switches one off.
+  // never change a section — only an explicit boolean flips one.
   it('ignores non-boolean values and unknown keys', () => {
-    const out = mergeSettings({ blocks: { featured: 'nope', mystery: false } });
+    const out = mergeSettings({
+      blocks: { featured: 'nope', featuredDesktop: 'yes', mystery: false },
+    });
     expect(Object.keys(out.blocks).sort()).toEqual([...BLOCKS].sort());
-    expect(Object.values(out.blocks).every((v) => v === true)).toBe(true);
+    for (const key of BLOCKS) expect(out.blocks[key]).toBe(!optIn(key));
+  });
+
+  // The Featured carousel used to be phone-only: a missing desktop flag keeps it so.
+  it('keeps Featured phone-only until the PC switch is turned on', () => {
+    expect(BLOCKS_OFF_BY_DEFAULT).toContain('featuredDesktop');
+    expect(mergeSettings({}).blocks.featuredDesktop).toBe(false);
+    expect(mergeSettings({ blocks: { featuredDesktop: true } }).blocks.featuredDesktop).toBe(true);
   });
 
   it('carries a switch for the reviews section and its home strip', () => {

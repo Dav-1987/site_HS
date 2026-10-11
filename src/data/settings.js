@@ -145,12 +145,31 @@ function sanitizeSeo(seo) {
  * On/off switches for whole sections of the site (see BLOCKS). Anything that
  * isn't an explicit `false` stays on, so a settings object saved before a switch
  * existed never blanks the section it controls.
+ *
+ * The home "Featured" carousel has one switch per layout: `featured` for phones
+ * (the key predates the split, so saved settings keep meaning the same) and
+ * `featuredDesktop` for md+ screens. The desktop one is opt-in — the section
+ * used to be phone-only, and a missing key must not suddenly show it on desktop.
  */
-export const BLOCKS = ['featured', 'collections', 'heroPromo', 'reviews', 'reviewsHome'];
+export const BLOCKS = [
+  'featured',
+  'featuredDesktop',
+  'collections',
+  'heroPromo',
+  'reviews',
+  'reviewsHome',
+];
+
+/** Blocks that stay off unless explicitly switched on (see above). */
+export const BLOCKS_OFF_BY_DEFAULT = ['featuredDesktop'];
 
 function sanitizeBlocks(blocks) {
   const out = {};
-  for (const key of BLOCKS) out[key] = blocks?.[key] !== false;
+  for (const key of BLOCKS) {
+    out[key] = BLOCKS_OFF_BY_DEFAULT.includes(key)
+      ? blocks?.[key] === true
+      : blocks?.[key] !== false;
+  }
   return out;
 }
 

@@ -85,11 +85,25 @@ function sanitizeSeo(seo) {
 // On/off switches for whole sections of the site. Mirrors BLOCKS in
 // src/data/settings.js — anything that isn't an explicit `false` stays on, so a
 // settings row written before a switch existed never blanks its section.
-const BLOCKS = ['featured', 'collections', 'heroPromo', 'reviews', 'reviewsHome'];
+// `featuredDesktop` is the exception: opt-in, so the Featured carousel stays
+// phone-only until it is switched on (see BLOCKS_OFF_BY_DEFAULT there).
+const BLOCKS = [
+  'featured',
+  'featuredDesktop',
+  'collections',
+  'heroPromo',
+  'reviews',
+  'reviewsHome',
+];
+const BLOCKS_OFF_BY_DEFAULT = ['featuredDesktop'];
 
 function sanitizeBlocks(blocks) {
   const out = {};
-  for (const key of BLOCKS) out[key] = blocks?.[key] !== false;
+  for (const key of BLOCKS) {
+    out[key] = BLOCKS_OFF_BY_DEFAULT.includes(key)
+      ? blocks?.[key] === true
+      : blocks?.[key] !== false;
+  }
   return out;
 }
 
