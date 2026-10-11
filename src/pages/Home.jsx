@@ -108,10 +108,15 @@ function FeaturedSection() {
   );
   const items = cards.length ? cards : fallback;
   const carousel = useCarousel();
-  if (!items.length || settings.blocks?.featured === false) return null;
+  // Separate switches for phones and md+ screens (see BLOCKS in data/settings.js);
+  // the desktop one is opt-in, so a missing key keeps the section phone-only.
+  const onMobile = settings.blocks?.featured !== false;
+  const onDesktop = settings.blocks?.featuredDesktop === true;
+  if (!items.length || (!onMobile && !onDesktop)) return null;
+  const visibility = onMobile && onDesktop ? '' : onMobile ? 'md:hidden' : 'hidden md:block';
 
   return (
-    <section className="py-14 md:hidden">
+    <section className={`py-14 md:py-20 ${visibility}`}>
       <div className="px-6 md:px-12 lg:px-20">
         <SectionHeader
           title={t('section.featured.title')}

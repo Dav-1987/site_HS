@@ -108,6 +108,37 @@ describe('home page blocks', () => {
     expect(screen.getByText(promoPlain)).toBeTruthy();
   });
 
+  // Featured has one switch per layout; the section is hidden on the other one
+  // with CSS (md breakpoint), and not rendered at all when both are off.
+  describe('featured carousel', () => {
+    const featuredSection = () =>
+      screen.queryByRole('heading', { name: /Piezas destacadas/i })?.closest('section') ?? null;
+    const withBlocks = (blocks) => renderPage(<Home />, '/', { catalog, settings: { blocks } });
+
+    it('is phone-only by default', () => {
+      withBlocks({});
+      expect(featuredSection().className).toMatch(/(^|\s)md:hidden(\s|$)/);
+    });
+
+    it('shows on both layouts when both switches are on', () => {
+      withBlocks({ featured: true, featuredDesktop: true });
+      const cls = featuredSection().className;
+      expect(cls).not.toMatch(/(^|\s)(md:)?hidden(\s|$)/);
+    });
+
+    it('is desktop-only when only the PC switch is on', () => {
+      withBlocks({ featured: false, featuredDesktop: true });
+      const cls = featuredSection().className;
+      expect(cls).toMatch(/(^|\s)hidden(\s|$)/);
+      expect(cls).toMatch(/(^|\s)md:block(\s|$)/);
+    });
+
+    it('is not rendered when both switches are off', () => {
+      withBlocks({ featured: false, featuredDesktop: false });
+      expect(featuredSection()).toBeNull();
+    });
+  });
+
   it('drops the collections grid when every section is hidden', () => {
     renderPage(<Home />, '/', { catalog: [makeCategory('c1', 'Oculta', 'unlisted')] });
     expect(screen.queryByText(collections)).toBeNull();
