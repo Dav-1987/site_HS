@@ -23,9 +23,38 @@ jobs:
             server/package-lock.json
       - run: npm ci
       - run: npm ci --prefix server
+      # Blocks only on high/critical advisories in code that ships (site +
+      # server). Dev-tool advisories are reported below without failing the
+      # run; Dependabot keeps those patched.
       - name: Reject vulnerable dependencies
         run: npm run audit:security
+      - name: Report all advisories (non-blocking)
+        run: npm run audit:report
+        continue-on-error: true
       - name: Lint and test
         run: npm run verify
       - name: Build and run the browser hydration check
         run: npm run build:seo
+
+  # Dependabot PRs merge themselves once `verify` (audit, lint, tests, build)
+  # is green. Both checks on the bot keep a human's push to a Dependabot
+  # branch from riding along; --match-head-commit refuses to merge anything
+  # newer than the commit that was tested.
+  automerge-dependabot:
+    needs: verify
+    if: >-
+      github.event_name == 'pull_request' &&
+      github.actor == 'dependabot[bot]' &&
+      github.event.pull_request.user.login == 'dependabot[bot]'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - run: >-
+          gh pr merge "$PR_URL" --squash --delete-branch
+          --match-head-commit "$HEAD_SHA"
+        env:
+          PR_URL: ${{ github.event.pull_request.html_url }}
+          HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

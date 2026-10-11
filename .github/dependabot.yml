@@ -1,0 +1,37 @@
+# Weekly dependency updates. Minor/patch bumps are grouped into one PR per
+# folder and merged automatically once CI passes (dependabot-automerge.yml).
+# Major versions are not proposed: they can need code changes, so they are
+# upgraded by hand. Security fixes still arrive regardless of this filter.
+version: 2
+updates:
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+    open-pull-requests-limit: 5
+    ignore:
+      - dependency-name: '*'
+        update-types: ['version-update:semver-major']
+    groups:
+      site-deps:
+        update-types: [minor, patch]
+
+  - package-ecosystem: npm
+    directory: /server
+    schedule:
+      interval: weekly
+    open-pull-requests-limit: 5
+    ignore:
+      - dependency-name: '*'
+        update-types: ['version-update:semver-major']
+    groups:
+      server-deps:
+        update-types: [minor, patch]
+
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: monthly
+    ignore:
+      - dependency-name: '*'
+        update-types: ['version-update:semver-major']
