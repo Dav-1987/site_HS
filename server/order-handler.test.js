@@ -28,11 +28,11 @@ function response() {
   };
 }
 
-function request(body = validBody) {
+function request(body = validBody, userAgent = 'Test UA') {
   return {
     body,
     ip: '1.2.3.4',
-    get: vi.fn(() => 'Test UA'),
+    get: vi.fn(() => userAgent),
   };
 }
 
@@ -130,5 +130,37 @@ describe('public order handler', () => {
     expect(deps.sendLeadEvent).not.toHaveBeenCalled();
     expect(deps.sendTelegram).not.toHaveBeenCalled();
     expect(deps.sendOrderEmail).not.toHaveBeenCalled();
+  });
+});
+
+describe('order handler — Google Shopping test orders', () => {
+  const STOREBOT =
+    'Mozilla/5.0 (X11; Linux x86_64; Storebot-Google/1.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36';
+
+  it('answers success to Storebot but saves and notifies nothing', async () => {
+    const deps = dependencies({ emailConfigured: vi.fn(() => true) });
+    const res = response();
+    await createOrderHandler(deps)(request(validBody, STOREBOT), res);
+
+    expect(res.statusCode).toBe(200);
+    expect(res.body).toEqual({ ok: true });
+    expect(deps.saveOrder).not.toHaveBeenCalled();
+    expect(deps.sendTelegram).not.toHaveBeenCalled();
+    expect(deps.sendOrderEmail).not.toHaveBeenCalled();
+    expect(deps.sendLeadEvent).not.toHaveBeenCalled();
+  });
+
+  it('still takes an order from a real Linux desktop browser', async () => {
+    const deps = dependencies();
+    const res = response();
+    await createOrderHandler(deps)(
+      request(validBody, 'Mozilla/5.0 (X11; Linux x86_64; rv:130.0) Gecko/20100101 Firefox/130.0'),
+      res,
+    );
+
+    expect(res.body).toEqual({ ok: true });
+    expect(deps.saveOrder).toHaveBeenCalledTimes(1);
+    expect(deps.sendTelegram).toHaveBeenCalledTimes(1);
+    expect(deps.sendLeadEvent).toHaveBeenCalledTimes(1);
   });
 });

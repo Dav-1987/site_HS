@@ -3,6 +3,7 @@ import { validateOrder, formatOrderText, resolveOrderProduct } from './order.js'
 import { telegramConfigured, emailConfigured, sendTelegram, sendOrderEmail } from './notify.js';
 import { saveOrder, markOrderTelegramSent, markOrderEmailSent } from './orders.js';
 import { metaCapiConfigured, sendLeadEvent } from './meta-capi.js';
+import { isShoppingBot } from './device.js';
 import { normalizePhone, normalizePostalCode, normalizeShippingCountry } from './order-data.js';
 
 const DEFAULT_DEPENDENCIES = {
@@ -83,6 +84,16 @@ export function createOrderHandler(overrides = {}) {
   return async function handleOrder(req, res) {
     // Honeypot: bots fill the hidden form field — pretend success, drop silently.
     if (req.body?._gotcha) return res.json({ ok: true });
+
+    // Проверочный заказ робота Google Shopping: тоже отвечаем успехом, чтобы
+    // его проверка оформления проходила, но не сохраняем, не уведомляем и не
+    // шлём Lead в Meta. Строка в логе — чтобы было видно, что он заходил.
+    if (isShoppingBot(req.get('user-agent'))) {
+      console.log(
+        `[order] Storebot-Google test order dropped product=${String(req.body?.productId).slice(0, 100)}`,
+      );
+      return res.json({ ok: true });
+    }
 
     const invalid = dependencies.validateOrder(req.body);
     if (invalid) return res.status(400).json({ error: invalid });

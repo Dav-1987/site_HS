@@ -38,6 +38,18 @@ const BROWSERS = [
   [/Firefox\/|FxiOS/, 'Firefox'],
 ];
 
+/**
+ * Робот Google Shopping (Merchant Center) раз в несколько дней проходит
+ * оформление заказа, чтобы сверить цену и наличие с фидом. Оплаты у нас нет,
+ * поэтому его проверочная «покупка» становилась настоящей заявкой — «Perez»
+ * с адресом и телефоном офиса Google в Мадриде. Ловим только его собственный
+ * токен: настоящие браузеры и встроенные браузеры приложений его не пишут.
+ * Общий для сервера (заявку не сохранять) и формы (Lead не отправлять).
+ */
+export function isShoppingBot(userAgent) {
+  return typeof userAgent === 'string' && /Storebot-Google/i.test(userAgent);
+}
+
 /** Обрезанная строка заголовка для базы или null, если хранить нечего. */
 export function cleanUserAgent(value) {
   if (typeof value !== 'string') return null;

@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { cleanUserAgent, describeDevice } from './device.js';
+import { cleanUserAgent, describeDevice, isShoppingBot } from './device.js';
 
 // Настоящие строки браузеров — по одной на каждый случай из таблицы, которую
 // согласовали с владельцем.
@@ -165,5 +165,31 @@ describe('cleanUserAgent', () => {
     expect(cleanUserAgent('')).toBeNull();
     expect(cleanUserAgent('   ')).toBeNull();
     expect(cleanUserAgent(['Mozilla/5.0'])).toBeNull();
+  });
+});
+
+// Строка из настоящих заявок «Perez» (Google Shopping проверяет оформление).
+const STOREBOT =
+  'Mozilla/5.0 (X11; Linux x86_64; Storebot-Google/1.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36';
+
+describe('isShoppingBot', () => {
+  it('узнаёт робота Google Shopping — и десктопного, и мобильного', () => {
+    expect(isShoppingBot(STOREBOT)).toBe(true);
+    expect(
+      isShoppingBot(
+        'Mozilla/5.0 (Linux; Android 8.0; Pixel 2 Build/OPD3.170816.012; Storebot-Google/1.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Mobile Safari/537.36',
+      ),
+    ).toBe(true);
+  });
+
+  // Главное: настоящий покупатель не должен потерять заявку. Linux у Android
+  // и у настоящего Linux-десктопа — не повод.
+  it.each(Object.keys(UA))('пропускает настоящий браузер: %s', (key) => {
+    expect(isShoppingBot(UA[key])).toBe(false);
+  });
+
+  it('пропускает пустой и отсутствующий заголовок', () => {
+    expect(isShoppingBot(undefined)).toBe(false);
+    expect(isShoppingBot('')).toBe(false);
   });
 });

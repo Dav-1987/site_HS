@@ -1,7 +1,8 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest';
-import { render } from '@testing-library/react';
+import { fireEvent, render, waitFor } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import OrderModal from './OrderModal.jsx';
+import { trackGoogleAdsLead, trackPixel } from '../lib/track.js';
 import { LanguageProvider } from '../i18n/LanguageContext.jsx';
 import { SettingsProvider } from '../settings/SettingsContext.jsx';
 
@@ -86,5 +87,49 @@ describe('OrderModal — the Back button', () => {
     // Already gone — popping again would step past the page behind it.
     expect(back).not.toHaveBeenCalled();
     back.mockRestore();
+  });
+});
+
+describe('OrderModal — Google Shopping test orders', () => {
+  const STOREBOT =
+    'Mozilla/5.0 (X11; Linux x86_64; Storebot-Google/1.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36';
+
+  beforeEach(() => {
+    history.replaceState(null, '');
+    vi.clearAllMocks();
+    vi.stubGlobal(
+      'fetch',
+      vi.fn(async () => ({ ok: true, json: async () => ({ ok: true }) })),
+    );
+  });
+
+  async function submitAs(userAgent) {
+    const ua = vi.spyOn(navigator, 'userAgent', 'get').mockReturnValue(userAgent);
+    const { container } = renderModal();
+    const set = (name, value) =>
+      fireEvent.change(container.querySelector(`[name="${name}"]`), { target: { value } });
+    set('name', 'Lucía Pérez');
+    set('phone', '612345678');
+    set('postalCode', '28001');
+    fireEvent.submit(container.querySelector('form'));
+    // The success screen replaces the form — Storebot must see it too.
+    await waitFor(() => expect(container.querySelector('form')).toBeNull());
+    // SettingsProvider fetches too, so look for the order call by URL.
+    expect(fetch).toHaveBeenCalledWith('/api/order', expect.anything());
+    ua.mockRestore();
+  }
+
+  it('fires the Lead conversions for a real customer', async () => {
+    await submitAs(
+      'Mozilla/5.0 (iPhone; CPU iPhone OS 17_5 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148 Instagram 347.0.0.21.95',
+    );
+    expect(trackPixel).toHaveBeenCalledWith('Lead', expect.anything(), expect.anything());
+    expect(trackGoogleAdsLead).toHaveBeenCalledTimes(1);
+  });
+
+  it('shows Storebot the success screen but sends no Lead anywhere', async () => {
+    await submitAs(STOREBOT);
+    expect(trackPixel).not.toHaveBeenCalledWith('Lead', expect.anything(), expect.anything());
+    expect(trackGoogleAdsLead).not.toHaveBeenCalled();
   });
 });

@@ -21,6 +21,7 @@ import {
   isValidPostalCode,
   normalizePhone,
 } from '../../server/order-data.js';
+import { isShoppingBot } from '../../server/device.js';
 import { productDiscount, productFullName, productLabel } from '../data/catalog.js';
 import { GiftLine } from './Gift.jsx';
 import IconWhatsApp from './IconWhatsApp.jsx';
@@ -245,6 +246,9 @@ export default function OrderModal({ product, gift, isOpen, onClose }) {
       if (!res.ok) throw new Error(data.error || 'error');
       setSent(true);
       leadTrackedRef.current = true;
+      // Робот Google Shopping видит обычный успех, но лидом для рекламы не
+      // считается — сервер его заявку тоже отбросил (server/device.js).
+      if (isShoppingBot(navigator.userAgent)) return;
       // Advanced matching: feed the (browser-hashed) name + phone before the
       // Lead so Meta can attribute the conversion to the ad click.
       setPixelUserData(buildUserData({ name, phone: normalizedPhone, country, postalCode }));
