@@ -21,7 +21,7 @@ export function VisibilityBadge({ entity }) {
   const text = BADGES[visibilityOf(entity)];
   if (!text) return null;
   return (
-    <span className="shrink-0 rounded-sm bg-amber-100 px-2 py-0.5 text-[11px] uppercase tracking-[0.14em] text-amber-700">
+    <span className="shrink-0 border border-accent-text px-1.5 py-px text-[11px] font-medium text-accent-text">
       {text}
     </span>
   );
@@ -69,7 +69,7 @@ export default function VisibilitySelect({ value, onChange, title }) {
       onChange={(e) => onChange(e.target.value)}
       title={title}
       aria-label={title}
-      className={`shrink-0 border bg-background px-2 py-1.5 text-xs text-primary transition-colors focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent ${
+      className={`min-h-11 shrink-0 border bg-background px-2 py-1.5 text-base text-primary sm:min-h-0 sm:text-xs transition-colors focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent ${
         current === 'public' ? 'border-primary/15' : 'border-amber-500/60 text-amber-700'
       }`}
     >

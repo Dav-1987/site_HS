@@ -35,12 +35,12 @@ export function Select({ label, value, onChange, options }) {
   );
 }
 
-export function TextArea({ label, value, onChange }) {
+export function TextArea({ label, value, onChange, rows = 2 }) {
   return (
     <label className="block">
       <span className={LABEL}>{label}</span>
       <textarea
-        rows={2}
+        rows={rows}
         className={`${INPUT} resize-y`}
         value={value ?? ''}
         onChange={(e) => onChange(e.target.value)}

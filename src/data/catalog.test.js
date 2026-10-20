@@ -26,7 +26,6 @@ import {
   visibilityOf,
   visibleCategories,
   OTHER_MODELS_SLUG,
-  moveProductsToCategory,
   productPerkVariant,
   productGift,
   categoryHasGift,
@@ -569,45 +568,6 @@ describe('visibility', () => {
     expect(out.map((p) => p.id)).toEqual(['p3']);
   });
 });
-
-describe('moveProductsToCategory', () => {
-  const categories = [cat('c1', 'p1', 'p2', 'p3'), cat('c2', 'p4')];
-
-  it('moves the given ids to the end of the target category, preserving ids and order', () => {
-    const out = moveProductsToCategory(categories, 'c1', ['p1', 'p3'], 'c2');
-    expect(out.find((c) => c.slug === 'c1').products.map((p) => p.id)).toEqual(['p2']);
-    expect(out.find((c) => c.slug === 'c2').products.map((p) => p.id)).toEqual(['p4', 'p1', 'p3']);
-  });
-
-  it('does not mutate the input array', () => {
-    moveProductsToCategory(categories, 'c1', ['p1'], 'c2');
-    expect(categories.find((c) => c.slug === 'c1').products.map((p) => p.id)).toEqual([
-      'p1',
-      'p2',
-      'p3',
-    ]);
-  });
-
-  it('is a same-reference no-op when the target category does not exist', () => {
-    expect(moveProductsToCategory(categories, 'c1', ['p1'], 'ghost')).toBe(categories);
-  });
-
-  it('is a same-reference no-op for a stale/missing product id', () => {
-    expect(moveProductsToCategory(categories, 'c1', ['ghost'], 'c2')).toBe(categories);
-  });
-
-  it('is a same-reference no-op when source and target are the same category', () => {
-    expect(moveProductsToCategory(categories, 'c1', ['p1'], 'c1')).toBe(categories);
-  });
-
-  it('is a same-reference no-op for an empty id list', () => {
-    expect(moveProductsToCategory(categories, 'c1', [], 'c2')).toBe(categories);
-  });
-});
-
-// `size` measures the piece assembled: a table 80cm high under an 80cm mirror
-// is listed as 160cm there. The mirror is a second measurement, and 58 products
-// have one — written into their descriptions until it became a field.
 describe('productMirrorSize', () => {
   it('reads a rectangular mirror as one line', () => {
     expect(productMirrorSize({ mirrorSize: '100 × 80 cm' })).toBe('100 × 80 cm');

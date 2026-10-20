@@ -22,6 +22,13 @@ export const COMPACT_MAX_WIDTH = 639;
  */
 export const SIDEBAR_MIN_WIDTH = 1024;
 
+/**
+ * From this width an open product sits in a column beside the catalog list;
+ * below it, it takes the whole screen. Beside a 240px sidebar, two columns
+ * need ~1000px between them to keep the product's fields usable.
+ */
+export const SPLIT_PANEL_MIN_WIDTH = 1280;
+
 const isCompactWidth = (maxWidth) => typeof window !== 'undefined' && window.innerWidth <= maxWidth;
 
 export function useIsCompact(maxWidth = COMPACT_MAX_WIDTH) {

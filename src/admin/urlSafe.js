@@ -6,10 +6,16 @@
 export const RESERVED_SLUGS = [
   'admin',
   'wallapop',
+  'utm',
   'catalogo',
   'categoria',
   'contacto',
   'producto',
+  'privacy-policy',
+  'legal-notice',
+  'envios',
+  'devoluciones',
+  'opiniones',
   'en',
 ];
 
