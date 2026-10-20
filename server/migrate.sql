@@ -148,6 +148,21 @@ ALTER TABLE orders ADD COLUMN IF NOT EXISTS event_id TEXT;
 CREATE UNIQUE INDEX IF NOT EXISTS idx_orders_event_id
   ON orders (event_id) WHERE event_id IS NOT NULL;
 
+-- Where the order is in the call-back workflow (ORDER_STATUSES in
+-- server/order-data.js): new → called → confirmed → delivered, or refused.
+-- The API validates the value, not a CHECK, so the list has a single home.
+-- Rows that predate the column stay NULL ("no status"): their outcome was never
+-- recorded, and stamping them 'new' would bury today's orders under months-old
+-- ones. Adding the column without a default is what leaves them NULL; the
+-- default set afterwards applies to new orders only. Both lines are safe to
+-- re-run.
+ALTER TABLE orders ADD COLUMN IF NOT EXISTS status TEXT;
+ALTER TABLE orders ALTER COLUMN status SET DEFAULT 'new';
+ALTER TABLE orders ADD COLUMN IF NOT EXISTS status_changed_at TIMESTAMPTZ;
+
+-- The owner's own note on the order: how the call went, the delivery date.
+ALTER TABLE orders ADD COLUMN IF NOT EXISTS note TEXT NOT NULL DEFAULT '';
+
 -- ─── Visibility ──────────────────────────────────────────────────────────────
 -- Three states, admin-editable (see VISIBILITY in src/data/catalog.js):
 --   'public'   — listed everywhere (default)
