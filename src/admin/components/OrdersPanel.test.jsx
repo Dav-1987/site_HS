@@ -1,6 +1,13 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { render, screen, waitFor } from '@testing-library/react';
 import OrdersPanel from './OrdersPanel.jsx';
+import { useOrders } from '../useOrders.js';
+
+// The panel as the «Заявки» section mounts it: fed by useOrders(), which the
+// admin shell owns.
+function Orders() {
+  return <OrdersPanel {...useOrders()} />;
+}
 
 afterEach(() => vi.unstubAllGlobals());
 
@@ -34,7 +41,7 @@ function mockOrders(orders) {
 describe('OrdersPanel delivery country', () => {
   it('shows the localized country and ISO code for a new order', async () => {
     mockOrders([order()]);
-    render(<OrdersPanel onClose={() => {}} />);
+    render(<Orders />);
 
     await waitFor(() => expect(screen.getByText('Страна: Франция (FR)')).toBeTruthy());
     expect(screen.getByText('+37499123456')).toBeTruthy();
@@ -42,7 +49,7 @@ describe('OrdersPanel delivery country', () => {
 
   it('keeps the country unknown for a legacy order', async () => {
     mockOrders([order({ id: 2, country: null, name: 'Legacy' })]);
-    render(<OrdersPanel onClose={() => {}} />);
+    render(<Orders />);
 
     await waitFor(() => expect(screen.getByText('Страна: неизвестна')).toBeTruthy());
   });
@@ -59,7 +66,7 @@ describe('OrdersPanel traffic source', () => {
         entry: '/tocadores',
       }),
     ]);
-    render(<OrdersPanel onClose={() => {}} />);
+    render(<Orders />);
 
     await waitFor(() =>
       expect(screen.getByText(/Meta Ads · Instagram — «Tocadores Septiembre»/)).toBeTruthy(),
@@ -70,7 +77,7 @@ describe('OrdersPanel traffic source', () => {
 
   it('says nothing extra for an order with no campaign behind it', async () => {
     mockOrders([order()]);
-    render(<OrdersPanel onClose={() => {}} />);
+    render(<Orders />);
 
     await waitFor(() => expect(screen.getByText(/Directo \/ desconocido/)).toBeTruthy());
     expect(screen.queryByText(/Anuncio:/)).toBeNull();
@@ -81,7 +88,7 @@ describe('OrdersPanel traffic source', () => {
 describe('OrdersPanel device', () => {
   it('shows the device on its own line', async () => {
     mockOrders([order({ entry: '/tocadores', device: '📱 iPhone · Instagram (app)' })]);
-    render(<OrdersPanel onClose={() => {}} />);
+    render(<Orders />);
 
     await waitFor(() =>
       expect(screen.getByText('Dispositivo: 📱 iPhone · Instagram (app)')).toBeTruthy(),
@@ -91,7 +98,7 @@ describe('OrdersPanel device', () => {
 
   it('shows no device line for an order saved before devices were stored', async () => {
     mockOrders([order({ device: '' })]);
-    render(<OrdersPanel onClose={() => {}} />);
+    render(<Orders />);
 
     await waitFor(() => expect(screen.getByText(/Directo \/ desconocido/)).toBeTruthy());
     expect(screen.queryByText(/Dispositivo:/)).toBeNull();

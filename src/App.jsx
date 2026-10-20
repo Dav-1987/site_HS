@@ -21,6 +21,9 @@ const Admin = lazy(() => import('./pages/Admin.jsx'));
 const UtmBuilder = lazy(() => import('./pages/UtmBuilder.jsx'));
 const WallapopPanel = import.meta.env.DEV ? lazy(() => import('./pages/WallapopPanel.jsx')) : null;
 
+/** /admin and its sections (/admin/catalog, /admin/orders…). */
+const isAdminPath = (pathname) => pathname === '/admin' || pathname.startsWith('/admin/');
+
 /** Old /categoria/:slug URLs → canonical /:slug (kept so saved links survive).
  *  Spanish-only: this legacy URL form never existed under /en. */
 function LegacyCategoryRedirect() {
@@ -79,6 +82,8 @@ export default function App() {
       isFirstRender.current = false;
       return;
     }
+    // The owner moving between admin sections is not a visit to the site.
+    if (isAdminPath(location.pathname)) return;
     const path = location.pathname + location.search + location.hash;
 
     if (typeof window.ym === 'function') {
@@ -96,12 +101,15 @@ export default function App() {
   return (
     // Reset on every navigation (key=pathname) so a crash on one page doesn't
     // permanently brick the rest of the SPA session — the boundary remounts
-    // fresh as soon as the user moves to a different route.
-    <ErrorBoundary key={location.pathname}>
+    // fresh as soon as the user moves to a different route. Except inside the
+    // admin: its sections are addresses of their own, and remounting it on
+    // every switch would throw away the edits not saved yet.
+    <ErrorBoundary key={isAdminPath(location.pathname) ? '/admin' : location.pathname}>
       <Routes>
-        {/* Admin lives outside the marketing Layout (no header/footer). */}
+        {/* Admin lives outside the marketing Layout (no header/footer). Its
+            sections are routes of its own, under /admin/* (AdminRoutes.jsx). */}
         <Route
-          path="/admin"
+          path="/admin/*"
           element={
             <Suspense fallback={<RouteFallback fullPage />}>
               <Admin />
