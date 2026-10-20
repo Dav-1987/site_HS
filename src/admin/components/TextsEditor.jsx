@@ -73,8 +73,8 @@ function TextGroup({ title, keys, texts, onSet }) {
   );
 }
 
-export default function TextsEditor({ texts, onChange }) {
-  const [open, setOpen] = useState(false);
+export default function TextsEditor({ texts, onChange, defaultOpen = false }) {
+  const [open, setOpen] = useState(defaultOpen);
   const setText = (lang, key, val) =>
     onChange({ ...texts, [lang]: { ...texts[lang], [key]: val } });
 

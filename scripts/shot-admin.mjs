@@ -1,5 +1,5 @@
 /**
- * shot-admin.mjs — mobile screenshots of the admin panel, without a password.
+ * shot-admin.mjs — screenshots of the admin panel, without a password.
  *
  * The admin lives behind a session cookie and `npm run dev` proxies /api to the
  * production VPS, so a plain screenshot run only ever lands on the login screen.
@@ -55,6 +55,8 @@ const ORDERS = [
     comment: 'Demo-заявка для снимка вёрстки.',
     telegramSent: true,
     emailSent: false,
+    status: 'new',
+    note: '',
     attributionLabel: 'instagram / cpc',
     entry: '/tocadores',
     device: '📱 iPhone · Instagram (app)',
@@ -138,6 +140,14 @@ async function main() {
       el.click();
     }, text);
 
+  // Section links: the sidebar on desktop, the strip under the toolbar on a phone.
+  const openSection = (text) =>
+    page.evaluate((t) => {
+      const el = [...document.querySelectorAll('nav a')].find((a) => a.innerText.includes(t));
+      if (!el) throw new Error(`section link not found: ${t}`);
+      el.click();
+    }, text);
+
   // Controls that only exist at one width (the "⋯" menus) — returns false
   // instead of throwing when this viewport doesn't have them.
   const clickByLabel = (label) =>
@@ -215,7 +225,7 @@ async function main() {
   await shot('03-category-open');
   report.push(await measure('03-category-open'));
 
-  await clickByText('Hollywood de cuerpo entero blanco'); // first product header
+  await clickByText('€'); // first product header (it carries the price)
   await settle(700);
   await shot('04-product-open');
   report.push(await measure('04-product-open'));
@@ -250,14 +260,24 @@ async function main() {
 
   await page.evaluate(() => window.scrollTo(0, 0));
   await settle(300);
-  // At phone width the toolbar's buttons are behind "⋯"; on desktop they're
-  // in the row itself.
-  await clickByLabel('Меню админки');
-  await settle(300);
-  await clickByText('Заявки');
+  // At phone width the rebuild and the way out are behind "⋯"; on desktop
+  // they're in the toolbar and the sidebar.
+  if (await clickByLabel('Меню админки')) {
+    await settle(300);
+    await shot('08-toolbar-menu');
+    await page.keyboard.press('Escape');
+    await settle(300);
+  }
+
+  await openSection('Заявки');
   await settle(700);
-  await shot('08-orders');
-  report.push(await measure('08-orders'));
+  await shot('09-orders');
+  report.push(await measure('09-orders'));
+
+  await openSection('Главная');
+  await settle(700);
+  await shot('10-home');
+  report.push(await measure('10-home'));
 
   const reportFile = join(OUT_DIR, `admin-metrics-${stamp}.json`);
   await writeFile(reportFile, JSON.stringify(report, null, 2), 'utf8');

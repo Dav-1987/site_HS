@@ -1,7 +1,8 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { render, screen, fireEvent, act, waitFor, within } from '@testing-library/react';
+import { MemoryRouter, Route, Routes } from 'react-router-dom';
 import * as api from '../api.js';
-import CatalogEditor from './CatalogEditor.jsx';
+import AdminRoutes from '../AdminRoutes.jsx';
 
 // An upload takes seconds — the server writes WebP variants on a one-core box —
 // and the admin stays usable meanwhile. These tests type into it while a file is
@@ -9,8 +10,10 @@ import CatalogEditor from './CatalogEditor.jsx';
 // to write back the catalog as it stood when the file was picked, undoing every
 // edit made during those seconds, in any product, not only the one it was for.
 //
-// The real CatalogEditor and useCatalogEditor, with only the network mocked, so
-// the whole chain from the file input up to the root state is the one /admin runs.
+// The real admin — routes, shell, sections, useCatalogEditor — with only the
+// network mocked, so the whole chain from the file input up to the root state
+// is the one /admin runs. Including switching sections mid-upload: the editor
+// the file was picked in is gone by the time it lands.
 
 vi.mock('../api.js', () => ({
   fetchCatalog: vi.fn(),
@@ -83,6 +86,7 @@ beforeEach(() => {
   api.saveSettings.mockImplementation(async (settings) => ({ settings }));
   api.uploadImage.mockImplementation(hold);
   api.uploadVideo.mockImplementation(hold);
+  api.fetchOrders.mockResolvedValue({ orders: [] });
 });
 
 const click = (name) => fireEvent.click(screen.getByRole('button', { name }));
@@ -92,9 +96,17 @@ const pickFile = (input, name = 'photo.jpg') =>
 const fileInputIn = (text) => screen.getByText(text).closest('label').querySelector('input');
 
 async function openAdmin() {
-  render(<CatalogEditor onLogout={() => {}} />);
+  render(
+    <MemoryRouter initialEntries={['/admin/catalog']}>
+      <Routes>
+        <Route path="/admin/*" element={<AdminRoutes onLogout={() => {}} />} />
+      </Routes>
+    </MemoryRouter>,
+  );
   await screen.findByRole('button', { name: /Tocadores/ });
 }
+
+const goTo = (section) => fireEvent.click(screen.getByRole('link', { name: section }));
 
 async function saved() {
   click('Сохранить');
@@ -114,7 +126,7 @@ const pickMobileCover = (productName) => {
   pickFile(fileInputIn('Загрузить изображение'));
 };
 
-describe('CatalogEditor — edits made while an upload runs', () => {
+describe('Admin — edits made while an upload runs', () => {
   it('keeps them, in the same product and in another one', async () => {
     await openAdmin();
     click(/Tocadores/);
@@ -178,12 +190,14 @@ describe('CatalogEditor — edits made while an upload runs', () => {
     ]);
   });
 
-  it('keeps a settings edit made while the hero photo uploads', async () => {
+  it('keeps a settings edit made in another section while the hero photo uploads', async () => {
     await openAdmin();
+    goTo('Главная страница');
     click(/Главный экран/);
     pickFile(
       screen.getAllByText('Загрузить изображение')[0].closest('label').querySelector('input'),
     );
+    goTo('Настройки');
     click(/Превью при отправке ссылки/);
     type(screen.getByPlaceholderText('Mirage Muebles — Mobiliario minimalista'), 'Nuevo título');
 
@@ -194,13 +208,29 @@ describe('CatalogEditor — edits made while an upload runs', () => {
     expect(settings.hero.image).toBe('/uploads/hero.jpg');
     expect(settings.seo.title).toBe('Nuevo título');
   });
+
+  it('keeps an unsaved catalog edit through a trip to another section', async () => {
+    await openAdmin();
+    click(/Tocadores/);
+    click(/Tocador A/);
+    click(/Основная информация/);
+    type(screen.getByLabelText('Название (исп.)'), 'Tocador A2');
+
+    goTo('Тексты сайта');
+    expect(screen.getByRole('heading', { level: 1, name: 'Тексты сайта' })).toBeTruthy();
+    expect(screen.getByText('Есть несохранённые изменения')).toBeTruthy();
+    goTo('Каталог');
+
+    const { a } = await saved();
+    expect(a.name).toBe('Tocador A2');
+  });
 });
 
 // Where the upload lands when the list moves under it. The editors used to find
 // a product by its place in the list, and an upload keeps the place it saw when
 // the file was picked — so a product moved up, or one deleted above it, sent the
 // photo to whichever neighbour had taken that place.
-describe('CatalogEditor — an upload lands on its own product', () => {
+describe('Admin — an upload lands on its own product', () => {
   it('after that product was moved up', async () => {
     await openAdmin();
     click(/Tocadores/);
@@ -244,6 +274,7 @@ describe('CatalogEditor — an upload lands on its own product', () => {
       settings: { featuredCards: [{ productId: 'Tocador-A' }, { productId: 'Tocador-B' }] },
     });
     await openAdmin();
+    goTo('Главная страница');
     click(/Избранное/);
     // Two cards, each with a cover slot and a video slot, in that order.
     const coverOfB = screen.getAllByText('Загрузить')[2].closest('label').querySelector('input');
