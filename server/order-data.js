@@ -106,3 +106,15 @@ export function normalizeMetaPostalCode(value) {
 export function normalizeMetaPhone(value, shippingCountry) {
   return normalizePhone(value, shippingCountry).replace(/^\+/, '');
 }
+
+// Where an order is in the call-back workflow: there is no online checkout, so
+// the phone call is the conversion and /admin tracks each order through it.
+// Shared with /admin, which renders one option per status in this order.
+// Orders saved before statuses existed have none (NULL in the database).
+export const ORDER_STATUSES = Object.freeze(['new', 'called', 'confirmed', 'delivered', 'refused']);
+
+const ORDER_STATUS_SET = new Set(ORDER_STATUSES);
+
+export function isOrderStatus(value) {
+  return ORDER_STATUS_SET.has(value);
+}

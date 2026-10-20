@@ -36,7 +36,7 @@ import {
   purgePendingRecords,
 } from './store.js';
 import { readSettings, writeSettings } from './settings.js';
-import { listOrders, deleteOrder } from './orders.js';
+import { listOrders, deleteOrder, parseOrderPatch, updateOrder } from './orders.js';
 import { handleOrder } from './order-handler.js';
 import { buildGoogleFeed, buildMetaFeed, buildPinterestFeed } from './feed.js';
 import { buildProductIndex, resolveRedirect } from './redirects.js';
@@ -529,10 +529,16 @@ app.get('/api/orders', async (req, res) => {
   }
 });
 
+// A positive integer id from the URL, or null.
+function orderIdParam(req) {
+  const id = Number(req.params.id);
+  return Number.isSafeInteger(id) && id > 0 ? id : null;
+}
+
 app.delete('/api/orders/:id', async (req, res) => {
   if (!isAuthenticated(req)) return res.status(401).json({ error: 'Unauthorized' });
-  const id = Number(req.params.id);
-  if (!Number.isFinite(id)) return res.status(400).json({ error: 'Invalid order id' });
+  const id = orderIdParam(req);
+  if (!id) return res.status(400).json({ error: 'Invalid order id' });
   try {
     const deleted = await deleteOrder(id);
     if (!deleted) return res.status(404).json({ error: 'Order not found' });
@@ -540,6 +546,25 @@ app.delete('/api/orders/:id', async (req, res) => {
   } catch (err) {
     console.error('order DELETE failed', err);
     res.status(500).json({ error: 'Failed to delete order' });
+  }
+});
+
+// Status and note of an order, from the /admin call-back workflow. Saved on
+// their own, not with the catalog: the admin's "Сохранить" is for the catalog
+// and settings only.
+app.patch('/api/orders/:id', async (req, res) => {
+  if (!isAuthenticated(req)) return res.status(401).json({ error: 'Unauthorized' });
+  const id = orderIdParam(req);
+  if (!id) return res.status(400).json({ error: 'Invalid order id' });
+  const { patch, error } = parseOrderPatch(req.body);
+  if (error) return res.status(400).json({ error });
+  try {
+    const order = await updateOrder(id, patch);
+    if (!order) return res.status(404).json({ error: 'Order not found' });
+    res.json({ order });
+  } catch (err) {
+    console.error('order PATCH failed', err);
+    res.status(500).json({ error: 'Failed to update order' });
   }
 });
 

@@ -236,6 +236,9 @@ ssh root@185.202.172.59 "PGPASSWORD='hs_secure_2024' psql -U hs_user -d hs_muebl
 | GET | `/api/versions` | только авторизованный |
 | POST | `/api/versions` | только авторизованный |
 | POST | `/api/order` | публичный (rate-limit 5/мин) |
+| GET | `/api/orders` | только авторизованный |
+| PATCH | `/api/orders/:id` | только авторизованный — статус и заметка заявки |
+| DELETE | `/api/orders/:id` | только авторизованный |
 
 ### Заявки из корзины (`/api/order`)
 

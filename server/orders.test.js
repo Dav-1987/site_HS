@@ -6,7 +6,8 @@ vi.mock('./db.js', () => ({
   default: { query },
 }));
 
-const { listOrders, saveOrder } = await import('./orders.js');
+const { MAX_ORDER_NOTE_LENGTH, listOrders, parseOrderPatch, saveOrder, updateOrder } =
+  await import('./orders.js');
 
 const order = {
   eventId: 'event-123',
@@ -191,5 +192,139 @@ describe('listOrders device', () => {
     query.mockResolvedValueOnce({ rows: [row(null)] });
 
     await expect(listOrders()).resolves.toMatchObject([{ device: '' }]);
+  });
+});
+
+const statusRow = (overrides) => ({
+  id: '60',
+  created_at: '2026-10-20T10:00:00.000Z',
+  name: 'Ana',
+  phone: '+34600000000',
+  country: 'ES',
+  postal_code: '28001',
+  address: '',
+  comment: '',
+  product_id: 'p1',
+  product_name: 'Tocador Aria',
+  price: 450,
+  attribution: null,
+  user_agent: null,
+  telegram_sent: true,
+  email_sent: true,
+  status: 'new',
+  status_changed_at: null,
+  note: '',
+  ...overrides,
+});
+
+describe('listOrders status', () => {
+  beforeEach(() => query.mockReset());
+
+  it('returns the status, when it changed and the note', async () => {
+    query.mockResolvedValueOnce({
+      rows: [
+        statusRow({
+          status: 'called',
+          status_changed_at: '2026-10-20T11:30:00.000Z',
+          note: 'перезвонить после 18:00',
+        }),
+      ],
+    });
+
+    await expect(listOrders()).resolves.toMatchObject([
+      {
+        status: 'called',
+        statusChangedAt: '2026-10-20T11:30:00.000Z',
+        note: 'перезвонить после 18:00',
+      },
+    ]);
+    expect(query.mock.calls[0][0]).toContain('status_changed_at');
+  });
+
+  it('keeps orders saved before statuses existed without one', async () => {
+    query.mockResolvedValueOnce({ rows: [statusRow({ status: null })] });
+
+    await expect(listOrders()).resolves.toMatchObject([
+      { status: null, statusChangedAt: null, note: '' },
+    ]);
+  });
+});
+
+describe('parseOrderPatch', () => {
+  it('accepts a status, a note, or both', () => {
+    expect(parseOrderPatch({ status: 'called' })).toEqual({ patch: { status: 'called' } });
+    expect(parseOrderPatch({ note: 'доставка 22.10' })).toEqual({
+      patch: { note: 'доставка 22.10' },
+    });
+    expect(parseOrderPatch({ status: 'confirmed', note: '' })).toEqual({
+      patch: { status: 'confirmed', note: '' },
+    });
+  });
+
+  it('ignores the customer fields, which are not editable', () => {
+    expect(parseOrderPatch({ status: 'refused', phone: '+34 911 111 111' })).toEqual({
+      patch: { status: 'refused' },
+    });
+    expect(parseOrderPatch({ name: 'Otro' })).toEqual({ error: 'Nothing to update' });
+  });
+
+  it('rejects a status outside the workflow', () => {
+    for (const status of ['done', 'NEW', '', null, 3]) {
+      expect(parseOrderPatch({ status })).toEqual({ error: 'Unknown order status' });
+    }
+  });
+
+  it('rejects a note that is not text or is too long', () => {
+    expect(parseOrderPatch({ note: 42 })).toEqual({ error: 'Note must be a string' });
+    expect(parseOrderPatch({ note: 'x'.repeat(MAX_ORDER_NOTE_LENGTH) })).toEqual({
+      patch: { note: 'x'.repeat(MAX_ORDER_NOTE_LENGTH) },
+    });
+    expect(parseOrderPatch({ note: 'x'.repeat(MAX_ORDER_NOTE_LENGTH + 1) }).error).toMatch(
+      /longer than/,
+    );
+  });
+
+  it('rejects a body that is not an object', () => {
+    for (const body of [undefined, null, 'called', ['called']]) {
+      expect(parseOrderPatch(body)).toEqual({ error: 'Expected a JSON object' });
+    }
+    expect(parseOrderPatch({})).toEqual({ error: 'Nothing to update' });
+  });
+});
+
+describe('updateOrder', () => {
+  beforeEach(() => query.mockReset());
+
+  it('sets the status and returns the order as /admin lists it', async () => {
+    query.mockResolvedValueOnce({
+      rows: [statusRow({ status: 'called', status_changed_at: '2026-10-20T12:00:00.000Z' })],
+    });
+
+    await expect(updateOrder(60, { status: 'called' })).resolves.toMatchObject({
+      id: 60,
+      status: 'called',
+      statusChangedAt: '2026-10-20T12:00:00.000Z',
+    });
+    const [sql, params] = query.mock.calls[0];
+    expect(sql).toContain('UPDATE orders SET');
+    expect(params).toEqual([60, 'called', null]);
+  });
+
+  it('moves the status time only when the status really changes', async () => {
+    query.mockResolvedValueOnce({ rows: [statusRow()] });
+
+    await updateOrder(60, { note: 'llamar mañana' });
+
+    const [sql, params] = query.mock.calls[0];
+    expect(sql).toMatch(/IS DISTINCT FROM status THEN NOW\(\)/);
+    expect(sql).toContain('ELSE status_changed_at');
+    // A note-only edit leaves the status (and so its time) as it is.
+    expect(params).toEqual([60, null, 'llamar mañana']);
+  });
+
+  it('returns null when no order has this id', async () => {
+    query.mockResolvedValueOnce({ rows: [] });
+
+    await expect(updateOrder(999, { status: 'called' })).resolves.toBeNull();
   });
 });

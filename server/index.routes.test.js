@@ -97,4 +97,13 @@ describe('unauthenticated writes', () => {
     });
     expect(res.status).toBe(401);
   });
+
+  it('turns away a change to an order status', async () => {
+    const res = await fetch(`${base}/api/orders/1`, {
+      method: 'PATCH',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({ status: 'refused' }),
+    });
+    expect(res.status).toBe(401);
+  });
 });
