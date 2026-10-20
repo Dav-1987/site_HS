@@ -170,16 +170,16 @@ export default function ProductImagesEditor({ media, onChange }) {
             <>
               {/* Position / role badge */}
               {i === coverIdx ? (
-                <span className="pointer-events-none absolute left-1 top-1 z-10 bg-background/80 px-1.5 py-0.5 text-[9px] uppercase tracking-[0.12em] text-primary/60">
+                <span className="pointer-events-none absolute left-1 top-1 z-10 bg-background/80 px-1.5 py-0.5 text-[11px] uppercase tracking-[0.12em] text-primary/75">
                   Обложка
                 </span>
               ) : (
-                <span className="pointer-events-none absolute left-1 top-1 z-10 bg-background/80 px-1.5 py-0.5 text-[9px] uppercase tracking-[0.12em] text-primary/50">
+                <span className="pointer-events-none absolute left-1 top-1 z-10 bg-background/80 px-1.5 py-0.5 text-[11px] uppercase tracking-[0.12em] text-primary/75">
                   {i + 1}
                 </span>
               )}
               {isVid && (
-                <span className="pointer-events-none absolute right-1 top-1 z-10 bg-primary/70 px-1 py-0.5 text-[9px] text-background">
+                <span className="pointer-events-none absolute right-1 top-1 z-10 bg-primary/70 px-1 py-0.5 text-[11px] text-background">
                   ▶
                 </span>
               )}
@@ -197,7 +197,9 @@ export default function ProductImagesEditor({ media, onChange }) {
             <img src={src} alt="" className="h-full w-full object-cover pointer-events-none" />
           ) : (
             <div className="flex h-full w-full items-center justify-center">
-              <span className="font-serif text-xl font-light text-primary/20">M</span>
+              <span aria-hidden="true" className="font-serif text-xl font-light text-primary/20">
+                M
+              </span>
             </div>
           );
 
@@ -271,7 +273,7 @@ export default function ProductImagesEditor({ media, onChange }) {
 
               {/* Hover overlay — replace + delete */}
               <div className="absolute inset-0 flex flex-col items-center justify-center gap-2 bg-primary/65 opacity-0 transition-opacity duration-200 group-hover:opacity-100">
-                <label className="cursor-pointer text-center text-[10px] uppercase tracking-[0.1em] text-background transition-colors hover:text-accent">
+                <label className="cursor-pointer text-center text-[11px] uppercase tracking-[0.1em] text-background transition-colors hover:text-accent">
                   {isReplacing ? '…' : '↺ Заменить'}
                   <input
                     type="file"
@@ -285,7 +287,7 @@ export default function ProductImagesEditor({ media, onChange }) {
                   type="button"
                   onClick={() => remove(i)}
                   aria-label={isVid ? 'Удалить видео' : 'Удалить фото'}
-                  className="text-[10px] uppercase tracking-[0.1em] text-background/70 transition-colors hover:text-red-400"
+                  className="text-[11px] uppercase tracking-[0.1em] text-background/70 transition-colors hover:text-danger"
                 >
                   × Удалить
                 </button>
@@ -296,15 +298,15 @@ export default function ProductImagesEditor({ media, onChange }) {
 
         {/* Add photos */}
         <label
-          className="aspect-square cursor-pointer border border-dashed border-primary/20 bg-transparent flex flex-col items-center justify-center gap-1 text-primary/40 transition-colors hover:border-accent hover:text-accent-text"
+          className="aspect-square cursor-pointer border border-dashed border-primary/20 bg-transparent flex flex-col items-center justify-center gap-1 text-primary/75 transition-colors hover:border-accent hover:text-accent-text"
           onDragOver={(e) => e.preventDefault()}
         >
           {photoUploading ? (
-            <span className="text-[10px] uppercase tracking-[0.1em]">{photoProgress}</span>
+            <span className="text-[11px] uppercase tracking-[0.1em]">{photoProgress}</span>
           ) : (
             <>
               <span className="text-2xl leading-none">+</span>
-              <span className="text-[9px] uppercase tracking-[0.1em]">Фото</span>
+              <span className="text-[11px] uppercase tracking-[0.1em]">Фото</span>
             </>
           )}
           <input
@@ -318,13 +320,13 @@ export default function ProductImagesEditor({ media, onChange }) {
         </label>
 
         {/* Add videos */}
-        <label className="aspect-square cursor-pointer border border-dashed border-primary/20 bg-transparent flex flex-col items-center justify-center gap-1 text-primary/40 transition-colors hover:border-accent hover:text-accent-text">
+        <label className="aspect-square cursor-pointer border border-dashed border-primary/20 bg-transparent flex flex-col items-center justify-center gap-1 text-primary/75 transition-colors hover:border-accent hover:text-accent-text">
           {videoUploading ? (
-            <span className="text-[10px] uppercase tracking-[0.1em]">{videoProgress}</span>
+            <span className="text-[11px] uppercase tracking-[0.1em]">{videoProgress}</span>
           ) : (
             <>
               <span className="text-2xl leading-none">▶</span>
-              <span className="text-[9px] uppercase tracking-[0.1em]">Видео</span>
+              <span className="text-[11px] uppercase tracking-[0.1em]">Видео</span>
             </>
           )}
           <input
@@ -338,7 +340,7 @@ export default function ProductImagesEditor({ media, onChange }) {
         </label>
       </div>
 
-      <p className="mt-2 text-xs leading-relaxed text-primary/40">
+      <p className="mt-2 text-xs leading-relaxed text-primary/75">
         {imageSpecText(IMAGE_SPECS.card)} Витрина режет фото по центру — держите товар в центре
         кадра. Видео: MP4, WebM, MOV, макс. 200 МБ. Порядок плиток = порядок в галерее товара.
         Держите хотя бы одно фото — первое фото используется как обложка в каталоге.
@@ -347,7 +349,7 @@ export default function ProductImagesEditor({ media, onChange }) {
       {errors.length > 0 && (
         <div className="mt-2 space-y-1">
           {errors.map((msg, i) => (
-            <p key={i} className="text-xs text-red-600">
+            <p key={i} className="text-xs text-danger">
               {msg}
             </p>
           ))}

@@ -2,7 +2,6 @@ import { describe, expect, it } from 'vitest';
 import {
   STATUS_OPTIONS,
   contactLinks,
-  formatOrderTime,
   matchesOrder,
   ordersInView,
   viewCounts,
@@ -82,24 +81,6 @@ describe('search', () => {
     expect(matchesOrder(order(1), '600 123')).toBe(true);
     expect(matchesOrder(order(1, { phone: '600 12 34 56' }), '6001234')).toBe(true);
     expect(matchesOrder(order(1), '999')).toBe(false);
-  });
-});
-
-describe('formatOrderTime', () => {
-  const now = new Date(2026, 9, 20, 15, 0);
-
-  it('says today and yesterday', () => {
-    expect(formatOrderTime(new Date(2026, 9, 20, 12, 40).toISOString(), now)).toBe(
-      'сегодня, 12:40',
-    );
-    expect(formatOrderTime(new Date(2026, 9, 19, 19, 5).toISOString(), now)).toBe('вчера, 19:05');
-  });
-
-  it('gives the day and month this year, the full date before', () => {
-    expect(formatOrderTime(new Date(2026, 9, 18, 13, 15).toISOString(), now)).toBe('18 окт, 13:15');
-    expect(formatOrderTime(new Date(2025, 9, 18, 13, 15).toISOString(), now)).toBe(
-      '18.10.2025, 13:15',
-    );
   });
 });
 

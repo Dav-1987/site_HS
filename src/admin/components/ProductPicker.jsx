@@ -31,9 +31,14 @@ export default function ProductPicker({ value, onChange, allProducts, excludeId,
             key={id}
             className="flex items-center gap-2 border border-primary/10 bg-background px-3 py-2"
           >
-            <span className="w-5 shrink-0 text-[11px] text-primary/35">{i + 1}</span>
+            <span className="w-5 shrink-0 text-[11px] text-primary/75">{i + 1}</span>
             <span className="min-w-0 flex-1 truncate text-sm text-primary">{labelOf(id)}</span>
-            <button type="button" onClick={() => move(i, -1)} disabled={i === 0} className={BTN_GHOST}>
+            <button
+              type="button"
+              onClick={() => move(i, -1)}
+              disabled={i === 0}
+              className={BTN_GHOST}
+            >
               ↑
             </button>
             <button
@@ -48,13 +53,13 @@ export default function ProductPicker({ value, onChange, allProducts, excludeId,
               type="button"
               onClick={() => remove(i)}
               aria-label="Убрать"
-              className="text-xs uppercase tracking-[0.18em] text-red-600 hover:underline"
+              className="text-xs uppercase tracking-[0.18em] text-danger hover:underline"
             >
               ×
             </button>
           </div>
         ))}
-        {ids.length === 0 && <p className="text-sm text-primary/40">{emptyHint}</p>}
+        {ids.length === 0 && <p className="text-sm text-primary/75">{emptyHint}</p>}
       </div>
       <select
         className={`${INPUT} mt-2`}

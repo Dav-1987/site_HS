@@ -25,7 +25,14 @@ export default function Admin() {
   };
 
   if (authed === null) {
-    return <div className="flex min-h-screen items-center justify-center bg-surface text-primary/50">…</div>;
+    return (
+      <div
+        role="status"
+        className="flex min-h-screen items-center justify-center bg-surface text-primary/75"
+      >
+        Загрузка…
+      </div>
+    );
   }
   if (!authed) return <LoginScreen onSuccess={() => setAuthed(true)} />;
   return <AdminRoutes onLogout={handleLogout} />;

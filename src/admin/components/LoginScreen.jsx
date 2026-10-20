@@ -25,14 +25,14 @@ function LoginForm({ onSuccess, onWantChange }) {
   return (
     <form onSubmit={submit}>
       <Field label="Пароль" type="password" value={password} onChange={setPassword} autoFocus />
-      {error && <p className="mt-4 text-sm text-red-600">{error}</p>}
+      {error && <p className="mt-4 text-sm text-danger">{error}</p>}
       <button type="submit" disabled={busy} className={`${BTN_SOLID} mt-8 w-full justify-center`}>
         {busy ? 'Вход…' : 'Войти'}
       </button>
       <button
         type="button"
         onClick={onWantChange}
-        className="mt-4 w-full text-center text-xs text-primary/60 underline-offset-2 hover:text-accent-text hover:underline"
+        className="mt-4 w-full text-center text-xs text-primary/75 underline-offset-2 hover:text-accent-text hover:underline"
       >
         Сменить пароль
       </button>
@@ -87,14 +87,14 @@ function ChangePasswordForm({ onSuccess, onCancel }) {
           onChange={setConfirm}
         />
       </div>
-      {error && <p className="mt-4 text-sm text-red-600">{error}</p>}
+      {error && <p className="mt-4 text-sm text-danger">{error}</p>}
       <button type="submit" disabled={busy} className={`${BTN_SOLID} mt-8 w-full justify-center`}>
         {busy ? 'Сохранение…' : 'Сменить пароль'}
       </button>
       <button
         type="button"
         onClick={onCancel}
-        className="mt-4 w-full text-center text-xs text-primary/60 underline-offset-2 hover:text-accent-text hover:underline"
+        className="mt-4 w-full text-center text-xs text-primary/75 underline-offset-2 hover:text-accent-text hover:underline"
       >
         Назад ко входу
       </button>

@@ -82,7 +82,7 @@ export default function GiftImagesEditor({ value, onChange }) {
             <div className="relative aspect-[4/5] overflow-hidden border border-primary/15 bg-surface">
               <img src={resolveImage(src, 320)} alt="" className="h-full w-full object-cover" />
               {i === 0 && (
-                <span className="absolute left-0 top-0 bg-primary/80 px-1.5 py-0.5 text-[10px] uppercase tracking-[0.12em] text-background">
+                <span className="absolute left-0 top-0 bg-primary/80 px-1.5 py-0.5 text-[11px] uppercase tracking-[0.12em] text-background">
                   В уголке
                 </span>
               )}
@@ -144,14 +144,14 @@ export default function GiftImagesEditor({ value, onChange }) {
       {errors.length > 0 && (
         <ul className="mt-2 space-y-1">
           {errors.map((msg) => (
-            <li key={msg} className="text-xs text-red-600">
+            <li key={msg} className="text-xs text-danger">
               {msg}
             </li>
           ))}
         </ul>
       )}
 
-      <p className="mt-2 text-xs leading-relaxed text-primary/40">
+      <p className="mt-2 text-xs leading-relaxed text-primary/75">
         {imageSpecText(IMAGE_SPECS.card)} Фото можно несколько: выберите сразу несколько файлов или
         добавляйте по одному, стрелками меняйте порядок. Первое фото показывается маленькой врезкой
         в углу фотографии товара, остальные — во всплывающем окне, когда по врезке кликнут. Без

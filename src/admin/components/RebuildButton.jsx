@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { triggerRebuild, fetchRebuildStatus } from '../api.js';
 import { BTN_GHOST } from '../ui.js';
 import { MenuItem } from './OverflowMenu.jsx';
+import { formatWhen } from '../formatWhen.js';
 
 const POLL_MS = 4000;
 
@@ -13,7 +14,9 @@ function label(run, clickedAt) {
     return clickedAt ? 'Запуск…' : null;
   }
   if (run.status !== 'completed') return 'Собирается…';
-  return run.conclusion === 'success' ? 'Готово ✓' : 'Ошибка ✗';
+  // When the pages search engines read were last built — the question the
+  // owner has before deciding whether to rebuild again.
+  return run.conclusion === 'success' ? `Собран ${formatWhen(run.createdAt)}` : 'Сборка не удалась';
 }
 
 /**
@@ -99,12 +102,12 @@ export default function RebuildButton() {
           href={runUrl}
           target="_blank"
           rel="noreferrer"
-          className="text-xs text-primary/60 underline-offset-2 hover:underline"
+          className="text-xs text-primary/75 underline-offset-2 hover:underline"
         >
           {statusText}
         </a>
       )}
-      {error && <span className="text-xs text-red-600">{error}</span>}
+      {error && <span className="text-xs text-danger">{error}</span>}
       <button type="button" onClick={start} disabled={busy} className={BTN_GHOST} title={TITLE}>
         Пересобрать сайт
       </button>
@@ -125,7 +128,7 @@ export function RebuildMenuItem() {
     <MenuItem keepOpen onClick={start} disabled={busy}>
       Пересобрать сайт
       {(statusText || error) && (
-        <span className={`ml-auto normal-case ${error ? 'text-red-600' : 'text-primary/50'}`}>
+        <span className={`ml-auto normal-case ${error ? 'text-danger' : 'text-primary/75'}`}>
           {error || statusText}
         </span>
       )}

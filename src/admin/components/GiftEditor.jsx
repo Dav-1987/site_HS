@@ -42,7 +42,7 @@ function CountField({ value, onChange }) {
         onChange={(qty) => onChange(qty === '' ? '' : Number(qty))}
         placeholder="1"
       />
-      <p className="mt-2 text-xs leading-relaxed text-primary/40">
+      <p className="mt-2 text-xs leading-relaxed text-primary/75">
         Пусто или 1 — на сайте количество не показывается, как было раньше. Больше одного — сайт
         пишет «2 × Estantería» всюду, где назван подарок (строка под ценой, плашка на фото, окно
         подарка, заявка в Telegram), а цену «valor» считает за все штуки.
@@ -85,7 +85,7 @@ function ShowPriceToggle({ checked, onChange, hint }) {
       />
       <span>
         <span className="block text-sm text-primary">Показывать цену подарка</span>
-        <span className="block text-xs leading-relaxed text-primary/40">{hint}</span>
+        <span className="block text-xs leading-relaxed text-primary/75">{hint}</span>
       </span>
     </label>
   );
@@ -130,7 +130,7 @@ export default function GiftEditor({ value, onChange, allProducts, excludeId, fo
             onChange={(productId) => set({ productId })}
             options={productOptions}
           />
-          <p className="mt-2 text-xs leading-relaxed text-primary/40">
+          <p className="mt-2 text-xs leading-relaxed text-primary/75">
             Название, размеры, фото и цену сайт возьмёт у самого товара — переписывать их здесь не
             нужно. Если подарок не продаётся отдельно, поставьте ему видимость «не в каталоге»:
             страница останется на месте, а из списков он пропадёт.
@@ -165,7 +165,7 @@ export default function GiftEditor({ value, onChange, allProducts, excludeId, fo
             onChange={(size) => set({ size })}
             placeholder="60 × 180 cm"
           />
-          <p className="text-xs leading-relaxed text-primary/40">
+          <p className="text-xs leading-relaxed text-primary/75">
             Одно поле на оба языка — цифры одинаковы. Пусто, если размеры подарку не нужны.
           </p>
           {/* `image` is kept alongside `images` for the reason a product keeps

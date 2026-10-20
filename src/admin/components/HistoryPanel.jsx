@@ -47,10 +47,10 @@ export default function HistoryPanel({ onClose, onRestored }) {
           </button>
         </div>
 
-        {error && <p className="mb-4 text-sm text-red-600">{error}</p>}
-        {!versions && !error && <p className="text-primary/50">Загрузка…</p>}
+        {error && <p className="mb-4 text-sm text-danger">{error}</p>}
+        {!versions && !error && <p className="text-primary/75">Загрузка…</p>}
         {versions && versions.length === 0 && (
-          <p className="text-primary/50">Пока нет сохранённых версий.</p>
+          <p className="text-primary/75">Пока нет сохранённых версий.</p>
         )}
 
         <ul className="space-y-3">
@@ -68,7 +68,7 @@ export default function HistoryPanel({ onClose, onRestored }) {
                     </span>
                   )}
                 </p>
-                <p className="text-xs text-primary/45">
+                <p className="text-xs text-primary/75">
                   {v.categoryCount} катег. · {v.productCount} товаров
                 </p>
               </div>

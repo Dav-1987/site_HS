@@ -31,6 +31,7 @@ beforeEach(() => {
     settingsDirty: false,
     saving: false,
     status: '',
+    saveError: '',
     showHistory: false,
     setShowHistory: vi.fn(),
     allProducts: [],
@@ -148,7 +149,10 @@ describe('AdminShell sections', () => {
     h.editor.categories = null;
     h.editor.loadError = 'Не удалось загрузить каталог';
     renderAdmin();
-    expect(screen.getByRole('alert').textContent).toBe('Не удалось загрузить каталог');
+    const alert = screen.getByRole('alert');
+    expect(within(alert).getByText('Не удалось загрузить каталог')).toBeTruthy();
+    // A draft keeps the edits, so a reload is a safe way to try again.
+    expect(within(alert).getByRole('button', { name: 'Обновить страницу' })).toBeTruthy();
   });
 });
 
@@ -213,6 +217,31 @@ describe('AdminShell toolbar — phone', () => {
     h.editor.dirty = true;
     renderAdmin({ width: PHONE });
     expect(screen.getByText('Есть несохранённые изменения')).toBeTruthy();
+  });
+});
+
+describe('AdminShell save feedback', () => {
+  it('reports a save that went through as news, not as an alarm', () => {
+    h.editor.status = 'Сохранено';
+    renderAdmin();
+    expect(screen.getByRole('status').textContent).toBe('Сохранено');
+    expect(screen.queryByRole('alert')).toBeNull();
+  });
+
+  it('shows a failed save in red, with why, and tries again from there', () => {
+    h.editor.dirty = true;
+    h.editor.saveError = 'Ошибка запроса (502)';
+    renderAdmin();
+    const alert = screen.getByRole('alert');
+    expect(alert.textContent).toContain('Не сохранилось: Ошибка запроса (502)');
+    fireEvent.click(within(alert).getByRole('button', { name: 'Повторить' }));
+    expect(h.editor.save).toHaveBeenCalled();
+  });
+
+  it('keeps the failure in view on a phone too', () => {
+    h.editor.saveError = 'сервер не ответил';
+    renderAdmin({ width: PHONE });
+    expect(screen.getByRole('alert').textContent).toContain('сервер не ответил');
   });
 });
 

@@ -11,10 +11,13 @@
 export const INPUT_BASE =
   'min-h-11 w-full border border-primary/15 bg-background px-3 py-2.5 text-base text-primary transition-colors focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent sm:min-h-0 sm:py-2 sm:text-sm';
 export const INPUT = `mt-1 ${INPUT_BASE}`;
-// 11px of letterspaced caps is a desktop detail; on a phone it needs the size
-// and the contrast to stay a readable label.
-export const LABEL =
-  'text-xs tracking-[0.1em] text-primary/60 uppercase sm:text-[11px] sm:tracking-[0.18em] sm:text-primary/45';
+// A field's name, in sentence case at a readable size. It used to be 11px of
+// letterspaced capitals at 45% ink — 2.6:1 against the page, under the 4.5:1
+// small text needs — and a long label ("Название (англ.) — для страниц /en…")
+// ran to three lines of capitals.
+// Secondary text elsewhere (hints, counts) is `text-primary/75`: 5:1 on both the
+// page and the card colour. Anything lighter fails as small text.
+export const LABEL = 'text-sm font-medium text-primary/80 sm:text-[13px]';
 export const BTN_SOLID =
   'inline-flex min-h-11 items-center justify-center gap-2 bg-primary px-5 py-2.5 text-xs uppercase tracking-[0.18em] text-background transition-colors hover:bg-accent hover:text-primary disabled:cursor-not-allowed disabled:opacity-40 sm:min-h-0';
 export const BTN_GHOST =

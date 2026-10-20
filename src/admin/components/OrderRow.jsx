@@ -2,7 +2,8 @@ import { useEffect, useId, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { productImages, resolveImage } from '../../data/catalog.js';
 import { getCountryName } from '../../../server/order-data.js';
-import { STATUS_OPTIONS, contactLinks, formatOrderTime } from '../orderView.js';
+import { STATUS_OPTIONS, contactLinks } from '../orderView.js';
+import { formatWhen } from '../formatWhen.js';
 import { BTN_GHOST, BTN_SOLID } from '../ui.js';
 import OverflowMenu, { MenuItem } from './OverflowMenu.jsx';
 
@@ -176,7 +177,7 @@ export default function OrderRow({ order, product, now, deleting, onUpdate, onRe
           <StatusSelect order={order} onChange={(status) => onUpdate({ status })} />
         </div>
         <p className="text-sm text-primary/75 lg:mt-2">
-          {formatOrderTime(order.createdAt, now)}
+          {formatWhen(order.createdAt, now)}
           <Notified order={order} />
         </p>
       </div>
@@ -207,7 +208,9 @@ export default function OrderRow({ order, product, now, deleting, onUpdate, onRe
               className="h-full w-full object-cover"
             />
           ) : (
-            <span className="font-serif text-sm font-light text-primary/40">M</span>
+            <span aria-hidden="true" className="font-serif text-sm font-light text-primary/40">
+              M
+            </span>
           )}
         </span>
         <div className="min-w-0">

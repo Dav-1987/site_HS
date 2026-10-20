@@ -24,12 +24,12 @@ export function StockBadge({ product }) {
 export function StockNote({ product }) {
   if (isInStock(product)) return null;
   return (
-    <p className="mt-2 border-l-2 border-primary/30 bg-primary/5 px-3 py-2 text-xs leading-relaxed text-primary/80">
+    <p className="mt-2 border border-primary/20 bg-surface px-3 py-2 text-xs leading-relaxed text-primary">
       Товар остаётся в каталоге, в «Избранном», в «Похожих» и в поиске Google. На фотографиях
       появляется «Agotado» вместо плашки со скидкой, само фото приглушается, кнопка заказа не
       нажимается. В товарном фиде уйдёт как «нет в наличии» — реклама по нему остановится, но
       карточка в Merchant Center сохранится.{' '}
-      <span className="text-primary/50">
+      <span className="text-primary/75">
         На сайте видно сразу после сохранения; для поисковиков — после кнопки «Пересобрать сайт».
       </span>
     </p>

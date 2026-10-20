@@ -6,7 +6,9 @@ const open = () => fireEvent.click(screen.getByRole('button', { name: /Отзы�
 
 describe('ReviewsEditor — выключатели раздела', () => {
   it('показывает оба переключателя внутри панели отзывов', () => {
-    render(<ReviewsEditor reviews={[]} onChange={() => {}} blocks={{}} onBlocksChange={() => {}} />);
+    render(
+      <ReviewsEditor reviews={[]} onChange={() => {}} blocks={{}} onBlocksChange={() => {}} />,
+    );
     open();
     expect(screen.getByLabelText(/Показывать раздел/)).toBeTruthy();
     expect(screen.getByLabelText(/Лента на главной/)).toBeTruthy();
@@ -15,7 +17,12 @@ describe('ReviewsEditor — выключатели раздела', () => {
   it('выключает раздел целиком', () => {
     const onBlocksChange = vi.fn();
     render(
-      <ReviewsEditor reviews={[]} onChange={() => {}} blocks={{ reviews: true }} onBlocksChange={onBlocksChange} />,
+      <ReviewsEditor
+        reviews={[]}
+        onChange={() => {}}
+        blocks={{ reviews: true }}
+        onBlocksChange={onBlocksChange}
+      />,
     );
     open();
     fireEvent.click(screen.getByLabelText(/Показывать раздел/));
@@ -26,7 +33,12 @@ describe('ReviewsEditor — выключатели раздела', () => {
   // почему на главной пусто.
   it('блокирует ленту, когда раздел выключен', () => {
     render(
-      <ReviewsEditor reviews={[]} onChange={() => {}} blocks={{ reviews: false }} onBlocksChange={() => {}} />,
+      <ReviewsEditor
+        reviews={[]}
+        onChange={() => {}}
+        blocks={{ reviews: false }}
+        onBlocksChange={() => {}}
+      />,
     );
     open();
     expect(screen.getByLabelText(/Лента на главной/).disabled).toBe(true);
@@ -34,7 +46,12 @@ describe('ReviewsEditor — выключатели раздела', () => {
 
   it('сообщает в заголовке, что раздел выключен', () => {
     render(
-      <ReviewsEditor reviews={[{ image: '/uploads/a.png' }]} onChange={() => {}} blocks={{ reviews: false }} onBlocksChange={() => {}} />,
+      <ReviewsEditor
+        reviews={[{ image: '/uploads/a.png' }]}
+        onChange={() => {}}
+        blocks={{ reviews: false }}
+        onBlocksChange={() => {}}
+      />,
     );
     expect(screen.getByText('раздел выключен')).toBeTruthy();
   });
