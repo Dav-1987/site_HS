@@ -84,7 +84,7 @@ export default function ImageField({
             className={INPUT}
             value={value ?? ''}
             onChange={(e) => onChange(e.target.value)}
-            placeholder="Unsplash ID, URL или /api/image/…"
+            placeholder="Загрузите картинку или вставьте ссылку на неё"
           />
           <div className="mt-2 flex flex-wrap items-center gap-3">
             <label className={`${BTN_GHOST} cursor-pointer`}>
