@@ -4,9 +4,9 @@ import { countLabel } from './plural.js';
 // /admin; `short` labels the phone's strip of section links, where the full
 // titles don't fit five across. `wide` sections use the whole window rather
 // than a reading-width column — the catalog sets its list and a product side
-// by side.
+// by side, and an order is a row of five columns.
 export const ADMIN_SECTIONS = Object.freeze([
-  { path: 'orders', title: 'Заявки', short: 'Заявки' },
+  { path: 'orders', title: 'Заявки', short: 'Заявки', wide: true },
   { path: 'catalog', title: 'Каталог', short: 'Каталог', wide: true },
   { path: 'home', title: 'Главная страница', short: 'Главная' },
   { path: 'texts', title: 'Тексты сайта', short: 'Тексты' },

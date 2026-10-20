@@ -8,6 +8,7 @@ import { countLabel } from '../plural.js';
 import { giftHint } from '../hints.js';
 import { BTN_GHOST, BTN_SOLID, INPUT_BASE } from '../ui.js';
 import ProductList from '../components/ProductList.jsx';
+import SearchBox from '../components/SearchBox.jsx';
 import ProductPanel from '../components/ProductPanel.jsx';
 import CategoryPanel from '../components/CategoryPanel.jsx';
 import SectionPending from './SectionPending.jsx';
@@ -239,31 +240,16 @@ export default function CatalogSection() {
     <div className="space-y-5">
       {/* ─── search ─── */}
       <div className="flex flex-wrap items-center gap-3">
-        <label className="relative block min-w-0 flex-1 basis-72 lg:max-w-2xl">
-          <span className="sr-only">Поиск по товарам</span>
-          <svg
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="1.6"
-            strokeLinecap="round"
-            aria-hidden="true"
-            className="pointer-events-none absolute left-3.5 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-secondary"
-          >
-            <circle cx="11" cy="11" r="8" />
-            <path d="m21 21-4.3-4.3" />
-          </svg>
-          <input
-            type="search"
-            value={query}
-            onChange={(e) => {
-              setSearch(e.target.value);
-              changeView({ q: e.target.value });
-            }}
-            placeholder="Название, артикул или ID — например, L-06"
-            className="min-h-12 w-full border border-primary/30 bg-background pl-11 pr-3 text-base [&::-webkit-search-cancel-button]:hidden text-primary transition-colors placeholder:text-secondary focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent"
-          />
-        </label>
+        <SearchBox
+          label="Поиск по товарам"
+          value={query}
+          onChange={(value) => {
+            setSearch(value);
+            changeView({ q: value });
+          }}
+          placeholder="Название, артикул или ID — например, L-06"
+          className="flex-1 basis-72 lg:max-w-2xl"
+        />
         <button type="button" onClick={() => setShowHistory(true)} className={BTN_GHOST}>
           История изменений
         </button>

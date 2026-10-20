@@ -40,27 +40,35 @@ const readJson = async (p) => JSON.parse(await readFile(join(ROOT, p), 'utf8'));
 
 // The two panels that have no fixture in the repo get obviously fake rows —
 // enough to lay out, nothing that could be mistaken for real customer data.
+// One demo order per stage, so the screenshot shows the «Заявки» groups.
+const demoOrder = (id, status, hoursAgo, extra = {}) => ({
+  id,
+  name: `Demo Cliente ${id}`,
+  phone: `+3460000000${id}`,
+  createdAt: new Date(Date.now() - hoursAgo * 36e5).toISOString(),
+  productName: 'Espejo Hollywood blanco',
+  productId: 'Espejo-Alto-F-05',
+  price: 239,
+  country: 'ES',
+  postalCode: '28001',
+  address: 'Calle Demo 1',
+  comment: '',
+  telegramSent: true,
+  emailSent: false,
+  status,
+  note: '',
+  attributionLabel: 'instagram / cpc',
+  entry: '/tocadores',
+  device: '📱 iPhone · Instagram (app)',
+  ...extra,
+});
 const ORDERS = [
-  {
-    id: 'demo-1',
-    name: 'Demo Cliente',
-    phone: '+34600000000',
-    createdAt: new Date().toISOString(),
-    productName: 'Espejo Hollywood blanco',
-    productId: 'Espejo-Alto-F-05',
-    price: 239,
-    country: 'ES',
-    postalCode: '28001',
-    address: 'Calle Demo 1',
-    comment: 'Demo-заявка для снимка вёрстки.',
-    telegramSent: true,
-    emailSent: false,
-    status: 'new',
-    note: '',
-    attributionLabel: 'instagram / cpc',
-    entry: '/tocadores',
-    device: '📱 iPhone · Instagram (app)',
-  },
+  demoOrder(1, 'new', 1, { comment: 'Demo-заявка для снимка вёрстки.' }),
+  demoOrder(2, 'new', 3, { telegramSent: false }),
+  demoOrder(3, 'called', 26, { note: 'Demo: перезвонить после 18:00' }),
+  demoOrder(4, 'confirmed', 50, { note: 'Demo: доставка в пятницу' }),
+  demoOrder(5, 'delivered', 200),
+  demoOrder(6, null, 900),
 ];
 const VERSIONS = [
   { id: 'v2', createdAt: new Date().toISOString(), categoryCount: 5, productCount: 124 },
