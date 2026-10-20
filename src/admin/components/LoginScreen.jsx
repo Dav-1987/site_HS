@@ -1,6 +1,8 @@
 import { useState } from 'react';
-import { login as apiLogin, changePassword as apiChangePassword } from '../api.js';
+import { login as apiLogin } from '../api.js';
+import { passwordErrorText } from '../passwordErrors.js';
 import { BTN_SOLID } from '../ui.js';
+import ChangePasswordForm from './ChangePasswordForm.jsx';
 import { Field } from './Field.jsx';
 
 function LoginForm({ onSuccess, onWantChange }) {
@@ -16,7 +18,7 @@ function LoginForm({ onSuccess, onWantChange }) {
       await apiLogin(password);
       onSuccess();
     } catch (err) {
-      setError(err.message || 'Ошибка входа');
+      setError(passwordErrorText(err.message, 'Ошибка входа'));
     } finally {
       setBusy(false);
     }
@@ -40,68 +42,6 @@ function LoginForm({ onSuccess, onWantChange }) {
   );
 }
 
-function ChangePasswordForm({ onSuccess, onCancel }) {
-  const [current, setCurrent] = useState('');
-  const [next, setNext] = useState('');
-  const [confirm, setConfirm] = useState('');
-  const [error, setError] = useState('');
-  const [busy, setBusy] = useState(false);
-
-  const submit = async (e) => {
-    e.preventDefault();
-    setError('');
-    if (next.length < 8) {
-      setError('Новый пароль должен быть не короче 8 символов');
-      return;
-    }
-    if (next !== confirm) {
-      setError('Пароли не совпадают');
-      return;
-    }
-    setBusy(true);
-    try {
-      await apiChangePassword(current, next);
-      onSuccess();
-    } catch (err) {
-      setError(err.message || 'Не удалось сменить пароль');
-    } finally {
-      setBusy(false);
-    }
-  };
-
-  return (
-    <form onSubmit={submit}>
-      <div className="space-y-4">
-        <Field
-          label="Текущий пароль"
-          type="password"
-          value={current}
-          onChange={setCurrent}
-          autoFocus
-        />
-        <Field label="Новый пароль" type="password" value={next} onChange={setNext} />
-        <Field
-          label="Повторите новый пароль"
-          type="password"
-          value={confirm}
-          onChange={setConfirm}
-        />
-      </div>
-      {error && <p className="mt-4 text-sm text-danger">{error}</p>}
-      <button type="submit" disabled={busy} className={`${BTN_SOLID} mt-8 w-full justify-center`}>
-        {busy ? 'Сохранение…' : 'Сменить пароль'}
-      </button>
-      <button
-        type="button"
-        onClick={onCancel}
-        className="mt-4 w-full text-center text-xs text-primary/75 underline-offset-2 hover:text-accent-text hover:underline"
-      >
-        Назад ко входу
-      </button>
-    </form>
-  );
-}
-
 export default function LoginScreen({ onSuccess }) {
   const [mode, setMode] = useState('login'); // 'login' | 'change'
 
@@ -115,7 +55,12 @@ export default function LoginScreen({ onSuccess }) {
         {mode === 'login' ? (
           <LoginForm onSuccess={onSuccess} onWantChange={() => setMode('change')} />
         ) : (
-          <ChangePasswordForm onSuccess={onSuccess} onCancel={() => setMode('login')} />
+          <ChangePasswordForm
+            onSuccess={onSuccess}
+            onCancel={() => setMode('login')}
+            wide
+            autoFocus
+          />
         )}
       </div>
     </div>

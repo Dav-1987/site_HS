@@ -2,31 +2,12 @@ import { useState } from 'react';
 import { translations } from '../../i18n/translations.js';
 import { INPUT, LABEL } from '../ui.js';
 import { normalizeSearch } from '../catalogView.js';
-import Collapsible from './Collapsible.jsx';
+import { groupTexts } from '../textGroups.js';
 import SearchBox from './SearchBox.jsx';
 
-const TEXT_GROUPS = {
-  nav: 'Меню',
-  hero: 'Главный экран',
-  section: 'Секции главной',
-  about: 'Цифры «О нас»',
-  home: 'SEO главной страницы (заголовок вкладки, Google, превью)',
-  catalog: 'Страница каталога',
-  category: 'Категория',
-  product: 'Карточка товара',
-  contact: 'Контакты',
-  footer: 'Подвал',
-  common: 'Общее',
-};
 const TEXT_KEYS = Object.keys(translations.es);
 const isLongText = (key) => (translations.es[key] || '').length > 60;
-
-const GROUPS = Object.entries(
-  TEXT_KEYS.reduce((acc, k) => {
-    (acc[k.split('.')[0]] ||= []).push(k);
-    return acc;
-  }, {}),
-);
+const GROUPS = groupTexts(TEXT_KEYS);
 
 /**
  * True when the query is in the key, in the site's own text (either language)
@@ -75,7 +56,7 @@ function TextRow({ textKey, texts, onSet }) {
 
 const edited = (keys, texts) => keys.filter((k) => texts?.es?.[k] || texts?.en?.[k]).length;
 
-export default function TextsEditor({ texts, onChange, defaultOpen = false }) {
+export default function TextsEditor({ texts, onChange }) {
   const [query, setQuery] = useState('');
   const setText = (lang, key, val) =>
     onChange((t) => ({ ...t, [lang]: { ...t?.[lang], [key]: val } }));
@@ -83,28 +64,30 @@ export default function TextsEditor({ texts, onChange, defaultOpen = false }) {
   const searching = Boolean(normalizeSearch(query));
   const found = searching ? TEXT_KEYS.filter((k) => matchesText(k, texts, query)) : [];
 
+  // The section's own heading names the screen, so this is its body alone — it
+  // used to sit in a fold titled «Тексты сайта» under that same heading.
   return (
-    <Collapsible
-      title="Тексты сайта"
-      summary={total ? `изменено: ${total}` : 'все из кода'}
-      defaultOpen={defaultOpen}
-    >
-      <p className="text-xs leading-relaxed text-primary/75">
+    <div className="space-y-4">
+      <p className="max-w-3xl text-sm leading-relaxed text-primary/75">
         Пусто = берётся текст из кода (показан серым как подсказка). Заполните поле, чтобы
         переопределить; очистите — вернётся стандартный текст. Напишите{' '}
-        <code className="bg-primary/10 px-1">---</code> чтобы скрыть текст на сайте полностью. Цифры в
-        блоке «О нас» — это значения вроде «12+», «100%».
+        <code className="bg-primary/10 px-1">---</code> чтобы скрыть текст на сайте полностью.
       </p>
-      <SearchBox
-        label="Поиск по текстам"
-        value={query}
-        onChange={setQuery}
-        placeholder="Слова с сайта, например «Entrega»"
-        className="max-w-xl"
-      />
+      <div className="flex flex-wrap items-center gap-x-6 gap-y-2">
+        <SearchBox
+          label="Поиск по текстам"
+          value={query}
+          onChange={setQuery}
+          placeholder="Слова с сайта, например «Entrega»"
+          className="flex-1 basis-72 lg:max-w-xl"
+        />
+        <p className="text-sm tabular-nums text-primary/75">
+          {total ? `Изменено: ${total} из ${TEXT_KEYS.length}` : 'Все тексты — из кода'}
+        </p>
+      </div>
 
       {searching ? (
-        <div className="border border-primary/10 bg-background px-4 py-1">
+        <div className="border border-primary/15 bg-surface px-4 py-1">
           {found.length ? (
             found.map((k) => <TextRow key={k} textKey={k} texts={texts} onSet={setText} />)
           ) : (
@@ -112,11 +95,13 @@ export default function TextsEditor({ texts, onChange, defaultOpen = false }) {
           )}
         </div>
       ) : (
-        GROUPS.map(([g, keys]) => (
-          <TextGroup key={g} title={TEXT_GROUPS[g] || g} keys={keys} texts={texts} onSet={setText} />
-        ))
+        <div className="space-y-2">
+          {GROUPS.map((g) => (
+            <TextGroup key={g.prefix} title={g.title} keys={g.keys} texts={texts} onSet={setText} />
+          ))}
+        </div>
       )}
-    </Collapsible>
+    </div>
   );
 }
 
@@ -124,7 +109,7 @@ function TextGroup({ title, keys, texts, onSet }) {
   const [open, setOpen] = useState(false);
   const count = edited(keys, texts);
   return (
-    <div className="border border-primary/10 bg-background">
+    <div className="border border-primary/15 bg-surface">
       <button
         type="button"
         aria-expanded={open}

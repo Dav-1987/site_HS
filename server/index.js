@@ -36,6 +36,7 @@ import {
   purgePendingRecords,
 } from './store.js';
 import { readSettings, writeSettings } from './settings.js';
+import { createQueue, isStale, revisionOf } from './revision.js';
 import { listOrders, deleteOrder, parseOrderPatch, updateOrder } from './orders.js';
 import { handleOrder } from './order-handler.js';
 import { buildGoogleFeed, buildMetaFeed, buildPinterestFeed } from './feed.js';
@@ -256,10 +257,14 @@ function validateCatalog(categories) {
   return null;
 }
 
+// Catalog and settings writes run one at a time, so a save's revision check and
+// its write are never split by another save (see revision.js).
+const writes = createQueue();
+
 app.get('/api/catalog', async (req, res) => {
   try {
     const categories = await readOrSeedCatalog();
-    res.json({ categories });
+    res.json({ categories, revision: revisionOf(categories) });
   } catch (err) {
     console.error('catalog GET failed', err);
     res.status(500).json({ error: 'Failed to load catalog' });
@@ -272,25 +277,31 @@ async function handleCatalogSave(req, res) {
   const invalid = validateCatalog(categories);
   if (invalid) return res.status(400).json({ error: invalid });
   try {
-    const [oldCatalog, settings] = await Promise.all([readOrSeedCatalog(), readSettings()]);
-    const oldKeys = extractUploadKeys(oldCatalog);
-    const settingsKeys = extractSettingsKeys(settings);
+    await writes(async () => {
+      const [oldCatalog, settings] = await Promise.all([readOrSeedCatalog(), readSettings()]);
+      if (isStale(req.body.baseRevision, revisionOf(oldCatalog))) {
+        res.status(409).json({ error: 'Catalog changed since it was loaded', conflict: 'catalog' });
+        return;
+      }
+      const oldKeys = extractUploadKeys(oldCatalog);
+      const settingsKeys = extractSettingsKeys(settings);
 
-    await writeCatalog(categories);
-    const saved = await readOrSeedCatalog();
-    const newKeys = extractUploadKeys(saved);
+      await writeCatalog(categories);
+      const saved = await readOrSeedCatalog();
+      const newKeys = extractUploadKeys(saved);
 
-    const removed = new Set([...oldKeys].filter((k) => !newKeys.has(k) && !settingsKeys.has(k)));
-    const reAdded = new Set([...newKeys].filter((k) => !oldKeys.has(k)));
-    if (removed.size) scheduleForDeletion(removed).catch(console.error);
-    if (reAdded.size) unscheduleFiles(reAdded).catch(console.error);
+      const removed = new Set([...oldKeys].filter((k) => !newKeys.has(k) && !settingsKeys.has(k)));
+      const reAdded = new Set([...newKeys].filter((k) => !oldKeys.has(k)));
+      if (removed.size) scheduleForDeletion(removed).catch(console.error);
+      if (reAdded.size) unscheduleFiles(reAdded).catch(console.error);
 
-    try {
-      await recordVersion(saved);
-    } catch (e) {
-      console.error('recordVersion failed', e);
-    }
-    res.json({ ok: true, categories: saved });
+      try {
+        await recordVersion(saved);
+      } catch (e) {
+        console.error('recordVersion failed', e);
+      }
+      res.json({ ok: true, categories: saved, revision: revisionOf(saved) });
+    });
   } catch (err) {
     console.error('catalog save failed', err);
     res.status(500).json({ error: 'Failed to save catalog' });
@@ -318,16 +329,23 @@ app.post('/api/versions', async (req, res) => {
   const id = Number(req.body?.id);
   if (!Number.isFinite(id)) return res.status(400).json({ error: 'Missing version id' });
   try {
-    const data = await getVersionData(id);
-    if (!data) return res.status(404).json({ error: 'Version not found' });
-    await writeCatalog(data);
-    const saved = await readOrSeedCatalog();
-    try {
-      await recordVersion(saved);
-    } catch (e) {
-      console.error('recordVersion (restore) failed', e);
-    }
-    res.json({ ok: true, categories: saved });
+    // A restore is asked for knowingly from «История», so it is not checked
+    // against what the admin loaded — only kept from interleaving with a save.
+    await writes(async () => {
+      const data = await getVersionData(id);
+      if (!data) {
+        res.status(404).json({ error: 'Version not found' });
+        return;
+      }
+      await writeCatalog(data);
+      const saved = await readOrSeedCatalog();
+      try {
+        await recordVersion(saved);
+      } catch (e) {
+        console.error('recordVersion (restore) failed', e);
+      }
+      res.json({ ok: true, categories: saved, revision: revisionOf(saved) });
+    });
   } catch (err) {
     console.error('versions POST failed', err);
     res.status(500).json({ error: 'Failed to restore version' });
@@ -354,7 +372,7 @@ function validateSettings(settings) {
 app.get('/api/settings', async (req, res) => {
   try {
     const settings = await readSettings();
-    res.json({ settings });
+    res.json({ settings, revision: revisionOf(settings) });
   } catch (err) {
     console.error('settings GET failed', err);
     res.status(500).json({ error: 'Failed to load settings' });
@@ -366,19 +384,30 @@ async function handleSettingsSave(req, res) {
   const invalid = validateSettings(req.body?.settings);
   if (invalid) return res.status(400).json({ error: invalid });
   try {
-    const [oldSettings, catalog] = await Promise.all([readSettings(), readOrSeedCatalog()]);
-    const oldKeys = extractSettingsKeys(oldSettings);
-    const catalogKeys = extractUploadKeys(catalog);
+    await writes(async () => {
+      const [oldSettings, catalog] = await Promise.all([readSettings(), readOrSeedCatalog()]);
+      if (isStale(req.body.baseRevision, revisionOf(oldSettings))) {
+        res
+          .status(409)
+          .json({ error: 'Settings changed since they were loaded', conflict: 'settings' });
+        return;
+      }
+      const oldKeys = extractSettingsKeys(oldSettings);
+      const catalogKeys = extractUploadKeys(catalog);
 
-    const settings = await writeSettings(req.body.settings);
-    const newKeys = extractSettingsKeys(settings);
+      await writeSettings(req.body.settings);
+      // Read back rather than trusting what was written: the revision must be
+      // the one the next GET will compute, or the next save looks stale.
+      const settings = await readSettings();
+      const newKeys = extractSettingsKeys(settings);
 
-    const removed = new Set([...oldKeys].filter((k) => !newKeys.has(k) && !catalogKeys.has(k)));
-    const reAdded = new Set([...newKeys].filter((k) => !oldKeys.has(k)));
-    if (removed.size) scheduleForDeletion(removed).catch(console.error);
-    if (reAdded.size) unscheduleFiles(reAdded).catch(console.error);
+      const removed = new Set([...oldKeys].filter((k) => !newKeys.has(k) && !catalogKeys.has(k)));
+      const reAdded = new Set([...newKeys].filter((k) => !oldKeys.has(k)));
+      if (removed.size) scheduleForDeletion(removed).catch(console.error);
+      if (reAdded.size) unscheduleFiles(reAdded).catch(console.error);
 
-    res.json({ ok: true, settings });
+      res.json({ ok: true, settings, revision: revisionOf(settings) });
+    });
   } catch (err) {
     console.error('settings save failed', err);
     res.status(500).json({ error: 'Failed to save settings' });
@@ -790,6 +819,28 @@ app.get('/{*splat}', async (req, res, next) => {
 app.get('/{*splat}', (req, res) => {
   const isClientOnlyRoute = CLIENT_ONLY_ROUTES.some((re) => re.test(req.path));
   res.status(isClientOnlyRoute ? 200 : 404).sendFile(join(DIST_DIR, 'index.html'));
+});
+
+// ─── Errors ───────────────────────────────────────────────────────────────────
+//
+// Express's own handler writes the stack trace into the response unless
+// NODE_ENV is "production", which it is not on the VPS: a scanner asking for
+// `/.env%85` got the server's file paths and library layout back, and left
+// eleven lines of stack in err.log per probe. A request the server cannot read
+// (a malformed %-escape, a body that is not JSON or is too large — the router
+// and body-parser mark those 4xx) is the client's: one line in the log. Anything
+// else is ours: 500, logged in full. Neither answer says more than its status.
+app.use((err, req, res, next) => {
+  if (res.headersSent) return next(err);
+  const status = err.status >= 400 && err.status < 500 ? err.status : 500;
+  if (status < 500) {
+    console.warn(`[http] ${status} ${req.method} ${req.originalUrl.slice(0, 200)}: ${err.message}`);
+  } else {
+    console.error(`[http] ${req.method} ${req.originalUrl.slice(0, 200)} failed`, err);
+  }
+  const message = status < 500 ? 'Bad request' : 'Internal server error';
+  if (req.originalUrl.startsWith('/api/')) return res.status(status).json({ error: message });
+  return res.status(status).type('text/plain').send(message);
 });
 
 // ─── Start ────────────────────────────────────────────────────────────────────

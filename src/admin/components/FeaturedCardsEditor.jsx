@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { resolveImage } from '../../data/catalog.js';
+import { featuredLayouts } from '../../data/settings.js';
 import { uploadImage, uploadVideo } from '../api.js';
 import { INPUT, LABEL, BTN_GHOST } from '../ui.js';
 import { productOptionLabel } from '../productLabel.js';
@@ -76,11 +77,27 @@ function UploadSlot({ kind, src, onUploaded, label, spec }) {
   );
 }
 
-// Editor for the home "Featured pieces" section: an ordered list of cards, each
+/**
+ * What the folded «Избранное» says: its cards, and where the carousel shows.
+ * Its on/off switches live in «Блоки главной», so switched off everywhere the
+ * fold must say so itself — "подбирается автоматически" alone read as working.
+ */
+function featuredSummary(cardCount, blocks) {
+  const { mobile, desktop } = featuredLayouts(blocks);
+  if (!mobile && !desktop) return 'выключено на сайте';
+  const cards = cardCount
+    ? countLabel(cardCount, ['карточка', 'карточки', 'карточек'])
+    : 'подбирается автоматически';
+  if (mobile && desktop) return cards;
+  return `${cards} · только ${mobile ? 'на мобильных' : 'на ПК'}`;
+}
+
+// Editor for the home «Избранное» section: an ordered list of cards, each
 // linking to a product (name + price shown on the card) with an optional cover
 // image and video. Empty → the home page auto-curates the section instead.
-export default function FeaturedCardsEditor({ value, onChange, allProducts }) {
+export default function FeaturedCardsEditor({ value, onChange, allProducts, blocks }) {
   const cards = Array.isArray(value) ? value : [];
+  const { mobile, desktop } = featuredLayouts(blocks);
 
   // Into the cards as they are when the change lands — a cover or a video
   // uploads for seconds, and the card may have been moved meanwhile, so it is
@@ -115,16 +132,18 @@ export default function FeaturedCardsEditor({ value, onChange, allProducts }) {
   };
 
   return (
-    <Collapsible
-      title="Избранное"
-      summary={
-        cards.length
-          ? countLabel(cards.length, ['карточка', 'карточки', 'карточек'])
-          : 'подбирается автоматически'
-      }
-    >
+    <Collapsible title="Избранное" summary={featuredSummary(cards.length, blocks)}>
+      {!mobile && !desktop && (
+        <p
+          role="status"
+          className="border border-accent-text/40 px-4 py-3 text-sm text-accent-text"
+        >
+          Сейчас этого блока нет на сайте: он выключен и на мобильных, и на ПК. Включить можно ниже,
+          в «Блоках главной».
+        </p>
+      )}
       <p className="text-xs leading-relaxed text-primary/75">
-        Карточки блока «Featured pieces» на главной. Каждая ведёт на выбранный товар и показывает
+        Карточки блока «Piezas destacadas» на главной. Каждая ведёт на выбранный товар и показывает
         его название и цену. Обложка видна всегда; видео проигрывается при наведении курсора (ПК)
         или когда карточка полностью видна (моб.). Клик/тап — переход на товар. Пусто — подборка
         формируется автоматически.

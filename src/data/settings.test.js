@@ -1,5 +1,11 @@
 import { describe, it, expect } from 'vitest';
-import { BLOCKS, BLOCKS_OFF_BY_DEFAULT, mergeSettings, posterFor } from './settings.js';
+import {
+  BLOCKS,
+  BLOCKS_OFF_BY_DEFAULT,
+  featuredLayouts,
+  mergeSettings,
+  posterFor,
+} from './settings.js';
 
 describe('mergeSettings — featuredCards', () => {
   it('keeps valid cards with trimmed fields, in order', () => {
@@ -72,6 +78,29 @@ describe('mergeSettings — blocks', () => {
   it('carries a switch for the reviews section and its home strip', () => {
     expect(BLOCKS).toContain('reviews');
     expect(BLOCKS).toContain('reviewsHome');
+  });
+});
+
+describe('featuredLayouts', () => {
+  it('shows on phones only when nothing was ever switched', () => {
+    expect(featuredLayouts(undefined)).toEqual({ mobile: true, desktop: false });
+    expect(featuredLayouts({})).toEqual({ mobile: true, desktop: false });
+  });
+
+  it('follows each switch on its own', () => {
+    expect(featuredLayouts({ featured: false, featuredDesktop: true })).toEqual({
+      mobile: false,
+      desktop: true,
+    });
+    expect(featuredLayouts({ featured: false, featuredDesktop: false })).toEqual({
+      mobile: false,
+      desktop: false,
+    });
+  });
+
+  it('reads sanitized settings the same as raw ones', () => {
+    const blocks = { featured: false, featuredDesktop: true };
+    expect(featuredLayouts(mergeSettings({ blocks }).blocks)).toEqual(featuredLayouts(blocks));
   });
 });
 

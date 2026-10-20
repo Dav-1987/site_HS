@@ -163,6 +163,15 @@ export const BLOCKS = [
 /** Blocks that stay off unless explicitly switched on (see above). */
 export const BLOCKS_OFF_BY_DEFAULT = ['featuredDesktop'];
 
+/**
+ * Where the home «Избранное» carousel shows, by the rules above: on phones
+ * unless switched off, on md+ screens only once switched on. One reading for
+ * the page and for the admin that describes it.
+ */
+export function featuredLayouts(blocks) {
+  return { mobile: blocks?.featured !== false, desktop: blocks?.featuredDesktop === true };
+}
+
 function sanitizeBlocks(blocks) {
   const out = {};
   for (const key of BLOCKS) {

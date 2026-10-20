@@ -7,7 +7,7 @@
 //
 // Only routes that need neither the database nor a built dist/ are exercised
 // here; the rest are checked against the live site after deploy.
-import { describe, it, expect, beforeAll, afterAll } from 'vitest';
+import { describe, it, expect, beforeAll, afterAll, vi } from 'vitest';
 import app from './index.js';
 
 let server;
@@ -77,6 +77,66 @@ describe('/api/admin/login', () => {
     expect(res.status).toBe(500);
     // The process survived it: the next request is still served.
     expect((await get('/api/admin/login')).status).toBe(200);
+  });
+});
+
+describe('errors', () => {
+  // Express's own handler wrote the stack trace into the page: scanners probing
+  // for /.env%85 got the server's file paths back.
+  const noStack = (body) => {
+    expect(body).not.toMatch(/node_modules|URIError|\bat \w/);
+  };
+
+  it('answers a malformed address with a bare 400', async () => {
+    const warn = vi.spyOn(console, 'warn').mockImplementation(() => {});
+    const res = await get('/.env%85');
+    expect(res.status).toBe(400);
+    expect(res.headers.get('content-type')).toMatch(/text\/plain/);
+    const body = await res.text();
+    expect(body).toBe('Bad request');
+    noStack(body);
+    // One line in the log, not a stack per probe.
+    expect(warn).toHaveBeenCalledTimes(1);
+    expect(warn.mock.calls[0]).toHaveLength(1);
+    warn.mockRestore();
+  });
+
+  it('answers a malformed API address in JSON', async () => {
+    const warn = vi.spyOn(console, 'warn').mockImplementation(() => {});
+    const res = await get('/api/x%c0');
+    expect(res.status).toBe(400);
+    expect(await res.json()).toEqual({ error: 'Bad request' });
+    warn.mockRestore();
+  });
+
+  it('answers a body that is not JSON with a bare 400', async () => {
+    const warn = vi.spyOn(console, 'warn').mockImplementation(() => {});
+    const res = await fetch(`${base}/api/catalog`, {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: '{not json',
+    });
+    expect(res.status).toBe(400);
+    const body = await res.text();
+    expect(JSON.parse(body)).toEqual({ error: 'Bad request' });
+    noStack(body);
+    warn.mockRestore();
+  });
+
+  it('answers its own failure without saying what failed', async () => {
+    const error = vi.spyOn(console, 'error').mockImplementation(() => {});
+    const res = await fetch(`${base}/api/admin/login`, {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({ password: 'definitely-not-the-password' }),
+    });
+    expect(res.status).toBe(500);
+    const body = await res.text();
+    expect(JSON.parse(body)).toEqual({ error: 'Internal server error' });
+    noStack(body);
+    // Logged in full for us, though.
+    expect(error).toHaveBeenCalled();
+    error.mockRestore();
   });
 });
 

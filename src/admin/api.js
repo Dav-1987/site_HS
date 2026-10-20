@@ -9,7 +9,11 @@ async function asJson(res) {
     /* no body */
   }
   if (!res.ok) {
-    throw new Error(data?.error || `Ошибка запроса (${res.status})`);
+    const err = new Error(data?.error || `Ошибка запроса (${res.status})`);
+    err.status = res.status;
+    // 'catalog' | 'settings' on a 409: saved from elsewhere since it was loaded.
+    err.conflict = data?.conflict ?? null;
+    throw err;
   }
   return data;
 }
@@ -42,11 +46,16 @@ export function fetchCatalog() {
   return fetch('/api/catalog', { method: 'GET' }).then(asJson);
 }
 
-export function saveCatalog(categories) {
+/**
+ * Saves the whole catalog; resolves to `{ categories, revision }`.
+ * `baseRevision` is the revision it was loaded at — the server answers 409 if it
+ * has been saved from elsewhere since. Left out, the save is not checked.
+ */
+export function saveCatalog(categories, baseRevision) {
   return fetch('/api/catalog', {
     method: 'POST',
     headers: { 'content-type': 'application/json' },
-    body: JSON.stringify({ categories }),
+    body: JSON.stringify({ categories, baseRevision }),
   }).then(asJson);
 }
 
@@ -54,11 +63,12 @@ export function fetchSettings() {
   return fetch('/api/settings', { method: 'GET' }).then(asJson);
 }
 
-export function saveSettings(settings) {
+/** As saveCatalog, for the settings; resolves to `{ settings, revision }`. */
+export function saveSettings(settings, baseRevision) {
   return fetch('/api/settings', {
     method: 'POST',
     headers: { 'content-type': 'application/json' },
-    body: JSON.stringify({ settings }),
+    body: JSON.stringify({ settings, baseRevision }),
   }).then(asJson);
 }
 

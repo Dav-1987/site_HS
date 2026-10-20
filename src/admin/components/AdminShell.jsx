@@ -11,6 +11,13 @@ import RebuildButton, { RebuildMenuItem } from './RebuildButton.jsx';
 import OverflowMenu, { MenuItem, MenuSeparator } from './OverflowMenu.jsx';
 import { AdminNavStrip, AdminSidebar } from './AdminNav.jsx';
 
+// A button inside the toolbar note: a link-like action on its line.
+const NOTE_BUTTON =
+  'min-h-11 font-semibold underline underline-offset-2 hover:no-underline disabled:opacity-50 sm:min-h-0';
+
+// Which part of the admin another tab saved first («…уже изменили»).
+const CONFLICT_SUBJECT = { catalog: 'каталог', settings: 'настройки' };
+
 /**
  * The frame of the admin: its sections down the left edge (a strip under the
  * toolbar on narrower screens), a toolbar with «Пересобрать сайт» and
@@ -32,13 +39,18 @@ export default function AdminShell({ onLogout }) {
     saving,
     status,
     saveError,
+    conflict,
     save,
+    overwrite,
+    reloadFromServer,
     updateSettings,
     showHistory,
     setShowHistory,
     applyRestored,
   } = editor;
   const canSave = (dirty || settingsDirty) && !saving;
+  // The conflict note carries two buttons, too much for the toolbar's row.
+  const noteOnOwnLine = narrow || Boolean(conflict);
   // A reading-width column for forms; the whole window for the catalog, which
   // sets its list and an open product side by side.
   const column = section?.wide ? 'max-w-[1600px]' : 'max-w-5xl';
@@ -71,18 +83,26 @@ export default function AdminShell({ onLogout }) {
   }, [section]);
 
   // One source for the toolbar note, in the row on desktop and on its own line
-  // on narrower screens, where it must not be what gets squeezed out. A failed
-  // save outranks everything: red, with the reason and a way to try again.
+  // on narrower screens, where it must not be what gets squeezed out. A save
+  // turned away because another tab saved first outranks everything — retrying
+  // would only be turned away again, so it offers the two ways out instead. Then
+  // a failed save: red, with the reason and a way to try again.
   const statusNote = status || (dirty || settingsDirty ? 'Есть несохранённые изменения' : '');
-  const toolbarNote = saveError ? (
+  const toolbarNote = conflict ? (
+    <span role="alert" className="flex flex-wrap items-center gap-x-3 text-xs text-danger">
+      Не сохранилось: {CONFLICT_SUBJECT[conflict]} уже изменили в другой вкладке или на другом
+      устройстве.
+      <button type="button" onClick={reloadFromServer} disabled={saving} className={NOTE_BUTTON}>
+        Загрузить свежую версию
+      </button>
+      <button type="button" onClick={overwrite} disabled={saving} className={NOTE_BUTTON}>
+        Сохранить мои поверх
+      </button>
+    </span>
+  ) : saveError ? (
     <span role="alert" className="flex flex-wrap items-center gap-x-2 text-xs text-danger">
       Не сохранилось: {saveError}
-      <button
-        type="button"
-        onClick={save}
-        disabled={saving}
-        className="min-h-11 font-semibold underline underline-offset-2 hover:no-underline disabled:opacity-50 sm:min-h-0"
-      >
+      <button type="button" onClick={save} disabled={saving} className={NOTE_BUTTON}>
         Повторить
       </button>
     </span>
@@ -106,7 +126,7 @@ export default function AdminShell({ onLogout }) {
             <h1 className="mr-auto min-w-0 truncate font-serif text-2xl font-light lg:text-3xl">
               {section?.title}
             </h1>
-            {!narrow && toolbarNote}
+            {!noteOnOwnLine && toolbarNote}
             {/* Narrower screens keep only «Сохранить» in the row; the rest of
                 the toolbar and the way out go behind "⋯". */}
             {narrow ? (
@@ -134,7 +154,7 @@ export default function AdminShell({ onLogout }) {
             >
               {saving ? 'Сохранение…' : 'Сохранить'}
             </button>
-            {narrow && toolbarNote && <div className="basis-full">{toolbarNote}</div>}
+            {noteOnOwnLine && toolbarNote && <div className="basis-full">{toolbarNote}</div>}
           </div>
           {narrow && <AdminNavStrip newOrders={orders.newCount} />}
         </header>

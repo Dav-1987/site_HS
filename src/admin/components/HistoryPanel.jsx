@@ -24,7 +24,7 @@ export default function HistoryPanel({ onClose, onRestored }) {
     setError('');
     try {
       const data = await apiRestoreVersion(id);
-      onRestored(data.categories);
+      onRestored(data.categories, data.revision);
     } catch (e) {
       setError(e.message || 'Ошибка восстановления');
       setRestoringId(null);

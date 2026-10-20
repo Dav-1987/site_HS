@@ -1,3 +1,4 @@
+import { featuredLayouts } from '../../data/settings.js';
 import Collapsible from './Collapsible.jsx';
 
 // Sections of the home page that can be switched off wholesale. Each key maps to
@@ -9,10 +10,11 @@ import Collapsible from './Collapsible.jsx';
 // (md+ screens). Off on both means the section isn't rendered; off on one means
 // it's rendered and hidden there with CSS — the page can't know the screen
 // width at render time.
+// Which flag is which is read by featuredLayouts — the desktop one is opt-in,
+// the section used to be phone-only (see BLOCKS_OFF_BY_DEFAULT).
 const FEATURED_DEVICES = [
-  { key: 'featured', label: 'На мобильных', on: (v) => v !== false },
-  // Opt-in: the section used to be phone-only (see BLOCKS_OFF_BY_DEFAULT).
-  { key: 'featuredDesktop', label: 'На ПК', on: (v) => v === true },
+  { key: 'featured', layout: 'mobile', label: 'На мобильных' },
+  { key: 'featuredDesktop', layout: 'desktop', label: 'На ПК' },
 ];
 
 const BLOCK_FIELDS = [
@@ -32,9 +34,10 @@ const HINT = 'block text-xs leading-relaxed text-primary/75';
 
 export default function BlocksEditor({ blocks, onChange }) {
   const set = (key, value) => onChange((b) => ({ ...b, [key]: value }));
-  const featuredOn = FEATURED_DEVICES.filter((d) => d.on(blocks?.[d.key]));
+  const shown = featuredLayouts(blocks);
   const hiddenCount =
-    BLOCK_FIELDS.filter((f) => blocks?.[f.key] === false).length + (featuredOn.length ? 0 : 1);
+    BLOCK_FIELDS.filter((f) => blocks?.[f.key] === false).length +
+    (shown.mobile || shown.desktop ? 0 : 1);
 
   return (
     <Collapsible
@@ -51,7 +54,7 @@ export default function BlocksEditor({ blocks, onChange }) {
             <label key={d.key} className="flex min-h-11 items-center gap-2 sm:min-h-0">
               <input
                 type="checkbox"
-                checked={d.on(blocks?.[d.key])}
+                checked={shown[d.layout]}
                 onChange={(e) => set(d.key, e.target.checked)}
                 className="h-4 w-4 shrink-0 accent-primary"
               />
