@@ -103,7 +103,8 @@ async function openAdmin() {
       </Routes>
     </MemoryRouter>,
   );
-  await screen.findByRole('button', { name: /Tocadores/ });
+  // The catalog opens on its first category.
+  await screen.findByRole('link', { name: 'Tocador A' });
 }
 
 const goTo = (section) => fireEvent.click(screen.getByRole('link', { name: section }));
@@ -117,31 +118,35 @@ async function saved() {
   return { a: byId('Tocador-A'), b: byId('Tocador-B'), c: byId('Espejo-C'), categories };
 }
 
-// The ↑ ↓ × of a row: the header its name is in, then the button by its title.
-const rowAction = (rowName, title) =>
-  within(screen.getByRole('button', { name: rowName }).parentElement).getByTitle(title);
-const pickMobileCover = (productName) => {
-  click(productName);
-  click(/Обложка для мобильных/);
+// A product opens in a side panel — at the test's 1024px, a full-screen one.
+const openProduct = (name) => fireEvent.click(screen.getByRole('link', { name }));
+const panel = () => within(screen.getByRole('dialog'));
+const openTab = (name) => fireEvent.click(panel().getByRole('tab', { name: new RegExp(name) }));
+const closeProduct = () => fireEvent.click(panel().getByRole('button', { name: 'Закрыть товар' }));
+// A row's "⋯" menu, then one of its items.
+const rowAction = (product, item) => {
+  fireEvent.click(screen.getByRole('button', { name: `Действия с товаром ${product}` }));
+  fireEvent.click(screen.getByRole('menuitem', { name: item }));
+};
+const pickMobileCover = (name) => {
+  openProduct(name);
+  openTab('Фото и видео');
   pickFile(fileInputIn('Загрузить изображение'));
 };
 
 describe('Admin — edits made while an upload runs', () => {
   it('keeps them, in the same product and in another one', async () => {
     await openAdmin();
-    click(/Tocadores/);
-    click(/Tocador A/);
-    click(/Обложка для мобильных/);
-    pickFile(fileInputIn('Загрузить изображение'));
+    pickMobileCover('Tocador A');
 
-    click(/Основная информация/);
-    type(screen.getByLabelText('Название (исп.)'), 'Tocador A2');
-    // Folding the card unmounts the field the upload started from — the
-    // result still has to land, and on top of what happened afterwards.
-    click(/Tocador A2/);
-    click(/Tocador B/);
-    click(/Основная информация/);
-    type(screen.getByLabelText('Название (исп.)'), 'Tocador B2');
+    // Another tab unmounts the field the upload started from, and closing the
+    // panel the whole product — the result still has to land, on top of what
+    // happened afterwards.
+    openTab('Основное');
+    type(panel().getByLabelText('Название (исп.)'), 'Tocador A2');
+    closeProduct();
+    openProduct('Tocador B');
+    type(panel().getByLabelText('Название (исп.)'), 'Tocador B2');
 
     await finish(0, '/uploads/mobile.jpg');
     const { a, b } = await saved();
@@ -152,11 +157,8 @@ describe('Admin — edits made while an upload runs', () => {
 
   it('keeps the gift name typed while its photo uploads', async () => {
     await openAdmin();
-    click(/Tocadores/);
-    click(/Tocador A/);
-    // The category has a «Подарок» group too; the product's is the one that
-    // follows the category rule.
-    click(/Подарок.*как у категории/);
+    openProduct('Tocador A');
+    openTab('Акции и подарок');
     fireEvent.change(screen.getByLabelText('Подарок к этому товару'), {
       target: { value: 'custom' },
     });
@@ -172,9 +174,8 @@ describe('Admin — edits made while an upload runs', () => {
 
   it('keeps both of two uploads that overlap in one gallery', async () => {
     await openAdmin();
-    click(/Tocadores/);
-    click(/Tocador A/);
-    click(/Фото и видео/);
+    openProduct('Tocador A');
+    openTab('Фото и видео');
     const add = (accept) =>
       document.querySelector(`input[type="file"][accept="${accept}"][multiple]`);
     pickFile(add('image/*'), 'photo.jpg');
@@ -211,10 +212,8 @@ describe('Admin — edits made while an upload runs', () => {
 
   it('keeps an unsaved catalog edit through a trip to another section', async () => {
     await openAdmin();
-    click(/Tocadores/);
-    click(/Tocador A/);
-    click(/Основная информация/);
-    type(screen.getByLabelText('Название (исп.)'), 'Tocador A2');
+    openProduct('Tocador A');
+    type(panel().getByLabelText('Название (исп.)'), 'Tocador A2');
 
     goTo('Тексты сайта');
     expect(screen.getByRole('heading', { level: 1, name: 'Тексты сайта' })).toBeTruthy();
@@ -233,9 +232,9 @@ describe('Admin — edits made while an upload runs', () => {
 describe('Admin — an upload lands on its own product', () => {
   it('after that product was moved up', async () => {
     await openAdmin();
-    click(/Tocadores/);
-    pickMobileCover(/Tocador B/);
-    fireEvent.click(rowAction(/Tocador B/, 'Переместить выше'));
+    pickMobileCover('Tocador B');
+    closeProduct();
+    rowAction('Tocador B', 'Переместить выше');
 
     await finish(0, '/uploads/b-mobile.jpg');
     const { a, b } = await saved();
@@ -245,10 +244,10 @@ describe('Admin — an upload lands on its own product', () => {
 
   it('after the product above it was deleted', async () => {
     await openAdmin();
-    click(/Tocadores/);
-    pickMobileCover(/Tocador B/);
+    pickMobileCover('Tocador B');
+    closeProduct();
     window.confirm.mockReturnValueOnce(true);
-    fireEvent.click(rowAction(/Tocador A/, 'Удалить товар'));
+    rowAction('Tocador A', 'Удалить товар');
 
     await finish(0, '/uploads/b-mobile.jpg');
     const { a, b } = await saved();
@@ -258,15 +257,52 @@ describe('Admin — an upload lands on its own product', () => {
 
   it('after its whole category was moved', async () => {
     await openAdmin();
-    click(/Tocadores/);
-    pickMobileCover(/Tocador A/);
-    fireEvent.click(rowAction(/Tocadores/, 'Переместить ниже'));
+    pickMobileCover('Tocador A');
+    closeProduct();
+    click('Настройки категории');
+    click('Переместить правее');
 
     await finish(0, '/uploads/a-mobile.jpg');
     const { a, c, categories } = await saved();
     expect(categories.map((cat) => cat.slug)).toEqual(['espejos', 'tocadores']);
     expect(a.imageMobile).toBe('/uploads/a-mobile.jpg');
     expect(c.imageMobile).toBeFalsy();
+  });
+
+  it('after it was moved to another category', async () => {
+    await openAdmin();
+    pickMobileCover('Tocador A');
+    closeProduct();
+    fireEvent.click(screen.getByRole('checkbox', { name: 'Выбрать Tocador A' }));
+    fireEvent.change(screen.getByRole('combobox', { name: 'Переместить в категорию' }), {
+      target: { value: 'espejos' },
+    });
+    click('Переместить выбранные');
+
+    await finish(0, '/uploads/a-mobile.jpg');
+    const { a, categories } = await saved();
+    expect(categories[1].products.map((p) => p.id)).toEqual(['Espejo-C', 'Tocador-A']);
+    expect(a.imageMobile).toBe('/uploads/a-mobile.jpg');
+  });
+
+  it('after it was given a new id', async () => {
+    // The id is what finds the product when the photo lands. A new one loses
+    // that photo — but never to another product (see catalogOps.js).
+    await openAdmin();
+    pickMobileCover('Tocador A');
+    openTab('Основное');
+    click('Изменить…');
+    type(panel().getByLabelText('Адрес страницы (ID)'), 'Tocador-B');
+    expect(panel().getByRole('alert').textContent).toBe('Такой ID уже есть у другого товара');
+    type(panel().getByLabelText('Адрес страницы (ID)'), 'Tocador-A2');
+    click('Применить');
+
+    await finish(0, '/uploads/a-mobile.jpg');
+    const { b, categories } = await saved();
+    const renamed = categories[0].products.find((p) => p.id === 'Tocador-A2');
+    expect(renamed.name).toBe('Tocador A');
+    expect(renamed.imageMobile).toBeFalsy();
+    expect(b.imageMobile).toBeFalsy();
   });
 
   it('and a featured card’s cover on its own card after the cards were reordered', async () => {

@@ -4,8 +4,13 @@
 // Mobile-first: the phone gets bigger type and 44px tap targets, and the
 // desktop look is restored from `sm:` up, so the panel a laptop shows is the
 // one it always showed.
-export const INPUT =
-  'mt-1 min-h-11 w-full border border-primary/15 bg-background px-3 py-2.5 text-base text-primary transition-colors focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent sm:min-h-0 sm:py-2 sm:text-sm';
+// INPUT_BASE is the field alone, for one that stands without a label above it
+// (a search box, a select in a toolbar); INPUT adds the gap under its label.
+// Two strings rather than an override: of two conflicting Tailwind classes the
+// one later in the stylesheet wins, not the one later in the attribute.
+export const INPUT_BASE =
+  'min-h-11 w-full border border-primary/15 bg-background px-3 py-2.5 text-base text-primary transition-colors focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent sm:min-h-0 sm:py-2 sm:text-sm';
+export const INPUT = `mt-1 ${INPUT_BASE}`;
 // 11px of letterspaced caps is a desktop detail; on a phone it needs the size
 // and the contrast to stay a readable label.
 export const LABEL =

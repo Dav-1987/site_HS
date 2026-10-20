@@ -36,34 +36,7 @@ export function StockNote({ product }) {
   );
 }
 
-/**
- * Availability switch, sized to sit inside a collapsed product row next to
- * VisibilitySelect so stock can be flipped without expanding the product.
- */
-export default function StockToggle({ product, onChange }) {
-  const inStock = isInStock(product);
-  return (
-    <button
-      type="button"
-      onClick={() => onChange(!inStock)}
-      title={
-        inStock
-          ? 'Товар в наличии — нажмите, чтобы отметить «нет в наличии»'
-          : 'Нет в наличии — нажмите, чтобы вернуть в наличие'
-      }
-      aria-pressed={!inStock}
-      className={`shrink-0 border px-2 py-1.5 text-xs transition-colors focus:outline-none focus:ring-1 focus:ring-accent ${
-        inStock
-          ? 'border-primary/15 bg-background text-primary/60 hover:text-primary'
-          : 'border-primary/40 bg-primary/5 text-primary'
-      }`}
-    >
-      {inStock ? 'В наличии' : 'Нет в наличии'}
-    </button>
-  );
-}
-
-/** The same switch as a menu row, for the compact (phone) row menu. */
+/** Availability as a menu row, for the row menus that have no switch of their own. */
 export function StockMenuItem({ product, onChange }) {
   const inStock = isInStock(product);
   return (

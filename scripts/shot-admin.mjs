@@ -159,6 +159,24 @@ async function main() {
       return true;
     }, label);
 
+  // A row's "⋯" is labelled with its product ("Действия с товаром F-05").
+  const clickByLabelPrefix = (prefix) =>
+    page.evaluate((p) => {
+      const el = document.querySelector(`button[aria-label^="${p}"]`);
+      if (!el) throw new Error(`button not found: ${p}…`);
+      el.scrollIntoView({ block: 'center' });
+      el.click();
+    }, prefix);
+
+  const clickTab = (name) =>
+    page.evaluate((n) => {
+      const el = [...document.querySelectorAll('[role="tab"]')].find((t) =>
+        t.innerText.startsWith(n),
+      );
+      if (!el) throw new Error(`tab not found: ${n}`);
+      el.click();
+    }, name);
+
   const settle = (ms = 600) => new Promise((r) => setTimeout(r, ms));
 
   // What the phone can't show: how far content runs past the right edge, how
@@ -216,47 +234,49 @@ async function main() {
 
   await page.evaluate(() => window.scrollTo(0, 520));
   await settle(300);
-  await shot('02-categories');
+  await shot('02-list');
+  report.push(await measure('02-list'));
 
-  await clickByText('тов.'); // first category header
-  await settle(700);
-  await page.evaluate(() => window.scrollTo(0, 520));
-  await settle(300);
-  await shot('03-category-open');
-  report.push(await measure('03-category-open'));
-
-  await clickByText('€'); // first product header (it carries the price)
-  await settle(700);
-  await shot('04-product-open');
-  report.push(await measure('04-product-open'));
-
-  // The product row's own actions live behind "⋯" at phone width.
-  await clickByLabel('Действия с товаром');
+  // A row's actions live behind its "⋯".
+  await clickByLabelPrefix('Действия с товаром');
   await settle(400);
-  await shot('05-row-menu');
+  await shot('03-row-menu');
   await page.keyboard.press('Escape');
   await settle(300);
 
-  // Группы полей внутри карточки — спойлеры, так что галерею сперва надо
-  // раскрыть: иначе снимок (и меню тайла ниже) достанется закрытому заголовку.
-  await clickByText('Фото и видео');
-  await settle(500);
-  await page.evaluate(() => {
-    const el = [...document.querySelectorAll('span')].find((s) =>
-      s.innerText.toLowerCase().startsWith('фото и видео'),
-    );
-    if (el) el.scrollIntoView({ block: 'start' });
-  });
+  // The first product opens in the side panel (full screen on a phone).
+  await page.evaluate(() => document.querySelector('main li a[href*="product="]').click());
+  await settle(800);
+  await shot('04-product-open');
+  report.push(await measure('04-product-open'));
+
+  await clickTab('Фото и видео');
   await settle(600);
-  await shot('06-photos');
+  await shot('05-photos');
 
   // Tapping a tile is the phone's replacement for hover + drag.
   if (await clickByLabel('Действия: фото 2')) {
     await settle(400);
-    await shot('07-photo-menu');
+    await shot('06-photo-menu');
     await page.keyboard.press('Escape');
     await settle(300);
   }
+
+  await clickByLabel('Закрыть товар');
+  await settle(500);
+  await page.type('input[type="search"]', 'blanco');
+  await settle(600);
+  await page.evaluate(() => window.scrollTo(0, 0));
+  await shot('07-search');
+  report.push(await measure('07-search'));
+
+  await clickByText('Сбросить поиск');
+  await settle(400);
+  await clickByText('Настройки категории');
+  await settle(700);
+  await shot('08-category-settings');
+  await clickByLabel('Закрыть настройки категории');
+  await settle(400);
 
   await page.evaluate(() => window.scrollTo(0, 0));
   await settle(300);
@@ -264,20 +284,20 @@ async function main() {
   // they're in the toolbar and the sidebar.
   if (await clickByLabel('Меню админки')) {
     await settle(300);
-    await shot('08-toolbar-menu');
+    await shot('09-toolbar-menu');
     await page.keyboard.press('Escape');
     await settle(300);
   }
 
   await openSection('Заявки');
   await settle(700);
-  await shot('09-orders');
-  report.push(await measure('09-orders'));
+  await shot('10-orders');
+  report.push(await measure('10-orders'));
 
   await openSection('Главная');
   await settle(700);
-  await shot('10-home');
-  report.push(await measure('10-home'));
+  await shot('11-home');
+  report.push(await measure('11-home'));
 
   const reportFile = join(OUT_DIR, `admin-metrics-${stamp}.json`);
   await writeFile(reportFile, JSON.stringify(report, null, 2), 'utf8');

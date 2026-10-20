@@ -1,13 +1,8 @@
 import { useEffect, useMemo, useState } from 'react';
-import {
-  fetchCatalog,
-  saveCatalog,
-  fetchSettings,
-  saveSettings,
-} from './api.js';
+import { fetchCatalog, saveCatalog, fetchSettings, saveSettings } from './api.js';
 import { defaultSettings, mergeSettings } from '../data/settings.js';
-import { DEFAULT_VISIBILITY, isListed, isOff, moveProductsToCategory } from '../data/catalog.js';
-import { updateAt } from './update.js';
+import { isListed, isOff } from '../data/catalog.js';
+import * as ops from './catalogOps.js';
 
 // Unsaved-edits draft, kept in localStorage so a reload/closed-tab accident
 // doesn't wipe out in-progress work. Cleared once the user saves or
@@ -48,7 +43,6 @@ export function useCatalogEditor() {
   const [categories, setCategories] = useState(null);
   const [settings, setSettings] = useState(null);
   const [loadError, setLoadError] = useState('');
-  const [openIdx, setOpenIdx] = useState(null);
   const [dirty, setDirty] = useState(false);
   const [settingsDirty, setSettingsDirty] = useState(false);
   const [saving, setSaving] = useState(false);
@@ -85,9 +79,12 @@ export function useCatalogEditor() {
     fetchCatalog()
       .then((data) => {
         const draft = readDraft();
-        if (draft?.categories && window.confirm(
-          `Найден несохранённый черновик от ${new Date(draft.savedAt).toLocaleString()}. Восстановить его?`,
-        )) {
+        if (
+          draft?.categories &&
+          window.confirm(
+            `Найден несохранённый черновик от ${new Date(draft.savedAt).toLocaleString()}. Восстановить его?`,
+          )
+        ) {
           setCategories(draft.categories);
           setDirty(Boolean(draft.dirty));
           if (draft.settings) {
@@ -138,62 +135,81 @@ export function useCatalogEditor() {
     setStatus('');
   };
 
-  const mutate = (next) => {
-    setCategories(next);
+  // Every catalog edit goes through here as a function of the catalog as it is
+  // when the change lands — an upload finishes seconds after its file was
+  // picked (see ./update.js). The edits themselves find products by id and
+  // categories by slug (see ./catalogOps.js), never by their place on screen.
+  const mutate = (edit) => {
+    setCategories(edit);
     setDirty(true);
     setStatus('');
   };
 
-  // Functional, so an upload finishing late lands on the catalog as it is now
-  // rather than as it was when the file was picked; and found by its slug when
-  // the categories were reordered meanwhile (see ./update.js).
-  const updateCategory = (ci, slug, next) =>
-    mutate((cats) => updateAt(cats, ci, (c) => c.slug === slug, next));
-  const removeCategory = (ci) => {
-    if (!window.confirm('Удалить эту категорию и все её товары?')) return;
-    mutate(categories.filter((_, i) => i !== ci));
-    setOpenIdx(null);
+  const updateProduct = (id, next) => mutate((cats) => ops.updateProduct(cats, id, next));
+  /** Adds a blank product to a category; returns its id. */
+  const addProduct = (slug) => {
+    const product = ops.newProduct(slug);
+    mutate((cats) => ops.addProduct(cats, slug, product));
+    return product.id;
   };
-  const moveCategory = (ci, dir) => {
-    const target = ci + dir;
-    if (target < 0 || target >= categories.length) return;
-    const next = [...categories];
-    [next[ci], next[target]] = [next[target], next[ci]];
-    mutate(next);
-    setOpenIdx(target);
+  /** Copies a product in right after itself; returns the copy's id. */
+  const duplicateProduct = (id) => {
+    const at = ops.locateProduct(categories, id);
+    if (!at) return null;
+    const copy = ops.copyOfProduct(categories[at.ci].products[at.pi]);
+    mutate((cats) => ops.insertProductAfter(cats, id, copy));
+    return copy.id;
   };
-  const addCategory = () => {
-    const n = categories.length + 1;
-    mutate([
-      ...categories,
-      {
-        slug: `nueva-categoria-${n}`,
-        name: { es: 'Nueva categoría', en: 'New category' },
-        tagline: { es: '', en: '' },
-        description: { es: '', en: '' },
-        image: '',
-        imageMobile: '',
-        visibility: DEFAULT_VISIBILITY,
-        products: [],
-      },
-    ]);
-    setOpenIdx(categories.length);
+  /** Asks first; returns whether the product went. */
+  const removeProduct = (id) => {
+    if (!window.confirm('Удалить этот товар?')) return false;
+    mutate((cats) => ops.removeProduct(cats, id));
+    return true;
   };
-  const moveProducts = (fromSlug, ids, toSlug) => {
-    const next = moveProductsToCategory(categories, fromSlug, ids, toSlug);
-    if (next !== categories) mutate(next);
+  const moveProduct = (id, toIndex) => mutate((cats) => ops.moveProduct(cats, id, toIndex));
+  const moveProductsTo = (ids, toSlug) => mutate((cats) => ops.moveProductsTo(cats, ids, toSlug));
+  const productIdError = (oldId, newId) => ops.productIdError(categories, oldId, newId);
+  // A new id follows the product everywhere it is named: «Похожие» lists and
+  // gifts in the catalog (catalogOps), and the «Избранное» cards in settings.
+  const renameProduct = (oldId, newId) => {
+    if (productIdError(oldId, newId)) return;
+    mutate((cats) => ops.renameProduct(cats, oldId, newId));
+    if (settings?.featuredCards?.some((card) => card.productId === oldId)) {
+      updateSettings((s) => ({
+        ...s,
+        featuredCards: s.featuredCards.map((card) =>
+          card.productId === oldId ? { ...card, productId: newId } : card,
+        ),
+      }));
+    }
   };
 
-  const duplicateCategory = (ci) => {
-    const src = categories[ci];
-    const suffix = Date.now().toString(36);
-    const copy = {
-      ...src,
-      slug: `${src.slug}-copy-${suffix}`,
-      products: src.products.map((p) => ({ ...p, id: `${p.id}-copy-${suffix}` })),
-    };
-    mutate([...categories, copy]);
+  const updateCategory = (slug, next) => mutate((cats) => ops.updateCategory(cats, slug, next));
+  /** Adds a blank category at the end; returns its slug. */
+  const addCategory = () => {
+    const category = ops.newCategory(categories);
+    mutate((cats) => [...cats, category]);
+    return category.slug;
   };
+  /** Copies a category and its products to the end; returns the copy's slug. */
+  const duplicateCategory = (slug) => {
+    const source = categories.find((c) => c.slug === slug);
+    if (!source) return null;
+    const copy = ops.copyOfCategory(source);
+    mutate((cats) => [...cats, copy]);
+    return copy.slug;
+  };
+  /** Asks first; returns whether the category went. */
+  const removeCategory = (slug) => {
+    if (!window.confirm('Удалить эту категорию и все её товары?')) return false;
+    mutate((cats) => ops.removeCategory(cats, slug));
+    return true;
+  };
+  const moveCategory = (slug, dir) => mutate((cats) => ops.moveCategory(cats, slug, dir));
+  const categorySlugError = (oldSlug, newSlug) =>
+    ops.categorySlugError(categories, oldSlug, newSlug);
+  const renameCategory = (oldSlug, newSlug) =>
+    mutate((cats) => ops.renameCategory(cats, oldSlug, newSlug));
 
   const save = async () => {
     setSaving(true);
@@ -230,8 +246,6 @@ export function useCatalogEditor() {
     categories,
     settings,
     loadError,
-    openIdx,
-    setOpenIdx,
     dirty,
     settingsDirty,
     saving,
@@ -241,12 +255,21 @@ export function useCatalogEditor() {
     allProducts,
     categoryOptions,
     updateSettings,
+    updateProduct,
+    addProduct,
+    duplicateProduct,
+    removeProduct,
+    moveProduct,
+    moveProductsTo,
+    productIdError,
+    renameProduct,
     updateCategory,
-    removeCategory,
-    moveCategory,
     addCategory,
     duplicateCategory,
-    moveProducts,
+    removeCategory,
+    moveCategory,
+    categorySlugError,
+    renameCategory,
     save,
     applyRestored,
   };

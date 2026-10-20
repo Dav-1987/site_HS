@@ -38,6 +38,9 @@ export default function AdminShell({ onLogout }) {
     applyRestored,
   } = editor;
   const canSave = (dirty || settingsDirty) && !saving;
+  // A reading-width column for forms; the whole window for the catalog, which
+  // sets its list and an open product side by side.
+  const column = section?.wide ? 'max-w-[1600px]' : 'max-w-5xl';
 
   // One settings field, merged into the settings as they are when the change
   // lands: an upload in one editor must not undo an edit made in another while
@@ -79,7 +82,9 @@ export default function AdminShell({ onLogout }) {
         <header className="sticky top-0 z-30 border-b border-primary/10 bg-background/95 backdrop-blur-md">
           {/* Same column as <main>, so the title and the buttons line up with
               the section's content rather than with the window's edges. */}
-          <div className="mx-auto flex max-w-5xl flex-wrap items-center gap-x-3 gap-y-2 px-3 py-3 sm:gap-x-4 sm:px-6 lg:px-10 lg:py-4">
+          <div
+            className={`mx-auto flex ${column} flex-wrap items-center gap-x-3 gap-y-2 px-3 py-3 sm:gap-x-4 sm:px-6 lg:px-10 lg:py-4`}
+          >
             <h1 className="mr-auto min-w-0 truncate font-serif text-2xl font-light lg:text-3xl">
               {section?.title}
             </h1>
@@ -118,7 +123,7 @@ export default function AdminShell({ onLogout }) {
           {narrow && <AdminNavStrip newOrders={orders.newCount} />}
         </header>
 
-        <main className="mx-auto max-w-5xl px-3 py-6 sm:px-6 sm:py-10 lg:px-10">
+        <main className={`mx-auto ${column} px-3 py-6 sm:px-6 sm:py-10 lg:px-10`}>
           <Outlet context={{ editor, orders, settingsField }} />
         </main>
       </div>

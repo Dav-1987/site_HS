@@ -40,4 +40,12 @@ describe('RESERVED_SLUGS', () => {
     expect(RESERVED_SLUGS).toContain('admin');
     expect(RESERVED_SLUGS).toContain('wallapop');
   });
+
+  // Every fixed page of the site: a category at one of these addresses would
+  // never be reached, the route above it wins (see marketingRoutes in App.jsx).
+  it('covers the legal, delivery and reviews pages too', () => {
+    for (const slug of ['privacy-policy', 'legal-notice', 'envios', 'devoluciones', 'opiniones']) {
+      expect(RESERVED_SLUGS).toContain(slug);
+    }
+  });
 });
