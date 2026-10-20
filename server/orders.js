@@ -10,6 +10,7 @@ import {
   sanitizeAttribution,
 } from './attribution.js';
 import { cleanUserAgent, describeDevice } from './device.js';
+import { isOrderStatus } from './order-data.js';
 
 export async function saveOrder({
   eventId,
@@ -72,13 +73,71 @@ export async function deleteOrder(id) {
 
 const MAX_ORDERS_LISTED = 500;
 
+// The owner's note is free text for themselves; the cap only keeps a pasted
+// wall of text out of the table.
+export const MAX_ORDER_NOTE_LENGTH = 1000;
+
+const ORDER_COLUMNS = `id, created_at, name, phone, country, postal_code, address, comment, product_id,
+  product_name, price, attribution, user_agent, telegram_sent, email_sent, status, status_changed_at, note`;
+
 export async function listOrders() {
   const { rows } = await pool.query(
-    `SELECT id, created_at, name, phone, country, postal_code, address, comment, product_id, product_name, price, attribution, user_agent, telegram_sent, email_sent
-     FROM orders ORDER BY created_at DESC LIMIT $1`,
+    `SELECT ${ORDER_COLUMNS} FROM orders ORDER BY created_at DESC LIMIT $1`,
     [MAX_ORDERS_LISTED],
   );
-  return rows.map((r) => ({
+  return rows.map(toOrder);
+}
+
+/**
+ * Validates an /admin edit of an order: a new status, a new note, or both.
+ * Returns `{ patch }` or `{ error }`; any other field in the body is ignored —
+ * the customer's own details are never editable from here.
+ */
+export function parseOrderPatch(body) {
+  if (!body || typeof body !== 'object' || Array.isArray(body)) {
+    return { error: 'Expected a JSON object' };
+  }
+  const patch = {};
+  if (body.status !== undefined) {
+    if (!isOrderStatus(body.status)) return { error: 'Unknown order status' };
+    patch.status = body.status;
+  }
+  if (body.note !== undefined) {
+    if (typeof body.note !== 'string') return { error: 'Note must be a string' };
+    if (body.note.length > MAX_ORDER_NOTE_LENGTH) {
+      return { error: `Note is longer than ${MAX_ORDER_NOTE_LENGTH} characters` };
+    }
+    patch.note = body.note;
+  }
+  if (!Object.keys(patch).length) return { error: 'Nothing to update' };
+  return { patch };
+}
+
+/**
+ * Applies a patch from parseOrderPatch(). `status_changed_at` moves only when
+ * the status really changes, so sending the same status again (a double click,
+ * a retry) keeps the time the order actually entered it. Every SET expression
+ * reads the row as it was before this UPDATE, so the CASE compares against the
+ * old status. Returns the updated order, or null when no order has this id.
+ */
+export async function updateOrder(id, { status, note }) {
+  const { rows } = await pool.query(
+    `UPDATE orders SET
+       status_changed_at = CASE
+         WHEN $2::text IS NOT NULL AND $2::text IS DISTINCT FROM status THEN NOW()
+         ELSE status_changed_at
+       END,
+       status = COALESCE($2::text, status),
+       note = COALESCE($3::text, note)
+     WHERE id = $1
+     RETURNING ${ORDER_COLUMNS}`,
+    [id, status ?? null, note ?? null],
+  );
+  return rows[0] ? toOrder(rows[0]) : null;
+}
+
+function toOrder(r) {
+  return {
     id: Number(r.id),
     createdAt: r.created_at,
     name: r.name,
@@ -99,5 +158,9 @@ export async function listOrders() {
     device: describeDevice(r.user_agent),
     telegramSent: r.telegram_sent,
     emailSent: r.email_sent,
-  }));
+    // null for orders saved before statuses existed — see migrate.sql.
+    status: r.status ?? null,
+    statusChangedAt: r.status_changed_at ?? null,
+    note: r.note ?? '',
+  };
 }

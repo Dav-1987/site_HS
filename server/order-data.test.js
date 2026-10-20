@@ -1,5 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import {
+  ORDER_STATUSES,
+  isOrderStatus,
   DEFAULT_SHIPPING_COUNTRY,
   getCountryName,
   getShippingCountryOptions,
@@ -88,5 +90,18 @@ describe('international postal codes', () => {
     expect(isValidPostalCode('!!')).toBe(false);
     expect(isValidPostalCode('2')).toBe(false);
     expect(isValidPostalCode('A'.repeat(20))).toBe(false);
+  });
+});
+
+describe('order statuses', () => {
+  it('follows the call-back workflow in order', () => {
+    expect(ORDER_STATUSES).toEqual(['new', 'called', 'confirmed', 'delivered', 'refused']);
+  });
+
+  it('recognises only the exact status values', () => {
+    for (const status of ORDER_STATUSES) expect(isOrderStatus(status)).toBe(true);
+    for (const value of ['New', 'cancelled', '', null, undefined]) {
+      expect(isOrderStatus(value)).toBe(false);
+    }
   });
 });
