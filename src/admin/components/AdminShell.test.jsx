@@ -16,6 +16,7 @@ vi.mock('../api.js', () => ({
   triggerRebuild: vi.fn(),
   listVersions: vi.fn(async () => ({ versions: [] })),
   restoreVersion: vi.fn(),
+  changePassword: vi.fn(),
 }));
 
 const { default: AdminRoutes } = await import('../AdminRoutes.jsx');
@@ -44,6 +45,9 @@ beforeEach(() => {
     duplicateCategory: vi.fn(),
     moveProducts: vi.fn(),
     save: vi.fn(),
+    conflict: null,
+    overwrite: vi.fn(),
+    reloadFromServer: vi.fn(),
     applyRestored: vi.fn(),
   };
   h.orders = {
@@ -131,6 +135,13 @@ describe('AdminShell sections', () => {
   it('opens the texts unfolded, since they are alone in their section', () => {
     renderAdmin({ path: '/admin/texts' });
     expect(screen.getByText(/Пусто = берётся текст из кода/)).toBeTruthy();
+  });
+
+  it('changes the password from «Настройки», not only from the login screen', () => {
+    renderAdmin({ path: '/admin/settings' });
+    fireEvent.click(screen.getByRole('button', { name: /Пароль администратора/ }));
+    expect(screen.getByLabelText('Текущий пароль')).toBeTruthy();
+    expect(screen.getByRole('button', { name: 'Сменить пароль' })).toBeTruthy();
   });
 
   it('opens the catalog history from the catalog section', () => {
@@ -242,6 +253,49 @@ describe('AdminShell save feedback', () => {
     h.editor.saveError = 'сервер не ответил';
     renderAdmin({ width: PHONE });
     expect(screen.getByRole('alert').textContent).toContain('сервер не ответил');
+  });
+});
+
+describe('AdminShell — another tab saved first', () => {
+  it('says what was saved elsewhere and offers both ways out, not a retry', () => {
+    h.editor.dirty = true;
+    h.editor.conflict = 'catalog';
+    renderAdmin();
+    const alert = screen.getByRole('alert');
+    expect(alert.textContent).toContain(
+      'Не сохранилось: каталог уже изменили в другой вкладке или на другом устройстве.',
+    );
+    expect(within(alert).queryByRole('button', { name: 'Повторить' })).toBeNull();
+
+    fireEvent.click(within(alert).getByRole('button', { name: 'Загрузить свежую версию' }));
+    expect(h.editor.reloadFromServer).toHaveBeenCalled();
+    fireEvent.click(within(alert).getByRole('button', { name: 'Сохранить мои поверх' }));
+    expect(h.editor.overwrite).toHaveBeenCalled();
+  });
+
+  it('names the settings when it is they that changed', () => {
+    h.editor.conflict = 'settings';
+    renderAdmin({ path: '/admin/home' });
+    expect(screen.getByRole('alert').textContent).toContain('настройки уже изменили');
+  });
+
+  it('outranks a failure message left from before', () => {
+    h.editor.conflict = 'catalog';
+    h.editor.saveError = 'Ошибка запроса (502)';
+    renderAdmin();
+    expect(screen.getAllByRole('alert')).toHaveLength(1);
+    expect(screen.getByRole('alert').textContent).not.toContain('502');
+  });
+
+  it('keeps both buttons out of reach while a save runs', () => {
+    h.editor.conflict = 'catalog';
+    h.editor.saving = true;
+    renderAdmin({ width: PHONE });
+    const alert = screen.getByRole('alert');
+    expect(within(alert).getByRole('button', { name: 'Загрузить свежую версию' }).disabled).toBe(
+      true,
+    );
+    expect(within(alert).getByRole('button', { name: 'Сохранить мои поверх' }).disabled).toBe(true);
   });
 });
 

@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { fetchCatalog, saveCatalog, fetchSettings, saveSettings } from './api.js';
 import { defaultSettings, mergeSettings } from '../data/settings.js';
 import { isListed, isOff } from '../data/catalog.js';
@@ -26,6 +26,17 @@ function writeDraft(draft) {
   }
 }
 
+// Stands in for the settings revision when they failed to load (see below).
+const SETTINGS_NOT_LOADED = 'not-loaded';
+
+// What «Сохранить мои поверх» asks before saving over the other tab's work.
+const OVERWRITE_QUESTION = {
+  catalog:
+    'Сохранить ваш каталог поверх изменений, сделанных в другой вкладке или на другом устройстве? Те изменения можно будет вернуть через «Историю изменений».',
+  settings:
+    'Сохранить ваши настройки поверх изменений, сделанных в другой вкладке или на другом устройстве? Те изменения пропадут: у настроек нет истории.',
+};
+
 function clearDraft() {
   try {
     localStorage.removeItem(DRAFT_KEY);
@@ -52,6 +63,15 @@ export function useCatalogEditor() {
   const [status, setStatus] = useState('');
   const [saveError, setSaveError] = useState('');
   const [showHistory, setShowHistory] = useState(false);
+  // The revisions the catalog and the settings were loaded (or last saved) at,
+  // sent back with each save so the server can turn away one that would
+  // overwrite a save made meanwhile from another tab or device (409, see
+  // server/revision.js). Kept in the draft too: a draft restored after a reload
+  // is based on what was loaded back then, not on what the server holds now.
+  const revisions = useRef({ catalog: undefined, settings: undefined });
+  // The part a save was turned away for — 'catalog' or 'settings' — until the
+  // owner loads the fresh version or saves theirs over it.
+  const [conflict, setConflict] = useState(null);
 
   // Flat list of every product (for the Featured / related pickers). `hidden`
   // marks the ones those sections would drop — the product itself is not listed,
@@ -80,6 +100,7 @@ export function useCatalogEditor() {
   );
 
   useEffect(() => {
+    let settingsFromDraft = false;
     fetchCatalog()
       .then((data) => {
         const draft = readDraft();
@@ -91,21 +112,35 @@ export function useCatalogEditor() {
         ) {
           setCategories(draft.categories);
           setDirty(Boolean(draft.dirty));
+          revisions.current.catalog = draft.revisions?.catalog;
           if (draft.settings) {
+            settingsFromDraft = true;
             setSettings(mergeSettings(draft.settings));
             setSettingsDirty(Boolean(draft.settingsDirty));
+            revisions.current.settings = draft.revisions?.settings;
           }
         } else {
           clearDraft();
           setCategories(data.categories);
+          revisions.current.catalog = data.revision;
         }
       })
       .catch((err) => setLoadError(err.message || 'Не удалось загрузить каталог'));
     // Settings load independently — fall back to defaults so the panel still works.
     // (Skipped if a restored draft above already set settings.)
     fetchSettings()
-      .then((data) => setSettings((prev) => prev ?? mergeSettings(data.settings)))
-      .catch(() => setSettings((prev) => prev ?? defaultSettings));
+      .then((data) => {
+        if (settingsFromDraft) return;
+        setSettings((prev) => prev ?? mergeSettings(data.settings));
+        revisions.current.settings = data.revision;
+      })
+      .catch(() => {
+        if (settingsFromDraft) return;
+        setSettings((prev) => prev ?? defaultSettings);
+        // The defaults are not what the server holds, so saving them must not
+        // pass for an edit of it: a revision no stored one ever matches.
+        revisions.current.settings = SETTINGS_NOT_LOADED;
+      });
   }, []);
 
   // Persist a debounced draft of unsaved edits to localStorage so a stray
@@ -117,7 +152,14 @@ export function useCatalogEditor() {
       return;
     }
     const id = setTimeout(() => {
-      writeDraft({ categories, settings, dirty, settingsDirty, savedAt: Date.now() });
+      writeDraft({
+        categories,
+        settings,
+        dirty,
+        settingsDirty,
+        revisions: { ...revisions.current },
+        savedAt: Date.now(),
+      });
     }, 500);
     return () => clearTimeout(id);
   }, [categories, settings, dirty, settingsDirty]);
@@ -215,23 +257,67 @@ export function useCatalogEditor() {
   const renameCategory = (oldSlug, newSlug) =>
     mutate((cats) => ops.renameCategory(cats, oldSlug, newSlug));
 
-  const save = async () => {
+  // `force` names the part to save without the revision check: the one the
+  // owner chose to save over after a conflict. The other part is still checked.
+  const runSave = async (force = null) => {
     setSaving(true);
     setStatus('');
     setSaveError('');
+    setConflict(null);
     try {
       if (dirty) {
-        const data = await saveCatalog(categories);
+        const base = force === 'catalog' ? undefined : revisions.current.catalog;
+        const data = await saveCatalog(categories, base);
+        revisions.current.catalog = data.revision;
         setCategories(data.categories);
         setDirty(false);
       }
       if (settingsDirty) {
-        const data = await saveSettings(settings);
+        const base = force === 'settings' ? undefined : revisions.current.settings;
+        const data = await saveSettings(settings, base);
+        revisions.current.settings = data.revision;
         setSettings(mergeSettings(data.settings));
         setSettingsDirty(false);
       }
       setStatus('Сохранено');
       clearDraft();
+    } catch (err) {
+      if (err.status === 409) setConflict(err.conflict === 'settings' ? 'settings' : 'catalog');
+      else setSaveError(err.message || 'сервер не ответил');
+    } finally {
+      setSaving(false);
+    }
+  };
+  const save = () => runSave();
+
+  /** After a conflict: asks first, then saves this tab's version over the other. */
+  const overwrite = () => {
+    if (!conflict || !window.confirm(OVERWRITE_QUESTION[conflict])) return;
+    runSave(conflict);
+  };
+
+  /**
+   * After a conflict: drops this tab's unsaved edits, asking first, and loads
+   * the catalog and the settings as the server holds them now.
+   */
+  const reloadFromServer = async () => {
+    if (
+      (dirty || settingsDirty) &&
+      !window.confirm('Загрузить версию с сервера? Ваши несохранённые правки пропадут.')
+    )
+      return;
+    setSaving(true);
+    setSaveError('');
+    try {
+      const [catalog, fresh] = await Promise.all([fetchCatalog(), fetchSettings()]);
+      revisions.current = { catalog: catalog.revision, settings: fresh.revision };
+      setCategories(catalog.categories);
+      setSettings(mergeSettings(fresh.settings));
+      setDirty(false);
+      setSettingsDirty(false);
+      setConflict(null);
+      clearDraft();
+      setStatus('Загружена свежая версия');
     } catch (err) {
       setSaveError(err.message || 'сервер не ответил');
     } finally {
@@ -239,10 +325,13 @@ export function useCatalogEditor() {
     }
   };
 
-  // Apply a catalog snapshot restored from the history panel.
-  const applyRestored = (cats) => {
+  // Apply a catalog snapshot restored from the history panel. The restore is
+  // a save of its own, so a catalog conflict is over; a settings one is not.
+  const applyRestored = (cats, revision) => {
+    revisions.current.catalog = revision;
     setCategories(cats);
     setDirty(false);
+    setConflict((c) => (c === 'catalog' ? null : c));
     setShowHistory(false);
     setStatus('Восстановлено');
   };
@@ -256,6 +345,7 @@ export function useCatalogEditor() {
     saving,
     status,
     saveError,
+    conflict,
     showHistory,
     setShowHistory,
     allProducts,
@@ -277,6 +367,8 @@ export function useCatalogEditor() {
     categorySlugError,
     renameCategory,
     save,
+    overwrite,
+    reloadFromServer,
     applyRestored,
   };
 }

@@ -23,6 +23,7 @@ export default function HomeSection() {
         value={settings.featuredCards || []}
         onChange={settingsField('featuredCards')}
         allProducts={allProducts}
+        blocks={settings.blocks}
       />
       <ReviewsEditor
         reviews={settings.reviews || []}

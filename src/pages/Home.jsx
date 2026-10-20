@@ -14,7 +14,7 @@ import CategoryCard from '../components/CategoryCard.jsx';
 import FeaturedCard from '../components/FeaturedCard.jsx';
 import ReviewTile from '../components/ReviewTile.jsx';
 import Lightbox from '../components/Lightbox.jsx';
-import { toLightboxItems } from '../data/settings.js';
+import { featuredLayouts, toLightboxItems } from '../data/settings.js';
 import { CarouselArrows, CarouselTrack, useCarousel } from '../components/ProductCarousel.jsx';
 
 const FEATURED_CARD_CLASSNAME =
@@ -110,8 +110,7 @@ function FeaturedSection() {
   const carousel = useCarousel();
   // Separate switches for phones and md+ screens (see BLOCKS in data/settings.js);
   // the desktop one is opt-in, so a missing key keeps the section phone-only.
-  const onMobile = settings.blocks?.featured !== false;
-  const onDesktop = settings.blocks?.featuredDesktop === true;
+  const { mobile: onMobile, desktop: onDesktop } = featuredLayouts(settings.blocks);
   if (!items.length || (!onMobile && !onDesktop)) return null;
   const visibility = onMobile && onDesktop ? '' : onMobile ? 'md:hidden' : 'hidden md:block';
 
