@@ -156,7 +156,7 @@ describe('AdminShell new orders', () => {
   it('counts the orders nobody has called yet on the «Заявки» link', () => {
     h.orders.newCount = 3;
     renderAdmin();
-    expect(within(nav()).getByRole('link', { name: /Заявки/ }).textContent).toBe('Заявки3 новые');
+    expect(within(nav()).getByRole('link', { name: /Заявки/ }).textContent).toBe('Заявки 3 новые');
   });
 
   it('says nothing while there are none', () => {
@@ -167,7 +167,7 @@ describe('AdminShell new orders', () => {
   it('refreshes the list on opening «Заявки»', () => {
     renderAdmin({ path: '/admin/orders' });
     expect(h.orders.refresh).toHaveBeenCalled();
-    expect(screen.getByText('Пока нет заявок.')).toBeTruthy();
+    expect(screen.getByText('Все заявки обработаны: новых и незавершённых нет.')).toBeTruthy();
   });
 });
 

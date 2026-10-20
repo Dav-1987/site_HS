@@ -36,6 +36,8 @@ export function AdminSidebar({ newOrders, onLogout }) {
               >
                 <AdminIcon name={s.path} />
                 <span className="flex-1">{s.title}</span>
+                {/* The space keeps the name read as "Заявки 3 новые". */}
+                {s.path === 'orders' && newOrders > 0 && ' '}
                 {s.path === 'orders' && <NewOrdersBadge count={newOrders} />}
               </NavLink>
             </li>

@@ -113,6 +113,18 @@ export function fetchOrders() {
   return fetch('/api/orders', { method: 'GET' }).then(asJson);
 }
 
+/**
+ * Set an order's status and/or note — `{ status, note }`, either or both.
+ * Saved on its own, not with «Сохранить». Returns `{ order }` as stored.
+ */
+export function updateOrder(id, patch) {
+  return fetch(`/api/orders/${id}`, {
+    method: 'PATCH',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(patch),
+  }).then(asJson);
+}
+
 /** Delete an order request by id. */
 export function deleteOrder(id) {
   return fetch(`/api/orders/${id}`, { method: 'DELETE' }).then(asJson);
