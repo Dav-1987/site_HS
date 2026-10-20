@@ -48,9 +48,9 @@ export function VisibilityNote({ entity, kind }) {
   const note = NOTES[kind]?.[visibilityOf(entity)];
   if (!note) return null;
   return (
-    <p className="border-l-2 border-amber-500/60 bg-amber-50 px-3 py-2 text-xs leading-relaxed text-amber-800">
+    <p className="border border-accent bg-accent/10 px-3 py-2 text-xs leading-relaxed text-primary">
       {note}{' '}
-      <span className="text-amber-700/80">
+      <span className="text-primary/75">
         На сайте видно сразу после сохранения; для поисковиков — после кнопки «Пересобрать сайт».
       </span>
     </p>
@@ -70,7 +70,9 @@ export default function VisibilitySelect({ value, onChange, title }) {
       title={title}
       aria-label={title}
       className={`min-h-11 shrink-0 border bg-background px-2 py-1.5 text-base text-primary sm:min-h-0 sm:text-xs transition-colors focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent ${
-        current === 'public' ? 'border-primary/15' : 'border-amber-500/60 text-amber-700'
+        current === 'public'
+          ? 'border-primary/30'
+          : 'border-accent-text font-medium text-accent-text'
       }`}
     >
       {VISIBILITY.map((v) => (

@@ -31,6 +31,7 @@ export default function AdminShell({ onLogout }) {
     settingsDirty,
     saving,
     status,
+    saveError,
     save,
     updateSettings,
     showHistory,
@@ -70,9 +71,26 @@ export default function AdminShell({ onLogout }) {
   }, [section]);
 
   // One source for the toolbar note, in the row on desktop and on its own line
-  // on narrower screens, where it must not be what gets squeezed out.
+  // on narrower screens, where it must not be what gets squeezed out. A failed
+  // save outranks everything: red, with the reason and a way to try again.
   const statusNote = status || (dirty || settingsDirty ? 'Есть несохранённые изменения' : '');
-  const statusClass = `text-xs ${status ? 'text-primary/75' : 'text-accent-text'}`;
+  const toolbarNote = saveError ? (
+    <span role="alert" className="flex flex-wrap items-center gap-x-2 text-xs text-danger">
+      Не сохранилось: {saveError}
+      <button
+        type="button"
+        onClick={save}
+        disabled={saving}
+        className="min-h-11 font-semibold underline underline-offset-2 hover:no-underline disabled:opacity-50 sm:min-h-0"
+      >
+        Повторить
+      </button>
+    </span>
+  ) : statusNote ? (
+    <span role="status" className={`text-xs ${status ? 'text-primary/75' : 'text-accent-text'}`}>
+      {statusNote}
+    </span>
+  ) : null;
 
   return (
     <div className="flex min-h-screen bg-background text-primary">
@@ -88,7 +106,7 @@ export default function AdminShell({ onLogout }) {
             <h1 className="mr-auto min-w-0 truncate font-serif text-2xl font-light lg:text-3xl">
               {section?.title}
             </h1>
-            {!narrow && statusNote && <span className={statusClass}>{statusNote}</span>}
+            {!narrow && toolbarNote}
             {/* Narrower screens keep only «Сохранить» in the row; the rest of
                 the toolbar and the way out go behind "⋯". */}
             {narrow ? (
@@ -116,9 +134,7 @@ export default function AdminShell({ onLogout }) {
             >
               {saving ? 'Сохранение…' : 'Сохранить'}
             </button>
-            {narrow && statusNote && (
-              <span className={`basis-full ${statusClass}`}>{statusNote}</span>
-            )}
+            {narrow && toolbarNote && <div className="basis-full">{toolbarNote}</div>}
           </div>
           {narrow && <AdminNavStrip newOrders={orders.newCount} />}
         </header>

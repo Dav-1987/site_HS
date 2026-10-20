@@ -17,11 +17,13 @@ function CropPreview({ src, ratio, caption }) {
           <img src={src} alt="" className="h-full w-full object-cover" />
         ) : (
           <div className="flex h-full w-full items-center justify-center">
-            <span className="font-serif text-xl font-light text-primary/20">M</span>
+            <span aria-hidden="true" className="font-serif text-xl font-light text-primary/20">
+              M
+            </span>
           </div>
         )}
       </div>
-      <p className="mt-1 text-center text-[10px] uppercase tracking-[0.12em] text-primary/35">
+      <p className="mt-1 text-center text-[11px] uppercase tracking-[0.12em] text-primary/75">
         {caption}
       </p>
     </div>
@@ -95,14 +97,12 @@ export default function ImageField({
                 disabled={busy}
               />
             </label>
-            {error && <span className="text-xs text-red-600">{error}</span>}
+            {error && <span className="text-xs text-danger">{error}</span>}
           </div>
-          {hint && (
-            <p className="mt-2 text-xs leading-relaxed text-primary/60">{hint}</p>
-          )}
+          {hint && <p className="mt-2 text-xs leading-relaxed text-primary/75">{hint}</p>}
           {/* Соотношение и размер — первым, ещё до объяснения про обрезку:
               это то, что нужно знать до того, как открыл файл, а не после. */}
-          <p className="mt-2 text-xs leading-relaxed text-primary/40">
+          <p className="mt-2 text-xs leading-relaxed text-primary/75">
             {imageSpecText(spec)} На витрине фото обрезается по{' '}
             {frames.length > 1 ? 'этим рамкам' : 'этой рамке'} (по центру). Держите главный объект в
             центре кадра.

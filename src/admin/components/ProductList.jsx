@@ -26,7 +26,9 @@ function Thumbnail({ product, size = 'h-[55px] w-11' }) {
           className="h-full w-full object-cover"
         />
       ) : (
-        <span className="font-serif text-sm font-light text-primary/40">M</span>
+        <span aria-hidden="true" className="font-serif text-sm font-light text-primary/40">
+          M
+        </span>
       )}
     </span>
   );
@@ -116,7 +118,7 @@ function ProductRow({
 }) {
   const { product, category } = row;
   const label = product.reference || product.name || 'без названия';
-  const name = product.name || <span className="text-primary/60">Новый товар</span>;
+  const name = product.name || <span className="text-primary/75">Новый товар</span>;
   const set = (patch) => onUpdate((p) => ({ ...p, ...patch }));
   const meta = [
     showCategory && (category.name?.es || category.slug),

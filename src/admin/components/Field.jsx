@@ -35,7 +35,7 @@ export function Select({ label, value, onChange, options }) {
   );
 }
 
-export function TextArea({ label, value, onChange, rows = 2 }) {
+export function TextArea({ label, value, onChange, rows = 2, ...rest }) {
   return (
     <label className="block">
       <span className={LABEL}>{label}</span>
@@ -44,6 +44,7 @@ export function TextArea({ label, value, onChange, rows = 2 }) {
         className={`${INPUT} resize-y`}
         value={value ?? ''}
         onChange={(e) => onChange(e.target.value)}
+        {...rest}
       />
     </label>
   );

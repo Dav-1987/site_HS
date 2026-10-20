@@ -46,7 +46,11 @@ export function useCatalogEditor() {
   const [dirty, setDirty] = useState(false);
   const [settingsDirty, setSettingsDirty] = useState(false);
   const [saving, setSaving] = useState(false);
+  // What the last save or restore did. `status` is good news ("Сохранено"),
+  // `saveError` why a save failed — kept apart so a failure can't read like
+  // the success it was mistaken for when both were one grey line.
   const [status, setStatus] = useState('');
+  const [saveError, setSaveError] = useState('');
   const [showHistory, setShowHistory] = useState(false);
 
   // Flat list of every product (for the Featured / related pickers). `hidden`
@@ -214,6 +218,7 @@ export function useCatalogEditor() {
   const save = async () => {
     setSaving(true);
     setStatus('');
+    setSaveError('');
     try {
       if (dirty) {
         const data = await saveCatalog(categories);
@@ -225,10 +230,10 @@ export function useCatalogEditor() {
         setSettings(mergeSettings(data.settings));
         setSettingsDirty(false);
       }
-      setStatus('Сохранено ✓');
+      setStatus('Сохранено');
       clearDraft();
     } catch (err) {
-      setStatus(err.message || 'Ошибка сохранения');
+      setSaveError(err.message || 'сервер не ответил');
     } finally {
       setSaving(false);
     }
@@ -239,7 +244,7 @@ export function useCatalogEditor() {
     setCategories(cats);
     setDirty(false);
     setShowHistory(false);
-    setStatus('Восстановлено ✓');
+    setStatus('Восстановлено');
   };
 
   return {
@@ -250,6 +255,7 @@ export function useCatalogEditor() {
     settingsDirty,
     saving,
     status,
+    saveError,
     showHistory,
     setShowHistory,
     allProducts,

@@ -23,7 +23,7 @@ export function MenuItem({ onClick, disabled, danger, checked, keepOpen, childre
       }}
       disabled={disabled}
       className={`${MENU_ITEM} ${
-        danger ? 'text-red-600 hover:bg-red-50' : 'text-primary hover:bg-surface'
+        danger ? 'text-danger hover:bg-danger/10' : 'text-primary hover:bg-surface'
       }`}
     >
       {/* A fixed-width slot keeps the labels aligned whether or not a row is
