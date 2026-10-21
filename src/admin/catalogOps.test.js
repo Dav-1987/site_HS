@@ -1,4 +1,4 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 import {
   addProduct,
   categorySlugError,
@@ -62,9 +62,20 @@ describe('adding, copying and removing products', () => {
     expect(ids(addProduct(catalog(), 'espejos', product))[1]).toBe(`espejos:D,${product.id}`);
   });
 
-  it('gives every new product an id of its own', () => {
-    const many = Array.from({ length: 50 }, () => newProduct('x').id);
-    expect(new Set(many).size).toBe(50);
+  it('gives every new product an id of its own, even within one millisecond', () => {
+    // The same time and the same "random" characters for all of them: only the
+    // counter can tell them apart, so the test no longer depends on luck.
+    const now = vi.spyOn(Date, 'now').mockReturnValue(1_792_559_232_233);
+    const random = vi.spyOn(Math, 'random').mockReturnValue(0.123456);
+    try {
+      const many = Array.from({ length: 50 }, () => newProduct('x').id);
+      const copies = Array.from({ length: 50 }, () => copyOfProduct(p('B')).id);
+      expect(new Set(many).size).toBe(50);
+      expect(new Set(copies).size).toBe(50);
+    } finally {
+      now.mockRestore();
+      random.mockRestore();
+    }
   });
 
   it('puts a copy right after the original', () => {
