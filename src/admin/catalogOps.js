@@ -45,8 +45,12 @@ export function updateCategory(categories, slug, next) {
   return categories.map((c, i) => (i === ci ? applyUpdate(next, c) : c));
 }
 
-// A suffix no two clicks share: the time alone repeats within a millisecond.
-const uniqueSuffix = () => `${Date.now().toString(36)}${Math.random().toString(36).slice(2, 5)}`;
+// A suffix no two clicks share. The time keeps tabs and sessions apart; within
+// this one the counter does, since the time repeats within a millisecond and
+// three random characters alone collided in ~2% of 50-id runs.
+let sequence = 0;
+const uniqueSuffix = () =>
+  `${Date.now().toString(36)}${(sequence++).toString(36)}${Math.random().toString(36).slice(2, 4)}`;
 
 /** A blank product for a category, with a provisional id the owner then renames. */
 export function newProduct(slug) {
