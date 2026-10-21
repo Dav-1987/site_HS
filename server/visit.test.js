@@ -89,6 +89,7 @@ describe('parseLogLine', () => {
       ip: IP,
       at: Date.parse('2026-10-21T05:09:24Z'),
       method: 'POST',
+      target: '/api/order?x=1',
       path: '/api/order',
       status: 200,
       referrer: PAGE,
@@ -128,6 +129,11 @@ describe('describeVisit', () => {
 
     expect(visit.start).toBe('2026-10-01T05:06:46.000Z');
     expect(visit.orderAt).toBe('2026-10-01T05:09:24.000Z');
+    // ChatGPT sends no Referer, only its utm_source in the link.
+    expect(visit.entryUrl).toBe(
+      'https://hsmuebles.es/espejos/Espejo-Alto-D02?utm_source=chatgpt.com',
+    );
+    expect(visit.entryReferrer).toBeNull();
     expect(visit.events).toEqual([
       {
         type: 'page',
@@ -165,6 +171,34 @@ describe('describeVisit', () => {
       'Товар «Espejo Arqueado con marco dorado 60 × 170 cm»',
       'order',
     ]);
+  });
+
+  it('keeps the whole entry link and the outside page that sent it', () => {
+    const link = '/tocadores/Tocador-L-05?utm_source=ig&utm_medium=social&fbclid=PAZXh0bgNhZW0';
+    const parsed = lines([
+      log('2026-10-01T05:00:00', `GET ${link}`, { referrer: 'https://l.instagram.com/' }),
+      log('2026-10-01T05:01:00', 'GET /tocadores', { referrer: 'https://hsmuebles.es/' }),
+      log('2026-10-01T05:02:00', 'POST /api/order', {
+        referrer: 'https://hsmuebles.es/tocadores',
+      }),
+    ]);
+    const visit = describeVisit(parsed, orderLineOf(parsed), CATEGORIES);
+
+    expect(visit.entryUrl).toBe(`https://hsmuebles.es${link}`);
+    expect(visit.entryReferrer).toBe('https://l.instagram.com/');
+  });
+
+  it('names no outside page when the visit started from one of ours', () => {
+    const parsed = lines([
+      log('2026-10-01T05:00:00', 'GET /tocadores', { referrer: 'https://hsmuebles.es/' }),
+      log('2026-10-01T05:02:00', 'POST /api/order', {
+        referrer: 'https://hsmuebles.es/tocadores',
+      }),
+    ]);
+    const visit = describeVisit(parsed, orderLineOf(parsed), CATEGORIES);
+
+    expect(visit.entryUrl).toBe('https://hsmuebles.es/tocadores');
+    expect(visit.entryReferrer).toBeNull();
   });
 
   it('lists the earlier visits of the same browser, newest first', () => {

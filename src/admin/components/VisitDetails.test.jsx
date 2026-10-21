@@ -32,6 +32,8 @@ const at = (h, m, s) => new Date(2026, 9, 21, h, m, s).toISOString();
 const VISIT = {
   start: at(7, 6, 46),
   orderAt: at(7, 9, 24),
+  entryUrl: 'https://hsmuebles.es/otros-modelos/Espejo-Alto-D02?utm_source=chatgpt.com',
+  entryReferrer: null,
   events: [
     {
       type: 'page',
@@ -74,6 +76,21 @@ describe('Подробности визита', () => {
       screen.getByText('На сайте 2 мин 38 с до заявки · Интернет: Movistar (rima-tde.net)'),
     ).toBeTruthy();
     expect(screen.getByText('Раньше за 14 дней не заходили.')).toBeTruthy();
+  });
+
+  it('shows the whole entry link as text, and the page that sent it', async () => {
+    api.fetchOrderVisit.mockReset().mockResolvedValue({
+      visit: { ...VISIT, entryReferrer: 'https://l.instagram.com/' },
+    });
+    fireEvent.click(renderRow());
+
+    const link = await screen.findByText(VISIT.entryUrl);
+    expect(link.closest('p').textContent).toBe(`Ссылка входа: ${VISIT.entryUrl}`);
+    // Not a link: opening it would count as a visit from that utm_source.
+    expect(link.closest('a')).toBeNull();
+    expect(screen.getByText('https://l.instagram.com/').closest('p').textContent).toBe(
+      'Пришли со страницы: https://l.instagram.com/',
+    );
   });
 
   it('keeps what it read when folded and opened again', async () => {

@@ -35,6 +35,7 @@ const AUTO_LOAD_MS = 5_000;
 
 const EARLIER_VISITS_LISTED = 5;
 
+const SITE = 'https://hsmuebles.es';
 const SITE_HOSTS = new Set(['hsmuebles.es', 'www.hsmuebles.es']);
 
 // nginx's default "combined" format.
@@ -102,6 +103,7 @@ export function parseLogLine(text) {
     ip: m[1],
     at,
     method: m[3],
+    target: m[4],
     path: m[4].split('?')[0],
     status: Number(m[5]),
     referrer: m[6],
@@ -239,6 +241,21 @@ function splitSessions(lines) {
   return sessions;
 }
 
+// The link the visit came in by, query string and all (utm, fbclid, gclid),
+// and the page that sent it when the browser said so — an outside one only,
+// since one of ours is just a step within the site.
+function entryOf(visit) {
+  const landing = visit.find((l) => l.method === 'GET' && isPagePath(l.path));
+  if (!landing) return { entryUrl: null, entryReferrer: null };
+  let entryReferrer = null;
+  try {
+    if (!SITE_HOSTS.has(new URL(landing.referrer).hostname)) entryReferrer = landing.referrer;
+  } catch {
+    // "-": the browser sent none
+  }
+  return { entryUrl: `${SITE}${landing.target}`, entryReferrer };
+}
+
 /**
  * The visit that ended in `orderLine`, from every request of that IP and
  * browser (`lines`, oldest first), plus the visits before it.
@@ -270,6 +287,7 @@ export function describeVisit(lines, orderLine, categories) {
   return {
     start: iso(visit[0].at),
     orderAt: iso(orderLine.at),
+    ...entryOf(visit),
     events: eventsOut(walkPages(visit, catalog), catalog),
     earlierVisits: earlier.slice(0, EARLIER_VISITS_LISTED),
     earlierCount: earlier.length,

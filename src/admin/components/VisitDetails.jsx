@@ -86,6 +86,24 @@ function VisitBody({ result, now }) {
           </li>
         ))}
       </ol>
+      {/* Text, not a link: opening it would itself be a visit with that
+          utm_source, and land in the analytics as one. */}
+      {(visit.entryUrl || visit.entryReferrer) && (
+        <div className="mt-3 space-y-0.5 break-all text-xs">
+          {visit.entryUrl && (
+            <p>
+              <span className="text-primary/75">Ссылка входа: </span>
+              {visit.entryUrl}
+            </p>
+          )}
+          {visit.entryReferrer && (
+            <p>
+              <span className="text-primary/75">Пришли со страницы: </span>
+              {visit.entryReferrer}
+            </p>
+          )}
+        </div>
+      )}
       <div className="mt-3 space-y-1 text-primary/75">
         <p>{facts.join(' · ')}</p>
         <EarlierVisits visit={visit} now={now} />
