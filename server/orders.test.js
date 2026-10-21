@@ -6,8 +6,14 @@ vi.mock('./db.js', () => ({
   default: { query },
 }));
 
-const { MAX_ORDER_NOTE_LENGTH, listOrders, parseOrderPatch, saveOrder, updateOrder } =
-  await import('./orders.js');
+const {
+  MAX_ORDER_NOTE_LENGTH,
+  getOrderOrigin,
+  listOrders,
+  parseOrderPatch,
+  saveOrder,
+  updateOrder,
+} = await import('./orders.js');
 
 const order = {
   eventId: 'event-123',
@@ -326,5 +332,27 @@ describe('updateOrder', () => {
     query.mockResolvedValueOnce({ rows: [] });
 
     await expect(updateOrder(999, { status: 'called' })).resolves.toBeNull();
+  });
+});
+
+describe('getOrderOrigin', () => {
+  beforeEach(() => query.mockReset());
+
+  it('returns when the order came in and from which browser', async () => {
+    query.mockResolvedValueOnce({
+      rows: [{ created_at: '2026-10-21T05:09:23.344Z', user_agent: IPHONE_UA }],
+    });
+
+    await expect(getOrderOrigin(51)).resolves.toEqual({
+      createdAt: '2026-10-21T05:09:23.344Z',
+      userAgent: IPHONE_UA,
+    });
+    expect(query.mock.calls[0][1]).toEqual([51]);
+  });
+
+  it('returns null when no order has this id', async () => {
+    query.mockResolvedValueOnce({ rows: [] });
+
+    await expect(getOrderOrigin(999)).resolves.toBeNull();
   });
 });

@@ -135,6 +135,14 @@ export function updateOrder(id, patch) {
   }).then(asJson);
 }
 
+/**
+ * What the customer did on the site before an order, from the server's access
+ * log: `{ visit }`, or `{ visit: null, reason }` when the log has nothing.
+ */
+export function fetchOrderVisit(id) {
+  return fetch(`/api/orders/${id}/visit`, { method: 'GET' }).then(asJson);
+}
+
 /** Delete an order request by id. */
 export function deleteOrder(id) {
   return fetch(`/api/orders/${id}`, { method: 'DELETE' }).then(asJson);

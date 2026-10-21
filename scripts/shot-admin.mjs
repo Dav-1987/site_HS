@@ -70,6 +70,34 @@ const ORDERS = [
   demoOrder(5, 'delivered', 200),
   demoOrder(6, null, 900),
 ];
+// «Подробности визита» of demo order 1, which came in an hour ago.
+const visitAt = (minutesBefore) => new Date(Date.now() - 36e5 - minutesBefore * 60e3).toISOString();
+const DEMO_VISIT = {
+  start: visitAt(6),
+  orderAt: visitAt(0),
+  events: [
+    { type: 'page', at: visitAt(6), path: '/', label: 'Главная' },
+    { type: 'page', at: visitAt(5), path: '/espejos', label: 'Категория «Espejos»' },
+    {
+      type: 'page',
+      at: visitAt(4),
+      path: '/espejos/Espejo-Alto-F-05',
+      label: 'Товар «Espejo Hollywood blanco 80 × 180 cm»',
+    },
+    { type: 'photos', at: visitAt(3), count: 4, total: 9 },
+    { type: 'order', at: visitAt(0) },
+  ],
+  earlierVisits: [
+    {
+      start: new Date(Date.now() - 3 * 864e5).toISOString(),
+      end: new Date(Date.now() - 3 * 864e5 + 120e3).toISOString(),
+      pages: ['Главная', 'Категория «Tocadores»'],
+      ordered: false,
+    },
+  ],
+  earlierCount: 1,
+  provider: { name: 'Demo ISP', domain: 'example.net' },
+};
 const VERSIONS = [
   { id: 'v2', createdAt: new Date().toISOString(), categoryCount: 5, productCount: 124 },
   {
@@ -95,6 +123,7 @@ async function main() {
     '/api/catalog': { categories },
     '/api/settings': { settings },
     '/api/orders': { orders: ORDERS },
+    '/api/orders/1/visit': { visit: DEMO_VISIT },
     '/api/versions': { versions: VERSIONS },
     '/api/admin/rebuild/status': { configured: true, run: null },
   };
@@ -301,6 +330,11 @@ async function main() {
   await settle(700);
   await shot('10-orders');
   report.push(await measure('10-orders'));
+
+  await clickByText('Подробности визита');
+  await settle(500);
+  await shot('10b-order-visit');
+  report.push(await measure('10b-order-visit'));
 
   await openSection('Главная');
   await settle(700);

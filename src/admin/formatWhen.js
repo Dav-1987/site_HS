@@ -18,3 +18,13 @@ export function formatWhen(iso, now = new Date()) {
       : d.toLocaleDateString('ru-RU');
   return `${date}, ${time}`;
 }
+
+/** How long something took, the same way: "38 с", "2 мин 38 с", "1 ч 5 мин". */
+export function formatDuration(ms) {
+  const s = Math.max(0, Math.round(ms / 1000));
+  if (s < 60) return `${s} с`;
+  const m = Math.floor(s / 60);
+  if (m < 60) return s % 60 ? `${m} мин ${s % 60} с` : `${m} мин`;
+  const h = Math.floor(m / 60);
+  return m % 60 ? `${h} ч ${m % 60} мин` : `${h} ч`;
+}
