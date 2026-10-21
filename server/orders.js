@@ -89,6 +89,17 @@ export async function listOrders() {
 }
 
 /**
+ * When an order came in and from which browser — what server/visit.js finds
+ * it in the access log by. Null when no order has this id.
+ */
+export async function getOrderOrigin(id) {
+  const { rows } = await pool.query('SELECT created_at, user_agent FROM orders WHERE id = $1', [
+    id,
+  ]);
+  return rows[0] ? { createdAt: rows[0].created_at, userAgent: rows[0].user_agent } : null;
+}
+
+/**
  * Validates an /admin edit of an order: a new status, a new note, or both.
  * Returns `{ patch }` or `{ error }`; any other field in the body is ignored —
  * the customer's own details are never editable from here.

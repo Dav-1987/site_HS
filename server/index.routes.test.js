@@ -167,3 +167,11 @@ describe('unauthenticated writes', () => {
     expect(res.status).toBe(401);
   });
 });
+
+describe('unauthenticated reads', () => {
+  it('keeps the visit behind an order to the admin', async () => {
+    // It reads the server's access log: visitors' addresses and pages.
+    const res = await get('/api/orders/1/visit');
+    expect(res.status).toBe(401);
+  });
+});

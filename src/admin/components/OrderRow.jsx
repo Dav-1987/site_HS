@@ -6,6 +6,8 @@ import { STATUS_OPTIONS, contactLinks } from '../orderView.js';
 import { formatWhen } from '../formatWhen.js';
 import { BTN_GHOST, BTN_SOLID } from '../ui.js';
 import OverflowMenu, { MenuItem } from './OverflowMenu.jsx';
+import { useOrderVisit } from '../useOrderVisit.js';
+import { VisitButton, VisitPanel } from './VisitDetails.jsx';
 
 // Each status reads apart by more than its hue: filled gold (to call), an
 // outline (waiting), filled dark (agreed), quiet (done), red outline (lost),
@@ -67,7 +69,7 @@ function StatusSelect({ order, onChange }) {
 const NOTE_SAVE_MS = 1200;
 
 /** The owner's note on an order, saved by itself (see useOrders' update). */
-function NoteField({ order, onSave }) {
+function NoteField({ order, onSave, className = '' }) {
   const [draft, setDraft] = useState(order.note ?? '');
   const [state, setState] = useState('idle'); // idle | saving | saved | failed
   const saved = useRef(order.note ?? '');
@@ -86,7 +88,7 @@ function NoteField({ order, onSave }) {
   useEffect(() => () => clearTimeout(timer.current), []);
 
   return (
-    <div>
+    <div className={className}>
       <label htmlFor={id} className="sr-only">
         Заметка к заявке от {order.name}
       </label>
@@ -155,6 +157,8 @@ function PhoneIcon() {
 export default function OrderRow({ order, product, now, deleting, onUpdate, onRemove }) {
   const { tel, whatsapp } = contactLinks(order);
   const isNew = order.status === 'new';
+  const visit = useOrderVisit(order.id);
+  const visitPanelId = useId();
   const cover = product && productImages(product)[0];
   const place = [order.postalCode, order.address].filter(Boolean).join(', ');
   const country = order.country
@@ -249,17 +253,27 @@ export default function OrderRow({ order, product, now, deleting, onUpdate, onRe
         {/* Its own line: a device label has « · » inside it, and would run
             into the entry page above. */}
         {order.device && <p className="text-xs text-primary/75">Dispositivo: {order.device}</p>}
+        <VisitButton visit={visit} panelId={visitPanelId} />
       </div>
 
-      <NoteField order={order} onSave={(note) => onUpdate({ note })} />
+      {/* On a phone the opened visit details come right under their button,
+          ahead of the note and the menu; on a wide screen they take a row of
+          their own under the order. */}
+      <NoteField
+        order={order}
+        onSave={(note) => onUpdate({ note })}
+        className="order-1 lg:order-none"
+      />
 
-      <div className="justify-self-end lg:justify-self-auto">
+      <div className="order-1 justify-self-end lg:order-none lg:justify-self-auto">
         <OverflowMenu title={`Действия с заявкой от ${order.name}`}>
           <MenuItem onClick={onRemove} disabled={deleting} danger>
             {deleting ? 'Удаляется…' : 'Удалить заявку'}
           </MenuItem>
         </OverflowMenu>
       </div>
+
+      {visit.open && <VisitPanel visit={visit} id={visitPanelId} name={order.name} now={now} />}
     </article>
   );
 }

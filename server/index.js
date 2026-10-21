@@ -37,7 +37,8 @@ import {
 } from './store.js';
 import { readSettings, writeSettings } from './settings.js';
 import { createQueue, isStale, revisionOf } from './revision.js';
-import { listOrders, deleteOrder, parseOrderPatch, updateOrder } from './orders.js';
+import { listOrders, deleteOrder, getOrderOrigin, parseOrderPatch, updateOrder } from './orders.js';
+import { findOrderVisit } from './visit.js';
 import { handleOrder } from './order-handler.js';
 import { buildGoogleFeed, buildMetaFeed, buildPinterestFeed } from './feed.js';
 import { buildProductIndex, resolveRedirect } from './redirects.js';
@@ -594,6 +595,22 @@ app.patch('/api/orders/:id', async (req, res) => {
   } catch (err) {
     console.error('order PATCH failed', err);
     res.status(500).json({ error: 'Failed to update order' });
+  }
+});
+
+// «Подробности визита»: what the customer did on the site before the order,
+// read from nginx's access log on every click and never stored (visit.js).
+app.get('/api/orders/:id/visit', async (req, res) => {
+  if (!isAuthenticated(req)) return res.status(401).json({ error: 'Unauthorized' });
+  const id = orderIdParam(req);
+  if (!id) return res.status(400).json({ error: 'Invalid order id' });
+  try {
+    const order = await getOrderOrigin(id);
+    if (!order) return res.status(404).json({ error: 'Order not found' });
+    res.json(await findOrderVisit({ ...order, categories: await readOrSeedCatalog() }));
+  } catch (err) {
+    console.error('order visit failed', err);
+    res.status(500).json({ error: 'Failed to read the visit' });
   }
 });
 
