@@ -75,6 +75,9 @@ const visitAt = (minutesBefore) => new Date(Date.now() - 36e5 - minutesBefore * 
 const DEMO_VISIT = {
   start: visitAt(6),
   orderAt: visitAt(0),
+  entryUrl:
+    'https://hsmuebles.es/?utm_source=ig&utm_medium=social&utm_content=link_in_bio&fbclid=DEMOxEXAMPLExCLICKxIDx0123456789abcdefDEMOxEXAMPLExCLICKxIDx0123456789',
+  entryReferrer: 'https://l.instagram.com/',
   events: [
     { type: 'page', at: visitAt(6), path: '/', label: 'Главная' },
     { type: 'page', at: visitAt(5), path: '/espejos', label: 'Категория «Espejos»' },
