@@ -241,8 +241,17 @@ function commonItemData({ product, category, images }) {
   };
 }
 
-function commonItemLines(entry) {
+/**
+ * `strikePrice: false` ships only the price we actually charge. Google is the
+ * one platform that gets it: every discount in the catalog is permanent, and
+ * Merchant Center checks a sale price against the item's price history — a
+ * "was" price that was never charged invites a Misrepresentation flag on the
+ * whole account, while the struck-through pair it would buy is not shown for a
+ * discount that never ends anyway.
+ */
+function commonItemLines(entry, { strikePrice = true } = {}) {
   const item = commonItemData(entry);
+  const salePrice = strikePrice ? item.salePrice : null;
   return [
     // product.id, not product.reference: five references are duplicated across
     // the catalog (M-01…M-05 appear twice) and Google needs this unique.
@@ -255,9 +264,10 @@ function commonItemLines(entry) {
     tag('g:availability', item.inStock ? 'in_stock' : 'out_of_stock'),
     // A discounted product ships its pre-discount price as `price` and the
     // current one as `sale_price`, which is how Shopping draws the same
-    // struck-through pair the product page shows.
-    tag('g:price', money(item.price)),
-    ...(item.salePrice !== null ? [tag('g:sale_price', money(item.salePrice))] : []),
+    // struck-through pair the product page shows — unless the caller asked
+    // for the charged price alone (see above).
+    tag('g:price', money(strikePrice ? item.price : (item.salePrice ?? item.price))),
+    ...(salePrice !== null ? [tag('g:sale_price', money(salePrice))] : []),
     tag('g:brand', item.brand),
     tag('g:condition', item.condition),
     // Made to order under our own brand, so there is no GTIN — but there is a
@@ -280,7 +290,7 @@ function wrapItem(lines) {
 
 function googleItemXml(entry) {
   return wrapItem([
-    ...commonItemLines(entry),
+    ...commonItemLines(entry, { strikePrice: false }),
     // Merchant Center accepts this repeated attribute for up to ten stable,
     // directly hosted product videos. Preserve the catalog's media order so
     // the first video remains the primary one on every platform.
