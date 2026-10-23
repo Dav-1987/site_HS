@@ -227,11 +227,14 @@ describe('buildGoogleFeed — the XML', () => {
       expect(xml).not.toContain('<g:sale_price>');
     });
 
-    // Shopping then draws the same struck-through pair as the product page.
-    it('sends the old price as price and the current one as sale_price', () => {
+    // Every discount in the catalog is permanent; a "was" price that was never
+    // charged risks a Misrepresentation flag in Merchant Center. Google gets
+    // the charged price alone — the same one the page's Offer carries.
+    it('sends only the charged price for a discounted product', () => {
       const xml = buildGoogleFeed(catalog([product({ price: 639, oldPrice: 800 })]));
-      expect(fields(xml, 'price')[0]).toBe('800.00 EUR');
-      expect(fields(xml, 'sale_price')[0]).toBe('639.00 EUR');
+      expect(fields(xml, 'price')[0]).toBe('639.00 EUR');
+      expect(xml).not.toContain('<g:sale_price>');
+      expect(xml).not.toContain('800.00');
     });
 
     // An "old price" below the current one is not a discount — the page ignores
@@ -362,8 +365,6 @@ describe('buildMetaFeed', () => {
       'title',
       'description',
       'link',
-      'price',
-      'sale_price',
       'brand',
       'condition',
       'mpn',
@@ -371,6 +372,11 @@ describe('buildMetaFeed', () => {
     ]) {
       expect(meta[name]).toBe(fields(google, name)[0]);
     }
+    // The one deliberate difference: Meta keeps the struck-through pair, while
+    // Google's single price is the one Meta sells at.
+    expect(meta.price).toBe('499.00 EUR');
+    expect(meta.sale_price).toBe('399.00 EUR');
+    expect(fields(google, 'price')[0]).toBe(meta.sale_price);
     expect(meta.availability).toBe('in stock');
     expect(fields(google, 'availability')[0]).toBe('in_stock');
   });
@@ -541,8 +547,6 @@ describe('buildPinterestFeed', () => {
       'description',
       'link',
       'image_link',
-      'price',
-      'sale_price',
       'availability',
       'brand',
       'condition',
@@ -550,6 +554,10 @@ describe('buildPinterestFeed', () => {
     ]) {
       expect(fields(buildPinterestFeed(cat), name)).toEqual(fields(buildGoogleFeed(cat), name));
     }
+    // Pinterest keeps the struck-through pair; Google gets only its second half.
+    expect(fields(buildPinterestFeed(cat), 'price')).toEqual(['499.00 EUR']);
+    expect(fields(buildPinterestFeed(cat), 'sale_price')).toEqual(['399.00 EUR']);
+    expect(fields(buildGoogleFeed(cat), 'price')).toEqual(['399.00 EUR']);
   });
 });
 
