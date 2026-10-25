@@ -22,6 +22,14 @@ vi.mock('../admin/api.js', () => ({
 
 const api = await import('../admin/api.js');
 const { default: App } = await import('../App.jsx');
+// App.jsx loads the admin lazily, as a chunk of its own. Left to the first
+// render, loading it (~0.5 s alone: the whole admin's code, for the first time
+// in this worker) fell inside the 1 s that findByRole waits for the admin's
+// nav, and other suites running on the machine pushed it past that. Both tests
+// then failed, the second still waiting on the same import. Loaded here, with
+// the file's other modules; the lazy route still suspends and then renders the
+// admin, from the module already loaded.
+await import('../pages/Admin.jsx');
 
 beforeEach(() => {
   window.ym = vi.fn();
