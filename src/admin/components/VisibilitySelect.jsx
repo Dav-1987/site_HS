@@ -1,14 +1,10 @@
 import { VISIBILITY, visibilityOf } from '../../data/catalog.js';
 import { MenuItem } from './OverflowMenu.jsx';
+import { VISIBILITY_LABELS } from '../hints.js';
 
 // One control for both levels — a section and a single product hide the same
-// way, so they get the same three options and the same wording (see VISIBILITY
-// in src/data/catalog.js for what each state actually does).
-const LABELS = {
-  public: 'Показывать',
-  unlisted: 'Скрыть из списков',
-  off: 'Снять с сайта',
-};
+// way, so they get the same three options and the same wording (VISIBILITY_LABELS
+// in ../hints.js; see VISIBILITY in src/data/catalog.js for what each state does).
 
 // Shown next to a collapsed row so hidden entries are recognisable at a glance,
 // without opening them. Renders nothing while the entry is public.
@@ -77,7 +73,7 @@ export default function VisibilitySelect({ value, onChange, title }) {
     >
       {VISIBILITY.map((v) => (
         <option key={v} value={v}>
-          {LABELS[v]}
+          {VISIBILITY_LABELS[v]}
         </option>
       ))}
     </select>
@@ -92,7 +88,7 @@ export function VisibilityMenuItems({ value, onChange }) {
   const current = visibilityOf({ visibility: value });
   return VISIBILITY.map((v) => (
     <MenuItem key={v} checked={current === v} onClick={() => onChange(v)}>
-      {LABELS[v]}
+      {VISIBILITY_LABELS[v]}
     </MenuItem>
   ));
 }

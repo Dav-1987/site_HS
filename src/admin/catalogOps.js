@@ -101,6 +101,33 @@ export function removeProduct(categories, id) {
   );
 }
 
+/**
+ * Applies `next` (a value or an updater) to every product with one of these
+ * ids, wherever it lives — the admin's bulk actions on a selection, which may
+ * span categories when it was made in «Все» or a search. Categories with none
+ * of them are handed back as they were.
+ */
+export function updateProducts(categories, ids, next) {
+  const wanted = new Set(ids);
+  if (wanted.size === 0) return categories;
+  return categories.map((c) =>
+    c.products.some((p) => wanted.has(p.id))
+      ? { ...c, products: c.products.map((p) => (wanted.has(p.id) ? applyUpdate(next, p) : p)) }
+      : c,
+  );
+}
+
+/** Removes every product with one of these ids, from whichever category. */
+export function removeProducts(categories, ids) {
+  const wanted = new Set(ids);
+  if (wanted.size === 0) return categories;
+  return categories.map((c) =>
+    c.products.some((p) => wanted.has(p.id))
+      ? { ...c, products: c.products.filter((p) => !wanted.has(p.id)) }
+      : c,
+  );
+}
+
 /** Moves a product to `toIndex` within its own category (clamped to the ends). */
 export function moveProduct(categories, id, toIndex) {
   const at = locateProduct(categories, id);

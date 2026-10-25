@@ -1,12 +1,12 @@
 import { useState } from 'react';
 import { useLocation, useNavigate, useSearchParams } from 'react-router-dom';
-import { findProduct, productGift, visibilityOf } from '../../data/catalog.js';
+import { VISIBILITY, findProduct, productGift, visibilityOf } from '../../data/catalog.js';
 import { useAdmin } from '../useAdmin.js';
 import { SPLIT_PANEL_MIN_WIDTH, useIsCompact } from '../useIsCompact.js';
 import { CATALOG_FILTERS, catalogRows, filterCounts } from '../catalogView.js';
 import { countLabel } from '../plural.js';
-import { giftHint } from '../hints.js';
-import { BTN_GHOST, BTN_SOLID, INPUT_BASE } from '../ui.js';
+import { VISIBILITY_LABELS, giftHint } from '../hints.js';
+import { BTN_DANGER, BTN_GHOST, BTN_SOLID, INPUT_BASE } from '../ui.js';
 import ProductList from '../components/ProductList.jsx';
 import SearchBox from '../components/SearchBox.jsx';
 import ProductPanel from '../components/ProductPanel.jsx';
@@ -60,6 +60,8 @@ export default function CatalogSection() {
     addProduct,
     duplicateProduct,
     removeProduct,
+    updateProducts,
+    removeProducts,
     moveProduct,
     moveProductsTo,
     productIdError,
@@ -151,6 +153,9 @@ export default function CatalogSection() {
   };
 
   const visibleSelected = rows.filter(({ product }) => selected.has(product.id));
+  // Bulk actions act on what is ticked AND on screen: a filter can take a
+  // ticked row out of sight, and nothing should change where nobody looks.
+  const selectedIds = visibleSelected.map(({ product }) => product.id);
   const toggleSelected = (id) =>
     setSelected((s) => {
       const next = new Set(s);
@@ -368,16 +373,21 @@ export default function CatalogSection() {
             )}
           </div>
 
-          {/* ─── bulk move ─── */}
+          {/* ─── bulk actions ─── */}
           {visibleSelected.length > 0 && (
             <BulkBar
               count={visibleSelected.length}
               categories={categories}
               onMove={(toSlug) => {
-                moveProductsTo(
-                  visibleSelected.map(({ product }) => product.id),
-                  toSlug,
-                );
+                moveProductsTo(selectedIds, toSlug);
+                setSelected(new Set());
+              }}
+              // The selection stays: setting visibility and stock are often
+              // done together, and neither takes the rows out of a plain list.
+              onSet={(patch) => updateProducts(selectedIds, (p) => ({ ...p, ...patch }))}
+              onRemove={() => {
+                if (!removeProducts(selectedIds)) return;
+                if (selectedIds.includes(productId)) closePanel();
                 setSelected(new Set());
               }}
               onClear={() => setSelected(new Set())}
@@ -451,36 +461,91 @@ export default function CatalogSection() {
   );
 }
 
-function BulkBar({ count, categories, onMove, onClear }) {
-  const [target, setTarget] = useState('');
+const STOCK_OPTIONS = { in: 'В наличии', out: 'Нет в наличии' };
+
+/**
+ * A select that acts the moment an option is picked and goes back to its
+ * placeholder — for settings applied to the whole selection, where a separate
+ * "apply" button would only add a click. Nothing reaches the site before
+ * «Сохранить» anyway.
+ */
+function ApplySelect({ label, placeholder, options, onPick }) {
   return (
-    <div className="mt-4 flex flex-wrap items-center gap-3 border border-accent bg-accent/10 px-4 py-3">
-      <span className="text-sm font-semibold">Выбрано: {count}</span>
-      <label className="flex-1 basis-48 sm:max-w-xs">
-        <span className="sr-only">Переместить в категорию</span>
-        <select value={target} onChange={(e) => setTarget(e.target.value)} className={INPUT_BASE}>
-          <option value="">Переместить в…</option>
-          {categories.map((c) => (
-            <option key={c.slug} value={c.slug}>
-              {c.name?.es || c.slug}
-            </option>
-          ))}
-        </select>
-      </label>
-      <button
-        type="button"
-        disabled={!target}
-        onClick={() => {
-          onMove(target);
-          setTarget('');
-        }}
-        className={BTN_SOLID}
+    <label className="w-full sm:w-44">
+      <span className="sr-only">{label}</span>
+      <select
+        value=""
+        onChange={(e) => e.target.value && onPick(e.target.value)}
+        className={INPUT_BASE}
       >
-        Переместить выбранные
-      </button>
-      <button type="button" onClick={onClear} className={BTN_GHOST}>
-        Снять выбор
-      </button>
+        <option value="">{placeholder}</option>
+        {Object.entries(options).map(([value, text]) => (
+          <option key={value} value={value}>
+            {text}
+          </option>
+        ))}
+      </select>
+    </label>
+  );
+}
+
+function BulkBar({ count, categories, onMove, onSet, onRemove, onClear }) {
+  const [target, setTarget] = useState('');
+  // Two rows rather than one long wrapping one: what is selected and the ways
+  // out of it on top, what to do with it below.
+  return (
+    <div className="mt-4 space-y-3 border border-accent bg-accent/10 px-4 py-3">
+      <div className="flex flex-wrap items-center gap-3">
+        <span className="mr-auto text-sm font-semibold">Выбрано: {count}</span>
+        <button type="button" onClick={onRemove} className={BTN_DANGER}>
+          Удалить выбранные
+        </button>
+        <button type="button" onClick={onClear} className={BTN_GHOST}>
+          Снять выбор
+        </button>
+      </div>
+      <div className="flex flex-wrap items-center gap-3">
+        <div className="flex w-full gap-3 sm:w-auto">
+          <label className="min-w-0 flex-1 sm:w-48 sm:flex-none">
+            <span className="sr-only">Переместить в категорию</span>
+            <select
+              value={target}
+              onChange={(e) => setTarget(e.target.value)}
+              className={INPUT_BASE}
+            >
+              <option value="">Переместить в…</option>
+              {categories.map((c) => (
+                <option key={c.slug} value={c.slug}>
+                  {c.name?.es || c.slug}
+                </option>
+              ))}
+            </select>
+          </label>
+          <button
+            type="button"
+            disabled={!target}
+            onClick={() => {
+              onMove(target);
+              setTarget('');
+            }}
+            className={BTN_SOLID}
+          >
+            Переместить
+          </button>
+        </div>
+        <ApplySelect
+          label="Видимость выбранных"
+          placeholder="Видимость…"
+          options={Object.fromEntries(VISIBILITY.map((v) => [v, VISIBILITY_LABELS[v]]))}
+          onPick={(visibility) => onSet({ visibility })}
+        />
+        <ApplySelect
+          label="Наличие выбранных"
+          placeholder="Наличие…"
+          options={STOCK_OPTIONS}
+          onPick={(stock) => onSet({ inStock: stock === 'in' })}
+        />
+      </div>
     </div>
   );
 }

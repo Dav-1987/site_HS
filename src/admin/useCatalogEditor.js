@@ -3,6 +3,18 @@ import { fetchCatalog, saveCatalog, fetchSettings, saveSettings } from './api.js
 import { defaultSettings, mergeSettings } from '../data/settings.js';
 import { isListed, isOff } from '../data/catalog.js';
 import * as ops from './catalogOps.js';
+import { countLabel } from './plural.js';
+
+// Deleting is the one bulk action that cannot be walked back on the site:
+// switching off keeps the page redirecting to a similar section and keeps the
+// photos (server/redirects.js), deleting does neither.
+export function removeProductsQuestion(count) {
+  return [
+    `Удалить ${countLabel(count, ['товар', 'товара', 'товаров'])}?`,
+    'Страницы удалённых товаров будут отвечать «страница не найдена» — без переадресации в похожий раздел. Фото сервер сотрёт примерно через сутки после сохранения.',
+    'Если на эти товары ещё ведут ссылки (Google, ChatGPT, старые посты), лучше выбрать «Снять с сайта».',
+  ].join('\n\n');
+}
 
 // Unsaved-edits draft, kept in localStorage so a reload/closed-tab accident
 // doesn't wipe out in-progress work. Cleared once the user saves or
@@ -212,6 +224,14 @@ export function useCatalogEditor() {
     mutate((cats) => ops.removeProduct(cats, id));
     return true;
   };
+  /** Applies `next` (a value or an updater) to every product of a selection. */
+  const updateProducts = (ids, next) => mutate((cats) => ops.updateProducts(cats, ids, next));
+  /** Asks first; returns whether the products went. */
+  const removeProducts = (ids) => {
+    if (!ids.length || !window.confirm(removeProductsQuestion(ids.length))) return false;
+    mutate((cats) => ops.removeProducts(cats, ids));
+    return true;
+  };
   const moveProduct = (id, toIndex) => mutate((cats) => ops.moveProduct(cats, id, toIndex));
   const moveProductsTo = (ids, toSlug) => mutate((cats) => ops.moveProductsTo(cats, ids, toSlug));
   const productIdError = (oldId, newId) => ops.productIdError(categories, oldId, newId);
@@ -355,6 +375,8 @@ export function useCatalogEditor() {
     addProduct,
     duplicateProduct,
     removeProduct,
+    updateProducts,
+    removeProducts,
     moveProduct,
     moveProductsTo,
     productIdError,

@@ -27,3 +27,11 @@ export const giftHint = (gift, forProduct) => {
   const own = choice === 'catalog' || choice === 'custom';
   return own && qty > 1 ? `${GIFT_HINTS[choice]} × ${qty}` : GIFT_HINTS[choice];
 };
+
+// The three visibility states by name — the same words in the product and
+// category menus (VisibilitySelect) and in the catalog's bulk bar.
+export const VISIBILITY_LABELS = {
+  public: 'Показывать',
+  unlisted: 'Скрыть из списков',
+  off: 'Снять с сайта',
+};
