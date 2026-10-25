@@ -9,9 +9,17 @@
 //
 // resolveRedirect() turns those into real 301s off the live catalog, so it
 // covers future moves too, not just the one that prompted it.
+//
+// The same goes for what the owner switched off in /admin («Снять с сайта»):
+// those pages have no snapshot either, and their links live on in search
+// results, ChatGPT answers and old posts. Rather than a 404, a visitor is sent
+// to an open section of the same kind of furniture, or to the catalogue.
+
+import { isListed, isOff, productDisplayName } from '../src/data/catalog.js';
 
 // Sections folded into "Otros Modelos" — their own pages no longer exist, so
-// their old URLs point at the section that absorbed them.
+// their old URLs point at the section that absorbed them. A slug that is a
+// section again (Espejos came back) is its own page, not a legacy one.
 export const MERGED_CATEGORIES = new Map([
   ['espejos', 'otros-modelos'],
   ['comodas', 'otros-modelos'],
@@ -20,15 +28,50 @@ export const MERGED_CATEGORIES = new Map([
   ['mesas-de-manicura', 'otros-modelos'],
 ]);
 
-/** Map of product id → the slug of the category it currently lives in. */
-export function buildProductIndex(categories) {
-  const index = new Map();
-  for (const c of categories ?? []) {
-    for (const p of c.products ?? []) {
-      if (p?.id) index.set(p.id, c.slug);
+// Where a switched-off product's visitors go, by the first word of its name
+// ("Espejo | Arqueado…" → espejo). Only kinds that have a section of their own;
+// everything else — and these too, while their section is not public — goes to
+// the catalogue.
+export const OFF_PRODUCT_SECTIONS = new Map([
+  ['espejo', 'espejos'],
+  ['tocador', 'tocadores'],
+]);
+export const CATALOG_PATH = 'catalogo';
+
+/** First word of a product's Spanish name, lower-case and without accents. */
+function kindOf(product) {
+  const [word = ''] = productDisplayName(product).split(/\s+/);
+  return word.normalize('NFD').replace(/\p{M}/gu, '').toLowerCase();
+}
+
+/**
+ * Everything resolveRedirect() needs from the catalog, built once per catalog:
+ * - `products`: id → `{ slug, off }` — the section it lives in and, when it is
+ *   switched off (itself or its whole section), the path to send its visitors to;
+ * - `categories`: slug → `{ off }`, the same for a section's own page. A section
+ *   whose products all go one way goes that way too; a mixed one, the catalogue.
+ */
+export function buildRedirectIndex(categories) {
+  const list = (categories ?? []).filter((c) => c?.slug);
+  const listedSlugs = new Set(list.filter(isListed).map((c) => c.slug));
+  const offTarget = (product) => {
+    const slug = OFF_PRODUCT_SECTIONS.get(kindOf(product));
+    return slug && listedSlugs.has(slug) ? slug : CATALOG_PATH;
+  };
+
+  const products = new Map();
+  const sections = new Map();
+  for (const c of list) {
+    const items = (c.products ?? []).filter((p) => p?.id);
+    const targets = new Set(items.map(offTarget));
+    sections.set(c.slug, {
+      off: isOff(c) ? (targets.size === 1 ? [...targets][0] : CATALOG_PATH) : null,
+    });
+    for (const p of items) {
+      products.set(p.id, { slug: c.slug, off: isOff(c) || isOff(p) ? offTarget(p) : null });
     }
   }
-  return index;
+  return { products, categories: sections };
 }
 
 /**
@@ -36,33 +79,40 @@ export function buildProductIndex(categories) {
  * isn't a catalog URL at all). The `/en` prefix is preserved — both language
  * trees mirror the same slugs.
  */
-export function resolveRedirect(pathname, productIndex) {
+export function resolveRedirect(pathname, index) {
   const parts = pathname.split('/').filter(Boolean);
   const lang = parts[0] === 'en' ? ['en'] : [];
   const rest = parts.slice(lang.length);
+  const to = (...segments) => `/${[...lang, ...segments].join('/')}`;
 
-  if (rest.length === 2 && rest[0] === 'categoria') {
-    const legacySlug = rest[1];
-    const canonicalSlug = MERGED_CATEGORIES.get(legacySlug) ?? legacySlug;
-    return `/${[...lang, canonicalSlug].join('/')}`;
-  }
+  const sectionPath = (slug) => {
+    const section = index?.categories?.get(slug);
+    if (section) return to(section.off ?? slug);
+    const merged = MERGED_CATEGORIES.get(slug);
+    if (!merged) return null;
+    return index?.categories?.has(merged) ? sectionPath(merged) : to(merged);
+  };
+  const productPath = (id) => {
+    const product = index?.products?.get(id);
+    if (!product) return null;
+    return product.off ? to(product.off) : to(product.slug, id);
+  };
+  // A path that resolves to itself needs no redirect.
+  const unlessSame = (target) => (target === to(...rest) ? null : target);
 
-  if (rest.length === 2 && rest[0] === 'producto') {
-    const id = rest[1];
-    const actual = productIndex?.get(id);
-    return actual ? `/${[...lang, actual, id].join('/')}` : null;
-  }
-
-  if (rest.length === 1) {
-    const merged = MERGED_CATEGORIES.get(rest[0]);
-    return merged ? `/${[...lang, merged].join('/')}` : null;
-  }
-
-  if (rest.length === 2) {
-    const [slug, id] = rest;
-    const actual = productIndex?.get(id);
-    return actual && actual !== slug ? `/${[...lang, actual, id].join('/')}` : null;
-  }
-
+  if (rest.length === 2 && rest[0] === 'categoria') return sectionPath(rest[1]);
+  if (rest.length === 2 && rest[0] === 'producto') return productPath(rest[1]);
+  if (rest.length === 1) return unlessSame(sectionPath(rest[0]));
+  if (rest.length === 2) return unlessSame(productPath(rest[1]));
   return null;
+}
+
+/**
+ * `target` with the query string of the request it answers. Without it the
+ * utm tags and click ids (fbclid, gclid) a visitor arrived with are gone by the
+ * time the landing page reads them, and the order is filed as a direct visit.
+ */
+export function withQuery(target, originalUrl) {
+  const at = originalUrl.indexOf('?');
+  return at === -1 ? target : `${target}${originalUrl.slice(at)}`;
 }

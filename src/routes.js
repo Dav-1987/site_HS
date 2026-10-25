@@ -8,14 +8,16 @@
 import { liveCatalog } from './data/catalog.js';
 
 // Sections and products switched off in /admin have no route at all: no
-// prerendered snapshot (so the SPA fallback answers a real 404) and no sitemap
+// prerendered snapshot (so the request falls through to the server, which
+// 301s it to a similar open section — see server/redirects.js) and no sitemap
 // entry. Unlisted ones keep both — the whole point of that state is that the
 // page stays live and indexed, it just isn't linked to from anywhere.
 export function buildRoutes(rawCatalog, settings) {
   const catalog = liveCatalog(rawCatalog);
   // Раздел отзывов выключается тумблером в /admin. Выключенный — не получает
   // ни пререндер-снимок (значит SPA-фолбэк отдаст честный 404), ни строку в
-  // sitemap; ровно так же ведут себя выключенные категории.
+  // sitemap. Выключенные категории ведут себя так же, только их адреса сервер
+  // ещё и переадресует (server/redirects.js), а у отзывов адрес просто пропадает.
   const reviewsOn = settings?.blocks?.reviews !== false;
   return [
     { path: '/', priority: '1.0', changefreq: 'weekly', catalogAggregate: true },
