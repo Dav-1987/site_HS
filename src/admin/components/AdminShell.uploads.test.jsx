@@ -1,5 +1,5 @@
-import { describe, it, expect, vi, beforeEach } from 'vitest';
-import { render, screen, fireEvent, act, waitFor, within } from '@testing-library/react';
+import { describe, it, expect, vi, beforeAll, beforeEach } from 'vitest';
+import { render, screen, fireEvent, act, waitFor, within, cleanup } from '@testing-library/react';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
 import * as api from '../api.js';
 import AdminRoutes from '../AdminRoutes.jsx';
@@ -75,7 +75,7 @@ const hold = () =>
   });
 const finish = (i, url) => act(async () => pending[i]({ url }));
 
-beforeEach(() => {
+function startFresh() {
   pending = [];
   localStorage.clear();
   vi.spyOn(window, 'confirm').mockReturnValue(false);
@@ -87,7 +87,9 @@ beforeEach(() => {
   api.uploadImage.mockImplementation(hold);
   api.uploadVideo.mockImplementation(hold);
   api.fetchOrders.mockResolvedValue({ orders: [] });
-});
+}
+
+beforeEach(startFresh);
 
 const click = (name) => fireEvent.click(screen.getByRole('button', { name }));
 const type = (el, value) => fireEvent.change(el, { target: { value } });
@@ -106,6 +108,19 @@ async function openAdmin() {
   // The catalog opens on its first category.
   await screen.findByRole('link', { name: 'Tocador A' });
 }
+
+// The first admin rendered in a test file costs about twice what any test here
+// does on its own: each file starts in a fresh worker, so the admin's code runs
+// for the first time, and jsdom parses its built-in stylesheet on the first
+// getComputedStyle — which every query by role ends in. Counted inside the first
+// test, that start-up took it past the 5 s limit whenever other suites were
+// running on the machine (~6 s, against ~0.4 s alone). Paid once here instead,
+// under the hook's own limit, so each test is timed on its own steps.
+beforeAll(async () => {
+  startFresh();
+  await openAdmin();
+  cleanup();
+});
 
 const goTo = (section) => fireEvent.click(screen.getByRole('link', { name: section }));
 
