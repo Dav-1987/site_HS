@@ -41,7 +41,7 @@ import { listOrders, deleteOrder, getOrderOrigin, parseOrderPatch, updateOrder }
 import { findOrderVisit } from './visit.js';
 import { handleOrder } from './order-handler.js';
 import { buildGoogleFeed, buildMetaFeed, buildPinterestFeed } from './feed.js';
-import { buildProductIndex, resolveRedirect } from './redirects.js';
+import { buildRedirectIndex, resolveRedirect, withQuery } from './redirects.js';
 import { rebuildConfigured, triggerRebuild, getLatestRun } from './rebuild.js';
 import { extractPoster, isVideoFile, posterFor, sweepVideos } from './video.js';
 import { findStrayUploads } from './uploads-cleanup.js';
@@ -805,27 +805,37 @@ const CLIENT_ONLY_ROUTES = [/^\/admin(\/|$)/, /^\/utm(\/|$)/];
 //
 // Requests that reach this point matched no prerendered snapshot — which is
 // exactly what an outdated catalog URL looks like after a product moves between
-// sections in /admin (its address carries the category slug). Send those on with
-// a real 301 instead of letting the catch-all below answer 404; see redirects.js.
+// sections in /admin (its address carries the category slug), or after it is
+// switched off there. Send those on with a real 301 instead of letting the
+// catch-all below answer 404; see redirects.js.
 //
-// The id→category index is rebuilt from the DB at most once a minute: it only
+// The redirect index is rebuilt from the DB at most once a minute: it only
 // changes on an admin save, and this path is 404 traffic, not the hot path.
 const INDEX_TTL_MS = 60 * 1000;
-let productIndex = null;
-let productIndexAt = 0;
+let redirectIndex = null;
+let redirectIndexAt = 0;
 
-async function currentProductIndex() {
-  if (!productIndex || Date.now() - productIndexAt > INDEX_TTL_MS) {
-    productIndex = buildProductIndex(await readOrSeedCatalog());
-    productIndexAt = Date.now();
+async function currentRedirectIndex() {
+  if (!redirectIndex || Date.now() - redirectIndexAt > INDEX_TTL_MS) {
+    redirectIndex = buildRedirectIndex(await readOrSeedCatalog());
+    redirectIndexAt = Date.now();
   }
-  return productIndex;
+  return redirectIndex;
 }
+
+// A 301 with no caching headers is kept by the browser for good, so a product
+// put back on the site would stay unreachable for everyone who had been sent
+// away from it. A day lets search engines treat the move as permanent while
+// the owner can still undo it.
+const REDIRECT_MAX_AGE_S = 24 * 60 * 60;
 
 app.get('/{*splat}', async (req, res, next) => {
   try {
-    const target = resolveRedirect(req.path, await currentProductIndex());
-    if (target) return res.redirect(301, target);
+    const target = resolveRedirect(req.path, await currentRedirectIndex());
+    if (target) {
+      res.set('Cache-Control', `public, max-age=${REDIRECT_MAX_AGE_S}`);
+      return res.redirect(301, withQuery(target, req.originalUrl));
+    }
   } catch (err) {
     // A DB hiccup must never keep the page itself from being served.
     console.error('[redirect] lookup failed', err);
