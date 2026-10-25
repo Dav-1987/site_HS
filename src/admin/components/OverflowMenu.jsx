@@ -1,5 +1,7 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useLayoutEffect, useRef, useState } from 'react';
+import { createPortal } from 'react-dom';
 import { BTN_ICON } from '../ui.js';
+import { menuPosition } from '../menuPosition.js';
 
 // Shared class for anything acting as a row in the menu — MenuItem below, and
 // the file-picker <label> in ProductImagesEditor, which has to be a label
@@ -40,6 +42,12 @@ export function MenuItem({ onClick, disabled, danger, checked, keepOpen, childre
  * A "⋯" popover for controls that don't fit a phone-width row. Closes on
  * outside click, on Escape, and after any item inside is activated.
  *
+ * The popover is portalled to <body> and placed in window coordinates rather
+ * than hung off its trigger: the product list scrolls sideways on narrow
+ * windows, and a box that scrolls one way clips the other too, so the menu of
+ * the last rows used to be cut off at the bottom of the list. It follows its
+ * trigger while the page scrolls or the window changes size.
+ *
  * `trigger` replaces the ⋯ glyph when the whole thing being tapped is the
  * control (a photo tile, say) rather than a separate button next to it.
  */
@@ -52,12 +60,17 @@ export default function OverflowMenu({
   align = 'right',
 }) {
   const [open, setOpen] = useState(false);
+  const [position, setPosition] = useState(null);
   const ref = useRef(null);
+  const buttonRef = useRef(null);
+  const menuRef = useRef(null);
 
   useEffect(() => {
     if (!open) return undefined;
     const onPointerDown = (e) => {
-      if (ref.current && !ref.current.contains(e.target)) setOpen(false);
+      // The popover lives outside the wrapper (see above), so it counts too.
+      const inside = [ref.current, menuRef.current].some((el) => el?.contains(e.target));
+      if (!inside) setOpen(false);
     };
     const onKeyDown = (e) => {
       if (e.key === 'Escape') setOpen(false);
@@ -72,10 +85,39 @@ export default function OverflowMenu({
     };
   }, [open]);
 
+  // Measured before paint, so the popover never shows up in the wrong place.
+  useLayoutEffect(() => {
+    if (!open) {
+      setPosition(null);
+      return undefined;
+    }
+    const place = () => {
+      if (!buttonRef.current || !menuRef.current) return;
+      const viewport = { width: window.innerWidth, height: window.innerHeight };
+      setPosition(
+        menuPosition(
+          buttonRef.current.getBoundingClientRect(),
+          menuRef.current.getBoundingClientRect(),
+          viewport,
+          align,
+        ),
+      );
+    };
+    place();
+    // Capture: the list's own sideways scroll fires on the list, not the window.
+    window.addEventListener('scroll', place, true);
+    window.addEventListener('resize', place);
+    return () => {
+      window.removeEventListener('scroll', place, true);
+      window.removeEventListener('resize', place);
+    };
+  }, [open, align]);
+
   return (
     <div className={wrapperClassName} ref={ref}>
       <button
         type="button"
+        ref={buttonRef}
         aria-haspopup="menu"
         aria-expanded={open}
         aria-label={title}
@@ -86,20 +128,23 @@ export default function OverflowMenu({
         {trigger || <span aria-hidden="true">⋯</span>}
       </button>
 
-      {open && (
-        <div
-          role="menu"
-          aria-label={title}
-          // Every item is an action, so one click closes the menu — saves each
-          // caller from threading a close callback through its handlers.
-          onClick={() => setOpen(false)}
-          className={`absolute top-full z-40 mt-1 min-w-[15rem] max-w-[80vw] border border-primary/15 bg-background py-1 shadow-floating ${
-            align === 'left' ? 'left-0' : 'right-0'
-          }`}
-        >
-          {children}
-        </div>
-      )}
+      {open &&
+        createPortal(
+          <div
+            ref={menuRef}
+            role="menu"
+            aria-label={title}
+            // Every item is an action, so one click closes the menu — saves each
+            // caller from threading a close callback through its handlers.
+            onClick={() => setOpen(false)}
+            style={position ?? { top: 0, left: 0, visibility: 'hidden' }}
+            // z-50: above the side panel (z-40), which can hold a menu of its own.
+            className="fixed z-50 min-w-[15rem] max-w-[80vw] overflow-y-auto border border-primary/15 bg-background py-1 shadow-floating"
+          >
+            {children}
+          </div>,
+          document.body,
+        )}
     </div>
   );
 }

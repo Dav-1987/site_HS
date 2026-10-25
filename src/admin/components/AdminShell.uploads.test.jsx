@@ -292,7 +292,7 @@ describe('Admin — an upload lands on its own product', () => {
     fireEvent.change(screen.getByRole('combobox', { name: 'Переместить в категорию' }), {
       target: { value: 'espejos' },
     });
-    click('Переместить выбранные');
+    click('Переместить');
 
     await finish(0, '/uploads/a-mobile.jpg');
     const { a, categories } = await saved();

@@ -14,10 +14,12 @@ import {
   productIdError,
   removeCategory,
   removeProduct,
+  removeProducts,
   renameCategory,
   renameProduct,
   updateCategory,
   updateProduct,
+  updateProducts,
 } from './catalogOps.js';
 
 const p = (id, extra = {}) => ({ id, name: id, ...extra });
@@ -105,6 +107,44 @@ describe('moveProductsTo', () => {
   it('does nothing for a category that does not exist', () => {
     const cats = catalog();
     expect(moveProductsTo(cats, ['A'], 'nope')).toBe(cats);
+  });
+});
+
+describe('updateProducts', () => {
+  it('applies a patch or an updater to every listed product, in any category', () => {
+    const next = updateProducts(catalog(), ['A', 'D'], (x) => ({ ...x, visibility: 'off' }));
+    expect(next.flatMap((c) => c.products.map((x) => `${x.id}:${x.visibility ?? '-'}`))).toEqual([
+      'A:off',
+      'B:-',
+      'C:-',
+      'D:off',
+    ]);
+  });
+
+  it('hands back a category without any of them as it was', () => {
+    const cats = catalog();
+    const next = updateProducts(cats, ['D'], { inStock: false });
+    expect(next[0]).toBe(cats[0]);
+    expect(next[1].products[0].inStock).toBe(false);
+  });
+
+  it('hands back the same catalog for an empty or unknown selection', () => {
+    const cats = catalog();
+    expect(updateProducts(cats, [], { inStock: false })).toBe(cats);
+    expect(ids(updateProducts(cats, ['ghost'], { inStock: false }))).toEqual(ids(cats));
+  });
+});
+
+describe('removeProducts', () => {
+  it('removes every listed product from whichever category it is in', () => {
+    expect(ids(removeProducts(catalog(), ['A', 'C', 'D']))).toEqual(['tocadores:B', 'espejos:']);
+  });
+
+  it('leaves the rest alone', () => {
+    const cats = catalog();
+    const next = removeProducts(cats, ['D']);
+    expect(next[0]).toBe(cats[0]);
+    expect(removeProducts(cats, [])).toBe(cats);
   });
 });
 

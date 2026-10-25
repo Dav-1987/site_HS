@@ -236,9 +236,57 @@ describe('CatalogSection — categories', () => {
     fireEvent.change(screen.getByRole('combobox', { name: 'Переместить в категорию' }), {
       target: { value: 'vacia' },
     });
-    fireEvent.click(screen.getByRole('button', { name: 'Переместить выбранные' }));
+    fireEvent.click(screen.getByRole('button', { name: 'Переместить' }));
     expect(listed()).toEqual(['Tocador Doble Cajonera']);
     fireEvent.click(tab('Vacía'));
     expect(listed()).toEqual(['Tocador Compacto']);
+  });
+
+  const selectBoth = () => {
+    fireEvent.click(screen.getByRole('checkbox', { name: 'Выбрать L-06' }));
+    fireEvent.click(screen.getByRole('checkbox', { name: 'Выбрать T-09' }));
+  };
+  const pick = (name, value) =>
+    fireEvent.change(screen.getByRole('combobox', { name }), { target: { value } });
+
+  it('sets the visibility of every selected product and keeps the selection', async () => {
+    await openCatalog();
+    selectBoth();
+    pick('Видимость выбранных', 'off');
+    expect(screen.getAllByText('снят с сайта')).toHaveLength(2);
+    // Ready for the next action on the same products.
+    expect(screen.getByText('Выбрано: 2')).toBeTruthy();
+    expect(screen.getByRole('combobox', { name: 'Видимость выбранных' }).value).toBe('');
+  });
+
+  it('takes every selected product out of stock and puts it back', async () => {
+    await openCatalog();
+    selectBoth();
+    const inStock = () => screen.getAllByRole('switch').map((s) => s.checked);
+    expect(inStock()).toEqual([true, true]);
+    pick('Наличие выбранных', 'out');
+    expect(inStock()).toEqual([false, false]);
+    pick('Наличие выбранных', 'in');
+    expect(inStock()).toEqual([true, true]);
+  });
+
+  it('deletes the selected products once confirmed, saying what deleting costs', async () => {
+    await openCatalog();
+    selectBoth();
+    fireEvent.click(screen.getByRole('button', { name: 'Удалить выбранные' }));
+    const question = window.confirm.mock.calls.at(-1)[0];
+    expect(question).toMatch(/^Удалить 2 товара\?/);
+    expect(question).toMatch(/Снять с сайта/);
+    expect(listed()).toEqual([]);
+    expect(screen.queryByText(/Выбрано:/)).toBeNull();
+  });
+
+  it('keeps the selected products when the deletion is not confirmed', async () => {
+    await openCatalog();
+    window.confirm.mockReturnValue(false);
+    selectBoth();
+    fireEvent.click(screen.getByRole('button', { name: 'Удалить выбранные' }));
+    expect(listed()).toEqual(['Tocador Doble Cajonera', 'Tocador Compacto']);
+    expect(screen.getByText('Выбрано: 2')).toBeTruthy();
   });
 });

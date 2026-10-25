@@ -24,6 +24,9 @@ export const BTN_SOLID =
   'inline-flex min-h-11 items-center justify-center gap-2 bg-primary px-5 py-2.5 text-xs uppercase tracking-[0.18em] text-background transition-colors hover:bg-accent hover:text-primary disabled:cursor-not-allowed disabled:opacity-40 sm:min-h-0';
 export const BTN_GHOST =
   'inline-flex min-h-11 items-center justify-center gap-2 border border-primary/20 px-4 py-2 text-xs uppercase tracking-[0.18em] text-primary transition-colors hover:border-accent hover:text-accent disabled:opacity-40 sm:min-h-0';
+// The ghost button for an action that deletes (asks first, but still deletes).
+export const BTN_DANGER =
+  'inline-flex min-h-11 items-center justify-center gap-2 border border-danger/45 px-4 py-2 text-xs uppercase tracking-[0.18em] text-danger transition-colors hover:bg-danger/10 disabled:opacity-40 sm:min-h-0';
 // Single-glyph controls (⧉ ↑ ↓ ⋯). Square and finger-sized on a phone, back to
 // the compact desktop button from `sm:` up.
 export const BTN_ICON =
