@@ -26,9 +26,7 @@ const product = {
 // will read, not a constant.
 describe('productSchema — availability', () => {
   it('is InStock for a product with the switch untouched', () => {
-    expect(productSchema(product, category).offers.availability).toBe(
-      'https://schema.org/InStock',
-    );
+    expect(productSchema(product, category).offers.availability).toBe('https://schema.org/InStock');
   });
 
   it('is InStock when the switch is explicitly on', () => {
@@ -54,6 +52,48 @@ describe('productSchema — availability', () => {
 
   it('has no offer at all for a product with no price', () => {
     expect(productSchema({ ...product, price: 0 }, category).offers).toBeUndefined();
+  });
+});
+
+// Google Shopping and ChatGPT take delivery and returns from the Offer itself,
+// not from the /envios and /devoluciones pages; these are the terms those pages
+// state, and the owner confirmed on 2026-10-26.
+describe('productSchema — delivery and returns', () => {
+  it('delivers in Spain only, for 35 €, within 3–5 days', () => {
+    expect(productSchema(product, category).offers.shippingDetails).toEqual({
+      '@type': 'OfferShippingDetails',
+      shippingRate: { '@type': 'MonetaryAmount', value: 35, currency: 'EUR' },
+      shippingDestination: { '@type': 'DefinedRegion', addressCountry: 'ES' },
+      deliveryTime: {
+        '@type': 'ShippingDeliveryTime',
+        handlingTime: { '@type': 'QuantitativeValue', minValue: 0, maxValue: 0, unitCode: 'DAY' },
+        transitTime: { '@type': 'QuantitativeValue', minValue: 3, maxValue: 5, unitCode: 'DAY' },
+      },
+    });
+  });
+
+  it('takes returns for 14 days, the return shipping on us', () => {
+    expect(productSchema(product, category).offers.hasMerchantReturnPolicy).toEqual({
+      '@type': 'MerchantReturnPolicy',
+      applicableCountry: 'ES',
+      returnPolicyCategory: 'https://schema.org/MerchantReturnFiniteReturnWindow',
+      merchantReturnDays: 14,
+      returnMethod: 'https://schema.org/ReturnByMail',
+      returnFees: 'https://schema.org/FreeReturn',
+      merchantReturnLink: 'https://hsmuebles.es/devoluciones',
+    });
+  });
+
+  it('links the returns page in the language of the product page', () => {
+    expect(
+      productSchema(product, category, 'en').offers.hasMerchantReturnPolicy.merchantReturnLink,
+    ).toBe('https://hsmuebles.es/en/devoluciones');
+  });
+
+  it('keeps them on an offer that is out of stock', () => {
+    const { offers } = productSchema({ ...product, inStock: false }, category);
+    expect(offers.shippingDetails.shippingRate.value).toBe(35);
+    expect(offers.hasMerchantReturnPolicy.merchantReturnDays).toBe(14);
   });
 });
 
