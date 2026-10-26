@@ -46,10 +46,10 @@ describe('CategoryPanel', () => {
     expect(written().products).toHaveLength(2);
   });
 
-  it('cannot move the first category further left', () => {
+  it('moves the category with the header arrows, and not the first one further up', () => {
     const { onMove } = renderPanel();
-    expect(screen.getByRole('button', { name: 'Переместить левее' }).disabled).toBe(true);
-    fireEvent.click(screen.getByRole('button', { name: 'Переместить правее' }));
+    expect(screen.getByRole('button', { name: 'Переместить выше' }).disabled).toBe(true);
+    fireEvent.click(screen.getByRole('button', { name: 'Переместить ниже' }));
     expect(onMove).toHaveBeenCalledWith(1);
   });
 

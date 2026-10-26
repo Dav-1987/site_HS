@@ -1,6 +1,6 @@
 import { useId } from 'react';
 import { isTileEntryCategory } from '../../data/catalog.js';
-import { BTN_GHOST } from '../ui.js';
+import { BTN_GHOST, BTN_PANEL_ICON } from '../ui.js';
 import { countLabel } from '../plural.js';
 import { urlSafe } from '../urlSafe.js';
 import { IMAGE_SPECS } from '../imageSpecs.js';
@@ -11,6 +11,7 @@ import VideoField from './VideoField.jsx';
 import GiftEditor from './GiftEditor.jsx';
 import RenameField from './RenameField.jsx';
 import SidePanel from './SidePanel.jsx';
+import { Chevron, CloseIcon } from './PanelIcons.jsx';
 import VisibilitySelect, { VisibilityNote } from './VisibilitySelect.jsx';
 
 function Group({ title, children }) {
@@ -59,23 +60,39 @@ export default function CategoryPanel({
             {countLabel(category.products.length, ['товар', 'товара', 'товаров'])}
           </p>
         </div>
-        <button
-          type="button"
-          onClick={onClose}
-          aria-label="Закрыть настройки категории"
-          className="flex h-10 w-10 shrink-0 items-center justify-center border border-primary/20 transition-colors hover:border-accent hover:text-accent-text focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
-        >
-          <svg
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="1.6"
-            aria-hidden="true"
-            className="h-4 w-4"
+        {/* The same square buttons as a product's header, but here ↑ ↓ move the
+            category itself: categories are few, and their order is what the
+            site's menu, home page and catalogue show. */}
+        <div className="flex shrink-0 items-center gap-1.5">
+          <button
+            type="button"
+            onClick={() => onMove(-1)}
+            disabled={isFirst}
+            aria-label="Переместить выше"
+            title="Переместить выше"
+            className={BTN_PANEL_ICON}
           >
-            <path d="M18 6 6 18M6 6l12 12" strokeLinecap="round" />
-          </svg>
-        </button>
+            <Chevron up />
+          </button>
+          <button
+            type="button"
+            onClick={() => onMove(1)}
+            disabled={isLast}
+            aria-label="Переместить ниже"
+            title="Переместить ниже"
+            className={BTN_PANEL_ICON}
+          >
+            <Chevron />
+          </button>
+          <button
+            type="button"
+            onClick={onClose}
+            aria-label="Закрыть настройки категории"
+            className={BTN_PANEL_ICON}
+          >
+            <CloseIcon />
+          </button>
+        </div>
       </div>
       <label className="mt-4 flex items-center gap-2 text-sm">
         Видимость
@@ -90,12 +107,6 @@ export default function CategoryPanel({
 
   const footer = (
     <div className="flex flex-wrap items-center gap-2 px-4 py-3 sm:px-6">
-      <button type="button" onClick={() => onMove(-1)} disabled={isFirst} className={BTN_GHOST}>
-        Переместить левее
-      </button>
-      <button type="button" onClick={() => onMove(1)} disabled={isLast} className={BTN_GHOST}>
-        Переместить правее
-      </button>
       <button type="button" onClick={onDuplicate} className={BTN_GHOST}>
         Дублировать
       </button>

@@ -211,7 +211,12 @@ export default function CatalogSection() {
         renameCategory(category.slug, newSlug);
         setParams(withParams({ cat: newSlug }), { replace: true, state: location.state });
       }}
-      onMove={(dir) => moveCategory(category.slug, dir)}
+      onMove={(dir) => {
+        moveCategory(category.slug, dir);
+        // Without `cat` in the address the list shows the first category, and
+        // moving that one down would quietly swap the open settings for another.
+        setParams(withParams({ cat: category.slug }), { replace: true, state: location.state });
+      }}
       onDuplicate={() => {
         const copy = duplicateCategory(category.slug);
         if (copy) setParams(withParams({ cat: copy }), { replace: true, state: location.state });
