@@ -64,6 +64,17 @@ describe('catalogRows', () => {
     expect(listed({ filters: ['hidden', 'out'] })).toEqual([]);
   });
 
+  it('keeps «На сайте» to products shown in a section that is shown too', () => {
+    const catalog = [
+      ...CATALOG,
+      { slug: 'otros', visibility: 'off', products: [product('Comoda-B01')] },
+      { slug: 'loft', visibility: 'unlisted', products: [product('Tocador-M-05')] },
+    ];
+    const live = catalogRows(catalog, { filters: ['live'] }).map(({ product: p }) => p.id);
+    expect(live).toEqual(['Tocador-L-06', 'Tocador-L-99', 'Estanteria-E-01']);
+    expect(filterCounts(catalog, {}).live).toBe(3);
+  });
+
   it('hands back each product with its category', () => {
     const [row] = catalogRows(CATALOG, { query: 'roble' });
     expect(row.category.slug).toBe('estanterias');
@@ -73,6 +84,7 @@ describe('catalogRows', () => {
 describe('filterCounts', () => {
   it('counts within the category and the search, before filtering', () => {
     expect(filterCounts(CATALOG, { slug: 'tocadores' })).toEqual({
+      live: 2,
       hidden: 1,
       out: 0,
       onephoto: 1,
