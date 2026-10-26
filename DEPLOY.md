@@ -125,6 +125,13 @@ ssh root@185.202.172.59 "pm2 restart hs-api"
   на VPS по SSH через `scripts/deploy-dist.mjs`.
 - После переключения релиза workflow проверяет публичный маркер сборки и
   `/api/health`. При ошибке предыдущая версия `dist` восстанавливается автоматически.
+- После деплоя workflow отправляет в **IndexNow** (Bing, Яндекс, Seznam, Naver)
+  адреса, которые изменились в `sitemap.xml` по сравнению с живой версией до
+  деплоя: новые, с новым `lastmod` и выпавшие из карты (`scripts/indexnow.mjs`).
+  Ключ публичный, лежит в `public/<ключ>.txt`. Шаг `continue-on-error`: отказ
+  IndexNow виден в логе, но выкладку не валит. `npm run deploy:seo` с локальной
+  машины IndexNow не шлёт — после него можно вручную:
+  `node scripts/indexnow.mjs --all dist/sitemap.xml`.
 - Триггерит и опрашивает статус `server/rebuild.js` через GitHub API —
   нужен `GH_REBUILD_TOKEN` в `.env` (fine-grained PAT, только этот репозиторий,
   Actions: Read and write; см. `.env.example`). Без токена кнопка в админке

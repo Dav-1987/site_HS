@@ -62,7 +62,19 @@ jobs:
       - name: Trust the VPS host key
         run: mkdir -p ~/.ssh && echo "${{ secrets.VPS_HOST_KEY }}" >> ~/.ssh/known_hosts
 
+      # The sitemap still live, to tell IndexNow only what this release changes.
+      # A failed fetch leaves no file, and the IndexNow step then sends every page.
+      - name: Remember the live sitemap
+        run: curl -fsS --max-time 20 https://hsmuebles.es/sitemap.xml -o "$RUNNER_TEMP/previous-sitemap.xml" || rm -f "$RUNNER_TEMP/previous-sitemap.xml"
+
       - name: Deploy with smoke-check and automatic rollback
         env:
           RELEASE_ID: ${{ github.sha }}
         run: node scripts/deploy-dist.mjs
+
+      # Bing (and so ChatGPT's search) otherwise notices a new or removed
+      # product weeks later. Best effort: a refusal shows as a warning here and
+      # never fails a deploy that already went out.
+      - name: Tell Bing what changed (IndexNow)
+        continue-on-error: true
+        run: node scripts/indexnow.mjs --previous "$RUNNER_TEMP/previous-sitemap.xml" --current dist/sitemap.xml
