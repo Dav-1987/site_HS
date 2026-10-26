@@ -15,7 +15,7 @@
 // results, ChatGPT answers and old posts. Rather than a 404, a visitor is sent
 // to an open section of the same kind of furniture, or to the catalogue.
 
-import { isListed, isOff, productDisplayName } from '../src/data/catalog.js';
+import { CATALOG_SLUG, isOff, offProductTarget } from '../src/data/catalog.js';
 
 // Sections folded into "Otros Modelos" — their own pages no longer exist, so
 // their old URLs point at the section that absorbed them. A slug that is a
@@ -28,47 +28,27 @@ export const MERGED_CATEGORIES = new Map([
   ['mesas-de-manicura', 'otros-modelos'],
 ]);
 
-// Where a switched-off product's visitors go, by the first word of its name
-// ("Espejo | Arqueado…" → espejo). Only kinds that have a section of their own;
-// everything else — and these too, while their section is not public — goes to
-// the catalogue.
-export const OFF_PRODUCT_SECTIONS = new Map([
-  ['espejo', 'espejos'],
-  ['tocador', 'tocadores'],
-]);
-export const CATALOG_PATH = 'catalogo';
-
-/** First word of a product's Spanish name, lower-case and without accents. */
-function kindOf(product) {
-  const [word = ''] = productDisplayName(product).split(/\s+/);
-  return word.normalize('NFD').replace(/\p{M}/gu, '').toLowerCase();
-}
-
 /**
  * Everything resolveRedirect() needs from the catalog, built once per catalog:
  * - `products`: id → `{ slug, off }` — the section it lives in and, when it is
- *   switched off (itself or its whole section), the path to send its visitors to;
+ *   switched off (itself or its whole section), the path to send its visitors
+ *   to (offProductTarget, the rule the admin also names beside the link);
  * - `categories`: slug → `{ off }`, the same for a section's own page. A section
  *   whose products all go one way goes that way too; a mixed one, the catalogue.
  */
 export function buildRedirectIndex(categories) {
   const list = (categories ?? []).filter((c) => c?.slug);
-  const listedSlugs = new Set(list.filter(isListed).map((c) => c.slug));
-  const offTarget = (product) => {
-    const slug = OFF_PRODUCT_SECTIONS.get(kindOf(product));
-    return slug && listedSlugs.has(slug) ? slug : CATALOG_PATH;
-  };
-
   const products = new Map();
   const sections = new Map();
   for (const c of list) {
     const items = (c.products ?? []).filter((p) => p?.id);
-    const targets = new Set(items.map(offTarget));
+    const targets = new Map(items.map((p) => [p.id, offProductTarget(list, p)]));
+    const kinds = new Set(targets.values());
     sections.set(c.slug, {
-      off: isOff(c) ? (targets.size === 1 ? [...targets][0] : CATALOG_PATH) : null,
+      off: isOff(c) ? (kinds.size === 1 ? [...kinds][0] : CATALOG_SLUG) : null,
     });
     for (const p of items) {
-      products.set(p.id, { slug: c.slug, off: isOff(c) || isOff(p) ? offTarget(p) : null });
+      products.set(p.id, { slug: c.slug, off: isOff(c) || isOff(p) ? targets.get(p.id) : null });
     }
   }
   return { products, categories: sections };

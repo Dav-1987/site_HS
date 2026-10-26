@@ -6,6 +6,7 @@ import OverflowMenu, { MenuItem, MenuSeparator } from './OverflowMenu.jsx';
 import { VisibilityBadge, VisibilityMenuItems } from './VisibilitySelect.jsx';
 import { StockBadge, StockMenuItem } from './StockToggle.jsx';
 import Switch from './Switch.jsx';
+import { openSiteLink } from '../siteLink.js';
 
 // Columns of the full (desktop, no panel open) row, shared with its header.
 const FULL_COLUMNS =
@@ -63,10 +64,22 @@ function PriceLine({ product }) {
   );
 }
 
-function RowMenu({ product, label, layout, position, onUpdate, onMove, onDuplicate, onRemove }) {
+function RowMenu({
+  product,
+  label,
+  layout,
+  position,
+  siteLink,
+  onUpdate,
+  onMove,
+  onDuplicate,
+  onRemove,
+}) {
   const set = (patch) => onUpdate((p) => ({ ...p, ...patch }));
   return (
     <OverflowMenu title={`Действия с товаром ${label}`}>
+      <MenuItem onClick={() => openSiteLink(siteLink)}>{siteLink.label} ↗</MenuItem>
+      <MenuSeparator />
       {layout !== 'full' && (
         <StockMenuItem product={product} onChange={(inStock) => set({ inStock })} />
       )}
@@ -107,6 +120,7 @@ function ProductRow({
   active,
   href,
   gift,
+  siteLink,
   position,
   selected,
   onSelect,
@@ -140,6 +154,7 @@ function ProductRow({
       label={label}
       layout={layout}
       position={position}
+      siteLink={siteLink}
       onUpdate={onUpdate}
       onMove={onMove}
       onDuplicate={onDuplicate}
@@ -236,13 +251,27 @@ function ProductRow({
       )}
       <Thumbnail product={product} />
       <span className="min-w-0 px-2">
-        <Link
-          to={href}
-          state={{ fromList: true }}
-          className="block truncate font-medium hover:text-accent-text"
-        >
-          {name}
-        </Link>
+        <span className="flex min-w-0 items-center gap-1">
+          <Link
+            to={href}
+            state={{ fromList: true }}
+            className="min-w-0 truncate font-medium hover:text-accent-text"
+          >
+            {name}
+          </Link>
+          {/* The page on the site, one click from the list. Desktop only: on a
+              phone the row is the tap target, and the same link sits in "⋯". */}
+          <a
+            href={siteLink.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={`${siteLink.label}: ${label}`}
+            title={siteLink.label}
+            className="shrink-0 px-1 leading-none text-secondary transition-colors hover:text-accent-text focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+          >
+            <span aria-hidden="true">↗</span>
+          </a>
+        </span>
         <span className="flex flex-wrap items-center gap-x-2.5 gap-y-1 text-xs text-secondary">
           {meta}
           {chips}
@@ -289,6 +318,7 @@ export default function ProductList({
   activeId,
   hrefFor,
   giftFor,
+  siteLinkFor,
   selected,
   onToggleSelected,
   onToggleAll,
@@ -378,6 +408,7 @@ export default function ProductList({
               active={id === activeId}
               href={hrefFor(id)}
               gift={giftFor(row.product, row.category)}
+              siteLink={siteLinkFor(row.product, row.category)}
               position={positionOf(row)}
               selected={selected.has(id)}
               onSelect={() => onToggleSelected(id)}
