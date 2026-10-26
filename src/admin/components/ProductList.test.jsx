@@ -2,6 +2,7 @@ import { describe, it, expect, vi } from 'vitest';
 import { render, screen, fireEvent, within } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import { productGift } from '../../data/catalog.js';
+import { productSiteLink } from '../siteLink.js';
 import { applyUpdate } from '../update.js';
 import ProductList from './ProductList.jsx';
 
@@ -56,6 +57,7 @@ function renderList({
         hrefFor={(id) => `?product=${id}`}
         // The same resolution the catalog section passes in.
         giftFor={(product, cat) => productGift(categories, product, cat, 'es')}
+        siteLinkFor={(product, cat) => productSiteLink(categories, product, cat)}
         selected={new Set()}
         {...handlers}
         {...props}
@@ -122,6 +124,7 @@ describe('ProductList — the gift mark', () => {
             layout="full"
             hrefFor={() => '?'}
             giftFor={(product, cat) => productGift(categories, product, cat, 'es')}
+            siteLinkFor={(product, cat) => productSiteLink(categories, product, cat)}
             selected={new Set()}
           />
         </MemoryRouter>,
@@ -215,6 +218,32 @@ describe('ProductList — order', () => {
     expect(screen.queryByRole('button', { name: /Перетащить/ })).toBeNull();
     openMenu('B');
     expect(screen.queryByRole('menuitem', { name: 'Переместить выше' })).toBeNull();
+  });
+});
+
+describe('ProductList — the page on the site', () => {
+  it('links each desktop row to the product’s page, in a new tab', () => {
+    renderList();
+    const link = screen.getByRole('link', { name: 'Открыть на сайте: M-05' });
+    expect(link.getAttribute('href')).toBe('/tocadores/Tocador-M-05');
+    expect(link.getAttribute('target')).toBe('_blank');
+  });
+
+  it('opens it from the row menu too', () => {
+    const open = vi.spyOn(window, 'open').mockImplementation(() => null);
+    renderList({ layout: 'phone' });
+    // No ↗ on a phone: the row itself is the tap target there.
+    expect(screen.queryByRole('link', { name: /^Открыть на сайте/ })).toBeNull();
+    openMenu();
+    fireEvent.click(screen.getByRole('menuitem', { name: 'Открыть на сайте ↗' }));
+    expect(open).toHaveBeenCalledWith('/tocadores/Tocador-M-05', '_blank', 'noopener');
+    open.mockRestore();
+  });
+
+  it('says where a switched-off product’s address leads instead', () => {
+    renderList({ categories: catalog({ products: [tocador({ visibility: 'off' })] }) });
+    const link = screen.getByRole('link', { name: /^Адрес на сайте/ });
+    expect(link.getAttribute('title')).toBe('Адрес на сайте (ведёт в «Tocadores»)');
   });
 });
 

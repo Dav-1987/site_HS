@@ -5,6 +5,7 @@ import { useAdmin } from '../useAdmin.js';
 import { SPLIT_PANEL_MIN_WIDTH, useIsCompact } from '../useIsCompact.js';
 import { CATALOG_FILTERS, catalogRows, filterCounts } from '../catalogView.js';
 import { countLabel } from '../plural.js';
+import { productSiteLink } from '../siteLink.js';
 import { VISIBILITY_LABELS, giftHint } from '../hints.js';
 import { BTN_DANGER, BTN_GHOST, BTN_SOLID, INPUT_BASE } from '../ui.js';
 import ProductList from '../components/ProductList.jsx';
@@ -134,6 +135,7 @@ export default function CatalogSection() {
 
   // ─── actions ───────────────────────────────────────────────────────────────
   const giftFor = (product, cat) => productGift(categories, product, cat, 'es');
+  const siteLinkFor = (product, cat) => productSiteLink(categories, product, cat);
   const onAddProduct = () => openPanel({ product: addProduct(slug), edit: null });
   const onDuplicate = (id) => {
     const copy = duplicateProduct(id);
@@ -202,6 +204,7 @@ export default function CatalogSection() {
       product={open.product}
       category={open.category}
       gift={giftFor(open.product, open.category)}
+      siteLink={siteLinkFor(open.product, open.category)}
       allProducts={allProducts}
       sheet={sheet}
       prev={neighbour(at - 1)}
@@ -405,6 +408,7 @@ export default function CatalogSection() {
                   activeId={open?.product.id}
                   hrefFor={hrefFor}
                   giftFor={giftFor}
+                  siteLinkFor={siteLinkFor}
                   selected={selected}
                   onToggleSelected={toggleSelected}
                   onToggleAll={(all) =>

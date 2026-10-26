@@ -21,6 +21,8 @@ import {
   isListed,
   isTileEntryCategory,
   isOff,
+  offProductTarget,
+  CATALOG_SLUG,
   listedProducts,
   liveCatalog,
   visibilityOf,
@@ -994,5 +996,32 @@ describe('categoryHasGift', () => {
   it('survives a category with no products', () => {
     expect(categoryHasGift([], { slug: 'empty' })).toBe(false);
     expect(categoryHasGift([], undefined)).toBe(false);
+  });
+});
+
+describe('offProductTarget', () => {
+  const sections = (espejos = 'public') => [
+    { slug: 'espejos', visibility: espejos, products: [] },
+    { slug: 'tocadores', products: [] },
+  ];
+
+  it('sends a mirror and a dressing table to the open section of their kind', () => {
+    expect(offProductTarget(sections(), { name: 'Espejo | Arqueado' })).toBe('espejos');
+    expect(offProductTarget(sections(), { name: 'Tocador | Hollywood' })).toBe('tocadores');
+  });
+
+  it('reads only the first word of the name, whatever its case and accents', () => {
+    expect(offProductTarget(sections(), { name: '  ESPÉJO grande' })).toBe('espejos');
+    expect(offProductTarget(sections(), { name: 'Consola con espejo | Blanca' })).toBe(
+      CATALOG_SLUG,
+    );
+  });
+
+  it('sends every other kind, and a kind whose section is not public, to the catalogue', () => {
+    expect(offProductTarget(sections(), { name: 'Estantería | Gris' })).toBe('catalogo');
+    expect(offProductTarget(sections(), {})).toBe('catalogo');
+    expect(offProductTarget(sections('unlisted'), { name: 'Espejo | LED' })).toBe('catalogo');
+    expect(offProductTarget(sections('off'), { name: 'Espejo | LED' })).toBe('catalogo');
+    expect(offProductTarget(null, { name: 'Espejo | LED' })).toBe('catalogo');
   });
 });

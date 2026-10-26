@@ -1,12 +1,6 @@
 import { useId, useState } from 'react';
 import { Link } from 'react-router-dom';
-import {
-  isInStock,
-  productImages,
-  productMedia,
-  resolveImage,
-  visibilityOf,
-} from '../../data/catalog.js';
+import { isInStock, productImages, productMedia, resolveImage } from '../../data/catalog.js';
 import { IconGift } from '../../components/Gift.jsx';
 import { BTN_GHOST } from '../ui.js';
 import { giftHint } from '../hints.js';
@@ -82,6 +76,9 @@ export default function ProductPanel({
   product,
   category,
   gift,
+  // `{ href, label }` from productSiteLink (../siteLink.js) — it needs the
+  // whole catalog to name where a switched-off product's address leads.
+  siteLink,
   allProducts,
   sheet,
   prev,
@@ -186,12 +183,12 @@ export default function ProductPanel({
           <span className="text-primary/75">({giftHint(product.gift, true)})</span>
         </span>
         <a
-          href={`/${category.slug}/${product.id}`}
+          href={siteLink.href}
           target="_blank"
           rel="noopener noreferrer"
           className="underline underline-offset-4 hover:text-accent-text"
         >
-          {visibilityOf(product) === 'off' ? 'Адрес на сайте' : 'Открыть на сайте'}
+          {siteLink.label}
         </a>
       </div>
 

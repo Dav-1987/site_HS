@@ -424,9 +424,37 @@ export function isListed(entity) {
   return visibilityOf(entity) === 'public';
 }
 
-/** True when the category/product is off the site entirely (its page must 404). */
+/**
+ * True when the category/product is off the site entirely: no page of its own,
+ * its address answered by a redirect (see offProductTarget below).
+ */
 export function isOff(entity) {
   return visibilityOf(entity) === 'off';
+}
+
+// Where the visitors of a switched-off product are sent: the server 301s its
+// old address there (server/redirects.js) and the admin names the place beside
+// the product's link, so both read this one rule. By the first word of the
+// name ("Espejo | Arqueado…" → espejo), to the open section of that kind of
+// furniture; every other kind — and these too while their section is not
+// public — to the catalogue.
+export const OFF_PRODUCT_SECTIONS = new Map([
+  ['espejo', 'espejos'],
+  ['tocador', 'tocadores'],
+]);
+export const CATALOG_SLUG = 'catalogo';
+
+/** First word of a product's Spanish name, lower-case and without accents. */
+function productKind(product) {
+  const [word = ''] = productDisplayName(product).split(/\s+/);
+  return word.normalize('NFD').replace(/\p{M}/gu, '').toLowerCase();
+}
+
+/** The slug a switched-off product's address leads to: a public section, or 'catalogo'. */
+export function offProductTarget(categories, product) {
+  const slug = OFF_PRODUCT_SECTIONS.get(productKind(product));
+  const section = slug ? (categories ?? []).find((c) => c?.slug === slug) : null;
+  return section && isListed(section) ? slug : CATALOG_SLUG;
 }
 
 /**
@@ -859,7 +887,10 @@ export function giftedWith(categories, product, lang) {
   }
   if (byCategory.size !== 1) return null;
   const [category] = byCategory.values();
-  return { name: category.name?.[lang] || category.name?.es || category.slug, href: `/${category.slug}` };
+  return {
+    name: category.name?.[lang] || category.name?.es || category.slug,
+    href: `/${category.slug}`,
+  };
 }
 
 // Deterministic templated descriptions so every product reads consistently
@@ -900,4 +931,3 @@ export function productDescription(product, category, lang) {
       : `Crafted in ${mat}, measuring ${product.size}. Part of the ${cat} collection.`;
   return `${intro} ${second}`;
 }
-

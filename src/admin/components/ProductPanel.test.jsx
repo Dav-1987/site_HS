@@ -37,6 +37,7 @@ function renderPanel(p = product(), props = {}) {
         product={p}
         category={CATEGORY}
         gift={null}
+        siteLink={{ href: '/tocadores/Tocador-M-05', label: 'Открыть на сайте' }}
         allProducts={[]}
         sheet
         prev={null}
@@ -59,6 +60,14 @@ describe('ProductPanel — frame', () => {
     renderPanel();
     expect(screen.getByRole('dialog', { name: 'Tocador Aria' })).toBeTruthy();
     expect(screen.getByText('M-05 · Tocadores · 2 фото')).toBeTruthy();
+  });
+
+  it('links to the page on the site under the name it is given', () => {
+    renderPanel(product(), {
+      siteLink: { href: '/otros-modelos/Tocador-M-05', label: 'Адрес на сайте (ведёт в каталог)' },
+    });
+    const link = screen.getByRole('link', { name: 'Адрес на сайте (ведёт в каталог)' });
+    expect(link.getAttribute('href')).toBe('/otros-modelos/Tocador-M-05');
   });
 
   it('closes, and on Escape too', () => {
@@ -100,6 +109,7 @@ describe('ProductPanel — frame', () => {
           product={p}
           category={CATEGORY}
           gift={null}
+          siteLink={{ href: '/tocadores/Tocador-M-05', label: 'Открыть на сайте' }}
           allProducts={[]}
           sheet
           onClose={() => {}}
