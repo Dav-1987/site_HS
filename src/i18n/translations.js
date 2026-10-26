@@ -187,8 +187,10 @@ export const translations = {
     // --- Privacy Policy ---
     'shipping.title': 'Envíos y entregas',
     'shipping.intro': 'Realizamos envíos a toda España.',
+    // The 35 € is also in every product's structured data (src/seo/schema.js):
+    // change both together, or Merchant Center sees two different prices.
     'shipping.cost':
-      'El coste del envío depende de la dirección de entrega. Te lo confirmamos antes de tramitar el pedido, junto con el resto de los datos.',
+      'El envío cuesta 35 € a cualquier dirección de España. Antes de tramitar el pedido te llamamos para confirmar la dirección y la fecha de entrega.',
     'shipping.time':
       'El plazo de entrega habitual es de 3 a 5 días desde la confirmación del pedido.',
     'shipping.assembly':
@@ -418,7 +420,7 @@ export const translations = {
     'shipping.title': 'Shipping and delivery',
     'shipping.intro': 'We ship anywhere in Spain.',
     'shipping.cost':
-      'The shipping cost depends on the delivery address. We confirm it with you before processing the order, along with the rest of the details.',
+      'Shipping costs €35 to any address in Spain. Before processing the order we call you to confirm the address and the delivery date.',
     'shipping.time': 'Delivery usually takes 3 to 5 days from order confirmation.',
     'shipping.assembly':
       'Assembly is included with the delivery of the product, at no extra cost. It is not sold separately.',

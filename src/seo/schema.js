@@ -86,6 +86,49 @@ export function breadcrumbSchema(trail) {
   };
 }
 
+// The terms every order gets, as /envios and /devoluciones state them: Spain
+// only, 35 € delivery within 3–5 days of the order being confirmed, and 14
+// days from delivery to return it, the return shipping paid by us. Google
+// Shopping and ChatGPT read them from the Offer; a page about them elsewhere
+// is not tied to any product. Change them here and on those two pages together.
+const SHIPPING_COUNTRY = 'ES';
+const SHIPPING_PRICE = 35;
+const DELIVERY_DAYS = { min: 3, max: 5 };
+const RETURN_DAYS = 14;
+
+const days = (min, max) => ({
+  '@type': 'QuantitativeValue',
+  minValue: min,
+  maxValue: max,
+  unitCode: 'DAY',
+});
+
+function shippingDetails() {
+  return {
+    '@type': 'OfferShippingDetails',
+    shippingRate: { '@type': 'MonetaryAmount', value: SHIPPING_PRICE, currency: 'EUR' },
+    shippingDestination: { '@type': 'DefinedRegion', addressCountry: SHIPPING_COUNTRY },
+    // The 3–5 days count from confirmation, so none of it is handling time.
+    deliveryTime: {
+      '@type': 'ShippingDeliveryTime',
+      handlingTime: days(0, 0),
+      transitTime: days(DELIVERY_DAYS.min, DELIVERY_DAYS.max),
+    },
+  };
+}
+
+function returnPolicy(lang) {
+  return {
+    '@type': 'MerchantReturnPolicy',
+    applicableCountry: SHIPPING_COUNTRY,
+    returnPolicyCategory: 'https://schema.org/MerchantReturnFiniteReturnWindow',
+    merchantReturnDays: RETURN_DAYS,
+    returnMethod: 'https://schema.org/ReturnByMail',
+    returnFees: 'https://schema.org/FreeReturn',
+    merchantReturnLink: `${SITE}${withLang('/devoluciones', lang)}`,
+  };
+}
+
 /** Product + Offer node. */
 export function productSchema(product, category, lang = 'es') {
   const { price } = productDiscount(product);
@@ -114,6 +157,8 @@ export function productSchema(product, category, lang = 'es') {
           itemCondition: 'https://schema.org/NewCondition',
           url,
           seller: { '@type': 'Organization', name: ORG_NAME },
+          shippingDetails: shippingDetails(),
+          hasMerchantReturnPolicy: returnPolicy(lang),
         }
       : undefined;
 
