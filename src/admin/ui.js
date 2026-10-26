@@ -27,6 +27,11 @@ export const BTN_GHOST =
 // The ghost button for an action that deletes (asks first, but still deletes).
 export const BTN_DANGER =
   'inline-flex min-h-11 items-center justify-center gap-2 border border-danger/45 px-4 py-2 text-xs uppercase tracking-[0.18em] text-danger transition-colors hover:bg-danger/10 disabled:opacity-40 sm:min-h-0';
+// The square buttons in a side panel's header (↑ ↓ ✕), the same at every width.
+// A step that leads nowhere is greyed out whether it is a disabled <button> or
+// an aria-disabled link.
+export const BTN_PANEL_ICON =
+  'flex h-10 w-10 shrink-0 items-center justify-center border border-primary/20 transition-colors hover:border-accent hover:text-accent-text focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent disabled:pointer-events-none disabled:opacity-30 aria-disabled:pointer-events-none aria-disabled:opacity-30';
 // Single-glyph controls (⧉ ↑ ↓ ⋯). Square and finger-sized on a phone, back to
 // the compact desktop button from `sm:` up.
 export const BTN_ICON =

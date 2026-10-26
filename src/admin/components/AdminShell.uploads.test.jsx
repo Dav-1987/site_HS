@@ -275,7 +275,7 @@ describe('Admin — an upload lands on its own product', () => {
     pickMobileCover('Tocador A');
     closeProduct();
     click('Настройки категории');
-    click('Переместить правее');
+    click('Переместить ниже');
 
     await finish(0, '/uploads/a-mobile.jpg');
     const { a, c, categories } = await saved();

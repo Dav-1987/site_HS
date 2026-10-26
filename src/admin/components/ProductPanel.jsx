@@ -2,10 +2,11 @@ import { useId, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { isInStock, productImages, productMedia, resolveImage } from '../../data/catalog.js';
 import { IconGift } from '../../components/Gift.jsx';
-import { BTN_GHOST } from '../ui.js';
+import { BTN_GHOST, BTN_PANEL_ICON } from '../ui.js';
 import { giftHint } from '../hints.js';
 import { applyUpdate } from '../update.js';
 import SidePanel from './SidePanel.jsx';
+import { Chevron, CloseIcon } from './PanelIcons.jsx';
 import Switch from './Switch.jsx';
 import VisibilitySelect, { VisibilityNote } from './VisibilitySelect.jsx';
 import { StockNote } from './StockToggle.jsx';
@@ -20,33 +21,11 @@ const PRODUCT_TABS = [
   { key: 'related', label: 'Похожие', count: (p) => p.related?.length || 0 },
 ];
 
-const ICON_BUTTON =
-  'flex h-10 w-10 shrink-0 items-center justify-center border border-primary/20 transition-colors hover:border-accent hover:text-accent-text focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent aria-disabled:pointer-events-none aria-disabled:opacity-30';
-
-function Chevron({ up }) {
-  return (
-    <svg
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="1.6"
-      aria-hidden="true"
-      className="h-4 w-4"
-    >
-      <path
-        d={up ? 'm18 15-6-6-6 6' : 'm6 9 6 6 6-6'}
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
-  );
-}
-
 /** A link to the previous/next product in the list, or a dead button at the end. */
 function Step({ to, up, label }) {
   if (!to) {
     return (
-      <span role="link" aria-disabled="true" aria-label={label} className={ICON_BUTTON}>
+      <span role="link" aria-disabled="true" aria-label={label} className={BTN_PANEL_ICON}>
         <Chevron up={up} />
       </span>
     );
@@ -57,7 +36,7 @@ function Step({ to, up, label }) {
       replace
       state={to.state}
       aria-label={`${label}: ${to.label}`}
-      className={ICON_BUTTON}
+      className={BTN_PANEL_ICON}
     >
       <Chevron up={up} />
     </Link>
@@ -127,18 +106,9 @@ export default function ProductPanel({
             type="button"
             onClick={onClose}
             aria-label="Закрыть товар"
-            className={ICON_BUTTON}
+            className={BTN_PANEL_ICON}
           >
-            <svg
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="1.6"
-              aria-hidden="true"
-              className="h-4 w-4"
-            >
-              <path d="M18 6 6 18M6 6l12 12" strokeLinecap="round" />
-            </svg>
+            <CloseIcon />
           </button>
         </div>
       </div>

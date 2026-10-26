@@ -248,6 +248,21 @@ describe('CatalogSection — categories', () => {
     expect(categorySelect().selectedOptions[0].textContent).toMatch(/^Nueva categoría — 0/);
   });
 
+  it('moves a category with the arrows in its settings, keeping them open', async () => {
+    await openCatalog();
+    fireEvent.click(screen.getByRole('button', { name: 'Настройки категории' }));
+    expect(screen.getByRole('button', { name: 'Переместить выше' }).disabled).toBe(true);
+    fireEvent.click(screen.getByRole('button', { name: 'Переместить ниже' }));
+    expect([...categorySelect().options].map((o) => o.value)).toEqual([
+      '*',
+      'estanterias',
+      'tocadores',
+      'vacia',
+    ]);
+    expect(screen.getByRole('dialog', { name: 'Tocadores' })).toBeTruthy();
+    expect(screen.getByRole('button', { name: 'Переместить выше' }).disabled).toBe(false);
+  });
+
   it('refuses an address a page of the site already has', async () => {
     await openCatalog();
     fireEvent.click(screen.getByRole('button', { name: 'Настройки категории' }));
