@@ -7,6 +7,7 @@ import { VisibilityBadge, VisibilityMenuItems } from './VisibilitySelect.jsx';
 import { StockBadge, StockMenuItem } from './StockToggle.jsx';
 import Switch from './Switch.jsx';
 import { openSiteLink } from '../siteLink.js';
+import { useTouchReorder } from '../useTouchReorder.js';
 
 // Columns of the full (desktop, no panel open) row, shared with its header.
 const FULL_COLUMNS =
@@ -129,6 +130,7 @@ function ProductRow({
   onDuplicate,
   onRemove,
   drag,
+  touch,
 }) {
   const { product, category } = row;
   const label = product.reference || product.name || 'без названия';
@@ -193,12 +195,24 @@ function ProductRow({
   }
 
   if (layout === 'phone') {
+    const lift = touch?.state;
     return (
-      <li className="flex items-center gap-3 border-b border-primary/10 py-2">
+      <li
+        {...touch?.props}
+        // While a row is held the others slide aside (transform only, so the
+        // list never reflows under the finger); the held row is moved by
+        // useTouchReorder itself and must get no transform from here.
+        style={lift && !lift.lifted ? { transform: `translateY(${lift.shift}px)` } : undefined}
+        className={`flex items-center gap-3 border-b border-primary/10 py-2 ${
+          touch?.props ? 'select-none [-webkit-touch-callout:none]' : ''
+        } ${lift?.lifted ? 'relative z-10 bg-background shadow-floating' : ''} ${
+          lift && !lift.lifted ? 'transition-transform duration-150 ease-out' : ''
+        }`}
+      >
         <Link
           to={href}
           state={{ fromList: true }}
-          className="flex min-w-0 flex-1 items-center gap-3"
+          className="flex min-w-0 flex-1 items-center gap-3 [-webkit-touch-callout:none]"
         >
           <Thumbnail product={product} />
           <span className="min-w-0 flex-1">
@@ -329,6 +343,8 @@ export default function ProductList({
 }) {
   const [dragId, setDragId] = useState(null);
   const [overId, setOverId] = useState(null);
+  // Phones have no HTML5 drag: hold a row, then drag it (see useTouchReorder).
+  const touch = useTouchReorder({ enabled: reorderable && layout === 'phone', onMove });
 
   const positionOf = (row) => {
     if (!reorderable) return null;
@@ -396,7 +412,7 @@ export default function ProductList({
           <span />
         </div>
       )}
-      <ul>
+      <ul ref={touch.listRef}>
         {rows.map((row) => {
           const { id } = row.product;
           return (
@@ -417,6 +433,14 @@ export default function ProductList({
               onDuplicate={() => onDuplicate(id)}
               onRemove={() => onRemove(id)}
               drag={dragFor(row)}
+              touch={
+                reorderable && layout === 'phone'
+                  ? {
+                      props: touch.rowProps(id, positionOf(row).index),
+                      state: touch.rowState(id, positionOf(row).index),
+                    }
+                  : null
+              }
             />
           );
         })}
