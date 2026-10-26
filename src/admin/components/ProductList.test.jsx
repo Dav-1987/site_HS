@@ -1,10 +1,11 @@
-import { describe, it, expect, vi } from 'vitest';
-import { render, screen, fireEvent, within } from '@testing-library/react';
-import { MemoryRouter } from 'react-router-dom';
+import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
+import { act, render, screen, fireEvent, within } from '@testing-library/react';
+import { MemoryRouter, useLocation } from 'react-router-dom';
 import { productGift } from '../../data/catalog.js';
 import { productSiteLink } from '../siteLink.js';
 import { applyUpdate } from '../update.js';
 import ProductList from './ProductList.jsx';
+import { HOLD_MS } from '../useTouchReorder.js';
 
 // A product whose gallery deliberately starts with a video: the row must show
 // the first PHOTO, matching the catalog cover rule.
@@ -31,6 +32,13 @@ function catalog({ categoryGift, products = [tocador()], shelf = SHELF } = {}) {
     { slug: 'tocadores', name: { es: 'Tocadores' }, gift: categoryGift, products },
     { slug: 'estanterias', name: { es: 'Estanterías' }, products: [shelf] },
   ];
+}
+
+// Where the list's links have taken the router (a tap on a row opens the product).
+let location;
+function LocationProbe() {
+  location = useLocation();
+  return null;
 }
 
 function renderList({
@@ -62,6 +70,7 @@ function renderList({
         {...handlers}
         {...props}
       />
+      <LocationProbe />
     </MemoryRouter>,
   );
   return handlers;
@@ -244,6 +253,122 @@ describe('ProductList — the page on the site', () => {
     renderList({ categories: catalog({ products: [tocador({ visibility: 'off' })] }) });
     const link = screen.getByRole('link', { name: /^Адрес на сайте/ });
     expect(link.getAttribute('title')).toBe('Адрес на сайте (ведёт в «Tocadores»)');
+  });
+});
+
+describe('ProductList — phone: hold a row, then drag it', () => {
+  const three = () =>
+    catalog({
+      products: ['A', 'B', 'C'].map((x) =>
+        tocador({ id: `Tocador-${x}`, reference: x, name: `Tocador ${x}` }),
+      ),
+    });
+  // Rows 60px tall from y=200, well clear of the window edges that scroll.
+  const rowsAt = () => {
+    const rows = [...document.querySelectorAll('li[data-reorder-row]')];
+    rows.forEach((row, i) => {
+      row.getBoundingClientRect = () => ({ top: 200 + i * 60, height: 60, bottom: 260 + i * 60 });
+    });
+    return rows;
+  };
+  const touchAt = (y, x = 20) => ({ touches: [{ clientX: x, clientY: y }] });
+
+  beforeEach(() => vi.useFakeTimers());
+  afterEach(() => vi.useRealTimers());
+
+  it('moves the held row to where the finger lets go', () => {
+    const { onMove } = renderList({ layout: 'phone', categories: three() });
+    const [a, b, c] = rowsAt();
+    fireEvent.touchStart(a, touchAt(230));
+    act(() => vi.advanceTimersByTime(HOLD_MS));
+    expect(a.className).toContain('shadow-floating');
+    // Past the middle of C: A goes last, and B and C slide up into its place.
+    fireEvent.touchMove(a, touchAt(360));
+    expect(a.style.transform).toBe('translateY(130px)');
+    expect([b, c].map((row) => row.style.transform)).toEqual([
+      'translateY(-60px)',
+      'translateY(-60px)',
+    ]);
+    fireEvent.touchEnd(a, { touches: [] });
+    expect(onMove).toHaveBeenCalledWith('Tocador-A', 2);
+    expect(a.className).not.toContain('shadow-floating');
+    expect([a, b, c].map((row) => row.style.transform)).toEqual(['', '', '']);
+  });
+
+  it('opens a gap where the row will land and lands there', () => {
+    const { onMove } = renderList({ layout: 'phone', categories: three() });
+    const [a, b, c] = rowsAt();
+    fireEvent.touchStart(c, touchAt(350));
+    act(() => vi.advanceTimersByTime(HOLD_MS));
+    fireEvent.touchMove(c, touchAt(250));
+    // Between A and B: B slides down, A stays.
+    expect(b.style.transform).toBe('translateY(60px)');
+    expect(a.style.transform).toBe('translateY(0px)');
+    fireEvent.touchEnd(c, { touches: [] });
+    expect(onMove).toHaveBeenCalledWith('Tocador-C', 1);
+  });
+
+  it('does not move a row put back where it was', () => {
+    const { onMove } = renderList({ layout: 'phone', categories: three() });
+    const [, b] = rowsAt();
+    fireEvent.touchStart(b, touchAt(290));
+    act(() => vi.advanceTimersByTime(HOLD_MS));
+    fireEvent.touchMove(b, touchAt(300));
+    fireEvent.touchEnd(b, { touches: [] });
+    expect(onMove).not.toHaveBeenCalled();
+  });
+
+  it('leaves a short tap to open the product', () => {
+    const { onMove } = renderList({ layout: 'phone', categories: three() });
+    const [a] = rowsAt();
+    fireEvent.touchStart(a, touchAt(230));
+    act(() => vi.advanceTimersByTime(HOLD_MS - 100));
+    fireEvent.touchEnd(a, { touches: [] });
+    act(() => vi.advanceTimersByTime(HOLD_MS));
+    expect(a.className).not.toContain('shadow-floating');
+    // The click that follows a tap still opens the product.
+    fireEvent.click(screen.getByRole('link', { name: /Tocador A/ }));
+    expect(location.search).toBe('?product=Tocador-A');
+    expect(onMove).not.toHaveBeenCalled();
+  });
+
+  it('leaves a finger that moves first to scroll the page', () => {
+    renderList({ layout: 'phone', categories: three() });
+    const [a] = rowsAt();
+    fireEvent.touchStart(a, touchAt(230));
+    act(() => vi.advanceTimersByTime(100));
+    fireEvent.touchMove(a, touchAt(260));
+    act(() => vi.advanceTimersByTime(HOLD_MS));
+    expect(a.className).not.toContain('shadow-floating');
+  });
+
+  it('swallows the click that ends a drag', () => {
+    renderList({ layout: 'phone', categories: three() });
+    const [a] = rowsAt();
+    fireEvent.touchStart(a, touchAt(230));
+    act(() => vi.advanceTimersByTime(HOLD_MS));
+    fireEvent.touchEnd(a, { touches: [] });
+    fireEvent.click(screen.getByRole('link', { name: /Tocador A/ }));
+    expect(location.search).toBe('');
+    // Only that one click: the next tap opens the product as usual.
+    fireEvent.click(screen.getByRole('link', { name: /Tocador A/ }));
+    expect(location.search).toBe('?product=Tocador-A');
+  });
+
+  it('does not lift a row held by its "⋯"', () => {
+    renderList({ layout: 'phone', categories: three() });
+    const [a] = rowsAt();
+    fireEvent.touchStart(
+      screen.getByRole('button', { name: 'Действия с товаром A' }),
+      touchAt(230),
+    );
+    act(() => vi.advanceTimersByTime(HOLD_MS));
+    expect(a.className).not.toContain('shadow-floating');
+  });
+
+  it('offers no drag where the rows are not the order (search, filters, «Все»)', () => {
+    renderList({ layout: 'phone', categories: three(), reorderable: false });
+    expect(document.querySelector('li[data-reorder-row]')).toBeNull();
   });
 });
 
