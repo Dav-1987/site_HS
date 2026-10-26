@@ -1,18 +1,34 @@
 # Mirage Muebles
 
-> Tienda online de mobiliario de tocador, con diseño minimalista, ubicada en España. / Online store for vanity and dressing-table furniture, minimalist design, based in Spain.
+> Tienda online de tocadores con espejo y espejos de diseño propio, hechos en España, con envío a toda España. / Online store of dressing tables with mirror and mirrors of its own design, made in Spain, delivering across Spain.
 
-Mirage Muebles diseña y vende mobiliario de tocador: tocadores con espejo, espejos, consolas, cómodas, estanterías y mesas de manicura. El sitio está disponible en español e inglés.
+Mirage Muebles diseña y vende tocadores con espejo (entre ellos tocadores Hollywood con bombillas) y espejos, también de cuerpo entero. Muchos modelos llevan las bombillas LED de regalo. El sitio está disponible en español e inglés.
 
-Mirage Muebles designs and sells vanity furniture: dressing tables with mirror, mirrors, console tables, chests of drawers, shelving units, and manicure tables. The site is available in Spanish and English.
+Mirage Muebles designs and sells dressing tables with mirror (Hollywood vanities with bulbs among them) and mirrors, full-length ones included. Many models come with the LED bulbs as a gift. The site is available in Spanish and English.
 
-## Páginas principales / Main pages
+## Productos / Products
 
-- [Inicio / Home](https://hsmuebles.es/)
-- [Catálogo / Catalog](https://hsmuebles.es/catalogo)
+- [Tocadores / Dressing tables](https://hsmuebles.es/tocadores)
+- [Espejos / Mirrors](https://hsmuebles.es/espejos)
+- [Catálogo completo / Full catalog](https://hsmuebles.es/catalogo)
+
+## Cómo comprar / How to buy
+
+- El pedido se hace desde la ficha del producto. Después te llamamos para confirmar la dirección y la fecha de entrega. / You order from the product page; we then call you to confirm the address and the delivery date.
+- Pago en efectivo, por transferencia bancaria o por Bizum. / Payment in cash, by bank transfer or by Bizum.
+- Envío a cualquier dirección de España: 35 €, entrega en 3 a 5 días desde la confirmación del pedido. No enviamos fuera de España. / Delivery to any address in Spain: €35, within 3 to 5 days of the order being confirmed. We do not ship outside Spain.
+- El montaje está incluido en la entrega, sin coste adicional. / Assembly is included in the delivery at no extra cost.
+- Devolución en 14 días desde la recepción, con el embalaje intacto y el producto sin daños; los gastos de devolución corren de nuestra cuenta. / Returns within 14 days of delivery, with the packaging intact and the product undamaged; we pay the return shipping.
+
+## Páginas / Pages
+
+- [Envíos / Shipping](https://hsmuebles.es/envios)
+- [Devoluciones / Returns](https://hsmuebles.es/devoluciones)
+- [Opiniones de clientes / Customer reviews](https://hsmuebles.es/opiniones)
 - [Contacto / Contact](https://hsmuebles.es/contacto)
 
 ## Contacto / Contact
 
+- Email: info@hsmuebles.es
+- Teléfono / Phone: +34 614 848 301
 - Web: https://hsmuebles.es
-- Formulario de contacto / Contact form: https://hsmuebles.es/contacto
