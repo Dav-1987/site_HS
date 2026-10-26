@@ -19,35 +19,15 @@ import SectionPending from './SectionPending.jsx';
 // open category settings — so a reload keeps it, a product can be linked to,
 // and the browser's Back closes what was just opened.
 const ALL = '*';
+// The select's value while a search is on: a search looks through every
+// category (catalogView.js), so no single one is "selected" then.
+const SEARCHING = '?';
 
 const VISIBILITY_TEXT = {
   public: 'показывается на сайте',
   unlisted: 'скрыта из списков',
   off: 'снята с сайта',
 };
-
-function EyeOff() {
-  return (
-    <svg
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="1.6"
-      strokeLinecap="round"
-      role="img"
-      aria-label="скрыта из списков"
-      className="h-4 w-4 shrink-0"
-    >
-      <path d="M10.73 5.08A10.74 10.74 0 0 1 21.94 11.65a1 1 0 0 1 0 .7 10.75 10.75 0 0 1-1.44 2.49" />
-      <path d="M14.08 14.16a3 3 0 0 1-4.24-4.24" />
-      <path d="M17.48 17.5a10.75 10.75 0 0 1-15.42-5.15 1 1 0 0 1 0-.7 10.75 10.75 0 0 1 4.45-5.14" />
-      <path d="m2 2 20 20" />
-    </svg>
-  );
-}
-
-const TAB =
-  'inline-flex min-h-10 items-center gap-2 border px-3.5 text-sm transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent';
 
 /** Каталог: search, categories, filters, the product list and a side panel. */
 export default function CatalogSection() {
@@ -264,48 +244,41 @@ export default function CatalogSection() {
       </div>
 
       {/* ─── categories ─── */}
-      <div role="group" aria-label="Категория" className="flex flex-wrap gap-2">
-        {[{ slug: ALL, name: 'Все', count: categories.reduce((n, c) => n + c.products.length, 0) }]
-          .concat(
-            categories.map((c) => ({
-              slug: c.slug,
-              name: c.name?.es || c.slug,
-              count: c.products.length,
-              hidden: visibilityOf(c) !== 'public',
-            })),
-          )
-          .map((t) => {
-            const pressed = !searching && (t.slug === ALL ? !category : t.slug === slug);
-            return (
-              <button
-                key={t.slug}
-                type="button"
-                aria-pressed={pressed}
-                onClick={() => {
-                  setSearch('');
-                  changeView({ cat: t.slug, q: null });
-                }}
-                className={`${TAB} ${
-                  pressed
-                    ? 'border-primary bg-primary font-semibold text-background'
-                    : 'border-primary/30 hover:border-primary'
-                }`}
-              >
-                {t.name}{' '}
-                <span
-                  className={`tabular-nums ${pressed ? 'font-normal opacity-80' : 'text-secondary'}`}
-                >
-                  {t.count}
-                </span>
-                {t.hidden && <EyeOff />}
-              </button>
-            );
-          })}
-        <button
-          type="button"
-          onClick={onAddCategory}
-          className={`${TAB} border-dashed border-primary/45 hover:border-primary`}
-        >
+      {/* A select rather than a row of tabs: the row wrapped to two lines on a
+          laptop and four on a phone, and most of it is sections that are off
+          the site. Their state is spelled out in the option instead. */}
+      <div className="flex flex-wrap items-center gap-x-3 gap-y-2">
+        <label className="flex w-full items-center gap-3 sm:w-auto">
+          <span className="shrink-0 text-sm text-secondary">Категория:</span>
+          <select
+            value={searching ? SEARCHING : category ? category.slug : ALL}
+            onChange={(e) => {
+              setSearch('');
+              changeView({ cat: e.target.value, q: null });
+            }}
+            className={`${INPUT_BASE} min-w-0 flex-1 sm:w-80 sm:flex-none`}
+          >
+            {searching && (
+              <option value={SEARCHING} disabled>
+                Поиск по всему каталогу
+              </option>
+            )}
+            <option value={ALL}>
+              Все товары — {categories.reduce((n, c) => n + c.products.length, 0)}
+            </option>
+            {categories.map((c) => (
+              <option key={c.slug} value={c.slug}>
+                {[
+                  `${c.name?.es || c.slug} — ${c.products.length}`,
+                  visibilityOf(c) !== 'public' && VISIBILITY_TEXT[visibilityOf(c)],
+                ]
+                  .filter(Boolean)
+                  .join(' · ')}
+              </option>
+            ))}
+          </select>
+        </label>
+        <button type="button" onClick={onAddCategory} className={BTN_GHOST}>
           + Категория
         </button>
       </div>
@@ -317,7 +290,11 @@ export default function CatalogSection() {
           Показать только:
         </span>
         {CATALOG_FILTERS.map((f) => (
-          <label key={f.key} className="flex min-h-11 cursor-pointer items-center gap-2 sm:min-h-0">
+          <label
+            key={f.key}
+            title={f.title}
+            className="flex min-h-11 cursor-pointer items-center gap-2 sm:min-h-0"
+          >
             <input
               type="checkbox"
               checked={filters.includes(f.key)}

@@ -79,10 +79,12 @@ async function openCatalog(search = '') {
       </Routes>
     </MemoryRouter>,
   );
-  await screen.findByRole('group', { name: 'Категория' });
+  await screen.findByRole('combobox', { name: /^Категория/ });
 }
 
-const tab = (name) => screen.getByRole('button', { name: new RegExp(`^${name}`) });
+const categorySelect = () => screen.getByRole('combobox', { name: /^Категория/ });
+const pickCategory = (slug) => fireEvent.change(categorySelect(), { target: { value: slug } });
+const optionFor = (slug) => [...categorySelect().options].find((o) => o.value === slug);
 const listed = () =>
   screen.queryAllByRole('link', { name: /name$|Tocador|Estantería/ }).map((a) => a.textContent);
 // The list's own heading (an open panel has one too).
@@ -91,7 +93,7 @@ const heading = () => document.getElementById('catalog-list-heading').textConten
 describe('CatalogSection — what is listed', () => {
   it('opens on the first category', async () => {
     await openCatalog();
-    expect(tab('Tocadores').getAttribute('aria-pressed')).toBe('true');
+    expect(categorySelect().value).toBe('tocadores');
     expect(heading()).toBe('Tocadores');
     expect(screen.getByText(/2 товара · показывается на сайте/)).toBeTruthy();
     expect(listed()).toEqual(['Tocador Doble Cajonera', 'Tocador Compacto']);
@@ -99,17 +101,44 @@ describe('CatalogSection — what is listed', () => {
 
   it('switches category, and lists every product under «Все»', async () => {
     await openCatalog();
-    fireEvent.click(tab('Estanterías'));
+    pickCategory('estanterias');
     expect(listed()).toEqual(['Estantería Roble']);
-    fireEvent.click(tab('Все'));
+    pickCategory('*');
     expect(heading()).toBe('Все товары');
     expect(screen.getByText('3 товара в 3 категориях')).toBeTruthy();
     expect(listed()).toHaveLength(3);
   });
 
-  it('marks a hidden category on its tab', async () => {
+  it('names every category with its count, and says which are hidden', async () => {
     await openCatalog();
-    expect(within(tab('Estanterías')).getByRole('img', { name: 'скрыта из списков' })).toBeTruthy();
+    expect([...categorySelect().options].map((o) => o.textContent)).toEqual([
+      'Все товары — 3',
+      'Tocadores — 2',
+      'Estanterías — 1 · скрыта из списков',
+      'Vacía — 0',
+    ]);
+  });
+
+  it('says a search looks through every category, and leaves it for a category', async () => {
+    await openCatalog();
+    fireEvent.change(screen.getByRole('searchbox', { name: 'Поиск по товарам' }), {
+      target: { value: 'roble' },
+    });
+    expect(optionFor('?').textContent).toBe('Поиск по всему каталогу');
+    expect(categorySelect().value).toBe('?');
+    pickCategory('tocadores');
+    expect(categorySelect().value).toBe('tocadores');
+    expect(listed()).toEqual(['Tocador Doble Cajonera', 'Tocador Compacto']);
+  });
+
+  it('shows only what the shop shows under «На сайте»', async () => {
+    await openCatalog();
+    pickCategory('*');
+    // T-09 is hidden itself, E-01 sits in a hidden section.
+    const live = screen.getByRole('checkbox', { name: /^На сайте/ });
+    expect(live.parentElement.textContent).toBe('На сайте 1');
+    fireEvent.click(live);
+    expect(listed()).toEqual(['Tocador Doble Cajonera']);
   });
 
   it('opens the category the address names', async () => {
@@ -153,7 +182,7 @@ describe('CatalogSection — what is listed', () => {
   it('only offers to reorder where the rows are the order', async () => {
     await openCatalog();
     expect(screen.getByText(/Порядок строк — это порядок на сайте/)).toBeTruthy();
-    fireEvent.click(tab('Все'));
+    pickCategory('*');
     expect(screen.getByText(/Порядок меняется в списке одной категории/)).toBeTruthy();
   });
 });
@@ -216,7 +245,7 @@ describe('CatalogSection — categories', () => {
     await openCatalog();
     fireEvent.click(screen.getByRole('button', { name: '+ Категория' }));
     expect(screen.getByRole('dialog', { name: 'Nueva categoría' })).toBeTruthy();
-    expect(tab('Nueva categoría').getAttribute('aria-pressed')).toBe('true');
+    expect(categorySelect().selectedOptions[0].textContent).toMatch(/^Nueva categoría — 0/);
   });
 
   it('refuses an address a page of the site already has', async () => {
@@ -238,7 +267,7 @@ describe('CatalogSection — categories', () => {
     });
     fireEvent.click(screen.getByRole('button', { name: 'Переместить' }));
     expect(listed()).toEqual(['Tocador Doble Cajonera']);
-    fireEvent.click(tab('Vacía'));
+    pickCategory('vacia');
     expect(listed()).toEqual(['Tocador Compacto']);
   });
 

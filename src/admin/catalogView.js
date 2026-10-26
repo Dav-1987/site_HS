@@ -4,8 +4,18 @@
 
 import { isInStock, isListed, productDiscount, productImages } from '../data/catalog.js';
 
-/** The filters, in the order they are offered. A row must pass every one on. */
+/**
+ * The filters, in the order they are offered. A row must pass every one on.
+ * `test(product, category)`: «На сайте» needs the section too — a product
+ * shown in a section that is switched off or hidden is still not in the shop.
+ */
 export const CATALOG_FILTERS = Object.freeze([
+  {
+    key: 'live',
+    label: 'На сайте',
+    title: 'Товары, которые покупатель видит в каталоге: и товар, и его раздел показываются',
+    test: (p, c) => isListed(p) && isListed(c),
+  },
   { key: 'hidden', label: 'Скрытые', test: (p) => !isListed(p) },
   { key: 'out', label: 'Нет в наличии', test: (p) => !isInStock(p) },
   { key: 'onephoto', label: 'Одно фото', test: (p) => productImages(p).length <= 1 },
@@ -48,7 +58,7 @@ export function catalogRows(categories, { slug = '', query = '', filters = [] } 
     .filter((c) => searching || !slug || c.slug === slug)
     .flatMap((category) =>
       category.products
-        .filter((p) => matchesSearch(p, query) && active.every((f) => f.test(p)))
+        .filter((p) => matchesSearch(p, query) && active.every((f) => f.test(p, category)))
         .map((product) => ({ product, category })),
     );
 }
@@ -57,6 +67,9 @@ export function catalogRows(categories, { slug = '', query = '', filters = [] } 
 export function filterCounts(categories, { slug = '', query = '' } = {}) {
   const rows = catalogRows(categories, { slug, query });
   return Object.fromEntries(
-    CATALOG_FILTERS.map((f) => [f.key, rows.filter(({ product }) => f.test(product)).length]),
+    CATALOG_FILTERS.map((f) => [
+      f.key,
+      rows.filter(({ product, category }) => f.test(product, category)).length,
+    ]),
   );
 }
