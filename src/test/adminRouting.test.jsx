@@ -1,5 +1,5 @@
-import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
-import { fireEvent, render, screen, within } from '@testing-library/react';
+import { afterEach, beforeAll, beforeEach, describe, expect, it, vi } from 'vitest';
+import { cleanup, fireEvent, render, screen, within } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import { SettingsProvider } from '../settings/SettingsContext.jsx';
 import { LanguageProvider } from '../i18n/LanguageContext.jsx';
@@ -22,8 +22,16 @@ vi.mock('../admin/api.js', () => ({
 
 const api = await import('../admin/api.js');
 const { default: App } = await import('../App.jsx');
+// App.jsx loads the admin lazily, as a chunk of its own. Left to the first
+// render, loading it (~0.5 s alone: the whole admin's code, for the first time
+// in this worker) fell inside the 1 s that findByRole waits for the admin's
+// nav, and other suites running on the machine pushed it past that. Both tests
+// then failed, the second still waiting on the same import. Loaded here, with
+// the file's other modules; the lazy route still suspends and then renders the
+// admin, from the module already loaded.
+await import('../pages/Admin.jsx');
 
-beforeEach(() => {
+function startFresh() {
   window.ym = vi.fn();
   window.fbq = vi.fn();
   localStorage.clear();
@@ -32,12 +40,31 @@ beforeEach(() => {
     'fetch',
     vi.fn(async () => ({ ok: true, status: 200, json: async () => ({}) })),
   );
-});
+}
 
-afterEach(() => {
+function tearDown() {
   delete window.ym;
   delete window.fbq;
   vi.unstubAllGlobals();
+}
+
+beforeEach(startFresh);
+afterEach(tearDown);
+
+// Even with its code loaded, the first admin rendered in this file costs more
+// than either test's own steps (~0.15 s against ~0.05 s alone): that code runs
+// for the first time, and jsdom parses its built-in stylesheet on the first
+// getComputedStyle, which every query by role ends in. Counted inside the first
+// test, that start-up took it past the 5 s limit when the machine was loaded.
+// Paid once here instead, under the hook's own limit, as in
+// AdminShell.uploads.test.jsx. The calls it made are then cleared, so the first
+// test counts the session checks of its own admin only.
+beforeAll(async () => {
+  startFresh();
+  await openAdmin('/admin/catalog');
+  cleanup();
+  tearDown();
+  vi.clearAllMocks();
 });
 
 async function openAdmin(path) {
