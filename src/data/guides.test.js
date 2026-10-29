@@ -258,3 +258,25 @@ describe('guideProducts', () => {
     expect(ids(undefined)).toHaveLength(DEFAULT_PRODUCT_LIMIT);
   });
 });
+
+describe('sanitizeGuide — keywords', () => {
+  const withKeywords = (keywords) => sanitizeGuide(complete({ es: { ...lang('A'), keywords } }));
+
+  it('keeps each search once, tidied, dropping empty lines left by the editor', () => {
+    expect(
+      withKeywords(['medidas de un tocador', '  tocador   80 cm ', '', 'Medidas de un tocador'])
+        .guide.es.keywords,
+    ).toEqual(['medidas de un tocador', 'tocador 80 cm']);
+  });
+
+  it('gives an article without any an empty list', () => {
+    expect(sanitizeGuide(complete()).guide.en.keywords).toEqual([]);
+  });
+
+  it('refuses a search too long or too many of them', () => {
+    expect(withKeywords(['x'.repeat(GUIDE_LIMITS.keyword + 1)]).error).toMatch(/keywords/);
+    expect(
+      withKeywords(Array.from({ length: GUIDE_LIMITS.keywords + 1 }, (_, i) => `k${i}`)).error,
+    ).toMatch(/keywords/);
+  });
+});

@@ -4,8 +4,7 @@ import {
   findCategory,
   findProduct,
   liveCatalog,
-  listedProducts,
-  visibleCategories,
+  listingCatalog,
 } from '../data/catalog.js';
 
 const CatalogContext = createContext(null);
@@ -90,12 +89,8 @@ export function CatalogProvider({ children, initialCatalog }) {
   //    with the products hidden from listings already stripped out.
   const value = useMemo(() => {
     const live = liveCatalog(categories);
-    const listed = visibleCategories(live).map((c) => {
-      const products = listedProducts(c);
-      return products.length === c.products.length ? c : { ...c, products };
-    });
     return {
-      categories: listed,
+      categories: listingCatalog(categories),
       allCategories: live,
       loaded,
       getCategory: (slug) => findCategory(live, slug),

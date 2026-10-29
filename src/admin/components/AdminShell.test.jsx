@@ -8,9 +8,10 @@ import { MemoryRouter, Route, Routes } from 'react-router-dom';
 const DESKTOP = 1280;
 const PHONE = 390;
 
-const h = vi.hoisted(() => ({ editor: null, orders: null }));
+const h = vi.hoisted(() => ({ editor: null, orders: null, guides: null }));
 vi.mock('../useCatalogEditor.js', () => ({ useCatalogEditor: () => h.editor }));
 vi.mock('../useOrders.js', () => ({ useOrders: () => h.orders }));
+vi.mock('../useGuidesEditor.js', () => ({ useGuidesEditor: () => h.guides }));
 vi.mock('../api.js', () => ({
   fetchRebuildStatus: vi.fn(async () => ({ configured: true, run: null })),
   triggerRebuild: vi.fn(),
@@ -20,6 +21,7 @@ vi.mock('../api.js', () => ({
 }));
 
 const { default: AdminRoutes } = await import('../AdminRoutes.jsx');
+const { newGuide } = await import('../guideOps.js');
 
 beforeEach(() => {
   h.editor = {
@@ -49,6 +51,24 @@ beforeEach(() => {
     overwrite: vi.fn(),
     reloadFromServer: vi.fn(),
     applyRestored: vi.fn(),
+  };
+  h.guides = {
+    guides: [],
+    loadError: '',
+    dirty: false,
+    dirtyKeys: new Set(),
+    saving: false,
+    status: '',
+    saveError: '',
+    conflict: null,
+    save: vi.fn(),
+    overwrite: vi.fn(),
+    reloadFromServer: vi.fn(),
+    update: vi.fn(),
+    create: vi.fn(() => 'new-1'),
+    move: vi.fn(),
+    remove: vi.fn(),
+    slugError: () => '',
   };
   h.orders = {
     orders: [],
@@ -99,6 +119,7 @@ describe('AdminShell sections', () => {
     expect(links.map((l) => l.textContent)).toEqual([
       'Заявки',
       'Каталог',
+      'Статьи',
       'Главная страница',
       'Тексты сайта',
       'Настройки',
@@ -211,7 +232,7 @@ describe('AdminShell toolbar — phone', () => {
       within(nav())
         .getAllByRole('link')
         .map((l) => l.textContent),
-    ).toEqual(['Заявки', 'Каталог', 'Главная', 'Тексты', 'Настройки']);
+    ).toEqual(['Заявки', 'Каталог', 'Статьи', 'Главная', 'Тексты', 'Настройки']);
   });
 
   it('moves the rebuild and the way out behind "⋯"', () => {
@@ -348,5 +369,99 @@ describe('AdminShell saving', () => {
     expect(pressCtrlS({ shiftKey: true }).defaultPrevented).toBe(false);
     expect(pressCtrlS({ code: 'KeyA', key: 'a' }).defaultPrevented).toBe(false);
     expect(h.editor.save).not.toHaveBeenCalled();
+  });
+});
+
+// The articles are saved by the same «Сохранить» (useGuidesEditor.js).
+describe('AdminShell — articles', () => {
+  it('saves the changed articles, and nothing else that is not changed', async () => {
+    h.guides.dirty = true;
+    renderAdmin({ path: '/admin/guides' });
+    expect(screen.getByText('Есть несохранённые изменения')).toBeTruthy();
+    fireEvent.click(saveButton());
+    await Promise.resolve();
+    expect(h.guides.save).toHaveBeenCalled();
+    expect(h.editor.save).not.toHaveBeenCalled();
+  });
+
+  it('saves the catalog first, then the articles, on Ctrl+S', async () => {
+    h.editor.dirty = true;
+    h.guides.dirty = true;
+    renderAdmin();
+    pressCtrlS();
+    await vi.waitFor(() => expect(h.guides.save).toHaveBeenCalled());
+    expect(h.editor.save).toHaveBeenCalled();
+  });
+
+  it('names the article another tab saved, with both ways out', () => {
+    h.guides.conflict = { key: 'g1', name: 'Medidas de un tocador' };
+    renderAdmin({ path: '/admin/guides' });
+    const alert = screen.getByRole('alert');
+    expect(alert.textContent).toContain('статью «Medidas de un tocador» уже изменили');
+    fireEvent.click(within(alert).getByRole('button', { name: 'Загрузить свежую версию' }));
+    expect(h.guides.reloadFromServer).toHaveBeenCalled();
+    fireEvent.click(within(alert).getByRole('button', { name: 'Сохранить мою поверх' }));
+    expect(h.guides.overwrite).toHaveBeenCalled();
+  });
+
+  it('shows why an article did not save', () => {
+    h.guides.saveError = '«Medidas» нельзя опубликовать — не заполнено (английский: текст).';
+    renderAdmin({ path: '/admin/guides' });
+    expect(screen.getByRole('alert').textContent).toContain('нельзя опубликовать');
+  });
+
+  it('waits for the articles before showing the section', () => {
+    h.guides.guides = null;
+    renderAdmin({ path: '/admin/guides' });
+    expect(screen.getByText('Загрузка…')).toBeTruthy();
+  });
+});
+
+describe('Статьи', () => {
+  const guide = (key, title, extra = {}) => ({
+    ...newGuide([], 1),
+    key,
+    slug: key,
+    es: { ...newGuide([], 1).es, title },
+    ...extra,
+  });
+
+  it('lists the articles in order, with their state, and opens one', () => {
+    h.guides.guides = [
+      guide('medidas-tocador', 'Medidas de un tocador', { visibility: 'public' }),
+      guide('silla', 'Silla para tocador'),
+    ];
+    h.guides.dirtyKeys = new Set(['silla']);
+    renderAdmin({ path: '/admin/guides' });
+    const items = within(screen.getByRole('list', { name: 'Статьи' })).getAllByRole('listitem');
+    expect(items[0].textContent).toContain('Medidas de un tocador');
+    expect(items[0].textContent).toContain('Опубликована');
+    expect(items[1].textContent).toContain('Черновик');
+    expect(items[1].textContent).toContain('Не сохранена');
+
+    fireEvent.click(within(items[0]).getByRole('button', { name: /^Medidas de un tocador/ }));
+    expect(screen.getByRole('heading', { level: 2, name: 'Medidas de un tocador' })).toBeTruthy();
+    fireEvent.click(screen.getByRole('button', { name: '← Все статьи' }));
+    expect(
+      within(screen.getByRole('list', { name: 'Статьи' })).getAllByRole('listitem'),
+    ).toHaveLength(2);
+  });
+
+  it('moves an article up the list', () => {
+    h.guides.guides = [guide('uno', 'Uno'), guide('dos', 'Dos')];
+    renderAdmin({ path: '/admin/guides' });
+    fireEvent.click(screen.getByRole('button', { name: '«Dos» выше' }));
+    expect(h.guides.move).toHaveBeenCalledWith('dos', -1);
+  });
+
+  it('starts a new article and opens it', () => {
+    h.guides.create = vi.fn(() => {
+      h.guides.guides = [guide('new-1', '')];
+      return 'new-1';
+    });
+    renderAdmin({ path: '/admin/guides' });
+    fireEvent.click(screen.getByRole('button', { name: '+ Новая статья' }));
+    expect(h.guides.create).toHaveBeenCalled();
+    expect(screen.getByRole('button', { name: '← Все статьи' })).toBeTruthy();
   });
 });
