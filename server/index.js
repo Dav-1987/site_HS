@@ -36,6 +36,18 @@ import {
   purgePendingRecords,
 } from './store.js';
 import { readSettings, writeSettings } from './settings.js';
+import {
+  listGuides,
+  getGuide,
+  createGuide,
+  updateGuide,
+  deleteGuide,
+  reorderGuides,
+  extractGuideKeys,
+  loadGuideSeeds,
+  seedGuides,
+} from './guides.js';
+import { guideUploadKeys, sanitizeGuide } from '../src/data/guides.js';
 import { createQueue, isStale, revisionOf } from './revision.js';
 import { listOrders, deleteOrder, getOrderOrigin, parseOrderPatch, updateOrder } from './orders.js';
 import { findOrderVisit } from './visit.js';
@@ -140,11 +152,47 @@ function extractSettingsKeys(settings) {
   return keys;
 }
 
+// Every upload something on the site uses. Throws when any part cannot be read:
+// a sweep that went ahead without the articles would take their photos.
 async function collectAllActiveKeys() {
-  const [catalog, settings] = await Promise.all([readOrSeedCatalog(), readSettings()]);
+  const [catalog, settings, guides] = await Promise.all([
+    readOrSeedCatalog(),
+    readSettings(),
+    listGuides({ includeDrafts: true }),
+  ]);
   const keys = extractUploadKeys(catalog);
   for (const k of extractSettingsKeys(settings)) keys.add(k);
+  for (const k of extractGuideKeys(guides)) keys.add(k);
   return keys;
+}
+
+// The articles' uploads, for a catalog or settings save deciding which of its
+// own files nothing uses any more. A failed read leaves them out instead of
+// failing the save: a file queued by mistake is still safe, because the sweep
+// reads the articles again before deleting and stops when it cannot.
+async function guideKeysForSave() {
+  try {
+    return extractGuideKeys(await listGuides({ includeDrafts: true }));
+  } catch (err) {
+    console.error(`[guides] uploads unknown for this save: ${err.message}`);
+    return new Set();
+  }
+}
+
+// After an article was created, changed or deleted: a file it no longer uses
+// that nothing else uses either goes in the deletion queue, one it uses again
+// leaves it. Never throws — the article is saved by then, and a hiccup here
+// only means the hourly pass sorts the file out instead.
+async function settleGuideUploads(before, after) {
+  try {
+    const active = await collectAllActiveKeys();
+    const removed = new Set([...before].filter((k) => !active.has(k)));
+    const reAdded = new Set([...after].filter((k) => !before.has(k)));
+    if (removed.size) await scheduleForDeletion(removed);
+    if (reAdded.size) await unscheduleFiles(reAdded);
+  } catch (err) {
+    console.error('[guides] upload bookkeeping failed', err);
+  }
 }
 
 // Uploads that never reached a catalog or settings save: see uploads-cleanup.js
@@ -285,13 +333,13 @@ async function handleCatalogSave(req, res) {
         return;
       }
       const oldKeys = extractUploadKeys(oldCatalog);
-      const settingsKeys = extractSettingsKeys(settings);
+      const otherKeys = new Set([...extractSettingsKeys(settings), ...(await guideKeysForSave())]);
 
       await writeCatalog(categories);
       const saved = await readOrSeedCatalog();
       const newKeys = extractUploadKeys(saved);
 
-      const removed = new Set([...oldKeys].filter((k) => !newKeys.has(k) && !settingsKeys.has(k)));
+      const removed = new Set([...oldKeys].filter((k) => !newKeys.has(k) && !otherKeys.has(k)));
       const reAdded = new Set([...newKeys].filter((k) => !oldKeys.has(k)));
       if (removed.size) scheduleForDeletion(removed).catch(console.error);
       if (reAdded.size) unscheduleFiles(reAdded).catch(console.error);
@@ -394,7 +442,7 @@ async function handleSettingsSave(req, res) {
         return;
       }
       const oldKeys = extractSettingsKeys(oldSettings);
-      const catalogKeys = extractUploadKeys(catalog);
+      const otherKeys = new Set([...extractUploadKeys(catalog), ...(await guideKeysForSave())]);
 
       await writeSettings(req.body.settings);
       // Read back rather than trusting what was written: the revision must be
@@ -402,7 +450,7 @@ async function handleSettingsSave(req, res) {
       const settings = await readSettings();
       const newKeys = extractSettingsKeys(settings);
 
-      const removed = new Set([...oldKeys].filter((k) => !newKeys.has(k) && !catalogKeys.has(k)));
+      const removed = new Set([...oldKeys].filter((k) => !newKeys.has(k) && !otherKeys.has(k)));
       const reAdded = new Set([...newKeys].filter((k) => !oldKeys.has(k)));
       if (removed.size) scheduleForDeletion(removed).catch(console.error);
       if (reAdded.size) unscheduleFiles(reAdded).catch(console.error);
@@ -417,6 +465,136 @@ async function handleSettingsSave(req, res) {
 
 app.post('/api/settings', handleSettingsSave);
 app.put('/api/settings', handleSettingsSave);
+
+// ─── /api/guides — the «Guías» articles ──────────────────────────────────────
+//
+// Saved one article at a time (see guides.js), in the same queue as the
+// catalog and the settings: their saves also decide which uploads are still in
+// use, and must not interleave with one. The public read is what a rebuild
+// pulls into the prerender; drafts reach only the admin.
+
+const SLUG_TAKEN = { error: 'Another guide already has this address', conflict: 'slug' };
+const isUniqueViolation = (err) => err?.code === '23505';
+const MAX_GUIDES_ORDERED = 500;
+
+app.get('/api/guides', async (req, res) => {
+  try {
+    const guides = await listGuides({ includeDrafts: isAuthenticated(req) });
+    res.json({ guides });
+  } catch (err) {
+    console.error('guides GET failed', err);
+    res.status(500).json({ error: 'Failed to load guides' });
+  }
+});
+
+app.post('/api/guides', async (req, res) => {
+  if (!isAuthenticated(req)) return res.status(401).json({ error: 'Unauthorized' });
+  const { guide, error } = sanitizeGuide(req.body?.guide);
+  if (error) return res.status(400).json({ error });
+  try {
+    await writes(async () => {
+      let saved;
+      try {
+        saved = await createGuide(guide);
+      } catch (err) {
+        if (!isUniqueViolation(err)) throw err;
+        res.status(409).json(SLUG_TAKEN);
+        return;
+      }
+      await settleGuideUploads(new Set(), guideUploadKeys(saved));
+      res.status(201).json({ guide: saved });
+    });
+  } catch (err) {
+    console.error('guide create failed', err);
+    res.status(500).json({ error: 'Failed to create guide' });
+  }
+});
+
+// Before '/api/guides/:id', which would otherwise take "order" for an id.
+app.put('/api/guides/order', async (req, res) => {
+  if (!isAuthenticated(req)) return res.status(401).json({ error: 'Unauthorized' });
+  const ids = req.body?.ids;
+  const valid =
+    Array.isArray(ids) &&
+    ids.length <= MAX_GUIDES_ORDERED &&
+    ids.every((id) => Number.isSafeInteger(id) && id > 0) &&
+    new Set(ids).size === ids.length;
+  if (!valid) return res.status(400).json({ error: 'ids must be a list of distinct guide ids' });
+  try {
+    await writes(async () => {
+      await reorderGuides(ids);
+      res.json({ guides: await listGuides({ includeDrafts: true }) });
+    });
+  } catch (err) {
+    console.error('guides reorder failed', err);
+    res.status(500).json({ error: 'Failed to reorder guides' });
+  }
+});
+
+app.put('/api/guides/:id', async (req, res) => {
+  if (!isAuthenticated(req)) return res.status(401).json({ error: 'Unauthorized' });
+  const id = idParam(req);
+  if (!id) return res.status(400).json({ error: 'Invalid guide id' });
+  const { guide, error } = sanitizeGuide(req.body?.guide);
+  if (error) return res.status(400).json({ error });
+  try {
+    await writes(async () => {
+      const current = await getGuide(id);
+      if (!current) {
+        res.status(404).json({ error: 'Guide not found' });
+        return;
+      }
+      if (isStale(req.body.baseRevision, current.revision)) {
+        res.status(409).json({ error: 'Guide changed since it was loaded', conflict: 'guide' });
+        return;
+      }
+      // Once published, the address may already be in search results and in
+      // AI answers; a new one would leave all of those on a redirect.
+      if (current.publishedAt && guide.slug !== current.slug) {
+        res.status(400).json({ error: 'A published guide keeps its address' });
+        return;
+      }
+      let saved;
+      try {
+        saved = await updateGuide(id, guide);
+      } catch (err) {
+        if (!isUniqueViolation(err)) throw err;
+        res.status(409).json(SLUG_TAKEN);
+        return;
+      }
+      if (!saved) {
+        res.status(404).json({ error: 'Guide not found' });
+        return;
+      }
+      await settleGuideUploads(guideUploadKeys(current), guideUploadKeys(saved));
+      res.json({ guide: saved });
+    });
+  } catch (err) {
+    console.error('guide save failed', err);
+    res.status(500).json({ error: 'Failed to save guide' });
+  }
+});
+
+app.delete('/api/guides/:id', async (req, res) => {
+  if (!isAuthenticated(req)) return res.status(401).json({ error: 'Unauthorized' });
+  const id = idParam(req);
+  if (!id) return res.status(400).json({ error: 'Invalid guide id' });
+  try {
+    await writes(async () => {
+      const current = await getGuide(id);
+      if (!current) {
+        res.status(404).json({ error: 'Guide not found' });
+        return;
+      }
+      await deleteGuide(id);
+      await settleGuideUploads(guideUploadKeys(current), new Set());
+      res.json({ ok: true });
+    });
+  } catch (err) {
+    console.error('guide DELETE failed', err);
+    res.status(500).json({ error: 'Failed to delete guide' });
+  }
+});
 
 // ─── /api/upload — стриминг, изображения (5 МБ) + видео (200 МБ) ─────────────
 
@@ -559,15 +737,15 @@ app.get('/api/orders', async (req, res) => {
   }
 });
 
-// A positive integer id from the URL, or null.
-function orderIdParam(req) {
+// A positive integer id from the URL (an order, an article), or null.
+function idParam(req) {
   const id = Number(req.params.id);
   return Number.isSafeInteger(id) && id > 0 ? id : null;
 }
 
 app.delete('/api/orders/:id', async (req, res) => {
   if (!isAuthenticated(req)) return res.status(401).json({ error: 'Unauthorized' });
-  const id = orderIdParam(req);
+  const id = idParam(req);
   if (!id) return res.status(400).json({ error: 'Invalid order id' });
   try {
     const deleted = await deleteOrder(id);
@@ -584,7 +762,7 @@ app.delete('/api/orders/:id', async (req, res) => {
 // and settings only.
 app.patch('/api/orders/:id', async (req, res) => {
   if (!isAuthenticated(req)) return res.status(401).json({ error: 'Unauthorized' });
-  const id = orderIdParam(req);
+  const id = idParam(req);
   if (!id) return res.status(400).json({ error: 'Invalid order id' });
   const { patch, error } = parseOrderPatch(req.body);
   if (error) return res.status(400).json({ error });
@@ -602,7 +780,7 @@ app.patch('/api/orders/:id', async (req, res) => {
 // read from nginx's access log on every click and never stored (visit.js).
 app.get('/api/orders/:id/visit', async (req, res) => {
   if (!isAuthenticated(req)) return res.status(401).json({ error: 'Unauthorized' });
-  const id = orderIdParam(req);
+  const id = idParam(req);
   if (!id) return res.status(400).json({ error: 'Invalid order id' });
   try {
     const order = await getOrderOrigin(id);
@@ -877,6 +1055,11 @@ app.use((err, req, res, next) => {
 if (process.env.NODE_ENV !== 'test') {
   app.listen(PORT, '0.0.0.0', () => {
     console.log(`Mirage API → http://0.0.0.0:${PORT}`);
+    // Articles that came with this release land in /admin as drafts (guides.js).
+    Promise.resolve()
+      .then(() => seedGuides(loadGuideSeeds()))
+      .then((added) => added.length && console.log(`[guides] seeded: ${added.join(', ')}`))
+      .catch((err) => console.error('[guides] seeding failed', err));
     runCleanup();
     setInterval(runCleanup, 60 * 60 * 1000); // hourly
   });

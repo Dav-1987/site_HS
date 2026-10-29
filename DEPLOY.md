@@ -176,7 +176,8 @@ gh workflow run deploy-server.yml --repo Dav-1987/site_HS
 
 - Проверки как у фронтенда: аудит зависимостей, lint и тесты.
 - Выкладывает **все** `server/*.js` (без тестов), `server/package*.json`,
-  `src/data/catalog.js` и `src/data/settings.default.json` (правила 8 и 10 ниже).
+  `src/data/catalog.js`, `src/data/settings.default.json`, `src/data/guides.js` и
+  `src/data/guides.seed.json` (правила 8, 10 и 11 ниже).
 - Перед распаковкой сохраняет текущие файлы в `server.rollback.tgz`. Если
   `server/package-lock.json` изменился — запускает `npm ci --omit=dev`.
 - После `pm2 restart hs-api` проверяет `/api/health` и `/api/settings`; при ошибке
@@ -223,7 +224,8 @@ ssh root@185.202.172.59 "PGPASSWORD='hs_secure_2024' psql -U hs_user -d hs_muebl
 ssh root@185.202.172.59 "PGPASSWORD='hs_secure_2024' psql -U hs_user -d hs_muebles -h 127.0.0.1 -f /path/to/migration.sql"
 ```
 
-**Схема таблиц:** `categories`, `products`, `catalog_versions`, `site_settings`
+**Схема таблиц:** `categories`, `products`, `catalog_versions`, `site_settings`,
+`pending_deletions`, `orders`, `guides`, `guides_seeded`
 Подробнее: `server/migrate.sql`
 
 ---
@@ -246,6 +248,11 @@ ssh root@185.202.172.59 "PGPASSWORD='hs_secure_2024' psql -U hs_user -d hs_muebl
 | GET | `/api/orders` | только авторизованный |
 | PATCH | `/api/orders/:id` | только авторизованный — статус и заметка заявки |
 | DELETE | `/api/orders/:id` | только авторизованный |
+| GET | `/api/guides` | публичный — только опубликованные статьи; админу — и черновики |
+| POST | `/api/guides` | только авторизованный — новая статья |
+| PUT | `/api/guides/:id` | только авторизованный — сохранить статью (`baseRevision`, 409 при конфликте) |
+| PUT | `/api/guides/order` | только авторизованный — порядок статей `{ ids }` |
+| DELETE | `/api/guides/:id` | только авторизованный |
 
 ### Заявки из корзины (`/api/order`)
 
@@ -356,3 +363,13 @@ console.log(await sweepVideos(dir, readdirSync(dir).filter(isVideoFile)));
    этот файл с диска (`../src/data/settings.default.json`), поэтому при добавлении
    новых настроек его нужно копировать вместе с серверными файлами:
    `scp src/data/settings.default.json root@185.202.172.59:/var/www/hs-muebles/src/data/`
+
+11. **Статьи «Guías»: `src/data/guides.js` и `src/data/guides.seed.json` тоже деплоятся.**
+   `server/guides.js` и `server/redirects.js` импортируют правила статей из
+   `src/data/guides.js` — без него API **не стартует**. `guides.seed.json` — статьи,
+   которые приходят с релизом: при старте сервер добавляет в базу каждую ровно один раз
+   (по адресу, таблица `guides_seeded`), черновиком, если в файле не сказано иначе;
+   удалённая владельцем статья не вернётся. `deploy-server.yml` возит оба файла сам.
+   Таблицы `guides` и `guides_seeded` создаёт `server/migrate.sql` — **миграцию
+   применить до деплоя сервера**, иначе статьи не читаются, а часовая чистка `uploads/`
+   пропускает проход (она не удаляет файлы, пока не может прочитать статьи).

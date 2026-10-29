@@ -120,6 +120,26 @@ describe('resolveRedirect', () => {
   });
 });
 
+describe('resolveRedirect — guides', () => {
+  // Only an article without a page gets here: a published one is answered from
+  // its prerendered file before the server is asked.
+  it('sends an article that has no page to the guides section', () => {
+    expect(resolveRedirect('/guias/borrador', index)).toBe('/guias');
+    expect(resolveRedirect('/en/guias/borrador', index)).toBe('/en/guias');
+    expect(resolveRedirect('/guias/a/b', index)).toBe('/guias');
+  });
+
+  // Even when a product happens to have the same id: /guias is no section.
+  it('never reads the article for a product', () => {
+    expect(resolveRedirect('/guias/Comoda-B01', index)).toBe('/guias');
+  });
+
+  it('leaves the section page alone', () => {
+    expect(resolveRedirect('/guias', index)).toBeNull();
+    expect(resolveRedirect('/en/guias', index)).toBeNull();
+  });
+});
+
 describe('resolveRedirect — switched-off products and sections', () => {
   it('sends a product to the open section of its kind', () => {
     expect(resolveRedirect('/otros-modelos/Espejo-Alto-D02', offIndex)).toBe('/espejos');

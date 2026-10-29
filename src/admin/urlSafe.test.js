@@ -48,4 +48,10 @@ describe('RESERVED_SLUGS', () => {
       expect(RESERVED_SLUGS).toContain(slug);
     }
   });
+
+  // The server sends every /guias/<anything> to the guides section
+  // (server/redirects.js), so a category there would never be reached either.
+  it('covers the guides section', () => {
+    expect(RESERVED_SLUGS).toContain('guias');
+  });
 });

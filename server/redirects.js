@@ -16,6 +16,7 @@
 // to an open section of the same kind of furniture, or to the catalogue.
 
 import { CATALOG_SLUG, isOff, offProductTarget } from '../src/data/catalog.js';
+import { GUIDES_SLUG } from '../src/data/guides.js';
 
 // Sections folded into "Otros Modelos" — their own pages no longer exist, so
 // their old URLs point at the section that absorbed them. A slug that is a
@@ -64,6 +65,11 @@ export function resolveRedirect(pathname, index) {
   const lang = parts[0] === 'en' ? ['en'] : [];
   const rest = parts.slice(lang.length);
   const to = (...segments) => `/${[...lang, ...segments].join('/')}`;
+
+  // An article that has no page — a draft again, deleted, or never there —
+  // sends its visitors to the section rather than a 404: its link may live on
+  // in an AI answer. The section's own page is no catalog URL.
+  if (rest[0] === GUIDES_SLUG) return rest.length > 1 ? to(GUIDES_SLUG) : null;
 
   const sectionPath = (slug) => {
     const section = index?.categories?.get(slug);
