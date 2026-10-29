@@ -4,6 +4,7 @@ import { INCLUDED_CATEGORY_SLUGS, WALLAPOP_CATEGORY_MAP } from './categories.js'
 import { expectedPanelTotal } from '../test/wallapopCounts.js';
 import {
   buildPanelState,
+  listingSlug,
   buildWallapopDescription,
   buildWallapopTitle,
   collectProductPhotos,
@@ -98,21 +99,26 @@ describe('Wallapop listing preparation', () => {
     const state = buildPanelState(defaultCatalog, null, '2026-08-06T12:00:00.000Z');
     const records = panelRecords(state);
 
+    // What a record is listed as, by its Wallapop type: a piece can be listed
+    // as another kind than its section (see listingSlug).
+    const listedAs = (record) =>
+      Object.keys(WALLAPOP_CATEGORY_MAP).find(
+        (slug) => WALLAPOP_CATEGORY_MAP[slug].type === record.wallapopType,
+      );
+
     for (const record of records) {
       expect(record.titleEs).not.toContain(record.reference);
       expect(record.titleEs).toContain(record.size);
       expect(record.productId).toBeTruthy();
       expect(record.reference).toBeTruthy();
-      if (record.siteCategorySlug === 'espejos') {
+      const kind = listedAs(record);
+      if (kind === 'espejos') {
         expect(record.descriptionEs).toContain('• Tipo: espejo de pie / de cuerpo entero');
         expect(record.descriptionEs).not.toContain('• Estado: nuevo');
-      } else if (record.siteCategorySlug === 'estanterias') {
+      } else if (kind === 'estanterias') {
         expect(record.descriptionEs).toContain('• Tipo: estantería de pie');
         expect(record.descriptionEs).not.toContain('• Estado: nuevo');
-      } else if (
-        record.siteCategorySlug === 'tocadores' ||
-        record.siteCategorySlug === 'tocadores-loft'
-      ) {
+      } else if (kind === 'tocadores' || kind === 'tocadores-loft') {
         expect(record.descriptionEs).toContain('• Tipo: tocador de maquillaje con espejo');
         expect(record.descriptionEs).not.toContain('• Estado: nuevo');
       } else {
@@ -251,7 +257,12 @@ describe('Wallapop listing preparation', () => {
       led: '💡 Iluminación LED profesional',
       quality: '⭐ Calidad premium',
     };
-    const products = categories.flatMap((category) => category.products);
+    // Only what is listed as a vanity: a shelf kept in «Tocadores» (the gift
+    // shelves) is listed as a shelf — see the test after this one.
+    const isVanity = (product, category) => listingSlug(product, category) === category.slug;
+    const products = categories.flatMap((category) =>
+      category.products.filter((product) => isVanity(product, category)),
+    );
 
     // Пол, а не точное число: каталог здесь — снимок боевой базы, который
     // обновляется `data:pull` перед каждым деплоем, и точное количество делало
@@ -259,7 +270,7 @@ describe('Wallapop listing preparation', () => {
     // идёт по каждому товару; это лишь страховка от пустой выборки.
     expect(products.length).toBeGreaterThanOrEqual(31);
     for (const category of categories) {
-      for (const product of category.products) {
+      for (const product of category.products.filter((p) => isVanity(p, category))) {
         const description = buildWallapopDescription(product, category);
         expect(vanityMirrorWallapopSize(product)).toMatch(/^\d+(?:[.,]\d+)? × \d+(?:[.,]\d+)? cm$/);
         expect(description).toContain(`• Medidas: ${vanityWallapopSize(product)}`);
@@ -267,6 +278,45 @@ describe('Wallapop listing preparation', () => {
         expect(description).toContain(expectedPerks[product.perks]);
       }
     }
+  });
+
+  // The owner keeps the gift shelves (E-001, E-002) in «Tocadores». Listed by
+  // their section they got a vanity's title, an empty «Espejo:» line and the
+  // «Tocadores» Wallapop category.
+  it('lists a piece as what its name says it is, whatever its section', () => {
+    const tocadores = { slug: 'tocadores', name: { es: 'Tocadores' } };
+    const shelf = {
+      id: 'Estanteria-E-001',
+      reference: 'E-001',
+      name: 'Estantería | blanca',
+      size: '30 × 23 × 180 cm',
+      perks: 'quality',
+      price: 179,
+    };
+    expect(listingSlug(shelf, tocadores)).toBe('estanterias');
+    expect(buildWallapopTitle(shelf, tocadores)).toMatch(/^Estantería · /);
+    const description = buildWallapopDescription(shelf, tocadores);
+    expect(description).not.toContain('tocador');
+    expect(description).not.toContain('• Espejo:');
+
+    const [record] = panelRecords(
+      buildPanelState([{ ...tocadores, products: [shelf] }], null, '2026-10-29T12:00:00.000Z'),
+    );
+    expect(record).toMatchObject({
+      siteCategorySlug: 'tocadores',
+      wallapopType: WALLAPOP_CATEGORY_MAP.estanterias.type,
+    });
+  });
+
+  it('keeps a loft vanity under its own Wallapop type', () => {
+    const loft = { slug: 'tocadores-loft', name: { es: 'Tocadores Loft' } };
+    const vanity = {
+      id: 'Tocador-M-06',
+      name: 'Tocador | Hollywood loft',
+      size: '100 × 40 × 180 cm',
+    };
+    expect(listingSlug(vanity, loft)).toBe('tocadores-loft');
+    expect(buildWallapopTitle(vanity, loft)).toMatch(/^Tocador de maquillaje estilo loft/);
   });
 
   it('supports every requested vanity perk label', () => {

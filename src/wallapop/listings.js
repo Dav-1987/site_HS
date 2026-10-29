@@ -1,6 +1,5 @@
-import { productImages } from '../data/catalog.js';
+import { isInStock, productImages, productKind } from '../data/catalog.js';
 import { isIncludedCategory, wallapopCategoryFor } from './categories.js';
-import { isInStock } from '../data/catalog.js';
 
 export const LISTING_STATUSES = ['not_published', 'published', 'sold'];
 
@@ -69,7 +68,9 @@ const COMPACT_PROMOTION_FOOTER = [
 ].join('\n');
 
 export function strikethroughText(value) {
-  return Array.from(String(value)).map((character) => `${character}\u0336`).join('');
+  return Array.from(String(value))
+    .map((character) => `${character}\u0336`)
+    .join('');
 }
 
 export function listingPriceBlock(product) {
@@ -108,10 +109,7 @@ export function mirrorWallapopSize(product) {
 function buildMirrorWallapopDescription(product) {
   const size = mirrorWallapopSize(product);
   const perk = WALLAPOP_PERK_LINES[product.perks];
-  const details = [
-    '• Tipo: espejo de pie / de cuerpo entero',
-    `• Medidas: ${size}`,
-  ].join('\n');
+  const details = ['• Tipo: espejo de pie / de cuerpo entero', `• Medidas: ${size}`].join('\n');
 
   return [
     MIRROR_INTROS[product.perks] || MIRROR_INTROS.default,
@@ -141,10 +139,9 @@ export function shelfWallapopSize(product) {
 }
 
 function buildShelfWallapopDescription(product) {
-  const details = [
-    '• Tipo: estantería de pie',
-    `• Medidas: ${shelfWallapopSize(product)}`,
-  ].join('\n');
+  const details = ['• Tipo: estantería de pie', `• Medidas: ${shelfWallapopSize(product)}`].join(
+    '\n',
+  );
 
   return [
     'Estantería práctica y decorativa, perfecta para organizar libros, plantas, fotografías, accesorios y objetos de decoración.',
@@ -219,6 +216,26 @@ function buildVanityWallapopDescription(product) {
     .join('\n\n');
 }
 
+// The sections each kind of furniture is listed under, its own first. A piece
+// whose name says another kind than its section — the gift shelves the owner
+// keeps in «Tocadores» — is listed as what it is: a shelf with a vanity's
+// title, mirror line and Wallapop category is a wrong ad, not a shelf ad.
+const KIND_SECTIONS = new Map([
+  ['espejo', ['espejos']],
+  ['tocador', ['tocadores', 'tocadores-loft']],
+  ['estanteria', ['estanterias']],
+]);
+
+/**
+ * The section a product is listed as: its own, unless the first word of its
+ * name says it is another kind of furniture (see productKind).
+ */
+export function listingSlug(product, category) {
+  const sections = KIND_SECTIONS.get(productKind(product));
+  if (!sections || sections.includes(category.slug)) return category.slug;
+  return sections[0];
+}
+
 function listingNoun(categorySlug) {
   if (categorySlug === 'espejos') return 'Espejo de cuerpo entero';
   if (categorySlug === 'tocadores-loft') return 'Tocador de maquillaje estilo loft';
@@ -228,25 +245,26 @@ function listingNoun(categorySlug) {
 }
 
 export function buildWallapopTitle(product, category) {
-  const noun = listingNoun(category.slug);
+  const noun = listingNoun(listingSlug(product, category));
   const size = compact(product.size || product.subtitle);
   return [noun, size ? `· ${size}` : ''].filter(Boolean).join(' ');
 }
 
 export function buildWallapopDescription(product, category) {
-  if (category.slug === 'espejos') {
+  const slug = listingSlug(product, category);
+  if (slug === 'espejos') {
     return buildMirrorWallapopDescription(product);
   }
 
-  if (category.slug === 'estanterias') {
+  if (slug === 'estanterias') {
     return buildShelfWallapopDescription(product);
   }
 
-  if (category.slug === 'tocadores' || category.slug === 'tocadores-loft') {
+  if (slug === 'tocadores' || slug === 'tocadores-loft') {
     return buildVanityWallapopDescription(product);
   }
 
-  const noun = listingNoun(category.slug).toLowerCase();
+  const noun = listingNoun(slug).toLowerCase();
   const reference = compact(product.reference || product.id);
   const material = compact(product.material?.es);
   const size = compact(product.size || product.subtitle);
@@ -275,7 +293,7 @@ export function collectProductPhotos(product) {
 }
 
 function sourceRecord(product, category) {
-  const mapping = wallapopCategoryFor(category.slug);
+  const mapping = wallapopCategoryFor(listingSlug(product, category));
   return {
     productId: product.id,
     reference: compact(product.reference),
