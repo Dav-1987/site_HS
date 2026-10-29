@@ -30,6 +30,8 @@ describe('which files a server release carries', () => {
   it('ships the files the API reads from src/data', () => {
     expect(files).toContain('src/data/catalog.js');
     expect(files).toContain('src/data/settings.default.json');
+    expect(files).toContain('src/data/guides.js');
+    expect(files).toContain('src/data/guides.seed.json');
   });
 
   it('ships the manifests so a dependency change can be installed', () => {

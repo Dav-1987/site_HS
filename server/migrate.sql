@@ -230,3 +230,33 @@ ALTER TABLE products   ADD COLUMN IF NOT EXISTS gift JSONB NOT NULL DEFAULT '{}'
 -- product already makes elsewhere — its perk variant, where 'bulbs' is exactly
 -- "Bombillas LED de regalo". A row saved with true/false overrides that.
 ALTER TABLE products ADD COLUMN IF NOT EXISTS show_bulbs_badge BOOLEAN;
+
+-- ─── Guías ───────────────────────────────────────────────────────────────────
+-- The articles of the guides section (/guias), edited one at a time in /admin
+-- «Статьи» — so a row each, not one document like site_settings: two articles
+-- saved from two tabs never collide, and updated_at is each article's own (it
+-- becomes the article's <lastmod> in the sitemap, which IndexNow reads).
+--   visibility   'public' — on the site; 'off' — a draft (src/data/guides.js)
+--   data         topic, cover, the block of models, both languages. Its shape is
+--                sanitizeGuide in src/data/guides.js — a whitelist, so a new
+--                field needs no migration but does need adding there.
+--   published_at the first publication. From then on the slug is fixed: search
+--                results and AI answers may already link to it.
+CREATE TABLE IF NOT EXISTS guides (
+  id           BIGSERIAL PRIMARY KEY,
+  slug         TEXT NOT NULL UNIQUE,
+  visibility   TEXT NOT NULL DEFAULT 'off',
+  position     INTEGER NOT NULL DEFAULT 0,
+  data         JSONB NOT NULL DEFAULT '{}'::jsonb,
+  published_at TIMESTAMPTZ,
+  created_at   TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+  updated_at   TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);
+
+-- Articles that came with a release (src/data/guides.seed.json), remembered by
+-- slug so each reaches /admin exactly once: one the owner deleted there is not
+-- brought back by the next restart.
+CREATE TABLE IF NOT EXISTS guides_seeded (
+  slug      TEXT PRIMARY KEY,
+  seeded_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);

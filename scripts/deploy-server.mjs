@@ -23,9 +23,15 @@ const PM2_APP = 'hs-api';
 const ARCHIVE = 'server-release.tgz';
 
 // Files outside server/ that the API reads at runtime (DEPLOY.md rules 8 and
-// 10): without catalog.js the API does not start at all, and settings.default
-// .json is where a newly added setting gets its default.
-const SHARED_FILES = ['src/data/catalog.js', 'src/data/settings.default.json'];
+// 10): without catalog.js or guides.js the API does not start at all,
+// settings.default.json is where a newly added setting gets its default, and
+// guides.seed.json carries the articles a release brings to /admin.
+const SHARED_FILES = [
+  'src/data/catalog.js',
+  'src/data/guides.js',
+  'src/data/guides.seed.json',
+  'src/data/settings.default.json',
+];
 
 /**
  * Everything the API needs on the VPS, relative to the project root: the

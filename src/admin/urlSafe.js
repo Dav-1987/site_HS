@@ -2,6 +2,8 @@
 // Spaces or special characters there produce fragile "%20"-links that break when
 // shared, so the admin inputs are sanitized as the user types.
 
+import { GUIDES_SLUG } from '../data/guides.js';
+
 /** Paths owned by app routes — a category with such a slug would be unreachable. */
 export const RESERVED_SLUGS = [
   'admin',
@@ -16,6 +18,7 @@ export const RESERVED_SLUGS = [
   'envios',
   'devoluciones',
   'opiniones',
+  GUIDES_SLUG,
   'en',
 ];
 
