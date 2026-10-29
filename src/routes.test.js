@@ -77,3 +77,42 @@ describe('buildRoutes — выключенный раздел отзывов', (
     expect(out).toContain('/opiniones');
   });
 });
+
+describe('buildRoutes — guides', () => {
+  const guide = (slug, updatedAt) => ({ slug, updatedAt });
+  const guideRoutes = (guides) =>
+    buildRoutes([cat('c1', undefined, 'p1')], undefined, guides).filter((r) =>
+      r.path.startsWith('/guias'),
+    );
+
+  it('gives the section and every published article a page', () => {
+    expect(
+      guideRoutes([guide('medidas-tocador', null), guide('espejo-hollywood', null)]).map(
+        (r) => r.path,
+      ),
+    ).toEqual(['/guias', '/guias/medidas-tocador', '/guias/espejo-hollywood']);
+  });
+
+  // IndexNow reads what changed off <lastmod>.
+  it('dates each article by its own last edit and the section by the latest', () => {
+    const [section, older, newer] = guideRoutes([
+      guide('a', '2026-10-01T10:00:00.000Z'),
+      guide('b', '2026-10-20T10:00:00.000Z'),
+    ]);
+    expect(section.updatedAt).toBe('2026-10-20T10:00:00.000Z');
+    expect(older.updatedAt).toBe('2026-10-01T10:00:00.000Z');
+    expect(newer.updatedAt).toBe('2026-10-20T10:00:00.000Z');
+  });
+
+  it('leaves out a date it does not have rather than making one up', () => {
+    const [section, article] = guideRoutes([guide('a', null)]);
+    expect(section.updatedAt).toBeUndefined();
+    expect(article.updatedAt).toBeUndefined();
+  });
+
+  // Nothing published: /guias has nothing to list and answers 404.
+  it('has no section page while nothing is published', () => {
+    expect(guideRoutes([])).toEqual([]);
+    expect(guideRoutes(undefined)).toEqual([]);
+  });
+});

@@ -192,6 +192,65 @@ export function productListSchema(products, categorySlug, lang = 'es') {
   };
 }
 
+/**
+ * Article node for a «Guías» page. The author is the shop — the articles are
+ * written for it, not by a named person. Dates are left out while unknown (an
+ * article pulled from the seed file before it reached the database).
+ */
+export function articleSchema({ url, title, description, image, publishedAt, updatedAt, lang }) {
+  return clean({
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: title,
+    description,
+    image: image ? [absUrl(image)] : undefined,
+    datePublished: publishedAt ?? undefined,
+    dateModified: updatedAt ?? publishedAt ?? undefined,
+    inLanguage: lang,
+    url,
+    mainEntityOfPage: url,
+    author: { '@type': 'Organization', name: ORG_NAME, url: SITE },
+    publisher: {
+      '@type': 'Organization',
+      name: ORG_NAME,
+      logo: { '@type': 'ImageObject', url: LOGO },
+    },
+  });
+}
+
+/**
+ * FAQPage from the questions an article answers. Only the ones its page shows
+ * — Google ignores, and may penalise, questions that are in the markup alone.
+ * Null when there are none.
+ */
+export function faqSchema(faq) {
+  if (!faq?.length) return null;
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faq.map(({ q, a }) => ({
+      '@type': 'Question',
+      name: q,
+      acceptedAnswer: { '@type': 'Answer', text: a },
+    })),
+  };
+}
+
+/** ItemList of the guides on the section page. */
+export function guideListSchema(guides, lang = 'es') {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    numberOfItems: guides.length,
+    itemListElement: guides.map((g, i) => ({
+      '@type': 'ListItem',
+      position: i + 1,
+      name: g[lang].title,
+      url: `${SITE}${withLang(`/guias/${g.slug}`, lang)}`,
+    })),
+  };
+}
+
 /** ItemList from the top-level categories (catalog page). */
 export function categoryListSchema(categories, lang = 'es') {
   return {

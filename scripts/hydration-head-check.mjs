@@ -19,7 +19,12 @@ if (!firstCategory || !firstProduct) {
   throw new Error('Hydration check needs at least one product route');
 }
 
-const routes = ['/', `/${firstCategory.slug}/${firstProduct.id}`];
+const productRoute = `/${firstCategory.slug}/${firstProduct.id}`;
+// An article page waits for its own data chunk before it can hydrate, unlike
+// every other page — checked whenever one is published.
+const guides = JSON.parse(await readFile(join(ROOT, 'src/data/guides.default.json'), 'utf8'));
+const guideRoute = guides[0] ? `/guias/${guides[0].slug}` : null;
+const routes = ['/', productRoute, guideRoute].filter(Boolean);
 const mime = {
   '.css': 'text/css; charset=utf-8',
   '.html': 'text/html; charset=utf-8',
@@ -173,7 +178,7 @@ try {
       }
     }
 
-    if (route !== '/') {
+    if (route === productRoute) {
       await page.focus('button[aria-label^="Ampliar"]');
       await page.keyboard.press('Enter');
       await page.waitForSelector('[role="dialog"][aria-modal="true"]');

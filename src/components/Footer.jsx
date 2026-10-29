@@ -3,6 +3,8 @@ import { Link } from './LocalizedLink.jsx';
 import { useLanguage } from '../i18n/LanguageContext.jsx';
 import { useSettings } from '../settings/SettingsContext.jsx';
 import IconWhatsApp from './IconWhatsApp.jsx';
+import { GUIDES } from '../guides/content.js';
+import { GUIDES_SLUG } from '../data/guides.js';
 
 function IconInstagram() {
   return (
@@ -195,6 +197,11 @@ export default function Footer() {
               return policy that is easy to find. Both pages existed before
               this and were reachable by URL only. */}
           <div className="flex flex-wrap gap-x-6 gap-y-2">
+            {GUIDES.length > 0 && (
+              <Link to={`/${GUIDES_SLUG}`} className="transition-colors hover:text-accent-text">
+                {t('nav.guides')}
+              </Link>
+            )}
             <Link to="/envios" className="transition-colors hover:text-accent-text">
               {t('footer.shipping')}
             </Link>

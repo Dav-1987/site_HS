@@ -24,7 +24,11 @@ const settings = JSON.parse(
 // over an inaccurate one).
 const isoDate = (d) => (d ? new Date(d).toISOString().split('T')[0] : undefined);
 
-const routes = buildRoutes(catalog, settings);
+// The published «Guías» articles, pulled by `npm run guides:pull` (part of
+// data:pull) like the catalog and the settings.
+const guides = JSON.parse(readFileSync(join(__dirname, '../src/data/guides.default.json'), 'utf8'));
+
+const routes = buildRoutes(catalog, settings, guides);
 
 const allTimestamps = routes.map((r) => r.updatedAt).filter(Boolean);
 // / and /catalogo surface the whole catalog, so they're "modified" whenever

@@ -1,5 +1,11 @@
 import { describe, it, expect } from 'vitest';
-import { productListSchema, productSchema } from './schema.js';
+import {
+  articleSchema,
+  faqSchema,
+  guideListSchema,
+  productListSchema,
+  productSchema,
+} from './schema.js';
 
 const category = {
   slug: 'tocadores',
@@ -123,5 +129,75 @@ describe('structured data never carries the display bar', () => {
     expect(productListSchema([named], 'tocadores', 'en').itemListElement[0].name).toBe(
       'Dressing table Makeup unit with mirror and LED bulbs',
     );
+  });
+});
+
+describe('guide structured data', () => {
+  const base = {
+    url: 'https://hsmuebles.es/guias/medidas-tocador',
+    title: 'Medidas de un tocador',
+    description: 'Ancho, fondo y altura.',
+    image: '/uploads/a_1600.webp',
+    lang: 'es',
+  };
+
+  it('describes the article, written and published by the shop', () => {
+    const node = articleSchema({
+      ...base,
+      publishedAt: '2026-10-01T10:00:00.000Z',
+      updatedAt: '2026-10-20T10:00:00.000Z',
+    });
+    expect(node).toMatchObject({
+      '@type': 'Article',
+      headline: 'Medidas de un tocador',
+      image: ['https://hsmuebles.es/uploads/a_1600.webp'],
+      datePublished: '2026-10-01T10:00:00.000Z',
+      dateModified: '2026-10-20T10:00:00.000Z',
+      inLanguage: 'es',
+      mainEntityOfPage: base.url,
+      author: { '@type': 'Organization', name: 'Mirage Muebles' },
+      publisher: { '@type': 'Organization', name: 'Mirage Muebles' },
+    });
+  });
+
+  // An article pulled from the seed file has no dates yet; none is invented.
+  it('leaves the dates out while there are none', () => {
+    const node = articleSchema({ ...base, publishedAt: null, updatedAt: null });
+    expect(node).not.toHaveProperty('datePublished');
+    expect(node).not.toHaveProperty('dateModified');
+  });
+
+  it('turns the questions of the page into a FAQPage', () => {
+    expect(faqSchema([{ q: '¿Altura?', a: '72–80 cm.' }])).toEqual({
+      '@context': 'https://schema.org',
+      '@type': 'FAQPage',
+      mainEntity: [
+        {
+          '@type': 'Question',
+          name: '¿Altura?',
+          acceptedAnswer: { '@type': 'Answer', text: '72–80 cm.' },
+        },
+      ],
+    });
+  });
+
+  it('has no FAQPage without questions', () => {
+    expect(faqSchema([])).toBeNull();
+    expect(faqSchema(undefined)).toBeNull();
+  });
+
+  it('lists the guides of the section in the page language', () => {
+    const list = guideListSchema(
+      [{ slug: 'medidas-tocador', es: { title: 'Medidas' }, en: { title: 'Dimensions' } }],
+      'en',
+    );
+    expect(list.itemListElement).toEqual([
+      {
+        '@type': 'ListItem',
+        position: 1,
+        name: 'Dimensions',
+        url: 'https://hsmuebles.es/en/guias/medidas-tocador',
+      },
+    ]);
   });
 });

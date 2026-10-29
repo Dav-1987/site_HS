@@ -33,13 +33,15 @@ const catalog = JSON.parse(readFileSync(join(ROOT, 'src/data/catalog.default.jso
 // Настройки нужны здесь только ради выключателей разделов: выключенный раздел
 // не должен получить пререндер-снимок, иначе nginx продолжит отдавать его
 // вместо 404. Как и каталог, они приезжают сюда через `npm run data:pull`.
-const settings = JSON.parse(
-  readFileSync(join(ROOT, 'src/data/settings.default.json'), 'utf8'),
-);
+const settings = JSON.parse(readFileSync(join(ROOT, 'src/data/settings.default.json'), 'utf8'));
+
+// The published «Guías» articles, pulled by `npm run guides:pull` (part of
+// data:pull) like the catalog and the settings.
+const guides = JSON.parse(readFileSync(join(ROOT, 'src/data/guides.default.json'), 'utf8'));
 
 // Every ES route (src/routes.js) plus its /en mirror (src/i18n/routing.js) —
 // same list App.jsx's router serves at runtime.
-const esPaths = buildRoutes(catalog, settings).map((r) => r.path);
+const esPaths = buildRoutes(catalog, settings, guides).map((r) => r.path);
 const routes = esPaths.flatMap((path) => [
   { path, lang: 'es' },
   { path: withLang(path, 'en'), lang: 'en' },

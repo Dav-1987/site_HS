@@ -8,6 +8,8 @@ import { categoryHasGift } from '../data/catalog.js';
 import { IconGift } from './Gift.jsx';
 import { useSettings } from '../settings/SettingsContext.jsx';
 import { stripLangPrefix, withLang } from '../i18n/routing.js';
+import { GUIDES } from '../guides/content.js';
+import { GUIDES_SLUG } from '../data/guides.js';
 
 function LangToggle({ className = '' }) {
   const { lang } = useLanguage();
@@ -62,6 +64,8 @@ export default function Header() {
   // вела бы на 404, который сама же страница и отдаёт.
   const { settings } = useSettings();
   const reviewsOn = settings.blocks?.reviews !== false;
+  // The section has no page while nothing in it is published (src/routes.js).
+  const guidesOn = GUIDES.length > 0;
   const [mobileOpen, setMobileOpen] = useState(false);
   const [catOpen, setCatOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -168,6 +172,12 @@ export default function Header() {
             </NavLink>
           )}
 
+          {guidesOn && (
+            <NavLink to={`/${GUIDES_SLUG}`} className={navLinkClass}>
+              {t('nav.guides')}
+            </NavLink>
+          )}
+
           <NavLink to="/contacto" className={navLinkClass}>
             {t('nav.contact')}
           </NavLink>
@@ -267,6 +277,15 @@ export default function Header() {
               className="border-b border-primary/10 py-4 font-serif text-2xl font-light"
             >
               {t('nav.reviews')}
+            </NavLink>
+          )}
+
+          {guidesOn && (
+            <NavLink
+              to={`/${GUIDES_SLUG}`}
+              className="border-b border-primary/10 py-4 font-serif text-2xl font-light"
+            >
+              {t('nav.guides')}
             </NavLink>
           )}
 
