@@ -42,6 +42,8 @@ export const GUIDE_LIMITS = Object.freeze({
   productId: 80,
   productLimit: 12,
   width: 500,
+  keywords: 12,
+  keyword: 80,
 });
 
 const SLUG_RE = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
@@ -118,6 +120,20 @@ function sanitizeLang(input, lang) {
   if (faq.length > GUIDE_LIMITS.faq)
     return { error: `${lang}.faq has more than ${GUIDE_LIMITS.faq} questions` };
   out.faq = faq;
+
+  // The searches the article is written for. Never on the page: the editor
+  // checks they are in its title, description and short answer.
+  const keywords = [];
+  for (const item of Array.isArray(source.keywords) ? source.keywords : []) {
+    const keyword = text(item).replace(/\s+/g, ' ');
+    if (!keyword) continue;
+    if (keyword.length > GUIDE_LIMITS.keyword)
+      return { error: `${lang}.keywords has one longer than ${GUIDE_LIMITS.keyword} characters` };
+    if (!keywords.some((k) => k.toLowerCase() === keyword.toLowerCase())) keywords.push(keyword);
+  }
+  if (keywords.length > GUIDE_LIMITS.keywords)
+    return { error: `${lang}.keywords has more than ${GUIDE_LIMITS.keywords} searches` };
+  out.keywords = keywords;
   return { value: out };
 }
 

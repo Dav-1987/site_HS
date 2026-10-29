@@ -8,6 +8,8 @@ import { countLabel } from './plural.js';
 export const ADMIN_SECTIONS = Object.freeze([
   { path: 'orders', title: 'Заявки', short: 'Заявки', wide: true },
   { path: 'catalog', title: 'Каталог', short: 'Каталог', wide: true },
+  // Wide: an article is edited with its preview beside the text.
+  { path: 'guides', title: 'Статьи', short: 'Статьи', wide: true },
   { path: 'home', title: 'Главная страница', short: 'Главная' },
   { path: 'texts', title: 'Тексты сайта', short: 'Тексты' },
   { path: 'settings', title: 'Настройки', short: 'Настройки' },

@@ -11,7 +11,8 @@ async function asJson(res) {
   if (!res.ok) {
     const err = new Error(data?.error || `Ошибка запроса (${res.status})`);
     err.status = res.status;
-    // 'catalog' | 'settings' on a 409: saved from elsewhere since it was loaded.
+    // 'catalog' | 'settings' | 'guide' | 'slug' on a 409: saved from elsewhere
+    // since it was loaded, or (`slug`) an article already has that address.
     err.conflict = data?.conflict ?? null;
     throw err;
   }
@@ -156,4 +157,44 @@ export function triggerRebuild() {
 /** `{ configured, run: { status, conclusion, url, createdAt } | null }` */
 export function fetchRebuildStatus() {
   return fetch('/api/admin/rebuild/status', { method: 'GET' }).then(asJson);
+}
+
+/** Every «Guías» article, drafts included (the admin is signed in): `{ guides }`. */
+export function fetchGuides() {
+  return fetch('/api/guides', { method: 'GET' }).then(asJson);
+}
+
+/** A new article; resolves to `{ guide }` as stored. 409 `slug`: the address is taken. */
+export function createGuide(guide) {
+  return fetch('/api/guides', {
+    method: 'POST',
+    headers: { 'content-type': 'application/json' },
+    body: JSON.stringify({ guide }),
+  }).then(asJson);
+}
+
+/**
+ * Save one article; resolves to `{ guide }` as stored. 409 `guide`: it was
+ * saved from elsewhere since `baseRevision` — left out, the save is not checked.
+ */
+export function saveGuide(id, guide, baseRevision) {
+  return fetch(`/api/guides/${id}`, {
+    method: 'PUT',
+    headers: { 'content-type': 'application/json' },
+    body: JSON.stringify({ guide, baseRevision }),
+  }).then(asJson);
+}
+
+/** The order of the articles, as ids; resolves to `{ guides }`. */
+export function reorderGuides(ids) {
+  return fetch('/api/guides/order', {
+    method: 'PUT',
+    headers: { 'content-type': 'application/json' },
+    body: JSON.stringify({ ids }),
+  }).then(asJson);
+}
+
+/** Delete an article for good. */
+export function deleteGuide(id) {
+  return fetch(`/api/guides/${id}`, { method: 'DELETE' }).then(asJson);
 }

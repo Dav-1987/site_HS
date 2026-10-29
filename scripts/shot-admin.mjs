@@ -115,6 +115,14 @@ async function main() {
   await mkdir(OUT_DIR, { recursive: true });
   const categories = await readJson('src/data/catalog.default.json');
   const settings = await readJson('src/data/settings.default.json');
+  // The articles the repo seeds, shaped as /api/guides returns them.
+  const guides = (await readJson('src/data/guides.seed.json')).map((g, i) => ({
+    ...g,
+    id: i + 1,
+    revision: `demo-${i + 1}`,
+    publishedAt: g.visibility === 'public' ? new Date(Date.now() - 864e5).toISOString() : null,
+    updatedAt: new Date(Date.now() - 36e5).toISOString(),
+  }));
 
   const json = (body) => ({
     status: 200,
@@ -128,6 +136,7 @@ async function main() {
     '/api/orders': { orders: ORDERS },
     '/api/orders/1/visit': { visit: DEMO_VISIT },
     '/api/versions': { versions: VERSIONS },
+    '/api/guides': { guides },
     '/api/admin/rebuild/status': { configured: true, run: null },
   };
 
@@ -343,6 +352,40 @@ async function main() {
   await settle(700);
   await shot('11-home');
   report.push(await measure('11-home'));
+
+  await openSection('Статьи');
+  await settle(700);
+  await shot('12-guides');
+  report.push(await measure('12-guides'));
+
+  await page.evaluate(() =>
+    document
+      .querySelector('ol[aria-label="Статьи"] li button[type="button"]:not([aria-label])')
+      .click(),
+  );
+  await settle(800);
+  await shot('13-guide-top');
+  report.push(await measure('13-guide-top'));
+
+  await page.evaluate(() =>
+    document.querySelector('section[aria-label="Тексты на двух языках"]').scrollIntoView(),
+  );
+  await settle(500);
+  await shot('14-guide-text');
+  report.push(await measure('14-guide-text'));
+
+  await page.evaluate(() =>
+    document.querySelector('[aria-label="Разметка текста"]').scrollIntoView(),
+  );
+  await settle(500);
+  await shot('15-guide-markdown');
+
+  await page.evaluate(() =>
+    document.querySelector('section[aria-label="Модели в статье"]').scrollIntoView(),
+  );
+  await settle(500);
+  await shot('16-guide-models');
+  report.push(await measure('16-guide-models'));
 
   const reportFile = join(OUT_DIR, `admin-metrics-${stamp}.json`);
   await writeFile(reportFile, JSON.stringify(report, null, 2), 'utf8');

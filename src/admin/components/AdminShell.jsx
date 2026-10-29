@@ -2,6 +2,7 @@ import { useEffect, useEffectEvent } from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
 import { useCatalogEditor } from '../useCatalogEditor.js';
 import { useOrders } from '../useOrders.js';
+import { useGuidesEditor } from '../useGuidesEditor.js';
 import { SIDEBAR_MIN_WIDTH, useIsCompact } from '../useIsCompact.js';
 import { sectionFor } from '../adminSections.js';
 import { applyUpdate } from '../update.js';
@@ -23,14 +24,15 @@ const CONFLICT_SUBJECT = { catalog: 'каталог', settings: 'настрой�
  * toolbar on narrower screens), a toolbar with «Пересобрать сайт» and
  * «Сохранить», and the current section under it.
  *
- * The catalog and settings being edited, and the orders, live here rather than
- * in the sections, so switching sections never drops an unsaved edit — nor an
+ * The catalog, settings and articles being edited, and the orders, live here
+ * rather than in the sections, so switching sections never drops an unsaved edit — nor an
  * upload still in flight, which lands on the state as it is when it finishes
  * (see ../update.js) whichever section is open by then.
  */
 export default function AdminShell({ onLogout }) {
   const editor = useCatalogEditor();
   const orders = useOrders();
+  const guides = useGuidesEditor();
   const narrow = useIsCompact(SIDEBAR_MIN_WIDTH - 1);
   const section = sectionFor(useLocation().pathname);
   const {
@@ -48,9 +50,17 @@ export default function AdminShell({ onLogout }) {
     setShowHistory,
     applyRestored,
   } = editor;
-  const canSave = (dirty || settingsDirty) && !saving;
+  const anyDirty = dirty || settingsDirty || guides.dirty;
+  const busy = saving || guides.saving;
+  const canSave = anyDirty && !busy;
+  // One «Сохранить» for everything: the catalog and the settings in one save,
+  // then the articles changed, each in its own (see ../useGuidesEditor.js).
+  const saveAll = async () => {
+    if (dirty || settingsDirty) await save();
+    if (guides.dirty) await guides.save();
+  };
   // The conflict note carries two buttons, too much for the toolbar's row.
-  const noteOnOwnLine = narrow || Boolean(conflict);
+  const noteOnOwnLine = narrow || Boolean(conflict || guides.conflict);
   // A reading-width column for forms; the whole window for the catalog, which
   // sets its list and an open product side by side.
   const column = section?.wide ? 'max-w-[1600px]' : 'max-w-5xl';
@@ -62,7 +72,7 @@ export default function AdminShell({ onLogout }) {
     updateSettings((s) => ({ ...s, [key]: applyUpdate(next, s[key]) }));
 
   const saveFromShortcut = useEffectEvent(() => {
-    if (canSave) save();
+    if (canSave) saveAll();
   });
   useEffect(() => {
     const onKeyDown = (e) => {
@@ -87,7 +97,8 @@ export default function AdminShell({ onLogout }) {
   // turned away because another tab saved first outranks everything — retrying
   // would only be turned away again, so it offers the two ways out instead. Then
   // a failed save: red, with the reason and a way to try again.
-  const statusNote = status || (dirty || settingsDirty ? 'Есть несохранённые изменения' : '');
+  const doneNote = status || guides.status;
+  const statusNote = doneNote || (anyDirty ? 'Есть несохранённые изменения' : '');
   const toolbarNote = conflict ? (
     <span role="alert" className="flex flex-wrap items-center gap-x-3 text-xs text-danger">
       Не сохранилось: {CONFLICT_SUBJECT[conflict]} уже изменили в другой вкладке или на другом
@@ -99,15 +110,31 @@ export default function AdminShell({ onLogout }) {
         Сохранить мои поверх
       </button>
     </span>
-  ) : saveError ? (
+  ) : guides.conflict ? (
+    <span role="alert" className="flex flex-wrap items-center gap-x-3 text-xs text-danger">
+      Не сохранилось: статью «{guides.conflict.name}» уже изменили в другой вкладке или на другом
+      устройстве.
+      <button
+        type="button"
+        onClick={guides.reloadFromServer}
+        disabled={busy}
+        className={NOTE_BUTTON}
+      >
+        Загрузить свежую версию
+      </button>
+      <button type="button" onClick={guides.overwrite} disabled={busy} className={NOTE_BUTTON}>
+        Сохранить мою поверх
+      </button>
+    </span>
+  ) : saveError || guides.saveError ? (
     <span role="alert" className="flex flex-wrap items-center gap-x-2 text-xs text-danger">
-      Не сохранилось: {saveError}
-      <button type="button" onClick={save} disabled={saving} className={NOTE_BUTTON}>
+      Не сохранилось: {saveError || guides.saveError}
+      <button type="button" onClick={saveAll} disabled={busy} className={NOTE_BUTTON}>
         Повторить
       </button>
     </span>
   ) : statusNote ? (
-    <span role="status" className={`text-xs ${status ? 'text-primary/75' : 'text-accent-text'}`}>
+    <span role="status" className={`text-xs ${doneNote ? 'text-primary/75' : 'text-accent-text'}`}>
       {statusNote}
     </span>
   ) : null;
@@ -146,13 +173,13 @@ export default function AdminShell({ onLogout }) {
             )}
             <button
               type="button"
-              onClick={save}
+              onClick={saveAll}
               disabled={!canSave}
               title="Сохранить (Ctrl+S)"
               aria-keyshortcuts="Control+S"
               className={BTN_SOLID}
             >
-              {saving ? 'Сохранение…' : 'Сохранить'}
+              {busy ? 'Сохранение…' : 'Сохранить'}
             </button>
             {noteOnOwnLine && toolbarNote && <div className="basis-full">{toolbarNote}</div>}
           </div>
@@ -160,7 +187,7 @@ export default function AdminShell({ onLogout }) {
         </header>
 
         <main className={`mx-auto ${column} px-3 py-6 sm:px-6 sm:py-10 lg:px-10`}>
-          <Outlet context={{ editor, orders, settingsField }} />
+          <Outlet context={{ editor, orders, guides, settingsField }} />
         </main>
       </div>
 

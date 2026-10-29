@@ -380,3 +380,8 @@ console.log(await sweepVideos(dir, readdirSync(dir).filter(isVideoFile)));
    **Новые статьи из `guides.seed.json` — сначала «Deploy Server»** (сервер заносит их
    в базу при старте), **потом «Пересобрать сайт»**; в обратном порядке пересборка их
    не увидит. Для ветки, чьи статьи ещё не в базе: `node scripts/pull-guides.mjs --seed`.
+   Правят статьи в админке, раздел «Статьи» (`src/admin/sections/GuidesSection.jsx`); их
+   сохраняет общая кнопка «Сохранить». Поля статьи — whitelist `sanitizeGuide` в
+   `src/data/guides.js`: если админка начинает слать новое поле (как «Ключевые запросы»),
+   **сначала «Deploy Server», потом «Пересобрать сайт»** — иначе старый сервер молча
+   отбросит поле при сохранении.

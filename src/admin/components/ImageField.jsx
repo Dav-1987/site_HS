@@ -78,7 +78,8 @@ export default function ImageField({
           ))}
         </div>
 
-        <div className="min-w-0 flex-1">
+        {/* Under the crop frames on a phone, rather than squeezed beside them. */}
+        <div className="min-w-0 flex-1 basis-56">
           <input
             id={inputId}
             className={INPUT}

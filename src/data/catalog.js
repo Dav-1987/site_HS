@@ -491,6 +491,18 @@ export function liveCatalog(categories) {
     });
 }
 
+/**
+ * The catalog as every listing renders it: public sections only, each without
+ * the products hidden from listings — what CatalogContext calls `categories`.
+ * A section keeps its identity when nothing in it is hidden.
+ */
+export function listingCatalog(categories) {
+  return visibleCategories(liveCatalog(categories)).map((c) => {
+    const products = listedProducts(c);
+    return products.length === c.products.length ? c : { ...c, products };
+  });
+}
+
 /** Lookup helper used by the dynamic category route. */
 export function findCategory(categories, slug) {
   return categories.find((c) => c.slug === slug);

@@ -29,6 +29,7 @@ vi.mock('../api.js', () => ({
   restoreVersion: vi.fn(),
   fetchOrders: vi.fn(),
   deleteOrder: vi.fn(),
+  fetchGuides: vi.fn(async () => ({ guides: [] })),
 }));
 
 const product = (id, name) => ({

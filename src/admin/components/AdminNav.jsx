@@ -64,21 +64,21 @@ export function AdminSidebar({ newOrders, onLogout }) {
 }
 
 /**
- * Tablet and phone: the same sections as a strip under the toolbar, scrolling
- * sideways when five don't fit. The way out lives in the toolbar's "⋯" menu.
+ * Tablet and phone: the same sections as a strip under the toolbar, one
+ * column each. The way out lives in the toolbar's "⋯" menu.
  */
 export function AdminNavStrip({ newOrders }) {
   return (
     <nav aria-label="Разделы админки" className="border-t border-primary/10">
-      {/* Five equal columns, icon over label: all five fit a 320px phone,
-          where a row of words had «Настройки» scrolled out of sight. */}
-      <ul className="grid grid-cols-5">
+      {/* Equal columns, icon over label: all six fit a 320px phone, where a
+          row of words had «Настройки» scrolled out of sight. */}
+      <ul className="grid grid-cols-6">
         {ADMIN_SECTIONS.map((s) => (
           <li key={s.path}>
             <NavLink
               to={`/admin/${s.path}`}
               className={({ isActive }) =>
-                `flex min-h-14 flex-col items-center justify-center gap-1 border-b-2 px-1 text-xs transition-colors ${FOCUS} ${
+                `flex min-h-14 flex-col items-center justify-center gap-1 border-b-2 px-0.5 text-[10.5px] tracking-tight transition-colors ${FOCUS} ${
                   isActive
                     ? 'border-primary font-semibold text-primary'
                     : 'border-transparent text-primary/75 hover:text-primary'
@@ -89,7 +89,7 @@ export function AdminNavStrip({ newOrders }) {
                 <AdminIcon name={s.path} />
                 {s.path === 'orders' && <NewOrdersDot count={newOrders} />}
               </span>
-              {s.short}
+              <span className="max-w-full truncate">{s.short}</span>
             </NavLink>
           </li>
         ))}
