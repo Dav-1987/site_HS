@@ -13,6 +13,7 @@ export const TEXT_GROUPS = Object.freeze([
   { prefix: 'product', title: 'Карточка товара' },
   { prefix: 'order', title: 'Заявка: кнопка «Заказать» и форма' },
   { prefix: 'reviews', title: 'Отзывы' },
+  { prefix: 'guides', title: 'Раздел «Guías»: подписи страниц статей' },
   { prefix: 'contact', title: 'Контакты' },
   { prefix: 'shipping', title: 'Страница «Доставка»' },
   { prefix: 'returns', title: 'Страница «Возврат»' },

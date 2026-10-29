@@ -120,7 +120,8 @@ ssh root@185.202.172.59 "pm2 restart hs-api"
 
 - Workflow: `.github/workflows/rebuild-deploy.yml` (`workflow_dispatch`) —
   запускается только для `main`; выполняет чистую установку клиентских и серверных
-  зависимостей → security-аудит → lint и тесты → `catalog:pull` → `build:seo`
+  зависимостей → security-аудит → lint и тесты → `data:pull` (каталог, настройки и
+  опубликованные статьи «Guías») → `build:seo`
   с браузерной проверкой → сохраняет проверенный `dist` как артефакт → деплоит
   на VPS по SSH через `scripts/deploy-dist.mjs`.
 - После переключения релиза workflow проверяет публичный маркер сборки и
@@ -373,3 +374,9 @@ console.log(await sweepVideos(dir, readdirSync(dir).filter(isVideoFile)));
    Таблицы `guides` и `guides_seeded` создаёт `server/migrate.sql` — **миграцию
    применить до деплоя сервера**, иначе статьи не читаются, а часовая чистка `uploads/`
    пропускает проход (она не удаляет файлы, пока не может прочитать статьи).
+   На сайт статьи попадают только пересборкой: `npm run guides:pull` (часть `data:pull`)
+   кладёт опубликованные в `src/data/guides.default.json` и `src/data/guide-articles/`,
+   из них строятся страницы `/guias`, карта сайта и список статей в `dist/llms.txt`.
+   **Новые статьи из `guides.seed.json` — сначала «Deploy Server»** (сервер заносит их
+   в базу при старте), **потом «Пересобрать сайт»**; в обратном порядке пересборка их
+   не увидит. Для ветки, чьи статьи ещё не в базе: `node scripts/pull-guides.mjs --seed`.

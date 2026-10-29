@@ -7,6 +7,8 @@
 // release ships it (scripts/deploy-server.mjs, SHARED_FILES).
 // ============================================================
 
+import { productDimensions, productPerkVariant } from './catalog.js';
+
 /** URL segment of the section: /guias and /guias/<slug>, mirrored under /en. */
 export const GUIDES_SLUG = 'guias';
 
@@ -190,4 +192,54 @@ export function guideUploadKeys(guide) {
     keys.add(match[1].replace(/\.+$/, ''));
   }
   return keys;
+}
+
+// Width of a piece in cm — a round mirror's diameter counts as its width — or
+// null when its size says neither.
+function widthOf(product) {
+  const dimension = productDimensions(product)?.find(
+    (d) => d.key === 'width' || d.key === 'diameter',
+  );
+  return dimension ? Number.parseFloat(dimension.value) : null;
+}
+
+/**
+ * The models an article's block shows: its pinned ones first, in the order
+ * given, then whatever its rule matches, narrowest first (the catalog's own
+ * order between equals), up to its limit. `categories` is the catalog as
+ * listings see it (CatalogContext's `categories`), so a model taken off the
+ * site or hidden from listings drops out of every article by itself — pinned
+ * or not. Each entry is `{ product, category }`.
+ */
+export function guideProducts(categories, rule) {
+  const {
+    category = '',
+    type = '',
+    minWidth = null,
+    maxWidth = null,
+    pinned = [],
+    limit = DEFAULT_PRODUCT_LIMIT,
+  } = rule ?? {};
+  if (!limit) return [];
+
+  const all = (categories ?? []).flatMap((c) =>
+    (c.products ?? []).map((product) => ({ product, category: c })),
+  );
+  const byId = new Map(all.map((entry) => [entry.product.id, entry]));
+  const picked = pinned.map((id) => byId.get(id)).filter(Boolean);
+  const pinnedIds = new Set(pinned);
+
+  const fits = ({ product, category: c }) => {
+    if (pinnedIds.has(product.id)) return false;
+    if (category && c.slug !== category) return false;
+    if (type && productPerkVariant(product) !== type) return false;
+    if (minWidth === null && maxWidth === null) return true;
+    const width = widthOf(product);
+    if (width === null) return false;
+    return (minWidth === null || width >= minWidth) && (maxWidth === null || width <= maxWidth);
+  };
+  const narrowestFirst = (a, b) =>
+    (widthOf(a.product) ?? Infinity) - (widthOf(b.product) ?? Infinity);
+
+  return [...picked, ...all.filter(fits).sort(narrowestFirst)].slice(0, limit);
 }

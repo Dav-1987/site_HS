@@ -1,0 +1,36 @@
+[
+  {
+    "slug": "medidas-tocador",
+    "topic": "tocadores",
+    "cover": "/uploads/0f6a9d65f0833e4f64c04982e32007fe.jpg",
+    "publishedAt": null,
+    "updatedAt": null,
+    "es": {
+      "title": "Medidas de un tocador: ancho, fondo y altura estándar",
+      "description": "Medidas de un tocador: de 60 a 150 cm de ancho, 40–50 cm de fondo y 72–80 cm de altura. Tabla de medidas, espacio para la silla y cómo elegir el tamaño.",
+      "coverAlt": "Tocador Hollywood blanco de 130 cm de ancho con cajoneras a ambos lados y espejo con bombillas"
+    },
+    "en": {
+      "title": "Dressing table dimensions: standard width, depth and height",
+      "description": "Dressing table dimensions: 60 to 150 cm wide, 40–50 cm deep and 72–80 cm high. A size chart, room for the chair and how to choose the right size.",
+      "coverAlt": "130 cm wide white Hollywood dressing table with drawers on both sides and a mirror with bulbs"
+    }
+  },
+  {
+    "slug": "espejo-hollywood",
+    "topic": "espejos",
+    "cover": "/uploads/d4a0534c2e1889b52c0a1fd5e594d313.jpg",
+    "publishedAt": null,
+    "updatedAt": null,
+    "es": {
+      "title": "¿Cómo se llama el espejo con bombillas? Qué es un espejo Hollywood",
+      "description": "El espejo con bombillas alrededor se llama espejo Hollywood o espejo de camerino. Para qué sirve, tipos, qué bombillas lleva y cómo elegirlo.",
+      "coverAlt": "Espejo Hollywood de cuerpo entero con bombillas alrededor de un marco blanco"
+    },
+    "en": {
+      "title": "What is the mirror with light bulbs called? The Hollywood mirror explained",
+      "description": "A mirror with light bulbs around it is called a Hollywood mirror or dressing room mirror. What it is for, the types, which bulbs it uses and how to choose one.",
+      "coverAlt": "Full-length Hollywood mirror with bulbs around a white frame"
+    }
+  }
+]

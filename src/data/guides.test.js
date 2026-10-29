@@ -2,6 +2,7 @@ import { describe, it, expect } from 'vitest';
 import {
   DEFAULT_PRODUCT_LIMIT,
   GUIDE_LIMITS,
+  guideProducts,
   guideUploadKeys,
   missingForPublish,
   sanitizeGuide,
@@ -195,5 +196,65 @@ describe('guideUploadKeys', () => {
 
   it('copes with nothing', () => {
     expect(guideUploadKeys(null)).toEqual(new Set());
+  });
+});
+
+describe('guideProducts', () => {
+  const product = (id, size, perks = 'bulbs') => ({ id, size, perks });
+  const catalog = [
+    {
+      slug: 'tocadores',
+      products: [
+        product('T-130', '130 × 40 × 160 cm'),
+        product('T-100', '100 × 40 × 160 cm'),
+        product('T-LED', '120 × 40 × 160 cm', 'led'),
+        product('T-NOSIZE', ''),
+      ],
+    },
+    { slug: 'espejos', products: [product('E-70', '70 × 170 cm'), product('E-R', 'Ø 80 cm')] },
+  ];
+  const ids = (rule) => guideProducts(catalog, rule).map((e) => e.product.id);
+
+  it('shows the narrowest first, up to the limit', () => {
+    expect(ids({ category: 'tocadores', limit: 2 })).toEqual(['T-100', 'T-LED']);
+  });
+
+  it('keeps the section each model belongs to, for its link', () => {
+    expect(guideProducts(catalog, { category: 'espejos' })[0].category.slug).toBe('espejos');
+  });
+
+  it('narrows to a kind of light', () => {
+    expect(ids({ category: 'tocadores', type: 'led' })).toEqual(['T-LED']);
+  });
+
+  it('narrows to a width, reading a round mirror by its diameter', () => {
+    expect(ids({ minWidth: 75, maxWidth: 100 })).toEqual(['E-R', 'T-100']);
+  });
+
+  it('leaves out what has no size once a width is asked for', () => {
+    expect(ids({ category: 'tocadores', maxWidth: 500 })).not.toContain('T-NOSIZE');
+  });
+
+  it('puts pinned models first, in their order, and does not repeat them', () => {
+    expect(ids({ category: 'tocadores', pinned: ['E-70', 'T-130'], limit: 4 })).toEqual([
+      'E-70',
+      'T-130',
+      'T-100',
+      'T-LED',
+    ]);
+  });
+
+  // The catalog given is the listed one: a model taken off the site is not in it.
+  it('drops a pinned model that is no longer listed', () => {
+    expect(ids({ pinned: ['GONE'], category: 'espejos' })).toEqual(['E-70', 'E-R']);
+  });
+
+  it('shows nothing when the article asks for no models', () => {
+    expect(ids({ category: 'tocadores', limit: 0 })).toEqual([]);
+  });
+
+  it('copes with no rule and no catalog', () => {
+    expect(guideProducts(undefined, undefined)).toEqual([]);
+    expect(ids(undefined)).toHaveLength(DEFAULT_PRODUCT_LIMIT);
   });
 });

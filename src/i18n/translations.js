@@ -14,6 +14,26 @@ export const translations = {
     // get it follows from the offers themselves (see categoryHasGift); the
     // wording is the shop's, editable under «Тексты сайта» → «Меню».
     'nav.giftBadge': '+Regalo',
+    'nav.guides': 'Guías',
+
+    // --- Guides («Guías») ---
+    'guides.meta.title': 'Guías sobre tocadores y espejos',
+    'guides.meta.description':
+      'Guías prácticas sobre tocadores y espejos: medidas de un tocador, tamaño del espejo de cuerpo entero, espejo Hollywood y luz para maquillarse.',
+    'guides.title': 'Guías y consejos',
+    'guides.intro':
+      'Guías prácticas sobre tocadores, espejos y luz para maquillarse: medidas, tamaños, tipos y cómo elegir el modelo adecuado para tu dormitorio.',
+    'guides.topic.tocadores': 'Tocadores',
+    'guides.topic.espejos': 'Espejos',
+    'guides.topic.luz-y-maquillaje': 'Luz y maquillaje',
+    'guides.author': 'Equipo Mirage Muebles',
+    'guides.updated': 'Actualizado el',
+    'guides.answer': 'En resumen',
+    'guides.toc': 'En este artículo',
+    'guides.faq': 'Preguntas frecuentes',
+    'guides.models': 'Modelos que encajan',
+    'guides.models.more': 'Ver todos: {name}',
+    'guides.more': 'Más guías',
 
     // --- Hero ---
     'hero.eyebrow': 'Muebles de diseño · Hecho en España',
@@ -256,6 +276,26 @@ export const translations = {
     'nav.menu': 'Menu',
     'nav.close': 'Close',
     'nav.giftBadge': '+Gift',
+    'nav.guides': 'Guides',
+
+    // --- Guides («Guías») ---
+    'guides.meta.title': 'Guides to dressing tables and mirrors',
+    'guides.meta.description':
+      'Practical guides to dressing tables and mirrors: dressing table dimensions, full-length mirror sizes, the Hollywood mirror and the best light for makeup.',
+    'guides.title': 'Guides and advice',
+    'guides.intro':
+      'Practical guides to dressing tables, mirrors and makeup lighting: dimensions, sizes, types and how to choose the right piece for your bedroom.',
+    'guides.topic.tocadores': 'Dressing tables',
+    'guides.topic.espejos': 'Mirrors',
+    'guides.topic.luz-y-maquillaje': 'Light and makeup',
+    'guides.author': 'Mirage Muebles team',
+    'guides.updated': 'Updated',
+    'guides.answer': 'In short',
+    'guides.toc': 'In this article',
+    'guides.faq': 'Frequently asked questions',
+    'guides.models': 'Models that fit',
+    'guides.models.more': 'See all: {name}',
+    'guides.more': 'More guides',
 
     // --- Hero ---
     'hero.eyebrow': 'Designer furniture · Made in Spain',

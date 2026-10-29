@@ -5,6 +5,7 @@ import Layout from './components/Layout.jsx';
 import ErrorBoundary from './components/ErrorBoundary.jsx';
 import RouteFallback from './components/RouteFallback.jsx';
 import { trackPixel } from './lib/track.js';
+import { GUIDES_SLUG } from './data/guides.js';
 
 const Home = lazy(() => import('./pages/Home.jsx'));
 const Catalog = lazy(() => import('./pages/Catalog.jsx'));
@@ -16,6 +17,8 @@ const LegalNotice = lazy(() => import('./pages/LegalNotice.jsx'));
 const Shipping = lazy(() => import('./pages/Shipping.jsx'));
 const Returns = lazy(() => import('./pages/Returns.jsx'));
 const Reviews = lazy(() => import('./pages/Reviews.jsx'));
+const Guides = lazy(() => import('./pages/Guides.jsx'));
+const Guide = lazy(() => import('./pages/Guide.jsx'));
 const NotFound = lazy(() => import('./pages/NotFound.jsx'));
 const Admin = lazy(() => import('./pages/Admin.jsx'));
 const UtmBuilder = lazy(() => import('./pages/UtmBuilder.jsx'));
@@ -55,6 +58,8 @@ const marketingRoutes = (
     <Route path="envios" element={<Shipping />} />
     <Route path="devoluciones" element={<Returns />} />
     <Route path="opiniones" element={<Reviews />} />
+    <Route path={GUIDES_SLUG} element={<Guides />} />
+    <Route path={`${GUIDES_SLUG}/:slug`} element={<Guide />} />
     <Route path=":slug" element={<Category />} />
     <Route path=":categorySlug/:id" element={<Product />} />
     <Route path="*" element={<NotFound />} />
