@@ -444,8 +444,12 @@ export const OFF_PRODUCT_SECTIONS = new Map([
 ]);
 export const CATALOG_SLUG = 'catalogo';
 
-/** First word of a product's Spanish name, lower-case and without accents. */
-function productKind(product) {
+/**
+ * First word of a product's Spanish name, lower-case and without accents —
+ * what kind of furniture it is ("Estantería | blanca" → "estanteria"), whichever
+ * section it sits in.
+ */
+export function productKind(product) {
   const [word = ''] = productDisplayName(product).split(/\s+/);
   return word.normalize('NFD').replace(/\p{M}/gu, '').toLowerCase();
 }
