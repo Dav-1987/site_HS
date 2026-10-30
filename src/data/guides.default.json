@@ -168,5 +168,90 @@
       "description": "Organise makeup by use and category, choose drawer dividers that fit and store brushes properly. Includes storage examples and product label advice.",
       "coverAlt": "White dressing table with open drawers and makeup on the worktop"
     }
+  },
+  {
+    "slug": "comparativa-tocadores-mirage",
+    "topic": "tocadores",
+    "cover": "/uploads/912b8c65b43d71670d59433516ec7df5.jpg",
+    "publishedAt": "2026-10-30T11:36:17.619Z",
+    "updatedAt": "2026-10-30T11:36:17.619Z",
+    "es": {
+      "title": "Comparativa de tocadores Mirage: L-23, L-06 y L-11",
+      "description": "Comparativa de tocadores Mirage L-23, L-06 y L-11: medidas, cajones, estantes, espejos y luz para elegir según tu espacio y lo que necesitas guardar.",
+      "coverAlt": "Tocador blanco Mirage L-23 con espejo rodeado de bombillas, tapa de cristal y dos cajones superiores"
+    },
+    "en": {
+      "title": "Dressing table comparison: Mirage L-23, L-06 and L-11",
+      "description": "Dressing table comparison of Mirage L-23, L-06 and L-11: dimensions, drawers, shelves, mirrors and lighting to help you choose for your room.",
+      "coverAlt": "White Mirage L-23 dressing table with a bulb-framed mirror, glass top and two upper drawers"
+    }
+  },
+  {
+    "slug": "como-limpiar-tocador-espejo-luces",
+    "topic": "tocadores",
+    "cover": "/uploads/5d62ce9c4b521050eea08da62fe173b7.jpg",
+    "publishedAt": "2026-10-30T11:36:17.827Z",
+    "updatedAt": "2026-10-30T11:36:17.827Z",
+    "es": {
+      "title": "Cómo limpiar un tocador con espejo y luces sin dañar sus superficies",
+      "description": "Cómo limpiar un tocador con espejo y luces: cuidados del lacado mate, cristal y bombillas, sin empapar las juntas ni usar productos abrasivos.",
+      "coverAlt": "Tocador blanco L-11 con espejo LED, estantes laterales y encimera de cristal"
+    },
+    "en": {
+      "title": "How to clean a dressing table with a mirror and lights",
+      "description": "How to clean a dressing table with a mirror and lights: gentle care for matte lacquer, glass tops and bulbs, with advice on marks and spills.",
+      "coverAlt": "White L-11 dressing table with an LED mirror, side shelves and a glass worktop"
+    }
+  },
+  {
+    "slug": "tocador-maquillaje-profesional",
+    "topic": "tocadores",
+    "cover": "/uploads/0a1128c2018c997ff3dd871a210b1fe7.jpg",
+    "publishedAt": "2026-10-30T11:36:17.904Z",
+    "updatedAt": "2026-10-30T11:36:17.904Z",
+    "es": {
+      "title": "Cómo elegir un tocador para maquillaje profesional",
+      "description": "Elige un tocador para maquillaje profesional según la superficie útil, el acceso al cliente, la luz y el almacenaje. Ejemplos L-23, L-06 y L-11.",
+      "coverAlt": "Tocador blanco L-06 con espejo rodeado de bombillas y dos cajoneras laterales"
+    },
+    "en": {
+      "title": "How to choose a professional makeup station",
+      "description": "Choose a professional makeup station by worktop space, client access, lighting and storage. Compare practical details of Mirage L-23, L-06 and L-11.",
+      "coverAlt": "White L-06 dressing table with bulbs around the mirror and two side drawer units"
+    }
+  },
+  {
+    "slug": "tocador-escritorio-espejo-abatible",
+    "topic": "tocadores",
+    "cover": "/uploads/178863f09e500b897ac832bf4bf8e289.jpg",
+    "publishedAt": "2026-10-30T11:36:17.944Z",
+    "updatedAt": "2026-10-30T11:36:17.944Z",
+    "es": {
+      "title": "Tocador y escritorio: cómo aprovechar un espejo abatible",
+      "description": "Tocador y escritorio en un mismo espacio: compara T-04 y T-04-2, organiza cosméticos y material de trabajo y comprueba tapa, silla y medidas.",
+      "coverAlt": "Tocador Mirage T-04 en tono nogal con espejo abatible e iluminación LED integrada"
+    },
+    "en": {
+      "title": "Dressing table and desk: making room for both uses",
+      "description": "Dressing table and desk in one space: compare T-04 and T-04-2, organise makeup and work materials, and check the lid, chair and clearances.",
+      "coverAlt": "Mirage T-04 dressing table in a walnut tone with a flip-up mirror and integrated LED lighting"
+    }
+  },
+  {
+    "slug": "espejo-con-base-o-ruedas",
+    "topic": "espejos",
+    "cover": "/uploads/3f17f75401458f2be6e6e8fd3035521b.jpg",
+    "publishedAt": "2026-10-30T11:36:17.966Z",
+    "updatedAt": "2026-10-30T11:36:17.966Z",
+    "es": {
+      "title": "Espejo con base o con ruedas: qué opción elegir",
+      "description": "Compara un espejo con base o con ruedas por espacio, movilidad y colocación. Medidas y diferencias de los espejos de pie F-02, F-06 y F-08.",
+      "coverAlt": "Espejo de cuerpo entero F-02 con marco blanco, bombillas y base con ruedas"
+    },
+    "en": {
+      "title": "Freestanding mirrors: bases, wheels and room to move",
+      "description": "Compare a freestanding mirror or mirror with wheels by floor space, movement and placement. Real F-02, F-06 and F-08 sizes and details.",
+      "coverAlt": "Full-length F-02 mirror with a white frame, bulbs and a wheeled base"
+    }
   }
 ]
