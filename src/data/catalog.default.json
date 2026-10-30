@@ -22,10 +22,10 @@
     "products": [
       {
         "id": "Espejo-Alto-F-05",
-        "name": "Espejo | Hollywood de cuerpo entero blanco con bombillas LED",
-        "nameEn": "Mirror | White full-length Hollywood design with LED bulbs",
-        "price": 249,
-        "oldPrice": 340,
+        "name": "Espejo | De cuerpo entero con bombillas LED y marco blanco ancho (estilo Hollywood)",
+        "nameEn": "Mirror | With LED bulbs and a wide white frame, full-length (Hollywood style)",
+        "price": 279,
+        "oldPrice": 390,
         "image": "/uploads/3611a23d86e72c7bf209810bfdd9a592.jpg",
         "imageMobile": "",
         "images": [
@@ -89,14 +89,14 @@
         "showDiscountBadge": true,
         "showBulbsBadge": null,
         "inStock": true,
-        "updatedAt": "2026-09-05T09:27:26.214Z"
+        "updatedAt": "2026-10-30T10:31:53.717Z"
       },
       {
         "id": "Espejo-Alto-F-03",
-        "name": "Espejo | Hollywood sin marco con bombillas LED",
-        "nameEn": "Mirror | Frameless Hollywood design with LED bulbs",
-        "price": 219,
-        "oldPrice": 300,
+        "name": "Espejo | De cuerpo entero sin marco con bombillas LED (estilo Hollywood)",
+        "nameEn": "Mirror | With LED bulbs, frameless full-length design (Hollywood style)",
+        "price": 249,
+        "oldPrice": 360,
         "image": "/uploads/c4ed1648ac2194b2c57ef23dfa6ddf05.jpg",
         "imageMobile": "",
         "images": [
@@ -150,14 +150,14 @@
         "showDiscountBadge": true,
         "showBulbsBadge": null,
         "inStock": true,
-        "updatedAt": "2026-09-04T20:35:02.275Z"
+        "updatedAt": "2026-10-30T10:31:53.717Z"
       },
       {
         "id": "Espejo-Alto-F-07",
-        "name": "Espejo | Hollywood de gran formato con bombillas LED",
-        "nameEn": "Mirror | Large Hollywood design with LED bulbs",
-        "price": 299,
-        "oldPrice": 400,
+        "name": "Espejo | De gran formato con bombillas LED y perfil plateado (estilo Hollywood)",
+        "nameEn": "Mirror | With LED bulbs and a silver-effect frame, large format (Hollywood style)",
+        "price": 349,
+        "oldPrice": 490,
         "image": "/uploads/66efc3b8287f3bd90ea766667f9bfc86.jpg",
         "imageMobile": "",
         "images": [
@@ -201,14 +201,14 @@
         "showDiscountBadge": true,
         "showBulbsBadge": null,
         "inStock": true,
-        "updatedAt": "2026-08-26T20:16:27.758Z"
+        "updatedAt": "2026-10-30T10:31:53.717Z"
       },
       {
         "id": "Espejo-Alto-F-06",
-        "name": "Espejo | Hollywood blanco con base y bombillas LED",
-        "nameEn": "Mirror | White Hollywood design with base and LED bulbs",
-        "price": 269,
-        "oldPrice": 380,
+        "name": "Espejo | Blanco con bombillas LED y base de pie (estilo Hollywood)",
+        "nameEn": "Mirror | With LED bulbs and a freestanding base, white (Hollywood style)",
+        "price": 299,
+        "oldPrice": 430,
         "image": "/uploads/16c45b90baae50744af08e3aa9c749bc.jpg",
         "imageMobile": "",
         "images": [
@@ -277,14 +277,14 @@
         "showDiscountBadge": true,
         "showBulbsBadge": null,
         "inStock": true,
-        "updatedAt": "2026-09-04T20:35:02.275Z"
+        "updatedAt": "2026-10-30T10:31:53.717Z"
       },
       {
         "id": "Espejo-Alto-F-01",
-        "name": "Espejo | Hollywood blanco clásico con bombillas LED",
-        "nameEn": "Mirror | Classic white Hollywood design with LED bulbs",
-        "price": 179,
-        "oldPrice": 270,
+        "name": "Espejo | Blanco clásico con bombillas LED (estilo Hollywood)",
+        "nameEn": "Mirror | With LED bulbs and a classic white frame (Hollywood style)",
+        "price": 199,
+        "oldPrice": 310,
         "image": "/uploads/a692727d48ead1768c4a09a1900fdf13.jpg",
         "imageMobile": "",
         "images": [
@@ -338,14 +338,14 @@
         "showDiscountBadge": true,
         "showBulbsBadge": null,
         "inStock": true,
-        "updatedAt": "2026-08-31T19:40:57.474Z"
+        "updatedAt": "2026-10-30T10:31:53.717Z"
       },
       {
         "id": "Espejo-Alto-F-04",
-        "name": "Espejo | Hollywood sin marco con base blanca y bombillas LED",
-        "nameEn": "Mirror | Frameless Hollywood design with white base and LED bulbs",
-        "price": 239,
-        "oldPrice": 330,
+        "name": "Espejo | Sin marco con bombillas LED y base blanca (estilo Hollywood)",
+        "nameEn": "Mirror | With LED bulbs and a white base, frameless (Hollywood style)",
+        "price": 269,
+        "oldPrice": 380,
         "image": "/uploads/f1a4522de8cd487bcd30a904aa6f692e.jpg",
         "imageMobile": "",
         "images": [
@@ -404,14 +404,14 @@
         "showDiscountBadge": true,
         "showBulbsBadge": null,
         "inStock": true,
-        "updatedAt": "2026-09-04T20:35:02.275Z"
+        "updatedAt": "2026-10-30T10:31:53.717Z"
       },
       {
         "id": "Espejo-Alto-F-08",
-        "name": "Espejo | Hollywood de pie sin marco con bombillas LED",
-        "nameEn": "Mirror | Frameless freestanding Hollywood design with LED bulbs",
-        "price": 329,
-        "oldPrice": 450,
+        "name": "Espejo | De pie sin marco con bombillas LED y base amplia (estilo Hollywood)",
+        "nameEn": "Mirror | With LED bulbs and a wide base, frameless freestanding design (Hollywood style)",
+        "price": 379,
+        "oldPrice": 520,
         "image": "/uploads/756f8c6ff6502724e6947db02769de1b.jpg",
         "imageMobile": "",
         "images": [
@@ -450,14 +450,14 @@
         "showDiscountBadge": true,
         "showBulbsBadge": null,
         "inStock": true,
-        "updatedAt": "2026-08-26T20:16:27.758Z"
+        "updatedAt": "2026-10-30T10:31:53.717Z"
       },
       {
         "id": "Espejo-Alto-F-02",
-        "name": "Espejo | Hollywood blanco con ruedas y bombillas LED",
-        "nameEn": "Mirror | White Hollywood design with wheels and LED bulbs",
-        "price": 199,
-        "oldPrice": 290,
+        "name": "Espejo | Blanco con bombillas LED y ruedas (estilo Hollywood)",
+        "nameEn": "Mirror | With LED bulbs and wheels, white (Hollywood style)",
+        "price": 219,
+        "oldPrice": 330,
         "image": "/uploads/3f17f75401458f2be6e6e8fd3035521b.jpg",
         "imageMobile": "",
         "images": [
@@ -516,12 +516,12 @@
         "showDiscountBadge": true,
         "showBulbsBadge": null,
         "inStock": true,
-        "updatedAt": "2026-08-31T19:41:24.748Z"
+        "updatedAt": "2026-10-30T10:31:53.717Z"
       },
       {
         "id": "Espejo-Alto-F-09",
-        "name": "Espejo | Hollywood extragrande con bombillas LED",
-        "nameEn": "Mirror | Extra-large Hollywood design with LED bulbs",
+        "name": "Espejo | Extragrande con bombillas LED y perfil plateado (estilo Hollywood)",
+        "nameEn": "Mirror | With LED bulbs and a silver-effect frame, extra-large (Hollywood style)",
         "price": 399,
         "oldPrice": 500,
         "image": "/uploads/50395d6b1c82cbde618ebf5a32628a64.jpg",
@@ -567,7 +567,7 @@
         "showDiscountBadge": true,
         "showBulbsBadge": null,
         "inStock": true,
-        "updatedAt": "2026-09-04T20:35:02.275Z"
+        "updatedAt": "2026-10-30T10:31:53.717Z"
       },
       {
         "id": "Espejo-Alto-D11",
@@ -669,11 +669,11 @@
         "related": [],
         "gift": {},
         "perks": "quality",
-        "visibility": "public",
+        "visibility": "off",
         "showDiscountBadge": true,
         "showBulbsBadge": null,
         "inStock": true,
-        "updatedAt": "2026-09-04T20:35:02.275Z"
+        "updatedAt": "2026-10-25T16:50:15.075Z"
       },
       {
         "id": "Espejo-Alto-D05",
@@ -723,11 +723,11 @@
         "related": [],
         "gift": {},
         "perks": "quality",
-        "visibility": "unlisted",
+        "visibility": "off",
         "showDiscountBadge": true,
         "showBulbsBadge": null,
         "inStock": true,
-        "updatedAt": "2026-08-31T19:38:09.666Z"
+        "updatedAt": "2026-10-25T16:50:15.075Z"
       },
       {
         "id": "Espejo-Alto-D10",
@@ -794,11 +794,11 @@
         "related": [],
         "gift": {},
         "perks": "led",
-        "visibility": "public",
+        "visibility": "off",
         "showDiscountBadge": true,
         "showBulbsBadge": null,
         "inStock": true,
-        "updatedAt": "2026-09-04T20:35:02.275Z"
+        "updatedAt": "2026-10-25T16:50:15.075Z"
       },
       {
         "id": "Espejo-Alto-D06",
@@ -845,11 +845,11 @@
         "related": [],
         "gift": {},
         "perks": "led",
-        "visibility": "unlisted",
+        "visibility": "off",
         "showDiscountBadge": true,
         "showBulbsBadge": null,
         "inStock": true,
-        "updatedAt": "2026-08-31T19:38:58.611Z"
+        "updatedAt": "2026-10-25T16:50:15.075Z"
       },
       {
         "id": "Espejo-Alto-D09",
@@ -896,11 +896,11 @@
         "related": [],
         "gift": {},
         "perks": "led",
-        "visibility": "unlisted",
+        "visibility": "off",
         "showDiscountBadge": true,
         "showBulbsBadge": null,
         "inStock": true,
-        "updatedAt": "2026-08-31T19:38:58.611Z"
+        "updatedAt": "2026-10-25T16:50:15.075Z"
       },
       {
         "id": "Espejo-Alto-F-10",
@@ -957,11 +957,11 @@
         "related": [],
         "gift": {},
         "perks": "led",
-        "visibility": "unlisted",
+        "visibility": "off",
         "showDiscountBadge": true,
         "showBulbsBadge": null,
         "inStock": true,
-        "updatedAt": "2026-08-31T19:39:15.705Z"
+        "updatedAt": "2026-10-25T16:50:15.075Z"
       }
     ]
   },
@@ -987,36 +987,37 @@
     "updatedAt": "2026-08-06T11:17:56.452Z",
     "products": [
       {
-        "id": "Tocador-L-01",
-        "name": "Tocador | Hollywood Blanco con Cajonera Lateral",
-        "nameEn": "Dressing Table | White Hollywood Vanity with Side Drawers",
-        "price": 479,
-        "oldPrice": 600,
-        "image": "/uploads/610e34128c48c5782743f5e24acfae22.jpg",
+        "id": "Tocador-L-23",
+        "name": "Tocador | Blanco con espejo y bombillas, tapa de cristal y dos cajones (estilo Hollywood)",
+        "nameEn": "Dressing Table | With mirror, bulbs, glass top and two drawers, white (Hollywood style)",
+        "price": 429,
+        "oldPrice": 610,
+        "image": "/uploads/27986c9e03927f5c5ce4684a2559c8e0.jpg",
         "imageMobile": "",
         "images": [
-          "/uploads/610e34128c48c5782743f5e24acfae22.jpg",
-          "/uploads/e0980a765b7cc797d59df245233508fc.jpg",
-          "/uploads/fea9cde58a2ca7b9e49b0383374c7967.jpg"
+          "/uploads/27986c9e03927f5c5ce4684a2559c8e0.jpg",
+          "/uploads/912b8c65b43d71670d59433516ec7df5.jpg",
+          "/uploads/6975cab921bd2f0aa26d835a0c6bd6f5.jpg",
+          "/uploads/093184be97a8674be606f8781770a343.jpg"
         ],
         "video": "",
         "videoFirst": false,
         "media": [
           {
-            "src": "/uploads/610e34128c48c5782743f5e24acfae22.jpg",
+            "src": "/uploads/27986c9e03927f5c5ce4684a2559c8e0.jpg",
             "type": "image"
           },
           {
-            "src": "/uploads/e0980a765b7cc797d59df245233508fc.jpg",
+            "src": "/uploads/912b8c65b43d71670d59433516ec7df5.jpg",
             "type": "image"
           },
           {
-            "src": "/uploads/fea9cde58a2ca7b9e49b0383374c7967.jpg",
+            "src": "/uploads/6975cab921bd2f0aa26d835a0c6bd6f5.jpg",
             "type": "image"
           },
           {
-            "src": "/uploads/c58f69a36cfdf8f55049f308a004c303.mp4",
-            "type": "video"
+            "src": "/uploads/093184be97a8674be606f8781770a343.jpg",
+            "type": "image"
           }
         ],
         "material": {
@@ -1026,11 +1027,11 @@
         "size": "100 × 40 × 160 cm",
         "mirrorSize": "100 × 80 cm",
         "shelvesSize": "",
-        "reference": "L-01",
+        "reference": "L-23",
         "subtitle": "100 × 40 × 160 cm",
         "description": {
-          "es": "Este tocador de maquillaje blanco combina un espejo estilo Hollywood con bombillas visibles, una superficie cómoda y una cajonera lateral que mantiene cosméticos, brochas, perfumes y accesorios bien ordenados. Su diseño moderno y luminoso encaja en dormitorios, vestidores, salones de belleza y estudios de maquillaje. Los tiradores transparentes aportan un acabado elegante, mientras los cajones superiores facilitan tener a mano los productos de uso diario. Una opción práctica para crear un rincón de belleza funcional, decorativo y fácil de organizar.\n\n🎁 Bombillas LED de regalo",
-          "en": "This white makeup vanity combines a Hollywood-style mirror with exposed bulbs, a comfortable worktop and a side drawer unit for keeping cosmetics, brushes, perfumes and accessories neatly organised. Its bright, modern design is ideal for bedrooms, dressing rooms, beauty salons and makeup studios. Crystal-style handles add an elegant finishing touch, while the upper drawers keep everyday beauty products close at hand. A practical choice for creating a functional, decorative and easy-to-organise beauty corner.\n\n🎁 Free LED bulbs"
+          "es": "Tocador de maquillaje blanco con espejo Hollywood, bombillas visibles y una tapa de vidrio que deja ver los compartimentos interiores para localizar rápidamente cosméticos y accesorios. Los dos cajones superiores ayudan a separar maquillaje, brochas, perfumes, joyas y productos de cuidado personal, manteniendo la superficie despejada. Su diseño compacto y contemporáneo aprovecha el espacio y ofrece una posición cómoda para maquillarse, peinarse o preparar la rutina facial. Encaja en dormitorios, vestidores, habitaciones juveniles, salones de belleza y estudios de maquillaje con una estética limpia y luminosa.\n\n🎁 Bombillas LED de regalo",
+          "en": "White makeup vanity with a Hollywood mirror, exposed bulbs and a glass top that displays the internal compartments, making cosmetics and accessories easy to find. Two upper drawers help separate makeup, brushes, perfumes, jewellery and personal care products while keeping the worktop tidy. Its compact contemporary design makes efficient use of space and provides a comfortable position for applying makeup, styling hair or following a skincare routine. Ideal for bedrooms, dressing rooms, teenage rooms, beauty salons and makeup studios seeking a clean and bright appearance.\n\n🎁 Free LED bulbs"
         },
         "related": [
           "toc-alba",
@@ -1038,24 +1039,20 @@
           "toc-mara",
           "toc-lina"
         ],
-        "gift": {
-          "mode": "own",
-          "source": "catalog",
-          "productId": "Estanteria-E-002"
-        },
+        "gift": {},
         "perks": "bulbs",
         "visibility": "public",
         "showDiscountBadge": true,
         "showBulbsBadge": null,
         "inStock": true,
-        "updatedAt": "2026-09-07T03:22:23.307Z"
+        "updatedAt": "2026-10-30T10:31:53.717Z"
       },
       {
         "id": "Tocador-L-22",
-        "name": "Tocador | Hollywood Blanco",
-        "nameEn": "Dressing Table | White Hollywood",
+        "name": "Tocador | Blanco con espejo y bombillas, tapa de cristal y tiradores transparentes (estilo Hollywood)",
+        "nameEn": "Dressing Table | With mirror, bulbs, glass top and clear handles, white (Hollywood style)",
         "price": 649,
-        "oldPrice": 790,
+        "oldPrice": 820,
         "image": "/uploads/0a76bec7e753c9ac40000fa3ab903c00.png",
         "imageMobile": "",
         "images": [
@@ -1121,14 +1118,14 @@
         "showDiscountBadge": true,
         "showBulbsBadge": null,
         "inStock": true,
-        "updatedAt": "2026-09-10T09:44:52.316Z"
+        "updatedAt": "2026-10-30T10:31:53.717Z"
       },
       {
         "id": "Tocador-L-08",
-        "name": "Tocador | Hollywood Blanco con Gran Almacenaje",
-        "nameEn": "Dressing Table | White Hollywood Vanity with Ample Storage",
-        "price": 659,
-        "oldPrice": 800,
+        "name": "Tocador | Blanco con espejo, bombillas y gran capacidad de almacenaje (estilo Hollywood)",
+        "nameEn": "Dressing Table | With mirror, bulbs and ample storage, white (Hollywood style)",
+        "price": 699,
+        "oldPrice": 880,
         "image": "/uploads/0f6a9d65f0833e4f64c04982e32007fe.jpg",
         "imageMobile": "",
         "images": [
@@ -1181,30 +1178,20 @@
           "toc-mara",
           "toc-lina"
         ],
-        "gift": {
-          "mode": "own",
-          "source": "catalog",
-          "productId": "Estanteria-E-002",
-          "name": {
-            "es": "Estantería",
-            "en": "Shelving Unit"
-          },
-          "size": "20 x 40 cm",
-          "image": "/uploads/5ac1d28526209a8057a999af8def7bef.png"
-        },
+        "gift": {},
         "perks": "bulbs",
         "visibility": "public",
         "showDiscountBadge": true,
         "showBulbsBadge": null,
         "inStock": true,
-        "updatedAt": "2026-09-07T03:22:23.307Z"
+        "updatedAt": "2026-10-30T10:31:53.717Z"
       },
       {
         "id": "Tocador-L-06",
-        "name": "Tocador | Hollywood Blanco con Doble Cajonera",
-        "nameEn": "Dressing Table | White Hollywood Vanity with Twin Drawer Units",
+        "name": "Tocador | Blanco con espejo, bombillas y doble cajonera (estilo Hollywood)",
+        "nameEn": "Dressing Table | With mirror, bulbs and twin drawer units, white (Hollywood style)",
         "price": 599,
-        "oldPrice": 750,
+        "oldPrice": 790,
         "image": "/uploads/0a1128c2018c997ff3dd871a210b1fe7.jpg",
         "imageMobile": "",
         "images": [
@@ -1263,17 +1250,18 @@
         "showDiscountBadge": true,
         "showBulbsBadge": null,
         "inStock": true,
-        "updatedAt": "2026-09-04T20:37:02.479Z"
+        "updatedAt": "2026-10-30T10:31:53.717Z"
       },
       {
         "id": "Tocador-T-04-2",
         "name": "Tocador | Blanco Plegable con Espejo LED",
         "nameEn": "Dressing Table | White Folding Vanity with LED Mirror",
-        "price": 729,
+        "price": 599,
         "oldPrice": 920,
-        "image": "/uploads/3880b7877440246f485fce6434b0a446.jpg",
+        "image": "/uploads/637738566b7222a756164af442c19dfd.png",
         "imageMobile": "",
         "images": [
+          "/uploads/637738566b7222a756164af442c19dfd.png",
           "/uploads/3880b7877440246f485fce6434b0a446.jpg",
           "/uploads/047394f33c389daa5c6c213fd3415857.jpg",
           "/uploads/1c2eca8c8be99ed903e0d4519bcda28e.jpg"
@@ -1281,6 +1269,10 @@
         "video": "",
         "videoFirst": false,
         "media": [
+          {
+            "src": "/uploads/637738566b7222a756164af442c19dfd.png",
+            "type": "image"
+          },
           {
             "src": "/uploads/3880b7877440246f485fce6434b0a446.jpg",
             "type": "image"
@@ -1319,14 +1311,14 @@
         "showDiscountBadge": true,
         "showBulbsBadge": null,
         "inStock": true,
-        "updatedAt": "2026-09-04T20:37:02.479Z"
+        "updatedAt": "2026-10-28T22:16:38.383Z"
       },
       {
         "id": "Tocador-L-07",
-        "name": "Tocador | Hollywood Blanco con Espejo Enmarcado",
-        "nameEn": "Dressing Table | White Hollywood Vanity with Framed Mirror",
-        "price": 639,
-        "oldPrice": 780,
+        "name": "Tocador | Blanco con espejo enmarcado, bombillas y tapa de cristal (estilo Hollywood)",
+        "nameEn": "Dressing Table | With framed mirror, bulbs and glass top, white (Hollywood style)",
+        "price": 659,
+        "oldPrice": 830,
         "image": "/uploads/b9d5084f27248439f6416003c9dbe954.jpg",
         "imageMobile": "",
         "images": [
@@ -1370,22 +1362,27 @@
         "showDiscountBadge": true,
         "showBulbsBadge": null,
         "inStock": true,
-        "updatedAt": "2026-09-04T20:37:02.479Z"
+        "updatedAt": "2026-10-30T10:31:53.717Z"
       },
       {
         "id": "Tocador-L-02",
-        "name": "Tocador | Hollywood Blanco con Cajonera Izquierda",
-        "nameEn": "Dressing Table | White Hollywood Vanity with Left Drawer Unit",
+        "name": "Tocador | Blanco con espejo, bombillas y cajonera izquierda (estilo Hollywood)",
+        "nameEn": "Dressing Table | With mirror, bulbs and left-hand drawer unit, white (Hollywood style)",
         "price": 499,
-        "oldPrice": 660,
-        "image": "/uploads/9afe0cb269d80f1661f77bbc2b58ba56.jpg",
+        "oldPrice": 680,
+        "image": "/uploads/d4f530592022cc614b12b2dbdee02e76.jpg",
         "imageMobile": "",
         "images": [
+          "/uploads/d4f530592022cc614b12b2dbdee02e76.jpg",
           "/uploads/9afe0cb269d80f1661f77bbc2b58ba56.jpg"
         ],
         "video": "",
         "videoFirst": false,
         "media": [
+          {
+            "src": "/uploads/d4f530592022cc614b12b2dbdee02e76.jpg",
+            "type": "image"
+          },
           {
             "src": "/uploads/9afe0cb269d80f1661f77bbc2b58ba56.jpg",
             "type": "image"
@@ -1416,13 +1413,13 @@
         "showDiscountBadge": true,
         "showBulbsBadge": null,
         "inStock": true,
-        "updatedAt": "2026-09-04T20:37:02.479Z"
+        "updatedAt": "2026-10-30T10:31:53.717Z"
       },
       {
         "id": "Tocador-L-11",
         "name": "Tocador | Blanco con Espejo LED y Estantes",
         "nameEn": "Dressing Table | White Vanity with LED Mirror and Shelves",
-        "price": 789,
+        "price": 799,
         "oldPrice": 990,
         "image": "/uploads/5d62ce9c4b521050eea08da62fe173b7.jpg",
         "imageMobile": "",
@@ -1477,14 +1474,14 @@
         "showDiscountBadge": true,
         "showBulbsBadge": null,
         "inStock": true,
-        "updatedAt": "2026-08-26T22:54:02.000Z"
+        "updatedAt": "2026-10-07T07:57:53.061Z"
       },
       {
         "id": "Tocador-L-10",
-        "name": "Tocador | Hollywood Blanco con Cristal y Cajones",
-        "nameEn": "Dressing Table | White Hollywood Vanity with Glass Top and Drawers",
-        "price": 699,
-        "oldPrice": 880,
+        "name": "Tocador | Blanco con espejo y bombillas, tapa de cristal y cajones centrales (estilo Hollywood)",
+        "nameEn": "Dressing Table | With mirror, bulbs, glass top and central drawers, white (Hollywood style)",
+        "price": 729,
+        "oldPrice": 990,
         "image": "/uploads/cd737dc85696bc1a997250a2fc851991.jpg",
         "imageMobile": "",
         "images": [
@@ -1538,27 +1535,88 @@
         "showDiscountBadge": true,
         "showBulbsBadge": null,
         "inStock": true,
-        "updatedAt": "2026-09-04T20:37:02.479Z"
+        "updatedAt": "2026-10-30T10:31:53.717Z"
+      },
+      {
+        "id": "Tocador-L-01",
+        "name": "Tocador | Blanco con espejo, bombillas y cajonera lateral (estilo Hollywood)",
+        "nameEn": "Dressing Table | With mirror, bulbs and side drawer unit, white (Hollywood style)",
+        "price": 489,
+        "oldPrice": 650,
+        "image": "/uploads/f3923cf4aeacfeb866fcf7a272f4d906.jpg",
+        "imageMobile": "",
+        "images": [
+          "/uploads/f3923cf4aeacfeb866fcf7a272f4d906.jpg",
+          "/uploads/e0980a765b7cc797d59df245233508fc.jpg",
+          "/uploads/fea9cde58a2ca7b9e49b0383374c7967.jpg"
+        ],
+        "video": "",
+        "videoFirst": false,
+        "media": [
+          {
+            "src": "/uploads/f3923cf4aeacfeb866fcf7a272f4d906.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/e0980a765b7cc797d59df245233508fc.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/fea9cde58a2ca7b9e49b0383374c7967.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/c58f69a36cfdf8f55049f308a004c303.mp4",
+            "type": "video"
+          }
+        ],
+        "material": {
+          "es": "Lacado mate",
+          "en": "Matte lacquer"
+        },
+        "size": "100 × 40 × 160 cm",
+        "mirrorSize": "100 × 80 cm",
+        "shelvesSize": "",
+        "reference": "L-01",
+        "subtitle": "100 × 40 × 160 cm",
+        "description": {
+          "es": "Este tocador de maquillaje blanco combina un espejo estilo Hollywood con bombillas visibles, una superficie cómoda y una cajonera lateral que mantiene cosméticos, brochas, perfumes y accesorios bien ordenados. Su diseño moderno y luminoso encaja en dormitorios, vestidores, salones de belleza y estudios de maquillaje. Los tiradores transparentes aportan un acabado elegante, mientras los cajones superiores facilitan tener a mano los productos de uso diario. Una opción práctica para crear un rincón de belleza funcional, decorativo y fácil de organizar.\n\n🎁 Bombillas LED de regalo",
+          "en": "This white makeup vanity combines a Hollywood-style mirror with exposed bulbs, a comfortable worktop and a side drawer unit for keeping cosmetics, brushes, perfumes and accessories neatly organised. Its bright, modern design is ideal for bedrooms, dressing rooms, beauty salons and makeup studios. Crystal-style handles add an elegant finishing touch, while the upper drawers keep everyday beauty products close at hand. A practical choice for creating a functional, decorative and easy-to-organise beauty corner.\n\n🎁 Free LED bulbs"
+        },
+        "related": [
+          "toc-alba",
+          "toc-vera",
+          "toc-mara",
+          "toc-lina"
+        ],
+        "gift": {},
+        "perks": "bulbs",
+        "visibility": "public",
+        "showDiscountBadge": true,
+        "showBulbsBadge": null,
+        "inStock": true,
+        "updatedAt": "2026-10-30T10:31:53.717Z"
       },
       {
         "id": "Tocador-L-05",
-        "name": "Tocador | Hollywood Blanco con Superficie de Cristal",
-        "nameEn": "Dressing Table | White Hollywood Vanity with Glass Top",
-        "price": 569,
-        "oldPrice": 730,
-        "image": "/uploads/9e0731b2c36d5ade397d3dabdff10b85.jpg",
+        "name": "Tocador | Blanco con espejo y bombillas, tapa de cristal y cajonera lateral (estilo Hollywood)",
+        "nameEn": "Dressing Table | With mirror, bulbs, glass top and side drawer unit, white (Hollywood style)",
+        "price": 589,
+        "oldPrice": 780,
+        "image": "/uploads/bedec3cf5e13656b28ac76198bcec40c.jpg",
         "imageMobile": "",
         "images": [
-          "/uploads/9e0731b2c36d5ade397d3dabdff10b85.jpg",
+          "/uploads/bedec3cf5e13656b28ac76198bcec40c.jpg",
           "/uploads/c9ffed394c9aab9febc9a476220be9dc.jpg",
           "/uploads/8231c468c7f41849e894f08d075f21cf.jpg",
+          "/uploads/9e0731b2c36d5ade397d3dabdff10b85.jpg",
           "/uploads/7962cf103f4a68e83ba19772519d5ffa.jpg"
         ],
         "video": "",
         "videoFirst": false,
         "media": [
           {
-            "src": "/uploads/9e0731b2c36d5ade397d3dabdff10b85.jpg",
+            "src": "/uploads/bedec3cf5e13656b28ac76198bcec40c.jpg",
             "type": "image"
           },
           {
@@ -1567,6 +1625,10 @@
           },
           {
             "src": "/uploads/8231c468c7f41849e894f08d075f21cf.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/9e0731b2c36d5ade397d3dabdff10b85.jpg",
             "type": "image"
           },
           {
@@ -1599,17 +1661,18 @@
         "showDiscountBadge": true,
         "showBulbsBadge": null,
         "inStock": true,
-        "updatedAt": "2026-09-04T20:40:22.029Z"
+        "updatedAt": "2026-10-30T10:31:53.717Z"
       },
       {
         "id": "Tocador-T-04",
         "name": "Tocador | Nogal con Espejo LED Abatible",
         "nameEn": "Dressing Table | Walnut Vanity with Folding LED Mirror",
-        "price": 759,
+        "price": 599,
         "oldPrice": 950,
-        "image": "/uploads/178863f09e500b897ac832bf4bf8e289.jpg",
+        "image": "/uploads/9d382c510fb1aed89a89e6599d991c23.png",
         "imageMobile": "",
         "images": [
+          "/uploads/9d382c510fb1aed89a89e6599d991c23.png",
           "/uploads/178863f09e500b897ac832bf4bf8e289.jpg",
           "/uploads/b011dc7f47235e8d7dceeee6ffe839ef.jpg",
           "/uploads/ccf0b80bcc929e963fb6311541022905.jpg",
@@ -1618,6 +1681,10 @@
         "video": "",
         "videoFirst": false,
         "media": [
+          {
+            "src": "/uploads/9d382c510fb1aed89a89e6599d991c23.png",
+            "type": "image"
+          },
           {
             "src": "/uploads/178863f09e500b897ac832bf4bf8e289.jpg",
             "type": "image"
@@ -1660,24 +1727,24 @@
         "showDiscountBadge": true,
         "showBulbsBadge": null,
         "inStock": true,
-        "updatedAt": "2026-08-26T22:35:52.775Z"
+        "updatedAt": "2026-10-28T22:17:12.579Z"
       },
       {
         "id": "Tocador-L-04",
-        "name": "Tocador | Hollywood Blanco con Marco Iluminado",
-        "nameEn": "Dressing Table | White Hollywood Vanity with Illuminated Frame",
+        "name": "Tocador | Blanco con espejo enmarcado y bombillas (estilo Hollywood)",
+        "nameEn": "Dressing Table | With framed mirror and bulbs, white (Hollywood style)",
         "price": 549,
-        "oldPrice": 710,
-        "image": "/uploads/579dd96462de4e0faa0e7598e7076db3.jpg",
+        "oldPrice": 750,
+        "image": "/uploads/90113782cb72591ea926397428418f6f.jpg",
         "imageMobile": "",
         "images": [
-          "/uploads/579dd96462de4e0faa0e7598e7076db3.jpg"
+          "/uploads/90113782cb72591ea926397428418f6f.jpg"
         ],
         "video": "",
         "videoFirst": false,
         "media": [
           {
-            "src": "/uploads/579dd96462de4e0faa0e7598e7076db3.jpg",
+            "src": "/uploads/90113782cb72591ea926397428418f6f.jpg",
             "type": "image"
           }
         ],
@@ -1706,14 +1773,14 @@
         "showDiscountBadge": true,
         "showBulbsBadge": null,
         "inStock": true,
-        "updatedAt": "2026-09-04T20:42:50.805Z"
+        "updatedAt": "2026-10-30T10:31:53.717Z"
       },
       {
         "id": "Tocador-L-09",
-        "name": "Tocador | Hollywood Blanco con Doble Módulo",
-        "nameEn": "Dressing Table | White Hollywood Vanity with Twin Storage Units",
+        "name": "Tocador | Blanco con espejo enmarcado, bombillas y dos módulos laterales (estilo Hollywood)",
+        "nameEn": "Dressing Table | With framed mirror, bulbs and twin storage units, white (Hollywood style)",
         "price": 679,
-        "oldPrice": 860,
+        "oldPrice": 920,
         "image": "/uploads/971d2424b776b8f5605162b52e6bbca7.jpg",
         "imageMobile": "",
         "images": [
@@ -1762,23 +1829,28 @@
         "showDiscountBadge": true,
         "showBulbsBadge": null,
         "inStock": true,
-        "updatedAt": "2026-09-04T20:42:50.805Z"
+        "updatedAt": "2026-10-30T10:31:53.717Z"
       },
       {
         "id": "Tocador-L-03",
-        "name": "Tocador | Hollywood Blanco Compacto con Cajones",
-        "nameEn": "Dressing Table | Compact White Hollywood Vanity with Drawers",
-        "price": 519,
-        "oldPrice": 680,
-        "image": "/uploads/9daa4d23729a59d67c2b07eac6745f9f.jpg",
+        "name": "Tocador | Blanco compacto con espejo sin marco, bombillas y cajones (estilo Hollywood)",
+        "nameEn": "Dressing Table | With frameless mirror, bulbs and drawers, compact white design (Hollywood style)",
+        "price": 559,
+        "oldPrice": 700,
+        "image": "/uploads/7b44912ac79ddaa2942c9a339e2f0706.jpg",
         "imageMobile": "",
         "images": [
+          "/uploads/7b44912ac79ddaa2942c9a339e2f0706.jpg",
           "/uploads/9daa4d23729a59d67c2b07eac6745f9f.jpg",
           "/uploads/a3ff82728006bd879616fca437c8a1d0.jpg"
         ],
         "video": "",
         "videoFirst": false,
         "media": [
+          {
+            "src": "/uploads/7b44912ac79ddaa2942c9a339e2f0706.jpg",
+            "type": "image"
+          },
           {
             "src": "/uploads/9daa4d23729a59d67c2b07eac6745f9f.jpg",
             "type": "image"
@@ -1813,12 +1885,12 @@
         "showDiscountBadge": true,
         "showBulbsBadge": null,
         "inStock": true,
-        "updatedAt": "2026-09-04T20:42:50.805Z"
+        "updatedAt": "2026-10-30T10:31:53.717Z"
       },
       {
         "id": "Tocador-T-01-2",
-        "name": "Tocador | Hollywood Blanco Estrecho con Cajón",
-        "nameEn": "Dressing Table | Slim White Hollywood Vanity with Drawer",
+        "name": "Tocador | Blanco estrecho con espejo y bombillas, tapa de cristal y cajón (estilo Hollywood)",
+        "nameEn": "Dressing Table | With mirror, bulbs, glass top and drawer, slim white design (Hollywood style)",
         "price": 299,
         "oldPrice": 470,
         "image": "/uploads/cc7e87f07eb3e4eadc393f5c79924f18.jpg",
@@ -1884,16 +1956,16 @@
         ],
         "gift": {},
         "perks": "bulbs",
-        "visibility": "public",
+        "visibility": "off",
         "showDiscountBadge": true,
         "showBulbsBadge": null,
         "inStock": true,
-        "updatedAt": "2026-08-26T22:35:52.775Z"
+        "updatedAt": "2026-10-30T10:31:53.717Z"
       },
       {
         "id": "Tocador-T-02-2",
-        "name": "Tocador | Hollywood Blanco Compacto con Dos Cajones",
-        "nameEn": "Dressing Table | Compact White Hollywood Vanity with Two Drawers",
+        "name": "Tocador | Blanco compacto con espejo, bombillas y dos cajones (estilo Hollywood)",
+        "nameEn": "Dressing Table | With mirror, bulbs and two drawers, compact white design (Hollywood style)",
         "price": 359,
         "oldPrice": 490,
         "image": "/uploads/c087ee159cd89a85fec7030b08b0acab.jpg",
@@ -1950,16 +2022,16 @@
         ],
         "gift": {},
         "perks": "bulbs",
-        "visibility": "public",
+        "visibility": "off",
         "showDiscountBadge": true,
         "showBulbsBadge": null,
         "inStock": true,
-        "updatedAt": "2026-09-04T20:42:50.805Z"
+        "updatedAt": "2026-10-30T10:31:53.717Z"
       },
       {
         "id": "Tocador-T-03-2",
-        "name": "Tocador | Hollywood Blanco con Tapa de Cristal",
-        "nameEn": "Dressing Table | White Hollywood Vanity with Glass Top",
+        "name": "Tocador | Blanco con espejo, bombillas y tapa de cristal (estilo Hollywood)",
+        "nameEn": "Dressing Table | With mirror, bulbs and glass top, white (Hollywood style)",
         "price": 399,
         "oldPrice": 520,
         "image": "/uploads/e86ae6968350e27eb24c92303c03eb20.jpg",
@@ -2016,16 +2088,16 @@
         ],
         "gift": {},
         "perks": "bulbs",
-        "visibility": "public",
+        "visibility": "off",
         "showDiscountBadge": true,
         "showBulbsBadge": null,
         "inStock": true,
-        "updatedAt": "2026-09-04T20:42:50.805Z"
+        "updatedAt": "2026-10-30T10:31:53.717Z"
       },
       {
         "id": "Tocador-T-09",
-        "name": "Tocador | Hollywood Blanco Compacto con Espejo",
-        "nameEn": "Dressing Table | Compact White Hollywood Vanity with Mirror",
+        "name": "Tocador | Blanco compacto con espejo enmarcado, bombillas y cajón (estilo Hollywood)",
+        "nameEn": "Dressing Table | With framed mirror, bulbs and drawer, compact white design (Hollywood style)",
         "price": 259,
         "oldPrice": 430,
         "image": "/uploads/cfe9b3489a985b6d5036bc8856caae05.jpg",
@@ -2076,11 +2148,261 @@
         ],
         "gift": {},
         "perks": "bulbs",
+        "visibility": "off",
+        "showDiscountBadge": true,
+        "showBulbsBadge": null,
+        "inStock": false,
+        "updatedAt": "2026-10-30T10:31:53.717Z"
+      },
+      {
+        "id": "Tocador-L-99",
+        "name": "Tocador | Blanco",
+        "nameEn": "Dressing Table | White Vanity",
+        "price": 639,
+        "oldPrice": 800,
+        "image": "/uploads/b604678d05eb0df93bcbb7643c45487e.jpg",
+        "imageMobile": "",
+        "images": [
+          "/uploads/b604678d05eb0df93bcbb7643c45487e.jpg"
+        ],
+        "video": "",
+        "videoFirst": false,
+        "media": [
+          {
+            "src": "/uploads/b604678d05eb0df93bcbb7643c45487e.jpg",
+            "type": "image"
+          }
+        ],
+        "material": {
+          "es": "Lacado mate",
+          "en": "Matte lacquer"
+        },
+        "size": "120 × 40 × 160 cm",
+        "mirrorSize": "120 × 80 cm",
+        "shelvesSize": "",
+        "reference": "L-99",
+        "subtitle": "120 × 40 × 160 cm",
+        "description": {
+          "es": "Tocador de maquillaje blanco con espejo Hollywood, Los dos cajones superiores ayudan a separar maquillaje, brochas, perfumes, joyas y productos de cuidado personal, manteniendo la superficie despejada. Su diseño compacto y contemporáneo aprovecha el espacio y ofrece una posición cómoda para maquillarse, peinarse o preparar la rutina facial. Encaja en dormitorios, vestidores, habitaciones juveniles, salones de belleza y estudios de maquillaje con una estética limpia y luminosa.",
+          "en": "White makeup vanity with a Hollywood mirror displays the internal compartments, making cosmetics and accessories easy to find. Two upper drawers help separate makeup, brushes, perfumes, jewellery and personal care products while keeping the worktop tidy. Its compact contemporary design makes efficient use of space and provides a comfortable position for applying makeup, styling hair or following a skincare routine. Ideal for bedrooms, dressing rooms, teenage rooms, beauty salons and makeup studios seeking a clean and bright appearance."
+        },
+        "related": [
+          "toc-alba",
+          "toc-vera",
+          "toc-mara",
+          "toc-lina"
+        ],
+        "gift": {},
+        "perks": "led",
+        "visibility": "public",
+        "showDiscountBadge": true,
+        "showBulbsBadge": null,
+        "inStock": true,
+        "updatedAt": "2026-10-07T10:14:29.617Z"
+      },
+      {
+        "id": "Tocador-L-98",
+        "name": "Tocador | Blanco",
+        "nameEn": "Dressing Table | White Vanity",
+        "price": 619,
+        "oldPrice": 720,
+        "image": "/uploads/8e9aaed9f1689d6439d20c9e0169db53.jpg",
+        "imageMobile": "",
+        "images": [
+          "/uploads/8e9aaed9f1689d6439d20c9e0169db53.jpg"
+        ],
+        "video": "",
+        "videoFirst": false,
+        "media": [
+          {
+            "src": "/uploads/8e9aaed9f1689d6439d20c9e0169db53.jpg",
+            "type": "image"
+          }
+        ],
+        "material": {
+          "es": "Lacado mate",
+          "en": "Matte lacquer"
+        },
+        "size": "100 × 40 × 160 cm",
+        "mirrorSize": "100 × 80 cm",
+        "shelvesSize": "",
+        "reference": "L-98",
+        "subtitle": "100 × 40 × 160 cm",
+        "description": {
+          "es": "Tocador de maquillaje blanco con espejo Hollywood, Los dos cajones superiores ayudan a separar maquillaje, brochas, perfumes, joyas y productos de cuidado personal, manteniendo la superficie despejada. Su diseño compacto y contemporáneo aprovecha el espacio y ofrece una posición cómoda para maquillarse, peinarse o preparar la rutina facial. Encaja en dormitorios, vestidores, habitaciones juveniles, salones de belleza y estudios de maquillaje con una estética limpia y luminosa.",
+          "en": "White makeup vanity with a Hollywood mirror displays the internal compartments, making cosmetics and accessories easy to find. Two upper drawers help separate makeup, brushes, perfumes, jewellery and personal care products while keeping the worktop tidy. Its compact contemporary design makes efficient use of space and provides a comfortable position for applying makeup, styling hair or following a skincare routine. Ideal for bedrooms, dressing rooms, teenage rooms, beauty salons and makeup studios seeking a clean and bright appearance."
+        },
+        "related": [
+          "toc-alba",
+          "toc-vera",
+          "toc-mara",
+          "toc-lina"
+        ],
+        "gift": {},
+        "perks": "led",
+        "visibility": "public",
+        "showDiscountBadge": true,
+        "showBulbsBadge": null,
+        "inStock": true,
+        "updatedAt": "2026-10-07T10:16:32.858Z"
+      },
+      {
+        "id": "Tocador-L-97",
+        "name": "Tocador | Blanco",
+        "nameEn": "Dressing Table | White Vanity",
+        "price": 539,
+        "oldPrice": 690,
+        "image": "/uploads/fd4f7374fdf5b9edb8b661e56f34f820.jpg",
+        "imageMobile": "",
+        "images": [
+          "/uploads/fd4f7374fdf5b9edb8b661e56f34f820.jpg",
+          "/uploads/90fab90739045b5f0d80927638842b96.jpg",
+          "/uploads/c4648e19e97840f663e5b147a42d1b7c.jpg"
+        ],
+        "video": "",
+        "videoFirst": false,
+        "media": [
+          {
+            "src": "/uploads/fd4f7374fdf5b9edb8b661e56f34f820.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/90fab90739045b5f0d80927638842b96.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/c4648e19e97840f663e5b147a42d1b7c.jpg",
+            "type": "image"
+          }
+        ],
+        "material": {
+          "es": "Lacado mate",
+          "en": "Matte lacquer"
+        },
+        "size": "100 × 40 × 160 cm",
+        "mirrorSize": "100 × 80 cm",
+        "shelvesSize": "",
+        "reference": "L-97",
+        "subtitle": "100 × 40 × 160 cm",
+        "description": {
+          "es": "Tocador de maquillaje blanco con espejo Hollywood, Los dos cajones superiores ayudan a separar maquillaje, brochas, perfumes, joyas y productos de cuidado personal, manteniendo la superficie despejada. Su diseño compacto y contemporáneo aprovecha el espacio y ofrece una posición cómoda para maquillarse, peinarse o preparar la rutina facial. Encaja en dormitorios, vestidores, habitaciones juveniles, salones de belleza y estudios de maquillaje con una estética limpia y luminosa.",
+          "en": "White makeup vanity with a Hollywood mirror displays the internal compartments, making cosmetics and accessories easy to find. Two upper drawers help separate makeup, brushes, perfumes, jewellery and personal care products while keeping the worktop tidy. Its compact contemporary design makes efficient use of space and provides a comfortable position for applying makeup, styling hair or following a skincare routine. Ideal for bedrooms, dressing rooms, teenage rooms, beauty salons and makeup studios seeking a clean and bright appearance."
+        },
+        "related": [
+          "toc-alba",
+          "toc-vera",
+          "toc-mara",
+          "toc-lina"
+        ],
+        "gift": {},
+        "perks": "led",
+        "visibility": "public",
+        "showDiscountBadge": true,
+        "showBulbsBadge": null,
+        "inStock": true,
+        "updatedAt": "2026-10-07T10:19:36.981Z"
+      },
+      {
+        "id": "Estanteria-E-002",
+        "name": "Estantería | blanca",
+        "nameEn": "Shelving Unit | White",
+        "price": 59,
+        "oldPrice": 110,
+        "image": "/uploads/a78640fcb57cb6eab45ba598c3ff3d7d.jpg",
+        "imageMobile": "",
+        "images": [
+          "/uploads/a78640fcb57cb6eab45ba598c3ff3d7d.jpg",
+          "/uploads/0a172706169c4ae52280f5910d8a0226.jpg"
+        ],
+        "video": "",
+        "videoFirst": false,
+        "media": [
+          {
+            "src": "/uploads/a78640fcb57cb6eab45ba598c3ff3d7d.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/0a172706169c4ae52280f5910d8a0226.jpg",
+            "type": "image"
+          }
+        ],
+        "material": {
+          "es": "Lacado mate",
+          "en": "Matte lacquer"
+        },
+        "size": "20 × 40 cm",
+        "mirrorSize": "",
+        "shelvesSize": "",
+        "reference": "E-002",
+        "subtitle": "20× 40 cm",
+        "description": {
+          "es": "",
+          "en": ""
+        },
+        "related": [],
+        "gift": {},
+        "perks": "quality",
         "visibility": "unlisted",
         "showDiscountBadge": true,
         "showBulbsBadge": null,
         "inStock": true,
-        "updatedAt": "2026-09-04T20:42:50.805Z"
+        "updatedAt": "2026-10-25T18:27:03.589Z"
+      },
+      {
+        "id": "Estanteria-E-001",
+        "name": "Estantería | blanca",
+        "nameEn": "Shelving Unit | White",
+        "price": 179,
+        "oldPrice": 280,
+        "image": "/uploads/0abff5362fded05c73bb8c19e4cc897f.jpg",
+        "imageMobile": "",
+        "images": [
+          "/uploads/0abff5362fded05c73bb8c19e4cc897f.jpg",
+          "/uploads/f02ac7a8ff1d2601ac306df3788c97b8.jpg",
+          "/uploads/725bf145a7062e78b0fdc197c2597907.jpg",
+          "/uploads/f76f9b585c236730967d43043fac7a35.jpg"
+        ],
+        "video": "",
+        "videoFirst": false,
+        "media": [
+          {
+            "src": "/uploads/0abff5362fded05c73bb8c19e4cc897f.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/f02ac7a8ff1d2601ac306df3788c97b8.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/725bf145a7062e78b0fdc197c2597907.jpg",
+            "type": "image"
+          },
+          {
+            "src": "/uploads/f76f9b585c236730967d43043fac7a35.jpg",
+            "type": "image"
+          }
+        ],
+        "material": {
+          "es": "Lacado mate",
+          "en": "Matte lacquer"
+        },
+        "size": "30 × 23× 180 cm",
+        "mirrorSize": "",
+        "shelvesSize": "",
+        "reference": "E-001",
+        "subtitle": "30 × 23× 180 cm",
+        "description": {
+          "es": "",
+          "en": ""
+        },
+        "related": [],
+        "gift": {},
+        "perks": "quality",
+        "visibility": "unlisted",
+        "showDiscountBadge": true,
+        "showBulbsBadge": null,
+        "inStock": true,
+        "updatedAt": "2026-10-25T18:27:03.589Z"
       }
     ]
   },
@@ -2102,13 +2424,13 @@
     "imageMobile": "",
     "video": "",
     "gift": {},
-    "visibility": "public",
-    "updatedAt": "2026-08-21T13:50:44.102Z",
+    "visibility": "off",
+    "updatedAt": "2026-10-25T17:24:13.687Z",
     "products": [
       {
         "id": "Tocador-M-05-3",
-        "name": "Tocador | Hollywood en roble y negro con estante",
-        "nameEn": "Dressing Table | Hollywood Oak and Black with Storage Shelf",
+        "name": "Tocador | Efecto roble y negro con espejo, bombillas y estante (estilo Hollywood)",
+        "nameEn": "Dressing Table | With mirror, bulbs and shelf, oak-effect and black (Hollywood style)",
         "price": 599,
         "oldPrice": 750,
         "image": "/uploads/d29e04e4fdb3901cd31b050922d2692b.jpg",
@@ -2153,12 +2475,12 @@
         "showDiscountBadge": true,
         "showBulbsBadge": null,
         "inStock": true,
-        "updatedAt": "2026-09-04T20:45:32.948Z"
+        "updatedAt": "2026-10-30T10:31:53.717Z"
       },
       {
         "id": "Tocador-M-05",
-        "name": "Tocador | Hollywood blanco con cajón y estante",
-        "nameEn": "Dressing Table | White Hollywood Vanity with Drawer and Shelf",
+        "name": "Tocador | Blanco con espejo y bombillas, cajón y estante (estilo Hollywood)",
+        "nameEn": "Dressing Table | With mirror, bulbs, drawer and shelf, white (Hollywood style)",
         "price": 489,
         "oldPrice": 590,
         "image": "/uploads/25076fa903e9891b55d0c515854a2ad8.jpg",
@@ -2204,16 +2526,16 @@
         "related": [],
         "gift": {},
         "perks": "bulbs",
-        "visibility": "unlisted",
+        "visibility": "off",
         "showDiscountBadge": true,
         "showBulbsBadge": null,
         "inStock": true,
-        "updatedAt": "2026-09-04T20:45:32.948Z"
+        "updatedAt": "2026-10-30T10:31:53.717Z"
       },
       {
         "id": "Tocador-M-02-3",
-        "name": "Tocador | Hollywood en roble y negro con espejo sin marco",
-        "nameEn": "Dressing Table | Hollywood Oak and Black with Frameless Mirror",
+        "name": "Tocador | Efecto roble y negro con espejo sin marco y bombillas (estilo Hollywood)",
+        "nameEn": "Dressing Table | With frameless mirror and bulbs, oak-effect and black (Hollywood style)",
         "price": 499,
         "oldPrice": 660,
         "image": "/uploads/845578ae92ec61b012ddbc1e57416c0a.jpg",
@@ -2274,12 +2596,12 @@
         "showDiscountBadge": true,
         "showBulbsBadge": null,
         "inStock": true,
-        "updatedAt": "2026-09-04T20:45:32.948Z"
+        "updatedAt": "2026-10-30T10:31:53.717Z"
       },
       {
         "id": "Tocador-M-01",
-        "name": "Tocador | Hollywood blanco con espejo enmarcado",
-        "nameEn": "Dressing Table | White Hollywood Vanity with Framed Mirror",
+        "name": "Tocador | Blanco con espejo enmarcado, bombillas y cajón amplio (estilo Hollywood)",
+        "nameEn": "Dressing Table | With framed mirror, bulbs and spacious drawer, white (Hollywood style)",
         "price": 359,
         "oldPrice": 510,
         "image": "/uploads/3008e04ff3a1bb8e3234559be7061b3f.jpg",
@@ -2321,16 +2643,16 @@
         "related": [],
         "gift": {},
         "perks": "bulbs",
-        "visibility": "unlisted",
+        "visibility": "off",
         "showDiscountBadge": true,
         "showBulbsBadge": null,
         "inStock": true,
-        "updatedAt": "2026-09-04T20:45:32.948Z"
+        "updatedAt": "2026-10-30T10:31:53.717Z"
       },
       {
         "id": "Tocador-M-02",
-        "name": "Tocador | Hollywood blanco y dorado con cajón",
-        "nameEn": "Dressing Table | White and Gold Hollywood Vanity with Drawer",
+        "name": "Tocador | Blanco y dorado con espejo, bombillas y cajón (estilo Hollywood)",
+        "nameEn": "Dressing Table | With mirror, bulbs and drawer, white and gold (Hollywood style)",
         "price": 399,
         "oldPrice": 540,
         "image": "/uploads/618594913f925884ed5ecf4b85bcac04.jpg",
@@ -2391,16 +2713,16 @@
         "related": [],
         "gift": {},
         "perks": "bulbs",
-        "visibility": "unlisted",
+        "visibility": "off",
         "showDiscountBadge": true,
         "showBulbsBadge": null,
         "inStock": true,
-        "updatedAt": "2026-09-04T20:45:32.948Z"
+        "updatedAt": "2026-10-30T10:31:53.717Z"
       },
       {
         "id": "Tocador-M-01-2",
-        "name": "Tocador | Hollywood en roble y plata con espejo enmarcado",
-        "nameEn": "Dressing Table | Hollywood Oak and Silver with Framed Mirror",
+        "name": "Tocador | Efecto roble y plata con espejo enmarcado y bombillas (estilo Hollywood)",
+        "nameEn": "Dressing Table | With framed mirror and bulbs, oak-effect and silver (Hollywood style)",
         "price": 379,
         "oldPrice": 530,
         "image": "/uploads/f206eec158c7f30fd96334523906ab23.jpg",
@@ -2457,16 +2779,16 @@
         "related": [],
         "gift": {},
         "perks": "bulbs",
-        "visibility": "unlisted",
+        "visibility": "off",
         "showDiscountBadge": true,
         "showBulbsBadge": null,
         "inStock": true,
-        "updatedAt": "2026-09-04T20:45:32.948Z"
+        "updatedAt": "2026-10-30T10:31:53.717Z"
       },
       {
         "id": "Tocador-M-06",
-        "name": "Tocador | Hollywood blanco y negro con estante metálico",
-        "nameEn": "Dressing Table | White and Black Hollywood Vanity with Metal Shelf",
+        "name": "Tocador | Blanco y negro con espejo, bombillas y estante metálico (estilo Hollywood)",
+        "nameEn": "Dressing Table | With mirror, bulbs and metal shelf, white and black (Hollywood style)",
         "price": 649,
         "oldPrice": 790,
         "image": "/uploads/771c0092caedde9b643cd77b72be35bf.jpg",
@@ -2507,12 +2829,12 @@
         "showDiscountBadge": true,
         "showBulbsBadge": null,
         "inStock": true,
-        "updatedAt": "2026-09-04T20:45:32.948Z"
+        "updatedAt": "2026-10-30T10:31:53.717Z"
       },
       {
         "id": "Tocador-M-04",
-        "name": "Tocador | Hollywood en roble y negro con espejo enmarcado",
-        "nameEn": "Dressing Table | Hollywood Oak and Black with Framed Mirror",
+        "name": "Tocador | Efecto roble y negro con espejo enmarcado y bombillas (estilo Hollywood)",
+        "nameEn": "Dressing Table | With framed mirror and bulbs, oak-effect and black (Hollywood style)",
         "price": 439,
         "oldPrice": 580,
         "image": "/uploads/95a57f1bc404f3b29fdb3d38f225feee.jpg",
@@ -2563,16 +2885,16 @@
         "related": [],
         "gift": {},
         "perks": "bulbs",
-        "visibility": "unlisted",
+        "visibility": "off",
         "showDiscountBadge": true,
         "showBulbsBadge": null,
         "inStock": true,
-        "updatedAt": "2026-09-04T20:45:32.948Z"
+        "updatedAt": "2026-10-30T10:31:53.717Z"
       },
       {
         "id": "Tocador-M-05-4",
-        "name": "Tocador | Hollywood en roble y plata con estante",
-        "nameEn": "Dressing Table | Hollywood Oak and Silver with Storage Shelf",
+        "name": "Tocador | Efecto roble y plata con espejo, bombillas y estante (estilo Hollywood)",
+        "nameEn": "Dressing Table | With mirror, bulbs and shelf, oak-effect and silver (Hollywood style)",
         "price": 519,
         "oldPrice": 620,
         "image": "/uploads/d9ff98b097c0c20ff0dda9946e3f9f89.jpg",
@@ -2624,16 +2946,16 @@
         "related": [],
         "gift": {},
         "perks": "bulbs",
-        "visibility": "unlisted",
+        "visibility": "off",
         "showDiscountBadge": true,
         "showBulbsBadge": null,
         "inStock": true,
-        "updatedAt": "2026-09-04T20:45:32.948Z"
+        "updatedAt": "2026-10-30T10:31:53.717Z"
       },
       {
         "id": "Tocador-M-08",
-        "name": "Tocador | Hollywood blanco y dorado con cuatro cajones",
-        "nameEn": "Dressing Table | White and Gold Hollywood Vanity with Four Drawers",
+        "name": "Tocador | Blanco y dorado con espejo, bombillas y cuatro cajones (estilo Hollywood)",
+        "nameEn": "Dressing Table | With mirror, bulbs and four drawers, white and gold (Hollywood style)",
         "price": 879,
         "oldPrice": 990,
         "image": "/uploads/1b7e0b3553b37f44f001bb06894a728b.jpg",
@@ -2684,7 +3006,7 @@
         "showDiscountBadge": true,
         "showBulbsBadge": null,
         "inStock": true,
-        "updatedAt": "2026-09-04T20:45:32.948Z"
+        "updatedAt": "2026-10-30T10:31:53.717Z"
       },
       {
         "id": "Tocador-M-07",
@@ -2753,8 +3075,8 @@
       },
       {
         "id": "Tocador-M-04-2",
-        "name": "Tocador | Hollywood en roble y plata con cajón amplio",
-        "nameEn": "Dressing Table | Hollywood Oak and Silver with Spacious Drawer",
+        "name": "Tocador | Efecto roble y plata con espejo, bombillas y cajón amplio (estilo Hollywood)",
+        "nameEn": "Dressing Table | With mirror, bulbs and spacious drawer, oak-effect and silver (Hollywood style)",
         "price": 439,
         "oldPrice": 580,
         "image": "/uploads/d464fee6601f991ad76f4bf674cbc80b.jpg",
@@ -2806,16 +3128,16 @@
         "related": [],
         "gift": {},
         "perks": "bulbs",
-        "visibility": "unlisted",
+        "visibility": "off",
         "showDiscountBadge": true,
         "showBulbsBadge": null,
         "inStock": true,
-        "updatedAt": "2026-09-04T20:45:32.948Z"
+        "updatedAt": "2026-10-30T10:31:53.717Z"
       },
       {
         "id": "Tocador-M-02-2",
-        "name": "Tocador | Hollywood en roble y plata con espejo sin marco",
-        "nameEn": "Dressing Table | Hollywood Oak and Silver with Frameless Mirror",
+        "name": "Tocador | Efecto roble y plata con espejo sin marco y bombillas (estilo Hollywood)",
+        "nameEn": "Dressing Table | With frameless mirror and bulbs, oak-effect and silver (Hollywood style)",
         "price": 399,
         "oldPrice": 550,
         "image": "/uploads/8a120f849d5d094ea636de110f5da616.jpg",
@@ -2867,16 +3189,16 @@
         "related": [],
         "gift": {},
         "perks": "bulbs",
-        "visibility": "unlisted",
+        "visibility": "off",
         "showDiscountBadge": true,
         "showBulbsBadge": null,
         "inStock": true,
-        "updatedAt": "2026-09-04T20:45:32.948Z"
+        "updatedAt": "2026-10-30T10:31:53.717Z"
       },
       {
         "id": "Tocador-M-09",
-        "name": "Tocador | Hollywood blanco y negro con doble cajón",
-        "nameEn": "Dressing Table | Black and White Hollywood Vanity with Two Drawers",
+        "name": "Tocador | Blanco y negro con espejo, bombillas y dos cajones (estilo Hollywood)",
+        "nameEn": "Dressing Table | With mirror, bulbs and two drawers, white and black (Hollywood style)",
         "price": 899,
         "oldPrice": 1150,
         "image": "/uploads/6b9f3f461853b147eaae7334acf3b38a.jpg",
@@ -2918,11 +3240,11 @@
         "related": [],
         "gift": {},
         "perks": "bulbs",
-        "visibility": "unlisted",
+        "visibility": "off",
         "showDiscountBadge": true,
         "showBulbsBadge": null,
         "inStock": true,
-        "updatedAt": "2026-09-04T20:45:32.948Z"
+        "updatedAt": "2026-10-30T10:31:53.717Z"
       }
     ]
   },
@@ -2944,8 +3266,8 @@
     "imageMobile": "",
     "video": "",
     "gift": {},
-    "visibility": "public",
-    "updatedAt": "2026-07-06T13:40:42.817Z",
+    "visibility": "off",
+    "updatedAt": "2026-10-25T16:50:15.075Z",
     "products": [
       {
         "id": "Estanteria-E-04",
@@ -3533,108 +3855,6 @@
         "showBulbsBadge": null,
         "inStock": true,
         "updatedAt": "2026-09-04T20:47:37.687Z"
-      },
-      {
-        "id": "Estanteria-E-002",
-        "name": "Estantería | blanca",
-        "nameEn": "Shelving Unit | White",
-        "price": 59,
-        "oldPrice": 110,
-        "image": "/uploads/a78640fcb57cb6eab45ba598c3ff3d7d.jpg",
-        "imageMobile": "",
-        "images": [
-          "/uploads/a78640fcb57cb6eab45ba598c3ff3d7d.jpg",
-          "/uploads/0a172706169c4ae52280f5910d8a0226.jpg"
-        ],
-        "video": "",
-        "videoFirst": false,
-        "media": [
-          {
-            "src": "/uploads/a78640fcb57cb6eab45ba598c3ff3d7d.jpg",
-            "type": "image"
-          },
-          {
-            "src": "/uploads/0a172706169c4ae52280f5910d8a0226.jpg",
-            "type": "image"
-          }
-        ],
-        "material": {
-          "es": "Lacado mate",
-          "en": "Matte lacquer"
-        },
-        "size": "20 × 40 cm",
-        "mirrorSize": "",
-        "shelvesSize": "",
-        "reference": "E-002",
-        "subtitle": "20× 40 cm",
-        "description": {
-          "es": "",
-          "en": ""
-        },
-        "related": [],
-        "gift": {},
-        "perks": "quality",
-        "visibility": "public",
-        "showDiscountBadge": true,
-        "showBulbsBadge": null,
-        "inStock": true,
-        "updatedAt": "2026-09-08T12:22:34.986Z"
-      },
-      {
-        "id": "Estanteria-E-001",
-        "name": "Estantería | blanca",
-        "nameEn": "Shelving Unit | White",
-        "price": 179,
-        "oldPrice": 280,
-        "image": "/uploads/0abff5362fded05c73bb8c19e4cc897f.jpg",
-        "imageMobile": "",
-        "images": [
-          "/uploads/0abff5362fded05c73bb8c19e4cc897f.jpg",
-          "/uploads/f02ac7a8ff1d2601ac306df3788c97b8.jpg",
-          "/uploads/725bf145a7062e78b0fdc197c2597907.jpg",
-          "/uploads/f76f9b585c236730967d43043fac7a35.jpg"
-        ],
-        "video": "",
-        "videoFirst": false,
-        "media": [
-          {
-            "src": "/uploads/0abff5362fded05c73bb8c19e4cc897f.jpg",
-            "type": "image"
-          },
-          {
-            "src": "/uploads/f02ac7a8ff1d2601ac306df3788c97b8.jpg",
-            "type": "image"
-          },
-          {
-            "src": "/uploads/725bf145a7062e78b0fdc197c2597907.jpg",
-            "type": "image"
-          },
-          {
-            "src": "/uploads/f76f9b585c236730967d43043fac7a35.jpg",
-            "type": "image"
-          }
-        ],
-        "material": {
-          "es": "Lacado mate",
-          "en": "Matte lacquer"
-        },
-        "size": "30 × 23× 180 cm",
-        "mirrorSize": "",
-        "shelvesSize": "",
-        "reference": "E-001",
-        "subtitle": "30 × 23× 180 cm",
-        "description": {
-          "es": "",
-          "en": ""
-        },
-        "related": [],
-        "gift": {},
-        "perks": "quality",
-        "visibility": "public",
-        "showDiscountBadge": true,
-        "showBulbsBadge": null,
-        "inStock": true,
-        "updatedAt": "2026-09-07T03:18:11.233Z"
       }
     ]
   },
@@ -3656,13 +3876,13 @@
     "imageMobile": "",
     "video": "",
     "gift": {},
-    "visibility": "unlisted",
-    "updatedAt": "2026-08-31T19:34:02.468Z",
+    "visibility": "off",
+    "updatedAt": "2026-10-25T16:50:15.075Z",
     "products": [
       {
         "id": "Tocador-M-03",
-        "name": "Tocador | Hollywood blanco con espejo y cajón",
-        "nameEn": "Dressing Table | White Hollywood Makeup Vanity with Mirror and Drawer",
+        "name": "Tocador | Blanco con espejo, bombillas y cajón amplio (estilo Hollywood)",
+        "nameEn": "Dressing Table | With mirror, bulbs and spacious drawer, white (Hollywood style)",
         "price": 449,
         "oldPrice": 630,
         "image": "/uploads/c58f2d4e90565ec8413875e47a2d2220.jpg",
@@ -3723,12 +3943,12 @@
         "showDiscountBadge": true,
         "showBulbsBadge": null,
         "inStock": true,
-        "updatedAt": "2026-08-27T08:04:37.051Z"
+        "updatedAt": "2026-10-30T10:31:53.717Z"
       },
       {
         "id": "Tocador-M-02-4",
-        "name": "Tocador | Hollywood negro con espejo, balda y ruedas",
-        "nameEn": "Dressing Table | Black Hollywood Vanity with Shelf and Wheels",
+        "name": "Tocador | Negro con espejo y bombillas, balda y ruedas (estilo Hollywood)",
+        "nameEn": "Dressing Table | With mirror, bulbs, shelf and wheels, black (Hollywood style)",
         "price": 429,
         "oldPrice": 570,
         "image": "/uploads/0f49bbdc75e5567ff69cad422524a7ce.jpg",
@@ -3784,12 +4004,12 @@
         "showDiscountBadge": true,
         "showBulbsBadge": null,
         "inStock": true,
-        "updatedAt": "2026-08-27T08:04:37.051Z"
+        "updatedAt": "2026-10-30T10:31:53.717Z"
       },
       {
         "id": "Tocador-M-04-3",
-        "name": "Tocador | Hollywood negro con marco, cajón y balda",
-        "nameEn": "Dressing Table | Black Hollywood Vanity with Framed Mirror and Shelf",
+        "name": "Tocador | Negro con espejo enmarcado y bombillas, cajón y balda (estilo Hollywood)",
+        "nameEn": "Dressing Table | With framed mirror, bulbs, drawer and shelf, black (Hollywood style)",
         "price": 499,
         "oldPrice": 600,
         "image": "/uploads/b385fb86ddd35a697fa03c73d5cee6cd.jpg",
@@ -3845,12 +4065,12 @@
         "showDiscountBadge": true,
         "showBulbsBadge": null,
         "inStock": true,
-        "updatedAt": "2026-08-27T08:04:37.051Z"
+        "updatedAt": "2026-10-30T10:31:53.717Z"
       },
       {
         "id": "Tocador-M-05-2",
-        "name": "Tocador | Hollywood blanco y dorado con balda",
-        "nameEn": "Dressing Table | White and Gold Hollywood Vanity with Shelf",
+        "name": "Tocador | Blanco y dorado con espejo, bombillas y balda (estilo Hollywood)",
+        "nameEn": "Dressing Table | With mirror, bulbs and shelf, white and gold (Hollywood style)",
         "price": 499,
         "oldPrice": 600,
         "image": "/uploads/db1a355f8f6622ca82b7ab13e0a4c157.jpg",
@@ -3886,12 +4106,12 @@
         "showDiscountBadge": true,
         "showBulbsBadge": null,
         "inStock": true,
-        "updatedAt": "2026-08-27T08:04:37.051Z"
+        "updatedAt": "2026-10-30T10:31:53.717Z"
       },
       {
         "id": "Tocador-M-05-5",
-        "name": "Tocador | Hollywood negro con espejo y almacenaje",
-        "nameEn": "Dressing Table | Black Hollywood Vanity with Mirror and Storage",
+        "name": "Tocador | Negro con espejo y bombillas, cajón amplio y balda (estilo Hollywood)",
+        "nameEn": "Dressing Table | With mirror, bulbs, spacious drawer and shelf, black (Hollywood style)",
         "price": 539,
         "oldPrice": 650,
         "image": "/uploads/721a7c3239b317f0780baff3a956d823.jpg",
@@ -3937,12 +4157,12 @@
         "showDiscountBadge": true,
         "showBulbsBadge": null,
         "inStock": true,
-        "updatedAt": "2026-08-27T08:04:37.051Z"
+        "updatedAt": "2026-10-30T10:31:53.717Z"
       },
       {
         "id": "Tocador-T-25",
-        "name": "Tocador | Hollywood blanco y plateado con dos cajones",
-        "nameEn": "Dressing Table | White and Silver Hollywood Vanity with Two Drawers",
+        "name": "Tocador | Blanco y plateado con espejo, bombillas y dos cajones (estilo Hollywood)",
+        "nameEn": "Dressing Table | With mirror, bulbs and two drawers, white and silver (Hollywood style)",
         "price": 499,
         "oldPrice": 700,
         "image": "/uploads/28d19308d09ec8d998279309b4a01628.jpg",
@@ -4022,12 +4242,12 @@
         "showDiscountBadge": true,
         "showBulbsBadge": null,
         "inStock": true,
-        "updatedAt": "2026-08-27T08:04:37.051Z"
+        "updatedAt": "2026-10-30T10:31:53.717Z"
       },
       {
         "id": "Tocador-T-26",
-        "name": "Tocador | Hollywood blanco y negro con cajón y balda",
-        "nameEn": "Dressing Table | White and Black Hollywood Vanity with Shelf",
+        "name": "Tocador | Blanco y negro con espejo y bombillas, cajón y balda (estilo Hollywood)",
+        "nameEn": "Dressing Table | With mirror, bulbs, drawer and shelf, white and black (Hollywood style)",
         "price": 569,
         "oldPrice": 700,
         "image": "/uploads/48dd83b1afd242bf95826a29d3502611.jpg",
@@ -4102,12 +4322,12 @@
         "showDiscountBadge": true,
         "showBulbsBadge": null,
         "inStock": true,
-        "updatedAt": "2026-08-27T08:04:37.051Z"
+        "updatedAt": "2026-10-30T10:31:53.717Z"
       },
       {
         "id": "Tocador-T-28",
-        "name": "Tocador | Hollywood en madera oscura y metal negro",
-        "nameEn": "Dressing Table | Dark Wood and Black Metal Hollywood Vanity",
+        "name": "Tocador | Efecto madera oscura y negro con espejo y bombillas (estilo Hollywood)",
+        "nameEn": "Dressing Table | With mirror and bulbs, dark wood-effect and black (Hollywood style)",
         "price": 619,
         "oldPrice": 800,
         "image": "/uploads/db1841fc027062f555aa3d18b262a7ef.jpg",
@@ -4162,7 +4382,7 @@
         "showDiscountBadge": true,
         "showBulbsBadge": null,
         "inStock": true,
-        "updatedAt": "2026-08-27T08:04:37.051Z"
+        "updatedAt": "2026-10-30T10:31:53.717Z"
       },
       {
         "id": "Tocador-T-30",
@@ -4378,8 +4598,8 @@
       },
       {
         "id": "Tocador-T-35",
-        "name": "Tocador | Hollywood grande blanco y dorado con cuatro cajones",
-        "nameEn": "Dressing Table | Large White and Gold Hollywood Vanity with Four Drawers",
+        "name": "Tocador | Grande blanco y dorado con espejo, bombillas y cuatro cajones (estilo Hollywood)",
+        "nameEn": "Dressing Table | With mirror, bulbs and four drawers, large white and gold design (Hollywood style)",
         "price": 839,
         "oldPrice": 1200,
         "image": "/uploads/cda90ee8c19fdc286f06925ced564ec2.jpg",
@@ -4415,12 +4635,12 @@
         "showDiscountBadge": true,
         "showBulbsBadge": null,
         "inStock": true,
-        "updatedAt": "2026-08-27T08:04:37.051Z"
+        "updatedAt": "2026-10-30T10:31:53.717Z"
       },
       {
         "id": "Tocador-T-36",
-        "name": "Tocador | Hollywood panorámico blanco y dorado",
-        "nameEn": "Dressing Table | Panoramic White and Gold Hollywood Vanity",
+        "name": "Tocador | Blanco y dorado con espejo panorámico y bombillas (estilo Hollywood)",
+        "nameEn": "Dressing Table | With panoramic mirror and bulbs, white and gold (Hollywood style)",
         "price": 879,
         "oldPrice": 1250,
         "image": "/uploads/512bf87915c071625b73627d8901ee77.jpg",
@@ -4481,12 +4701,12 @@
         "showDiscountBadge": true,
         "showBulbsBadge": null,
         "inStock": true,
-        "updatedAt": "2026-08-27T08:04:37.051Z"
+        "updatedAt": "2026-10-30T10:31:53.717Z"
       },
       {
         "id": "Tocador-T-38",
-        "name": "Tocador | Hollywood blanco efecto madera y negro",
-        "nameEn": "Dressing Table | White Wood-Effect and Black Hollywood Vanity",
+        "name": "Tocador | Blanco efecto madera y negro con espejo y bombillas (estilo Hollywood)",
+        "nameEn": "Dressing Table | With mirror and bulbs, white wood-effect and black (Hollywood style)",
         "price": 939,
         "oldPrice": 1350,
         "image": "/uploads/72c175e5e9c12d294eb32c03ea566100.jpg",
@@ -4542,12 +4762,12 @@
         "showDiscountBadge": true,
         "showBulbsBadge": null,
         "inStock": true,
-        "updatedAt": "2026-08-27T08:04:37.051Z"
+        "updatedAt": "2026-10-30T10:31:53.717Z"
       },
       {
         "id": "Tocador-T-39",
-        "name": "Tocador | Hollywood panorámico negro para salón",
-        "nameEn": "Dressing Table | Panoramic Black Hollywood Vanity for Salons",
+        "name": "Tocador | Negro para salón con espejo panorámico y bombillas (estilo Hollywood)",
+        "nameEn": "Dressing Table | With panoramic mirror and bulbs, black salon design (Hollywood style)",
         "price": 999,
         "oldPrice": 1400,
         "image": "/uploads/1cdd810047059739b43b90a24a2d6036.jpg",
@@ -4603,12 +4823,12 @@
         "showDiscountBadge": true,
         "showBulbsBadge": null,
         "inStock": true,
-        "updatedAt": "2026-08-27T08:04:37.051Z"
+        "updatedAt": "2026-10-30T10:31:53.717Z"
       },
       {
         "id": "Tocador-T-01",
-        "name": "Tocador | Hollywood compacto blanco con cajón",
-        "nameEn": "Dressing Table | Compact White Hollywood Vanity with Drawer",
+        "name": "Tocador | Blanco compacto con espejo, bombillas y cajón (estilo Hollywood)",
+        "nameEn": "Dressing Table | With mirror, bulbs and drawer, compact white design (Hollywood style)",
         "price": 299,
         "oldPrice": 470,
         "image": "/uploads/23892ed3a413a251335d8380ad32cbac.jpg",
@@ -4669,12 +4889,12 @@
         "showDiscountBadge": true,
         "showBulbsBadge": null,
         "inStock": true,
-        "updatedAt": "2026-08-27T08:04:37.051Z"
+        "updatedAt": "2026-10-30T10:31:53.717Z"
       },
       {
         "id": "Tocador-T-02",
-        "name": "Tocador | Hollywood blanco con dos cajones",
-        "nameEn": "Dressing Table | White Hollywood Vanity with Two Drawers",
+        "name": "Tocador | Blanco con espejo, bombillas y dos cajones (estilo Hollywood)",
+        "nameEn": "Dressing Table | With mirror, bulbs and two drawers, white (Hollywood style)",
         "price": 339,
         "oldPrice": 490,
         "image": "/uploads/d54586e9cbfcb8a6ddac354a8c2a0571.jpg",
@@ -4740,12 +4960,12 @@
         "showDiscountBadge": true,
         "showBulbsBadge": null,
         "inStock": true,
-        "updatedAt": "2026-08-27T08:04:37.051Z"
+        "updatedAt": "2026-10-30T10:31:53.717Z"
       },
       {
         "id": "Tocador-T-03",
-        "name": "Tocador | Hollywood blanco con espejo amplio y dos cajones",
-        "nameEn": "Dressing Table | White Hollywood Vanity with Large Mirror and Two Drawers",
+        "name": "Tocador | Blanco con espejo amplio, bombillas y dos cajones (estilo Hollywood)",
+        "nameEn": "Dressing Table | With large mirror, bulbs and two drawers, white (Hollywood style)",
         "price": 379,
         "oldPrice": 520,
         "image": "/uploads/40cf889d7a55a4afc01c59454a51d742.jpg",
@@ -4811,7 +5031,7 @@
         "showDiscountBadge": true,
         "showBulbsBadge": null,
         "inStock": true,
-        "updatedAt": "2026-08-27T08:04:37.051Z"
+        "updatedAt": "2026-10-30T10:31:53.717Z"
       },
       {
         "id": "Espejo-Alto-D01",
@@ -5674,8 +5894,8 @@
       },
       {
         "id": "Espejo-K09",
-        "name": "Espejo | Hollywood semicircular con bombillas",
-        "nameEn": "Mirror | Semicircular Hollywood Makeup Mirror with Bulbs",
+        "name": "Espejo | Semicircular de maquillaje con bombillas (estilo Hollywood)",
+        "nameEn": "Mirror | With bulbs, semicircular makeup design (Hollywood style)",
         "price": 199,
         "oldPrice": 340,
         "image": "/uploads/0eb2e83fe288beb457416da7105c41c3.jpg",
@@ -5726,7 +5946,7 @@
         "showDiscountBadge": true,
         "showBulbsBadge": null,
         "inStock": true,
-        "updatedAt": "2026-08-27T08:07:43.389Z"
+        "updatedAt": "2026-10-30T10:31:53.717Z"
       },
       {
         "id": "Espejo-K05",
@@ -5892,8 +6112,8 @@
       },
       {
         "id": "Espejo-K14",
-        "name": "Espejo | Hollywood redondo con bombillas",
-        "nameEn": "Mirror | Round Hollywood Makeup Mirror with Bulbs",
+        "name": "Espejo | Redondo de maquillaje con bombillas (estilo Hollywood)",
+        "nameEn": "Mirror | With bulbs, round makeup design (Hollywood style)",
         "price": 239,
         "oldPrice": 370,
         "image": "/uploads/083ac4739da74fb6601daa0ff0f37600.jpg",
@@ -5949,7 +6169,7 @@
         "showDiscountBadge": true,
         "showBulbsBadge": null,
         "inStock": true,
-        "updatedAt": "2026-08-27T08:07:43.389Z"
+        "updatedAt": "2026-10-30T10:31:53.717Z"
       },
       {
         "id": "Espejo-K10",
@@ -6110,8 +6330,8 @@
       },
       {
         "id": "Espejo-K07",
-        "name": "Espejo | Hollywood de sobremesa semicircular",
-        "nameEn": "Mirror | Semicircular Hollywood Tabletop Mirror with Bulbs",
+        "name": "Espejo | Semicircular de sobremesa con bombillas (estilo Hollywood)",
+        "nameEn": "Mirror | With bulbs, semicircular tabletop design (Hollywood style)",
         "price": 179,
         "oldPrice": 290,
         "image": "/uploads/2d62889e8f15abd762e6133462f3fdb1.jpg",
@@ -6172,7 +6392,7 @@
         "showDiscountBadge": true,
         "showBulbsBadge": null,
         "inStock": true,
-        "updatedAt": "2026-08-27T08:07:43.389Z"
+        "updatedAt": "2026-10-30T10:31:53.717Z"
       },
       {
         "id": "Espejo-K11",
@@ -6358,8 +6578,8 @@
       },
       {
         "id": "Espejo-K06",
-        "name": "Espejo | Hollywood redondo con bombillas y marco negro",
-        "nameEn": "Mirror | Round Hollywood Design with Bulbs and Black Frame",
+        "name": "Espejo | Redondo con bombillas y marco negro (estilo Hollywood)",
+        "nameEn": "Mirror | With bulbs and a black frame, round (Hollywood style)",
         "price": 169,
         "oldPrice": 270,
         "image": "/uploads/84fb56b3a6f01b281439695109aac716.jpg",
@@ -6425,7 +6645,7 @@
         "showDiscountBadge": true,
         "showBulbsBadge": null,
         "inStock": true,
-        "updatedAt": "2026-08-27T08:07:43.389Z"
+        "updatedAt": "2026-10-30T10:31:53.717Z"
       },
       {
         "id": "Espejo-K04",
@@ -6520,8 +6740,8 @@
       },
       {
         "id": "Espejo-K08",
-        "name": "Espejo | Hollywood redondo blanco con bombillas",
-        "nameEn": "Mirror | White Round Hollywood Makeup Mirror with Bulbs",
+        "name": "Espejo | Redondo blanco con bombillas (estilo Hollywood)",
+        "nameEn": "Mirror | With bulbs and a white finish, round (Hollywood style)",
         "price": 189,
         "oldPrice": 320,
         "image": "/uploads/5cdbfd6624ff9ef1db5c0816f91084c4.jpg",
@@ -6587,7 +6807,7 @@
         "showDiscountBadge": true,
         "showBulbsBadge": null,
         "inStock": true,
-        "updatedAt": "2026-08-27T08:07:43.389Z"
+        "updatedAt": "2026-10-30T10:31:53.717Z"
       },
       {
         "id": "Espejo-K02",
