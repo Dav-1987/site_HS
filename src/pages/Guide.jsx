@@ -88,37 +88,37 @@ function GuideArticle({ article }) {
         ].filter(Boolean)}
       />
 
-      <article>
-        <header className="px-6 pt-6 md:px-12 md:pt-10 lg:px-20">
-          <nav
-            aria-label="breadcrumb"
-            className="mb-6 flex flex-wrap items-center gap-2 text-xs uppercase tracking-[0.08em] text-secondary"
-          >
-            <Link to={`/${GUIDES_SLUG}`} className="transition-colors hover:text-accent-text">
-              {t('guides.title')}
-            </Link>
-            <span aria-hidden="true">/</span>
-            <span className="text-primary/70">{t(`guides.topic.${article.topic}`)}</span>
-          </nav>
-          <div className="max-w-3xl">
-            <h1 className="font-serif text-[clamp(2.25rem,4.4vw,3.5rem)] font-light leading-[1.08] tracking-tight text-primary">
-              {text.title}
-            </h1>
-            <p className="mt-5 text-xs uppercase tracking-[0.12em] text-secondary">
-              {t('guides.author')}
-              {updated && (
-                <>
-                  {' · '}
-                  {t('guides.updated')}{' '}
-                  <time dateTime={article.updatedAt ?? article.publishedAt}>{updated}</time>
-                </>
-              )}
-            </p>
-          </div>
-        </header>
+      <article className="px-6 md:px-12 lg:px-20">
+        <div className="mx-auto w-full max-w-[45rem]">
+          <header className="pt-6 md:pt-10">
+            <nav
+              aria-label="breadcrumb"
+              className="mb-6 flex flex-wrap items-center gap-2 text-xs uppercase tracking-[0.08em] text-secondary"
+            >
+              <Link to={`/${GUIDES_SLUG}`} className="transition-colors hover:text-accent-text">
+                {t('guides.title')}
+              </Link>
+              <span aria-hidden="true">/</span>
+              <span className="text-primary/70">{t(`guides.topic.${article.topic}`)}</span>
+            </nav>
+            <div>
+              <h1 className="font-serif text-[clamp(2.25rem,4.4vw,3.5rem)] font-light leading-[1.08] tracking-tight text-primary">
+                {text.title}
+              </h1>
+              <p className="mt-5 text-xs uppercase tracking-[0.12em] text-secondary">
+                {t('guides.author')}
+                {updated && (
+                  <>
+                    {' · '}
+                    {t('guides.updated')}{' '}
+                    <time dateTime={article.updatedAt ?? article.publishedAt}>{updated}</time>
+                  </>
+                )}
+              </p>
+            </div>
+          </header>
 
-        <div className="px-6 pb-20 pt-8 md:px-12 md:pb-28 md:pt-10 lg:px-20">
-          <div className="max-w-2xl">
+          <div className="pb-20 pt-8 md:pb-28 md:pt-10">
             {/* The answer first: what search engines and AI assistants quote. */}
             <section
               aria-labelledby="guide-answer"
