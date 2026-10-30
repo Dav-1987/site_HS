@@ -1,0 +1,117 @@
+{
+  "slug": "luz-para-maquillarse",
+  "topic": "luz-y-maquillaje",
+  "cover": "/uploads/90113782cb72591ea926397428418f6f.jpg",
+  "publishedAt": "2026-10-29T17:45:37.842Z",
+  "updatedAt": "2026-10-30T05:27:37.145Z",
+  "products": {
+    "category": "",
+    "type": "bulbs",
+    "minWidth": null,
+    "maxWidth": null,
+    "pinned": [],
+    "limit": 4
+  },
+  "es": {
+    "title": "Qué luz es mejor para maquillarse: blanca, neutra o amarilla",
+    "description": "¿Qué luz es mejor para maquillarse? Neutra o de día (4000–5000 K), con un CRI de 90 o más y de frente a la cara. Por qué la amarilla y la fría engañan.",
+    "answer": "¿Qué luz es mejor para maquillarse? La luz neutra o de día, de 4000 a 5000 K, con un índice de reproducción cromática (CRI) de 90 o más, y que llegue de frente a la cara. La luz amarilla (2700–3000 K) calienta el tono de la piel y hace elegir una base equivocada; la luz fría (6000 K o más) la vuelve pálida. Un espejo con luz neutra alrededor ilumina la cara sin sombras.",
+    "coverAlt": "Tocador blanco con un espejo rodeado de bombillas encendidas",
+    "faq": [
+      {
+        "q": "¿Qué luz es mejor para maquillarse, blanca o amarilla?",
+        "a": "Blanca neutra o luz de día, de 4000–5000 K. La amarilla altera el tono de la piel y hace elegir mal la base."
+      },
+      {
+        "q": "¿Cuántos kelvin necesito para maquillarme?",
+        "a": "Entre 4000 y 5000 K: luz neutra o luz de día."
+      },
+      {
+        "q": "¿Qué es el CRI de una bombilla?",
+        "a": "El índice de reproducción cromática: lo fiel que es la luz a los colores reales, de 0 a 100. Para maquillarse, 90 o más."
+      },
+      {
+        "q": "¿La luz LED sirve para maquillarse?",
+        "a": "Sí, si es neutra y tiene un CRI alto. Además, apenas da calor, así que el maquillaje no se derrite."
+      }
+    ],
+    "html": "<h2 id=\"luz-blanca-neutra-o-amarilla-que-significa\">Luz blanca, neutra o amarilla: qué significa</h2>\n<p>El color de una luz se mide en grados Kelvin (K): cuantos menos, más amarilla; cuantos más, más azulada.</p>\n<div class=\"guide-table\"><table>\n<thead>\n<tr>\n<th>Tipo de luz</th>\n<th>Temperatura</th>\n<th>Cómo se ve la piel</th>\n<th>¿Para maquillarse?</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>Cálida o amarilla</td>\n<td>2700–3000 K</td>\n<td>Más dorada o rosada</td>\n<td>No: engaña con la base y el colorete</td>\n</tr>\n<tr>\n<td>Neutra</td>\n<td>4000 K</td>\n<td>Natural</td>\n<td>Sí</td>\n</tr>\n<tr>\n<td>Luz de día</td>\n<td>5000–5500 K</td>\n<td>La más parecida al sol</td>\n<td>Sí, la mejor</td>\n</tr>\n<tr>\n<td>Fría</td>\n<td>6000–6500 K</td>\n<td>Pálida, azulada</td>\n<td>No</td>\n</tr>\n</tbody>\n</table></div>\n<h2 id=\"que-es-el-cri-y-por-que-importa\">¿Qué es el CRI y por qué importa?</h2>\n<p>El índice de reproducción cromática (CRI) mide, de 0 a 100, lo fiel que es una luz a los colores reales. Con un CRI de 90 o más, la piel y el maquillaje se ven casi como con luz natural. Con un CRI bajo, los rojos y los rosas se apagan, y es fácil pasarse con el colorete o el labial.</p>\n<h2 id=\"de-donde-debe-venir-la-luz\">De dónde debe venir la luz</h2>\n<ul>\n<li><strong>De frente y a la altura de la cara,</strong> no solo desde el techo.</li>\n<li><strong>Por los dos lados a la vez,</strong> para que no quede media cara en sombra.</li>\n<li><strong>Difusa,</strong> sin deslumbrar.</li>\n</ul>\n<p>La luz que cae solo desde arriba marca sombras bajo los ojos y la nariz: las ojeras parecen más oscuras y se acaba usando corrector de más. Por eso los espejos de maquillaje llevan la luz alrededor; más en <a href=\"/guias/espejo-hollywood\">qué es un espejo con bombillas</a>.</p>\n<h2 id=\"luz-natural-para-maquillarse\">Luz natural para maquillarse</h2>\n<p>La luz del día junto a una ventana es la referencia. Pero cambia con la hora, con las nubes y con la estación, y a primera hora o por la noche no hay. Un espejo con luz neutra da siempre la misma luz.</p>\n<h2 id=\"errores-de-maquillaje-por-la-luz\">Errores de maquillaje por la luz</h2>\n<ul>\n<li><strong>Base demasiado oscura</strong> elegida con luz amarilla.</li>\n<li><strong>Colorete o labial excesivo</strong> con luz fría o con un CRI bajo.</li>\n<li><strong>Corrector de más</strong> por la sombra de la luz cenital.</li>\n<li><strong>No revisar el maquillaje</strong> con luz natural antes de salir.</li>\n</ul>\n<h2 id=\"como-comprobar-el-maquillaje\">Cómo comprobar el maquillaje</h2>\n<ol>\n<li>Maquíllate con luz neutra, de frente.</li>\n<li>Revisa el resultado junto a una ventana, con luz natural.</li>\n<li>Si vas a un sitio con luz cálida, como un restaurante o una boda por la noche, mírate también con esa luz.</li>\n</ol>\n",
+    "toc": [
+      {
+        "id": "luz-blanca-neutra-o-amarilla-que-significa",
+        "text": "Luz blanca, neutra o amarilla: qué significa"
+      },
+      {
+        "id": "que-es-el-cri-y-por-que-importa",
+        "text": "¿Qué es el CRI y por qué importa?"
+      },
+      {
+        "id": "de-donde-debe-venir-la-luz",
+        "text": "De dónde debe venir la luz"
+      },
+      {
+        "id": "luz-natural-para-maquillarse",
+        "text": "Luz natural para maquillarse"
+      },
+      {
+        "id": "errores-de-maquillaje-por-la-luz",
+        "text": "Errores de maquillaje por la luz"
+      },
+      {
+        "id": "como-comprobar-el-maquillaje",
+        "text": "Cómo comprobar el maquillaje"
+      }
+    ]
+  },
+  "en": {
+    "title": "What light is best for makeup: white, neutral or warm",
+    "description": "What light is best for makeup? Neutral or daylight white (4000–5000 K), with a CRI of 90 or more, from the front. Why warm and cool light mislead you.",
+    "answer": "What light is best for makeup? Neutral or daylight white, 4000 to 5000 K, with a color rendering index (CRI) of 90 or more, falling on your face from the front. Warm yellow light (2700–3000 K) warms up your skin tone and makes you pick the wrong foundation; cool light (6000 K or more) makes it look pale. A mirror with neutral light all around lights the face without shadows.",
+    "coverAlt": "White dressing table with a mirror framed by lit bulbs",
+    "faq": [
+      {
+        "q": "Is white or warm light better for makeup?",
+        "a": "Neutral white or daylight, 4000–5000 K. Warm light changes your skin tone and makes you choose the wrong foundation."
+      },
+      {
+        "q": "How many kelvin do I need for makeup?",
+        "a": "Between 4000 and 5000 K: neutral white or daylight."
+      },
+      {
+        "q": "What is the CRI of a bulb?",
+        "a": "The color rendering index: how true the light is to real colors, from 0 to 100. For makeup, 90 or more."
+      },
+      {
+        "q": "Is LED light good for makeup?",
+        "a": "Yes, if it is neutral and has a high CRI. It also gives off very little heat, so your makeup does not melt."
+      }
+    ],
+    "html": "<h2 id=\"white-neutral-or-warm-light-what-it-means\">White, neutral or warm light: what it means</h2>\n<p>The color of light is measured in kelvin (K): the lower the number, the yellower; the higher, the bluer.</p>\n<div class=\"guide-table\"><table>\n<thead>\n<tr>\n<th>Type of light</th>\n<th>Temperature</th>\n<th>How skin looks</th>\n<th>For makeup?</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>Warm or yellow</td>\n<td>2700–3000 K</td>\n<td>More golden or pink</td>\n<td>No: it misleads on foundation and blush</td>\n</tr>\n<tr>\n<td>Neutral</td>\n<td>4000 K</td>\n<td>Natural</td>\n<td>Yes</td>\n</tr>\n<tr>\n<td>Daylight</td>\n<td>5000–5500 K</td>\n<td>Closest to sunlight</td>\n<td>Yes, the best</td>\n</tr>\n<tr>\n<td>Cool</td>\n<td>6000–6500 K</td>\n<td>Pale, bluish</td>\n<td>No</td>\n</tr>\n</tbody>\n</table></div>\n<h2 id=\"what-is-cri-and-why-does-it-matter\">What is CRI and why does it matter?</h2>\n<p>The color rendering index (CRI) measures, from 0 to 100, how true a light is to real colors. With a CRI of 90 or more, skin and makeup look almost as they do in daylight. With a low CRI, reds and pinks look dull, and it is easy to overdo blush or lipstick.</p>\n<h2 id=\"where-the-light-should-come-from\">Where the light should come from</h2>\n<ul>\n<li><strong>From the front and at face height,</strong> not only from the ceiling.</li>\n<li><strong>From both sides at once,</strong> so half your face is not in shadow.</li>\n<li><strong>Diffuse,</strong> without glare.</li>\n</ul>\n<p>Light from above only casts shadows under the eyes and the nose: dark circles look darker and you end up using too much concealer. That is why makeup mirrors have the light all around; more in <a href=\"/en/guias/espejo-hollywood\">what a Hollywood mirror is</a>.</p>\n<h2 id=\"natural-light-for-makeup\">Natural light for makeup</h2>\n<p>Daylight by a window is the benchmark. But it changes with the time of day, the clouds and the season, and early in the morning or at night there is none. A mirror with neutral light always gives the same light.</p>\n<h2 id=\"makeup-mistakes-caused-by-light\">Makeup mistakes caused by light</h2>\n<ul>\n<li><strong>Foundation too dark,</strong> chosen under warm light.</li>\n<li><strong>Too much blush or lipstick</strong> under cool light or a low CRI.</li>\n<li><strong>Too much concealer</strong> because of shadows from overhead light.</li>\n<li><strong>Not checking your makeup</strong> in daylight before going out.</li>\n</ul>\n<h2 id=\"how-to-check-your-makeup\">How to check your makeup</h2>\n<ol>\n<li>Do your makeup in neutral light, from the front.</li>\n<li>Check the result by a window, in daylight.</li>\n<li>If you are going somewhere with warm light, like a restaurant or an evening wedding, look at yourself in that light too.</li>\n</ol>\n",
+    "toc": [
+      {
+        "id": "white-neutral-or-warm-light-what-it-means",
+        "text": "White, neutral or warm light: what it means"
+      },
+      {
+        "id": "what-is-cri-and-why-does-it-matter",
+        "text": "What is CRI and why does it matter?"
+      },
+      {
+        "id": "where-the-light-should-come-from",
+        "text": "Where the light should come from"
+      },
+      {
+        "id": "natural-light-for-makeup",
+        "text": "Natural light for makeup"
+      },
+      {
+        "id": "makeup-mistakes-caused-by-light",
+        "text": "Makeup mistakes caused by light"
+      },
+      {
+        "id": "how-to-check-your-makeup",
+        "text": "How to check your makeup"
+      }
+    ]
+  }
+}

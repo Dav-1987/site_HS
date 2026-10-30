@@ -1,0 +1,109 @@
+{
+  "slug": "tocador-pequeno",
+  "topic": "tocadores",
+  "cover": "/uploads/f3923cf4aeacfeb866fcf7a272f4d906.jpg",
+  "publishedAt": "2026-10-29T17:45:36.447Z",
+  "updatedAt": "2026-10-29T17:45:36.447Z",
+  "products": {
+    "category": "tocadores",
+    "type": "",
+    "minWidth": null,
+    "maxWidth": 100,
+    "pinned": [],
+    "limit": 4
+  },
+  "es": {
+    "title": "Tocador pequeño: medidas y modelos para dormitorios pequeños",
+    "description": "Tocador pequeño o estrecho: qué medidas buscar (60–100 cm de ancho y unos 40 cm de fondo), dónde colocarlo y cómo ganar almacenaje en un dormitorio pequeño.",
+    "answer": "Un tocador pequeño mide entre 60 y 100 cm de ancho y unos 40 cm de fondo, así que cabe en un hueco de pared junto a la ventana, en un lateral de la cama o en una esquina. Para un dormitorio pequeño conviene un tocador estrecho con el espejo incorporado y los cajones en vertical: ocupa poco suelo y lo guarda todo en el mismo sitio.",
+    "coverAlt": "Tocador blanco de 100 cm con cajonera lateral, espejo con bombillas y una silla blanca",
+    "faq": [
+      {
+        "q": "¿Cuál es el tocador más pequeño?",
+        "a": "Los más pequeños miden 50–60 cm de ancho y unos 35–40 cm de fondo: lo justo para lo esencial del día a día."
+      },
+      {
+        "q": "¿Qué fondo tiene un tocador estrecho?",
+        "a": "Entre 35 y 40 cm. El ancho puede variar, pero con ese fondo el tocador apenas ocupa paso."
+      },
+      {
+        "q": "¿Cabe un tocador en un dormitorio pequeño?",
+        "a": "Sí, si hay 60–80 cm de pared libre y unos 70 cm delante para la silla."
+      },
+      {
+        "q": "¿Dónde se pone un tocador en una habitación pequeña?",
+        "a": "Junto a la ventana, en una esquina o en una pared libre al lado de la cama, sin que bloquee el paso."
+      }
+    ],
+    "html": "<h2 id=\"que-medidas-tiene-un-tocador-pequeno\">¿Qué medidas tiene un tocador pequeño?</h2>\n<div class=\"guide-table\"><table>\n<thead>\n<tr>\n<th>Medida</th>\n<th>Tocador pequeño</th>\n<th>Tocador estándar</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>Ancho</td>\n<td>60–100 cm</td>\n<td>100–130 cm</td>\n</tr>\n<tr>\n<td>Fondo</td>\n<td>35–40 cm</td>\n<td>40–50 cm</td>\n</tr>\n<tr>\n<td>Altura de la encimera</td>\n<td>72–80 cm</td>\n<td>72–80 cm</td>\n</tr>\n</tbody>\n</table></div>\n<p>La clave es el fondo: con 40 cm el tocador apenas sobresale de la pared y deja paso libre. Todas las medidas, con el espacio que necesita la silla, en <a href=\"/guias/medidas-tocador\">medidas de un tocador</a>.</p>\n<h2 id=\"donde-poner-un-tocador-pequeno\">¿Dónde poner un tocador pequeño?</h2>\n<ul>\n<li><strong>Junto a la ventana:</strong> buena luz natural para maquillarse, con la ventana a un lado y no a la espalda.</li>\n<li><strong>En un lateral de la cama:</strong> si quedan 70 cm libres delante para la silla.</li>\n<li><strong>En una esquina:</strong> un tocador estrecho aprovecha un rincón donde no cabe otro mueble.</li>\n<li><strong>En el vestidor o junto al armario:</strong> con un espejo con luz no depende de la ventana.</li>\n</ul>\n<h2 id=\"tocador-pequeno-con-espejo-integrado-o-aparte\">Tocador pequeño con espejo: ¿integrado o aparte?</h2>\n<p>Un tocador con el espejo montado sobre la mesa ocupa en el suelo lo mismo que la mesa sola: el espejo crece en altura, no en anchura. Si además lleva luz, no hace falta otra lámpara, y eso en un dormitorio pequeño es un mueble menos.</p>\n<h2 id=\"como-ganar-almacenaje-en-un-tocador-estrecho\">Cómo ganar almacenaje en un tocador estrecho</h2>\n<ol>\n<li>Elige una cajonera vertical a un lado: muchos cajones en poco ancho.</li>\n<li>Pon separadores dentro de los cajones para el maquillaje pequeño.</li>\n<li>Deja en la encimera solo lo que usas cada día.</li>\n<li>Aprovecha la pared: una balda o un estante sobre el tocador.</li>\n</ol>\n<h2 id=\"errores-al-elegir-un-tocador-pequeno\">Errores al elegir un tocador pequeño</h2>\n<ul>\n<li>Medir solo el ancho y olvidar el sitio para la silla.</li>\n<li>Elegir 50 cm de fondo o más en un dormitorio estrecho.</li>\n<li>Colocarlo con la ventana a la espalda: la cara queda a contraluz.</li>\n<li>No comprobar si hay un enchufe cerca cuando el espejo lleva luz.</li>\n</ul>\n",
+    "toc": [
+      {
+        "id": "que-medidas-tiene-un-tocador-pequeno",
+        "text": "¿Qué medidas tiene un tocador pequeño?"
+      },
+      {
+        "id": "donde-poner-un-tocador-pequeno",
+        "text": "¿Dónde poner un tocador pequeño?"
+      },
+      {
+        "id": "tocador-pequeno-con-espejo-integrado-o-aparte",
+        "text": "Tocador pequeño con espejo: ¿integrado o aparte?"
+      },
+      {
+        "id": "como-ganar-almacenaje-en-un-tocador-estrecho",
+        "text": "Cómo ganar almacenaje en un tocador estrecho"
+      },
+      {
+        "id": "errores-al-elegir-un-tocador-pequeno",
+        "text": "Errores al elegir un tocador pequeño"
+      }
+    ]
+  },
+  "en": {
+    "title": "Small dressing table: sizes and models for small bedrooms",
+    "description": "A small dressing table: the sizes to look for (60–100 cm wide, about 40 cm deep), where to put it and how to gain storage in a small bedroom.",
+    "answer": "A small dressing table is 60 to 100 cm wide and about 40 cm deep, so it fits a stretch of wall next to the window, beside the bed or in a corner. For a small bedroom, a narrow dressing table with the mirror built in and the drawers stacked vertically works best: it takes little floor space and keeps everything in one place.",
+    "coverAlt": "100 cm white dressing table with side drawers, a mirror with bulbs and a white chair",
+    "faq": [
+      {
+        "q": "What is the smallest dressing table?",
+        "a": "The smallest ones are 50–60 cm wide and about 35–40 cm deep: just enough for the daily essentials."
+      },
+      {
+        "q": "How deep is a narrow dressing table?",
+        "a": "Between 35 and 40 cm. The width can vary, but at that depth the table barely takes up any walkway."
+      },
+      {
+        "q": "Does a dressing table fit in a small bedroom?",
+        "a": "Yes, if there are 60–80 cm of free wall and about 70 cm in front for the chair."
+      },
+      {
+        "q": "Where do you put a dressing table in a small room?",
+        "a": "Next to the window, in a corner or on a free wall beside the bed, without blocking the way."
+      }
+    ],
+    "html": "<h2 id=\"what-size-is-a-small-dressing-table\">What size is a small dressing table?</h2>\n<div class=\"guide-table\"><table>\n<thead>\n<tr>\n<th>Measure</th>\n<th>Small dressing table</th>\n<th>Standard dressing table</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>Width</td>\n<td>60–100 cm</td>\n<td>100–130 cm</td>\n</tr>\n<tr>\n<td>Depth</td>\n<td>35–40 cm</td>\n<td>40–50 cm</td>\n</tr>\n<tr>\n<td>Table height</td>\n<td>72–80 cm</td>\n<td>72–80 cm</td>\n</tr>\n</tbody>\n</table></div>\n<p>Depth is what matters: at 40 cm the table barely sticks out from the wall and leaves the way clear. All the figures, including the space the chair needs, in <a href=\"/en/guias/medidas-tocador\">dressing table dimensions</a>.</p>\n<h2 id=\"where-to-put-a-small-dressing-table\">Where to put a small dressing table</h2>\n<ul>\n<li><strong>Next to the window:</strong> good daylight for makeup, with the window to one side, not behind you.</li>\n<li><strong>Beside the bed:</strong> if there are 70 cm clear in front for the chair.</li>\n<li><strong>In a corner:</strong> a narrow dressing table uses a corner where nothing else fits.</li>\n<li><strong>In the dressing room or by the wardrobe:</strong> with a lit mirror it does not depend on the window.</li>\n</ul>\n<h2 id=\"small-dressing-table-with-mirror-built-in-or-separate\">Small dressing table with mirror: built in or separate?</h2>\n<p>A dressing table with the mirror mounted on it takes the same floor space as the table alone: the mirror grows in height, not in width. If it has lights too, there is no need for another lamp — and in a small bedroom that is one piece of furniture fewer.</p>\n<h2 id=\"how-to-gain-storage-in-a-narrow-dressing-table\">How to gain storage in a narrow dressing table</h2>\n<ol>\n<li>Choose a vertical set of drawers on one side: many drawers in little width.</li>\n<li>Use dividers inside the drawers for small makeup.</li>\n<li>Keep only what you use every day on the top.</li>\n<li>Use the wall: a shelf above the dressing table.</li>\n</ol>\n<h2 id=\"mistakes-when-choosing-a-small-dressing-table\">Mistakes when choosing a small dressing table</h2>\n<ul>\n<li>Measuring only the width and forgetting the room for the chair.</li>\n<li>Choosing a depth of 50 cm or more in a narrow bedroom.</li>\n<li>Placing it with the window behind you: your face ends up backlit.</li>\n<li>Not checking for a socket nearby when the mirror has lights.</li>\n</ul>\n",
+    "toc": [
+      {
+        "id": "what-size-is-a-small-dressing-table",
+        "text": "What size is a small dressing table?"
+      },
+      {
+        "id": "where-to-put-a-small-dressing-table",
+        "text": "Where to put a small dressing table"
+      },
+      {
+        "id": "small-dressing-table-with-mirror-built-in-or-separate",
+        "text": "Small dressing table with mirror: built in or separate?"
+      },
+      {
+        "id": "how-to-gain-storage-in-a-narrow-dressing-table",
+        "text": "How to gain storage in a narrow dressing table"
+      },
+      {
+        "id": "mistakes-when-choosing-a-small-dressing-table",
+        "text": "Mistakes when choosing a small dressing table"
+      }
+    ]
+  }
+}

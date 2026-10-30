@@ -3,12 +3,12 @@
     "slug": "medidas-tocador",
     "topic": "tocadores",
     "cover": "/uploads/0f6a9d65f0833e4f64c04982e32007fe.jpg",
-    "publishedAt": null,
-    "updatedAt": null,
+    "publishedAt": "2026-10-29T10:53:39.032Z",
+    "updatedAt": "2026-10-30T05:27:37.145Z",
     "es": {
       "title": "Medidas de un tocador: ancho, fondo y altura estándar",
       "description": "Medidas de un tocador: de 60 a 150 cm de ancho, 40–50 cm de fondo y 72–80 cm de altura. Tabla de medidas, espacio para la silla y cómo elegir el tamaño.",
-      "coverAlt": "Tocador Hollywood blanco de 130 cm de ancho con cajoneras a ambos lados y espejo con bombillas"
+      "coverAlt": "Tocador con espejo y bombillas blanco de 130 cm de ancho con cajoneras a ambos lados y espejo con bombillas"
     },
     "en": {
       "title": "Dressing table dimensions: standard width, depth and height",
@@ -20,17 +20,153 @@
     "slug": "espejo-hollywood",
     "topic": "espejos",
     "cover": "/uploads/d4a0534c2e1889b52c0a1fd5e594d313.jpg",
-    "publishedAt": null,
-    "updatedAt": null,
+    "publishedAt": "2026-10-29T10:53:39.116Z",
+    "updatedAt": "2026-10-30T05:27:37.145Z",
     "es": {
-      "title": "¿Cómo se llama el espejo con bombillas? Qué es un espejo Hollywood",
-      "description": "El espejo con bombillas alrededor se llama espejo Hollywood o espejo de camerino. Para qué sirve, tipos, qué bombillas lleva y cómo elegirlo.",
-      "coverAlt": "Espejo Hollywood de cuerpo entero con bombillas alrededor de un marco blanco"
+      "title": "Espejo con bombillas: cómo se llama y cómo elegirlo",
+      "description": "El espejo con bombillas alrededor también se conoce como espejo Hollywood o de camerino. Tipos, iluminación y consejos para elegirlo.",
+      "coverAlt": "Espejo con bombillas de cuerpo entero con bombillas alrededor de un marco blanco"
     },
     "en": {
       "title": "What is the mirror with light bulbs called? The Hollywood mirror explained",
       "description": "A mirror with light bulbs around it is called a Hollywood mirror or dressing room mirror. What it is for, the types, which bulbs it uses and how to choose one.",
       "coverAlt": "Full-length Hollywood mirror with bulbs around a white frame"
+    }
+  },
+  {
+    "slug": "tipos-de-tocador",
+    "topic": "tocadores",
+    "cover": "/uploads/5d62ce9c4b521050eea08da62fe173b7.jpg",
+    "publishedAt": "2026-10-29T17:45:36.215Z",
+    "updatedAt": "2026-10-30T05:27:37.145Z",
+    "es": {
+      "title": "Tocador con espejo y luces: con bombillas, luz integrada o plegable",
+      "description": "Tocador con espejo y luces: compara modelos con bombillas visibles, iluminación integrada y espejo plegable. Diferencias de diseño, luz y espacio.",
+      "coverAlt": "Tocador blanco con espejo de luz LED integrada y estantes laterales"
+    },
+    "en": {
+      "title": "Dressing table with mirror and lights: Hollywood, LED or folding",
+      "description": "Dressing table with mirror and lights: a Hollywood table with bulbs, an LED mirror or a folding one. The light each gives and who it suits.",
+      "coverAlt": "White dressing table with a built-in LED mirror and side shelves"
+    }
+  },
+  {
+    "slug": "tocador-pequeno",
+    "topic": "tocadores",
+    "cover": "/uploads/f3923cf4aeacfeb866fcf7a272f4d906.jpg",
+    "publishedAt": "2026-10-29T17:45:36.447Z",
+    "updatedAt": "2026-10-29T17:45:36.447Z",
+    "es": {
+      "title": "Tocador pequeño: medidas y modelos para dormitorios pequeños",
+      "description": "Tocador pequeño o estrecho: qué medidas buscar (60–100 cm de ancho y unos 40 cm de fondo), dónde colocarlo y cómo ganar almacenaje en un dormitorio pequeño.",
+      "coverAlt": "Tocador blanco de 100 cm con cajonera lateral, espejo con bombillas y una silla blanca"
+    },
+    "en": {
+      "title": "Small dressing table: sizes and models for small bedrooms",
+      "description": "A small dressing table: the sizes to look for (60–100 cm wide, about 40 cm deep), where to put it and how to gain storage in a small bedroom.",
+      "coverAlt": "100 cm white dressing table with side drawers, a mirror with bulbs and a white chair"
+    }
+  },
+  {
+    "slug": "donde-colocar-tocador",
+    "topic": "tocadores",
+    "cover": "/uploads/d4f530592022cc614b12b2dbdee02e76.jpg",
+    "publishedAt": "2026-10-29T17:45:36.892Z",
+    "updatedAt": "2026-10-30T05:27:37.145Z",
+    "es": {
+      "title": "Dónde poner el tocador en el dormitorio: luz, enchufe y espacio",
+      "description": "Dónde poner el tocador en el dormitorio: junto a la ventana sin contraluz, con un enchufe cerca y 70–90 cm libres delante. Ideas para cada dormitorio.",
+      "coverAlt": "Tocador con espejo y bombillas blanco con espejo de bombillas en un dormitorio"
+    },
+    "en": {
+      "title": "Where to put a dressing table in the bedroom: light, socket and space",
+      "description": "Where to put a dressing table in the bedroom: by the window but not backlit, with a socket nearby and 70–90 cm clear in front. Ideas for every bedroom.",
+      "coverAlt": "White Hollywood dressing table with a mirror with bulbs in a bedroom"
+    }
+  },
+  {
+    "slug": "silla-para-tocador",
+    "topic": "tocadores",
+    "cover": "/uploads/fd4f7374fdf5b9edb8b661e56f34f820.jpg",
+    "publishedAt": "2026-10-29T17:45:37.105Z",
+    "updatedAt": "2026-10-29T17:45:37.105Z",
+    "es": {
+      "title": "Silla para tocador o taburete: qué altura y medidas elegir",
+      "description": "Silla para tocador o taburete: el asiento, 25–30 cm por debajo de la encimera (42–48 cm en un tocador estándar). Medidas, tipos y cómo elegir.",
+      "coverAlt": "Tocador blanco con espejo LED y una silla blanca delante"
+    },
+    "en": {
+      "title": "Dressing table chair or stool: what height and size to choose",
+      "description": "Dressing table chair or stool: the seat 25–30 cm below the table top (42–48 cm on a standard table). Sizes, types and how to choose.",
+      "coverAlt": "White dressing table with an LED mirror and a white chair in front of it"
+    }
+  },
+  {
+    "slug": "tamano-espejo-cuerpo-entero",
+    "topic": "espejos",
+    "cover": "/uploads/66efc3b8287f3bd90ea766667f9bfc86.jpg",
+    "publishedAt": "2026-10-29T17:45:37.338Z",
+    "updatedAt": "2026-10-30T05:27:37.145Z",
+    "es": {
+      "title": "Espejo de cuerpo entero: qué tamaño necesitas según tu altura",
+      "description": "Qué tamaño de espejo de cuerpo entero necesitas: al menos la mitad de tu altura, y 150–180 cm para verte con holgura. Tabla y altura para colgarlo.",
+      "coverAlt": "Dos personas frente a un espejo de cuerpo entero con bombillas que las refleja de pies a cabeza"
+    },
+    "en": {
+      "title": "Full-length mirror: what size you need for your height",
+      "description": "What size full-length mirror you need: at least half your height, and 150–180 cm to see yourself with room to spare. A chart and how high to hang it.",
+      "coverAlt": "Two people in front of a full-length mirror with bulbs that shows them head to toe"
+    }
+  },
+  {
+    "slug": "donde-poner-espejo-cuerpo-entero",
+    "topic": "espejos",
+    "cover": "/uploads/c4ed1648ac2194b2c57ef23dfa6ddf05.jpg",
+    "publishedAt": "2026-10-29T17:45:37.614Z",
+    "updatedAt": "2026-10-30T05:27:37.145Z",
+    "es": {
+      "title": "Dónde poner un espejo de cuerpo entero en casa",
+      "description": "Dónde poner un espejo de cuerpo entero: dormitorio, vestidor, recibidor o salón, con buena luz de frente. Y qué dice el feng shui del espejo frente a la cama.",
+      "coverAlt": "Espejo de cuerpo entero con bombillas apoyado en la pared de un dormitorio"
+    },
+    "en": {
+      "title": "Where to put a full-length mirror at home",
+      "description": "Where to put a full-length mirror: bedroom, dressing room, hallway or living room, with light in front. And what feng shui says about facing the bed.",
+      "coverAlt": "Full-length mirror with bulbs leaning against a bedroom wall"
+    }
+  },
+  {
+    "slug": "luz-para-maquillarse",
+    "topic": "luz-y-maquillaje",
+    "cover": "/uploads/90113782cb72591ea926397428418f6f.jpg",
+    "publishedAt": "2026-10-29T17:45:37.842Z",
+    "updatedAt": "2026-10-30T05:27:37.145Z",
+    "es": {
+      "title": "Qué luz es mejor para maquillarse: blanca, neutra o amarilla",
+      "description": "¿Qué luz es mejor para maquillarse? Neutra o de día (4000–5000 K), con un CRI de 90 o más y de frente a la cara. Por qué la amarilla y la fría engañan.",
+      "coverAlt": "Tocador blanco con un espejo rodeado de bombillas encendidas"
+    },
+    "en": {
+      "title": "What light is best for makeup: white, neutral or warm",
+      "description": "What light is best for makeup? Neutral or daylight white (4000–5000 K), with a CRI of 90 or more, from the front. Why warm and cool light mislead you.",
+      "coverAlt": "White dressing table with a mirror framed by lit bulbs"
+    }
+  },
+  {
+    "slug": "organizar-maquillaje-tocador",
+    "topic": "luz-y-maquillaje",
+    "cover": "/uploads/bedec3cf5e13656b28ac76198bcec40c.jpg",
+    "publishedAt": "2026-10-29T17:45:38.124Z",
+    "updatedAt": "2026-10-29T17:45:38.124Z",
+    "es": {
+      "title": "Cómo organizar el maquillaje en el tocador: cajones y organizadores",
+      "description": "Cómo organizar el maquillaje en el tocador: qué guardar en cada cajón, organizadores y separadores, dónde poner las brochas y qué dejar a la vista. Paso a paso.",
+      "coverAlt": "Tocador blanco con los cajones abiertos y maquillaje sobre la encimera"
+    },
+    "en": {
+      "title": "How to organize makeup in your dressing table: drawers and organizers",
+      "description": "How to organize makeup in your dressing table: what goes in each drawer, organizers and dividers, where to keep brushes and what to leave out. Step by step.",
+      "coverAlt": "White dressing table with open drawers and makeup on the top"
     }
   }
 ]
