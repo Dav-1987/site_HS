@@ -12,28 +12,7 @@
     "Espejo-Alto-D06",
     "Estanteria-E-07"
   ],
-  "featuredCards": [
-    {
-      "productId": "Tocador-L-01",
-      "cover": "",
-      "video": "/uploads/c58f69a36cfdf8f55049f308a004c303.mp4"
-    },
-    {
-      "productId": "Espejo-Alto-F-07",
-      "cover": "/uploads/66efc3b8287f3bd90ea766667f9bfc86.jpg",
-      "video": ""
-    },
-    {
-      "productId": "Tocador-L-08",
-      "cover": "/uploads/0f6a9d65f0833e4f64c04982e32007fe.jpg",
-      "video": "/uploads/5218f38fb12e936a6b3977ae78788eb5.mp4"
-    },
-    {
-      "productId": "Tocador-M-05-3",
-      "cover": "/uploads/95a57f1bc404f3b29fdb3d38f225feee.jpg",
-      "video": "/uploads/015e7089509b625cd540eba2539e6a67.mp4"
-    }
-  ],
+  "featuredCards": [],
   "reviews": [],
   "texts": {
     "es": {
@@ -65,7 +44,8 @@
     "description": "Espejos, tocadores, estanterías, consolas y cómodas de diseño minimalista. Envío a toda España, montaje incluido."
   },
   "blocks": {
-    "featured": true,
+    "featured": false,
+    "featuredDesktop": false,
     "collections": true,
     "heroPromo": true,
     "reviews": false,
