@@ -39,14 +39,17 @@ describe('Header promo strip', () => {
     const link = screen.getByText('Black Friday').closest('a');
     expect(link.getAttribute('href')).toBe('/tocadores');
     expect(link.textContent).toContain('11.11');
-    expect(link.textContent).toContain('Descuentos del 11 al 15 de noviembre');
+    expect(screen.getByText('Descuentos espectaculares').closest('a')).toBe(link);
+    expect(link.textContent).toContain('del 11 al 15 de noviembre');
+    expect(link.textContent).toContain('¡Aproveche las ofertas!');
   });
 
   it('speaks English on the English site', () => {
     renderHeader({ promo: true }, '/en');
     const link = screen.getByText('Black Friday').closest('a');
     expect(link.getAttribute('href')).toBe('/en/tocadores');
-    expect(link.textContent).toContain('Discounts from 11 to 15 November');
+    expect(link.textContent).toContain('Spectacular discounts');
+    expect(link.textContent).toContain('from 11 to 15 November');
   });
 
   it('is not there once the promo is over', () => {

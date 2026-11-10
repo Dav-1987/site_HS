@@ -141,6 +141,25 @@
   filter: drop-shadow(0 0 10px rgb(var(--color-accent) / 0.35));
 }
 
+/* BLACK FRIDAY on the promo strip: white letters with a soft white halo and a
+   wider gold one, so the edges glow against the black. */
+.text-glow {
+  text-shadow:
+    0 0 4px rgb(255 255 255 / 0.6),
+    0 0 12px rgb(255 255 255 / 0.35),
+    0 0 24px rgb(var(--color-accent) / 0.55);
+}
+
+/* The offer line on the black promo strip: a vivid signal red with its own
+   glow. Not --color-promo, which is tuned for white and goes dull on black
+   (3.7:1); this one is 5.7:1 there. */
+.text-red-glow {
+  color: #ff2d2d;
+  text-shadow:
+    0 0 6px rgb(255 45 45 / 0.75),
+    0 0 18px rgb(255 45 45 / 0.45);
+}
+
 @layer base {
   html {
     -webkit-font-smoothing: antialiased;

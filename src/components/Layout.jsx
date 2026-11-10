@@ -79,7 +79,7 @@ export default function Layout() {
 
   return (
     <div
-      className={`flex min-h-screen flex-col ${promo ? '[--promo-h:3.75rem] md:[--promo-h:4.25rem]' : ''}`}
+      className={`flex min-h-screen flex-col ${promo ? '[--promo-h:5.75rem] md:[--promo-h:6rem] xl:[--promo-h:5.75rem]' : ''}`}
     >
       <JsonLd data={[organizationSchema(settings?.contact), websiteSchema(lang)]} />
       <a
