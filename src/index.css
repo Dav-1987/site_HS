@@ -141,7 +141,7 @@
   filter: drop-shadow(0 0 10px rgb(var(--color-accent) / 0.35));
 }
 
-/* BLACK FRIDAY on the promo strip: white letters with a soft white halo and a
+/* The SHOPPING DAYS title on the promo strip: white letters with a soft white halo and a
    wider gold one, so the edges glow against the black. */
 .text-glow {
   text-shadow:

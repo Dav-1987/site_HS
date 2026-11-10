@@ -34,9 +34,9 @@ describe('isPromoBarActive', () => {
 });
 
 describe('Header promo strip', () => {
-  it('shows the Black Friday strip as a link to the dressing tables', () => {
+  it('shows the 11.11 Shopping Days strip as a link to the dressing tables', () => {
     renderHeader({ promo: true });
-    const link = screen.getByText('Black Friday').closest('a');
+    const link = screen.getByText('Shopping Days').closest('a');
     expect(link.getAttribute('href')).toBe('/tocadores');
     expect(link.textContent).toContain('11.11');
     expect(screen.getByText('Descuentos espectaculares').closest('a')).toBe(link);
@@ -46,7 +46,7 @@ describe('Header promo strip', () => {
 
   it('speaks English on the English site', () => {
     renderHeader({ promo: true }, '/en');
-    const link = screen.getByText('Black Friday').closest('a');
+    const link = screen.getByText('Shopping Days').closest('a');
     expect(link.getAttribute('href')).toBe('/en/tocadores');
     expect(link.textContent).toContain('Spectacular discounts');
     expect(link.textContent).toContain('from 11 to 15 November');
@@ -54,6 +54,6 @@ describe('Header promo strip', () => {
 
   it('is not there once the promo is over', () => {
     renderHeader({ promo: false });
-    expect(screen.queryByText('Black Friday')).toBeNull();
+    expect(screen.queryByText('Shopping Days')).toBeNull();
   });
 });

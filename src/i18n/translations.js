@@ -16,8 +16,8 @@ export const translations = {
     'nav.giftBadge': '+Regalo',
     'nav.guides': 'Guías',
 
-    // --- Black Friday strip under the header (src/data/promoBar.js) ---
-    'promo.bar.title': 'Black Friday',
+    // --- 11.11 Shopping Days strip under the header (src/data/promoBar.js) ---
+    'promo.bar.title': 'Shopping Days',
     'promo.bar.headline': 'Descuentos espectaculares',
     'promo.bar.dates': 'del 11 al 15 de noviembre',
     'promo.bar.cta': '¡Aproveche las ofertas!',
@@ -284,8 +284,8 @@ export const translations = {
     'nav.giftBadge': '+Gift',
     'nav.guides': 'Guides',
 
-    // --- Black Friday strip under the header ---
-    'promo.bar.title': 'Black Friday',
+    // --- 11.11 Shopping Days strip under the header ---
+    'promo.bar.title': 'Shopping Days',
     'promo.bar.headline': 'Spectacular discounts',
     'promo.bar.dates': 'from 11 to 15 November',
     'promo.bar.cta': 'Make the most of the deals!',

@@ -1,14 +1,14 @@
 import { Link } from './LocalizedLink.jsx';
 import { useLanguage } from '../i18n/LanguageContext.jsx';
 
-// The Black Friday strip under the header's nav row: pure black, a gold-foil
-// "11.11", a glowing BLACK FRIDAY, the offer in bright red and a small
+// The 11.11 Shopping Days strip under the header's nav row: pure black, a
+// gold-foil "11.11", a glowing SHOPPING DAYS, the offer in bright red and a small
 // "¡Aproveche las ofertas! →" line under it all. It stays solid even while the
 // header above it is transparent over the hero. Its height is --promo-h (set
 // in Layout per breakpoint), which the page offsets read, so the layout per
 // width is fixed rather than left to wrapping:
-//   phones    — 11.11 BLACK FRIDAY / offer / dates / call to action
-//   md–lg     — 11.11 BLACK FRIDAY / offer + dates / call to action
+//   phones    — 11.11 SHOPPING DAYS / offer / dates / call to action
+//   md–lg     — 11.11 SHOPPING DAYS / offer + dates / call to action
 //   xl and up — everything on one row / call to action
 export default function PromoBar() {
   const { t } = useLanguage();
