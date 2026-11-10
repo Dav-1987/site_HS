@@ -10,6 +10,7 @@ import { useSettings } from '../settings/SettingsContext.jsx';
 import JsonLd from './JsonLd.jsx';
 import { organizationSchema, websiteSchema } from '../seo/schema.js';
 import { stripLangPrefix } from '../i18n/routing.js';
+import { isPromoBarActive } from '../data/promoBar.js';
 
 export default function Layout() {
   const lenisRef = useRef(null);
@@ -53,7 +54,9 @@ export default function Layout() {
       const id = window.setTimeout(() => {
         const el = document.querySelector(hash);
         if (el) {
-          if (lenis) lenis.scrollTo(el, { offset: -80 });
+          // The fixed header's real height, promo strip included.
+          const headerH = document.querySelector('header')?.offsetHeight ?? 80;
+          if (lenis) lenis.scrollTo(el, { offset: -headerH });
           else el.scrollIntoView({ behavior: 'smooth' });
         }
       }, 80);
@@ -70,9 +73,14 @@ export default function Layout() {
   // The header is fixed (overlapping content). The home hero sits under it on
   // purpose; every other page needs top padding equal to the header height.
   const isHome = stripLangPrefix(location.pathname).path === '/';
+  // While the promo strip is up the header grows by --promo-h; every offset
+  // that clears the header (page padding, mobile menu, hero eyebrow) adds it.
+  const promo = isPromoBarActive();
 
   return (
-    <div className="flex min-h-screen flex-col">
+    <div
+      className={`flex min-h-screen flex-col ${promo ? '[--promo-h:3.75rem] md:[--promo-h:4.25rem]' : ''}`}
+    >
       <JsonLd data={[organizationSchema(settings?.contact), websiteSchema(lang)]} />
       <a
         href="#main-content"
@@ -80,8 +88,13 @@ export default function Layout() {
       >
         {t('a11y.skipToContent')}
       </a>
-      <Header />
-      <main id="main-content" className={`flex-1 ${isHome ? '' : 'pt-14 lg:pt-20'}`}>
+      <Header promo={promo} />
+      <main
+        id="main-content"
+        className={`flex-1 ${
+          isHome ? '' : 'pt-[calc(3.5rem+var(--promo-h))] lg:pt-[calc(5rem+var(--promo-h))]'
+        }`}
+      >
         <Suspense fallback={<RouteFallback />}>
           <Outlet />
         </Suspense>

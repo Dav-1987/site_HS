@@ -5,6 +5,7 @@
 // fails the build for that.
 export const TEXT_GROUPS = Object.freeze([
   { prefix: 'nav', title: 'Меню' },
+  { prefix: 'promo', title: 'Полоска акции под меню (Black Friday 11.11)' },
   { prefix: 'hero', title: 'Главный экран' },
   { prefix: 'section', title: 'Секции главной' },
   { prefix: 'home', title: 'SEO главной страницы (заголовок вкладки, Google, превью)' },

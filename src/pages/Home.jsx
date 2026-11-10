@@ -56,7 +56,7 @@ function Hero() {
 
       {/* Eyebrow — sits in normal flow at the top, just under the header, so it
           can never overlap the centered content below it even on short screens. */}
-      <p className="relative z-10 px-6 pt-[clamp(4.5rem,11vh,7rem)] text-xs font-semibold uppercase tracking-[0.2em] text-accent-text sm:text-sm sm:tracking-[0.4em] lg:pt-[clamp(6rem,11vh,7rem)]">
+      <p className="relative z-10 px-6 pt-[calc(clamp(4.5rem,11vh,7rem)+var(--promo-h))] text-xs font-semibold uppercase tracking-[0.2em] text-accent-text sm:text-sm sm:tracking-[0.4em] lg:pt-[calc(clamp(6rem,11vh,7rem)+var(--promo-h))]">
         {t('hero.eyebrow')}
       </p>
 

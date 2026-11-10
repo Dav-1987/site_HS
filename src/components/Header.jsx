@@ -8,6 +8,7 @@ import { categoryHasGift } from '../data/catalog.js';
 import { IconGift } from './Gift.jsx';
 import { useSettings } from '../settings/SettingsContext.jsx';
 import { stripLangPrefix, withLang } from '../i18n/routing.js';
+import PromoBar from './PromoBar.jsx';
 
 function LangToggle({ className = '' }) {
   const { lang } = useLanguage();
@@ -45,7 +46,7 @@ function LangToggle({ className = '' }) {
   );
 }
 
-export default function Header() {
+export default function Header({ promo = false }) {
   const { lang, t } = useLanguage();
   const { categories, allCategories } = useCatalog();
   // Worked out once per catalog rather than per menu row: both menus ask the
@@ -203,12 +204,14 @@ export default function Header() {
         </div>
       </div>
 
-      {/* Mobile menu */}
+      {promo && <PromoBar />}
+
+      {/* Mobile menu — opens below the nav row and the promo strip. */}
       <div
-        className={`fixed inset-x-0 top-14 z-40 overflow-y-auto bg-background transition-opacity duration-300 lg:hidden ${
+        className={`fixed inset-x-0 top-[calc(3.5rem+var(--promo-h))] z-40 overflow-y-auto bg-background transition-opacity duration-300 lg:hidden ${
           mobileOpen ? 'visible opacity-100' : 'invisible opacity-0'
         }`}
-        style={{ height: mobileOpen ? 'calc(100dvh - 3.5rem)' : 0 }}
+        style={{ height: mobileOpen ? 'calc(100dvh - 3.5rem - var(--promo-h))' : 0 }}
       >
         <nav className="flex flex-col px-6 py-8" aria-label={t('nav.menu')}>
           <NavLink

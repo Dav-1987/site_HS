@@ -4,7 +4,7 @@
 // rest of the site sets them.
 export const GUIDE_PROSE = [
   'text-[0.95rem] leading-relaxed text-secondary md:text-base',
-  '[&_h2]:mb-5 [&_h2]:mt-14 [&_h2]:scroll-mt-28 [&_h2]:font-serif [&_h2]:text-[clamp(1.6rem,2.6vw,2.1rem)] [&_h2]:font-light [&_h2]:leading-tight [&_h2]:tracking-tight [&_h2]:text-primary',
+  '[&_h2]:mb-5 [&_h2]:mt-14 [&_h2]:scroll-mt-32 [&_h2]:font-serif [&_h2]:text-[clamp(1.6rem,2.6vw,2.1rem)] [&_h2]:font-light [&_h2]:leading-tight [&_h2]:tracking-tight [&_h2]:text-primary',
   '[&_h3]:mb-3 [&_h3]:mt-8 [&_h3]:font-serif [&_h3]:text-xl [&_h3]:font-normal [&_h3]:text-primary',
   '[&_p]:mt-4',
   '[&_ul]:mt-4 [&_ul]:list-disc [&_ul]:space-y-2 [&_ul]:pl-5',

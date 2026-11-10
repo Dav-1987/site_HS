@@ -120,6 +120,25 @@
      own token rather than --color-danger because the two are only nearly the
      same red: danger is the form-error brick, and a gift is not an error. */
   --color-promo: 198 40 40;
+  /* Height of the promo strip under the header; Layout raises it while one runs. */
+  --promo-h: 0px;
+}
+
+/* Metallic gold for the big "11.11" on the charcoal promo strip: the brand
+   gold (--color-accent) with a champagne highlight above and below it, so it
+   reads as foil rather than flat ochre. Only for large display text on dark. */
+.text-gold-foil {
+  background-image: linear-gradient(
+    180deg,
+    #f7e7b4 0%,
+    #e2c27a 38%,
+    rgb(var(--color-accent)) 58%,
+    #f0d796 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  filter: drop-shadow(0 0 10px rgb(var(--color-accent) / 0.35));
 }
 
 @layer base {

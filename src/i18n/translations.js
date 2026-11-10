@@ -16,6 +16,11 @@ export const translations = {
     'nav.giftBadge': '+Regalo',
     'nav.guides': 'Guías',
 
+    // --- Black Friday strip under the header (src/data/promoBar.js) ---
+    'promo.bar.title': 'Black Friday',
+    'promo.bar.dates': 'Descuentos del 11 al 15 de noviembre',
+    'promo.bar.cta': 'Ver ofertas',
+
     // --- Guides («Guías») ---
     'guides.meta.title': 'Guías sobre tocadores y espejos',
     'guides.meta.description':
@@ -277,6 +282,11 @@ export const translations = {
     'nav.close': 'Close',
     'nav.giftBadge': '+Gift',
     'nav.guides': 'Guides',
+
+    // --- Black Friday strip under the header ---
+    'promo.bar.title': 'Black Friday',
+    'promo.bar.dates': 'Discounts from 11 to 15 November',
+    'promo.bar.cta': 'Shop the deals',
 
     // --- Guides («Guías») ---
     'guides.meta.title': 'Guides to dressing tables and mirrors',
