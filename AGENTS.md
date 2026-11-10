@@ -236,6 +236,26 @@ or hover transitions → verify in the live browser, do NOT rely on screenshots.
 
 ---
 
+## 📈 Google Ads (read-only access — CONFIGURED)
+
+> Direct access to the Google Ads API from this repo. No plugin, connector or browser login is needed.
+> Account: HS Muebles, customer ID `7208461658`. Run commands from the repo root.
+
+- Campaign totals: `node scripts/google-ads-report.mjs [days]`
+- Any GAQL query, rows as JSON: `node scripts/google-ads-query.mjs "SELECT campaign.name, metrics.clicks FROM campaign WHERE segments.date DURING LAST_7_DAYS"`
+
+**Rules:**
+- Read only. Never change campaigns, budgets or ads through the API; give the owner recommendations instead.
+- Credentials live in `secrets/` (gitignored). Never print them or send them anywhere.
+
+**Facts the data won't tell you:**
+- Account time zone is `Asia/Yerevan`, not Madrid. The owner chose to keep it.
+- Campaigns target the Province of Madrid. This is the owner's choice, not a mistake.
+- `Lead` is the only counted conversion. Calls and WhatsApp are not tracked, and its value is a fixed 1 EUR.
+- If the API returns 404, bump `API_VERSION` in `scripts/google-ads-lib.mjs`.
+
+---
+
 ## 📋 Response Format
 
 ### For Planning Phase:
