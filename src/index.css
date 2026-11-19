@@ -333,9 +333,14 @@ html.black-friday .bf-hero {
 
 .bf-date {
   color: #ff514b;
-  font-size: 11px;
-  letter-spacing: 0.12em;
+  font-size: 14px;
+  line-height: 1.25;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
+}
+
+.bf-mobile-line {
+  display: block;
 }
 
 .bf-title {
@@ -380,6 +385,7 @@ html.black-friday .bf-hero {
   max-width: 18rem;
   font-size: 14px;
   line-height: 1.4;
+  margin-bottom: 12px;
 }
 
 #site-shell .bf-cta {
@@ -460,7 +466,10 @@ html.black-friday .bf-hero {
   .bf-offer {
     max-width: 100%;
     font-size: clamp(1.125rem, 1.4vw, 1.25rem);
-    margin-bottom: 0.5rem;
+  }
+
+  .bf-mobile-line {
+    display: inline;
   }
 
   .bf-photo {

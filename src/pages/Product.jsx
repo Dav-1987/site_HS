@@ -578,7 +578,7 @@ export default function Product() {
           </Reveal>
 
           {/* Info */}
-          <Reveal delay={0.1} className="lg:col-span-7 lg:pl-4">
+          <Reveal delay={0.1} className="flex flex-col lg:col-span-7 lg:pl-4">
             <Link
               to={`/${category.slug}`}
               className="hidden text-xs uppercase tracking-[0.25em] text-accent-text transition-colors hover:text-primary lg:inline-block"
@@ -603,6 +603,17 @@ export default function Product() {
             </h1>
             <div className="mt-4 lg:mt-4">
               <Price product={product} className="font-serif text-3xl text-primary" />
+            </div>
+            <div className="mt-5 flex flex-col items-start gap-3 lg:order-1 lg:mt-10 lg:flex-row lg:items-center lg:gap-6">
+              <Button
+                type="button"
+                variant="solid"
+                disabled={soldOut}
+                onClick={() => setOrderOpen(true)}
+                className="w-full lg:w-auto"
+              >
+                {soldOut ? t('product.soldOut') : t('order.button')}
+              </Button>
             </div>
             {/* Opens the same dialog as the inset on the photo: the two are
                 one offer, and the name of the gift is what people reach for. */}
@@ -630,19 +641,9 @@ export default function Product() {
               ))}
             </dl>
 
-            {/* CTA */}
-            <div className="mt-10 flex flex-col items-start gap-3 sm:flex-row sm:items-center sm:gap-6">
-              <Button
-                type="button"
-                variant="solid"
-                disabled={soldOut}
-                onClick={() => setOrderOpen(true)}
-                className="w-full sm:w-auto"
-              >
-                {soldOut ? t('product.soldOut') : t('order.button')}
-              </Button>
+            <div className="lg:order-2">
+              <OrderPerks t={t} variant={productPerkVariant(product)} />
             </div>
-            <OrderPerks t={t} variant={productPerkVariant(product)} />
           </Reveal>
         </div>
       </article>
