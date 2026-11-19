@@ -418,6 +418,15 @@ html.black-friday .bf-hero {
   object-position: 50% 40%;
 }
 
+.bf-image::after {
+  content: '';
+  position: absolute;
+  inset: 0 0 auto;
+  height: 7.5rem;
+  background: linear-gradient(to bottom, rgb(0 0 0 / 0.78), rgb(0 0 0 / 0.72) 38%, transparent);
+  pointer-events: none;
+}
+
 .bf-photo::after {
   content: '';
   position: absolute;
@@ -446,6 +455,12 @@ html.black-friday .bf-hero {
 
   .bf-title {
     font-size: clamp(82px, 13.5cqw, 135px);
+  }
+
+  .bf-offer {
+    max-width: 100%;
+    font-size: clamp(1.125rem, 1.4vw, 1.25rem);
+    margin-bottom: 0.5rem;
   }
 
   .bf-photo {

@@ -51,7 +51,7 @@ export const translations = {
     'hero.cta': 'Ver catálogo',
     'blackFriday.until': 'Hasta el 30 de noviembre',
     'blackFriday.offer': '¡Grandes descuentos y regalos!',
-    'blackFriday.cta': 'Ver selección',
+    'blackFriday.cta': 'Ver catálogo',
     'blackFriday.photoAlt': 'Tocador Mirage con espejo iluminado',
     'blackFriday.label': 'Black Friday · hasta el 30 de noviembre',
 
@@ -325,7 +325,7 @@ export const translations = {
     'hero.cta': 'View catalog',
     'blackFriday.until': 'Until 30 November',
     'blackFriday.offer': 'Big discounts and gifts!',
-    'blackFriday.cta': 'Explore the selection',
+    'blackFriday.cta': 'View catalog',
     'blackFriday.photoAlt': 'Mirage dressing table with illuminated mirror',
     'blackFriday.label': 'Black Friday · until 30 November',
 
