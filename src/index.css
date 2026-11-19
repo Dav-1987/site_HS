@@ -326,12 +326,13 @@ html.black-friday .bf-hero {
   min-width: 0;
   flex-direction: column;
   align-items: flex-start;
-  justify-content: center;
+  justify-content: flex-start;
   gap: 7px;
   padding: 70px 5% 18px;
 }
 
 .bf-date {
+  margin-top: auto;
   color: #ff514b;
   font-size: 14px;
   line-height: 1.25;
@@ -389,6 +390,8 @@ html.black-friday .bf-hero {
 }
 
 #site-shell .bf-cta {
+  margin-top: auto;
+  max-width: 100%;
   min-height: 44px;
   gap: 8px;
   padding: 10px 11px;
