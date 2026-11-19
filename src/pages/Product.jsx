@@ -610,7 +610,7 @@ export default function Product() {
                 variant="solid"
                 disabled={soldOut}
                 onClick={() => setOrderOpen(true)}
-                className="w-full lg:w-auto"
+                className="bf-order-button w-full lg:w-auto"
               >
                 {soldOut ? t('product.soldOut') : t('order.button')}
               </Button>

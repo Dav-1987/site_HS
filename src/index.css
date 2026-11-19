@@ -265,6 +265,20 @@ html.black-friday #site-shell .bf-new-price {
   color: #ffe2a1;
 }
 
+html.black-friday .bf-order-button:enabled {
+  min-height: 52px;
+  min-width: min(13rem, 100%);
+  background-color: rgb(var(--color-accent));
+  color: rgb(var(--color-background));
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+html.black-friday .bf-order-button:enabled:hover {
+  background-color: rgb(var(--color-accent-text));
+}
+
 html.black-friday #site-shell .bf-category-overlay {
   background-image: linear-gradient(to top, rgb(0 0 0 / 0.7), rgb(0 0 0 / 0.1), transparent);
 }
