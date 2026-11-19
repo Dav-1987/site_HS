@@ -604,7 +604,10 @@ export default function Product() {
             <div className="mt-4 lg:mt-4">
               <Price product={product} className="font-serif text-3xl text-primary" />
             </div>
-            <div className="mt-5 flex flex-col items-start gap-3 lg:order-1 lg:mt-10 lg:flex-row lg:items-center lg:gap-6">
+            {/* Opens the same dialog as the inset on the photo: the two are
+                one offer, and the name of the gift is what people reach for. */}
+            <GiftLine gift={gift} onOpen={() => setGiftOpen(true)} className="mt-3" />
+            <div className="mt-5 flex flex-col items-start gap-3 lg:flex-row lg:items-center lg:gap-6">
               <Button
                 type="button"
                 variant="solid"
@@ -615,9 +618,6 @@ export default function Product() {
                 {soldOut ? t('product.soldOut') : t('order.button')}
               </Button>
             </div>
-            {/* Opens the same dialog as the inset on the photo: the two are
-                one offer, and the name of the gift is what people reach for. */}
-            <GiftLine gift={gift} onOpen={() => setGiftOpen(true)} className="mt-3" />
             <GiftWithNote offer={giftedFor} className="mt-3" />
 
             <ExpandableText
