@@ -7,6 +7,20 @@ import {
   posterFor,
 } from './settings.js';
 
+describe('mergeSettings — Black Friday images', () => {
+  it('fills settings saved before the campaign and keeps separately selected photos', () => {
+    expect(mergeSettings({}).blackFridayHero).toEqual({
+      image: '/uploads/178863f09e500b897ac832bf4bf8e289.jpg',
+      imageMobile: '',
+    });
+    expect(
+      mergeSettings({
+        blackFridayHero: { image: ' /uploads/desktop.jpg ', imageMobile: ' /uploads/mobile.jpg ' },
+      }).blackFridayHero,
+    ).toEqual({ image: '/uploads/desktop.jpg', imageMobile: '/uploads/mobile.jpg' });
+  });
+});
+
 describe('mergeSettings — featuredCards', () => {
   it('keeps valid cards with trimmed fields, in order', () => {
     const out = mergeSettings({
@@ -107,7 +121,11 @@ describe('featuredLayouts', () => {
 describe('mergeSettings — reviews', () => {
   it('keeps image and video items in the order they were arranged', () => {
     const out = mergeSettings({
-      reviews: [{ image: '/uploads/a.png' }, { video: '/uploads/b.mp4' }, { image: '/uploads/c.png' }],
+      reviews: [
+        { image: '/uploads/a.png' },
+        { video: '/uploads/b.mp4' },
+        { image: '/uploads/c.png' },
+      ],
     });
     expect(out.reviews).toEqual([
       { image: '/uploads/a.png' },
@@ -117,7 +135,9 @@ describe('mergeSettings — reviews', () => {
   });
 
   it('drops rows carrying neither an image nor a video', () => {
-    const out = mergeSettings({ reviews: [{}, { image: '   ' }, null, 'nope', { image: '/uploads/a.png' }] });
+    const out = mergeSettings({
+      reviews: [{}, { image: '   ' }, null, 'nope', { image: '/uploads/a.png' }],
+    });
     expect(out.reviews).toEqual([{ image: '/uploads/a.png' }]);
   });
 

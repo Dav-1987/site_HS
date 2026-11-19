@@ -123,10 +123,10 @@ function sanitizeContact(c) {
   const str = (v, fb) => (typeof v === 'string' ? v.trim() : fb);
   return {
     instagram: str(c?.instagram, def.instagram),
-    tiktok:    str(c?.tiktok,    def.tiktok),
-    whatsapp:  str(c?.whatsapp,  def.whatsapp),
-    phone:     str(c?.phone,     def.phone),
-    email:     str(c?.email,     def.email),
+    tiktok: str(c?.tiktok, def.tiktok),
+    whatsapp: str(c?.whatsapp, def.whatsapp),
+    phone: str(c?.phone, def.phone),
+    email: str(c?.email, def.email),
   };
 }
 
@@ -188,10 +188,19 @@ export function mergeSettings(input) {
   const video = input?.hero?.video;
   return {
     hero: {
-      image:
-        typeof image === 'string' && image.trim() ? image.trim() : defaultSettings.hero.image,
+      image: typeof image === 'string' && image.trim() ? image.trim() : defaultSettings.hero.image,
       imageMobile: typeof imageMobile === 'string' ? imageMobile.trim() : '',
       video: typeof video === 'string' ? video.trim() : '',
+    },
+    blackFridayHero: {
+      image:
+        typeof input?.blackFridayHero?.image === 'string' && input.blackFridayHero.image.trim()
+          ? input.blackFridayHero.image.trim()
+          : defaultSettings.blackFridayHero.image,
+      imageMobile:
+        typeof input?.blackFridayHero?.imageMobile === 'string'
+          ? input.blackFridayHero.imageMobile.trim()
+          : '',
     },
     featured: sanitizeFeatured(input?.featured),
     featuredCards: sanitizeFeaturedCards(input?.featuredCards),

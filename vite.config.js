@@ -11,8 +11,8 @@ export default defineConfig({
     port: parseInt(process.env.PORT) || 3000,
     host: true,
     proxy: {
-      '/api': { target: 'http://185.202.172.59', changeOrigin: true },
-      '/uploads': { target: 'http://185.202.172.59', changeOrigin: true },
+      '/api': { target: 'https://hsmuebles.es', changeOrigin: true },
+      '/uploads': { target: 'https://hsmuebles.es', changeOrigin: true },
     },
   },
 });

@@ -49,6 +49,11 @@ export const translations = {
     'hero.subtitle': 'Espejos, tocadores y estanterías de diseño propio. Envío a toda España.',
     'hero.promo': '¡Grandes descuentos en toda la colección!',
     'hero.cta': 'Ver catálogo',
+    'blackFriday.until': 'Hasta el 30 de noviembre',
+    'blackFriday.offer': '¡Grandes descuentos y regalos!',
+    'blackFriday.cta': 'Ver selección',
+    'blackFriday.photoAlt': 'Tocador Mirage con espejo iluminado',
+    'blackFriday.label': 'Black Friday · hasta el 30 de noviembre',
 
     // --- Sections ---
     'section.categories.eyebrow': 'Colecciones',
@@ -318,6 +323,11 @@ export const translations = {
       'Mirrors, dressing tables and shelving of our own design. Delivery across Spain.',
     'hero.promo': 'Big discounts across the entire collection!',
     'hero.cta': 'View catalog',
+    'blackFriday.until': 'Until 30 November',
+    'blackFriday.offer': 'Big discounts and gifts!',
+    'blackFriday.cta': 'Explore the selection',
+    'blackFriday.photoAlt': 'Mirage dressing table with illuminated mirror',
+    'blackFriday.label': 'Black Friday · until 30 November',
 
     // --- Sections ---
     'section.categories.eyebrow': 'Collections',

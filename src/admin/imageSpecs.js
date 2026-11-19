@@ -23,6 +23,8 @@ export const IMAGE_SPECS = {
   hero: { ratio: '16:9', size: '2400 × 1350' },
   /** Он же на телефоне — вертикальный. */
   heroMobile: { ratio: '3:4', size: '1200 × 1600' },
+  blackFridayHero: { ratio: '3:2', size: '1600 × 1067' },
+  blackFridayHeroMobile: { ratio: '9:16', size: '900 × 1600' },
   /** Обложка статьи «Guías»: 16:9 в списке статей, 4:3 на телефоне. */
   guide: { ratio: '16:9', size: '1600 × 900' },
   /** Картинка ссылки в соцсетях и мессенджерах — формат диктуют они, не сайт. */

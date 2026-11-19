@@ -41,6 +41,7 @@ export default function Catalog() {
       />
       <section className="px-3 pb-8 pt-4 md:px-12 md:pb-12 md:pt-6 lg:px-20">
         <Reveal className="mb-6 max-w-3xl md:mb-10">
+          <p className="bf-campaign-label">{t('blackFriday.label')}</p>
           <p className="mb-2 text-xs uppercase tracking-[0.3em] text-accent-text">
             {t('catalog.eyebrow')}
           </p>

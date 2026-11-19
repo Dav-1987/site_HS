@@ -74,6 +74,7 @@ export default function Category() {
         </nav>
 
         <Reveal>
+          <p className="bf-campaign-label">{t('blackFriday.label')}</p>
           <h1 className="font-serif text-[clamp(3rem,5.6vw,4.5rem)] font-light leading-[1.02] tracking-tight text-primary">
             {category.name[lang]}
           </h1>

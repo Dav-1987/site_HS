@@ -16,6 +16,7 @@ import ReviewTile from '../components/ReviewTile.jsx';
 import Lightbox from '../components/Lightbox.jsx';
 import { featuredLayouts, toLightboxItems } from '../data/settings.js';
 import { CarouselArrows, CarouselTrack, useCarousel } from '../components/ProductCarousel.jsx';
+import BlackFridayHero from '../components/BlackFridayHero.jsx';
 
 const FEATURED_CARD_CLASSNAME =
   'w-[calc(100%-80px)] flex-none snap-start sm:w-[calc(50%-18px)] md:w-[calc(50%-32px)] lg:w-[calc(33.333%-37px)]';
@@ -25,7 +26,7 @@ function Hero() {
   const { t } = useLanguage();
   const { settings } = useSettings();
   return (
-    <section className="relative flex min-h-[100svh] flex-col overflow-hidden bg-surface text-center">
+    <section className="regular-hero relative flex min-h-[100svh] flex-col overflow-hidden bg-surface text-center">
       {/* Full-bleed background image (LCP — loaded eagerly). Editable in /admin;
           a warm, styled interior with a calm zone behind the centered headline. */}
       <div className="absolute inset-0">
@@ -196,9 +197,7 @@ function ReviewsSection() {
         products={items}
         carousel={carousel}
         cardClassName={REVIEW_CARD_CLASSNAME}
-        renderItem={(item) => (
-          <ReviewTile review={item} index={item.index} onOpen={setLightbox} />
-        )}
+        renderItem={(item) => <ReviewTile review={item} index={item.index} onOpen={setLightbox} />}
       />
 
       {lightbox >= 0 && (
@@ -259,6 +258,7 @@ export default function Home() {
         image={resolveImage(seo.image || settings?.hero?.image, 1600)}
       />
       <Hero />
+      <BlackFridayHero />
       <FeaturedSection />
       <CategoriesSection />
       <ReviewsSection />

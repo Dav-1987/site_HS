@@ -378,6 +378,7 @@ export default function Product() {
           </Link>
         </nav>
 
+        <p className="bf-campaign-label">{t('blackFriday.label')}</p>
         <div className="grid gap-10 lg:grid-cols-12 lg:gap-16">
           {/* Mobile-only title above gallery (real <h1>; the category link is a
               visual duplicate of the breadcrumb, so it's hidden from AT). */}

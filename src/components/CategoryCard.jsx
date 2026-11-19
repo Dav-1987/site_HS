@@ -57,20 +57,20 @@ export default function CategoryCard({ category }) {
             className="absolute inset-0 h-full w-full object-cover opacity-0 transition-opacity duration-500 group-hover:opacity-100"
           />
         )}
-        <div className="absolute inset-0 bg-gradient-to-t from-primary/65 via-primary/10 to-transparent" />
+        <div className="bf-category-overlay absolute inset-0 bg-gradient-to-t from-primary/65 via-primary/10 to-transparent" />
 
         <span
           aria-hidden="true"
-          className="absolute right-3 top-3 flex h-8 w-8 translate-y-1 items-center justify-center rounded-full border border-background/40 text-background opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100 md:right-5 md:top-5 md:h-10 md:w-10"
+          className="bf-category-photo-text absolute right-3 top-3 flex h-8 w-8 translate-y-1 items-center justify-center rounded-full border border-background/40 text-background opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100 md:right-5 md:top-5 md:h-10 md:w-10"
         >
           →
         </span>
 
         <div className="absolute inset-x-0 bottom-0 p-3 md:p-6">
-          <h3 className="font-serif text-base font-light leading-tight text-background md:text-2xl lg:text-3xl">
+          <h3 className="bf-category-photo-text font-serif text-base font-light leading-tight text-background md:text-2xl lg:text-3xl">
             {category.name[lang]}
           </h3>
-          <p className="mt-1 text-xs uppercase tracking-[0.2em] text-background/80 md:mt-1.5">
+          <p className="bf-category-photo-text mt-1 text-xs uppercase tracking-[0.2em] text-background/80 md:mt-1.5">
             {category.products.length} {t('category.products')}
           </p>
           {/* The menu sets this marker in promo red on the panel's own pale

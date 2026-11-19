@@ -90,12 +90,12 @@ export default function Lightbox({ items, index, alt = '', onClose, onIndex }) {
   }, []);
 
   const arrow =
-    'absolute top-1/2 -translate-y-1/2 flex h-12 w-12 items-center justify-center text-3xl text-background/70 transition-colors hover:text-background focus-visible:outline-none focus-visible:text-background';
+    'bf-lightbox-control absolute top-1/2 -translate-y-1/2 flex h-12 w-12 items-center justify-center text-3xl text-background/70 transition-colors hover:text-background focus-visible:outline-none focus-visible:text-background';
 
   return (
     <div
       ref={dialogRef}
-      className="fixed inset-0 z-[100] flex items-center justify-center bg-primary/95 p-4"
+      className="bf-lightbox fixed inset-0 z-[100] flex items-center justify-center bg-primary/95 p-4"
       role="dialog"
       aria-modal="true"
       aria-label={alt || t('lightbox.label')}
@@ -159,7 +159,7 @@ export default function Lightbox({ items, index, alt = '', onClose, onIndex }) {
         type="button"
         onClick={onClose}
         aria-label={t('lightbox.close')}
-        className="absolute right-4 top-4 z-10 flex h-11 w-11 items-center justify-center text-2xl text-background/70 transition-colors hover:text-background focus-visible:outline-none focus-visible:text-background"
+        className="bf-lightbox-control absolute right-4 top-4 z-10 flex h-11 w-11 items-center justify-center text-2xl text-background/70 transition-colors hover:text-background focus-visible:outline-none focus-visible:text-background"
       >
         ✕
       </button>
@@ -193,7 +193,7 @@ export default function Lightbox({ items, index, alt = '', onClose, onIndex }) {
       )}
 
       {multi && (
-        <span className="absolute bottom-5 left-1/2 -translate-x-1/2 text-xs uppercase tracking-[0.2em] text-background/60">
+        <span className="bf-lightbox-control absolute bottom-5 left-1/2 -translate-x-1/2 text-xs uppercase tracking-[0.2em] text-background/60">
           {index + 1} / {items.length}
         </span>
       )}

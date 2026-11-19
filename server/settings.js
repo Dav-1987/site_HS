@@ -134,12 +134,19 @@ export function mergeSettings(input) {
   const video = input?.hero?.video;
   return {
     hero: {
-      image:
-        typeof image === 'string' && image.trim()
-          ? image.trim()
-          : defaultSettings.hero.image,
+      image: typeof image === 'string' && image.trim() ? image.trim() : defaultSettings.hero.image,
       imageMobile: typeof imageMobile === 'string' ? imageMobile.trim() : '',
       video: typeof video === 'string' ? video.trim() : '',
+    },
+    blackFridayHero: {
+      image:
+        typeof input?.blackFridayHero?.image === 'string' && input.blackFridayHero.image.trim()
+          ? input.blackFridayHero.image.trim()
+          : defaultSettings.blackFridayHero.image,
+      imageMobile:
+        typeof input?.blackFridayHero?.imageMobile === 'string'
+          ? input.blackFridayHero.imageMobile.trim()
+          : '',
     },
     featured: sanitizeFeatured(input?.featured),
     featuredCards: sanitizeFeaturedCards(input?.featuredCards),
@@ -152,9 +159,7 @@ export function mergeSettings(input) {
 }
 
 export async function readSettings() {
-  const { rows } = await pool.query(
-    "SELECT value FROM site_settings WHERE key = 'settings'",
-  );
+  const { rows } = await pool.query("SELECT value FROM site_settings WHERE key = 'settings'");
   return mergeSettings(rows[0]?.value ?? null);
 }
 

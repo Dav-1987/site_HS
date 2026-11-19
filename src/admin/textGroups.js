@@ -7,6 +7,7 @@ export const TEXT_GROUPS = Object.freeze([
   { prefix: 'nav', title: 'Меню' },
   { prefix: 'promo', title: 'Полоска акции под меню (11.11 Shopping Days)' },
   { prefix: 'hero', title: 'Главный экран' },
+  { prefix: 'blackFriday', title: 'Black Friday: главный экран и подписи' },
   { prefix: 'section', title: 'Секции главной' },
   { prefix: 'home', title: 'SEO главной страницы (заголовок вкладки, Google, превью)' },
   { prefix: 'catalog', title: 'Страница каталога' },

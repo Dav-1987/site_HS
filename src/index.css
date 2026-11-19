@@ -238,3 +238,234 @@
     background-size: 100% 1px;
   }
 }
+
+/* Seasonal storefront. The document class is set before the CSS loads and
+   removed at midnight in Madrid, including in an already-open tab. */
+html.black-friday body {
+  background: #090909;
+}
+
+html.black-friday #site-shell {
+  --color-background: 9 9 9;
+  --color-primary: 245 242 233;
+  --color-secondary: 198 190 178;
+  --color-accent: 243 209 134;
+  --color-accent-text: 255 226 161;
+  --color-surface: 25 24 22;
+  --color-promo: 255 81 75;
+  color-scheme: dark;
+  background: rgb(var(--color-background));
+}
+
+html.black-friday #site-shell .bf-old-price {
+  color: #bdb5a8;
+}
+
+html.black-friday #site-shell .bf-new-price {
+  color: #ffe2a1;
+}
+
+html.black-friday #site-shell .bf-category-overlay {
+  background-image: linear-gradient(to top, rgb(0 0 0 / 0.7), rgb(0 0 0 / 0.1), transparent);
+}
+
+html.black-friday #site-shell .bf-category-photo-text {
+  color: #f7f5f2;
+}
+
+html.black-friday #site-shell .bf-lightbox {
+  background: rgb(0 0 0 / 0.95);
+}
+
+html.black-friday #site-shell .bf-lightbox-control {
+  color: #f7f5f2;
+}
+
+html.black-friday #site-shell img[src='/logo-mirage.png'] {
+  filter: brightness(0) invert(1);
+}
+
+.bf-campaign-label {
+  display: none;
+}
+
+html.black-friday .bf-campaign-label {
+  display: block;
+  margin-bottom: 12px;
+  color: #ff514b;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.bf-hero {
+  display: none;
+  position: relative;
+  grid-template-columns: 53% 47%;
+  min-height: 420px;
+  overflow: hidden;
+  background: #000;
+  color: #f5f2e9;
+  container-type: inline-size;
+}
+
+html.black-friday .regular-hero {
+  display: none;
+}
+
+html.black-friday .bf-hero {
+  display: grid;
+}
+
+.bf-copy {
+  position: relative;
+  z-index: 1;
+  grid-column: 1;
+  grid-row: 1;
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 7px;
+  padding: 70px 5% 18px;
+}
+
+.bf-date {
+  color: #ff514b;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.bf-title {
+  width: 2.02em;
+  font-family: Oswald, sans-serif;
+  font-size: clamp(63px, 19cqw, 79px);
+  font-weight: 600;
+  line-height: 0.91;
+  letter-spacing: 0.005em;
+  color: #eabf62;
+}
+
+.bf-title span {
+  display: block;
+  width: max-content;
+  transform: scaleX(0.76);
+  transform-origin: left;
+}
+
+.bf-title span:last-child {
+  transform: scaleX(0.7);
+}
+
+@supports (background-clip: text) or (-webkit-background-clip: text) {
+  .bf-title span {
+    background: linear-gradient(
+      180deg,
+      #bd923e 9%,
+      #f8ea7b 29%,
+      #f7f3a8 45%,
+      #fae589 57%,
+      #e9bd60 72%,
+      #ae7529 100%
+    );
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+  }
+}
+
+.bf-offer {
+  max-width: 18rem;
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+#site-shell .bf-cta {
+  min-height: 44px;
+  gap: 8px;
+  padding: 10px 11px;
+  background: #f3d186;
+  color: #18130b;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+#site-shell .bf-cta:hover {
+  background: #fbe3af;
+  color: #18130b;
+}
+
+.bf-photo {
+  position: relative;
+  grid-column: 2;
+  grid-row: 1;
+  min-width: 0;
+  margin-left: -42px;
+  background: #171511;
+}
+
+.bf-image {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+.bf-image img {
+  object-position: 50% 40%;
+}
+
+.bf-photo::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    #000 0,
+    rgb(0 0 0 / 0.96) 15px,
+    rgb(0 0 0 / 0.6) 42px,
+    transparent 88px
+  );
+  pointer-events: none;
+}
+
+@media (min-width: 768px) {
+  .bf-hero {
+    grid-template-columns: 47% 53%;
+    min-height: 620px;
+    max-height: 740px;
+  }
+
+  .bf-copy {
+    gap: 13px;
+    padding: 85px 10.5% 28px;
+  }
+
+  .bf-title {
+    font-size: clamp(82px, 13.5cqw, 135px);
+  }
+
+  .bf-photo {
+    margin-left: -80px;
+  }
+
+  .bf-photo::after {
+    background: linear-gradient(
+      90deg,
+      #000 0,
+      rgb(0 0 0 / 0.96) 25px,
+      rgb(0 0 0 / 0.56) 82px,
+      transparent 155px
+    );
+  }
+}
+
+@media (forced-colors: active) {
+  .bf-title span {
+    background: none;
+    color: CanvasText;
+  }
+}

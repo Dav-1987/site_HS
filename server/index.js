@@ -139,6 +139,8 @@ function extractSettingsKeys(settings) {
   add(settings?.hero?.image);
   add(settings?.hero?.imageMobile);
   add(settings?.hero?.video);
+  add(settings?.blackFridayHero?.image);
+  add(settings?.blackFridayHero?.imageMobile);
   for (const card of settings?.featuredCards ?? []) {
     add(card?.cover);
     add(card?.video);
@@ -408,6 +410,12 @@ function validateSettings(settings) {
   const image = settings?.hero?.image;
   if (typeof image !== 'string') return 'hero.image must be a string';
   if (image.length > 2048) return 'hero.image is too long';
+  for (const key of ['image', 'imageMobile']) {
+    const value = settings?.blackFridayHero?.[key];
+    if (value !== undefined && (typeof value !== 'string' || value.length > 2048)) {
+      return `blackFridayHero.${key} must be a string of at most 2048 characters`;
+    }
+  }
   const featured = settings?.featured;
   if (featured !== undefined) {
     if (!Array.isArray(featured)) return 'featured must be an array';

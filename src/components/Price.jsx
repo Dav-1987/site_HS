@@ -17,10 +17,10 @@ export default function Price({ product, className = '' }) {
 
   return (
     <span className={`inline-flex items-baseline gap-2 ${className}`}>
-      <span className="text-[0.72em] text-primary/35 line-through">
+      <span className="bf-old-price text-[0.72em] text-primary/35 line-through">
         {oldPrice} {t('common.currency')}
       </span>
-      <span className="inline-block text-[1.15em] font-medium text-accent-text transition-transform duration-300 group-hover:scale-110">
+      <span className="bf-new-price inline-block text-[1.15em] font-medium text-accent-text transition-transform duration-300 group-hover:scale-110">
         {cur}
       </span>
     </span>
