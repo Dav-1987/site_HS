@@ -6,19 +6,7 @@ import SocialMeta from '../components/SocialMeta.jsx';
 import HreflangLinks from '../components/HreflangLinks.jsx';
 import IconWhatsApp from '../components/IconWhatsApp.jsx';
 import { trackPixel } from '../lib/track.js';
-
-// Derives a display handle ("@name") from a social profile URL so the
-// visible label always matches the link an admin sets, instead of drifting
-// out of sync with a hardcoded string.
-function handleFromUrl(url) {
-  try {
-    const segment = new URL(url).pathname.split('/').filter(Boolean)[0] || '';
-    if (!segment) return url;
-    return segment.startsWith('@') ? segment : `@${segment}`;
-  } catch {
-    return url;
-  }
-}
+import { handleFromUrl } from '../lib/contact.js';
 
 function IconInstagram() {
   return (

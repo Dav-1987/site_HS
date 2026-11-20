@@ -38,6 +38,40 @@ export default function HomeSection() {
   return (
     <div className="space-y-4">
       <HeroSettingsEditor settings={settings} onChange={updateSettings} />
+      <Collapsible title="Навигация на главной" summary="Кнопки «Каталог» и «Контакты»">
+        <p className="text-xs leading-relaxed text-primary/75">
+          Выберите, куда ведут кнопки меню на главной странице. На остальных страницах ссылки ведут
+          в каталог и на страницу контактов.
+        </p>
+        <label className="flex min-h-11 items-center gap-3 text-sm">
+          <input
+            type="checkbox"
+            checked={settings.homeNavigation?.catalogScroll === true}
+            onChange={(event) =>
+              settingsField('homeNavigation')((value) => ({
+                ...value,
+                catalogScroll: event.target.checked,
+              }))
+            }
+            className="h-4 w-4 shrink-0 accent-primary"
+          />
+          «Каталог» — прокрутка к каталогу на главной без выпадающего меню
+        </label>
+        <label className="flex min-h-11 items-center gap-3 text-sm">
+          <input
+            type="checkbox"
+            checked={settings.homeNavigation?.contactsScroll === true}
+            onChange={(event) =>
+              settingsField('homeNavigation')((value) => ({
+                ...value,
+                contactsScroll: event.target.checked,
+              }))
+            }
+            className="h-4 w-4 shrink-0 accent-primary"
+          />
+          «Контакты» — прокрутка к контактам внизу главной
+        </label>
+      </Collapsible>
       <FeaturedCardsEditor
         value={settings.featuredCards || []}
         onChange={settingsField('featuredCards')}

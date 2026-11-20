@@ -47,6 +47,22 @@ describe('mergeSettings — home catalog', () => {
   });
 });
 
+describe('mergeSettings — home navigation', () => {
+  it('keeps existing page links until an admin enables each scroll option', () => {
+    expect(mergeSettings({}).homeNavigation).toEqual({
+      catalogScroll: false,
+      contactsScroll: false,
+    });
+    expect(
+      mergeSettings({ homeNavigation: { catalogScroll: true, contactsScroll: false } })
+        .homeNavigation,
+    ).toEqual({ catalogScroll: true, contactsScroll: false });
+    expect(
+      mergeSettings({ homeNavigation: { catalogScroll: 'yes', contactsScroll: 1 } }).homeNavigation,
+    ).toEqual({ catalogScroll: false, contactsScroll: false });
+  });
+});
+
 describe('mergeSettings — featuredCards', () => {
   it('keeps valid cards with trimmed fields, in order', () => {
     const out = mergeSettings({

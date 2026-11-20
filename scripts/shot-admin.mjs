@@ -380,6 +380,17 @@ async function main() {
   await shot('11-home');
   report.push(await measure('11-home'));
 
+  await clickByText('Навигация на главной');
+  await page.evaluate(() =>
+    [...document.querySelectorAll('section')]
+      .find((section) => section.querySelector('h2')?.textContent.includes('Навигация на главной'))
+      ?.scrollIntoView({ block: 'center' }),
+  );
+  await settle(400);
+  await shot('11-nav-settings');
+  report.push(await measure('11-nav-settings'));
+  await clickByText('Навигация на главной');
+
   await clickByText('Каталог на главной');
   await page.evaluate(() =>
     document

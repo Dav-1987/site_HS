@@ -58,3 +58,28 @@ describe('home catalog order in the admin', () => {
     expect(api.saveCatalog).not.toHaveBeenCalled();
   });
 });
+
+describe('home navigation in the admin', () => {
+  it('saves catalog and contact scroll switches independently', async () => {
+    render(
+      <MemoryRouter initialEntries={['/admin/home']}>
+        <Routes>
+          <Route path="/admin/*" element={<AdminRoutes onLogout={() => {}} />} />
+        </Routes>
+      </MemoryRouter>,
+    );
+    fireEvent.click(await screen.findByRole('button', { name: /Навигация на главной/ }));
+    const catalogSwitch = screen.getByLabelText(/«Каталог» — прокрутка/);
+    const contactsSwitch = screen.getByLabelText(/«Контакты» — прокрутка/);
+    expect(catalogSwitch.checked).toBe(false);
+    expect(contactsSwitch.checked).toBe(false);
+    fireEvent.click(catalogSwitch);
+    fireEvent.click(contactsSwitch);
+    fireEvent.click(screen.getByRole('button', { name: 'Сохранить' }));
+    await waitFor(() => expect(api.saveSettings).toHaveBeenCalled());
+    expect(api.saveSettings.mock.calls.at(-1)[0].homeNavigation).toEqual({
+      catalogScroll: true,
+      contactsScroll: true,
+    });
+  });
+});

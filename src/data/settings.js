@@ -134,6 +134,13 @@ function sanitizeContact(c) {
   };
 }
 
+function sanitizeHomeNavigation(input) {
+  return {
+    catalogScroll: input?.catalogScroll === true,
+    contactsScroll: input?.contactsScroll === true,
+  };
+}
+
 /** Site-wide social/SEO preview (default OG image + share title/description). */
 function sanitizeSeo(seo) {
   const def = defaultSettings.seo;
@@ -216,6 +223,7 @@ export function mergeSettings(input) {
     featured: sanitizeFeatured(input?.featured),
     featuredCards: sanitizeFeaturedCards(input?.featuredCards),
     homeCatalogOrder: sanitizeHomeCatalogOrder(input?.homeCatalogOrder),
+    homeNavigation: sanitizeHomeNavigation(input?.homeNavigation),
     reviews: sanitizeReviews(input?.reviews),
     texts: sanitizeTexts(input?.texts),
     contact: sanitizeContact(input?.contact),

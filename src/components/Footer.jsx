@@ -1,10 +1,13 @@
 import { useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import { Link } from './LocalizedLink.jsx';
 import { useLanguage } from '../i18n/LanguageContext.jsx';
 import { useSettings } from '../settings/SettingsContext.jsx';
 import IconWhatsApp from './IconWhatsApp.jsx';
 import { GUIDES } from '../guides/content.js';
 import { GUIDES_SLUG } from '../data/guides.js';
+import { stripLangPrefix } from '../i18n/routing.js';
+import { handleFromUrl } from '../lib/contact.js';
 
 function IconInstagram() {
   return (
@@ -69,8 +72,11 @@ export default function Footer() {
   const { t } = useLanguage();
   const { settings } = useSettings();
   const contact = settings.contact;
+  const isHome = stripLangPrefix(useLocation().pathname).path === '/';
   const year = new Date().getFullYear();
   const [emailCopied, setEmailCopied] = useState(false);
+  const phoneDigits = contact.phone?.replace(/\s/g, '') || '';
+  const phoneHref = phoneDigits.startsWith('+') ? phoneDigits : `+34${phoneDigits}`;
 
   const copyEmail = () => {
     if (!navigator.clipboard) return;
@@ -84,10 +90,13 @@ export default function Footer() {
   };
 
   return (
-    <footer className="border-t border-primary/10 bg-background">
+    <footer
+      id={isHome ? 'home-contacts' : undefined}
+      className="scroll-mt-[calc(5rem+var(--promo-h,0px))] border-t border-primary/10 bg-background"
+    >
       <div className="px-6 pb-10 pt-20 md:px-12 md:pb-12 md:pt-28 lg:px-20">
-        <div>
-          {/* Brand + socials + contacts */}
+        <div className="grid gap-12 lg:grid-cols-2 lg:gap-20">
+          {/* Brand */}
           <div className="max-w-sm">
             <Link
               to="/"
@@ -105,85 +114,88 @@ export default function Footer() {
             <p className="mt-5 max-w-sm text-sm leading-relaxed text-secondary">
               {t('footer.tagline')}
             </p>
-
-            {/* Social icons */}
-            <div className="mt-6 flex items-center gap-4">
-              {contact.instagram && (
-                <a
-                  href={contact.instagram}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label="Instagram"
-                  className="touch-target inline-flex items-center justify-center text-secondary transition-colors duration-300 hover:text-accent-text"
-                >
-                  <IconInstagram />
-                </a>
-              )}
-              {contact.tiktok && (
-                <a
-                  href={contact.tiktok}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label="TikTok"
-                  className="touch-target inline-flex items-center justify-center text-secondary transition-colors duration-300 hover:text-accent-text"
-                >
-                  <IconTikTok />
-                </a>
-              )}
-              {contact.whatsapp && (
-                <a
-                  href={contact.whatsapp}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label="WhatsApp"
-                  className="touch-target inline-flex items-center justify-center text-secondary transition-colors duration-300 hover:text-accent-text"
-                >
-                  <IconWhatsApp />
-                </a>
-              )}
-            </div>
-
-            {/* Phone — admin enters a bare local number (e.g. "614848301") and
-                we assume Spain by default, but accept a full international
-                number (leading "+") as-is to avoid doubling the prefix. */}
-            {contact.phone && (
-              <a
-                href={`tel:${(() => {
-                  const digits = contact.phone.replace(/\s/g, '');
-                  return digits.startsWith('+') ? digits : `+34${digits}`;
-                })()}`}
-                className="mt-4 flex min-h-11 items-center gap-2 text-sm text-secondary transition-colors duration-300 hover:text-accent-text"
-              >
-                <IconPhone />
-                {contact.phone}
-              </a>
-            )}
-
-            {/* Email — click to copy */}
-            {contact.email && (
-              <div className="relative mt-3 inline-block">
-                <button
-                  type="button"
-                  onClick={copyEmail}
-                  className="flex min-h-11 items-center gap-2 text-sm text-secondary transition-colors duration-300 hover:text-accent-text"
-                >
-                  <IconEmail />
-                  {contact.email}
-                </button>
-                <span
-                  role="status"
-                  className={`pointer-events-none absolute -top-8 left-0 whitespace-nowrap rounded bg-primary px-2 py-1 text-xs text-background transition-all duration-200 ${
-                    emailCopied ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-1'
-                  }`}
-                >
-                  {/* role="status" only announces on content change, not on
-                      the opacity/translate transition — render the text node
-                      conditionally so screen readers pick it up. */}
-                  {emailCopied ? t('footer.emailCopied') : ''}
-                </span>
-              </div>
-            )}
           </div>
+          <section aria-label={t('nav.contact')} className="max-w-lg">
+            <h2 className="font-serif text-3xl font-light text-primary">{t('nav.contact')}</h2>
+            <dl className="mt-5 divide-y divide-primary/10 border-t border-primary/10">
+              {[
+                contact.instagram && {
+                  label: 'Instagram',
+                  icon: <IconInstagram />,
+                  href: contact.instagram,
+                  value: handleFromUrl(contact.instagram),
+                },
+                contact.tiktok && {
+                  label: 'TikTok',
+                  icon: <IconTikTok />,
+                  href: contact.tiktok,
+                  value: handleFromUrl(contact.tiktok),
+                },
+                contact.whatsapp && {
+                  label: 'WhatsApp',
+                  icon: <IconWhatsApp />,
+                  href: contact.whatsapp,
+                  value: contact.phone || contact.whatsapp,
+                },
+                contact.phone && {
+                  label: 'Tel',
+                  icon: <IconPhone />,
+                  href: `tel:${phoneHref}`,
+                  value: phoneDigits.startsWith('+') ? contact.phone : `+34 ${contact.phone}`,
+                },
+              ]
+                .filter(Boolean)
+                .map(({ label, icon, href, value }) => (
+                  <div key={label} className="flex min-h-14 items-center gap-4 py-2 text-sm">
+                    <span aria-hidden="true" className="w-5 shrink-0 text-accent-text">
+                      {icon}
+                    </span>
+                    <dt className="w-20 shrink-0 text-xs uppercase tracking-[0.15em] text-secondary">
+                      {label}
+                    </dt>
+                    <dd className="min-w-0 break-all">
+                      <a
+                        href={href}
+                        {...(href.startsWith('http')
+                          ? { target: '_blank', rel: 'noopener noreferrer' }
+                          : {})}
+                        className="text-primary transition-colors hover:text-accent-text focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+                      >
+                        {value}
+                      </a>
+                    </dd>
+                  </div>
+                ))}
+              {contact.email && (
+                <div className="flex min-h-14 items-center gap-4 py-2 text-sm">
+                  <span aria-hidden="true" className="w-5 shrink-0 text-accent-text">
+                    <IconEmail />
+                  </span>
+                  <dt className="w-20 shrink-0 text-xs uppercase tracking-[0.15em] text-secondary">
+                    Email
+                  </dt>
+                  <dd className="relative min-w-0 break-all">
+                    <button
+                      type="button"
+                      onClick={copyEmail}
+                      className="text-left text-primary transition-colors hover:text-accent-text focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+                    >
+                      {contact.email}
+                    </button>
+                    <span
+                      role="status"
+                      className="absolute -top-7 left-0 whitespace-nowrap text-xs text-accent-text"
+                    >
+                      {emailCopied ? t('footer.emailCopied') : ''}
+                    </span>
+                  </dd>
+                </div>
+              )}
+            </dl>
+            {contact.phone && (
+              <p className="mt-4 text-xs text-secondary">{t('contact.info.hours')}</p>
+            )}
+          </section>
         </div>
 
         {/* Bottom bar */}

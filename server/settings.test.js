@@ -24,3 +24,19 @@ describe('server settings — home catalog', () => {
     ]);
   });
 });
+
+describe('server settings — home navigation', () => {
+  it('persists independently enabled scroll links and keeps old settings unchanged', () => {
+    expect(mergeSettings({}).homeNavigation).toEqual({
+      catalogScroll: false,
+      contactsScroll: false,
+    });
+    expect(
+      mergeSettings({ homeNavigation: { catalogScroll: true, contactsScroll: true } })
+        .homeNavigation,
+    ).toEqual({ catalogScroll: true, contactsScroll: true });
+    expect(
+      mergeSettings({ homeNavigation: { catalogScroll: 'true' } }).homeNavigation.catalogScroll,
+    ).toBe(false);
+  });
+});

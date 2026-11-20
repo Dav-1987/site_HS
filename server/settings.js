@@ -76,6 +76,13 @@ function sanitizeContact(c) {
   };
 }
 
+function sanitizeHomeNavigation(input) {
+  return {
+    catalogScroll: input?.catalogScroll === true,
+    contactsScroll: input?.contactsScroll === true,
+  };
+}
+
 function sanitizeSeo(seo) {
   const def = defaultSettings.seo || {};
   const str = (v, fb = '') => (typeof v === 'string' ? v.trim().slice(0, MAX_TEXT_LEN) : fb);
@@ -157,6 +164,7 @@ export function mergeSettings(input) {
     featured: sanitizeFeatured(input?.featured),
     featuredCards: sanitizeFeaturedCards(input?.featuredCards),
     homeCatalogOrder: sanitizeHomeCatalogOrder(input?.homeCatalogOrder),
+    homeNavigation: sanitizeHomeNavigation(input?.homeNavigation),
     reviews: sanitizeReviews(input?.reviews),
     texts: sanitizeTexts(input?.texts),
     contact: sanitizeContact(input?.contact),

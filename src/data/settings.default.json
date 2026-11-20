@@ -18,6 +18,10 @@
   ],
   "featuredCards": [],
   "homeCatalogOrder": [],
+  "homeNavigation": {
+    "catalogScroll": false,
+    "contactsScroll": false
+  },
   "reviews": [],
   "texts": {
     "es": {

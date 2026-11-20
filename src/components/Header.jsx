@@ -8,6 +8,7 @@ import { categoryHasGift } from '../data/catalog.js';
 import { IconGift } from './Gift.jsx';
 import { useSettings } from '../settings/SettingsContext.jsx';
 import { stripLangPrefix, withLang } from '../i18n/routing.js';
+import { homeCatalogLayouts } from '../data/settings.js';
 import PromoBar from './PromoBar.jsx';
 
 function LangToggle({ className = '' }) {
@@ -48,7 +49,7 @@ function LangToggle({ className = '' }) {
 
 export default function Header({ promo = false }) {
   const { lang, t } = useLanguage();
-  const { categories, allCategories } = useCatalog();
+  const { categories, allCategories, homeCatalogProducts } = useCatalog();
   // Worked out once per catalog rather than per menu row: both menus ask the
   // same question about the same five collections, and the answer walks the
   // products of any collection without a rule of its own.
@@ -71,6 +72,16 @@ export default function Header({ promo = false }) {
   // Transparent only at the very top of the home page; solid everywhere else.
   const isHome = stripLangPrefix(location.pathname).path === '/';
   const transparent = isHome && !scrolled;
+  const catalogScroll = isHome && settings.homeNavigation?.catalogScroll === true;
+  const contactsScroll = isHome && settings.homeNavigation?.contactsScroll === true;
+  const catalogLayouts = homeCatalogLayouts(settings.blocks);
+  const catalogTarget = (device) =>
+    homeCatalogProducts.length && catalogLayouts[device] ? '/#home-catalog' : '/catalogo';
+  const scrollAgain = (id) => {
+    setMobileOpen(false);
+    if (location.hash === `#${id}`)
+      document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+  };
 
   // Track scroll position to toggle the solid/transparent header state.
   useEffect(() => {
@@ -129,39 +140,49 @@ export default function Header({ promo = false }) {
             {t('nav.home')}
           </NavLink>
 
-          <div className="group relative">
-            <NavLink to="/catalogo" className={navLinkClass}>
+          {catalogScroll ? (
+            <NavLink
+              to={catalogTarget('desktop')}
+              className={navLinkClass}
+              onClick={() => scrollAgain('home-catalog')}
+            >
               {t('nav.catalog')}
             </NavLink>
-            {/* Dropdown */}
-            <div className="invisible absolute left-1/2 top-full z-50 w-[34rem] -translate-x-1/2 pt-5 opacity-0 transition-all duration-300 group-hover:visible group-hover:opacity-100 group-focus-within:visible group-focus-within:opacity-100">
-              <div className="grid grid-cols-2 gap-x-8 border border-primary/10 bg-background p-6 shadow-floating">
-                {categories.map((c) => (
-                  <Link
-                    key={c.slug}
-                    to={`/${c.slug}`}
-                    className="group/item flex items-center justify-between border-b border-primary/5 py-2.5 text-sm text-primary/70 transition-colors duration-300 hover:text-accent-text focus-visible:outline-none focus-visible:text-accent-text"
-                  >
-                    <span>
-                      {c.name[lang]}
-                      {giftedSlugs.has(c.slug) && (
-                        <span className="ml-2 inline-flex items-center gap-1 align-middle text-xs font-medium text-promo">
-                          {t('nav.giftBadge')}
-                          <IconGift className="h-3.5 w-3.5" />
-                        </span>
-                      )}
-                    </span>
-                    <span
-                      aria-hidden="true"
-                      className="text-[10px] opacity-0 transition-opacity duration-300 group-hover/item:opacity-60"
+          ) : (
+            <div className="group relative">
+              <NavLink to="/catalogo" className={navLinkClass}>
+                {t('nav.catalog')}
+              </NavLink>
+              {/* Dropdown */}
+              <div className="invisible absolute left-1/2 top-full z-50 w-[34rem] -translate-x-1/2 pt-5 opacity-0 transition-all duration-300 group-hover:visible group-hover:opacity-100 group-focus-within:visible group-focus-within:opacity-100">
+                <div className="grid grid-cols-2 gap-x-8 border border-primary/10 bg-background p-6 shadow-floating">
+                  {categories.map((c) => (
+                    <Link
+                      key={c.slug}
+                      to={`/${c.slug}`}
+                      className="group/item flex items-center justify-between border-b border-primary/5 py-2.5 text-sm text-primary/70 transition-colors duration-300 hover:text-accent-text focus-visible:outline-none focus-visible:text-accent-text"
                     >
-                      →
-                    </span>
-                  </Link>
-                ))}
+                      <span>
+                        {c.name[lang]}
+                        {giftedSlugs.has(c.slug) && (
+                          <span className="ml-2 inline-flex items-center gap-1 align-middle text-xs font-medium text-promo">
+                            {t('nav.giftBadge')}
+                            <IconGift className="h-3.5 w-3.5" />
+                          </span>
+                        )}
+                      </span>
+                      <span
+                        aria-hidden="true"
+                        className="text-[10px] opacity-0 transition-opacity duration-300 group-hover/item:opacity-60"
+                      >
+                        →
+                      </span>
+                    </Link>
+                  ))}
+                </div>
               </div>
             </div>
-          </div>
+          )}
 
           {reviewsOn && (
             <NavLink to="/opiniones" className={navLinkClass}>
@@ -169,7 +190,11 @@ export default function Header({ promo = false }) {
             </NavLink>
           )}
 
-          <NavLink to="/contacto" className={navLinkClass}>
+          <NavLink
+            to={contactsScroll ? '/#home-contacts' : '/contacto'}
+            className={navLinkClass}
+            onClick={contactsScroll ? () => scrollAgain('home-contacts') : undefined}
+          >
             {t('nav.contact')}
           </NavLink>
         </nav>
@@ -221,48 +246,64 @@ export default function Header({ promo = false }) {
             {t('nav.home')}
           </NavLink>
 
-          <button
-            type="button"
-            onClick={() => setCatOpen((v) => !v)}
-            aria-expanded={catOpen}
-            className="flex items-center justify-between border-b border-primary/10 py-4 text-left font-serif text-2xl font-light"
-          >
-            {t('nav.catalog')}
-            <span
-              className={`text-base transition-transform duration-300 ${catOpen ? 'rotate-45' : ''}`}
-              aria-hidden="true"
+          {catalogScroll ? (
+            <Link
+              to={catalogTarget('mobile')}
+              onClick={() => scrollAgain('home-catalog')}
+              className="border-b border-primary/10 py-4 font-serif text-2xl font-light"
             >
-              +
-            </span>
-          </button>
-          <div
-            aria-hidden={!catOpen}
-            className={`grid overflow-hidden transition-[grid-template-rows] duration-300 ease-in-out ${
-              catOpen ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]'
-            }`}
-          >
-            <div className="overflow-hidden">
-              <div className="flex flex-col border-b border-primary/10 py-2">
-                <Link
-                  to="/catalogo"
-                  className="py-2 text-sm uppercase tracking-[0.15em] text-accent-text"
+              {t('nav.catalog')}
+            </Link>
+          ) : (
+            <>
+              <button
+                type="button"
+                onClick={() => setCatOpen((v) => !v)}
+                aria-expanded={catOpen}
+                className="flex items-center justify-between border-b border-primary/10 py-4 text-left font-serif text-2xl font-light"
+              >
+                {t('nav.catalog')}
+                <span
+                  className={`text-base transition-transform duration-300 ${catOpen ? 'rotate-45' : ''}`}
+                  aria-hidden="true"
                 >
-                  {t('common.viewAll')}
-                </Link>
-                {categories.map((c) => (
-                  <Link key={c.slug} to={`/${c.slug}`} className="py-2 text-base text-primary/70">
-                    {c.name[lang]}
-                    {giftedSlugs.has(c.slug) && (
-                      <span className="ml-2 inline-flex items-center gap-1 align-middle text-sm font-medium text-promo">
-                        {t('nav.giftBadge')}
-                        <IconGift className="h-4 w-4" />
-                      </span>
-                    )}
-                  </Link>
-                ))}
+                  +
+                </span>
+              </button>
+              <div
+                aria-hidden={!catOpen}
+                className={`grid overflow-hidden transition-[grid-template-rows] duration-300 ease-in-out ${
+                  catOpen ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]'
+                }`}
+              >
+                <div className="overflow-hidden">
+                  <div className="flex flex-col border-b border-primary/10 py-2">
+                    <Link
+                      to="/catalogo"
+                      className="py-2 text-sm uppercase tracking-[0.15em] text-accent-text"
+                    >
+                      {t('common.viewAll')}
+                    </Link>
+                    {categories.map((c) => (
+                      <Link
+                        key={c.slug}
+                        to={`/${c.slug}`}
+                        className="py-2 text-base text-primary/70"
+                      >
+                        {c.name[lang]}
+                        {giftedSlugs.has(c.slug) && (
+                          <span className="ml-2 inline-flex items-center gap-1 align-middle text-sm font-medium text-promo">
+                            {t('nav.giftBadge')}
+                            <IconGift className="h-4 w-4" />
+                          </span>
+                        )}
+                      </Link>
+                    ))}
+                  </div>
+                </div>
               </div>
-            </div>
-          </div>
+            </>
+          )}
 
           {reviewsOn && (
             <NavLink
@@ -274,7 +315,8 @@ export default function Header({ promo = false }) {
           )}
 
           <NavLink
-            to="/contacto"
+            to={contactsScroll ? '/#home-contacts' : '/contacto'}
+            onClick={contactsScroll ? () => scrollAgain('home-contacts') : undefined}
             className="border-b border-primary/10 py-4 font-serif text-2xl font-light"
           >
             {t('nav.contact')}
