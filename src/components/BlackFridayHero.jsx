@@ -11,6 +11,8 @@ export default function BlackFridayHero() {
   const dateParts = date.split(/\s+(?=30\b)/);
   const offer = t('blackFriday.offer');
   const offerParts = offer.split(/\s+(?=(?:y regalos|and gifts)!?$)/i);
+  const cta = t('blackFriday.cta');
+  const ctaParts = cta.split(/\s+(?=(?:la promoción|the promotion)$)/i);
 
   return (
     <section className="bf-hero" aria-label="Black Friday">
@@ -40,7 +42,15 @@ export default function BlackFridayHero() {
           )}
         </p>
         <Button to="/catalogo" variant="solid" className="bf-cta">
-          {t('blackFriday.cta')} <span aria-hidden="true">→</span>
+          {ctaParts.length === 2 ? (
+            <span>
+              {ctaParts[0]}
+              <span className="bf-mobile-line"> {ctaParts[1]}</span>
+            </span>
+          ) : (
+            cta
+          )}{' '}
+          <span aria-hidden="true">→</span>
         </Button>
       </div>
       <div className="bf-photo">
