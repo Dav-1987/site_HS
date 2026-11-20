@@ -15,7 +15,7 @@ import FeaturedCard from '../components/FeaturedCard.jsx';
 import ProductCard from '../components/ProductCard.jsx';
 import ReviewTile from '../components/ReviewTile.jsx';
 import Lightbox from '../components/Lightbox.jsx';
-import { featuredLayouts, toLightboxItems } from '../data/settings.js';
+import { featuredLayouts, homeCatalogLayouts, toLightboxItems } from '../data/settings.js';
 import { CarouselArrows, CarouselTrack, useCarousel } from '../components/ProductCarousel.jsx';
 import BlackFridayHero from '../components/BlackFridayHero.jsx';
 
@@ -149,12 +149,14 @@ function HomeCatalogSection() {
   const { t } = useLanguage();
   const { homeCatalogProducts: products } = useCatalog();
   const { settings } = useSettings();
-  if (settings.blocks?.homeCatalog === false || !products.length) return null;
+  const { mobile, desktop } = homeCatalogLayouts(settings.blocks);
+  if ((!mobile && !desktop) || !products.length) return null;
+  const visibility = mobile && desktop ? '' : mobile ? 'md:hidden' : 'hidden md:block';
 
   return (
     <section
       id="home-catalog"
-      className="scroll-mt-[calc(5rem+var(--promo-h,0px))] px-6 py-14 md:px-12 md:py-20 lg:px-20"
+      className={`scroll-mt-[calc(5rem+var(--promo-h,0px))] px-6 py-14 md:px-12 md:py-20 lg:px-20 ${visibility}`}
     >
       <SectionHeader title={t('section.homeCatalog.title')} gapClassName="mb-8 md:mb-12" />
       <div className="grid grid-cols-2 gap-x-6 gap-y-12 md:grid-cols-3 md:gap-x-8 lg:grid-cols-4">

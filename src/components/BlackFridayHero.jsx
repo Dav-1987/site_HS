@@ -3,6 +3,7 @@ import { useSettings } from '../settings/SettingsContext.jsx';
 import { useCatalog } from '../catalog/CatalogContext.jsx';
 import Media from './Media.jsx';
 import Button from './Button.jsx';
+import { homeCatalogLayouts } from '../data/settings.js';
 
 export default function BlackFridayHero() {
   const { t } = useLanguage();
@@ -15,10 +16,24 @@ export default function BlackFridayHero() {
   const offerParts = offer.split(/\s+(?=(?:y regalos|and gifts)!?$)/i);
   const cta = t('blackFriday.cta');
   const ctaParts = cta.split(/\s+(?=(?:la promoción|the promotion)$)/i);
-  const catalogTarget =
-    settings.blocks?.homeCatalog !== false && homeCatalogProducts.length
-      ? '/#home-catalog'
-      : '/catalogo';
+  const catalogLayouts = homeCatalogLayouts(settings.blocks);
+  const targetFor = (shown) =>
+    shown && homeCatalogProducts.length ? '/#home-catalog' : '/catalogo';
+  const mobileTarget = targetFor(catalogLayouts.mobile);
+  const desktopTarget = targetFor(catalogLayouts.desktop);
+  const ctaContent = (
+    <>
+      {ctaParts.length === 2 ? (
+        <span>
+          {ctaParts[0]}
+          <span className="bf-mobile-line"> {ctaParts[1]}</span>
+        </span>
+      ) : (
+        cta
+      )}{' '}
+      <span aria-hidden="true">→</span>
+    </>
+  );
 
   return (
     <section className="bf-hero" aria-label="Black Friday">
@@ -47,17 +62,20 @@ export default function BlackFridayHero() {
             offer
           )}
         </p>
-        <Button to={catalogTarget} variant="solid" className="bf-cta">
-          {ctaParts.length === 2 ? (
-            <span>
-              {ctaParts[0]}
-              <span className="bf-mobile-line"> {ctaParts[1]}</span>
-            </span>
-          ) : (
-            cta
-          )}{' '}
-          <span aria-hidden="true">→</span>
-        </Button>
+        {mobileTarget === desktopTarget ? (
+          <Button to={mobileTarget} variant="solid" className="bf-cta">
+            {ctaContent}
+          </Button>
+        ) : (
+          <>
+            <Button to={mobileTarget} variant="solid" className="bf-cta md:hidden">
+              {ctaContent}
+            </Button>
+            <Button to={desktopTarget} variant="solid" className="bf-cta hidden md:inline-flex">
+              {ctaContent}
+            </Button>
+          </>
+        )}
       </div>
       <div className="bf-photo">
         <div className="bf-image">

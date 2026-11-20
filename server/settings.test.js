@@ -4,7 +4,11 @@ import { mergeSettings } from './settings.js';
 describe('server settings — home catalog', () => {
   it('keeps the new block enabled for older settings and persists its switch', () => {
     expect(mergeSettings({}).blocks.homeCatalog).toBe(true);
+    expect(mergeSettings({}).blocks.homeCatalogDesktop).toBe(true);
     expect(mergeSettings({ blocks: { homeCatalog: false } }).blocks.homeCatalog).toBe(false);
+    expect(mergeSettings({ blocks: { homeCatalogDesktop: false } }).blocks.homeCatalogDesktop).toBe(
+      false,
+    );
   });
 
   it('keeps the edited section title', () => {

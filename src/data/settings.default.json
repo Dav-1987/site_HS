@@ -51,6 +51,7 @@
     "featured": false,
     "featuredDesktop": false,
     "homeCatalog": true,
+    "homeCatalogDesktop": true,
     "collections": true,
     "heroPromo": true,
     "reviews": false,

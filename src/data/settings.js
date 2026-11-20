@@ -155,6 +155,7 @@ export const BLOCKS = [
   'featured',
   'featuredDesktop',
   'homeCatalog',
+  'homeCatalogDesktop',
   'collections',
   'heroPromo',
   'reviews',
@@ -171,6 +172,11 @@ export const BLOCKS_OFF_BY_DEFAULT = ['featuredDesktop'];
  */
 export function featuredLayouts(blocks) {
   return { mobile: blocks?.featured !== false, desktop: blocks?.featuredDesktop === true };
+}
+
+/** The home product catalog was visible on both layouts before the split. */
+export function homeCatalogLayouts(blocks) {
+  return { mobile: blocks?.homeCatalog !== false, desktop: blocks?.homeCatalogDesktop !== false };
 }
 
 function sanitizeBlocks(blocks) {

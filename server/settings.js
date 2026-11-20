@@ -91,6 +91,7 @@ const BLOCKS = [
   'featured',
   'featuredDesktop',
   'homeCatalog',
+  'homeCatalogDesktop',
   'collections',
   'heroPromo',
   'reviews',

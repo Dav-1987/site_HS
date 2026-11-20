@@ -353,6 +353,17 @@ async function main() {
   await shot('11-home');
   report.push(await measure('11-home'));
 
+  await clickByText('Блоки главной');
+  await page.evaluate(() => {
+    const fieldset = [...document.querySelectorAll('fieldset')].find((node) =>
+      node.querySelector('legend')?.textContent.includes('Каталог товаров'),
+    );
+    fieldset?.scrollIntoView({ block: 'center' });
+  });
+  await settle(400);
+  await shot('11b-home-blocks');
+  report.push(await measure('11b-home-blocks'));
+
   await openSection('Статьи');
   await settle(700);
   await shot('12-guides');

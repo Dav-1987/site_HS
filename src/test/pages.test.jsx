@@ -161,15 +161,49 @@ describe('home page blocks', () => {
     expect(screen.getByText('Aprovechar').closest('a').getAttribute('href')).toBe('/#home-catalog');
   });
 
-  it('hides the home catalog when its switch is off', () => {
+  it('shows the home catalog on both layouts by default', () => {
+    const category = makeCategory('c1', 'Espejo reservado');
+    category.products[0].onHomeCatalog = true;
+    renderPage(<Home />, '/', { catalog: [category], settings: { blocks: {} } });
+    const section = screen.getByRole('heading', { name: 'Catálogo' }).closest('section');
+    expect(section.className).not.toMatch(/(^|\s)(md:)?hidden(\s|$)/);
+    expect(document.querySelector('.bf-cta').getAttribute('href')).toBe('/#home-catalog');
+  });
+
+  it.each([
+    [{ homeCatalog: true, homeCatalogDesktop: false }, 'md:hidden', '/#home-catalog', '/catalogo'],
+    [
+      { homeCatalog: false, homeCatalogDesktop: true },
+      'hidden md:block',
+      '/catalogo',
+      '/#home-catalog',
+    ],
+  ])(
+    'shows the home catalog only on the selected layout',
+    (blocks, visibility, mobileHref, desktopHref) => {
+      const category = makeCategory('c1', 'Espejo reservado');
+      category.products[0].onHomeCatalog = true;
+      renderPage(<Home />, '/', { catalog: [category], settings: { blocks } });
+      const section = screen.getByRole('heading', { name: 'Catálogo' }).closest('section');
+      expect(section.className).toContain(visibility);
+      const links = [...document.querySelectorAll('.bf-cta')];
+      expect(links).toHaveLength(2);
+      expect(links[0].getAttribute('href')).toBe(mobileHref);
+      expect(links[0].className).toContain('md:hidden');
+      expect(links[1].getAttribute('href')).toBe(desktopHref);
+      expect(links[1].className).toContain('hidden md:inline-flex');
+    },
+  );
+
+  it('hides the home catalog when both switches are off', () => {
     const category = makeCategory('c1', 'Espejo reservado');
     category.products[0].onHomeCatalog = true;
     renderPage(<Home />, '/', {
       catalog: [category],
-      settings: { blocks: { homeCatalog: false } },
+      settings: { blocks: { homeCatalog: false, homeCatalogDesktop: false } },
     });
     expect(screen.queryByRole('heading', { name: 'Catálogo' })).toBeNull();
-    expect(screen.getByText('Aprovechar').closest('a').getAttribute('href')).toBe('/catalogo');
+    expect(document.querySelector('.bf-cta').getAttribute('href')).toBe('/catalogo');
   });
 });
 

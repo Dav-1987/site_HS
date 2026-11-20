@@ -7,6 +7,7 @@ import SectionPending from './SectionPending.jsx';
 import Collapsible from '../components/Collapsible.jsx';
 import { Field } from '../components/Field.jsx';
 import { translations } from '../../i18n/translations.js';
+import { homeCatalogLayouts } from '../../data/settings.js';
 
 const TITLE_KEY = 'section.homeCatalog.title';
 
@@ -21,6 +22,16 @@ export default function HomeSection() {
 
   if (!settings || !categories) return <SectionPending error={loadError} />;
 
+  const catalogLayouts = homeCatalogLayouts(settings.blocks);
+  const catalogSummary =
+    catalogLayouts.mobile && catalogLayouts.desktop
+      ? 'на мобильных и ПК'
+      : catalogLayouts.mobile
+        ? 'только на мобильных'
+        : catalogLayouts.desktop
+          ? 'только на ПК'
+          : 'выключен';
+
   return (
     <div className="space-y-4">
       <HeroSettingsEditor settings={settings} onChange={updateSettings} />
@@ -30,10 +41,7 @@ export default function HomeSection() {
         allProducts={allProducts}
         blocks={settings.blocks}
       />
-      <Collapsible
-        title="Каталог на главной"
-        summary={settings.blocks?.homeCatalog === false ? 'выключен' : 'включён'}
-      >
+      <Collapsible title="Каталог на главной" summary={catalogSummary}>
         <p className="text-xs leading-relaxed text-primary/75">
           Товары добавляются переключателем «На главной в каталоге» в каждой карточке товара.
         </p>

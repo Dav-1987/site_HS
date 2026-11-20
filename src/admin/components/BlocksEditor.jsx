@@ -1,4 +1,4 @@
-import { featuredLayouts } from '../../data/settings.js';
+import { featuredLayouts, homeCatalogLayouts } from '../../data/settings.js';
 import Collapsible from './Collapsible.jsx';
 
 // Sections of the home page that can be switched off wholesale. Each key maps to
@@ -6,7 +6,7 @@ import Collapsible from './Collapsible.jsx';
 // checks before rendering. Off means the section isn't rendered at all — not
 // hidden with CSS — so nothing is left behind in the markup.
 //
-// «Избранное» switches per layout instead: one flag for phones, one for PC
+// «Избранное» and «Каталог» switch per layout: one flag for phones, one for PC
 // (md+ screens). Off on both means the section isn't rendered; off on one means
 // it's rendered and hidden there with CSS — the page can't know the screen
 // width at render time.
@@ -16,13 +16,12 @@ const FEATURED_DEVICES = [
   { key: 'featured', layout: 'mobile', label: 'На мобильных' },
   { key: 'featuredDesktop', layout: 'desktop', label: 'На ПК' },
 ];
+const CATALOG_DEVICES = [
+  { key: 'homeCatalog', layout: 'mobile', label: 'На мобильных' },
+  { key: 'homeCatalogDesktop', layout: 'desktop', label: 'На ПК' },
+];
 
 const BLOCK_FIELDS = [
-  {
-    key: 'homeCatalog',
-    label: 'Каталог товаров',
-    hint: 'Товары, отмеченные в карточках, на главной.',
-  },
   {
     key: 'collections',
     label: 'Коллекции',
@@ -37,37 +36,56 @@ const BLOCK_FIELDS = [
 
 const HINT = 'block text-xs leading-relaxed text-primary/75';
 
+function DeviceSwitches({ title, hint, devices, shown, onSet }) {
+  return (
+    <fieldset>
+      <legend className="block text-sm">{title}</legend>
+      <span className={HINT}>{hint}</span>
+      <div className="mt-2 flex flex-wrap gap-x-6 gap-y-2">
+        {devices.map((device) => (
+          <label key={device.key} className="flex min-h-11 items-center gap-2 sm:min-h-0">
+            <input
+              type="checkbox"
+              checked={shown[device.layout]}
+              onChange={(e) => onSet(device.key, e.target.checked)}
+              className="h-4 w-4 shrink-0 accent-primary"
+            />
+            <span className="text-sm">{device.label}</span>
+          </label>
+        ))}
+      </div>
+    </fieldset>
+  );
+}
+
 export default function BlocksEditor({ blocks, onChange }) {
   const set = (key, value) => onChange((b) => ({ ...b, [key]: value }));
   const shown = featuredLayouts(blocks);
+  const catalogShown = homeCatalogLayouts(blocks);
   const hiddenCount =
     BLOCK_FIELDS.filter((f) => blocks?.[f.key] === false).length +
-    (shown.mobile || shown.desktop ? 0 : 1);
+    (shown.mobile || shown.desktop ? 0 : 1) +
+    (catalogShown.mobile || catalogShown.desktop ? 0 : 1);
 
   return (
     <Collapsible
       title="Блоки главной"
       summary={hiddenCount ? `${hiddenCount} скрыто` : 'все показаны'}
     >
-      <fieldset>
-        <legend className="block text-sm">Избранное</legend>
-        <span className={HINT}>
-          Карусель избранных товаров на главной. Выключите обе галочки, чтобы убрать её совсем.
-        </span>
-        <div className="mt-2 flex flex-wrap gap-x-6 gap-y-2">
-          {FEATURED_DEVICES.map((d) => (
-            <label key={d.key} className="flex min-h-11 items-center gap-2 sm:min-h-0">
-              <input
-                type="checkbox"
-                checked={shown[d.layout]}
-                onChange={(e) => set(d.key, e.target.checked)}
-                className="h-4 w-4 shrink-0 accent-primary"
-              />
-              <span className="text-sm">{d.label}</span>
-            </label>
-          ))}
-        </div>
-      </fieldset>
+      <DeviceSwitches
+        title="Избранное"
+        hint="Карусель избранных товаров на главной. Выключите обе галочки, чтобы убрать её совсем."
+        devices={FEATURED_DEVICES}
+        shown={shown}
+        onSet={set}
+      />
+      <DeviceSwitches
+        title="Каталог товаров"
+        hint="Товары, отмеченные в карточках, на главной. Выключите обе галочки, чтобы убрать блок совсем."
+        devices={CATALOG_DEVICES}
+        shown={catalogShown}
+        onSet={set}
+      />
       {BLOCK_FIELDS.map((f) => (
         <label key={f.key} className="flex items-start gap-3">
           <input

@@ -24,7 +24,11 @@ describe('mergeSettings — Black Friday images', () => {
 describe('mergeSettings — home catalog', () => {
   it('keeps the section on for older settings and allows turning it off', () => {
     expect(mergeSettings({}).blocks.homeCatalog).toBe(true);
+    expect(mergeSettings({}).blocks.homeCatalogDesktop).toBe(true);
     expect(mergeSettings({ blocks: { homeCatalog: false } }).blocks.homeCatalog).toBe(false);
+    expect(mergeSettings({ blocks: { homeCatalogDesktop: false } }).blocks.homeCatalogDesktop).toBe(
+      false,
+    );
   });
 
   it('preserves an edited section title in both languages', () => {
