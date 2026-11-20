@@ -505,6 +505,16 @@ export function homeCatalogProducts(categories) {
   );
 }
 
+/** Keep the curated home order; products added later follow in catalog order. */
+export function orderHomeCatalogProducts(products, order) {
+  if (!Array.isArray(order) || !order.length) return products;
+  const positions = new Map(order.map((id, index) => [id, index]));
+  return products
+    .map((product, index) => ({ product, index, rank: positions.get(product.id) ?? order.length }))
+    .sort((a, b) => a.rank - b.rank || a.index - b.index)
+    .map(({ product }) => product);
+}
+
 /**
  * The catalog as every listing renders it: public sections only, each without
  * the products hidden from listings — what CatalogContext calls `categories`.

@@ -55,6 +55,7 @@ beforeEach(() => {
   api.fetchOrders.mockResolvedValue({ orders: [] });
   api.fetchRebuildStatus.mockResolvedValue({ configured: false });
   api.saveCatalog.mockImplementation(async (categories) => ({ categories }));
+  api.saveSettings.mockImplementation(async (settings) => ({ settings }));
 });
 
 let location;
@@ -220,6 +221,9 @@ describe('CatalogSection — the product panel', () => {
   });
 
   it('follows a renamed product in the address', async () => {
+    api.fetchSettings.mockResolvedValueOnce({
+      settings: { homeCatalogOrder: ['T-09', 'L-06'] },
+    });
     await openCatalog('?product=L-06');
     fireEvent.click(screen.getByRole('button', { name: 'Изменить…' }));
     fireEvent.change(screen.getByLabelText('Адрес страницы (ID)'), {
@@ -228,6 +232,12 @@ describe('CatalogSection — the product panel', () => {
     fireEvent.click(screen.getByRole('button', { name: 'Применить' }));
     expect(location.search).toBe('?product=Tocador-L-06');
     expect(screen.getByRole('dialog', { name: 'Tocador Doble Cajonera' })).toBeTruthy();
+    fireEvent.click(screen.getByRole('button', { name: 'Сохранить' }));
+    await waitFor(() => expect(api.saveSettings).toHaveBeenCalled());
+    expect(api.saveSettings.mock.calls.at(-1)[0].homeCatalogOrder).toEqual([
+      'T-09',
+      'Tocador-L-06',
+    ]);
   });
 
   it('closes when its product is deleted', async () => {

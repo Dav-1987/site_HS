@@ -6,8 +6,10 @@ import BlocksEditor from '../components/BlocksEditor.jsx';
 import SectionPending from './SectionPending.jsx';
 import Collapsible from '../components/Collapsible.jsx';
 import { Field } from '../components/Field.jsx';
+import HomeCatalogOrderEditor from '../components/HomeCatalogOrderEditor.jsx';
 import { translations } from '../../i18n/translations.js';
 import { homeCatalogLayouts } from '../../data/settings.js';
+import { homeCatalogProducts } from '../../data/catalog.js';
 
 const TITLE_KEY = 'section.homeCatalog.title';
 
@@ -23,6 +25,7 @@ export default function HomeSection() {
   if (!settings || !categories) return <SectionPending error={loadError} />;
 
   const catalogLayouts = homeCatalogLayouts(settings.blocks);
+  const catalogProducts = homeCatalogProducts(categories);
   const catalogSummary =
     catalogLayouts.mobile && catalogLayouts.desktop
       ? 'на мобильных и ПК'
@@ -62,6 +65,11 @@ export default function HomeSection() {
             />
           ))}
         </div>
+        <HomeCatalogOrderEditor
+          products={catalogProducts}
+          order={settings.homeCatalogOrder}
+          onChange={settingsField('homeCatalogOrder')}
+        />
       </Collapsible>
       <ReviewsEditor
         reviews={settings.reviews || []}

@@ -10,6 +10,7 @@ export const defaultSettings = defaultSettingsData;
 
 /** Max curated picks kept for the homepage "Featured" section. */
 const MAX_FEATURED = 12;
+const MAX_HOME_CATALOG_ORDER = 2000;
 
 /** Max screenshots/clips kept in the reviews wall. */
 const MAX_REVIEWS = 200;
@@ -63,7 +64,7 @@ export function posterFor(videoSrc) {
 }
 
 /** Keep an ordered, de-duped list of product-id strings (capped). */
-function sanitizeFeatured(input) {
+function sanitizeIdList(input, limit) {
   if (!Array.isArray(input)) return [];
   const seen = new Set();
   const out = [];
@@ -73,10 +74,13 @@ function sanitizeFeatured(input) {
     if (!trimmed || seen.has(trimmed)) continue;
     seen.add(trimmed);
     out.push(trimmed);
-    if (out.length >= MAX_FEATURED) break;
+    if (out.length >= limit) break;
   }
   return out;
 }
+
+const sanitizeFeatured = (input) => sanitizeIdList(input, MAX_FEATURED);
+const sanitizeHomeCatalogOrder = (input) => sanitizeIdList(input, MAX_HOME_CATALOG_ORDER);
 
 /**
  * Featured cards for the home section: ordered list of `{ productId, cover, video }`.
@@ -211,6 +215,7 @@ export function mergeSettings(input) {
     },
     featured: sanitizeFeatured(input?.featured),
     featuredCards: sanitizeFeaturedCards(input?.featuredCards),
+    homeCatalogOrder: sanitizeHomeCatalogOrder(input?.homeCatalogOrder),
     reviews: sanitizeReviews(input?.reviews),
     texts: sanitizeTexts(input?.texts),
     contact: sanitizeContact(input?.contact),

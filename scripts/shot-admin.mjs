@@ -115,6 +115,19 @@ async function main() {
   await mkdir(OUT_DIR, { recursive: true });
   const categories = await readJson('src/data/catalog.default.json');
   const settings = await readJson('src/data/settings.default.json');
+  // The committed fixture predates the home catalog picker. Seed a few picks
+  // only in memory so the order controls can be checked in screenshots.
+  if (
+    categories.reduce(
+      (count, category) =>
+        count + (category.products?.filter((product) => product.onHomeCatalog).length ?? 0),
+      0,
+    ) < 3
+  ) {
+    categories[0]?.products?.slice(0, 4).forEach((product) => {
+      product.onHomeCatalog = true;
+    });
+  }
   // The articles the repo seeds, shaped as /api/guides returns them.
   const guides = (await readJson('src/data/guides.seed.json')).map((g, i) => ({
     ...g,
@@ -366,6 +379,48 @@ async function main() {
   await settle(700);
   await shot('11-home');
   report.push(await measure('11-home'));
+
+  await clickByText('Каталог на главной');
+  await page.evaluate(() =>
+    document
+      .querySelector('ol[aria-label="Порядок товаров каталога на главной"]')
+      ?.scrollIntoView({ block: 'center' }),
+  );
+  await settle(400);
+  await shot('11a-home-catalog-order');
+  report.push(await measure('11a-home-catalog-order'));
+  if (VIEWPORT.id === 'desktop') {
+    const drag = await page.evaluate(() => {
+      const rows = [
+        ...document.querySelectorAll('ol[aria-label="Порядок товаров каталога на главной"] > li'),
+      ];
+      const grip = rows[0]?.querySelector('[draggable="true"]')?.getBoundingClientRect();
+      const target = rows[2]?.getBoundingClientRect();
+      return {
+        first: rows[0]?.querySelector('p[title]')?.getAttribute('title'),
+        from: { x: grip.x + grip.width / 2, y: grip.y + grip.height / 2 },
+        to: { x: target.x + target.width / 2, y: target.y + target.height / 2 },
+      };
+    });
+    await page.mouse.move(drag.from.x, drag.from.y);
+    await page.mouse.down();
+    await page.mouse.move(drag.from.x, drag.from.y + 12, { steps: 4 });
+    await page.mouse.move(drag.to.x, drag.to.y, { steps: 12 });
+    await page.mouse.up();
+    await settle(300);
+    const moved = await page.evaluate(
+      (first) =>
+        [
+          ...document.querySelectorAll('ol[aria-label="Порядок товаров каталога на главной"] > li'),
+        ][2]
+          ?.querySelector('p[title]')
+          ?.getAttribute('title') === first,
+      drag.first,
+    );
+    if (!moved) throw new Error('Home catalog drag did not change the product order');
+    console.log('OK  home catalog drag  -> moved first product to position 3');
+  }
+  await clickByText('Каталог на главной');
 
   await clickByText('Блоки главной');
   await page.evaluate(() => {

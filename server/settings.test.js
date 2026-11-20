@@ -15,4 +15,12 @@ describe('server settings — home catalog', () => {
     const texts = { es: { 'section.homeCatalog.title': 'Ofertas' }, en: {} };
     expect(mergeSettings({ texts }).texts.es['section.homeCatalog.title']).toBe('Ofertas');
   });
+
+  it('persists the chosen product order without duplicate ids', () => {
+    expect(mergeSettings({}).homeCatalogOrder).toEqual([]);
+    expect(mergeSettings({ homeCatalogOrder: [' B ', 'A', 'B', null] }).homeCatalogOrder).toEqual([
+      'B',
+      'A',
+    ]);
+  });
 });

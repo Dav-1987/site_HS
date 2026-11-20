@@ -2,7 +2,12 @@ import { useMemo, useState } from 'react';
 import { useLanguage } from '../i18n/LanguageContext.jsx';
 import { useCatalog } from '../catalog/CatalogContext.jsx';
 import { useSettings } from '../settings/SettingsContext.jsx';
-import { computeFeatured, resolveFeaturedCards, resolveImage } from '../data/catalog.js';
+import {
+  computeFeatured,
+  orderHomeCatalogProducts,
+  resolveFeaturedCards,
+  resolveImage,
+} from '../data/catalog.js';
 import SocialMeta from '../components/SocialMeta.jsx';
 import HreflangLinks from '../components/HreflangLinks.jsx';
 import Media from '../components/Media.jsx';
@@ -152,6 +157,7 @@ function HomeCatalogSection() {
   const { mobile, desktop } = homeCatalogLayouts(settings.blocks);
   if ((!mobile && !desktop) || !products.length) return null;
   const visibility = mobile && desktop ? '' : mobile ? 'md:hidden' : 'hidden md:block';
+  const orderedProducts = orderHomeCatalogProducts(products, settings.homeCatalogOrder);
 
   return (
     <section
@@ -160,7 +166,7 @@ function HomeCatalogSection() {
     >
       <SectionHeader title={t('section.homeCatalog.title')} gapClassName="mb-8 md:mb-12" />
       <div className="grid grid-cols-2 gap-x-6 gap-y-12 md:grid-cols-3 md:gap-x-8 lg:grid-cols-4">
-        {products.map((product) => (
+        {orderedProducts.map((product) => (
           <ProductCard
             key={product.id}
             product={product}

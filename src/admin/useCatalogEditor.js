@@ -236,16 +236,20 @@ export function useCatalogEditor() {
   const moveProductsTo = (ids, toSlug) => mutate((cats) => ops.moveProductsTo(cats, ids, toSlug));
   const productIdError = (oldId, newId) => ops.productIdError(categories, oldId, newId);
   // A new id follows the product everywhere it is named: «Похожие» lists and
-  // gifts in the catalog (catalogOps), and the «Избранное» cards in settings.
+  // gifts in the catalog (catalogOps), and home-page picks in settings.
   const renameProduct = (oldId, newId) => {
     if (productIdError(oldId, newId)) return;
     mutate((cats) => ops.renameProduct(cats, oldId, newId));
-    if (settings?.featuredCards?.some((card) => card.productId === oldId)) {
+    if (
+      settings?.featuredCards?.some((card) => card.productId === oldId) ||
+      settings?.homeCatalogOrder?.includes(oldId)
+    ) {
       updateSettings((s) => ({
         ...s,
-        featuredCards: s.featuredCards.map((card) =>
+        featuredCards: (s.featuredCards ?? []).map((card) =>
           card.productId === oldId ? { ...card, productId: newId } : card,
         ),
+        homeCatalogOrder: (s.homeCatalogOrder ?? []).map((id) => (id === oldId ? newId : id)),
       }));
     }
   };

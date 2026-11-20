@@ -13,9 +13,10 @@ const defaultSettings = JSON.parse(
 
 const MAX_TEXT_LEN = 4000;
 const MAX_FEATURED = 12;
+const MAX_HOME_CATALOG_ORDER = 2000;
 const MAX_REVIEWS = 200;
 
-function sanitizeFeatured(input) {
+function sanitizeIdList(input, limit) {
   if (!Array.isArray(input)) return [];
   const seen = new Set();
   const out = [];
@@ -25,10 +26,13 @@ function sanitizeFeatured(input) {
     if (!trimmed || seen.has(trimmed)) continue;
     seen.add(trimmed);
     out.push(trimmed);
-    if (out.length >= MAX_FEATURED) break;
+    if (out.length >= limit) break;
   }
   return out;
 }
+
+const sanitizeFeatured = (input) => sanitizeIdList(input, MAX_FEATURED);
+const sanitizeHomeCatalogOrder = (input) => sanitizeIdList(input, MAX_HOME_CATALOG_ORDER);
 
 function sanitizeFeaturedCards(input) {
   if (!Array.isArray(input)) return [];
@@ -152,6 +156,7 @@ export function mergeSettings(input) {
     },
     featured: sanitizeFeatured(input?.featured),
     featuredCards: sanitizeFeaturedCards(input?.featuredCards),
+    homeCatalogOrder: sanitizeHomeCatalogOrder(input?.homeCatalogOrder),
     reviews: sanitizeReviews(input?.reviews),
     texts: sanitizeTexts(input?.texts),
     contact: sanitizeContact(input?.contact),

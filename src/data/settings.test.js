@@ -38,6 +38,13 @@ describe('mergeSettings — home catalog', () => {
     };
     expect(mergeSettings({ texts }).texts).toEqual(texts);
   });
+
+  it('keeps a clean product order and defaults older settings to catalog order', () => {
+    expect(mergeSettings({}).homeCatalogOrder).toEqual([]);
+    expect(
+      mergeSettings({ homeCatalogOrder: [' B ', 'A', 'B', '', null, 'C'] }).homeCatalogOrder,
+    ).toEqual(['B', 'A', 'C']);
+  });
 });
 
 describe('mergeSettings — featuredCards', () => {

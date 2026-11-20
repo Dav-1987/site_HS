@@ -25,6 +25,8 @@ import {
   CATALOG_SLUG,
   listedProducts,
   liveCatalog,
+  homeCatalogProducts,
+  orderHomeCatalogProducts,
   visibilityOf,
   visibleCategories,
   OTHER_MODELS_SLUG,
@@ -41,6 +43,26 @@ const cat = (slug, ...ids) => ({
   slug,
   name: { es: slug, en: slug },
   products: ids.map((id) => ({ id, name: id })),
+});
+
+describe('home catalog order', () => {
+  it('places curated products first and appends new picks in catalog order', () => {
+    const categories = [
+      { ...cat('hidden', 'A', 'B'), visibility: 'off' },
+      cat('visible', 'C', 'D'),
+    ];
+    for (const category of categories) {
+      for (const product of category.products) product.onHomeCatalog = true;
+    }
+    const products = homeCatalogProducts(categories);
+    expect(orderHomeCatalogProducts(products, ['D', 'B', 'deleted']).map((p) => p.id)).toEqual([
+      'D',
+      'B',
+      'A',
+      'C',
+    ]);
+    expect(products.map((p) => p.id)).toEqual(['A', 'B', 'C', 'D']);
+  });
 });
 
 describe('productLabel', () => {

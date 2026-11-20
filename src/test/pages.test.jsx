@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { render, screen } from '@testing-library/react';
+import { render, screen, within } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import { SettingsProvider } from '../settings/SettingsContext.jsx';
 import { defaultSettings } from '../data/settings.js';
@@ -159,6 +159,22 @@ describe('home page blocks', () => {
       '/hidden/hidden-1',
     );
     expect(screen.getByText('Aprovechar').closest('a').getAttribute('href')).toBe('/#home-catalog');
+  });
+
+  it('uses the chosen home order without changing category order', () => {
+    const first = makeCategory('one', 'Primero');
+    const second = makeCategory('two', 'Segundo', 'off');
+    first.products[0].onHomeCatalog = true;
+    second.products[0].onHomeCatalog = true;
+    renderPage(<Home />, '/', {
+      catalog: [first, second],
+      settings: { homeCatalogOrder: ['two-1', 'one-1'] },
+    });
+    const section = screen.getByRole('heading', { name: 'Catálogo' }).closest('section');
+    const links = within(section)
+      .getAllByRole('link')
+      .map((link) => link.getAttribute('href'));
+    expect([...new Set(links)]).toEqual(['/two/two-1', '/one/one-1']);
   });
 
   it('shows the home catalog on both layouts by default', () => {
