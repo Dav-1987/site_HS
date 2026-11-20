@@ -209,6 +209,15 @@ function ProductRow({
           lift && !lift.lifted ? 'transition-transform duration-150 ease-out' : ''
         }`}
       >
+        <label className="flex h-11 w-11 shrink-0 items-center justify-center">
+          <input
+            type="checkbox"
+            checked={selected}
+            onChange={onSelect}
+            aria-label={`Выбрать ${label}`}
+            className="h-5 w-5 accent-primary"
+          />
+        </label>
         <Link
           to={href}
           state={{ fromList: true }}

@@ -314,6 +314,40 @@ describe('CatalogSection — categories', () => {
     expect(inStock()).toEqual([true, true]);
   });
 
+  it('adds selected products from different categories to the home catalog and saves them', async () => {
+    await openCatalog('?cat=*');
+    fireEvent.click(screen.getByRole('checkbox', { name: 'Выбрать L-06' }));
+    fireEvent.click(screen.getByRole('checkbox', { name: 'Выбрать E-01' }));
+    pick('Каталог на главной для выбранных', 'add');
+
+    expect(screen.getByText('Выбрано: 2')).toBeTruthy();
+    expect(screen.getByRole('combobox', { name: 'Каталог на главной для выбранных' }).value).toBe(
+      '',
+    );
+    fireEvent.click(screen.getByRole('button', { name: 'Сохранить' }));
+    await waitFor(() => expect(api.saveCatalog).toHaveBeenCalled());
+    const saved = api.saveCatalog.mock.calls.at(-1)[0];
+    expect(saved.find((c) => c.slug === 'tocadores').products.map((p) => p.onHomeCatalog)).toEqual([
+      true,
+      undefined,
+    ]);
+    expect(saved.find((c) => c.slug === 'estanterias').products[0].onHomeCatalog).toBe(true);
+  });
+
+  it('removes selected products from the home catalog in bulk', async () => {
+    await openCatalog();
+    selectBoth();
+    pick('Каталог на главной для выбранных', 'add');
+    pick('Каталог на главной для выбранных', 'remove');
+
+    fireEvent.click(screen.getByRole('button', { name: 'Сохранить' }));
+    await waitFor(() => expect(api.saveCatalog).toHaveBeenCalled());
+    expect(api.saveCatalog.mock.calls.at(-1)[0][0].products.map((p) => p.onHomeCatalog)).toEqual([
+      false,
+      false,
+    ]);
+  });
+
   it('deletes the selected products once confirmed, saying what deleting costs', async () => {
     await openCatalog();
     selectBoth();

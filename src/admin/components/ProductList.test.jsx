@@ -366,6 +366,14 @@ describe('ProductList — phone: hold a row, then drag it', () => {
     expect(a.className).not.toContain('shadow-floating');
   });
 
+  it('does not lift a row held by its selection checkbox', () => {
+    renderList({ layout: 'phone', categories: three() });
+    const [a] = rowsAt();
+    fireEvent.touchStart(screen.getByRole('checkbox', { name: 'Выбрать A' }), touchAt(230));
+    act(() => vi.advanceTimersByTime(HOLD_MS));
+    expect(a.className).not.toContain('shadow-floating');
+  });
+
   it('offers no drag where the rows are not the order (search, filters, «Все»)', () => {
     renderList({ layout: 'phone', categories: three(), reorderable: false });
     expect(document.querySelector('li[data-reorder-row]')).toBeNull();
@@ -377,6 +385,13 @@ describe('ProductList — phone', () => {
     renderList({ layout: 'phone' });
     expect(screen.getByText('Tocador Aria')).toBeTruthy();
     expect(screen.getByText('M-05')).toBeTruthy();
+  });
+
+  it('lets a product join a bulk selection without opening its page', () => {
+    const { onToggleSelected } = renderList({ layout: 'phone' });
+    fireEvent.click(screen.getByRole('checkbox', { name: 'Выбрать M-05' }));
+    expect(onToggleSelected).toHaveBeenCalledWith('Tocador-M-05');
+    expect(location.search).toBe('');
   });
 
   it('flips availability from the menu, having no room for the switch', () => {

@@ -183,8 +183,8 @@ export function useTouchReorder({ enabled, onMove }) {
       ? {
           'data-reorder-row': '',
           onTouchStart: (e) => {
-            // The row's own "⋯" is a button to tap, not a handle to hold.
-            if (e.touches.length !== 1 || e.target.closest?.('button')) return;
+            // Row controls are tapped directly, not held as drag handles.
+            if (e.touches.length !== 1 || e.target.closest?.('button, input, label')) return;
             const t = e.touches[0];
             liftRef.current?.(id, index, t.clientX, t.clientY);
           },

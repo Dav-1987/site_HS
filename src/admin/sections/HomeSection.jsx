@@ -43,7 +43,8 @@ export default function HomeSection() {
       />
       <Collapsible title="Каталог на главной" summary={catalogSummary}>
         <p className="text-xs leading-relaxed text-primary/75">
-          Товары добавляются переключателем «На главной в каталоге» в каждой карточке товара.
+          Товары добавляются переключателем «На главной в каталоге» в карточке товара или массово
+          через выбор товаров в разделе «Каталог».
         </p>
         <div className="grid gap-4 sm:grid-cols-2">
           {['es', 'en'].map((lang) => (

@@ -448,6 +448,7 @@ export default function CatalogSection() {
 }
 
 const STOCK_OPTIONS = { in: 'В наличии', out: 'Нет в наличии' };
+const HOME_CATALOG_OPTIONS = { add: 'Добавить выбранные', remove: 'Убрать выбранные' };
 
 /**
  * A select that acts the moment an option is picked and goes back to its
@@ -455,9 +456,9 @@ const STOCK_OPTIONS = { in: 'В наличии', out: 'Нет в наличии'
  * "apply" button would only add a click. Nothing reaches the site before
  * «Сохранить» anyway.
  */
-function ApplySelect({ label, placeholder, options, onPick }) {
+function ApplySelect({ label, placeholder, options, onPick, widthClass = 'sm:w-44' }) {
   return (
-    <label className="w-full sm:w-44">
+    <label className={`w-full ${widthClass}`}>
       <span className="sr-only">{label}</span>
       <select
         value=""
@@ -530,6 +531,13 @@ function BulkBar({ count, categories, onMove, onSet, onRemove, onClear }) {
           placeholder="Наличие…"
           options={STOCK_OPTIONS}
           onPick={(stock) => onSet({ inStock: stock === 'in' })}
+        />
+        <ApplySelect
+          label="Каталог на главной для выбранных"
+          placeholder="Каталог главной…"
+          options={HOME_CATALOG_OPTIONS}
+          onPick={(action) => onSet({ onHomeCatalog: action === 'add' })}
+          widthClass="sm:w-56"
         />
       </div>
     </div>

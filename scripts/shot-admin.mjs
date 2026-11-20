@@ -286,6 +286,20 @@ async function main() {
   await shot('02-list');
   report.push(await measure('02-list'));
 
+  await page.evaluate(() => {
+    const boxes = [...document.querySelectorAll('input[aria-label^="Выбрать "]')].filter(
+      (box) => box.getAttribute('aria-label') !== 'Выбрать все товары в списке',
+    );
+    boxes.slice(0, 2).forEach((box) => box.click());
+    [...document.querySelectorAll('select')]
+      .find((select) => select.options[0]?.textContent.includes('Каталог главной'))
+      ?.scrollIntoView({ block: 'center' });
+  });
+  await settle(300);
+  await shot('02b-bulk-catalog');
+  report.push(await measure('02b-bulk-catalog'));
+  await clickByText('Снять выбор');
+
   // A row's actions live behind its "⋯".
   await clickByLabelPrefix('Действия с товаром');
   await settle(400);
