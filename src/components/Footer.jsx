@@ -192,9 +192,6 @@ export default function Footer() {
                 </div>
               )}
             </dl>
-            {contact.phone && (
-              <p className="mt-4 text-xs text-secondary">{t('contact.info.hours')}</p>
-            )}
           </section>
         </div>
 

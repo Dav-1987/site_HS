@@ -48,6 +48,7 @@ describe('home navigation and contacts', () => {
       'tel:+34614848301',
     );
     expect(within(footer).getByRole('button', { name: 'info@hsmuebles.es' })).toBeTruthy();
+    expect(within(footer).queryByText('Lun–Vie · 9:00–18:00')).toBeNull();
   });
 
   it('retains the existing catalog menu and contact page by default', () => {
