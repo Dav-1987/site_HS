@@ -49,4 +49,12 @@ describe('BlocksEditor — «Избранное» по устройствам', 
     );
     expect(screen.getByText('1 скрыто')).toBeTruthy();
   });
+
+  it('turns off the home catalog', () => {
+    const onChange = vi.fn();
+    render(<BlocksEditor blocks={{}} onChange={onChange} />);
+    open();
+    fireEvent.click(screen.getByLabelText(/Каталог товаров/));
+    expect(written(onChange, {}).homeCatalog).toBe(false);
+  });
 });

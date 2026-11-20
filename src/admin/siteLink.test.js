@@ -38,4 +38,10 @@ describe('productSiteLink', () => {
       label: 'Адрес на сайте (ведёт в каталог)',
     });
   });
+
+  it('opens a selected home catalog product in a switched-off section', () => {
+    const section = otros('off');
+    const product = { id: 'T-1', onHomeCatalog: true };
+    expect(productSiteLink(catalog(section), product, section).live).toBe(true);
+  });
 });

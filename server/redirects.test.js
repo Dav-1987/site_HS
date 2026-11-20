@@ -164,6 +164,21 @@ describe('resolveRedirect — switched-off products and sections', () => {
     expect(resolveRedirect('/espejos/Espejo-K01', offIndex)).toBeNull();
   });
 
+  it('keeps a home catalog product reachable when its section is off', () => {
+    const index = buildRedirectIndex([
+      {
+        slug: 'hidden',
+        visibility: 'off',
+        products: [
+          { id: 'chosen', onHomeCatalog: true },
+          { id: 'removed', visibility: 'off', onHomeCatalog: true },
+        ],
+      },
+    ]);
+    expect(resolveRedirect('/hidden/chosen', index)).toBeNull();
+    expect(resolveRedirect('/hidden/removed', index)).toBe('/catalogo');
+  });
+
   it('sends a section of one kind where its products go, a mixed one to the catalogue', () => {
     expect(resolveRedirect('/tocadores-loft', offIndex)).toBe('/tocadores');
     expect(resolveRedirect('/otros-modelos', offIndex)).toBe('/catalogo');

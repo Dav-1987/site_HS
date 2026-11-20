@@ -86,6 +86,10 @@ describe('adding, copying and removing products', () => {
     expect(ids(insertProductAfter(catalog(), 'B', copy))[0]).toBe(`tocadores:A,B,${copy.id},C`);
   });
 
+  it('does not put a duplicated product into the home catalog automatically', () => {
+    expect(copyOfProduct(p('B', { onHomeCatalog: true })).onHomeCatalog).toBe(false);
+  });
+
   it('removes by id', () => {
     expect(ids(removeProduct(catalog(), 'B'))[0]).toBe('tocadores:A,C');
   });
@@ -199,6 +203,11 @@ describe('categories', () => {
     const copy = copyOfCategory(catalog()[0]);
     expect(copy.slug).toMatch(/^tocadores-copy-/);
     expect(copy.products.every((x) => x.id.includes('-copy-'))).toBe(true);
+  });
+
+  it('does not select copied category products for the home catalog', () => {
+    const source = { ...catalog()[0], products: [p('A', { onHomeCatalog: true })] };
+    expect(copyOfCategory(source).products[0].onHomeCatalog).toBe(false);
   });
 
   it('moves and removes by slug', () => {

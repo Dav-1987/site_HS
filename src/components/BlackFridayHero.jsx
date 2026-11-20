@@ -1,11 +1,13 @@
 import { useLanguage } from '../i18n/LanguageContext.jsx';
 import { useSettings } from '../settings/SettingsContext.jsx';
+import { useCatalog } from '../catalog/CatalogContext.jsx';
 import Media from './Media.jsx';
 import Button from './Button.jsx';
 
 export default function BlackFridayHero() {
   const { t } = useLanguage();
   const { settings } = useSettings();
+  const { homeCatalogProducts } = useCatalog();
   const hero = settings.blackFridayHero;
   const date = t('blackFriday.until');
   const dateParts = date.split(/\s+(?=30\b)/);
@@ -13,6 +15,10 @@ export default function BlackFridayHero() {
   const offerParts = offer.split(/\s+(?=(?:y regalos|and gifts)!?$)/i);
   const cta = t('blackFriday.cta');
   const ctaParts = cta.split(/\s+(?=(?:la promoción|the promotion)$)/i);
+  const catalogTarget =
+    settings.blocks?.homeCatalog !== false && homeCatalogProducts.length
+      ? '/#home-catalog'
+      : '/catalogo';
 
   return (
     <section className="bf-hero" aria-label="Black Friday">
@@ -41,7 +47,7 @@ export default function BlackFridayHero() {
             offer
           )}
         </p>
-        <Button to="/catalogo" variant="solid" className="bf-cta">
+        <Button to={catalogTarget} variant="solid" className="bf-cta">
           {ctaParts.length === 2 ? (
             <span>
               {ctaParts[0]}

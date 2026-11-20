@@ -19,6 +19,11 @@ const FEATURED_DEVICES = [
 
 const BLOCK_FIELDS = [
   {
+    key: 'homeCatalog',
+    label: 'Каталог товаров',
+    hint: 'Товары, отмеченные в карточках, на главной.',
+  },
+  {
     key: 'collections',
     label: 'Коллекции',
     hint: 'Сетка категорий на главной, под первым экраном.',

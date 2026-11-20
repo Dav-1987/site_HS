@@ -139,6 +139,12 @@ export default function ProductPanel({
         <Switch checked={isInStock(product)} onChange={(inStock) => set({ inStock })}>
           В наличии
         </Switch>
+        <Switch
+          checked={product.onHomeCatalog === true}
+          onChange={(onHomeCatalog) => set({ onHomeCatalog })}
+        >
+          На главной в каталоге
+        </Switch>
         <label className="flex items-center gap-2">
           Видимость
           <VisibilitySelect

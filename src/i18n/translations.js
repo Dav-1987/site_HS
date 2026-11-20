@@ -60,6 +60,7 @@ export const translations = {
     'section.categories.title': 'Explora por categoría',
     'section.featured.eyebrow': 'Selección',
     'section.featured.title': 'Piezas destacadas',
+    'section.homeCatalog.title': 'Catálogo',
 
     // --- Catalog page ---
     'catalog.eyebrow': 'Catálogo',
@@ -334,6 +335,7 @@ export const translations = {
     'section.categories.title': 'Explore by category',
     'section.featured.eyebrow': 'Selection',
     'section.featured.title': 'Featured pieces',
+    'section.homeCatalog.title': 'Catalog',
 
     // --- Catalog page ---
     'catalog.eyebrow': 'Catalog',

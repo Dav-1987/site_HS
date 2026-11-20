@@ -106,6 +106,16 @@ describe('productContentEqual — visibility', () => {
   });
 });
 
+describe('productContentEqual — home catalog', () => {
+  it('treats legacy products as unselected and detects either toggle', () => {
+    expect(productContentEqual(base, { ...base, onHomeCatalog: false })).toBe(true);
+    expect(productContentEqual(base, { ...base, onHomeCatalog: true })).toBe(false);
+    expect(
+      productContentEqual({ ...base, onHomeCatalog: true }, { ...base, onHomeCatalog: false }),
+    ).toBe(false);
+  });
+});
+
 describe('productContentEqual — sale badge switch', () => {
   it('treats a missing switch as on', () => {
     expect(productContentEqual(base, { ...base, showDiscountBadge: true })).toBe(true);
@@ -213,7 +223,12 @@ describe('productContentEqual — gift', () => {
 
   it('ignores an unknown mode, which reads as the default', () => {
     const bogus = { ...gift, mode: 'sometimes' };
-    expect(productContentEqual({ ...base, gift: { source: 'catalog', productId: 'Estanteria-E-03' } }, { ...base, gift: bogus })).toBe(true);
+    expect(
+      productContentEqual(
+        { ...base, gift: { source: 'catalog', productId: 'Estanteria-E-03' } },
+        { ...base, gift: bogus },
+      ),
+    ).toBe(true);
   });
 
   // The gallery and the price a gift outside the catalog carries. Both are new

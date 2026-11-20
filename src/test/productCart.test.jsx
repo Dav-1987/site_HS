@@ -40,6 +40,16 @@ describe('product page order flow', () => {
     expect(screen.getByText(/¡PEDIR AHORA!/i)).toBeTruthy();
   });
 
+  it('opens an explicitly selected product from a switched-off category', () => {
+    const hidden = {
+      ...category,
+      visibility: 'off',
+      products: [{ ...product, onHomeCatalog: true }],
+    };
+    renderProduct([hidden]);
+    expect(screen.getByText(/¡PEDIR AHORA!/i)).toBeTruthy();
+  });
+
   it('opens the order modal when the CTA is clicked', () => {
     renderProduct();
     expect(screen.queryByRole('dialog')).toBeNull();

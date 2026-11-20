@@ -78,6 +78,16 @@ describe('buildRoutes — выключенный раздел отзывов', (
   });
 });
 
+describe('buildRoutes — каталог на главной', () => {
+  it('keeps a selected product page from an off category', () => {
+    const hidden = cat('hidden', 'off', 'chosen');
+    hidden.products[0].onHomeCatalog = true;
+    const out = paths([hidden]);
+    expect(out).toContain('/hidden/chosen');
+    expect(out).not.toContain('/hidden');
+  });
+});
+
 describe('buildRoutes — guides', () => {
   const guide = (slug, updatedAt) => ({ slug, updatedAt });
   const guideRoutes = (guides) =>

@@ -185,6 +185,11 @@ END $$;
 
 ALTER TABLE products ADD COLUMN IF NOT EXISTS visibility TEXT NOT NULL DEFAULT 'public';
 
+-- Explicit selection for the homepage product catalog. Independent of the
+-- category visibility so a selected product stays reachable when its category
+-- is off; an individual product set to off is still excluded.
+ALTER TABLE products ADD COLUMN IF NOT EXISTS on_home_catalog BOOLEAN NOT NULL DEFAULT false;
+
 -- Per-product switch for the "-N%" sale badge in the corner of the photo
 -- (see showsDiscountBadge in src/data/catalog.js). Positive and on by default:
 -- the badge has always been shown whenever a higher old price is set, and this

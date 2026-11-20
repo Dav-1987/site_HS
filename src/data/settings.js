@@ -154,6 +154,7 @@ function sanitizeSeo(seo) {
 export const BLOCKS = [
   'featured',
   'featuredDesktop',
+  'homeCatalog',
   'collections',
   'heroPromo',
   'reviews',

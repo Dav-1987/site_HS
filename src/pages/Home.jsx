@@ -12,6 +12,7 @@ import Button from '../components/Button.jsx';
 import SectionHeader from '../components/SectionHeader.jsx';
 import CategoryCard from '../components/CategoryCard.jsx';
 import FeaturedCard from '../components/FeaturedCard.jsx';
+import ProductCard from '../components/ProductCard.jsx';
 import ReviewTile from '../components/ReviewTile.jsx';
 import Lightbox from '../components/Lightbox.jsx';
 import { featuredLayouts, toLightboxItems } from '../data/settings.js';
@@ -144,6 +145,32 @@ function FeaturedSection() {
   );
 }
 
+function HomeCatalogSection() {
+  const { t } = useLanguage();
+  const { homeCatalogProducts: products } = useCatalog();
+  const { settings } = useSettings();
+  if (settings.blocks?.homeCatalog === false || !products.length) return null;
+
+  return (
+    <section
+      id="home-catalog"
+      className="scroll-mt-[calc(5rem+var(--promo-h,0px))] px-6 py-14 md:px-12 md:py-20 lg:px-20"
+    >
+      <SectionHeader title={t('section.homeCatalog.title')} gapClassName="mb-8 md:mb-12" />
+      <div className="grid grid-cols-2 gap-x-6 gap-y-12 md:grid-cols-3 md:gap-x-8 lg:grid-cols-4">
+        {products.map((product) => (
+          <ProductCard
+            key={product.id}
+            product={product}
+            categorySlug={product.categorySlug}
+            categoryName={product.category}
+          />
+        ))}
+      </div>
+    </section>
+  );
+}
+
 /** Сколько последних отзывов показываем на главной; остальное — на /opiniones. */
 const REVIEWS_ON_HOME = 8;
 
@@ -260,6 +287,7 @@ export default function Home() {
       <Hero />
       <BlackFridayHero />
       <FeaturedSection />
+      <HomeCatalogSection />
       <CategoriesSection />
       <ReviewsSection />
     </>

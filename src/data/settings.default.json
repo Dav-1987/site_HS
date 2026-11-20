@@ -50,6 +50,7 @@
   "blocks": {
     "featured": false,
     "featuredDesktop": false,
+    "homeCatalog": true,
     "collections": true,
     "heroPromo": true,
     "reviews": false,

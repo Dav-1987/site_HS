@@ -90,6 +90,7 @@ function sanitizeSeo(seo) {
 const BLOCKS = [
   'featured',
   'featuredDesktop',
+  'homeCatalog',
   'collections',
   'heroPromo',
   'reviews',

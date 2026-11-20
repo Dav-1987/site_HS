@@ -5,6 +5,7 @@ import { useLanguage } from '../i18n/LanguageContext.jsx';
 import { useCatalog } from '../catalog/CatalogContext.jsx';
 import {
   isInStock,
+  isOff,
   productDescription,
   productDimensions,
   productFullName,
@@ -358,7 +359,7 @@ export default function Product() {
           breadcrumbSchema([
             { name: t('nav.home'), url: `${SITE}${localize('/')}` },
             { name: t('nav.catalog'), url: catalogUrl },
-            { name: category.name[lang], url: categoryUrl },
+            ...(!isOff(category) ? [{ name: category.name[lang], url: categoryUrl }] : []),
             { name: fullName, url: canonicalUrl },
           ]),
         ]}
@@ -373,9 +374,11 @@ export default function Product() {
             {t('nav.catalog')}
           </Link>
           <span aria-hidden="true">/</span>
-          <Link to={`/${category.slug}`} className="transition-colors hover:text-accent-text">
-            {category.name[lang]}
-          </Link>
+          {!isOff(category) && (
+            <Link to={`/${category.slug}`} className="transition-colors hover:text-accent-text">
+              {category.name[lang]}
+            </Link>
+          )}
         </nav>
 
         <p className="bf-campaign-label">{t('blackFriday.label')}</p>
@@ -383,14 +386,16 @@ export default function Product() {
           {/* Mobile-only title above gallery (real <h1>; the category link is a
               visual duplicate of the breadcrumb, so it's hidden from AT). */}
           <div className="lg:hidden">
-            <Link
-              to={`/${category.slug}`}
-              aria-hidden="true"
-              tabIndex={-1}
-              className="text-xs uppercase tracking-[0.25em] text-accent-text"
-            >
-              {category.name[lang]}
-            </Link>
+            {!isOff(category) && (
+              <Link
+                to={`/${category.slug}`}
+                aria-hidden="true"
+                tabIndex={-1}
+                className="text-xs uppercase tracking-[0.25em] text-accent-text"
+              >
+                {category.name[lang]}
+              </Link>
+            )}
             <h1 className="mt-2 font-serif leading-[1.05] tracking-tight text-primary">
               <span
                 className={`font-light ${
@@ -579,12 +584,14 @@ export default function Product() {
 
           {/* Info */}
           <Reveal delay={0.1} className="flex flex-col lg:col-span-7 lg:pl-4">
-            <Link
-              to={`/${category.slug}`}
-              className="hidden text-xs uppercase tracking-[0.25em] text-accent-text transition-colors hover:text-primary lg:inline-block"
-            >
-              {category.name[lang]}
-            </Link>
+            {!isOff(category) && (
+              <Link
+                to={`/${category.slug}`}
+                className="hidden text-xs uppercase tracking-[0.25em] text-accent-text transition-colors hover:text-primary lg:inline-block"
+              >
+                {category.name[lang]}
+              </Link>
+            )}
             <h1 className="hidden font-serif leading-[1.05] tracking-tight text-primary lg:mt-4 lg:block">
               <span
                 className={`font-light ${

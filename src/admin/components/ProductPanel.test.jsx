@@ -138,6 +138,12 @@ describe('ProductPanel — state up top', () => {
     expect(written().inStock).toBe(false);
   });
 
+  it('adds a product to the home catalog', () => {
+    const { written } = renderPanel();
+    fireEvent.click(screen.getByRole('switch', { name: 'На главной в каталоге' }));
+    expect(written().onHomeCatalog).toBe(true);
+  });
+
   it('defaults to «Показывать» and writes the chosen visibility back', () => {
     const { written } = renderPanel();
     const select = screen.getByRole('combobox', { name: 'Видимость товара' });

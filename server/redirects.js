@@ -49,7 +49,10 @@ export function buildRedirectIndex(categories) {
       off: isOff(c) ? (kinds.size === 1 ? [...kinds][0] : CATALOG_SLUG) : null,
     });
     for (const p of items) {
-      products.set(p.id, { slug: c.slug, off: isOff(c) || isOff(p) ? targets.get(p.id) : null });
+      products.set(p.id, {
+        slug: c.slug,
+        off: isOff(p) || (isOff(c) && p.onHomeCatalog !== true) ? targets.get(p.id) : null,
+      });
     }
   }
   return { products, categories: sections };

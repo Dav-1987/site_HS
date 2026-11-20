@@ -21,6 +21,21 @@ describe('mergeSettings — Black Friday images', () => {
   });
 });
 
+describe('mergeSettings — home catalog', () => {
+  it('keeps the section on for older settings and allows turning it off', () => {
+    expect(mergeSettings({}).blocks.homeCatalog).toBe(true);
+    expect(mergeSettings({ blocks: { homeCatalog: false } }).blocks.homeCatalog).toBe(false);
+  });
+
+  it('preserves an edited section title in both languages', () => {
+    const texts = {
+      es: { 'section.homeCatalog.title': 'Ofertas' },
+      en: { 'section.homeCatalog.title': 'Offers' },
+    };
+    expect(mergeSettings({ texts }).texts).toEqual(texts);
+  });
+});
+
 describe('mergeSettings — featuredCards', () => {
   it('keeps valid cards with trimmed fields, in order', () => {
     const out = mergeSettings({

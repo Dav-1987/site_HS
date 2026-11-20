@@ -297,6 +297,8 @@ function validateCatalog(categories) {
       if (!p.name) return `product "${p.id}" needs a name`;
       if (badVisibility(p.visibility))
         return `product "${p.id}" has an unknown visibility: ${p.visibility}`;
+      if (p.onHomeCatalog !== undefined && typeof p.onHomeCatalog !== 'boolean')
+        return `product "${p.id}" onHomeCatalog must be a boolean`;
       if (p.related !== undefined) {
         if (!Array.isArray(p.related)) return `product "${p.id}" related must be an array`;
         if (p.related.length > 50) return `product "${p.id}" has too many related items`;

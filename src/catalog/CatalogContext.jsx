@@ -3,6 +3,9 @@ import {
   loadDefaultCatalog,
   findCategory,
   findProduct,
+  homeCatalogProducts,
+  isListed,
+  isOff,
   liveCatalog,
   listingCatalog,
 } from '../data/catalog.js';
@@ -81,8 +84,8 @@ export function CatalogProvider({ children, initialCatalog }) {
 
   // Visibility is applied once, here, so every route, lookup and listing on the
   // site agrees on it (see src/data/catalog.js):
-  //  - `live` drops everything switched off entirely. It's what the lookups
-  //    search, so an off slug/id simply isn't found and the page 404s.
+  //  - `live` drops everything switched off entirely. Product lookup makes
+  //    one exception for a home-catalog pick in an off category.
   //  - `allCategories` is that live catalog: unlisted sections still have a
   //    working page and product URLs, they're just never linked to.
   //  - `categories` is what every listing renders — public sections only, each
@@ -92,9 +95,20 @@ export function CatalogProvider({ children, initialCatalog }) {
     return {
       categories: listingCatalog(categories),
       allCategories: live,
+      homeCatalogProducts: homeCatalogProducts(categories),
       loaded,
       getCategory: (slug) => findCategory(live, slug),
-      getProduct: (id) => findProduct(live, id),
+      getProduct: (id) => {
+        const found = findProduct(live, id);
+        if (found) return found;
+        const selected = findProduct(categories, id);
+        return selected &&
+          isOff(selected.category) &&
+          selected.product.onHomeCatalog === true &&
+          isListed(selected.product)
+          ? selected
+          : null;
+      },
     };
   }, [categories, loaded]);
 

@@ -143,6 +143,34 @@ describe('home page blocks', () => {
     renderPage(<Home />, '/', { catalog: [makeCategory('c1', 'Oculta', 'unlisted')] });
     expect(screen.queryByText(collections)).toBeNull();
   });
+
+  it('shows selected products from a switched-off category in the home catalog', () => {
+    const hidden = makeCategory('hidden', 'Espejo reservado', 'off');
+    hidden.products[0].onHomeCatalog = true;
+    renderPage(<Home />, '/', {
+      catalog: [hidden],
+      settings: {
+        blocks: { homeCatalog: true },
+        texts: { es: { 'section.homeCatalog.title': 'Nuestra selección' } },
+      },
+    });
+    expect(screen.getByRole('heading', { name: 'Nuestra selección' })).toBeTruthy();
+    expect(screen.getAllByRole('link', { name: /Espejo reservado/ })[0].getAttribute('href')).toBe(
+      '/hidden/hidden-1',
+    );
+    expect(screen.getByText('Aprovechar').closest('a').getAttribute('href')).toBe('/#home-catalog');
+  });
+
+  it('hides the home catalog when its switch is off', () => {
+    const category = makeCategory('c1', 'Espejo reservado');
+    category.products[0].onHomeCatalog = true;
+    renderPage(<Home />, '/', {
+      catalog: [category],
+      settings: { blocks: { homeCatalog: false } },
+    });
+    expect(screen.queryByRole('heading', { name: 'Catálogo' })).toBeNull();
+    expect(screen.getByText('Aprovechar').closest('a').getAttribute('href')).toBe('/catalogo');
+  });
 });
 
 // Category visibility, end to end through the providers (see src/data/catalog.js).

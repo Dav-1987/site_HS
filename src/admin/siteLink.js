@@ -11,7 +11,8 @@ import { CATALOG_SLUG, isOff, offProductTarget } from '../data/catalog.js';
  */
 export function productSiteLink(categories, product, category) {
   const href = `/${category.slug}/${product.id}`;
-  if (!isOff(product) && !isOff(category)) return { href, label: 'Открыть на сайте', live: true };
+  if (!isOff(product) && (!isOff(category) || product.onHomeCatalog === true))
+    return { href, label: 'Открыть на сайте', live: true };
   const target = offProductTarget(categories, product);
   const section = target === CATALOG_SLUG ? null : categories.find((c) => c.slug === target);
   const where = section ? `в «${section.name?.es || section.slug}»` : 'в каталог';

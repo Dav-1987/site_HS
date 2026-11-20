@@ -5,7 +5,7 @@
 // script got updated, the other didn't. English routes are derived from
 // these via withLang() rather than listed separately, for the same reason.
 
-import { liveCatalog } from './data/catalog.js';
+import { liveCatalog, homeCatalogProducts, isOff } from './data/catalog.js';
 import { GUIDES_SLUG } from './data/guides.js';
 
 // The latest of the given ISO dates, or undefined when there is none.
@@ -34,11 +34,11 @@ function guideRoutes(guides) {
   ];
 }
 
-// Sections and products switched off in /admin have no route at all: no
-// prerendered snapshot (so the request falls through to the server, which
-// 301s it to a similar open section — see server/redirects.js) and no sitemap
-// entry. Unlisted ones keep both — the whole point of that state is that the
-// page stays live and indexed, it just isn't linked to from anywhere.
+// Sections and products switched off in /admin have no snapshot or sitemap
+// entry; the server redirects their old URLs (server/redirects.js). A product
+// selected for the home catalog is the exception when its category is off:
+// its product page remains reachable and gets a snapshot. Unlisted pages also
+// stay live and indexed, though they do not appear in normal listings.
 export function buildRoutes(rawCatalog, settings, guides = []) {
   const catalog = liveCatalog(rawCatalog);
   // Раздел отзывов выключается тумблером в /admin. Выключенный — не получает
@@ -72,5 +72,13 @@ export function buildRoutes(rawCatalog, settings, guides = []) {
         updatedAt: p.updatedAt,
       })),
     ),
+    ...homeCatalogProducts(rawCatalog)
+      .filter((product) => isOff(rawCatalog.find((c) => c.slug === product.categorySlug)))
+      .map((product) => ({
+        path: `/${product.categorySlug}/${product.id}`,
+        priority: '0.7',
+        changefreq: 'monthly',
+        updatedAt: product.updatedAt,
+      })),
   ];
 }

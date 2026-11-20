@@ -495,6 +495,16 @@ export function liveCatalog(categories) {
     });
 }
 
+/** Products explicitly placed on the home catalog stay reachable when their
+ * parent section is off. A product switched off individually never does. */
+export function homeCatalogProducts(categories) {
+  return (categories ?? []).flatMap((category) =>
+    (category.products ?? [])
+      .filter((product) => product.onHomeCatalog === true && isListed(product))
+      .map((product) => withCategory(product, category)),
+  );
+}
+
 /**
  * The catalog as every listing renders it: public sections only, each without
  * the products hidden from listings — what CatalogContext calls `categories`.

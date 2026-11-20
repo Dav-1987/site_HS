@@ -65,6 +65,7 @@ export function newProduct(slug) {
     material: { es: '', en: '' },
     size: '',
     visibility: DEFAULT_VISIBILITY,
+    onHomeCatalog: false,
     showDiscountBadge: true,
     inStock: true,
   };
@@ -79,7 +80,7 @@ export function addProduct(categories, slug, product) {
 
 /** A copy of a product, with an id of its own. */
 export function copyOfProduct(product) {
-  return { ...product, id: `${product.id}-copy-${uniqueSuffix()}` };
+  return { ...product, id: `${product.id}-copy-${uniqueSuffix()}`, onHomeCatalog: false };
 }
 
 /** Puts `product` right after the product with id `afterId`. */
@@ -238,7 +239,11 @@ export function copyOfCategory(category) {
   return {
     ...category,
     slug: `${category.slug}-copy-${suffix}`,
-    products: category.products.map((p) => ({ ...p, id: `${p.id}-copy-${suffix}` })),
+    products: category.products.map((p) => ({
+      ...p,
+      id: `${p.id}-copy-${suffix}`,
+      onHomeCatalog: false,
+    })),
   };
 }
 
